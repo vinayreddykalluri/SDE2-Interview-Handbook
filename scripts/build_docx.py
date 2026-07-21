@@ -2,15 +2,40 @@
 from __future__ import annotations
 
 import argparse
-import subprocess
 import shutil
+import subprocess
+import sys
+import zipfile
 from pathlib import Path
 from typing import List
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 OUTPUT = ROOT / "output"
+REFERENCE_DOC = ROOT / "templates" / "reference.docx"
 VOLUME_DIRS = sorted(DOCS.glob("volume-*"), key=lambda p: p.name)
+
+
+def reference_doc_args() -> List[str]:
+    if not REFERENCE_DOC.exists():
+        return []
+
+    try:
+        with zipfile.ZipFile(REFERENCE_DOC) as archive:
+            names = set(archive.namelist())
+    except (OSError, zipfile.BadZipFile):
+        names = set()
+
+    required = {"[Content_Types].xml", "word/document.xml", "word/styles.xml"}
+    if required.issubset(names):
+        return ["--reference-doc", str(REFERENCE_DOC)]
+
+    print(
+        f"Warning: {REFERENCE_DOC} is not a valid DOCX template; "
+        "using Pandoc's default reference document.",
+        file=sys.stderr,
+    )
+    return []
 
 
 def volume_output_stem(volume_dir: Path) -> str:
@@ -43,8 +68,7 @@ def build_volume_docx(volume_dir: Path) -> Path:
         f"--resource-path={DOCS}",
     ]
 
-    if (ROOT / "templates" / "reference.docx").exists():
-        cmd += ["--reference-doc", str(ROOT / "templates" / "reference.docx")]
+    cmd += reference_doc_args()
     cmd += ["-o", str(out)]
     run(cmd)
     return out
@@ -68,8 +92,7 @@ def build_combined_docx() -> Path:
         "--number-sections",
         f"--resource-path={DOCS}",
     ]
-    if (ROOT / "templates" / "reference.docx").exists():
-        cmd += ["--reference-doc", str(ROOT / "templates" / "reference.docx")]
+    cmd += reference_doc_args()
     cmd += ["-o", str(out)]
     run(cmd)
     return out

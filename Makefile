@@ -1,12 +1,21 @@
-.PHONY: install serve serve-web build-site build-pdf build-docx build-all validate validate-layout validate-web validate-code verify clean
+.PHONY: bootstrap install doctor serve serve-web build-site build-pdf build-docx build-all validate validate-layout validate-web validate-code verify clean
 
-PYTHON ?= python3
+SYSTEM_PYTHON ?= python3
+PYTHON ?= .venv/bin/python
+
+bootstrap:
+	bash scripts/bootstrap_macos.sh
 
 install:
+	test -x "$(PYTHON)" || $(SYSTEM_PYTHON) -m venv .venv
+	$(PYTHON) -m pip install --upgrade pip
 	$(PYTHON) -m pip install -r requirements.txt
 
+doctor:
+	$(SYSTEM_PYTHON) scripts/check_local_environment.py
+
 serve:
-	mkdocs serve
+	$(PYTHON) -m mkdocs serve
 
 serve-web: build-site
 	$(PYTHON) -m http.server 8000 --directory site

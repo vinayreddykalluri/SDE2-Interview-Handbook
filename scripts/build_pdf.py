@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 import shutil
 import subprocess
 from pathlib import Path
@@ -14,6 +15,26 @@ TEMPLATES = ROOT / "templates"
 SITE = ROOT / "site"
 
 VOLUME_DIRS = sorted(DOCS.glob("volume-*"), key=lambda p: p.name)
+
+
+def resolve_pdf_engine() -> str:
+    requested = os.environ.get("PDF_ENGINE")
+    if requested:
+        if shutil.which(requested) is None:
+            raise RuntimeError(
+                f"PDF_ENGINE={requested!r} is not available on PATH. "
+                "Install it or unset PDF_ENGINE to use automatic detection."
+            )
+        return requested
+
+    for candidate in ("xelatex", "tectonic"):
+        if shutil.which(candidate):
+            return candidate
+
+    raise RuntimeError(
+        "A PDF engine is required. Install tectonic (recommended for local builds) "
+        "or xelatex, then retry."
+    )
 
 
 def run(cmd: List[str], cwd: Path = ROOT) -> None:
@@ -60,7 +81,7 @@ def build_volume_pdf(volume_dir: Path, keep: bool = False) -> Path:
         "--toc",
         "--number-sections",
         "--highlight-style=tango",
-        "--pdf-engine=xelatex",
+        f"--pdf-engine={resolve_pdf_engine()}",
         "--resource-path=docs",
         "-V",
         "papersize=letter",
@@ -105,7 +126,7 @@ def build_combined_pdf() -> Path:
         "--toc",
         "--number-sections",
         "--highlight-style=tango",
-        "--pdf-engine=xelatex",
+        f"--pdf-engine={resolve_pdf_engine()}",
         "--resource-path=docs",
         "-V",
         "papersize=letter",
