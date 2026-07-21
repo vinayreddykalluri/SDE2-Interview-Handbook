@@ -61,7 +61,13 @@ def main() -> int:
         if not (ROOT / name).is_dir():
             errors.append(f"Missing required root directory: {name}/")
 
-    for page in ["index.md", "roadmap.md", "readiness-matrix.md"]:
+    for page in [
+        "index.md",
+        "roadmap.md",
+        "readiness-matrix.md",
+        "revision-system.md",
+        "review-log.md",
+    ]:
         if not (BACKEND_TRACK / page).is_file():
             errors.append(f"Missing backend track page: docs/backend-interview/{page}")
 
@@ -72,13 +78,15 @@ def main() -> int:
             continue
         if not (module_path / "index.md").is_file():
             errors.append(f"Missing module overview: {module}/index.md")
-        if len(list(module_path.glob("*.md"))) < 2:
+        if not (module_path / "advanced-review.md").is_file():
+            errors.append(f"Missing advanced review material: {module}/advanced-review.md")
+        if len(list(module_path.glob("*.md"))) < 3:
             errors.append(f"Backend module needs overview plus detail pages: {module}")
 
     backend_page_count = len(list(BACKEND_TRACK.rglob("*.md")))
-    if backend_page_count < 30:
+    if backend_page_count < 42:
         errors.append(
-            f"Backend track must retain at least 30 curriculum pages; found {backend_page_count}"
+            f"Backend track must retain at least 42 curriculum pages; found {backend_page_count}"
         )
 
     if errors:

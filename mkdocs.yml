@@ -18,43 +18,55 @@ nav:
       - Overview: backend-interview/index.md
       - 12-Week Roadmap: backend-interview/roadmap.md
       - Readiness Matrix: backend-interview/readiness-matrix.md
+      - Structured Revision System: backend-interview/revision-system.md
+      - Review Log: backend-interview/review-log.md
       - "01. Programming Problem Solving":
           - Overview: backend-interview/01-programming-problem-solving/index.md
           - Framework: backend-interview/01-programming-problem-solving/problem-solving-framework.md
           - Patterns and Performance: backend-interview/01-programming-problem-solving/patterns-and-performance.md
+          - Advanced Review: backend-interview/01-programming-problem-solving/advanced-review.md
       - "02. Low-Level Design":
           - Overview: backend-interview/02-low-level-design/index.md
           - Modeling and Patterns: backend-interview/02-low-level-design/modeling-and-patterns.md
           - Case Studies: backend-interview/02-low-level-design/case-studies.md
+          - Advanced Review: backend-interview/02-low-level-design/advanced-review.md
       - "03. High-Level System Design":
           - Overview: backend-interview/03-high-level-system-design/index.md
           - Framework and Estimation: backend-interview/03-high-level-system-design/design-framework-and-estimation.md
           - Architecture Patterns: backend-interview/03-high-level-system-design/architecture-patterns.md
+          - Advanced Review: backend-interview/03-high-level-system-design/advanced-review.md
       - "04. API and Service Design":
           - Overview: backend-interview/04-api-service-design/index.md
           - Contracts and Reliability: backend-interview/04-api-service-design/contracts-and-reliability.md
           - Service Boundaries: backend-interview/04-api-service-design/service-boundaries.md
+          - Advanced Review: backend-interview/04-api-service-design/advanced-review.md
       - "05. Data and Storage":
           - Overview: backend-interview/05-data-storage/index.md
           - Storage and Consistency: backend-interview/05-data-storage/storage-and-consistency.md
           - Scaling Data: backend-interview/05-data-storage/scaling-data.md
+          - Advanced Review: backend-interview/05-data-storage/advanced-review.md
       - "06. Distributed Systems":
           - Overview: backend-interview/06-distributed-systems/index.md
           - Coordination and Messaging: backend-interview/06-distributed-systems/coordination-and-messaging.md
           - Resilience Patterns: backend-interview/06-distributed-systems/resilience-patterns.md
+          - Advanced Review: backend-interview/06-distributed-systems/advanced-review.md
       - "07. Production Engineering":
           - Overview: backend-interview/07-production-engineering/index.md
           - Observability and Testing: backend-interview/07-production-engineering/observability-and-testing.md
           - Security: backend-interview/07-production-engineering/security.md
+          - Advanced Review: backend-interview/07-production-engineering/advanced-review.md
       - "08. Cloud and Platform":
           - Overview: backend-interview/08-cloud-platform/index.md
           - Platform and Deployments: backend-interview/08-cloud-platform/platform-and-deployments.md
+          - Advanced Review: backend-interview/08-cloud-platform/advanced-review.md
       - "09. Leadership and Behavioral":
           - Overview: backend-interview/09-leadership-behavioral/index.md
           - Leadership Evidence: backend-interview/09-leadership-behavioral/leadership-evidence.md
+          - Advanced Review: backend-interview/09-leadership-behavioral/advanced-review.md
       - "10. Practice and Assessment":
           - Overview: backend-interview/10-practice/index.md
           - Question Bank and Rubric: backend-interview/10-practice/question-bank-and-rubric.md
+          - Advanced Review: backend-interview/10-practice/advanced-review.md
   - "Volume 01: Java Fundamentals":
       - Overview: volume-01-java-fundamentals/index.md
       - 01.01 Java Ecosystem and Execution Model: volume-01-java-fundamentals/01-java-ecosystem-execution-model.md
