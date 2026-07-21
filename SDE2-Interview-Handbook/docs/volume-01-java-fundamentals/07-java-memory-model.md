@@ -33,22 +33,8 @@ sequenceDiagram
 
 ## Code Example
 
-```java
-public class JmmDemo {
-    private volatile boolean ready;
-    private int value;
+[Code Example 1 in detail (external file)](../examples/java/volume-01-java-fundamentals/07-java-memory-model-01.java)
 
-    public void produce() {
-        value = 42;
-        ready = true;
-    }
-
-    public int consume() {
-        if (ready) return value;
-        return -1;
-    }
-}
-```
 
 ## Step-by-Step Execution
 

@@ -39,17 +39,8 @@ graph TD
 
 ## Code Example
 
-```java
-public class BitOps {
-    public static boolean isPowerOfTwo(int x) {
-        return x > 0 && (x & (x - 1)) == 0;
-    }
+[Code Example 1 in detail (external file)](../examples/java/volume-06-bit-manipulation/01-bitwise-cookbook-01.java)
 
-    public static int toggleBit(int x, int pos) {
-        return x ^ (1 << pos);
-    }
-}
-```
 
 ## Step-by-Step Execution
 

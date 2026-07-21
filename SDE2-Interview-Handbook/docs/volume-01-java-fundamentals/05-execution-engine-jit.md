@@ -34,21 +34,8 @@ flowchart TD
 
 ## Code Example
 
-```java
-public class HotPath {
-    static long compute(int x) {
-        return x * x + 2L * x + 1;
-    }
+[Code Example 1 in detail (external file)](../examples/java/volume-01-java-fundamentals/05-execution-engine-jit-01.java)
 
-    public static void main(String[] args) {
-        long sum = 0;
-        for (int i = 0; i < 10_000_000; i++) {
-            sum += compute(i);
-        }
-        System.out.println(sum);
-    }
-}
-```
 
 ## Step-by-Step Execution
 

@@ -44,18 +44,8 @@ flowchart TD
 
 ## Code Example
 
-```java
-public class LoopPatterns {
-    public static int firstPositive(int[] nums) {
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] > 0) {
-                return i;
-            }
-        }
-        return -1;
-    }
-}
-```
+[Code Example 1 in detail (external file)](../examples/java/volume-04-loop-mastery/01-loop-patterns-01.java)
+
 
 ## Step-by-Step Execution
 

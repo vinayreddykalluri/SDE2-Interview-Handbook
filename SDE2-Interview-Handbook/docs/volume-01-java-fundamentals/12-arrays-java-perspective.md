@@ -31,16 +31,8 @@ graph TD
 
 ## Code Example
 
-```java
-public class ArrayPerspective {
-    public static void main(String[] args) {
-        int[] nums = {4, 5, 6, 7};
-        int sum = 0;
-        for (int n : nums) sum += n;
-        System.out.println(sum);
-    }
-}
-```
+[Code Example 1 in detail (external file)](../examples/java/volume-01-java-fundamentals/12-arrays-java-perspective-01.java)
+
 
 ## Step-by-Step Execution
 

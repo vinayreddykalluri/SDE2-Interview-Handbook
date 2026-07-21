@@ -40,21 +40,8 @@ flowchart LR
 
 ## Code Example
 
-```java
-public class StringPatterns {
-    public static String reverseWords(String s) {
-        String[] parts = s.trim().split("\\s+");
-        StringBuilder sb = new StringBuilder();
-        for (int i = parts.length - 1; i >= 0; i--) {
-            if (!parts[i].isEmpty()) {
-                sb.append(parts[i]);
-                if (i > 0) sb.append(' ');
-            }
-        }
-        return sb.toString();
-    }
-}
-```
+[Code Example 1 in detail (external file)](../examples/java/volume-08-strings/01-string-internals-and-patterns-01.java)
+
 
 ## Step-by-Step Execution
 

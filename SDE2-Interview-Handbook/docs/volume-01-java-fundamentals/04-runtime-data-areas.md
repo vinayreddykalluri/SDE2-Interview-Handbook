@@ -40,23 +40,8 @@ flowchart LR
 
 ## Code Example
 
-```java
-public class DataAreaWalk {
-    private static int value = 10;
+[Code Example 1 in detail (external file)](../examples/java/volume-01-java-fundamentals/04-runtime-data-areas-01.java)
 
-    public static void main(String[] args) {
-        int local = 5;
-        Integer boxed = local; // boxing allocation semantics
-        recursive(local);
-        System.out.println(value + boxed);
-    }
-
-    private static void recursive(int n) {
-        if (n <= 0) return;
-        recursive(n - 1);
-    }
-}
-```
 
 ## Step-by-Step Execution
 

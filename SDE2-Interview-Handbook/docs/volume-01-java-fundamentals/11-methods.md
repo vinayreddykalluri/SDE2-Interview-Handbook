@@ -31,19 +31,8 @@ flowchart LR
 
 ## Code Example
 
-```java
-public class MethodsDemo {
-    public static void append(StringBuilder builder, String suffix) {
-        builder.append(suffix);
-    }
+[Code Example 1 in detail (external file)](../examples/java/volume-01-java-fundamentals/11-methods-01.java)
 
-    public static void main(String[] args) {
-        StringBuilder sb = new StringBuilder("Hello");
-        append(sb, " World");
-        System.out.println(sb);
-    }
-}
-```
 
 ## Step-by-Step Execution
 

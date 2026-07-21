@@ -54,21 +54,8 @@ flowchart LR
 
 ## Code Example
 
-```java
-public class ComplexityDemo {
-    public static int complexityExample(int[] nums) {
-        int max = 0;
-        for (int i = 0; i < nums.length; i++) {            // O(n)
-            int running = 0;
-            for (int j = i; j < nums.length; j++) {        // O(n)
-                running += nums[j];
-            }
-            max = Math.max(max, running);
-        }
-        return max; // O(n^2)
-    }
-}
-```
+[Code Example 1 in detail (external file)](../examples/java/volume-02-time-space-complexity/01-time-space-analysis-01.java)
+
 
 ## Step-by-Step Execution
 

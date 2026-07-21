@@ -30,11 +30,8 @@ flowchart LR
 
 ## Code Example
 
-```java
-public final class RevisionMap {
-    public static final String TOPIC = "JVM + Java + DSA";
-}
-```
+[Code Example 1 in detail (external file)](../examples/java/volume-01-java-fundamentals/18-revision-cheat-sheet-01.java)
+
 
 ## Step-by-Step Execution
 

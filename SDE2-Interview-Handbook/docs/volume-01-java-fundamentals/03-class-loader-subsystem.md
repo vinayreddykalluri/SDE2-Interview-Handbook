@@ -38,18 +38,8 @@ flowchart LR
 
 ## Code Example
 
-```java
-public class BootDemo {
-    static {
-        System.out.println("Loaded before main");
-    }
+[Code Example 1 in detail (external file)](../examples/java/volume-01-java-fundamentals/03-class-loader-subsystem-01.java)
 
-    public static void main(String[] args) {
-        BootDemo demo = new BootDemo();
-        System.out.println(demo.getClass().getClassLoader());
-    }
-}
-```
 
 ## Step-by-Step Execution
 

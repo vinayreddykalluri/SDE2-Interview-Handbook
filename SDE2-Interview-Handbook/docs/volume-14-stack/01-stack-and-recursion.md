@@ -41,26 +41,8 @@ flowchart TD
 
 ## Code Example
 
-```java
-import java.util.ArrayDeque;
+[Code Example 1 in detail (external file)](../examples/java/volume-14-stack/01-stack-and-recursion-01.java)
 
-public class StackPatterns {
-    public static boolean isBalanced(String s) {
-        ArrayDeque<Character> st = new ArrayDeque<>();
-        for (char ch : s.toCharArray()) {
-            if (ch == '(' || ch == '{' || ch == '[') st.push(ch);
-            else {
-                if (st.isEmpty()) return false;
-                char p = st.pop();
-                if ((ch == ')' && p != '(') || (ch == '}' && p != '{') || (ch == ']' && p != '[')) {
-                    return false;
-                }
-            }
-        }
-        return st.isEmpty();
-    }
-}
-```
 
 ## Step-by-Step Execution
 

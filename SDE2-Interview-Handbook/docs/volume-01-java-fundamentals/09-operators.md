@@ -30,17 +30,8 @@ flowchart LR
 
 ## Code Example
 
-```java
-public class OperatorDemo {
-    public static void main(String[] args) {
-        int a = 10;
-        int b = 3;
-        boolean safe = b != 0 && a / b > 1;
-        System.out.println(safe);
-        System.out.println(a & 3);
-    }
-}
-```
+[Code Example 1 in detail (external file)](../examples/java/volume-01-java-fundamentals/09-operators-01.java)
+
 
 ## Step-by-Step Execution
 

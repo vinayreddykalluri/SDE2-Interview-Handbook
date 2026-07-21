@@ -39,21 +39,8 @@ flowchart LR
 
 ## Code Example
 
-```java
-public class PrefixSum {
-    public static int[] buildPrefix(int[] nums) {
-        int[] pref = new int[nums.length + 1];
-        for (int i = 0; i < nums.length; i++) {
-            pref[i + 1] = pref[i] + nums[i];
-        }
-        return pref;
-    }
+[Code Example 1 in detail (external file)](../examples/java/volume-12-prefix-sum/01-prefix-sum-and-difference-01.java)
 
-    public static int rangeSum(int[] pref, int l, int r) {
-        return pref[r + 1] - pref[l];
-    }
-}
-```
 
 ## Step-by-Step Execution
 

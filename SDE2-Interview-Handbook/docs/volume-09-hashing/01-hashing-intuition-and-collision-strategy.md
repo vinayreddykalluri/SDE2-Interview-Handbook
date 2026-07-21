@@ -39,24 +39,8 @@ flowchart TD
 
 ## Code Example
 
-```java
-import java.util.HashMap;
+[Code Example 1 in detail (external file)](../examples/java/volume-09-hashing/01-hashing-intuition-and-collision-strategy-01.java)
 
-public class HashingDemo {
-    public static int mostFrequent(int[] nums) {
-        HashMap<Integer, Integer> freq = new HashMap<>();
-        for (int n : nums) freq.put(n, freq.getOrDefault(n, 0) + 1);
-        int best = nums[0], bestCount = 0;
-        for (var e : freq.entrySet()) {
-            if (e.getValue() > bestCount) {
-                best = e.getKey();
-                bestCount = e.getValue();
-            }
-        }
-        return best;
-    }
-}
-```
 
 ## Step-by-Step Execution
 

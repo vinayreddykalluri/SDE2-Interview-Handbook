@@ -31,19 +31,8 @@ flowchart LR
 
 ## Code Example
 
-```java
-public class PrimitiveDemo {
-    public static void main(String[] args) {
-        int a = 2_000_000_000;
-        int b = 1_000_000_000;
-        int c = a + b;
-        System.out.println(c); // overflow risk
+[Code Example 1 in detail (external file)](../examples/java/volume-01-java-fundamentals/08-primitive-types-01.java)
 
-        long safe = (long) a + b;
-        System.out.println(safe);
-    }
-}
-```
 
 ## Step-by-Step Execution
 

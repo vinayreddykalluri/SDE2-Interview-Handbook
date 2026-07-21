@@ -42,19 +42,8 @@ flowchart LR
 
 ## Code Example
 
-```java
-public class BinarySearch {
-    public static int lowerBound(int[] nums, int target) {
-        int l = 0, r = nums.length; // [l, r)
-        while (l < r) {
-            int m = l + ((r - l) >> 1);
-            if (nums[m] < target) l = m + 1;
-            else r = m;
-        }
-        return l;
-    }
-}
-```
+[Code Example 1 in detail (external file)](../examples/java/volume-13-binary-search/01-binary-search-framework-01.java)
+
 
 ## Step-by-Step Execution
 

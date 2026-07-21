@@ -31,16 +31,8 @@ flowchart TD
 
 ## Code Example
 
-```java
-public final class ExercisePattern {
-    public static int solveIfSafe(boolean condition, int value) {
-        if (!condition) {
-            throw new IllegalArgumentException("Invalid inputs");
-        }
-        return value;
-    }
-}
-```
+[Code Example 1 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-01.java)
+
 
 ## Step-by-Step Execution
 
@@ -908,259 +900,124 @@ Each exercise includes statement, example input, expected output, constraints, h
 ## Solutions (first 30 problems)
 
 ### Solution 1: Sum of Two Integers
-```java
-int sum(int a, int b) { return a + b; }
-```
+[Code Example 2 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-02.java)
+
 
 ### Solution 2: Odd or Even
-```java
-boolean isEven(int x) { return x % 2 == 0; }
-```
+[Code Example 3 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-03.java)
+
 
 ### Solution 3: Character Type
-```java
-String type(char c) {
-    if (Character.isLetter(c)) return "Letter";
-    if (Character.isDigit(c)) return "Digit";
-    return "Other";
-}
-```
+[Code Example 4 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-04.java)
+
 
 ### Solution 4: Celsius to Fahrenheit
-```java
-int toF(int c) { return c * 9 / 5 + 32; }
-```
+[Code Example 5 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-05.java)
+
 
 ### Solution 5: Swap Without Temp
-```java
-void swap(int[] a) {
-    a[0] = a[0] ^ a[1];
-    a[1] = a[0] ^ a[1];
-    a[0] = a[0] ^ a[1];
-}
-```
+[Code Example 6 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-06.java)
+
 
 ### Solution 6: Rectangle Area
-```java
-int area(int l, int b) { return l * b; }
-```
+[Code Example 7 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-07.java)
+
 
 ### Solution 7: ASCII Value
-```java
-int ascii(char c) { return (int) c; }
-```
+[Code Example 8 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-08.java)
+
 
 ### Solution 8: Age Bracket
-```java
-String bracket(int age) {
-    if (age < 13) return "Child";
-    if (age < 20) return "Teen";
-    return "Adult";
-}
-```
+[Code Example 9 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-09.java)
+
 
 ### Solution 9: Minutes to Hours
-```java
-String hm(int m) { return (m / 60) + " h " + (m % 60) + " m"; }
-```
+[Code Example 10 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-10.java)
+
 
 ### Solution 10: Days in Month
-```java
-int days(int month, int year) {
-    int[] d = {31,28,31,30,31,30,31,31,30,31,30,31};
-    if (month == 2 && isLeap(year)) return 29;
-    return d[month - 1];
-}
+[Code Example 11 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-11.java)
 
-boolean isLeap(int y) { return (y%4==0 && y%100!=0) || y%400==0; }
-```
 
 ### Solution 11: Maximum of Three
-```java
-int max3(int a, int b, int c) {
-    return Math.max(a, Math.max(b, c));
-}
-```
+[Code Example 12 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-12.java)
+
 
 ### Solution 12: Grade Classifier
-```java
-String grade(int s) {
-    if (s >= 90) return "A";
-    if (s >= 80) return "B";
-    if (s >= 70) return "C";
-    return "F";
-}
-```
+[Code Example 13 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-13.java)
+
 
 ### Solution 13: Leap Year
-```java
-boolean isLeapYear(int y) {
-    return (y % 400 == 0) || (y % 4 == 0 && y % 100 != 0);
-}
-```
+[Code Example 14 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-14.java)
+
 
 ### Solution 14: Triangle Type
-```java
-String tri(int a, int b, int c) {
-    if (a == b && b == c) return "equilateral";
-    if (a == b || b == c || a == c) return "isosceles";
-    return "scalene";
-}
-```
+[Code Example 15 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-15.java)
+
 
 ### Solution 15: Login Attempts
-```java
-String status(int fails) {
-    return fails >= 5 ? "LOCKED" : "OPEN";
-}
-```
+[Code Example 16 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-16.java)
+
 
 ### Solution 16: Discount Slab
-```java
-int discount(int amount) {
-    if (amount >= 10000) return 20;
-    if (amount >= 5000) return 10;
-    return 0;
-}
-```
+[Code Example 17 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-17.java)
+
 
 ### Solution 17: ATM Withdrawal
-```java
-boolean validNotes(int amount) {
-    return amount > 0 && amount % 10 == 0;
-}
-```
+[Code Example 18 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-18.java)
+
 
 ### Solution 18: Password Policy
-```java
-boolean validPassword(String s) {
-    if (s.length() < 6) return false;
-    for (char c : s.toCharArray()) {
-        if (Character.isDigit(c)) return true;
-    }
-    return false;
-}
-```
+[Code Example 19 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-19.java)
+
 
 ### Solution 19: Largest Magnitude
-```java
-int absMax(int a, int b) {
-    return Math.abs(a) >= Math.abs(b) ? a : b;
-}
-```
+[Code Example 20 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-20.java)
+
 
 ### Solution 20: Vowel Check
-```java
-boolean isVowel(char c) {
-    return "aeiouAEIOU".indexOf(c) >= 0;
-}
-```
+[Code Example 21 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-21.java)
+
 
 ### Solution 21: Print N numbers
-```java
-void printN(int n) {
-    for (int i = 1; i <= n; i++) {
-        System.out.print(i + " ");
-    }
-}
-```
+[Code Example 22 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-22.java)
+
 
 ### Solution 22: Factorial
-```java
-long factorial(int n) {
-    long ans = 1;
-    for (int i = 2; i <= n; i++) ans *= i;
-    return ans;
-}
-```
+[Code Example 23 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-23.java)
+
 
 ### Solution 23: Count Digits
-```java
-int digits(int n) {
-    if (n == 0) return 1;
-    int c = 0;
-    while (n != 0) { n /= 10; c++; }
-    return c;
-}
-```
+[Code Example 24 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-24.java)
+
 
 ### Solution 24: Reverse Number
-```java
-int rev(int n) {
-    int r = 0;
-    while (n != 0) {
-        r = r * 10 + (n % 10);
-        n /= 10;
-    }
-    return r;
-}
-```
+[Code Example 25 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-25.java)
+
 
 ### Solution 25: GCD
-```java
-int gcd(int a, int b) {
-    while (b != 0) {
-        int t = a % b;
-        a = b;
-        b = t;
-    }
-    return Math.abs(a);
-}
-```
+[Code Example 26 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-26.java)
+
 
 ### Solution 26: Fibonacci Series
-```java
-void fib(int n) {
-    int a = 0, b = 1;
-    for (int i = 0; i < n; i++) {
-        System.out.print(a + " ");
-        int c = a + b;
-        a = b;
-        b = c;
-    }
-}
-```
+[Code Example 27 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-27.java)
+
 
 ### Solution 27: Prime Count
-```java
-int primeCount(int n) {
-    if (n < 2) return 0;
-    boolean[] p = new boolean[n + 1];
-    Arrays.fill(p, true);
-    p[0] = p[1] = false;
-    for (int i = 2; i * i <= n; i++) if (p[i])
-        for (int j = i * i; j <= n; j += i) p[j] = false;
-    int c = 0;
-    for (int i = 2; i <= n; i++) if (p[i]) c++;
-    return c;
-}
-```
+[Code Example 28 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-28.java)
+
 
 ### Solution 28: Star Pattern
-```java
-void star(int n) {
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) System.out.print("*");
-        System.out.println();
-    }
-}
-```
+[Code Example 29 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-29.java)
+
 
 ### Solution 29: Power of Two
-```java
-boolean power2(int n) {
-    return n > 0 && (n & (n - 1)) == 0;
-}
-```
+[Code Example 30 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-30.java)
+
 
 ### Solution 30: Odd Number Printer
-```java
-void printOdd(int n) {
-    for (int i = 0; i < n; i++) {
-        System.out.print((2 * i + 1) + " ");
-    }
-}
-```
+[Code Example 31 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-31.java)
+
 
 ## Practice Exercises
 

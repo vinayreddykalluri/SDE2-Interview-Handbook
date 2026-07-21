@@ -36,20 +36,8 @@ flowchart TD
 
 ## Code Example
 
-```java
-public class DpPatterns {
-    public static int climbStairs(int n) {
-        if (n <= 1) return 1;
-        int prev2 = 1, prev1 = 1;
-        for (int i = 2; i <= n; i++) {
-            int cur = prev1 + prev2;
-            prev2 = prev1;
-            prev1 = cur;
-        }
-        return prev1;
-    }
-}
-```
+[Code Example 1 in detail (external file)](../examples/java/volume-19-dynamic-programming/01-dp-state-design-01.java)
+
 
 ## Step-by-Step Execution
 

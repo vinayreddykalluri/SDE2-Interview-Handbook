@@ -42,15 +42,8 @@ flowchart TD
 
 ## Code Example
 
-```java
-public class JvmStats {
-    public static void main(String[] args) {
-        System.out.println("Runtime processors: " + Runtime.getRuntime().availableProcessors());
-        long max = Runtime.getRuntime().maxMemory();
-        System.out.println("Max memory bytes: " + max);
-    }
-}
-```
+[Code Example 1 in detail (external file)](../examples/java/volume-01-java-fundamentals/02-jvm-architecture-01.java)
+
 
 ## Step-by-Step Execution
 

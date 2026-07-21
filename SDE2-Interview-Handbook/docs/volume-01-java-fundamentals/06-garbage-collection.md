@@ -40,21 +40,8 @@ flowchart TD
 
 ## Code Example
 
-```java
-import java.util.ArrayList;
-import java.util.List;
+[Code Example 1 in detail (external file)](../examples/java/volume-01-java-fundamentals/06-garbage-collection-01.java)
 
-public class GcExample {
-    public static void main(String[] args) throws InterruptedException {
-        List<byte[]> allocations = new ArrayList<>();
-        for (int i = 0; i < 1000; i++) {
-            allocations.add(new byte[1024 * 1024]);
-            if (i % 50 == 0) allocations.clear();
-            Thread.sleep(5);
-        }
-    }
-}
-```
 
 ## Step-by-Step Execution
 

@@ -43,28 +43,8 @@ graph TD
 
 ## Code Example
 
-```java
-public class MathUtils {
-    public static int gcd(int a, int b) {
-        while (b != 0) {
-            int t = a % b;
-            a = b;
-            b = t;
-        }
-        return Math.abs(a);
-    }
+[Code Example 1 in detail (external file)](../examples/java/volume-03-math-fundamentals/01-math-foundations-01.java)
 
-    public static long nCk(int n, int k) {
-        if (k < 0 || k > n) return 0;
-        k = Math.min(k, n - k);
-        long res = 1;
-        for (int i = 1; i <= k; i++) {
-            res = res * (n - i + 1) / i;
-        }
-        return res;
-    }
-}
-```
 
 ## Step-by-Step Execution
 

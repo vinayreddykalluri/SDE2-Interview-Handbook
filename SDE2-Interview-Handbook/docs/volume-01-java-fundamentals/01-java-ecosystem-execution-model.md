@@ -45,18 +45,8 @@ flowchart TD
 
 ## Code Example
 
-```java
-public final class ExecutionDemo {
-    public static int sum(int a, int b) {
-        return a + b;
-    }
+[Code Example 1 in detail (external file)](../examples/java/volume-01-java-fundamentals/01-java-ecosystem-execution-model-01.java)
 
-    public static void main(String[] args) {
-        int value = sum(5, 7);
-        System.out.println("value=" + value);
-    }
-}
-```
 
 ## Step-by-Step Execution
 

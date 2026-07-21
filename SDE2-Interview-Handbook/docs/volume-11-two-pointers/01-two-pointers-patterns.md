@@ -43,20 +43,8 @@ flowchart TD
 
 ## Code Example
 
-```java
-public class TwoPointers {
-    public static boolean twoSumPair(int[] nums, int target) {
-        int l = 0, r = nums.length - 1;
-        while (l < r) {
-            int sum = nums[l] + nums[r];
-            if (sum == target) return true;
-            if (sum < target) l++;
-            else r--;
-        }
-        return false;
-    }
-}
-```
+[Code Example 1 in detail (external file)](../examples/java/volume-11-two-pointers/01-two-pointers-patterns-01.java)
+
 
 ## Step-by-Step Execution
 

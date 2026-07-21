@@ -36,18 +36,8 @@ flowchart TB
 
 ## Code Example
 
-```java
-import java.util.*;
+[Code Example 1 in detail (external file)](../examples/java/volume-01-java-fundamentals/15-collections-overview-01.java)
 
-public class CollectionsOverview {
-    public static void main(String[] args) {
-        Map<String, Integer> counts = new HashMap<>();
-        counts.put("apple", 3);
-        counts.merge("apple", 1, Integer::sum);
-        System.out.println(counts);
-    }
-}
-```
 
 ## Step-by-Step Execution
 

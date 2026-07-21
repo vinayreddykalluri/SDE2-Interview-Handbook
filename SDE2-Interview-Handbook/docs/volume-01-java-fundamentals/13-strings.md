@@ -31,20 +31,8 @@ flowchart LR
 
 ## Code Example
 
-```java
-public class StringDemo {
-    public static void main(String[] args) {
-        String a = "hello";
-        String b = new String("hello");
-        System.out.println(a == b);         // false
-        System.out.println(a.equals(b));     // true
+[Code Example 1 in detail (external file)](../examples/java/volume-01-java-fundamentals/13-strings-01.java)
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("a").append("b").append("c");
-        System.out.println(sb.toString());
-    }
-}
-```
 
 ## Step-by-Step Execution
 

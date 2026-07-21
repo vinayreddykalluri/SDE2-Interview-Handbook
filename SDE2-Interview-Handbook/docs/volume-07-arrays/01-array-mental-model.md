@@ -41,17 +41,8 @@ flowchart LR
 
 ## Code Example
 
-```java
-public class ArrayOps {
-    public static void moveZeroes(int[] nums) {
-        int write = 0;
-        for (int x : nums) {
-            if (x != 0) nums[write++] = x;
-        }
-        while (write < nums.length) nums[write++] = 0;
-    }
-}
-```
+[Code Example 1 in detail (external file)](../examples/java/volume-07-arrays/01-array-mental-model-01.java)
+
 
 ## Step-by-Step Execution
 

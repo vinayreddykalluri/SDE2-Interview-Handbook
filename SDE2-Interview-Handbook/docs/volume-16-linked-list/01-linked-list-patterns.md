@@ -39,26 +39,8 @@ flowchart LR
 
 ## Code Example
 
-```java
-public class ListPatterns {
-    static class Node {
-        int val;
-        Node next;
-        Node(int v) { this.val = v; }
-    }
+[Code Example 1 in detail (external file)](../examples/java/volume-16-linked-list/01-linked-list-patterns-01.java)
 
-    public static Node reverse(Node head) {
-        Node prev = null, cur = head;
-        while (cur != null) {
-            Node nxt = cur.next;
-            cur.next = prev;
-            prev = cur;
-            cur = nxt;
-        }
-        return prev;
-    }
-}
-```
 
 ## Step-by-Step Execution
 
