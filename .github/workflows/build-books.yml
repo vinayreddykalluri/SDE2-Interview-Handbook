@@ -51,7 +51,7 @@ jobs:
         run: make build-all
 
       - name: Upload PDFs
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: handbook-pdfs
           path: output/pdf/
@@ -59,7 +59,7 @@ jobs:
           retention-days: 30
 
       - name: Upload combined artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: handbook-combined
           path: output/combined/
@@ -67,7 +67,7 @@ jobs:
           retention-days: 30
 
       - name: Upload DOCX
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: handbook-docx
           path: output/docx/
