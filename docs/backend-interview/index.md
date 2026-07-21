@@ -38,10 +38,11 @@ flowchart LR
 ## How to use the track
 
 1. Complete the [readiness matrix](readiness-matrix.md) honestly.
-2. Follow the [12-week roadmap](roadmap.md), or select modules below level 2.
-3. Produce the required artifact: code, class diagram, architecture diagram, API contract, data model, runbook, or behavioral story.
-4. Explain every decision aloud using constraints, alternatives, failure modes, and operational impact.
-5. Re-score after each mock interview and keep an evidence log.
+2. Use the [structured revision system](revision-system.md) and [review log](review-log.md) for repeated retrieval.
+3. Follow the [12-week roadmap](roadmap.md), or select modules below level 2.
+4. Produce the required artifact: code, class diagram, architecture diagram, API contract, data model, runbook, or behavioral story.
+5. Explain every decision aloud using constraints, alternatives, failure modes, and operational impact.
+6. Re-score after each mock interview and keep an evidence log.
 
 ## SDE-2 completion standard
 

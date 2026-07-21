@@ -55,7 +55,7 @@ def build_volume_pdf(volume_dir: Path, keep: bool = False) -> Path:
     cmd = [
         "pandoc",
         str(combined),
-        "--from=gfm+tex_math_dollars+raw_tex",
+        "--from=gfm+tex_math_dollars",
         "--standalone",
         "--toc",
         "--number-sections",
@@ -100,7 +100,7 @@ def build_combined_pdf() -> Path:
     cmd = [
         "pandoc",
         str(combined),
-        "--from=gfm+tex_math_dollars+raw_tex",
+        "--from=gfm+tex_math_dollars",
         "--standalone",
         "--toc",
         "--number-sections",

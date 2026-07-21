@@ -16,6 +16,7 @@ Explore the [interactive learning portal](https://vinayreddykalluri.github.io/SD
 | --- | --- |
 | Study in order | [Getting Started](docs/getting-started.md) and [Study Plan](docs/study-plan.md) |
 | Prepare for SDE-2 backend interviews | [Backend Interview Track](docs/backend-interview/index.md) |
+| Repeat and retain advanced material | [Structured Revision System](docs/backend-interview/revision-system.md) |
 | Explore learning paths and track progress | [Interactive portal](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/) |
 | Search concepts and diagrams | [Complete documentation](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/docs/) |
 | Practice Java implementations | [Java examples](examples/java/README.md) |
