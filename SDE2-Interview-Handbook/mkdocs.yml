@@ -1,9 +1,11 @@
 site_name: SDE2 Interview Handbook
 site_description: A printable, production-quality interview handbook for SDE-2 Java and DSA preparation.
-site_url: https://example.com/sde2-interview-handbook
-repo_url: https://github.com/your-org/SDE2-Interview-Handbook
-repo_name: SDE2-Interview-Handbook
-copyright: Copyright © 2026
+site_author: Vinay Reddy Kalluri and contributors
+site_url: https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/docs/
+repo_url: https://github.com/vinayreddykalluri/SDE2-Interview-Handbook
+repo_name: vinayreddykalluri/SDE2-Interview-Handbook
+edit_uri: edit/master/docs/
+copyright: Copyright &copy; 2026 Vinay Reddy Kalluri and contributors. Content licensed CC BY 4.0.
 
 nav:
   - Home:
@@ -11,7 +13,8 @@ nav:
       - Getting Started: getting-started.md
       - Study Plan: study-plan.md
       - Code Library: examples/README.md
-  - Volume 01: Java Fundamentals:
+      - Downloads and Printing: downloads.md
+  - "Volume 01: Java Fundamentals":
       - Overview: volume-01-java-fundamentals/index.md
       - 01.01 Java Ecosystem and Execution Model: volume-01-java-fundamentals/01-java-ecosystem-execution-model.md
       - 01.02 JVM Architecture: volume-01-java-fundamentals/02-jvm-architecture.md
@@ -31,60 +34,65 @@ nav:
       - 01.16 Interview Questions: volume-01-java-fundamentals/16-interview-questions.md
       - 01.17 Coding Exercises: volume-01-java-fundamentals/17-coding-exercises.md
       - 01.18 Revision Cheat Sheet: volume-01-java-fundamentals/18-revision-cheat-sheet.md
-  - Volume 02: Time and Space Complexity:
+  - "Volume 02: Time and Space Complexity":
       - Overview: volume-02-time-space-complexity/index.md
       - 02.01 Time and Space Analysis: volume-02-time-space-complexity/01-time-space-analysis.md
-  - Volume 03: Math Fundamentals:
+  - "Volume 03: Math Fundamentals":
       - Overview: volume-03-math-fundamentals/index.md
       - 03.01 Math Foundations: volume-03-math-fundamentals/01-math-foundations.md
-  - Volume 04: Loop Mastery:
+  - "Volume 04: Loop Mastery":
       - Overview: volume-04-loop-mastery/index.md
       - 04.01 Loop Patterns and Pitfalls: volume-04-loop-mastery/01-loop-patterns.md
-  - Volume 05: Index Calculations:
+  - "Volume 05: Index Calculations":
       - Overview: volume-05-index-calculations/index.md
       - 05.01 Indexing in Practice: volume-05-index-calculations/01-indexing-in-practice.md
-  - Volume 06: Bit Manipulation:
+  - "Volume 06: Bit Manipulation":
       - Overview: volume-06-bit-manipulation/index.md
       - 06.01 Bitwise Cookbook: volume-06-bit-manipulation/01-bitwise-cookbook.md
-  - Volume 07: Arrays:
+  - "Volume 07: Arrays":
       - Overview: volume-07-arrays/index.md
       - 07.01 Array Mental Model: volume-07-arrays/01-array-mental-model.md
-  - Volume 08: Strings:
+  - "Volume 08: Strings":
       - Overview: volume-08-strings/index.md
       - 08.01 String Internals and Patterns: volume-08-strings/01-string-internals-and-patterns.md
-  - Volume 09: Hashing:
+  - "Volume 09: Hashing":
       - Overview: volume-09-hashing/index.md
       - 09.01 Hashing Intuition and Collisions: volume-09-hashing/01-hashing-intuition-and-collision-strategy.md
-  - Volume 10: Sliding Window:
+  - "Volume 10: Sliding Window":
       - Overview: volume-10-sliding-window/index.md
       - 10.01 Sliding Window Patterns: volume-10-sliding-window/01-sliding-window-patterns.md
-  - Volume 11: Two Pointers:
+  - "Volume 11: Two Pointers":
       - Overview: volume-11-two-pointers/index.md
       - 11.01 Two-Pointer Patterns: volume-11-two-pointers/01-two-pointers-patterns.md
-  - Volume 12: Prefix Sum:
+  - "Volume 12: Prefix Sum":
       - Overview: volume-12-prefix-sum/index.md
       - 12.01 Prefix Sum and Difference: volume-12-prefix-sum/01-prefix-sum-and-difference.md
-  - Volume 13: Binary Search:
+  - "Volume 13: Binary Search":
       - Overview: volume-13-binary-search/index.md
       - 13.01 Binary Search Framework: volume-13-binary-search/01-binary-search-framework.md
-  - Volume 14: Stack:
+  - "Volume 14: Stack":
       - Overview: volume-14-stack/index.md
       - 14.01 Stack and Recursion: volume-14-stack/01-stack-and-recursion.md
-  - Volume 15: Queue:
+  - "Volume 15: Queue":
       - Overview: volume-15-queue/index.md
       - 15.01 Queues, Deques, and Buffers: volume-15-queue/01-queues-deques-and-buffers.md
-  - Volume 16: Linked List:
+  - "Volume 16: Linked List":
       - Overview: volume-16-linked-list/index.md
       - 16.01 Linked List Patterns: volume-16-linked-list/01-linked-list-patterns.md
-  - Volume 17: Trees:
+  - "Volume 17: Trees":
       - Overview: volume-17-trees/index.md
       - 17.01 Tree Mental Model: volume-17-trees/01-trees-and-recursive-structure.md
-  - Volume 18: Graphs:
+  - "Volume 18: Graphs":
       - Overview: volume-18-graphs/index.md
       - 18.01 Graphs and Traversal: volume-18-graphs/01-graphs-and-traversal.md
-  - Volume 19: Dynamic Programming:
+  - "Volume 19: Dynamic Programming":
       - Overview: volume-19-dynamic-programming/index.md
       - 19.01 State Design: volume-19-dynamic-programming/01-dp-state-design.md
+  - Project:
+      - Open Source and Licensing: community/open-source.md
+      - Contributor Guide: community/contributing.md
+      - Architecture: community/architecture.md
+      - Quality Standards: community/code-quality.md
 
 theme:
   name: material
@@ -95,12 +103,15 @@ theme:
     - navigation.sections
     - navigation.expand
     - navigation.top
+    - navigation.footer
     - toc.integrate
     - toc.follow
     - search.suggest
     - search.highlight
     - content.code.copy
     - content.code.annotate
+    - content.action.edit
+    - content.action.view
     - content.tabs.link
     - content.footnote
   palette:
@@ -125,7 +136,10 @@ theme:
 plugins:
   - search
   - mermaid2
-  - git-revision-date-localized
+  - git-revision-date-localized:
+      enable_creation_date: true
+      enable_git_follow: false
+      type: date
 
 extra_css:
   - assets/css/extra.css
@@ -161,4 +175,5 @@ markdown_extensions:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/your-org/SDE2-Interview-Handbook
+      link: https://github.com/vinayreddykalluri/SDE2-Interview-Handbook
+      name: SDE2 Interview Handbook on GitHub

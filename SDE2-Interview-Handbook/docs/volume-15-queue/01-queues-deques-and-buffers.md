@@ -42,7 +42,7 @@ flowchart LR
 
 ## Code Example
 
-[Code Example 1 in detail (external file)](../examples/java/volume-15-queue/01-queues-deques-and-buffers-01.java)
+[Code Example 1 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume15/QueuePatterns.java)
 
 
 ## Step-by-Step Execution

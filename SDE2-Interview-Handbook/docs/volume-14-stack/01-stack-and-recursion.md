@@ -41,7 +41,7 @@ flowchart TD
 
 ## Code Example
 
-[Code Example 1 in detail (external file)](../examples/java/volume-14-stack/01-stack-and-recursion-01.java)
+[Code Example 1 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume14/StackPatterns.java)
 
 
 ## Step-by-Step Execution

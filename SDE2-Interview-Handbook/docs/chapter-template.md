@@ -19,13 +19,9 @@ flowchart LR
 
 ## Code Example
 
-```java
-public class ChapterExample {
-    public static void main(String[] args) {
-        System.out.println("Interview-ready Java patterns");
-    }
-}
-```
+Canonical source path: `examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volumeXX/ConceptName.java`
+
+Replace the pattern above with a working GitHub link after adding the source file. State the input contract, invariant, output contract, and time/space complexity before walking through the implementation. Keep the canonical implementation in the separate Java source tree.
 
 ## Step-by-Step Execution
 

@@ -39,7 +39,7 @@ flowchart LR
 
 ## Code Example
 
-[Code Example 1 in detail (external file)](../examples/java/volume-12-prefix-sum/01-prefix-sum-and-difference-01.java)
+[Code Example 1 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume12/PrefixSum.java)
 
 
 ## Step-by-Step Execution

@@ -31,7 +31,7 @@ flowchart TD
 
 ## Code Example
 
-[Code Example 1 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-01.java)
+[Code Example 1 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/ExercisePattern.java)
 
 
 ## Step-by-Step Execution
@@ -900,123 +900,123 @@ Each exercise includes statement, example input, expected output, constraints, h
 ## Solutions (first 30 problems)
 
 ### Solution 1: Sum of Two Integers
-[Code Example 2 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-02.java)
+[Code Example 2 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/SumNumbers.java)
 
 
 ### Solution 2: Odd or Even
-[Code Example 3 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-03.java)
+[Code Example 3 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/EvenNumberCheck.java)
 
 
 ### Solution 3: Character Type
-[Code Example 4 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-04.java)
+[Code Example 4 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/CharacterType.java)
 
 
 ### Solution 4: Celsius to Fahrenheit
-[Code Example 5 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-05.java)
+[Code Example 5 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/TemperatureConversion.java)
 
 
 ### Solution 5: Swap Without Temp
-[Code Example 6 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-06.java)
+[Code Example 6 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/ArrayValueSwap.java)
 
 
 ### Solution 6: Rectangle Area
-[Code Example 7 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-07.java)
+[Code Example 7 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/RectangleArea.java)
 
 
 ### Solution 7: ASCII Value
-[Code Example 8 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-08.java)
+[Code Example 8 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/CharacterCode.java)
 
 
 ### Solution 8: Age Bracket
-[Code Example 9 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-09.java)
+[Code Example 9 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/AgeBracket.java)
 
 
 ### Solution 9: Minutes to Hours
-[Code Example 10 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-10.java)
+[Code Example 10 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/MinutesToHours.java)
 
 
 ### Solution 10: Days in Month
-[Code Example 11 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-11.java)
+[Code Example 11 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/DaysInMonth.java)
 
 
 ### Solution 11: Maximum of Three
-[Code Example 12 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-12.java)
+[Code Example 12 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/MaximumOfThree.java)
 
 
 ### Solution 12: Grade Classifier
-[Code Example 13 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-13.java)
+[Code Example 13 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/GradeCalculator.java)
 
 
 ### Solution 13: Leap Year
-[Code Example 14 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-14.java)
+[Code Example 14 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/LeapYearCheck.java)
 
 
 ### Solution 14: Triangle Type
-[Code Example 15 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-15.java)
+[Code Example 15 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/TriangleClassification.java)
 
 
 ### Solution 15: Login Attempts
-[Code Example 16 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-16.java)
+[Code Example 16 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/AccountLockStatus.java)
 
 
 ### Solution 16: Discount Slab
-[Code Example 17 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-17.java)
+[Code Example 17 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/DiscountRate.java)
 
 
 ### Solution 17: ATM Withdrawal
-[Code Example 18 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-18.java)
+[Code Example 18 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/AtmAmountValidation.java)
 
 
 ### Solution 18: Password Policy
-[Code Example 19 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-19.java)
+[Code Example 19 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/PasswordValidation.java)
 
 
 ### Solution 19: Largest Magnitude
-[Code Example 20 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-20.java)
+[Code Example 20 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/AbsoluteMaximum.java)
 
 
 ### Solution 20: Vowel Check
-[Code Example 21 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-21.java)
+[Code Example 21 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/VowelCheck.java)
 
 
 ### Solution 21: Print N numbers
-[Code Example 22 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-22.java)
+[Code Example 22 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/PrintOneToN.java)
 
 
 ### Solution 22: Factorial
-[Code Example 23 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-23.java)
+[Code Example 23 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/Factorial.java)
 
 
 ### Solution 23: Count Digits
-[Code Example 24 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-24.java)
+[Code Example 24 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/DigitCount.java)
 
 
 ### Solution 24: Reverse Number
-[Code Example 25 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-25.java)
+[Code Example 25 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/ReverseInteger.java)
 
 
 ### Solution 25: GCD
-[Code Example 26 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-26.java)
+[Code Example 26 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/GreatestCommonDivisor.java)
 
 
 ### Solution 26: Fibonacci Series
-[Code Example 27 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-27.java)
+[Code Example 27 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/FibonacciSequence.java)
 
 
 ### Solution 27: Prime Count
-[Code Example 28 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-28.java)
+[Code Example 28 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/PrimeCount.java)
 
 
 ### Solution 28: Star Pattern
-[Code Example 29 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-29.java)
+[Code Example 29 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/SquarePattern.java)
 
 
 ### Solution 29: Power of Two
-[Code Example 30 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-30.java)
+[Code Example 30 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/PowerOfTwoCheck.java)
 
 
 ### Solution 30: Odd Number Printer
-[Code Example 31 in detail (external file)](../examples/java/volume-01-java-fundamentals/17-coding-exercises-31.java)
+[Code Example 31 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/PrintOddNumbers.java)
 
 
 ## Practice Exercises

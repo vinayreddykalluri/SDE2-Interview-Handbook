@@ -34,9 +34,24 @@ flowchart TD
     E --> F[Space Optimization]
 ```
 
+## Architecture or Memory Diagram
+
+```mermaid
+flowchart LR
+    Input["Problem input"] --> State["Define state and parameters"]
+    State --> Base["Establish base cases"]
+    State --> Transition["Derive transition"]
+    Base --> Order["Choose evaluation order"]
+    Transition --> Order
+    Order --> Store["Memo table or compressed state"]
+    Store --> Answer["Return requested state"]
+```
+
+The state definition determines what each cached value means. Base cases terminate the dependency graph, the transition identifies smaller solved states, and the evaluation order guarantees every dependency is available before it is consumed.
+
 ## Code Example
 
-[Code Example 1 in detail (external file)](../examples/java/volume-19-dynamic-programming/01-dp-state-design-01.java)
+[Code Example 1 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume19/DpPatterns.java)
 
 
 ## Step-by-Step Execution

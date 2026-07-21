@@ -54,7 +54,7 @@ flowchart LR
 
 ## Code Example
 
-[Code Example 1 in detail (external file)](../examples/java/volume-02-time-space-complexity/01-time-space-analysis-01.java)
+[Code Example 1 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume02/ComplexityDemo.java)
 
 
 ## Step-by-Step Execution

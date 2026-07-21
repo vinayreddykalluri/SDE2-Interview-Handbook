@@ -10,7 +10,12 @@ from typing import List
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 OUTPUT = ROOT / "output"
-VOLUME_DIRS = sorted((DOCS / d for d in DOCS.glob("volume-*")), key=lambda p: p.name)
+VOLUME_DIRS = sorted(DOCS.glob("volume-*"), key=lambda p: p.name)
+
+
+def volume_output_stem(volume_dir: Path) -> str:
+    number, *topic = volume_dir.name.removeprefix("volume-").split("-")
+    return f"Volume-{number}-{'-'.join(word.title() for word in topic)}"
 
 
 def run(cmd: List[str]) -> None:
@@ -25,14 +30,17 @@ def build_volume_docx(volume_dir: Path) -> Path:
     files = collect_markdown(volume_dir)
     if not files:
         raise RuntimeError(f"No markdown in {volume_dir}")
-    out = OUTPUT / "docx" / f"{volume_dir.name.replace('volume-','Volume-').upper()}.docx"
+    out = OUTPUT / "docx" / f"{volume_output_stem(volume_dir)}.docx"
     out.parent.mkdir(parents=True, exist_ok=True)
 
     cmd = [
         "pandoc",
         *map(str, files),
         "--from=gfm",
-        "-s",
+        "--standalone",
+        "--toc",
+        "--number-sections",
+        f"--resource-path={DOCS}",
     ]
 
     if (ROOT / "templates" / "reference.docx").exists():
@@ -55,13 +63,14 @@ def build_combined_docx() -> Path:
         "pandoc",
         *map(str, all_files),
         "--from=gfm",
-        "-s",
-        "-o",
-        str(out),
+        "--standalone",
+        "--toc",
+        "--number-sections",
+        f"--resource-path={DOCS}",
     ]
     if (ROOT / "templates" / "reference.docx").exists():
-        cmd.insert(len(cmd)-2, "--reference-doc")
-        cmd.insert(len(cmd)-2, str(ROOT / "templates" / "reference.docx"))
+        cmd += ["--reference-doc", str(ROOT / "templates" / "reference.docx")]
+    cmd += ["-o", str(out)]
     run(cmd)
     return out
 
@@ -80,8 +89,7 @@ def main() -> None:
         build_volume_docx(ROOT / "docs" / args.volume)
     else:
         for v in VOLUME_DIRS:
-            if v.name == "volume-01-java-fundamentals":
-                build_volume_docx(v)
+            build_volume_docx(v)
         build_combined_docx()
 
 

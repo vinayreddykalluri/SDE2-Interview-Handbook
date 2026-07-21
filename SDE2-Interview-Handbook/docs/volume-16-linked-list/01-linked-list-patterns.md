@@ -39,7 +39,7 @@ flowchart LR
 
 ## Code Example
 
-[Code Example 1 in detail (external file)](../examples/java/volume-16-linked-list/01-linked-list-patterns-01.java)
+[Code Example 1 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume16/ListPatterns.java)
 
 
 ## Step-by-Step Execution

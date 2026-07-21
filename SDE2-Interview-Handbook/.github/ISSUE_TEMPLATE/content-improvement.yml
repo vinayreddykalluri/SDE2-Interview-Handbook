@@ -1,0 +1,46 @@
+name: Content improvement
+description: Report inaccurate, incomplete, unclear, or outdated handbook material.
+title: "[Content]: "
+body:
+  - type: markdown
+    attributes:
+      value: Provide enough context for a reviewer to locate and evaluate the material.
+
+  - type: input
+    id: location
+    attributes:
+      label: Chapter or page
+      description: Include the volume, chapter, heading, and URL when available.
+      placeholder: "Volume 13, Binary Search Framework, Loop Invariant"
+    validations:
+      required: true
+
+  - type: textarea
+    id: current
+    attributes:
+      label: Current content or problem
+      description: Explain what is inaccurate, missing, ambiguous, or difficult to learn from.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Proposed correction or detail
+      description: Describe the technically correct explanation, example, diagram, or source.
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Supporting evidence
+      description: Link authoritative specifications, official documentation, papers, or reproducible examples.
+
+  - type: checkboxes
+    id: rights
+    attributes:
+      label: Contribution terms
+      options:
+        - label: I have not included proprietary interview material or content I cannot license.
+          required: true

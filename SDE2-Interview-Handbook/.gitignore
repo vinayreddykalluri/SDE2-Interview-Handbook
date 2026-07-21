@@ -3,6 +3,7 @@
 site/
 __pycache__/
 *.pyc
+*.class
 .venv/
 .env
 
@@ -11,6 +12,7 @@ output/pdf/*.tmp/
 output/docx/*.tmp/
 output/combined/*.tmp/
 output/
+examples/java/out/
 
 # OS and editors
 .DS_Store

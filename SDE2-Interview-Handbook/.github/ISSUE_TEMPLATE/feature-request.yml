@@ -1,0 +1,40 @@
+name: Feature request
+description: Propose a focused learning, tooling, accessibility, or publishing improvement.
+title: "[Feature]: "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+      description: Explain the learner or contributor need before describing a solution.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed approach
+      description: Describe scope, affected files, and expected behavior.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives and trade-offs
+      description: Identify simpler options, maintenance cost, and compatibility concerns.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Primary area
+      options:
+        - Handbook content
+        - Java examples
+        - Diagrams
+        - Search and navigation
+        - PDF or DOCX
+        - Accessibility
+        - Contributor tooling
+    validations:
+      required: true

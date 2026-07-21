@@ -40,7 +40,7 @@ flowchart LR
 
 ## Code Example
 
-[Code Example 1 in detail (external file)](../examples/java/volume-05-index-calculations/01-indexing-in-practice-01.java)
+[Code Example 1 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume05/Indexing.java)
 
 
 ## Step-by-Step Execution

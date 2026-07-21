@@ -43,7 +43,7 @@ flowchart TD
 
 ## Code Example
 
-[Code Example 1 in detail (external file)](../examples/java/volume-11-two-pointers/01-two-pointers-patterns-01.java)
+[Code Example 1 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume11/TwoPointers.java)
 
 
 ## Step-by-Step Execution

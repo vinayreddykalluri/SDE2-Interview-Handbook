@@ -1,0 +1,10 @@
+{
+  "name": "SDE2 Interview Handbook",
+  "short_name": "SDE2 Handbook",
+  "description": "Java, JVM, DSA, and SDE-2 interview curriculum.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f2eddf",
+  "theme_color": "#f2eddf"
+}

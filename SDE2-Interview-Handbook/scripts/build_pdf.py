@@ -27,7 +27,7 @@ def combine_markdown_files(paths: Iterable[Path], title: str) -> Path:
     lines: List[str] = [f"# {title}\n"]
     for p in paths:
         text = p.read_text(encoding="utf-8")
-        lines.append("\n<div class=\"page-break\"></div>\n")
+        lines.append("\n\\newpage\n")
         lines.append(text)
     out.write_text("\n".join(lines), encoding="utf-8")
     return out
@@ -55,12 +55,21 @@ def build_volume_pdf(volume_dir: Path, keep: bool = False) -> Path:
     cmd = [
         "pandoc",
         str(combined),
-        "--from=gfm+tex_math_dollars",
+        "--from=gfm+tex_math_dollars+raw_tex",
         "--standalone",
         "--toc",
         "--number-sections",
+        "--highlight-style=tango",
         "--pdf-engine=xelatex",
         "--resource-path=docs",
+        "-V",
+        "papersize=letter",
+        "-V",
+        "geometry:margin=0.75in",
+        "-V",
+        "fontsize=10pt",
+        "-V",
+        "colorlinks=true",
         "-o",
         str(output_pdf),
     ]
@@ -91,12 +100,21 @@ def build_combined_pdf() -> Path:
     cmd = [
         "pandoc",
         str(combined),
-        "--from=gfm+tex_math_dollars",
+        "--from=gfm+tex_math_dollars+raw_tex",
         "--standalone",
         "--toc",
         "--number-sections",
+        "--highlight-style=tango",
         "--pdf-engine=xelatex",
         "--resource-path=docs",
+        "-V",
+        "papersize=letter",
+        "-V",
+        "geometry:margin=0.75in",
+        "-V",
+        "fontsize=10pt",
+        "-V",
+        "colorlinks=true",
         "-o",
         str(output_pdf),
     ]
@@ -112,9 +130,6 @@ def render_all() -> None:
 
     for volume in VOLUME_DIRS:
         if not any(volume.glob("*.md")):
-            continue
-        if volume.name != "volume-01-java-fundamentals":
-            # Placeholders for future volumes are intentionally excluded from PDF output for now.
             continue
         build_volume_pdf(volume)
 

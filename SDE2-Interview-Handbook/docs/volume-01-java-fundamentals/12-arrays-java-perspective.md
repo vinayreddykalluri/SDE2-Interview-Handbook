@@ -31,7 +31,7 @@ graph TD
 
 ## Code Example
 
-[Code Example 1 in detail (external file)](../examples/java/volume-01-java-fundamentals/12-arrays-java-perspective-01.java)
+[Code Example 1 in detail (external file)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/ArrayPerspective.java)
 
 
 ## Step-by-Step Execution

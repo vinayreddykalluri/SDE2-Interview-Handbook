@@ -1,6 +1,6 @@
-.PHONY: install serve build-site build-pdf build-docx build-all validate clean
+.PHONY: install serve serve-web build-site build-pdf build-docx build-all validate validate-web validate-code verify clean
 
-PYTHON := python
+PYTHON ?= python3
 
 install:
 	$(PYTHON) -m pip install -r requirements.txt
@@ -8,8 +8,11 @@ install:
 serve:
 	mkdocs serve
 
+serve-web: build-site
+	$(PYTHON) -m http.server 8000 --directory site
+
 build-site:
-	mkdocs build --clean
+	$(PYTHON) scripts/build_site.py
 
 build-pdf:
 	$(PYTHON) scripts/build_pdf.py
@@ -23,6 +26,16 @@ build-all:
 validate:
 	$(PYTHON) scripts/validate_structure.py
 	$(PYTHON) scripts/validate_links.py
+	$(PYTHON) scripts/validate_java_examples.py
+	$(PYTHON) scripts/validate_web.py
+
+validate-web:
+	$(PYTHON) scripts/validate_web.py
+
+validate-code:
+	$(PYTHON) scripts/validate_java_examples.py
+
+verify: validate build-site
 
 clean:
 	rm -rf site output/pdf/*.pdf output/docx/*.docx output/combined/*.pdf output/combined/*.docx
