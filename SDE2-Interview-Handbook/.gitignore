@@ -1,0 +1,18 @@
+# Local caches
+.site
+site/
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# Build outputs (regenerate when needed)
+output/pdf/*.tmp/
+output/docx/*.tmp/
+output/combined/*.tmp/
+output/
+
+# OS and editors
+.DS_Store
+*.swp
+*.swo

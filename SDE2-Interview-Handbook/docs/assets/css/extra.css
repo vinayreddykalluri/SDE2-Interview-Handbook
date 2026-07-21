@@ -1,0 +1,84 @@
+:root {
+    --md-text-font: "Merriweather", "Georgia", serif;
+}
+
+body {
+    font-family: "Merriweather", "Georgia", serif;
+    line-height: 1.55;
+}
+
+.md-content {
+    max-width: 1200px;
+}
+
+.md-nav__item {
+    font-size: 0.88rem;
+}
+
+pre, code {
+    border-radius: 0.45rem;
+    font-family: "Fira Code", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+pre {
+    overflow: auto;
+    border: 1px solid #bbb;
+    padding: 0.75rem;
+}
+
+.md-typeset table {
+    font-size: 0.9rem;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.md-typeset table th, .md-typeset table td {
+    border: 1px solid #b9c2ca;
+    padding: 0.45rem;
+    word-break: break-word;
+}
+
+.md-typeset .admonition {
+    border-left-width: 5px;
+    border-left-style: solid;
+    border-radius: 0.3rem;
+    padding: 0.5rem 0.75rem;
+}
+
+.md-typeset .admonition.note { border-left-color: #2a6f97; background: #f1f6fb; }
+.md-typeset .admonition.important { border-left-color: #ba181b; background: #fff3f3; }
+.md-typeset .admonition.warning { border-left-color: #c66b00; background: #fff6e5; }
+
+.page-break {
+    break-after: page;
+    page-break-after: always;
+    height: 1px;
+}
+
+.chapter-title {
+    page-break-before: always;
+    break-before: page;
+}
+
+@media print {
+    @page {
+        size: letter;
+        margin: 0.75in;
+    }
+    body {
+        font-size: 11pt;
+    }
+    pre {
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+    }
+    table {
+        break-inside: auto;
+    }
+    tr {
+        break-inside: avoid;
+    }
+    h2, h3, h4 {
+        break-after: avoid;
+    }
+}

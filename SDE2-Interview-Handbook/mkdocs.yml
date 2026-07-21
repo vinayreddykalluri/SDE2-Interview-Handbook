@@ -1,0 +1,145 @@
+site_name: SDE2 Interview Handbook
+site_description: A printable, production-quality interview handbook for SDE-2 Java and DSA preparation.
+site_url: https://example.com/sde2-interview-handbook
+repo_url: https://github.com/your-org/SDE2-Interview-Handbook
+repo_name: SDE2-Interview-Handbook
+copyright: Copyright © 2026
+
+nav:
+  - Home:
+      - Overview: index.md
+      - Getting Started: getting-started.md
+      - Study Plan: study-plan.md
+  - Volume 01: Java Fundamentals:
+      - Overview: volume-01-java-fundamentals/index.md
+      - 01 Java Ecosystem and Execution Model: volume-01-java-fundamentals/01-java-ecosystem-execution-model.md
+      - 02 JVM Architecture: volume-01-java-fundamentals/02-jvm-architecture.md
+      - 03 Class Loader Subsystem: volume-01-java-fundamentals/03-class-loader-subsystem.md
+      - 04 Runtime Data Areas: volume-01-java-fundamentals/04-runtime-data-areas.md
+      - 05 Execution Engine and JIT: volume-01-java-fundamentals/05-execution-engine-jit.md
+      - 06 Garbage Collection: volume-01-java-fundamentals/06-garbage-collection.md
+      - 07 Java Memory Model: volume-01-java-fundamentals/07-java-memory-model.md
+      - 08 Primitive Types: volume-01-java-fundamentals/08-primitive-types.md
+      - 09 Operators: volume-01-java-fundamentals/09-operators.md
+      - 10 Control Flow: volume-01-java-fundamentals/10-control-flow.md
+      - 11 Methods: volume-01-java-fundamentals/11-methods.md
+      - 12 Arrays from a Java Perspective: volume-01-java-fundamentals/12-arrays-java-perspective.md
+      - 13 Strings: volume-01-java-fundamentals/13-strings.md
+      - 14 Wrapper Classes: volume-01-java-fundamentals/14-wrapper-classes.md
+      - 15 Collections Overview: volume-01-java-fundamentals/15-collections-overview.md
+      - 16 Interview Questions: volume-01-java-fundamentals/16-interview-questions.md
+      - 17 Coding Exercises: volume-01-java-fundamentals/17-coding-exercises.md
+      - 18 Revision Cheat Sheet: volume-01-java-fundamentals/18-revision-cheat-sheet.md
+  - Volume 02: Time and Space Complexity:
+      - Overview: volume-02-time-space-complexity/index.md
+  - Volume 03: Math Fundamentals:
+      - Overview: volume-03-math-fundamentals/index.md
+  - Volume 04: Loop Mastery:
+      - Overview: volume-04-loop-mastery/index.md
+  - Volume 05: Index Calculations:
+      - Overview: volume-05-index-calculations/index.md
+  - Volume 06: Bit Manipulation:
+      - Overview: volume-06-bit-manipulation/index.md
+  - Volume 07: Arrays:
+      - Overview: volume-07-arrays/index.md
+  - Volume 08: Strings:
+      - Overview: volume-08-strings/index.md
+  - Volume 09: Hashing:
+      - Overview: volume-09-hashing/index.md
+  - Volume 10: Sliding Window:
+      - Overview: volume-10-sliding-window/index.md
+  - Volume 11: Two Pointers:
+      - Overview: volume-11-two-pointers/index.md
+  - Volume 12: Prefix Sum:
+      - Overview: volume-12-prefix-sum/index.md
+  - Volume 13: Binary Search:
+      - Overview: volume-13-binary-search/index.md
+  - Volume 14: Stack:
+      - Overview: volume-14-stack/index.md
+  - Volume 15: Queue:
+      - Overview: volume-15-queue/index.md
+  - Volume 16: Linked List:
+      - Overview: volume-16-linked-list/index.md
+  - Volume 17: Trees:
+      - Overview: volume-17-trees/index.md
+  - Volume 18: Graphs:
+      - Overview: volume-18-graphs/index.md
+  - Volume 19: Dynamic Programming:
+      - Overview: volume-19-dynamic-programming/index.md
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.indexes
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - toc.integrate
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - content.footnote
+  palette:
+    - media: '(prefers-color-scheme: light)'
+      scheme: default
+      primary: slate
+      accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: '(prefers-color-scheme: dark)'
+      scheme: slate
+      primary: black
+      accent: amber
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Merriweather Sans
+    code: Fira Code
+
+plugins:
+  - search
+  - mermaid2
+  - git-revision-date-localized
+
+extra_css:
+  - assets/css/extra.css
+
+markdown_extensions:
+  - admonition
+  - footnotes
+  - attr_list
+  - def_list
+  - pymdownx.details
+  - pymdownx.tasklist
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.superfences
+  - pymdownx.magiclink
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.critic
+  - pymdownx.betterem
+  - pymdownx.tilde
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.arithmatex
+  - pymdownx.emoji
+  - pymdownx.tabbed
+  - toc:
+      permalink: true
+      toc_depth: 3
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/your-org/SDE2-Interview-Handbook
