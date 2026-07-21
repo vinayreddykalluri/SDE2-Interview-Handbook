@@ -5,5 +5,5 @@ mkdocs-git-revision-date-localized-plugin==1.4.7
 pymdown-extensions==10.12
 Pygments==2.19.2
 PyYAML==6.0.2
-weasyprint==63.0
+weasyprint==69.0
 pypandoc==1.14
