@@ -3,21 +3,64 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Page not found | SDE2 Interview Handbook</title>
+  <meta name="theme-color" content="#f4efe3">
+  <title>Page not found | Backend SDE-2 Interview Field Manual</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body class="error-page">
+  <div class="page-grid" aria-hidden="true"></div>
+
+  <header class="site-header error-header">
+    <a class="brand" href="./" aria-label="Backend SDE-2 Interview Field Manual home">
+      <span class="brand-mark">S2</span>
+      <span class="brand-copy">
+        <strong>BACKEND / SDE2</strong>
+        <small>INTERVIEW FIELD MANUAL</small>
+      </span>
+    </a>
+    <nav class="primary-nav" aria-label="Recovery navigation">
+      <a href="./#journey">Journey</a>
+      <a href="./#method">Method</a>
+      <a href="./#practice">Practice</a>
+      <a href="docs/backend-interview/">Handbook</a>
+    </nav>
+    <a class="header-cta" href="./">Return home</a>
+  </header>
+
   <main class="error-shell">
-    <p class="section-kicker">HTTP / 404</p>
-    <h1>Wrong pointer.<br>Valid recovery.</h1>
-    <p>The requested page moved, was renamed, or never existed.</p>
-    <div class="hero-actions">
-      <a class="button button-primary" href="./">Return to the web portal</a>
-      <a class="button button-secondary" href="docs/">Search the full docs</a>
+    <div class="error-copy">
+      <p class="section-kicker">HTTP / RECOVERY PATH</p>
+      <p class="error-code">404</p>
+      <h1>Wrong pointer.<br>Clear recovery.</h1>
+      <p>The requested page moved, was renamed, or never existed. Continue from the preparation journey or search the detailed handbook.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="./#journey">Return to the journey</a>
+        <a class="button button-secondary" href="docs/">Search all docs</a>
+      </div>
     </div>
+
+    <aside class="error-recovery" aria-label="Recommended destinations">
+      <span>RECOVERY_OPTIONS / 04</span>
+      <a href="docs/backend-interview/readiness-matrix/"><strong>Assess readiness</strong><small>Find the next preparation gap</small></a>
+      <a href="docs/backend-interview/roadmap/"><strong>Open the roadmap</strong><small>Resume the ordered study plan</small></a>
+      <a href="docs/backend-interview/10-practice/"><strong>Practice a round</strong><small>Use prompts and scoring rubrics</small></a>
+      <a href="https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/new/choose"><strong>Report a broken link</strong><small>Help improve the open-source handbook</small></a>
+    </aside>
   </main>
+
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="./">
+      <span class="brand-mark">S2</span>
+      <span class="brand-copy"><strong>BACKEND / SDE2</strong><small>INTERVIEW FIELD MANUAL</small></span>
+    </a>
+    <p>Open source. Local-first. Built for deliberate repetition.</p>
+    <nav aria-label="Footer navigation">
+      <a href="docs/">All docs</a>
+      <a href="https://github.com/vinayreddykalluri/SDE2-Interview-Handbook">GitHub</a>
+    </nav>
+  </footer>
 </body>
 </html>

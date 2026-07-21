@@ -1,540 +1,492 @@
-(() => {
-  "use strict";
+const JOURNEY_URL = "content/interview-path.json";
+const PROGRESS_KEY = "sde2-interview-journey-progress-v1";
+const THEME_KEY = "sde2-handbook-theme";
 
-  const STORAGE_KEYS = {
-    theme: "sde2-handbook-theme-v1",
-    progress: "sde2-handbook-progress-v1"
-  };
+let stages = [];
+let completedStages = new Set(loadStoredArray(PROGRESS_KEY));
+let searchIndex = [];
+let activeSearchResult = -1;
+let allStagesExpanded = false;
 
-  const state = {
-    volumes: [],
-    completed: loadCompleted(),
-    stage: "all",
-    query: "",
-    searchSelection: -1
-  };
+const stageList = document.querySelector("#stage-list");
+const journeySearch = document.querySelector("#journey-search");
+const completedCount = document.querySelector("#completed-count");
+const stageCount = document.querySelector("#stage-count");
+const progressFill = document.querySelector("#progress-fill");
+const continueButton = document.querySelector("#continue-stage");
+const expandButton = document.querySelector("#expand-stages");
+const resetButton = document.querySelector("#reset-progress");
+const primaryNav = document.querySelector("#primary-nav");
+const menuButton = document.querySelector(".menu-toggle");
+const themeButton = document.querySelector(".theme-toggle");
+const searchDialog = document.querySelector("#search-dialog");
+const globalSearch = document.querySelector("#global-search");
+const searchResults = document.querySelector("#search-results");
+const toast = document.querySelector("#toast");
 
-  const elements = {
-    root: document.documentElement,
-    volumeList: document.querySelector("#volume-list"),
-    curriculumSearch: document.querySelector("#curriculum-search"),
-    filterButtons: [...document.querySelectorAll(".filter-button")],
-    completedCount: document.querySelector("#completed-count"),
-    volumeCount: document.querySelector("#volume-count"),
-    progressFill: document.querySelector("#progress-fill"),
-    resetProgress: document.querySelector("#reset-progress"),
-    searchDialog: document.querySelector("#search-dialog"),
-    searchTriggers: [...document.querySelectorAll(".search-trigger")],
-    searchClose: document.querySelector(".dialog-close"),
-    globalSearch: document.querySelector("#global-search"),
-    searchResults: document.querySelector("#search-results"),
-    themeToggle: document.querySelector(".theme-toggle"),
-    themeIcon: document.querySelector(".theme-icon"),
-    menuToggle: document.querySelector(".menu-toggle"),
-    primaryNav: document.querySelector("#primary-nav"),
-    toast: document.querySelector("#toast"),
-    copyCommand: document.querySelector(".copy-command")
-  };
+function loadStoredArray(key) {
+  try {
+    const value = JSON.parse(localStorage.getItem(key) || "[]");
+    return Array.isArray(value) ? value : [];
+  } catch {
+    return [];
+  }
+}
 
-  const staticDestinations = [
-    {
-      id: "DOC",
-      title: "Complete searchable documentation",
-      summary: "All chapters, diagrams, exercises, questions, and revision sheets.",
-      url: "docs/",
-      type: "Documentation",
-      keywords: ["docs", "search", "chapters", "handbook"]
-    },
-    {
-      id: "CODE",
-      title: "Java implementation library",
-      summary: "Semantic Java source, compiler validation, and smoke tests.",
-      url: "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/examples/java",
-      type: "Source code",
-      keywords: ["java", "code", "examples", "github"]
-    },
-    {
-      id: "PRINT",
-      title: "PDF and DOCX downloads",
-      summary: "Per-volume and combined printable handbook artifacts.",
-      url: "docs/downloads/",
-      type: "Downloads",
-      keywords: ["pdf", "docx", "print", "download"]
-    },
-    {
-      id: "PLAN",
-      title: "Structured study plan",
-      summary: "Turn the curriculum into an interview-preparation schedule.",
-      url: "docs/study-plan/",
-      type: "Learning path",
-      keywords: ["study", "plan", "schedule", "revision"]
+function createElement(tag, className, text) {
+  const element = document.createElement(tag);
+  if (className) element.className = className;
+  if (text !== undefined) element.textContent = text;
+  return element;
+}
+
+function persistProgress() {
+  try {
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(Array.from(completedStages)));
+  } catch {
+    showToast("Progress could not be saved");
+  }
+}
+
+function stageSearchText(stage) {
+  return [
+    stage.id,
+    stage.phase,
+    stage.category,
+    stage.title,
+    stage.summary,
+    stage.outcome
+  ].concat(
+    stage.tasks,
+    stage.topics,
+    stage.resources.flatMap(function (resource) {
+      return [resource.label, resource.note, resource.type];
+    })
+  ).join(" ").toLowerCase();
+}
+
+function buildStageCard(stage, index, firstIncomplete) {
+  const isComplete = completedStages.has(stage.id);
+  const details = createElement("details", "stage-card");
+  details.id = "stage-" + stage.id;
+  details.dataset.stageId = stage.id;
+  details.dataset.stageSearch = stageSearchText(stage);
+  details.style.animationDelay = Math.min(index * 30, 240) + "ms";
+  details.open = stage.id === firstIncomplete || (!firstIncomplete && index === 0);
+
+  const summary = createElement("summary");
+  summary.append(createElement("span", "stage-index", stage.id));
+
+  const summaryCopy = createElement("span", "stage-summary-copy");
+  summaryCopy.append(
+    createElement("span", "stage-kicker", stage.phase + " / " + stage.category),
+    createElement("strong", "stage-title", stage.title)
+  );
+
+  const status = createElement("span", "stage-status" + (isComplete ? " is-complete" : ""), isComplete ? "Complete" : "Ready to start");
+  status.dataset.stageStatus = stage.id;
+
+  summary.append(
+    summaryCopy,
+    createElement("span", "stage-duration", stage.duration),
+    status,
+    createElement("span", "stage-toggle-icon", "+")
+  );
+
+  const content = createElement("div", "stage-content");
+
+  const outcome = createElement("div", "stage-outcome");
+  outcome.append(
+    createElement("h3", "", "Exit outcome"),
+    createElement("p", "", stage.outcome),
+    createElement("p", "stage-summary", stage.summary)
+  );
+
+  const checklistBlock = createElement("div");
+  checklistBlock.append(createElement("h3", "", "Preparation checklist"));
+  const checklist = createElement("ol", "stage-checklist");
+  stage.tasks.forEach(function (task) {
+    checklist.append(createElement("li", "", task));
+  });
+  checklistBlock.append(checklist);
+
+  const topics = createElement("div", "stage-topics");
+  topics.setAttribute("aria-label", "Topics covered");
+  stage.topics.forEach(function (topic) {
+    topics.append(createElement("span", "", topic));
+  });
+
+  const resources = createElement("div", "stage-resources");
+  stage.resources.forEach(function (resource) {
+    const link = createElement("a", "stage-resource");
+    link.href = resource.href;
+    link.append(
+      createElement("span", "", resource.type),
+      createElement("strong", "", resource.label),
+      createElement("small", "", resource.note)
+    );
+    resources.append(link);
+  });
+
+  const completionLabel = createElement("label", "stage-complete-control");
+  const checkbox = createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.dataset.completeStage = stage.id;
+  checkbox.checked = isComplete;
+  completionLabel.append(checkbox, document.createTextNode(" I can produce the exit outcome without notes"));
+
+  content.append(outcome, checklistBlock, topics, resources, completionLabel);
+  details.append(summary, content);
+  return details;
+}
+
+function renderStages() {
+  stageList.replaceChildren();
+
+  if (!stages.length) {
+    stageList.append(createElement("div", "empty-state", "No journey stages are available."));
+    return;
+  }
+
+  const firstIncompleteStage = stages.find(function (stage) {
+    return !completedStages.has(stage.id);
+  });
+  const firstIncomplete = firstIncompleteStage ? firstIncompleteStage.id : null;
+
+  stages.forEach(function (stage, index) {
+    stageList.append(buildStageCard(stage, index, firstIncomplete));
+  });
+
+  updateProgress();
+  applyJourneyFilter();
+}
+
+function updateProgress() {
+  const validIds = new Set(stages.map(function (stage) { return stage.id; }));
+  completedStages = new Set(Array.from(completedStages).filter(function (id) {
+    return validIds.has(id);
+  }));
+
+  const complete = completedStages.size;
+  const total = stages.length || 1;
+  completedCount.textContent = String(complete);
+  stageCount.textContent = String(stages.length);
+  progressFill.style.width = Math.round((complete / total) * 100) + "%";
+
+  document.querySelectorAll("[data-stage-status]").forEach(function (element) {
+    const isComplete = completedStages.has(element.dataset.stageStatus);
+    element.textContent = isComplete ? "Complete" : "Ready to start";
+    element.classList.toggle("is-complete", isComplete);
+  });
+
+  continueButton.textContent = complete === stages.length ? "Review from start" : "Continue next";
+}
+
+function setStageCompletion(stageId, checked) {
+  if (checked) {
+    completedStages.add(stageId);
+  } else {
+    completedStages.delete(stageId);
+  }
+  persistProgress();
+  updateProgress();
+  showToast(checked ? "Stage marked complete" : "Stage reopened");
+}
+
+function applyJourneyFilter() {
+  const query = (journeySearch.value || "").trim().toLowerCase();
+  let visibleCount = 0;
+
+  document.querySelectorAll(".stage-card").forEach(function (card) {
+    const matches = !query || card.dataset.stageSearch.includes(query);
+    card.hidden = !matches;
+    if (matches) {
+      visibleCount += 1;
+      if (query) card.open = true;
     }
+  });
+
+  const existingEmpty = stageList.querySelector(".empty-state.filter-empty");
+  if (!visibleCount && !existingEmpty) {
+    const empty = createElement("div", "empty-state filter-empty", "No stage matches that search.");
+    stageList.append(empty);
+  } else if (visibleCount && existingEmpty) {
+    existingEmpty.remove();
+  }
+}
+
+function findStageCard(stageId) {
+  return Array.from(document.querySelectorAll(".stage-card")).find(function (card) {
+    return card.dataset.stageId === stageId;
+  });
+}
+
+function openStage(stageId) {
+  journeySearch.value = "";
+  applyJourneyFilter();
+  const card = findStageCard(stageId);
+  if (!card) return;
+  card.open = true;
+  card.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function continueJourney() {
+  const next = stages.find(function (stage) {
+    return !completedStages.has(stage.id);
+  }) || stages[0];
+  if (next) openStage(next.id);
+}
+
+function toggleAllStages() {
+  allStagesExpanded = !allStagesExpanded;
+  document.querySelectorAll(".stage-card:not([hidden])").forEach(function (card) {
+    card.open = allStagesExpanded;
+  });
+  expandButton.textContent = allStagesExpanded ? "Collapse all" : "Expand all";
+}
+
+function buildSearchIndex() {
+  const fixedDestinations = [
+    { type: "Start", label: "Readiness matrix", note: "Assess current interview readiness", href: "docs/backend-interview/readiness-matrix/" },
+    { type: "Plan", label: "12-week roadmap", note: "Follow the complete preparation schedule", href: "docs/backend-interview/roadmap/" },
+    { type: "Practice", label: "Question bank and rubric", note: "Run scored interview simulations", href: "docs/backend-interview/10-practice/question-bank-and-rubric/" },
+    { type: "Review", label: "Structured revision system", note: "Retain material through repeated recall", href: "docs/backend-interview/revision-system/" },
+    { type: "Code", label: "Java example library", note: "Open the separate runnable source tree", href: "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/examples/java" }
   ];
 
-  initializeTheme();
-  initializeNavigation();
-  initializeSearch();
-  initializeProgress();
-  initializeCopyButton();
-  initializeReveal();
-  loadVolumes();
-
-  async function loadVolumes() {
-    try {
-      const response = await fetch("content/volumes.json");
-      if (!response.ok) {
-        throw new Error(`Curriculum request failed with status ${response.status}`);
-      }
-
-      state.volumes = await response.json();
-      renderStats();
-      renderVolumes();
-      renderSearchResults("");
-    } catch (error) {
-      console.error(error);
-      elements.volumeList.innerHTML = `
-        <div class="empty-state">
-          <h3>Curriculum data unavailable</h3>
-          <p>Open the <a href="docs/">full documentation</a> or reload this page.</p>
-        </div>
-      `;
-    }
-  }
-
-  function renderStats() {
-    const chapters = state.volumes.reduce((total, volume) => total + volume.chapters, 0);
-    const examples = state.volumes.reduce((total, volume) => total + volume.codeExamples, 0);
-    setStat("volumes", state.volumes.length);
-    setStat("chapters", chapters);
-    setStat("examples", examples);
-    elements.volumeCount.textContent = String(state.volumes.length);
-    updateProgress();
-  }
-
-  function setStat(name, value) {
-    const target = document.querySelector(`[data-stat="${name}"]`);
-    if (target) {
-      target.textContent = String(value);
-    }
-  }
-
-  function renderVolumes() {
-    const visible = state.volumes.filter(matchesCurrentFilter);
-
-    if (!visible.length) {
-      elements.volumeList.innerHTML = `
-        <div class="empty-state">
-          <h3>No matching volume</h3>
-          <p>Try a broader concept or switch back to all stages.</p>
-        </div>
-      `;
-      return;
-    }
-
-    elements.volumeList.innerHTML = visible.map(volumeTemplate).join("");
-    observeReveals(elements.volumeList);
-  }
-
-  function matchesCurrentFilter(volume) {
-    const stageMatches = state.stage === "all" || volume.stage === state.stage;
-    if (!stageMatches) {
-      return false;
-    }
-
-    const query = normalize(state.query);
-    if (!query) {
-      return true;
-    }
-
-    const searchable = [
-      volume.id,
-      volume.roman,
-      volume.title,
-      volume.stage,
-      volume.level,
-      volume.summary,
-      ...volume.keywords
-    ].join(" ");
-
-    return normalize(searchable).includes(query);
-  }
-
-  function volumeTemplate(volume) {
-    const complete = state.completed.has(volume.id);
-    const detailId = `volume-detail-${volume.id}`;
-    const packageName = `volume${volume.id}`;
-    const keywords = volume.keywords
-      .slice(0, 7)
-      .map(keyword => `<span>${escapeHtml(keyword)}</span>`)
-      .join("");
-
-    return `
-      <article class="volume-row reveal${complete ? " is-complete" : ""}" data-volume="${volume.id}" data-stage="${escapeHtml(volume.stage)}">
-        <button class="volume-summary" type="button" aria-expanded="false" aria-controls="${detailId}">
-          <span class="volume-id">${escapeHtml(volume.roman)}</span>
-          <span class="volume-title-block">
-            <small>${escapeHtml(volume.stage)} / VOL ${volume.id}</small>
-            <strong>${escapeHtml(volume.title)}</strong>
-            <p>${escapeHtml(volume.summary)}</p>
-          </span>
-          <span class="volume-meta">
-            <span>Chapters<strong>${volume.chapters}</strong></span>
-            <span>Java files<strong>${volume.codeExamples}</strong></span>
-          </span>
-          <span class="volume-control">
-            <span class="volume-state-dot" aria-hidden="true"></span>
-            <span class="volume-plus" aria-hidden="true">+</span>
-          </span>
-        </button>
-
-        <div class="volume-detail" id="${detailId}" hidden>
-          <div>
-            <p class="volume-description">${escapeHtml(volume.summary)}</p>
-            <div class="volume-keywords" aria-label="Covered concepts">${keywords}</div>
-          </div>
-          <dl class="volume-facts">
-            <div><dt>Stage</dt><dd>${escapeHtml(volume.stage)}</dd></div>
-            <div><dt>Level</dt><dd>${escapeHtml(volume.level)}</dd></div>
-            <div><dt>Suggested effort</dt><dd>${escapeHtml(volume.duration)}</dd></div>
-            <div><dt>Implementation set</dt><dd>${volume.codeExamples} Java file${volume.codeExamples === 1 ? "" : "s"}</dd></div>
-          </dl>
-          <div class="volume-actions">
-            <a class="volume-link volume-link-primary" href="docs/${encodeURIComponent(volume.slug)}/">Open full volume &rarr;</a>
-            <a class="volume-link" href="https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/${packageName}">Browse source</a>
-            <button class="complete-button" type="button" data-complete="${volume.id}" aria-pressed="${complete}">
-              ${complete ? "Completed" : "Mark complete"}
-            </button>
-          </div>
-        </div>
-      </article>
-    `;
-  }
-
-  elements.volumeList.addEventListener("click", event => {
-    const summary = event.target.closest(".volume-summary");
-    if (summary) {
-      const row = summary.closest(".volume-row");
-      const detail = row.querySelector(".volume-detail");
-      const opening = !row.classList.contains("is-open");
-      row.classList.toggle("is-open", opening);
-      summary.setAttribute("aria-expanded", String(opening));
-      detail.hidden = !opening;
-      return;
-    }
-
-    const completeButton = event.target.closest("[data-complete]");
-    if (completeButton) {
-      toggleComplete(completeButton.dataset.complete);
-    }
-  });
-
-  elements.curriculumSearch.addEventListener("input", event => {
-    state.query = event.target.value;
-    renderVolumes();
-  });
-
-  elements.filterButtons.forEach(button => {
-    button.addEventListener("click", () => {
-      setStage(button.dataset.stage);
-    });
-  });
-
-  document.querySelectorAll("[data-stage-link]").forEach(link => {
-    link.addEventListener("click", () => {
-      setStage(link.dataset.stageLink);
-    });
-  });
-
-  function setStage(stage) {
-    state.stage = stage;
-    elements.filterButtons.forEach(button => {
-      button.classList.toggle("is-active", button.dataset.stage === stage);
-    });
-    renderVolumes();
-  }
-
-  function toggleComplete(id) {
-    if (state.completed.has(id)) {
-      state.completed.delete(id);
-    } else {
-      state.completed.add(id);
-    }
-
-    saveCompleted();
-    renderVolumes();
-    updateProgress();
-  }
-
-  function initializeProgress() {
-    elements.resetProgress.addEventListener("click", () => {
-      if (!state.completed.size) {
-        showToast("Progress is already empty");
-        return;
-      }
-
-      state.completed.clear();
-      saveCompleted();
-      renderVolumes();
-      updateProgress();
-      showToast("Local progress reset");
-    });
-  }
-
-  function updateProgress() {
-    const total = state.volumes.length || 19;
-    const validCompleted = [...state.completed].filter(id =>
-      !state.volumes.length || state.volumes.some(volume => volume.id === id)
-    ).length;
-    const percentage = Math.round((validCompleted / total) * 100);
-    elements.completedCount.textContent = String(validCompleted);
-    elements.progressFill.style.width = `${percentage}%`;
-  }
-
-  function loadCompleted() {
-    try {
-      const value = JSON.parse(localStorage.getItem(STORAGE_KEYS.progress) || "[]");
-      return new Set(Array.isArray(value) ? value : []);
-    } catch {
-      return new Set();
-    }
-  }
-
-  function saveCompleted() {
-    try {
-      localStorage.setItem(STORAGE_KEYS.progress, JSON.stringify([...state.completed]));
-    } catch {
-      showToast("Progress could not be saved in this browser");
-    }
-  }
-
-  function initializeTheme() {
-    const saved = readStorage(STORAGE_KEYS.theme);
-    const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    setTheme(saved || preferred);
-
-    elements.themeToggle.addEventListener("click", () => {
-      const next = elements.root.dataset.theme === "dark" ? "light" : "dark";
-      setTheme(next);
-      writeStorage(STORAGE_KEYS.theme, next);
-    });
-  }
-
-  function setTheme(theme) {
-    elements.root.dataset.theme = theme;
-    elements.themeIcon.textContent = theme === "dark" ? "DAY" : "NIGHT";
-    elements.themeToggle.setAttribute(
-      "aria-label",
-      theme === "dark" ? "Switch to light theme" : "Switch to dark theme"
-    );
-    document.querySelector('meta[name="theme-color"]').setAttribute(
-      "content",
-      theme === "dark" ? "#101917" : "#f2eddf"
-    );
-  }
-
-  function initializeNavigation() {
-    elements.menuToggle.addEventListener("click", () => {
-      const opening = !elements.primaryNav.classList.contains("is-open");
-      elements.primaryNav.classList.toggle("is-open", opening);
-      elements.menuToggle.setAttribute("aria-expanded", String(opening));
+  const stageEntries = [];
+  stages.forEach(function (stage) {
+    stageEntries.push({
+      type: "Stage " + stage.id,
+      label: stage.title,
+      note: stage.outcome,
+      href: "#stage-" + stage.id,
+      stageId: stage.id,
+      keywords: stageSearchText(stage)
     });
 
-    elements.primaryNav.addEventListener("click", () => {
-      elements.primaryNav.classList.remove("is-open");
-      elements.menuToggle.setAttribute("aria-expanded", "false");
-    });
-  }
-
-  function initializeSearch() {
-    elements.searchTriggers.forEach(trigger => {
-      trigger.addEventListener("click", openSearch);
-    });
-
-    elements.searchClose.addEventListener("click", closeSearch);
-    elements.searchDialog.addEventListener("click", event => {
-      if (event.target === elements.searchDialog) {
-        closeSearch();
-      }
-    });
-
-    elements.globalSearch.addEventListener("input", event => {
-      state.searchSelection = -1;
-      renderSearchResults(event.target.value);
-    });
-
-    elements.globalSearch.addEventListener("keydown", event => {
-      const results = [...elements.searchResults.querySelectorAll(".search-result")];
-      if (!results.length) {
-        return;
-      }
-
-      if (event.key === "ArrowDown") {
-        event.preventDefault();
-        state.searchSelection = Math.min(state.searchSelection + 1, results.length - 1);
-        updateSearchSelection(results);
-      } else if (event.key === "ArrowUp") {
-        event.preventDefault();
-        state.searchSelection = Math.max(state.searchSelection - 1, 0);
-        updateSearchSelection(results);
-      } else if (event.key === "Enter" && state.searchSelection >= 0) {
-        event.preventDefault();
-        results[state.searchSelection].click();
-      }
-    });
-
-    document.addEventListener("keydown", event => {
-      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
-        event.preventDefault();
-        openSearch();
-      } else if (event.key === "/" && document.activeElement.tagName !== "INPUT") {
-        event.preventDefault();
-        openSearch();
-      }
-    });
-  }
-
-  function openSearch() {
-    if (!elements.searchDialog.open) {
-      elements.searchDialog.showModal();
-    }
-    elements.globalSearch.value = "";
-    state.searchSelection = -1;
-    renderSearchResults("");
-    requestAnimationFrame(() => elements.globalSearch.focus());
-  }
-
-  function closeSearch() {
-    if (elements.searchDialog.open) {
-      elements.searchDialog.close();
-    }
-  }
-
-  function renderSearchResults(query) {
-    const normalizedQuery = normalize(query);
-    const volumeResults = state.volumes.map(volume => ({
-      id: volume.id,
-      title: volume.title,
-      summary: volume.summary,
-      url: `docs/${volume.slug}/`,
-      type: `Volume ${volume.id}`,
-      keywords: [volume.stage, volume.level, ...volume.keywords]
-    }));
-
-    const results = [...staticDestinations, ...volumeResults]
-      .filter(item => {
-        if (!normalizedQuery) {
-          return true;
-        }
-        return normalize([item.title, item.summary, item.type, ...item.keywords].join(" "))
-          .includes(normalizedQuery);
-      })
-      .slice(0, 12);
-
-    if (!results.length) {
-      elements.searchResults.innerHTML = `
-        <div class="empty-state">
-          <h3>No result</h3>
-          <p>Try a pattern name, data structure, runtime component, or output format.</p>
-        </div>
-      `;
-      return;
-    }
-
-    elements.searchResults.innerHTML = results.map(item => `
-      <a class="search-result" href="${escapeHtml(item.url)}">
-        <span class="search-result-index">${escapeHtml(item.id)}</span>
-        <span>
-          <strong>${escapeHtml(item.title)}</strong>
-          <small>${escapeHtml(item.summary)}</small>
-        </span>
-        <span class="search-result-type">${escapeHtml(item.type)}</span>
-      </a>
-    `).join("");
-  }
-
-  function updateSearchSelection(results) {
-    results.forEach((result, index) => {
-      result.classList.toggle("is-selected", index === state.searchSelection);
-    });
-    results[state.searchSelection]?.scrollIntoView({ block: "nearest" });
-  }
-
-  function initializeCopyButton() {
-    elements.copyCommand.addEventListener("click", async () => {
-      try {
-        await navigator.clipboard.writeText(elements.copyCommand.dataset.copy);
-        showToast("Clone command copied");
-      } catch {
-        showToast("Copy unavailable - select the command manually");
-      }
-    });
-  }
-
-  function initializeReveal() {
-    observeReveals(document);
-  }
-
-  function observeReveals(container) {
-    const targets = [...container.querySelectorAll(".reveal:not(.is-visible)")];
-    if (!targets.length) {
-      return;
-    }
-
-    if (!("IntersectionObserver" in window)) {
-      targets.forEach(target => target.classList.add("is-visible"));
-      return;
-    }
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          window.setTimeout(() => entry.target.classList.add("is-visible"), index * 35);
-          observer.unobserve(entry.target);
-        }
+    stage.resources.forEach(function (resource) {
+      stageEntries.push({
+        type: resource.type,
+        label: resource.label,
+        note: resource.note,
+        href: resource.href,
+        keywords: stage.title + " " + stage.category + " " + stage.topics.join(" ")
       });
-    }, { threshold: 0.08 });
+    });
+  });
 
-    targets.forEach(target => observer.observe(target));
+  searchIndex = fixedDestinations.concat(stageEntries);
+}
+
+function matchedSearchResults(query) {
+  const normalized = query.trim().toLowerCase();
+  if (!normalized) return searchIndex.slice(0, 8);
+  return searchIndex.filter(function (item) {
+    return [item.type, item.label, item.note, item.keywords || ""].join(" ").toLowerCase().includes(normalized);
+  }).slice(0, 10);
+}
+
+function renderGlobalSearch() {
+  const matches = matchedSearchResults(globalSearch.value);
+  activeSearchResult = matches.length ? 0 : -1;
+  searchResults.replaceChildren();
+
+  if (!matches.length) {
+    searchResults.append(createElement("div", "empty-state", "No matching stage or resource."));
+    return;
   }
 
-  let toastTimer;
-  function showToast(message) {
-    window.clearTimeout(toastTimer);
-    elements.toast.textContent = message;
-    elements.toast.classList.add("is-visible");
-    toastTimer = window.setTimeout(() => {
-      elements.toast.classList.remove("is-visible");
-    }, 2400);
-  }
+  matches.forEach(function (item, index) {
+    const result = createElement("a", "search-result" + (index === activeSearchResult ? " is-active" : ""));
+    result.href = item.href;
+    result.dataset.searchPosition = String(index);
+    if (item.stageId) result.dataset.openStage = item.stageId;
+    result.append(
+      createElement("span", "", item.type),
+      createElement("strong", "", item.label),
+      createElement("small", "", item.note)
+    );
+    searchResults.append(result);
+  });
+}
 
-  function normalize(value) {
-    return String(value).trim().toLowerCase();
-  }
+function moveSearchSelection(direction) {
+  const results = Array.from(searchResults.querySelectorAll(".search-result"));
+  if (!results.length) return;
+  activeSearchResult = (activeSearchResult + direction + results.length) % results.length;
+  results.forEach(function (result, index) {
+    result.classList.toggle("is-active", index === activeSearchResult);
+  });
+  results[activeSearchResult].scrollIntoView({ block: "nearest" });
+}
 
-  function escapeHtml(value) {
-    const entities = {
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#039;"
-    };
-    return String(value).replace(/[&<>"']/g, character => entities[character]);
+function openSearch() {
+  renderGlobalSearch();
+  if (typeof searchDialog.showModal === "function") {
+    searchDialog.showModal();
+    requestAnimationFrame(function () { globalSearch.focus(); });
   }
+}
 
-  function readStorage(key) {
+function closeSearch() {
+  if (searchDialog.open) searchDialog.close();
+}
+
+function showToast(message) {
+  toast.textContent = message;
+  toast.classList.add("is-visible");
+  window.clearTimeout(showToast.timeout);
+  showToast.timeout = window.setTimeout(function () {
+    toast.classList.remove("is-visible");
+  }, 1800);
+}
+
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  themeButton.textContent = theme === "dark" ? "Light" : "Dark";
+  themeButton.setAttribute("aria-label", "Switch to " + (theme === "dark" ? "light" : "dark") + " theme");
+  try {
+    localStorage.setItem(THEME_KEY, theme);
+  } catch {
+    // Theme persistence is optional.
+  }
+}
+
+function initializeTheme() {
+  let storedTheme = null;
+  try {
+    storedTheme = localStorage.getItem(THEME_KEY);
+  } catch {
+    // Use system preference.
+  }
+  const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  applyTheme(storedTheme || systemTheme);
+}
+
+async function initializeJourney() {
+  try {
+    const response = await fetch(JOURNEY_URL);
+    if (!response.ok) throw new Error("Journey request failed with " + response.status);
+    stages = await response.json();
+    if (!Array.isArray(stages)) throw new Error("Journey data must be an array");
+    renderStages();
+    buildSearchIndex();
+    document.querySelector("[data-stat='stages']").textContent = stages.length + " steps";
+  } catch (error) {
+    const fallback = createElement("div", "empty-state");
+    fallback.append(
+      document.createTextNode("The journey map could not load. "),
+      Object.assign(createElement("a", "", "Open the Backend SDE-2 handbook."), { href: "docs/backend-interview/" })
+    );
+    stageList.replaceChildren(fallback);
+    console.error(error);
+  }
+}
+
+stageList.addEventListener("change", function (event) {
+  const checkbox = event.target.closest("[data-complete-stage]");
+  if (checkbox) setStageCompletion(checkbox.dataset.completeStage, checkbox.checked);
+});
+
+journeySearch.addEventListener("input", applyJourneyFilter);
+continueButton.addEventListener("click", continueJourney);
+expandButton.addEventListener("click", toggleAllStages);
+
+resetButton.addEventListener("click", function () {
+  if (!window.confirm("Reset all locally stored journey progress?")) return;
+  completedStages.clear();
+  persistProgress();
+  renderStages();
+  showToast("Progress reset");
+});
+
+menuButton.addEventListener("click", function () {
+  const open = primaryNav.classList.toggle("is-open");
+  menuButton.setAttribute("aria-expanded", String(open));
+  menuButton.textContent = open ? "Close" : "Menu";
+});
+
+primaryNav.addEventListener("click", function () {
+  primaryNav.classList.remove("is-open");
+  menuButton.setAttribute("aria-expanded", "false");
+  menuButton.textContent = "Menu";
+});
+
+themeButton.addEventListener("click", function () {
+  applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
+});
+
+document.querySelectorAll(".search-trigger").forEach(function (button) {
+  button.addEventListener("click", openSearch);
+});
+
+document.querySelector(".dialog-close").addEventListener("click", closeSearch);
+globalSearch.addEventListener("input", renderGlobalSearch);
+
+globalSearch.addEventListener("keydown", function (event) {
+  if (event.key === "ArrowDown") {
+    event.preventDefault();
+    moveSearchSelection(1);
+  } else if (event.key === "ArrowUp") {
+    event.preventDefault();
+    moveSearchSelection(-1);
+  } else if (event.key === "Enter") {
+    event.preventDefault();
+    const active = searchResults.querySelector(".search-result.is-active");
+    if (active) active.click();
+  }
+});
+
+searchResults.addEventListener("click", function (event) {
+  const result = event.target.closest("[data-open-stage]");
+  if (!result) return;
+  event.preventDefault();
+  closeSearch();
+  openStage(result.dataset.openStage);
+});
+
+document.addEventListener("keydown", function (event) {
+  if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+    event.preventDefault();
+    openSearch();
+  } else if (event.key === "Escape") {
+    closeSearch();
+  }
+});
+
+document.querySelectorAll("[data-copy]").forEach(function (button) {
+  button.addEventListener("click", async function () {
     try {
-      return localStorage.getItem(key);
+      await navigator.clipboard.writeText(button.dataset.copy);
+      showToast("Clone command copied");
     } catch {
-      return null;
+      showToast("Copy failed");
     }
-  }
+  });
+});
 
-  function writeStorage(key, value) {
-    try {
-      localStorage.setItem(key, value);
-    } catch {
-      // Theme persistence is optional.
-    }
-  }
-})();
+const observedSections = Array.from(document.querySelectorAll("main section[id]"));
+const sectionLinks = Array.from(primaryNav.querySelectorAll('a[href^="#"]'));
+
+if ("IntersectionObserver" in window) {
+  const sectionObserver = new IntersectionObserver(function (entries) {
+    const visible = entries.filter(function (entry) {
+      return entry.isIntersecting;
+    }).sort(function (a, b) {
+      return b.intersectionRatio - a.intersectionRatio;
+    })[0];
+
+    if (!visible) return;
+    sectionLinks.forEach(function (link) {
+      link.classList.toggle("is-active", link.getAttribute("href") === "#" + visible.target.id);
+    });
+  }, { rootMargin: "-25% 0px -60%", threshold: [0.1, 0.4] });
+
+  observedSections.forEach(function (section) {
+    sectionObserver.observe(section);
+  });
+}
+
+initializeTheme();
+initializeJourney();

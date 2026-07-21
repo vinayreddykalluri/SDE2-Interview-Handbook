@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="An open-source Java, JVM, DSA, and SDE-2 interview curriculum with searchable docs, runnable code, diagrams, and printable books.">
-  <meta name="theme-color" content="#f2eddf">
-  <meta property="og:title" content="SDE2 Interview Handbook">
-  <meta property="og:description" content="Build interview judgment from Java execution to dynamic programming.">
+  <meta name="description" content="A structured, open-source Backend SDE-2 interview preparation journey covering coding, LLD, HLD, APIs, data, distributed systems, production, cloud, leadership, and practice.">
+  <meta name="theme-color" content="#f4efe3">
+  <meta property="og:title" content="Backend SDE-2 Interview Field Manual">
+  <meta property="og:description" content="Prepare in a clear sequence, from readiness assessment to mock interviews.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/">
-  <title>SDE2 Interview Handbook | Web Curriculum</title>
+  <title>Backend SDE-2 Interview Field Manual</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
@@ -19,362 +19,284 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
-  <div class="ambient-grid" aria-hidden="true"></div>
+  <div class="page-grid" aria-hidden="true"></div>
 
   <header class="site-header">
-    <a class="brand" href="./" aria-label="SDE2 Interview Handbook home">
+    <a class="brand" href="./" aria-label="Backend SDE-2 Interview Field Manual home">
       <span class="brand-mark">S2</span>
       <span class="brand-copy">
-        <strong>SDE2 / HANDBOOK</strong>
-        <small>JAVA + DSA FIELD GUIDE</small>
+        <strong>BACKEND / SDE2</strong>
+        <small>INTERVIEW FIELD MANUAL</small>
       </span>
     </a>
 
     <nav class="primary-nav" id="primary-nav" aria-label="Primary navigation">
-      <a href="#curriculum">Curriculum</a>
-      <a href="#paths">Learning paths</a>
-      <a href="docs/backend-interview/">Backend SDE-2</a>
-      <a href="docs/">Full docs</a>
+      <a href="#journey">Journey</a>
+      <a href="#method">Method</a>
+      <a href="#practice">Practice</a>
+      <a href="docs/backend-interview/">Handbook</a>
       <a href="https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/examples/java">Code</a>
-      <a href="https://github.com/vinayreddykalluri/SDE2-Interview-Handbook">GitHub</a>
     </nav>
 
     <div class="header-actions">
-      <button class="utility-button search-trigger" type="button" aria-label="Search curriculum" aria-keyshortcuts="Meta+K Control+K">
-        <span>Search</span>
-        <kbd>⌘K</kbd>
+      <button class="header-button search-trigger" type="button" aria-label="Search the interview journey" aria-keyshortcuts="Meta+K Control+K">
+        Search <kbd>&#8984;K</kbd>
       </button>
-      <button class="icon-button theme-toggle" type="button" aria-label="Switch color theme">
-        <span class="theme-icon" aria-hidden="true">L/D</span>
-      </button>
-      <button class="icon-button menu-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Open navigation">
-        <span aria-hidden="true">MENU</span>
-      </button>
+      <button class="header-button theme-toggle" type="button" aria-label="Switch color theme">Dark</button>
+      <a class="header-cta" href="docs/backend-interview/readiness-matrix/">Start here</a>
+      <button class="menu-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Open navigation">Menu</button>
     </div>
   </header>
 
   <main id="main">
-    <section class="hero section-shell" aria-labelledby="hero-title">
-      <div class="hero-copy reveal">
-        <div class="eyebrow-row">
-          <p class="eyebrow">FIELD_NOTE 001 / CURRICULUM 2026</p>
-          <p class="open-badge"><span></span> Open source</p>
+    <section class="hero shell" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <div class="hero-meta">
+          <span>BACKEND_ENGINEERING / 2026</span>
+          <span class="availability"><i></i> OPEN SOURCE</span>
         </div>
-
         <h1 id="hero-title">
-          <span>Interview</span>
-          <span>Engineering</span>
-          <em>Handbook</em>
+          Prepare in a sequence.
+          <em>Not a pile.</em>
         </h1>
-
         <p class="hero-lede">
-          Build the reasoning that survives follow-up questions. Start at Java execution,
-          move through reusable DSA invariants, and finish with state design.
+          One structured path for Backend SDE-2 interviews: solve problems, model objects,
+          design systems, defend trade-offs, operate production software, and communicate impact.
         </p>
-
         <p class="hero-note">
-          Written for experienced Java engineers preparing for SDE-2 interviews.
-          Every topic connects the whiteboard answer to production behavior.
+          Every stage tells you what to learn, what to produce, how to test readiness,
+          and where to go next. No guessing which chapter matters.
         </p>
-
         <div class="hero-actions">
-          <a class="button button-primary" href="docs/getting-started/">
-            Start the handbook <span aria-hidden="true">&rarr;</span>
+          <a class="button button-primary" href="docs/backend-interview/readiness-matrix/">
+            Assess your readiness <span aria-hidden="true">&rarr;</span>
           </a>
-          <a class="button button-secondary" href="#curriculum">Explore 19 volumes</a>
-          <a class="button button-secondary" href="docs/backend-interview/">Backend interview track</a>
+          <a class="button button-secondary" href="#journey">Open the journey</a>
+          <a class="text-link" href="docs/backend-interview/roadmap/">View 12-week plan</a>
         </div>
       </div>
 
-      <div class="hero-visual reveal" aria-label="Java execution flow illustration">
-        <div class="visual-label">EXECUTION_TRACE / 01</div>
-        <div class="runtime-card">
-          <div class="runtime-topline">
-            <span>JAVA_RUNTIME</span>
-            <span class="runtime-status">ACTIVE</span>
-          </div>
-          <div class="runtime-flow">
-            <div class="runtime-node">
-              <span class="node-index">01</span>
-              <strong>Source</strong>
-              <small>.java</small>
-            </div>
-            <span class="flow-arrow" aria-hidden="true">&rarr;</span>
-            <div class="runtime-node">
-              <span class="node-index">02</span>
-              <strong>Bytecode</strong>
-              <small>.class</small>
-            </div>
-            <span class="flow-arrow" aria-hidden="true">&rarr;</span>
-            <div class="runtime-node runtime-node-accent">
-              <span class="node-index">03</span>
-              <strong>JVM</strong>
-              <small>JIT + GC</small>
-            </div>
-            <span class="flow-arrow" aria-hidden="true">&rarr;</span>
-            <div class="runtime-node">
-              <span class="node-index">04</span>
-              <strong>CPU</strong>
-              <small>native</small>
-            </div>
-          </div>
-          <div class="runtime-readout">
-            <div><span>MODEL</span><strong>FIRST PRINCIPLES</strong></div>
-            <div><span>OUTPUT</span><strong>INTERVIEW JUDGMENT</strong></div>
-          </div>
-          <div class="runtime-code" aria-hidden="true">
-            <span>while (candidate.isLearning()) {</span>
-            <span>&nbsp;&nbsp;derive(); implement(); explain();</span>
-            <span>}</span>
-          </div>
+      <aside class="next-action" aria-labelledby="next-action-title">
+        <div class="panel-topline">
+          <span>START_PROTOCOL / 00</span>
+          <span class="live-label">READY</span>
         </div>
-        <div class="visual-stamp">NO PAYWALL / NO SIGNUP / FORK IT</div>
-      </div>
-    </section>
-
-    <section class="metrics-strip" aria-label="Handbook statistics">
-      <div class="metric reveal">
-        <span class="metric-label">Volumes</span>
-        <strong data-stat="volumes">19</strong>
-        <small>ordered curriculum</small>
-      </div>
-      <div class="metric reveal">
-        <span class="metric-label">Chapters</span>
-        <strong data-stat="chapters">36</strong>
-        <small>deep explanations</small>
-      </div>
-      <div class="metric reveal">
-        <span class="metric-label">Java files</span>
-        <strong data-stat="examples">66</strong>
-        <small>compiler validated</small>
-      </div>
-      <div class="metric reveal">
-        <span class="metric-label">Formats</span>
-        <strong>WEB + PRINT</strong>
-        <small>Pages, PDF, DOCX</small>
-      </div>
-    </section>
-
-    <section class="manifesto section-shell" aria-labelledby="manifesto-title">
-      <div class="section-kicker">WHY THIS EXISTS</div>
-      <div class="manifesto-grid">
-        <h2 id="manifesto-title" class="reveal">Patterns are useful.<br>Derivation is durable.</h2>
-        <div class="manifesto-copy reveal">
-          <p>
-            Interview preparation often becomes a bag of disconnected answers. That works
-            until the interviewer changes a constraint, asks for the invariant, or connects
-            the algorithm to a real backend system.
-          </p>
-          <p>
-            This handbook is the spine: runtime mechanics first, linear-data patterns next,
-            structural traversal after that, and optimization last. Each chapter moves through
-            concept, internals, diagram, code, trace, production impact, questions, and revision.
-          </p>
+        <h2 id="next-action-title">Your next four actions</h2>
+        <ol class="action-sequence">
+          <li>
+            <span>01</span>
+            <div>
+              <strong>Measure the gap</strong>
+              <a href="docs/backend-interview/readiness-matrix/">Score the readiness matrix</a>
+            </div>
+          </li>
+          <li>
+            <span>02</span>
+            <div>
+              <strong>Choose one stage</strong>
+              <a href="#journey">Do not study everything at once</a>
+            </div>
+          </li>
+          <li>
+            <span>03</span>
+            <div>
+              <strong>Produce evidence</strong>
+              <a href="#method">Explain, draw, code, and defend</a>
+            </div>
+          </li>
+          <li>
+            <span>04</span>
+            <div>
+              <strong>Review deliberately</strong>
+              <a href="docs/backend-interview/review-log/">Log misses and retry dates</a>
+            </div>
+          </li>
+        </ol>
+        <div class="panel-footer">
+          <span>NO SIGNUP</span>
+          <span>LOCAL PROGRESS</span>
+          <span>WEB + PRINT</span>
         </div>
-      </div>
-
-      <div class="principles">
-        <article class="principle reveal">
-          <span>01 / UNDERSTAND</span>
-          <h3>Build the model</h3>
-          <p>Explain what memory, pointers, queues, states, or runtime components actually represent.</p>
-        </article>
-        <article class="principle reveal">
-          <span>02 / IMPLEMENT</span>
-          <h3>Protect the invariant</h3>
-          <p>Write semantic Java with explicit contracts, edge cases, and complexity.</p>
-        </article>
-        <article class="principle reveal">
-          <span>03 / COMMUNICATE</span>
-          <h3>Defend the trade-off</h3>
-          <p>Connect the interview abstraction to latency, memory, concurrency, and operability.</p>
-        </article>
-      </div>
+      </aside>
     </section>
 
-    <section class="learning-paths section-shell" id="paths" aria-labelledby="paths-title">
+    <section class="signal-strip" aria-label="Handbook scope">
+      <div><span>Journey</span><strong data-stat="stages">11 steps</strong><small>start to assessment</small></div>
+      <div><span>Backend depth</span><strong>42 pages</strong><small>advanced review included</small></div>
+      <div><span>Runnable code</span><strong>66 Java files</strong><small>separate source tree</small></div>
+      <div><span>Surfaces</span><strong>Web + Docs</strong><small>PDF and DOCX ready</small></div>
+    </section>
+
+    <section class="method shell" id="method" aria-labelledby="method-title">
       <div class="section-heading">
         <div>
-          <p class="section-kicker">FOUR-STAGE ROUTE</p>
-          <h2 id="paths-title">A curriculum with an order</h2>
+          <p class="section-kicker">THE INTERVIEW ANSWER LOOP</p>
+          <h2 id="method-title">Use the same method for every topic.</h2>
         </div>
-        <p>Follow the complete route or enter at the stage matching your current interview gap.</p>
+        <p>
+          A chapter is not complete because you read it. It is complete when you can
+          reconstruct the reasoning under follow-up questions.
+        </p>
       </div>
 
-      <div class="path-grid">
-        <a class="path-card path-blue reveal" href="#curriculum" data-stage-link="Runtime Foundations">
-          <span class="path-number">A</span>
-          <div>
-            <p>VOLUMES 01-06</p>
-            <h3>Runtime foundations</h3>
-            <span>Java, JVM, complexity, math, loops, indexing, and bits</span>
-          </div>
-          <strong>START HERE &rarr;</strong>
-        </a>
-        <a class="path-card path-orange reveal" href="#curriculum" data-stage-link="Linear Data Patterns">
-          <span class="path-number">B</span>
-          <div>
-            <p>VOLUMES 07-13</p>
-            <h3>Linear-data patterns</h3>
-            <span>Arrays, strings, hashing, windows, pointers, prefixes, and search</span>
-          </div>
-          <strong>OPEN STAGE &rarr;</strong>
-        </a>
-        <a class="path-card path-green reveal" href="#curriculum" data-stage-link="Structural Patterns">
-          <span class="path-number">C</span>
-          <div>
-            <p>VOLUMES 14-18</p>
-            <h3>Structural patterns</h3>
-            <span>Stacks, queues, linked lists, trees, and graphs</span>
-          </div>
-          <strong>OPEN STAGE &rarr;</strong>
-        </a>
-        <a class="path-card path-ink reveal" href="#curriculum" data-stage-link="State Optimization">
-          <span class="path-number">D</span>
-          <div>
-            <p>VOLUME 19</p>
-            <h3>State optimization</h3>
-            <span>Dynamic-programming state, transitions, ordering, and compression</span>
-          </div>
-          <strong>FINISH STRONG &rarr;</strong>
-        </a>
-      </div>
+      <ol class="method-flow" aria-label="Five-step interview preparation method">
+        <li><span>01</span><strong>Understand</strong><p>State the model, constraints, and invariant in plain language.</p></li>
+        <li><span>02</span><strong>Visualize</strong><p>Draw the state, request path, ownership, and failure boundaries.</p></li>
+        <li><span>03</span><strong>Implement</strong><p>Write focused code or pseudocode with explicit contracts.</p></li>
+        <li><span>04</span><strong>Defend</strong><p>Compare alternatives across latency, scale, cost, and complexity.</p></li>
+        <li><span>05</span><strong>Revisit</strong><p>Record the miss, schedule a retry, and answer from memory.</p></li>
+      </ol>
     </section>
 
-    <section class="curriculum section-shell" id="curriculum" aria-labelledby="curriculum-title">
-      <div class="section-heading curriculum-heading">
+    <section class="journey shell" id="journey" aria-labelledby="journey-title">
+      <div class="section-heading journey-heading">
         <div>
-          <p class="section-kicker">CURRICULUM INDEX</p>
-          <h2 id="curriculum-title">19 volumes. One reasoning chain.</h2>
+          <p class="section-kicker">THE PREPARATION SPINE</p>
+          <h2 id="journey-title">Your Backend SDE-2 journey</h2>
         </div>
-        <div class="progress-summary" aria-live="polite">
-          <span>YOUR PROGRESS</span>
-          <strong><span id="completed-count">0</span> / <span id="volume-count">19</span></strong>
+        <p>
+          Move top to bottom. Expand a stage for its outcome, checklist, scope,
+          core handbook pages, and advanced review.
+        </p>
+      </div>
+
+      <div class="journey-console">
+        <div class="progress-block" aria-live="polite">
+          <div class="progress-copy">
+            <span>LOCAL PROGRESS</span>
+            <strong><span id="completed-count">0</span> / <span id="stage-count">11</span> stages</strong>
+          </div>
           <div class="progress-track" aria-hidden="true"><span id="progress-fill"></span></div>
-          <small>Saved only in this browser</small>
+          <small>Stored only in this browser.</small>
+        </div>
+
+        <div class="journey-controls">
+          <label class="journey-search">
+            <span>Find a stage</span>
+            <input id="journey-search" type="search" placeholder="Try system design, data, leadership..." autocomplete="off">
+          </label>
+          <button id="continue-stage" class="control-button control-primary" type="button">Continue next</button>
+          <button id="expand-stages" class="control-button" type="button">Expand all</button>
         </div>
       </div>
 
-      <div class="curriculum-toolbar" aria-label="Curriculum filters">
-        <label class="inline-search">
-          <span>FILTER</span>
-          <input id="curriculum-search" type="search" placeholder="Search volumes or concepts" autocomplete="off">
-        </label>
-        <div class="stage-filters" role="group" aria-label="Filter by learning stage">
-          <button class="filter-button is-active" type="button" data-stage="all">All</button>
-          <button class="filter-button" type="button" data-stage="Runtime Foundations">Runtime</button>
-          <button class="filter-button" type="button" data-stage="Linear Data Patterns">Linear data</button>
-          <button class="filter-button" type="button" data-stage="Structural Patterns">Structures</button>
-          <button class="filter-button" type="button" data-stage="State Optimization">State</button>
-        </div>
+      <div class="stage-list" id="stage-list" aria-live="polite">
+        <div class="loading-state"><span></span><p>Loading the interview journey...</p></div>
       </div>
 
-      <div class="volume-list" id="volume-list" aria-live="polite">
-        <div class="loading-state">
-          <span></span>
-          <p>Loading curriculum map...</p>
-        </div>
-      </div>
-
-      <div class="progress-actions">
-        <p><strong>Progress is private.</strong> It stays in local browser storage and is never sent anywhere.</p>
+      <div class="journey-footer">
+        <p><strong>Do not chase completion.</strong> Mark a stage complete only after producing its stated outcome without notes.</p>
         <button id="reset-progress" class="text-button" type="button">Reset local progress</button>
       </div>
     </section>
 
-    <section class="code-bridge section-shell" id="code" aria-labelledby="code-title">
-      <div class="code-panel reveal">
-        <div class="code-panel-copy">
-          <p class="section-kicker">IMPLEMENTATION LAYER</p>
-          <h2 id="code-title">Read the idea. Open the source. Break the edge case.</h2>
-          <p>
-            The web portal and MkDocs explain the reasoning. The separate Java tree contains
-            the canonical implementations, semantic class names, compiler checks, and smoke tests.
-          </p>
-          <div class="code-actions">
-            <a class="button button-light" href="https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/examples/java">Browse Java source</a>
-            <a class="button button-ghost" href="docs/examples/">Open code guide</a>
-          </div>
+    <section class="rounds shell" aria-labelledby="rounds-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">ROUND-BASED ENTRY POINTS</p>
+          <h2 id="rounds-title">Short on time? Enter by interview round.</h2>
         </div>
-        <div class="terminal-card" aria-label="Repository validation commands">
-          <div class="terminal-bar">
-            <span></span><span></span><span></span>
-            <small>handbook / validate</small>
-          </div>
-          <pre><code><span class="prompt">$</span> git clone https://github.com/vinayreddykalluri/SDE2-Interview-Handbook.git
-<span class="prompt">$</span> cd SDE2-Interview-Handbook
-<span class="prompt">$</span> make install
-<span class="prompt">$</span> make validate
+        <p>These are shortcuts into the same ordered journey, not separate curricula.</p>
+      </div>
 
-<span class="success">PASS</span> structure + links
-<span class="success">PASS</span> 66 Java examples
-<span class="success">PASS</span> cross-volume smoke suite</code></pre>
-          <button class="copy-command" type="button" data-copy="git clone https://github.com/vinayreddykalluri/SDE2-Interview-Handbook.git">Copy clone command</button>
-        </div>
+      <div class="round-grid">
+        <a class="round-card" href="docs/backend-interview/01-programming-problem-solving/">
+          <span>CODING</span><h3>Problem solving</h3>
+          <p>Clarify, derive, implement, test, and optimize under time pressure.</p>
+          <strong>Open coding prep &rarr;</strong>
+        </a>
+        <a class="round-card" href="docs/backend-interview/02-low-level-design/">
+          <span>DESIGN / OBJECTS</span><h3>Low-level design</h3>
+          <p>Model responsibilities, invariants, extensibility, and concurrency.</p>
+          <strong>Open LLD prep &rarr;</strong>
+        </a>
+        <a class="round-card" href="docs/backend-interview/03-high-level-system-design/">
+          <span>DESIGN / SYSTEMS</span><h3>High-level design</h3>
+          <p>Estimate, partition, scale, fail safely, and explain trade-offs.</p>
+          <strong>Open HLD prep &rarr;</strong>
+        </a>
+        <a class="round-card" href="docs/backend-interview/09-leadership-behavioral/">
+          <span>LEADERSHIP</span><h3>Behavioral evidence</h3>
+          <p>Tell scoped stories with decisions, conflict, ownership, and results.</p>
+          <strong>Open leadership prep &rarr;</strong>
+        </a>
       </div>
     </section>
 
-    <section class="format-bridge section-shell" aria-labelledby="formats-title">
-      <div class="format-intro reveal">
-        <p class="section-kicker">ONE SOURCE / MULTIPLE SURFACES</p>
-        <h2 id="formats-title">Use the format that fits the work.</h2>
+    <section class="practice shell" id="practice" aria-labelledby="practice-title">
+      <div class="practice-intro">
+        <p class="section-kicker">CLOSE THE LOOP</p>
+        <h2 id="practice-title">Convert knowledge into interview evidence.</h2>
+        <p>
+          Finish each study cycle with retrieval, a timed simulation, and a written correction.
+          The handbook provides the artifacts; you provide the repeated attempts.
+        </p>
       </div>
-      <div class="format-grid">
-        <a class="format-card reveal" href="./">
-          <span>01</span>
-          <h3>Web portal</h3>
-          <p>Fast orientation, learning paths, progress, and curriculum discovery.</p>
-          <strong>YOU ARE HERE</strong>
+
+      <div class="practice-board">
+        <a href="docs/backend-interview/10-practice/question-bank-and-rubric/">
+          <span>01 / SIMULATE</span><h3>Question bank and rubric</h3>
+          <p>Run coding, LLD, HLD, production, and behavioral prompts with scoring criteria.</p>
+          <strong>Start a mock &rarr;</strong>
         </a>
-        <a class="format-card reveal" href="docs/">
-          <span>02</span>
-          <h3>Full documentation</h3>
-          <p>Searchable chapters, diagrams, questions, exercises, and revision sheets.</p>
-          <strong>OPEN DOCS &rarr;</strong>
+        <a href="docs/backend-interview/review-log/">
+          <span>02 / CORRECT</span><h3>Review log</h3>
+          <p>Capture misses, root causes, corrected models, and scheduled retry dates.</p>
+          <strong>Open the log &rarr;</strong>
         </a>
-        <a class="format-card reveal" href="docs/downloads/">
-          <span>03</span>
-          <h3>Printable books</h3>
-          <p>Per-volume and combined PDF/DOCX artifacts generated from Markdown.</p>
-          <strong>GET BOOKS &rarr;</strong>
+        <a href="docs/backend-interview/revision-system/">
+          <span>03 / RETAIN</span><h3>Structured revision</h3>
+          <p>Use daily recall, weekly synthesis, and spaced advanced-review loops.</p>
+          <strong>Open revision system &rarr;</strong>
         </a>
+      </div>
+    </section>
+
+    <section class="resource-strip shell" aria-labelledby="resources-title">
+      <div>
+        <p class="section-kicker">ONE SOURCE / CLEAR SURFACES</p>
+        <h2 id="resources-title">Choose the surface for the job.</h2>
+      </div>
+      <div class="resource-links">
+        <a href="docs/backend-interview/"><span>READ + SEARCH</span><strong>Backend handbook</strong><small>Detailed chapters and diagrams</small></a>
+        <a href="https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/examples/java"><span>IMPLEMENT</span><strong>Java source</strong><small>Canonical code and smoke tests</small></a>
+        <a href="docs/downloads/"><span>PRINT + ANNOTATE</span><strong>PDF and DOCX</strong><small>Offline review formats</small></a>
+      </div>
+      <div class="clone-command">
+        <code>git clone https://github.com/vinayreddykalluri/SDE2-Interview-Handbook.git</code>
+        <button type="button" data-copy="git clone https://github.com/vinayreddykalluri/SDE2-Interview-Handbook.git">Copy</button>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="footer-brand">
+    <a class="brand footer-brand" href="./">
       <span class="brand-mark">S2</span>
-      <div>
-        <strong>SDE2 INTERVIEW HANDBOOK</strong>
-        <p>Open source. Reproducible. Built for serious practice.</p>
-      </div>
-    </div>
-    <div class="footer-links">
-      <a href="docs/">Docs</a>
-      <a href="docs/downloads/">Downloads</a>
+      <span class="brand-copy"><strong>BACKEND / SDE2</strong><small>INTERVIEW FIELD MANUAL</small></span>
+    </a>
+    <p>Open source. Local-first. Built for deliberate repetition.</p>
+    <nav aria-label="Footer navigation">
+      <a href="docs/">All docs</a>
       <a href="docs/community/open-source/">Licensing</a>
       <a href="https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/new/choose">Report an issue</a>
-    </div>
-    <p class="footer-license">&copy; 2026 Vinay Reddy Kalluri and contributors / Code MIT / Content CC BY 4.0</p>
+      <a href="https://github.com/vinayreddykalluri/SDE2-Interview-Handbook">GitHub</a>
+    </nav>
   </footer>
 
   <dialog class="search-dialog" id="search-dialog" aria-labelledby="search-title">
-    <div class="search-dialog-header">
-      <div>
-        <span class="section-kicker">COMMAND SEARCH</span>
-        <h2 id="search-title">Find a volume or destination</h2>
-      </div>
-      <button class="dialog-close icon-button" type="button" aria-label="Close search">ESC</button>
+    <div class="search-header">
+      <div><span>COMMAND SEARCH</span><h2 id="search-title">Find a stage or resource</h2></div>
+      <button class="dialog-close" type="button" aria-label="Close search">Esc</button>
     </div>
-    <label class="dialog-search-field">
+    <label class="global-search-field">
       <span aria-hidden="true">/</span>
-      <input id="global-search" type="search" placeholder="Try binary search, JVM, graphs..." autocomplete="off">
+      <input id="global-search" type="search" placeholder="Try API design, distributed systems, mock..." autocomplete="off">
     </label>
     <div class="search-results" id="search-results" aria-live="polite"></div>
-    <p class="search-hint">Use arrow keys to move, Enter to open, Escape to close.</p>
+    <p class="search-hint">Use arrow keys to move, Enter to open, and Escape to close.</p>
   </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <noscript>This portal needs JavaScript to load the stage map. The complete handbook remains available under <a href="docs/backend-interview/">Backend SDE-2 docs</a>.</noscript>
 </body>
 </html>

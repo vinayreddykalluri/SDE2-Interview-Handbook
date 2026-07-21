@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  {{ super() }}
+  <meta name="theme-color" content="#f4efe3">
+{% endblock %}
+
+{% block announce %}
+  <div class="field-announcement">
+    <span>BACKEND_SDE2 / INTERVIEW FIELD MANUAL</span>
+    <nav aria-label="Global handbook destinations">
+      <a href="{{ base_url }}/../#journey">Journey</a>
+      <a href="{{ 'backend-interview/readiness-matrix/' | url }}">Assess</a>
+      <a href="{{ 'backend-interview/revision-system/' | url }}">Review</a>
+      <a href="{{ 'backend-interview/10-practice/' | url }}">Practice</a>
+      <a href="{{ base_url }}/../">Web portal</a>
+    </nav>
+  </div>
+{% endblock %}
+
+{% block content %}
+  {% set current_url = page.url if page else '' %}
+  <div class="field-pagebar">
+    <div class="field-pagebar__current">
+      <span class="field-pagebar__route">
+        {% if '01-programming-problem-solving' in current_url %}
+          STAGE 01 / PROGRAMMING AND PROBLEM SOLVING
+        {% elif '02-low-level-design' in current_url %}
+          STAGE 02 / LOW-LEVEL DESIGN
+        {% elif '03-high-level-system-design' in current_url %}
+          STAGE 03 / HIGH-LEVEL SYSTEM DESIGN
+        {% elif '04-api-service-design' in current_url %}
+          STAGE 04 / API AND SERVICE DESIGN
+        {% elif '05-data-storage' in current_url %}
+          STAGE 05 / DATA AND STORAGE
+        {% elif '06-distributed-systems' in current_url %}
+          STAGE 06 / DISTRIBUTED SYSTEMS
+        {% elif '07-production-engineering' in current_url %}
+          STAGE 07 / PRODUCTION ENGINEERING
+        {% elif '08-cloud-platform' in current_url %}
+          STAGE 08 / CLOUD AND PLATFORM
+        {% elif '09-leadership-behavioral' in current_url %}
+          STAGE 09 / LEADERSHIP AND BEHAVIORAL
+        {% elif '10-practice' in current_url %}
+          STAGE 10 / PRACTICE AND ASSESSMENT
+        {% elif 'volume-' in current_url %}
+          CODING FOUNDATIONS / CONCEPT LIBRARY
+        {% elif 'community/' in current_url %}
+          PROJECT / OPEN SOURCE
+        {% else %}
+          BACKEND SDE2 / FIELD NOTE
+        {% endif %}
+      </span>
+      <strong>{{ page.title if page else config.site_name }}</strong>
+    </div>
+    <nav aria-label="Page workflow">
+      <a href="{{ base_url }}/../#journey">Journey</a>
+      <a href="{{ 'backend-interview/readiness-matrix/' | url }}">Assess</a>
+      <a href="{{ 'backend-interview/review-log/' | url }}">Log</a>
+      <a href="{{ 'backend-interview/10-practice/question-bank-and-rubric/' | url }}">Mock</a>
+    </nav>
+  </div>
+  {{ super() }}
+{% endblock %}

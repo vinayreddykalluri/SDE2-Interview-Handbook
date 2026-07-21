@@ -1,0 +1,222 @@
+[
+  {
+    "id": "00",
+    "phase": "Orient",
+    "category": "Start",
+    "title": "Readiness and Study Plan",
+    "duration": "1 day",
+    "summary": "Begin with evidence, not anxiety. Establish the target role, interview format, time budget, and current strength for every round.",
+    "outcome": "A scored readiness matrix, a prioritized gap list, and a calendar with explicit weekly deliverables.",
+    "tasks": [
+      "Score every competency from cannot explain to can teach and defend",
+      "Choose a 2-week, 6-week, or 12-week preparation window",
+      "Schedule coding, design, production, and behavioral practice blocks"
+    ],
+    "topics": ["baseline", "gap analysis", "study calendar", "success criteria", "review cadence"],
+    "resources": [
+      {"type": "ASSESS", "label": "Readiness matrix", "href": "docs/backend-interview/readiness-matrix/", "note": "Score each interview competency"},
+      {"type": "PLAN", "label": "12-week roadmap", "href": "docs/backend-interview/roadmap/", "note": "Convert gaps into weekly work"},
+      {"type": "METHOD", "label": "Getting started", "href": "docs/getting-started/", "note": "Understand every repository surface"}
+    ]
+  },
+  {
+    "id": "01",
+    "phase": "Build",
+    "category": "Coding",
+    "title": "Programming and Problem Solving",
+    "duration": "2-3 weeks",
+    "summary": "Use a repeatable reasoning framework rather than memorized solutions. Connect invariants, complexity, and Java implementation choices.",
+    "outcome": "A correct, tested solution explained from brute force through optimization, including complexity and edge cases.",
+    "tasks": [
+      "Clarify constraints and derive the invariant before writing code",
+      "Implement common array, string, hashing, traversal, search, and DP patterns",
+      "Run timed problems and narrate decisions without losing correctness"
+    ],
+    "topics": ["Java", "complexity", "arrays", "strings", "hashing", "two pointers", "sliding window", "trees", "graphs", "dynamic programming"],
+    "resources": [
+      {"type": "CORE", "label": "Problem-solving track", "href": "docs/backend-interview/01-programming-problem-solving/", "note": "Framework, patterns, and performance"},
+      {"type": "CODE", "label": "Java example library", "href": "docs/examples/", "note": "Canonical implementations and usage"},
+      {"type": "REVIEW", "label": "Advanced coding review", "href": "docs/backend-interview/01-programming-problem-solving/advanced-review/", "note": "Follow-ups, traps, and trade-offs"}
+    ]
+  },
+  {
+    "id": "02",
+    "phase": "Model",
+    "category": "Design",
+    "title": "Low-Level Design",
+    "duration": "1-2 weeks",
+    "summary": "Translate ambiguous requirements into responsibilities, contracts, state transitions, and extensible object collaboration.",
+    "outcome": "A coherent class model with defended boundaries, invariants, extension points, and concurrency behavior.",
+    "tasks": [
+      "Extract actors, use cases, invariants, and failure cases",
+      "Assign responsibilities without creating god objects or pattern theater",
+      "Walk through one case study with state, sequence, and class diagrams"
+    ],
+    "topics": ["SOLID", "domain modeling", "design patterns", "state machines", "concurrency", "testability"],
+    "resources": [
+      {"type": "CORE", "label": "LLD track", "href": "docs/backend-interview/02-low-level-design/", "note": "Modeling framework and expectations"},
+      {"type": "CASES", "label": "LLD case studies", "href": "docs/backend-interview/02-low-level-design/case-studies/", "note": "Apply the model to realistic prompts"},
+      {"type": "REVIEW", "label": "Advanced LLD review", "href": "docs/backend-interview/02-low-level-design/advanced-review/", "note": "Trade-offs and senior follow-ups"}
+    ]
+  },
+  {
+    "id": "03",
+    "phase": "Scale",
+    "category": "Design",
+    "title": "High-Level System Design",
+    "duration": "2 weeks",
+    "summary": "Move from requirements and estimates to components, data flow, bottlenecks, failures, and explicit architecture trade-offs.",
+    "outcome": "A complete system design narrative that quantifies scale and evolves from a simple baseline to a resilient architecture.",
+    "tasks": [
+      "Clarify functional and non-functional requirements",
+      "Estimate traffic, storage, bandwidth, and hot-key risk",
+      "Design APIs, data flow, scaling strategy, failure handling, and observability"
+    ],
+    "topics": ["estimation", "load balancing", "caching", "partitioning", "replication", "queues", "availability", "consistency"],
+    "resources": [
+      {"type": "CORE", "label": "HLD track", "href": "docs/backend-interview/03-high-level-system-design/", "note": "End-to-end system design framework"},
+      {"type": "PATTERNS", "label": "Architecture patterns", "href": "docs/backend-interview/03-high-level-system-design/architecture-patterns/", "note": "Scale, reliability, and data flow"},
+      {"type": "REVIEW", "label": "Advanced HLD review", "href": "docs/backend-interview/03-high-level-system-design/advanced-review/", "note": "Deep trade-offs and failure probes"}
+    ]
+  },
+  {
+    "id": "04",
+    "phase": "Contract",
+    "category": "Backend",
+    "title": "API and Service Design",
+    "duration": "1 week",
+    "summary": "Design stable service contracts that handle retries, evolution, authorization, partial failure, and operational ownership.",
+    "outcome": "An evolvable API contract with idempotency, pagination, error semantics, security boundaries, and reliability behavior.",
+    "tasks": [
+      "Choose resource and operation boundaries from domain ownership",
+      "Specify request, response, pagination, validation, and error contracts",
+      "Defend versioning, idempotency, retry, timeout, and authorization choices"
+    ],
+    "topics": ["REST", "RPC", "idempotency", "pagination", "versioning", "timeouts", "rate limits", "service boundaries"],
+    "resources": [
+      {"type": "CORE", "label": "API design track", "href": "docs/backend-interview/04-api-service-design/", "note": "Contracts, boundaries, and reliability"},
+      {"type": "BOUNDARIES", "label": "Service boundaries", "href": "docs/backend-interview/04-api-service-design/service-boundaries/", "note": "Ownership and decomposition decisions"},
+      {"type": "REVIEW", "label": "Advanced API review", "href": "docs/backend-interview/04-api-service-design/advanced-review/", "note": "Compatibility and failure follow-ups"}
+    ]
+  },
+  {
+    "id": "05",
+    "phase": "Persist",
+    "category": "Data",
+    "title": "Data and Storage",
+    "duration": "1 week",
+    "summary": "Select and scale storage from access patterns, consistency requirements, transaction boundaries, and recovery needs.",
+    "outcome": "A defended data model and storage choice with indexes, partitioning, consistency, migration, and recovery strategy.",
+    "tasks": [
+      "Derive entities and access patterns before selecting a database",
+      "Explain indexes, transaction isolation, and consistency requirements",
+      "Plan partitioning, replication, migration, backup, and restore behavior"
+    ],
+    "topics": ["SQL", "NoSQL", "indexes", "transactions", "isolation", "partitioning", "replication", "migration"],
+    "resources": [
+      {"type": "CORE", "label": "Data and storage track", "href": "docs/backend-interview/05-data-storage/", "note": "Selection, modeling, and consistency"},
+      {"type": "SCALE", "label": "Scaling data", "href": "docs/backend-interview/05-data-storage/scaling-data/", "note": "Partitioning, replication, and growth"},
+      {"type": "REVIEW", "label": "Advanced data review", "href": "docs/backend-interview/05-data-storage/advanced-review/", "note": "Transactions and scaling follow-ups"}
+    ]
+  },
+  {
+    "id": "06",
+    "phase": "Coordinate",
+    "category": "Systems",
+    "title": "Distributed Systems",
+    "duration": "1-2 weeks",
+    "summary": "Reason about unreliable networks, duplicate work, ordering, coordination, and recovery without hiding behind product names.",
+    "outcome": "A failure-aware workflow that specifies delivery semantics, deduplication, ordering, backpressure, and recovery.",
+    "tasks": [
+      "Model timeout, retry, duplication, reordering, and partition failures",
+      "Choose synchronous or asynchronous coordination from workflow needs",
+      "Apply idempotency, outbox, saga, circuit-breaker, and backpressure patterns"
+    ],
+    "topics": ["messaging", "delivery semantics", "consensus", "outbox", "saga", "deduplication", "backpressure", "resilience"],
+    "resources": [
+      {"type": "CORE", "label": "Distributed systems track", "href": "docs/backend-interview/06-distributed-systems/", "note": "Coordination, messaging, and failure"},
+      {"type": "RESILIENCE", "label": "Resilience patterns", "href": "docs/backend-interview/06-distributed-systems/resilience-patterns/", "note": "Contain and recover from failure"},
+      {"type": "REVIEW", "label": "Advanced distributed review", "href": "docs/backend-interview/06-distributed-systems/advanced-review/", "note": "Semantics and coordination probes"}
+    ]
+  },
+  {
+    "id": "07",
+    "phase": "Operate",
+    "category": "Production",
+    "title": "Production Engineering",
+    "duration": "1 week",
+    "summary": "Show that you can test, observe, secure, deploy, and debug software after the architecture diagram ends.",
+    "outcome": "An operational plan with SLOs, telemetry, rollout safety, incident diagnosis, security controls, and test strategy.",
+    "tasks": [
+      "Define SLIs, SLOs, alerts, dashboards, logs, metrics, and traces",
+      "Design a test pyramid plus load, fault, and integration validation",
+      "Threat-model the request and deployment path and plan safe rollback"
+    ],
+    "topics": ["SLOs", "observability", "testing", "incident response", "security", "deployments", "capacity", "debugging"],
+    "resources": [
+      {"type": "CORE", "label": "Production engineering track", "href": "docs/backend-interview/07-production-engineering/", "note": "Operate and diagnose backend systems"},
+      {"type": "SECURITY", "label": "Security review", "href": "docs/backend-interview/07-production-engineering/security/", "note": "Threats, controls, and secure defaults"},
+      {"type": "REVIEW", "label": "Advanced production review", "href": "docs/backend-interview/07-production-engineering/advanced-review/", "note": "Incidents and operability follow-ups"}
+    ]
+  },
+  {
+    "id": "08",
+    "phase": "Deliver",
+    "category": "Platform",
+    "title": "Cloud and Platform",
+    "duration": "4-5 days",
+    "summary": "Explain how an application becomes a repeatable, isolated, observable deployment without turning the answer into vendor trivia.",
+    "outcome": "A deployment topology with compute, networking, configuration, scaling, release, isolation, and recovery decisions.",
+    "tasks": [
+      "Map application needs to compute, network, storage, and identity primitives",
+      "Explain containers, orchestration, autoscaling, configuration, and secrets",
+      "Choose a rollout strategy with health checks, rollback, and blast-radius control"
+    ],
+    "topics": ["containers", "orchestration", "networking", "autoscaling", "configuration", "secrets", "CI/CD", "rollouts"],
+    "resources": [
+      {"type": "CORE", "label": "Cloud and platform track", "href": "docs/backend-interview/08-cloud-platform/", "note": "Platform and deployment fundamentals"},
+      {"type": "DEPLOY", "label": "Platform and deployments", "href": "docs/backend-interview/08-cloud-platform/platform-and-deployments/", "note": "From artifact to safe production release"},
+      {"type": "REVIEW", "label": "Advanced platform review", "href": "docs/backend-interview/08-cloud-platform/advanced-review/", "note": "Isolation, scale, and rollout probes"}
+    ]
+  },
+  {
+    "id": "09",
+    "phase": "Lead",
+    "category": "Behavioral",
+    "title": "Leadership and Behavioral",
+    "duration": "1 week",
+    "summary": "Replace generic STAR stories with scoped engineering evidence that exposes judgment, influence, conflict, and measurable results.",
+    "outcome": "A reusable story bank covering ownership, conflict, ambiguity, failure, mentoring, delivery, and technical influence.",
+    "tasks": [
+      "Build stories with context, personal decision, alternatives, action, and result",
+      "Quantify impact and separate your contribution from the team's work",
+      "Prepare follow-ups about conflict, failure, learning, and what changed afterward"
+    ],
+    "topics": ["ownership", "influence", "conflict", "ambiguity", "mentoring", "delivery", "failure", "impact"],
+    "resources": [
+      {"type": "CORE", "label": "Leadership track", "href": "docs/backend-interview/09-leadership-behavioral/", "note": "Behavioral structure and expectations"},
+      {"type": "EVIDENCE", "label": "Leadership evidence", "href": "docs/backend-interview/09-leadership-behavioral/leadership-evidence/", "note": "Build and pressure-test story material"},
+      {"type": "REVIEW", "label": "Advanced leadership review", "href": "docs/backend-interview/09-leadership-behavioral/advanced-review/", "note": "Senior-level behavioral follow-ups"}
+    ]
+  },
+  {
+    "id": "10",
+    "phase": "Prove",
+    "category": "Practice",
+    "title": "Practice and Assessment",
+    "duration": "repeat weekly",
+    "summary": "Integrate the material through timed rounds, explicit scoring, correction logs, and spaced reattempts.",
+    "outcome": "Two complete mock loops with rubric scores, corrected misses, and no unresolved critical readiness gaps.",
+    "tasks": [
+      "Run timed coding, LLD, HLD, production, and behavioral simulations",
+      "Score communication, structure, correctness, depth, and trade-off quality",
+      "Log every miss, correct the model, and retry without notes"
+    ],
+    "topics": ["mock interviews", "rubrics", "retrieval", "review log", "spaced repetition", "communication", "readiness"],
+    "resources": [
+      {"type": "MOCK", "label": "Practice and assessment", "href": "docs/backend-interview/10-practice/", "note": "Run the complete simulation loop"},
+      {"type": "RUBRIC", "label": "Question bank", "href": "docs/backend-interview/10-practice/question-bank-and-rubric/", "note": "Prompts and scoring criteria"},
+      {"type": "REVIEW", "label": "Review log", "href": "docs/backend-interview/review-log/", "note": "Track misses and scheduled retries"}
+    ]
+  }
+]
