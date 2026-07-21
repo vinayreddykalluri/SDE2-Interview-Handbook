@@ -1,9 +1,9 @@
-# volume-11-two-pointers
+# Volume 11: Two Pointers
 
-This volume directory is created as a placeholder and will be expanded in later phases.
+## Scope
 
-## Implementation plan
+Two-pointer patterns simplify array and string optimization by scanning from both ends or with multiple advancing positions.
 
-- Finalize learning objectives
-- Add chapters with the standard chapter template
-- Add 100+ practice questions and curated exercises
+## Chapters
+
+1. [Two-Pointer Patterns and Correctness](./01-two-pointers-patterns.md)

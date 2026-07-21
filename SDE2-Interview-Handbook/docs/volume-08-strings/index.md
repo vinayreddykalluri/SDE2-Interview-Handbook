@@ -1,9 +1,9 @@
-# volume-08-strings
+# Volume 08: Strings
 
-This volume directory is created as a placeholder and will be expanded in later phases.
+## Scope
 
-## Implementation plan
+String problems blend array-like indexing with immutability and encoding details. This volume focuses on practical manipulations without hidden performance traps.
 
-- Finalize learning objectives
-- Add chapters with the standard chapter template
-- Add 100+ practice questions and curated exercises
+## Chapters
+
+1. [String Internals and Processing Patterns](./01-string-internals-and-patterns.md)

@@ -1,9 +1,9 @@
-# volume-16-linked-list
+# Volume 16: Linked List
 
-This volume directory is created as a placeholder and will be expanded in later phases.
+## Scope
 
-## Implementation plan
+Linked lists trade array-like indexing for dynamic, pointer-linked flexibility.
 
-- Finalize learning objectives
-- Add chapters with the standard chapter template
-- Add 100+ practice questions and curated exercises
+## Chapters
+
+1. [Linked List Patterns and Pointer Safety](./01-linked-list-patterns.md)

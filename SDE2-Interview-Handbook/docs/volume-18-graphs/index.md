@@ -1,9 +1,9 @@
-# volume-18-graphs
+# Volume 18: Graphs
 
-This volume directory is created as a placeholder and will be expanded in later phases.
+## Scope
 
-## Implementation plan
+Graphs model connectivity, dependencies, and shortest-path style reasoning.
 
-- Finalize learning objectives
-- Add chapters with the standard chapter template
-- Add 100+ practice questions and curated exercises
+## Chapters
+
+1. [Graph Representations and Traversals](./01-graphs-and-traversal.md)

@@ -1,9 +1,9 @@
-# volume-19-dynamic-programming
+# Volume 19: Dynamic Programming
 
-This volume directory is created as a placeholder and will be expanded in later phases.
+## Scope
 
-## Implementation plan
+Dynamic programming is state definition, transition design, and optimization under constraints.
 
-- Finalize learning objectives
-- Add chapters with the standard chapter template
-- Add 100+ practice questions and curated exercises
+## Chapters
+
+1. [State Design and Transition Optimization](./01-dp-state-design.md)

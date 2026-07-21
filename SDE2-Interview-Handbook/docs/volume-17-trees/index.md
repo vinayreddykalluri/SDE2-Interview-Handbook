@@ -1,9 +1,9 @@
-# volume-17-trees
+# Volume 17: Trees
 
-This volume directory is created as a placeholder and will be expanded in later phases.
+## Scope
 
-## Implementation plan
+Tree problems combine recursion, traversal strategies, and hierarchical state transitions.
 
-- Finalize learning objectives
-- Add chapters with the standard chapter template
-- Add 100+ practice questions and curated exercises
+## Chapters
+
+1. [Tree Mental Model and Traversals](./01-trees-and-recursive-structure.md)

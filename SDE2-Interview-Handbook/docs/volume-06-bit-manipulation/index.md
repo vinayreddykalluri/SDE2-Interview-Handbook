@@ -1,9 +1,9 @@
-# volume-06-bit-manipulation
+# Volume 06: Bit Manipulation
 
-This volume directory is created as a placeholder and will be expanded in later phases.
+## Scope
 
-## Implementation plan
+Bits are where optimization and elegant state encoding appear in many SDE-2 interviews.
 
-- Finalize learning objectives
-- Add chapters with the standard chapter template
-- Add 100+ practice questions and curated exercises
+## Chapters
+
+1. [Bitwise Fundamentals and Patterns](./01-bitwise-cookbook.md)

@@ -1,9 +1,9 @@
-# volume-13-binary-search
+# Volume 13: Binary Search
 
-This volume directory is created as a placeholder and will be expanded in later phases.
+## Scope
 
-## Implementation plan
+Binary search underpins not only search but optimization and boundary-based solutions.
 
-- Finalize learning objectives
-- Add chapters with the standard chapter template
-- Add 100+ practice questions and curated exercises
+## Chapters
+
+1. [Binary Search Framework](./01-binary-search-framework.md)

@@ -1,9 +1,9 @@
-# volume-10-sliding-window
+# Volume 10: Sliding Window
 
-This volume directory is created as a placeholder and will be expanded in later phases.
+## Scope
 
-## Implementation plan
+Sliding window compresses repeated scanning into linear complexity by maintaining state over a moving range.
 
-- Finalize learning objectives
-- Add chapters with the standard chapter template
-- Add 100+ practice questions and curated exercises
+## Chapters
+
+1. [Sliding Window Framework](./01-sliding-window-patterns.md)

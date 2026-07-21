@@ -1,9 +1,9 @@
-# volume-03-math-fundamentals
+# Volume 03: Math Fundamentals
 
-This volume directory is created as a placeholder and will be expanded in later phases.
+## Scope
 
-## Implementation plan
+Math in interviews is mainly applied math: number theory, combinatorics, set reasoning, and probability intuition used for algorithm correctness and constraints.
 
-- Finalize learning objectives
-- Add chapters with the standard chapter template
-- Add 100+ practice questions and curated exercises
+## Chapters
+
+1. [Math Foundations for Algorithms](./01-math-foundations.md)

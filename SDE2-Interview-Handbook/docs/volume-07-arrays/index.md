@@ -1,9 +1,9 @@
-# volume-07-arrays
+# Volume 07: Arrays
 
-This volume directory is created as a placeholder and will be expanded in later phases.
+## Scope
 
-## Implementation plan
+Arrays are the bedrock for most DS&A questions and need to be treated as a memory and indexing model, not just a container.
 
-- Finalize learning objectives
-- Add chapters with the standard chapter template
-- Add 100+ practice questions and curated exercises
+## Chapters
+
+1. [Array Mental Model](./01-array-mental-model.md)

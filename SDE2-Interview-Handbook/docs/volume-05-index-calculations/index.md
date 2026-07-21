@@ -1,9 +1,9 @@
-# volume-05-index-calculations
+# Volume 05: Index Calculations
 
-This volume directory is created as a placeholder and will be expanded in later phases.
+## Scope
 
-## Implementation plan
+Indexing is deceptively simple and one of the highest-frequency bug sources in coding interviews.
 
-- Finalize learning objectives
-- Add chapters with the standard chapter template
-- Add 100+ practice questions and curated exercises
+## Chapters
+
+1. [Indexing and Offset Reasoning](./01-indexing-in-practice.md)

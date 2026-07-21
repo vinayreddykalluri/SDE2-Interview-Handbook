@@ -32,40 +32,58 @@ nav:
       - 18 Revision Cheat Sheet: volume-01-java-fundamentals/18-revision-cheat-sheet.md
   - Volume 02: Time and Space Complexity:
       - Overview: volume-02-time-space-complexity/index.md
+      - Chapter 1: Time and Space Analysis: volume-02-time-space-complexity/01-time-space-analysis.md
   - Volume 03: Math Fundamentals:
       - Overview: volume-03-math-fundamentals/index.md
+      - Chapter 1: Math Foundations: volume-03-math-fundamentals/01-math-foundations.md
   - Volume 04: Loop Mastery:
       - Overview: volume-04-loop-mastery/index.md
+      - Chapter 1: Loop Patterns and Pitfalls: volume-04-loop-mastery/01-loop-patterns.md
   - Volume 05: Index Calculations:
       - Overview: volume-05-index-calculations/index.md
+      - Chapter 1: Indexing in Practice: volume-05-index-calculations/01-indexing-in-practice.md
   - Volume 06: Bit Manipulation:
       - Overview: volume-06-bit-manipulation/index.md
+      - Chapter 1: Bitwise Cookbook: volume-06-bit-manipulation/01-bitwise-cookbook.md
   - Volume 07: Arrays:
       - Overview: volume-07-arrays/index.md
+      - Chapter 1: Array Mental Model: volume-07-arrays/01-array-mental-model.md
   - Volume 08: Strings:
       - Overview: volume-08-strings/index.md
+      - Chapter 1: String Internals and Patterns: volume-08-strings/01-string-internals-and-patterns.md
   - Volume 09: Hashing:
       - Overview: volume-09-hashing/index.md
+      - Chapter 1: Hashing Intuition and Collisions: volume-09-hashing/01-hashing-intuition-and-collision-strategy.md
   - Volume 10: Sliding Window:
       - Overview: volume-10-sliding-window/index.md
+      - Chapter 1: Sliding Window Patterns: volume-10-sliding-window/01-sliding-window-patterns.md
   - Volume 11: Two Pointers:
       - Overview: volume-11-two-pointers/index.md
+      - Chapter 1: Two-Pointer Patterns: volume-11-two-pointers/01-two-pointers-patterns.md
   - Volume 12: Prefix Sum:
       - Overview: volume-12-prefix-sum/index.md
+      - Chapter 1: Prefix Sum and Difference: volume-12-prefix-sum/01-prefix-sum-and-difference.md
   - Volume 13: Binary Search:
       - Overview: volume-13-binary-search/index.md
+      - Chapter 1: Binary Search Framework: volume-13-binary-search/01-binary-search-framework.md
   - Volume 14: Stack:
       - Overview: volume-14-stack/index.md
+      - Chapter 1: Stack and Recursion: volume-14-stack/01-stack-and-recursion.md
   - Volume 15: Queue:
       - Overview: volume-15-queue/index.md
+      - Chapter 1: Queues, Deques, and Buffers: volume-15-queue/01-queues-deques-and-buffers.md
   - Volume 16: Linked List:
       - Overview: volume-16-linked-list/index.md
+      - Chapter 1: Linked List Patterns: volume-16-linked-list/01-linked-list-patterns.md
   - Volume 17: Trees:
       - Overview: volume-17-trees/index.md
+      - Chapter 1: Tree Mental Model: volume-17-trees/01-trees-and-recursive-structure.md
   - Volume 18: Graphs:
       - Overview: volume-18-graphs/index.md
+      - Chapter 1: Graphs and Traversal: volume-18-graphs/01-graphs-and-traversal.md
   - Volume 19: Dynamic Programming:
       - Overview: volume-19-dynamic-programming/index.md
+      - Chapter 1: State Design: volume-19-dynamic-programming/01-dp-state-design.md
 
 theme:
   name: material

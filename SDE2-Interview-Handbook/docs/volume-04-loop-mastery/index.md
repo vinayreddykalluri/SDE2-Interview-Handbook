@@ -1,9 +1,9 @@
-# volume-04-loop-mastery
+# Volume 04: Loop Mastery
 
-This volume directory is created as a placeholder and will be expanded in later phases.
+## Scope
 
-## Implementation plan
+This volume strengthens loop modeling: invariants, early exits, and complexity-aware iteration patterns.
 
-- Finalize learning objectives
-- Add chapters with the standard chapter template
-- Add 100+ practice questions and curated exercises
+## Chapters
+
+1. [Loop Patterns and Pitfalls](./01-loop-patterns.md)

@@ -1,9 +1,9 @@
-# volume-15-queue
+# Volume 15: Queue
 
-This volume directory is created as a placeholder and will be expanded in later phases.
+## Scope
 
-## Implementation plan
+Queue concepts appear in BFS, scheduling, and rate-limiter style interview problems.
 
-- Finalize learning objectives
-- Add chapters with the standard chapter template
-- Add 100+ practice questions and curated exercises
+## Chapters
+
+1. [Queues, Deques, and Circular Buffers](./01-queues-deques-and-buffers.md)

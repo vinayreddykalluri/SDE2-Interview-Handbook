@@ -1,11 +1,19 @@
 # Volume 02: Time and Space Complexity
 
-This volume is intentionally scaffolded for future expansion.
+## Scope
 
-## Planned chapters
+This volume turns complexity analysis into an interview skill, not just a notation drill. You will connect asymptotic reasoning with real data-structure behavior and production trade-offs.
 
-- Time complexity frameworks
-- Big-O, Omega, Theta
-- Space complexity models
-- Recursion and dynamic resources
-- Real-world complexity profiling
+## Chapters
+
+1. [Time and Space Analysis Framework](./01-time-space-analysis.md)
+
+## Why This Volume Matters
+
+Every high-quality SDE-2 interview answer depends on describing algorithm behavior under different inputs. Recruiters expect confidence in best-case, average-case, and worst-case implications, plus a practical memory cost model.
+
+## Recommended Path
+
+- Read the chapter and annotate each algorithm with input-size-dependent costs.
+- Revisit the same problem with multiple constraints (small, medium, large n) and compare observed curves.
+- Build one benchmarking habit: compare expected complexity against observed profile.

@@ -1,9 +1,9 @@
-# volume-12-prefix-sum
+# Volume 12: Prefix Sum
 
-This volume directory is created as a placeholder and will be expanded in later phases.
+## Scope
 
-## Implementation plan
+Prefix sums move repeated range-query computations from O(n) to O(1) lookups after preprocessing.
 
-- Finalize learning objectives
-- Add chapters with the standard chapter template
-- Add 100+ practice questions and curated exercises
+## Chapters
+
+1. [Prefix Sum and Difference Array](./01-prefix-sum-and-difference.md)

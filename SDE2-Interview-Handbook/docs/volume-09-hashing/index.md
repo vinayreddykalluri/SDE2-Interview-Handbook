@@ -1,9 +1,9 @@
-# volume-09-hashing
+# Volume 09: Hashing
 
-This volume directory is created as a placeholder and will be expanded in later phases.
+## Scope
 
-## Implementation plan
+Hashing converts fast key lookups into near-constant average operations and appears in both algorithm and system design interview questions.
 
-- Finalize learning objectives
-- Add chapters with the standard chapter template
-- Add 100+ practice questions and curated exercises
+## Chapters
+
+1. [Hashing Fundamentals and Collisions](./01-hashing-intuition-and-collision-strategy.md)

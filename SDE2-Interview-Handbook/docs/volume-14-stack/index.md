@@ -1,9 +1,9 @@
-# volume-14-stack
+# Volume 14: Stack
 
-This volume directory is created as a placeholder and will be expanded in later phases.
+## Scope
 
-## Implementation plan
+Stacks model nested contexts, expression parsing, and monotonic constraints.
 
-- Finalize learning objectives
-- Add chapters with the standard chapter template
-- Add 100+ practice questions and curated exercises
+## Chapters
+
+1. [Stack and Recursion Mapping](./01-stack-and-recursion.md)
