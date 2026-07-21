@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/docs/sitemap.xml

@@ -1,0 +1,47 @@
+name: Java example problem
+description: Report compilation, correctness, edge-case, complexity, or Java-version problems.
+title: "[Java]: "
+body:
+  - type: input
+    id: source
+    attributes:
+      label: Source file
+      placeholder: "examples/java/src/main/java/.../BinarySearch.java"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Problem category
+      options:
+        - Incorrect result
+        - Missing edge case
+        - Compilation failure
+        - Complexity mismatch
+        - Unsafe or misleading behavior
+        - Java-version compatibility
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Minimal reproduction
+      description: Include input, command, JDK version, expected result, and actual result.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reasoning
+    attributes:
+      label: Correctness reasoning
+      description: Explain the violated contract, invariant, boundary, or complexity claim.
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: "macOS 15, Temurin JDK 21.0.x"

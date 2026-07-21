@@ -1,0 +1,41 @@
+name: Build or publishing problem
+description: Report failures in MkDocs, validation, PDF, DOCX, CI, or GitHub Pages.
+title: "[Build]: "
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected pipeline
+      options:
+        - Local MkDocs site
+        - Structure or link validation
+        - Java validation
+        - PDF generation
+        - DOCX generation
+        - GitHub Actions
+        - GitHub Pages
+    validations:
+      required: true
+
+  - type: textarea
+    id: command
+    attributes:
+      label: Command and complete error
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment and versions
+      description: Include OS, Python, Java, Pandoc, and relevant package versions.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+    validations:
+      required: true

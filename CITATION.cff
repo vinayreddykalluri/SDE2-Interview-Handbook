@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If this handbook helps your work, please cite the project."
+title: "SDE2 Interview Handbook"
+type: book
+authors:
+  - family-names: "Kalluri"
+    given-names: "Vinay Reddy"
+repository-code: "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook"
+url: "https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/"
+license: "CC-BY-4.0"
+version: "1.0.0"
+keywords:
+  - Java
+  - JVM
+  - data structures
+  - algorithms
+  - interview preparation
