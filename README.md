@@ -15,6 +15,7 @@ Explore the [interactive learning portal](https://vinayreddykalluri.github.io/SD
 | Goal | Best entry point |
 | --- | --- |
 | Study in order | [Getting Started](docs/getting-started.md) and [Study Plan](docs/study-plan.md) |
+| Prepare for SDE-2 backend interviews | [Backend Interview Track](docs/backend-interview/index.md) |
 | Explore learning paths and track progress | [Interactive portal](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/) |
 | Search concepts and diagrams | [Complete documentation](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/docs/) |
 | Practice Java implementations | [Java examples](examples/java/README.md) |
@@ -24,6 +25,7 @@ Explore the [interactive learning portal](https://vinayreddykalluri.github.io/SD
 ## What is included
 
 - 19 ordered volumes from Java execution fundamentals through dynamic programming.
+- A numbered backend SDE-2 track covering problem solving, LLD, HLD, APIs, data, distributed systems, production, cloud, security, and leadership.
 - First-principles explanations, interviewer perspective, production trade-offs, exercises, and revision sheets.
 - Mermaid architecture, memory, control-flow, and algorithm diagrams.
 - Semantically named Java examples in a standard source layout.
@@ -95,6 +97,7 @@ make build-all
 | `make serve-web` | Build and serve the portal plus complete docs |
 | `make serve` | Run only the MkDocs documentation server |
 | `make validate` | Validate structure, links, Java sources, and web metadata |
+| `make validate-layout` | Enforce the single repository root and ordered backend modules |
 | `make validate-web` | Validate portal assets and docs/code metadata alignment |
 | `make validate-code` | Compile all Java examples and run smoke checks |
 | `make build-site` | Build the production website |
@@ -105,7 +108,7 @@ make build-all
 ## Repository map
 
 ```text
-docs/                  Handbook chapters, diagrams, and reader guides
+docs/                  Handbook chapters, backend track, diagrams, and reader guides
 web/                   Interactive portal source, styles, scripts, and metadata
 examples/java/         Independently compilable Java source and smoke tests
 scripts/               Validation and book-generation automation

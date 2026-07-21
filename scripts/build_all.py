@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main() -> None:
     python = sys.executable
+    subprocess.run([python, "scripts/validate_repository_layout.py"], cwd=str(ROOT), check=True)
     subprocess.run([python, "scripts/validate_structure.py"], cwd=str(ROOT), check=True)
     subprocess.run([python, "scripts/validate_links.py"], cwd=str(ROOT), check=True)
     subprocess.run([python, "scripts/validate_java_examples.py"], cwd=str(ROOT), check=True)

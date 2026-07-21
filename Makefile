@@ -1,4 +1,4 @@
-.PHONY: install serve serve-web build-site build-pdf build-docx build-all validate validate-web validate-code verify clean
+.PHONY: install serve serve-web build-site build-pdf build-docx build-all validate validate-layout validate-web validate-code verify clean
 
 PYTHON ?= python3
 
@@ -24,10 +24,14 @@ build-all:
 	$(PYTHON) scripts/build_all.py
 
 validate:
+	$(PYTHON) scripts/validate_repository_layout.py
 	$(PYTHON) scripts/validate_structure.py
 	$(PYTHON) scripts/validate_links.py
 	$(PYTHON) scripts/validate_java_examples.py
 	$(PYTHON) scripts/validate_web.py
+
+validate-layout:
+	$(PYTHON) scripts/validate_repository_layout.py
 
 validate-web:
 	$(PYTHON) scripts/validate_web.py
