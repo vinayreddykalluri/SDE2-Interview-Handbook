@@ -14,6 +14,8 @@ ROOT = Path(__file__).resolve().parents[1]
 WEB_SOURCE = ROOT / "web"
 SITE_OUTPUT = ROOT / "site"
 DOCS_OUTPUT = SITE_OUTPUT / "docs"
+EXAMPLES_SOURCE = ROOT / "examples"
+EXAMPLES_OUTPUT = SITE_OUTPUT / "examples"
 VOLUMES_FILE = WEB_SOURCE / "content" / "volumes.json"
 
 
@@ -37,6 +39,7 @@ def main() -> int:
     )
 
     shutil.copytree(WEB_SOURCE, SITE_OUTPUT, dirs_exist_ok=True)
+    shutil.copytree(EXAMPLES_SOURCE, EXAMPLES_OUTPUT, dirs_exist_ok=True)
 
     volumes = json.loads(VOLUMES_FILE.read_text(encoding="utf-8"))
     required_outputs = [
@@ -45,6 +48,17 @@ def main() -> int:
         SITE_OUTPUT / "assets" / "app.js",
         SITE_OUTPUT / "content" / "volumes.json",
         DOCS_OUTPUT / "index.html",
+        EXAMPLES_OUTPUT
+        / "java"
+        / "src"
+        / "main"
+        / "java"
+        / "io"
+        / "github"
+        / "vinayreddykalluri"
+        / "interviewhandbook"
+        / "problemsolving"
+        / "MinimumSizeSubarraySum.java",
     ]
     required_outputs.extend(
         DOCS_OUTPUT / volume["slug"] / "index.html" for volume in volumes

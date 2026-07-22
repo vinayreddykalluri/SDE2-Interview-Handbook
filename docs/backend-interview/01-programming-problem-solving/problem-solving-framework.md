@@ -2,6 +2,14 @@
 
 This framework is an operating system for a coding interview. It prevents premature coding, makes correctness reviewable, and gives you a controlled way to respond when requirements change.
 
+<nav class="module-flow" aria-label="Programming problem solving modules">
+  <a class="module-flow__link" href="../">Overview</a>
+  <a class="module-flow__link" href="../problem-solving-framework/" aria-current="page">Framework</a>
+  <a class="module-flow__link" href="../patterns-and-performance/">Patterns</a>
+  <a class="module-flow__link" href="../advanced-review/">Advanced</a>
+  <a class="module-flow__link" href="../#compilable-java-examples">Java examples</a>
+</nav>
+
 !!! abstract "Core model"
     A complete solution is not just an algorithm. It is a contract, representation, invariant, transition, progress argument, implementation, validation plan, and cost model.
 
@@ -9,20 +17,20 @@ This framework is an operating system for a coding interview. It prevents premat
 
 ```mermaid
 flowchart TD
-    P["Prompt"] --> C["Define the contract"]
-    C --> Q{"Any behavior<br/>still ambiguous?"}
-    Q -- Yes --> C
-    Q -- No --> E["Construct evidence cases"]
-    E --> B["State a correct baseline"]
-    B --> R["Locate repeated or expensive work"]
-    R --> S["Choose state and candidate patterns"]
-    S --> J{"Can the invariant<br/>be stated precisely?"}
+    P[Prompt] --> C[Define contract]
+    C --> Q{Behavior clear}
+    Q -- No --> C
+    Q -- Yes --> E[Build evidence cases]
+    E --> B[State baseline]
+    B --> R[Locate repeated work]
+    R --> S[Choose state and pattern]
+    S --> J{Invariant precise}
     J -- No --> S
-    J -- Yes --> K["Implement transitions"]
-    K --> T["Trace and test"]
-    T --> F{"Failure found?"}
+    J -- Yes --> K[Implement transitions]
+    K --> T[Trace and test]
+    T --> F{Failure found}
     F -- Yes --> C
-    F -- No --> A["Derive costs and trade-offs"]
+    F -- No --> A[Derive costs and tradeoffs]
 ```
 
 ## 1. Convert the prompt into a contract
@@ -122,9 +130,9 @@ For most interview loops, use initialization, maintenance, and termination.
 
 ```mermaid
 flowchart LR
-    I["Initialization<br/>True before work"] --> M["Maintenance<br/>Every transition preserves it"]
-    M --> T["Termination<br/>Progress measure ends"]
-    T --> R["Result<br/>Invariant implies contract"]
+    I[Initialization] --> M[Maintenance]
+    M --> T[Termination]
+    T --> R[Result follows]
 ```
 
 ### Loop-proof template
@@ -274,6 +282,8 @@ Initialization holds for an empty window with sum zero. Adding `right` and remov
 ### Constraint change
 
 If negative values are allowed, removing the left element can increase the sum and extending right can decrease it. The monotone shrink argument fails, so this sliding-window invariant is insufficient. The general shortest-subarray-at-least-target problem requires a different representation, commonly prefix sums with a monotonic deque.
+
+The executable version is <a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/problemsolving/MinimumSizeSubarraySum.java">MinimumSizeSubarraySum.java</a>. The code keeps the implementation separate while preserving the contract and invariant taught above.
 
 ## Communication script
 

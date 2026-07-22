@@ -2,6 +2,14 @@
 
 Advanced preparation is not a contest to memorize obscure algorithms. It is the ability to defend a solution when an interviewer asks why it works, how its guarantees were derived, and what happens when the operating model changes.
 
+<nav class="module-flow" aria-label="Programming problem solving modules">
+  <a class="module-flow__link" href="../">Overview</a>
+  <a class="module-flow__link" href="../problem-solving-framework/">Framework</a>
+  <a class="module-flow__link" href="../patterns-and-performance/">Patterns</a>
+  <a class="module-flow__link" href="../advanced-review/" aria-current="page">Advanced</a>
+  <a class="module-flow__link" href="../#compilable-java-examples">Java examples</a>
+</nav>
+
 !!! abstract "SDE-2 depth standard"
     Move fluently between four layers: contract, correctness proof, complexity guarantee, and machine or production behavior. State which layer each claim belongs to.
 
@@ -9,13 +17,13 @@ Advanced preparation is not a contest to memorize obscure algorithms. It is the 
 
 ```mermaid
 flowchart TD
-    C["Contract and assumptions"] --> P["Proof obligation"]
-    P --> G["Complexity guarantee"]
-    G --> M["Machine cost"]
-    M --> O["Operational behavior"]
-    O --> X{"Constraint changes?"}
+    C[Contract and assumptions] --> P[Proof obligation]
+    P --> G[Complexity guarantee]
+    G --> M[Machine cost]
+    M --> O[Operational behavior]
+    O --> X{Constraint changes}
     X -- Yes --> C
-    X -- No --> R["Defensible solution"]
+    X -- No --> R[Defensible solution]
 ```
 
 ## Correctness proof toolkit
@@ -133,12 +141,12 @@ Dynamic programming applies when subproblems repeat and a state can summarize al
 
 ```mermaid
 flowchart LR
-    S["Define sufficient state"] --> T["Enumerate transitions"]
-    T --> B["Set base cases"]
-    B --> O["Choose dependency order"]
-    O --> P["Prove state meaning"]
-    P --> C["Count states x transitions"]
-    C --> R["Reconstruct or compress"]
+    S[Define sufficient state] --> T[Enumerate transitions]
+    T --> B[Set base cases]
+    B --> O[Choose dependency order]
+    O --> P[Prove state meaning]
+    P --> C[Count states and transitions]
+    C --> R[Reconstruct or compress]
 ```
 
 ### DP design checklist

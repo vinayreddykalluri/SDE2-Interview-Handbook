@@ -1,0 +1,354 @@
+/* Programming Problem Solving learning path and executable example catalog. */
+
+:root,
+[data-md-color-scheme="default"] {
+  --diagram-bg: #fffaf0;
+  --diagram-node: #f4e6d3;
+  --diagram-node-alt: #ffffff;
+  --diagram-text: #102a38;
+  --diagram-line: #35576a;
+  --diagram-accent: #c8662d;
+  --diagram-label-bg: #fffaf0;
+}
+
+[data-md-color-scheme="slate"] {
+  --diagram-bg: #0f2937;
+  --diagram-node: #183b4d;
+  --diagram-node-alt: #214a5e;
+  --diagram-text: #fffaf0;
+  --diagram-line: #c6d7df;
+  --diagram-accent: #f0a568;
+  --diagram-label-bg: #102a38;
+}
+
+.module-flow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin: 1.25rem 0 1.75rem;
+  padding: 0.65rem;
+  border: 1px solid var(--field-line, rgba(18, 48, 74, 0.18));
+  border-radius: 0.85rem;
+  background:
+    linear-gradient(135deg, rgba(218, 121, 51, 0.08), transparent 45%),
+    var(--md-default-bg-color);
+}
+
+.module-flow__link {
+  display: flex;
+  min-height: 2.65rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid transparent;
+  border-radius: 0.55rem;
+  color: var(--md-default-fg-color) !important;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.66rem;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.055em;
+  transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease;
+}
+
+.module-flow__link:hover,
+.module-flow__link:focus-visible {
+  border-color: var(--field-accent, #c8662d);
+  background: rgba(218, 121, 51, 0.1);
+}
+
+.module-flow__link[aria-current="page"] {
+  border-color: var(--field-ink, #12304a);
+  background: var(--field-ink, #12304a);
+  color: #fffaf0 !important;
+}
+
+.example-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: 1rem;
+  margin: 1.25rem 0 2rem;
+}
+
+.example-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: 1rem;
+  border: 1px solid var(--field-line, rgba(18, 48, 74, 0.18));
+  border-top: 0.28rem solid var(--field-accent, #c8662d);
+  border-radius: 0.75rem;
+  background: var(--md-default-bg-color);
+  box-shadow: 0 0.4rem 1rem rgba(18, 48, 74, 0.07);
+}
+
+.example-card h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+}
+
+.example-card > p {
+  margin: 0 0 0.75rem;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.78rem;
+}
+
+.example-list {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.example-list li {
+  min-width: 0;
+}
+
+.example-list a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.58rem 0.65rem;
+  border-radius: 0.45rem;
+  background: rgba(18, 48, 74, 0.055);
+  color: var(--md-default-fg-color) !important;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  font-weight: 650;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.example-list a::after {
+  flex: 0 0 auto;
+  content: "CODE";
+  color: var(--field-accent, #c8662d);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+}
+
+.example-list a:hover,
+.example-list a:focus-visible {
+  background: rgba(218, 121, 51, 0.12);
+}
+
+.roadmap-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin: 1.2rem 0 2rem !important;
+  padding: 0 !important;
+  counter-reset: roadmap-step;
+  list-style: none !important;
+}
+
+.roadmap-steps li {
+  position: relative;
+  min-width: 0;
+  padding: 1rem 0.9rem 0.9rem;
+  overflow: hidden;
+  border: 1px solid var(--field-line, rgba(18, 48, 74, 0.18));
+  border-radius: 0.7rem;
+  background: var(--md-default-bg-color);
+  counter-increment: roadmap-step;
+}
+
+.roadmap-steps li::before {
+  display: grid;
+  width: 1.85rem;
+  height: 1.85rem;
+  margin-bottom: 0.7rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--field-accent, #c8662d);
+  color: #fffaf0;
+  content: counter(roadmap-step, decimal-leading-zero);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.66rem;
+  font-weight: 700;
+}
+
+.roadmap-steps li:not(:last-child)::after {
+  position: absolute;
+  top: 1.85rem;
+  right: -0.75rem;
+  width: 1.5rem;
+  height: 2px;
+  background: var(--field-accent, #c8662d);
+  content: "";
+}
+
+.roadmap-steps strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--md-default-fg-color);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.74rem;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0.045em;
+}
+
+.roadmap-steps span {
+  display: block;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.mermaid {
+  max-width: 100%;
+  margin: 1.35rem 0;
+  padding: 1rem;
+  overflow-x: auto;
+  border: 1px solid var(--field-line, rgba(18, 48, 74, 0.18));
+  border-radius: 0.75rem;
+  background: var(--diagram-bg);
+  text-align: center;
+}
+
+pre.mermaid-source {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+
+.mermaid svg {
+  display: block;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  margin: 0 auto;
+}
+
+.mermaid text,
+.mermaid .label,
+.mermaid .nodeLabel,
+.mermaid .nodeLabel p,
+.mermaid .edgeLabel,
+.mermaid .edgeLabel p,
+.mermaid .cluster-label,
+.mermaid .cluster-label span {
+  color: var(--diagram-text) !important;
+  fill: var(--diagram-text) !important;
+}
+
+.mermaid .node rect,
+.mermaid .node circle,
+.mermaid .node ellipse,
+.mermaid .node polygon,
+.mermaid .node path,
+.mermaid .actor,
+.mermaid .labelBox {
+  fill: var(--diagram-node) !important;
+  stroke: var(--diagram-accent) !important;
+}
+
+.mermaid .cluster rect {
+  fill: var(--diagram-node-alt) !important;
+  stroke: var(--diagram-line) !important;
+}
+
+.mermaid .edgeLabel,
+.mermaid .edgeLabel rect,
+.mermaid .labelBkg {
+  background-color: var(--diagram-label-bg) !important;
+  fill: var(--diagram-label-bg) !important;
+  opacity: 1 !important;
+}
+
+.mermaid .flowchart-link,
+.mermaid .edgePath path,
+.mermaid .messageLine0,
+.mermaid .messageLine1 {
+  stroke: var(--diagram-line) !important;
+}
+
+.mermaid marker path,
+.mermaid .arrowheadPath {
+  fill: var(--diagram-line) !important;
+  stroke: var(--diagram-line) !important;
+}
+
+[data-md-color-scheme="slate"] .module-flow {
+  background:
+    linear-gradient(135deg, rgba(218, 121, 51, 0.12), transparent 45%),
+    var(--md-default-bg-color);
+}
+
+[data-md-color-scheme="slate"] .example-card {
+  box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+[data-md-color-scheme="slate"] .example-list a {
+  background: rgba(255, 250, 240, 0.06);
+}
+
+@media screen and (max-width: 58rem) {
+  .module-flow {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .roadmap-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .roadmap-steps li::after {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 40rem) {
+  .module-flow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.4rem;
+    margin-top: 0.85rem;
+    padding: 0.45rem;
+  }
+
+  .module-flow__link {
+    min-height: 2.4rem;
+    padding: 0.45rem;
+    font-size: 0.61rem;
+  }
+
+  .module-flow__link:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  .example-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .roadmap-steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .example-card {
+    padding: 0.85rem;
+  }
+
+  .mermaid {
+    margin-inline: -0.35rem;
+    padding: 0.6rem;
+  }
+}
+
+@media print {
+  .module-flow {
+    display: none;
+  }
+
+  .example-card {
+    break-inside: avoid;
+    box-shadow: none;
+  }
+
+  .roadmap-steps li {
+    break-inside: avoid;
+  }
+}

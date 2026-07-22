@@ -6,6 +6,14 @@ A coding pattern is a reusable correctness structure, not a keyword-to-template 
 
 Choose a pattern only when the input properties make its transitions safe. Reject it when the required invariant cannot be maintained.
 
+<nav class="module-flow" aria-label="Programming problem solving modules">
+  <a class="module-flow__link" href="../">Overview</a>
+  <a class="module-flow__link" href="../problem-solving-framework/">Framework</a>
+  <a class="module-flow__link" href="../patterns-and-performance/" aria-current="page">Patterns</a>
+  <a class="module-flow__link" href="../advanced-review/">Advanced</a>
+  <a class="module-flow__link" href="../#compilable-java-examples">Java examples</a>
+</nav>
+
 ## Constraint-first selection
 
 Extract six dimensions before selecting a data structure:
@@ -21,19 +29,19 @@ The following tree creates a shortlist. It does not replace proof.
 
 ```mermaid
 flowchart TD
-    S["Extract constraints"] --> R{"Contiguous range?"}
-    R -- Yes --> M{"Can boundaries move<br/>monotonically?"}
-    M -- Yes --> W["Sliding window / two pointers"]
-    M -- No --> P["Prefix state / map / monotonic deque"]
-    R -- No --> O{"Ordered data or<br/>monotone predicate?"}
-    O -- Yes --> B["Binary search / ordered pointers"]
-    O -- No --> G{"Relationships or<br/>dependencies?"}
-    G -- Yes --> H["Traversal / topo / union-find / shortest path"]
-    G -- No --> K{"Keep only best k?"}
-    K -- Yes --> Q["Heap / selection"]
-    K -- No --> D{"Repeated subproblems?"}
-    D -- Yes --> DP["Memoization / tabulation"]
-    D -- No --> X["Hashing / greedy / backtracking / domain model"]
+    S[Extract constraints] --> R{Contiguous range}
+    R -- Yes --> M{Monotone boundaries}
+    M -- Yes --> W[Window or two pointers]
+    M -- No --> P[Prefix map or deque]
+    R -- No --> O{Ordered or monotone}
+    O -- Yes --> B[Binary search]
+    O -- No --> G{Relationships}
+    G -- Yes --> H[Graph algorithms]
+    G -- No --> K{Retain best k}
+    K -- Yes --> Q[Heap or selection]
+    K -- No --> D{Repeated subproblems}
+    D -- Yes --> DP[Dynamic programming]
+    D -- No --> X[Hash greedy or backtracking]
 ```
 
 ## Linear and range patterns

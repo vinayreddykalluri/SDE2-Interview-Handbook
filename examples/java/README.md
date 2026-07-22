@@ -31,6 +31,7 @@ examples/java/
 ├── README.md
 └── src/
     ├── main/java/io/github/vinayreddykalluri/interviewhandbook/
+    │   ├── problemsolving/
     │   ├── volume01/
     │   ├── volume02/
     │   └── ... volume19/
@@ -39,6 +40,20 @@ examples/java/
 ```
 
 Volume 01 contains focused Java/JVM demonstrations and warm-up solutions. Volumes 02-19 contain the principal data-structure and algorithm implementation associated with each volume.
+
+The `problemsolving` package contains SDE-2 interview extensions that combine multiple foundations or require deeper proof. It includes the handbook's worked threshold-window problem, prefix-plus-hash reasoning, monotonic stacks, topological sorting, Dijkstra, union-find, top-k selection, greedy interval scheduling, dynamic programming, backtracking, binary search on the answer, and reservoir sampling.
+
+## Programming problem-solving examples
+
+| Family | Examples |
+| --- | --- |
+| Range and prefix state | `MinimumSizeSubarraySum`, `SubarraySumCount` |
+| Ordered and monotone state | `NextGreaterElement`, `MinimumShipCapacity` |
+| Graphs and connectivity | `CourseScheduleOrder`, `DijkstraShortestPath`, `DisjointSet` |
+| Selection and optimization | `TopKFrequentElements`, `IntervalScheduling`, `CoinChange`, `UniquePermutations` |
+| Streaming and randomization | `ReservoirSampling` |
+
+All public methods document their contract, invariant, and complexity. The dependency-free smoke suite executes every example through `make validate-code`.
 
 ## Run a class with a main method
 

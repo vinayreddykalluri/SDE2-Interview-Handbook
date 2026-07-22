@@ -196,7 +196,6 @@ theme:
 
 plugins:
   - search
-  - mermaid2
   - git-revision-date-localized:
       enable_creation_date: true
       enable_git_follow: false
@@ -204,6 +203,10 @@ plugins:
 
 extra_css:
   - assets/css/extra.css
+  - assets/css/programming-path.css
+
+extra_javascript:
+  - assets/javascripts/mermaid.mjs
 
 markdown_extensions:
   - admonition
@@ -216,7 +219,11 @@ markdown_extensions:
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid-source
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.magiclink
   - pymdownx.inlinehilite
   - pymdownx.snippets

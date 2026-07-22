@@ -1,6 +1,18 @@
 // SPDX-License-Identifier: MIT
 package io.github.vinayreddykalluri.interviewhandbook.tests;
 
+import io.github.vinayreddykalluri.interviewhandbook.problemsolving.CoinChange;
+import io.github.vinayreddykalluri.interviewhandbook.problemsolving.CourseScheduleOrder;
+import io.github.vinayreddykalluri.interviewhandbook.problemsolving.DijkstraShortestPath;
+import io.github.vinayreddykalluri.interviewhandbook.problemsolving.DisjointSet;
+import io.github.vinayreddykalluri.interviewhandbook.problemsolving.IntervalScheduling;
+import io.github.vinayreddykalluri.interviewhandbook.problemsolving.MinimumShipCapacity;
+import io.github.vinayreddykalluri.interviewhandbook.problemsolving.MinimumSizeSubarraySum;
+import io.github.vinayreddykalluri.interviewhandbook.problemsolving.NextGreaterElement;
+import io.github.vinayreddykalluri.interviewhandbook.problemsolving.ReservoirSampling;
+import io.github.vinayreddykalluri.interviewhandbook.problemsolving.SubarraySumCount;
+import io.github.vinayreddykalluri.interviewhandbook.problemsolving.TopKFrequentElements;
+import io.github.vinayreddykalluri.interviewhandbook.problemsolving.UniquePermutations;
 import io.github.vinayreddykalluri.interviewhandbook.volume01.DaysInMonth;
 import io.github.vinayreddykalluri.interviewhandbook.volume01.EvenNumberCheck;
 import io.github.vinayreddykalluri.interviewhandbook.volume01.SumNumbers;
@@ -33,6 +45,7 @@ public final class ExampleSmokeTest {
         checkMathAndIndexing();
         checkLinearPatterns();
         checkSearchAndTraversal();
+        checkProblemSolvingExtensions();
         System.out.println("Java example smoke checks passed");
     }
 
@@ -79,6 +92,71 @@ public final class ExampleSmokeTest {
         expectEquals(8, DpPatterns.climbStairs(5), "compressed dynamic programming");
     }
 
+    private static void checkProblemSolvingExtensions() {
+        expectEquals(
+                2,
+                MinimumSizeSubarraySum.minLengthAtLeast(new int[] {2, 3, 1, 2, 4, 3}, 7),
+                "minimum threshold window"
+        );
+        expectEquals(2L, SubarraySumCount.count(new int[] {1, 1, 1}, 2), "signed prefix count");
+        expectArrayEquals(
+                new int[] {3, 2, 3, -1, -1},
+                NextGreaterElement.nextGreaterIndices(new int[] {2, 1, 2, 4, 3}),
+                "next-greater indices"
+        );
+        expectArrayEquals(
+                new int[] {0, 1, 2, 3},
+                CourseScheduleOrder.order(4, new int[][] {{1, 0}, {2, 0}, {3, 1}, {3, 2}}),
+                "topological course order"
+        );
+        expectArrayEquals(
+                new long[] {0, 3, 1, 4},
+                DijkstraShortestPath.shortestPaths(
+                        4,
+                        new int[][] {{0, 1, 4}, {0, 2, 1}, {2, 1, 2}, {1, 3, 1}, {2, 3, 5}},
+                        0
+                ),
+                "Dijkstra distances"
+        );
+
+        DisjointSet components = new DisjointSet(5);
+        expectTrue(components.union(0, 1), "first union");
+        expectTrue(components.union(1, 2), "second union");
+        expectTrue(components.connected(0, 2), "union-find connectivity");
+        expectEquals(3, components.componentSize(1), "union-find component size");
+        expectEquals(3, components.componentCount(), "union-find component count");
+
+        expectArrayEquals(
+                new int[] {1, 2},
+                TopKFrequentElements.select(new int[] {1, 1, 1, 2, 2, 3}, 2),
+                "top-k frequency"
+        );
+        List<IntervalScheduling.Interval> selected = IntervalScheduling.selectMaximum(List.of(
+                new IntervalScheduling.Interval(1, 3),
+                new IntervalScheduling.Interval(2, 4),
+                new IntervalScheduling.Interval(3, 5),
+                new IntervalScheduling.Interval(0, 7),
+                new IntervalScheduling.Interval(5, 7)
+        ));
+        expectEquals(3, selected.size(), "greedy interval count");
+        expectEquals(3, CoinChange.minCoins(new int[] {1, 2, 5}, 11), "minimum coin count");
+
+        List<List<Integer>> permutations = UniquePermutations.generate(new int[] {1, 1, 2});
+        expectEquals(3, permutations.size(), "unique permutation count");
+        expectTrue(permutations.contains(List.of(2, 1, 1)), "unique permutation content");
+        expectEquals(
+                15L,
+                MinimumShipCapacity.minimumCapacity(new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 5),
+                "minimum shipping capacity"
+        );
+
+        int[] sample = ReservoirSampling.sample(new int[] {1, 2, 3, 4, 5, 6}, 3, 42L);
+        expectEquals(3, sample.length, "reservoir sample size");
+        expectTrue(Arrays.stream(sample).allMatch(value -> value >= 1 && value <= 6),
+                "reservoir sample membership");
+        expectEquals(3L, Arrays.stream(sample).distinct().count(), "reservoir sample uniqueness");
+    }
+
     private static void expectTrue(boolean actual, String label) {
         if (!actual) {
             throw new AssertionError(label + ": expected true");
@@ -92,6 +170,14 @@ public final class ExampleSmokeTest {
     }
 
     private static void expectArrayEquals(int[] expected, int[] actual, String label) {
+        if (!Arrays.equals(expected, actual)) {
+            throw new AssertionError(
+                    label + ": expected " + Arrays.toString(expected) + ", got " + Arrays.toString(actual)
+            );
+        }
+    }
+
+    private static void expectArrayEquals(long[] expected, long[] actual, String label) {
         if (!Arrays.equals(expected, actual)) {
             throw new AssertionError(
                     label + ": expected " + Arrays.toString(expected) + ", got " + Arrays.toString(actual)
