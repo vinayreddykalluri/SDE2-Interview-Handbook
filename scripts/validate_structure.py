@@ -43,7 +43,11 @@ REQUIRED_HEADINGS = [
 
 
 def parse_nav() -> List[str]:
-    data = yaml.safe_load(MKDOCS.read_text(encoding="utf-8"))
+    config_text = MKDOCS.read_text(encoding="utf-8").replace(
+        "!!python/name:pymdownx.superfences.fence_code_format",
+        "pymdownx.superfences.fence_code_format",
+    )
+    data = yaml.safe_load(config_text)
     out = []
 
     def walk(node):
