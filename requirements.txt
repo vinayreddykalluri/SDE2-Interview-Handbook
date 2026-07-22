@@ -1,9 +1,9 @@
 mkdocs==1.6.1
 mkdocs-material==9.7.7
 mkdocs-mermaid2-plugin==1.2.3
-mkdocs-git-revision-date-localized-plugin==1.4.7
+mkdocs-git-revision-date-localized-plugin==1.5.3
 pymdown-extensions==11.0.1
 Pygments==2.20.0
 PyYAML==6.0.3
 weasyprint==69.0
-pypandoc==1.14
+pypandoc==1.17
