@@ -9,16 +9,16 @@ The SDE2 Interview Handbook is an open-source learning system for engineers who 
 
 | If you need to... | Start here |
 | --- | --- |
-| rebuild Java and JVM fundamentals | Volume 01, then Volumes 02-06 |
-| prepare for array and string rounds | Volumes 07-13 |
-| master traversal and state problems | Volumes 14-19 |
+| rebuild Java and JVM fundamentals | Module 01, then Modules 02-06 |
+| prepare for array and string rounds | Modules 07-13 |
+| master traversal and state problems | Modules 14-19 |
 | revise in a limited time | the study plan and each chapter's one-page summary |
 | inspect or run implementations | the separate code library |
 | print or annotate offline | Downloads and Printing |
 
 ## The complete learning sequence
 
-| Stage | Volumes | Outcome |
+| Stage | Modules | Outcome |
 | --- | --- | --- |
 | Runtime foundations | 01-06 | Explain Java execution, complexity, indexing, loops, math, and bits from first principles |
 | Linear-data patterns | 07-13 | Recognize array, string, hashing, window, pointer, prefix, and binary-search invariants |

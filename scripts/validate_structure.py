@@ -1,198 +1,193 @@
 #!/usr/bin/env python3
+"""Validate curriculum hierarchy and every Markdown path referenced by MkDocs."""
+
 from __future__ import annotations
 
 import re
 import sys
 from pathlib import Path
-from typing import Dict, List
+from typing import Any
 
 import yaml
 
+
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
+FOUNDATIONS = DOCS / "coding-foundations"
+BACKEND = DOCS / "backend-interview"
 MKDOCS = ROOT / "mkdocs.yml"
-PLACEHOLDER_PATTERNS = [r"TODO", r"TBD", r"Lorem ipsum", r"exercise number", r"question number", r"add content later"]
-REQUIRED_PROJECT_FILES = [
-    ROOT / "README.md",
-    ROOT / "CONTRIBUTING.md",
-    ROOT / "CODE_OF_CONDUCT.md",
-    ROOT / "SECURITY.md",
-    ROOT / "SUPPORT.md",
-    ROOT / "GOVERNANCE.md",
-    ROOT / "LICENSE",
-    ROOT / "LICENSE-CONTENT.md",
-    ROOT / "CITATION.cff",
+
+EXPECTED_FOUNDATION_DIRS = [
+    "01-java-runtime",
+    "02-complexity",
+    "03-math",
+    "04-loop-reasoning",
+    "05-indexing",
+    "06-bit-manipulation",
+    "07-arrays",
+    "08-strings",
+    "09-hashing",
+    "10-sliding-window",
+    "11-two-pointers",
+    "12-prefix-sum",
+    "13-binary-search",
+    "14-stacks-recursion",
+    "15-queues-deques",
+    "16-linked-lists",
+    "17-trees",
+    "18-graphs",
+    "19-dynamic-programming",
 ]
-REQUIRED_HEADINGS = [
-    "Why This Matters",
-    "Learning Objectives",
-    "Core Concept",
-    "Internal Working",
-    "Architecture or Memory Diagram",
-    "Code Example",
-    "Step-by-Step Execution",
-    "Interviewer Perspective",
-    "Common Mistakes",
-    "Production Perspective",
-    "Must Know for DSA",
-    "Interview Questions and Answers",
-    "Practice Exercises",
-    "Revision Checklist",
-    "One-Page Summary",
-]
+NUMBERED_DIR = re.compile(r"^(\d{2})-[a-z0-9]+(?:-[a-z0-9]+)*$")
+NUMBERED_CHAPTER = re.compile(r"^\d{2}-[a-z0-9]+(?:-[a-z0-9]+)*\.md$")
 
 
-def parse_nav() -> List[str]:
-    config_text = MKDOCS.read_text(encoding="utf-8").replace(
-        "!!python/name:pymdownx.superfences.fence_code_format",
-        "pymdownx.superfences.fence_code_format",
+class MkDocsConfigLoader(yaml.SafeLoader):
+    """Safe YAML loader that recognizes MkDocs callable references as opaque names."""
+
+
+def construct_python_name(
+    loader: MkDocsConfigLoader,
+    tag_suffix: str,
+    node: yaml.Node,
+) -> str:
+    loader.construct_scalar(node)
+    return tag_suffix
+
+
+MkDocsConfigLoader.add_multi_constructor(
+    "tag:yaml.org,2002:python/name:",
+    construct_python_name,
+)
+
+
+def nav_paths(node: Any) -> list[str]:
+    paths: list[str] = []
+    if isinstance(node, str):
+        if node.endswith(".md"):
+            paths.append(node)
+    elif isinstance(node, list):
+        for item in node:
+            paths.extend(nav_paths(item))
+    elif isinstance(node, dict):
+        for value in node.values():
+            paths.extend(nav_paths(value))
+    return paths
+
+
+def validate_foundations(errors: list[str]) -> tuple[int, int]:
+    if not FOUNDATIONS.is_dir():
+        errors.append("Missing docs/coding-foundations/")
+        return 0, 0
+
+    actual_dirs = sorted(
+        path.name for path in FOUNDATIONS.iterdir() if path.is_dir() and not path.name.startswith(".")
     )
-    data = yaml.safe_load(config_text)
-    out = []
+    if actual_dirs != EXPECTED_FOUNDATION_DIRS:
+        errors.append(
+            "Coding-foundation directories must be the ordered canonical set; "
+            f"found {actual_dirs}"
+        )
 
-    def walk(node):
-        if isinstance(node, str):
-            out.append(node)
-        elif isinstance(node, dict):
-            for v in node.values():
-                walk(v)
-        elif isinstance(node, list):
-            for item in node:
-                walk(item)
-
-    walk(data.get("nav", []))
-    return out
-
-
-def resolve_ref(ref: str) -> Path:
-    p = (DOCS / ref)
-    return p
-
-
-def check_navigation():
-    missing = []
-    for ref in parse_nav():
-        if ref == "/":
+    module_count = 0
+    chapter_count = 0
+    for directory_name in EXPECTED_FOUNDATION_DIRS:
+        module_dir = FOUNDATIONS / directory_name
+        if not module_dir.is_dir():
             continue
-        p = resolve_ref(ref)
-        if ref and not p.exists():
-            missing.append(ref)
-    if missing:
-        raise SystemExit(f"Missing navigation refs: {missing}")
+        module_count += 1
+        if not (module_dir / "index.md").is_file():
+            errors.append(f"Missing module overview: {module_dir.relative_to(ROOT)}/index.md")
+
+        chapters = sorted(
+            path for path in module_dir.glob("*.md") if NUMBERED_CHAPTER.fullmatch(path.name)
+        )
+        if not chapters:
+            errors.append(f"No numbered chapters in {module_dir.relative_to(ROOT)}")
+        chapter_count += len(chapters)
+
+    if chapter_count != 36:
+        errors.append(f"Expected 36 coding-foundation chapters; found {chapter_count}")
+
+    legacy_dirs = sorted(path.name for path in DOCS.glob("volume-*") if path.is_dir())
+    if legacy_dirs:
+        errors.append(f"Legacy top-level curriculum directories remain: {legacy_dirs}")
+
+    return module_count, chapter_count
 
 
-def check_project_files():
-    missing = [str(path.relative_to(ROOT)) for path in REQUIRED_PROJECT_FILES if not path.exists()]
-    if missing:
-        raise SystemExit(f"Missing open-source project files: {missing}")
+def validate_backend(errors: list[str]) -> int:
+    if not (BACKEND / "index.md").is_file():
+        errors.append("Missing docs/backend-interview/index.md")
+        return 0
+
+    module_dirs = sorted(
+        path for path in BACKEND.iterdir() if path.is_dir() and NUMBERED_DIR.fullmatch(path.name)
+    )
+    ids = [int(path.name[:2]) for path in module_dirs]
+    if ids != list(range(1, len(ids) + 1)):
+        errors.append(f"Backend module numbering must be contiguous from 01; found {ids}")
+
+    required_signals = {
+        "programming": any("programming-problem-solving" in path.name for path in module_dirs),
+        "LLD": any("low-level-design" in path.name for path in module_dirs),
+        "HLD/system design": any(
+            "high-level" in path.name or "system-design" in path.name for path in module_dirs
+        ),
+    }
+    for signal, present in required_signals.items():
+        if not present:
+            errors.append(f"Backend track is missing required {signal} coverage")
+
+    for module_dir in module_dirs:
+        if not (module_dir / "index.md").is_file():
+            errors.append(f"Missing backend module overview: {module_dir.relative_to(ROOT)}/index.md")
+
+    return len(module_dirs)
 
 
-def check_source_separation():
-    embedded_java = sorted(DOCS.rglob("*.java"))
-    if embedded_java:
-        paths = [str(path.relative_to(ROOT)) for path in embedded_java]
-        raise SystemExit("Java source must live under examples/java, not docs:\n" + "\n".join(paths))
+def validate_navigation(errors: list[str]) -> int:
+    try:
+        config = yaml.load(
+            MKDOCS.read_text(encoding="utf-8"),
+            Loader=MkDocsConfigLoader,
+        )
+    except (OSError, yaml.YAMLError) as error:
+        errors.append(f"Cannot parse mkdocs.yml: {error}")
+        return 0
 
-    java_root = ROOT / "examples" / "java" / "src" / "main" / "java"
-    if not any(java_root.rglob("*.java")):
-        raise SystemExit(f"No canonical Java examples found under {java_root}")
+    paths = nav_paths(config.get("nav", []))
+    duplicates = sorted({path for path in paths if paths.count(path) > 1})
+    if duplicates:
+        errors.append(f"Duplicate MkDocs navigation targets: {duplicates}")
 
+    for relative in paths:
+        if not (DOCS / relative).is_file():
+            errors.append(f"Missing MkDocs navigation target: docs/{relative}")
 
-def check_public_metadata():
-    metadata = MKDOCS.read_text(encoding="utf-8")
-    forbidden = ["example.com", "your-org"]
-    found = [value for value in forbidden if value in metadata]
-    if found:
-        raise SystemExit(f"Placeholder public metadata found in mkdocs.yml: {found}")
-
-
-def check_placeholders() -> bool:
-    bad = []
-    for p in DOCS.rglob("*.md"):
-        text = p.read_text(encoding="utf-8").lower()
-        for pat in PLACEHOLDER_PATTERNS:
-            if re.search(pat.lower(), text):
-                bad.append(f"{p}: {pat}")
-    if bad:
-        raise SystemExit("Placeholder text found: \n" + "\n".join(bad))
+    return len(paths)
 
 
-def check_required_sections(files: List[Path]):
-    errors = []
-    for p in files:
-        text = p.read_text(encoding="utf-8")
-        for heading in REQUIRED_HEADINGS:
-            if f"## {heading}" not in text and f"## {heading.lower()}" not in text.lower():
-                errors.append(f"{p}: missing heading '{heading}'")
+def main() -> int:
+    errors: list[str] = []
+    module_count, chapter_count = validate_foundations(errors)
+    backend_count = validate_backend(errors)
+    nav_count = validate_navigation(errors)
+
     if errors:
-        raise SystemExit("Missing required sections:\n" + "\n".join(errors))
+        for error in errors:
+            print(f"ERROR: {error}", file=sys.stderr)
+        return 1
 
-
-def check_mermaid_blocks():
-    for p in DOCS.rglob("*.md"):
-        lines = p.read_text(encoding="utf-8").splitlines()
-        stack = []
-        for line in lines:
-            stripped = line.strip()
-            if not stripped.startswith("```"):
-                continue
-            if stripped.startswith("```mermaid"):
-                stack.append("mermaid")
-            elif stack and stripped == "```":
-                stack.pop()
-        if stack:
-            raise SystemExit(f"Unbalanced mermaid fence in {p}")
-
-
-def check_empty_chapters(files: List[Path]):
-    small = [str(p) for p in files if len(p.read_text(encoding="utf-8").strip()) < 600]
-    if small:
-        raise SystemExit("Potentially empty/sparse chapters: \n" + "\n".join(small))
-
-
-def check_duplicate_titles(files: List[Path]):
-    seen: Dict[str, str] = {}
-    dups = []
-    for p in files:
-        first = None
-        for line in p.read_text(encoding="utf-8").splitlines():
-            if line.startswith("# "):
-                first = line[2:].strip()
-                break
-        if first:
-            if first in seen:
-                dups.append(f"{first}: {seen[first]} and {p}")
-            else:
-                seen[first] = str(p)
-    if dups:
-        raise SystemExit("Duplicate chapter titles:\n" + "\n".join(dups))
-
-
-def main() -> None:
-    if not MKDOCS.exists():
-        raise SystemExit("mkdocs.yml missing")
-    check_project_files()
-    check_public_metadata()
-    check_navigation()
-    check_source_separation()
-    all_md = [p for p in DOCS.rglob("*.md")]
-    if not all_md:
-        raise SystemExit("No markdown files found")
-    check_placeholders()
-    required = [
-        p
-        for p in all_md
-        if p.parent.name.startswith("volume-") and p.name != "index.md"
-    ]
-    check_required_sections(required)
-    check_mermaid_blocks()
-    check_empty_chapters([p for p in required])
-    check_duplicate_titles(required)
+    print(
+        "Structure validation passed: "
+        f"{module_count} coding-foundation modules, "
+        f"{chapter_count} chapters, "
+        f"{backend_count} backend modules, "
+        f"{nav_count} navigation targets"
+    )
+    return 0
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except Exception as exc:
-        print(f"Structure validation failed: {exc}")
-        sys.exit(1)
+    raise SystemExit(main())

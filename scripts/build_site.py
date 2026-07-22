@@ -16,7 +16,7 @@ SITE_OUTPUT = ROOT / "site"
 DOCS_OUTPUT = SITE_OUTPUT / "docs"
 EXAMPLES_SOURCE = ROOT / "examples"
 EXAMPLES_OUTPUT = SITE_OUTPUT / "examples"
-VOLUMES_FILE = WEB_SOURCE / "content" / "volumes.json"
+MODULES_FILE = WEB_SOURCE / "content" / "coding-foundations.json"
 
 
 def main() -> int:
@@ -41,12 +41,12 @@ def main() -> int:
     shutil.copytree(WEB_SOURCE, SITE_OUTPUT, dirs_exist_ok=True)
     shutil.copytree(EXAMPLES_SOURCE, EXAMPLES_OUTPUT, dirs_exist_ok=True)
 
-    volumes = json.loads(VOLUMES_FILE.read_text(encoding="utf-8"))
+    modules = json.loads(MODULES_FILE.read_text(encoding="utf-8"))
     required_outputs = [
         SITE_OUTPUT / "index.html",
         SITE_OUTPUT / "assets" / "styles.css",
         SITE_OUTPUT / "assets" / "app.js",
-        SITE_OUTPUT / "content" / "volumes.json",
+        SITE_OUTPUT / "content" / "coding-foundations.json",
         DOCS_OUTPUT / "index.html",
         EXAMPLES_OUTPUT
         / "java"
@@ -61,7 +61,7 @@ def main() -> int:
         / "MinimumSizeSubarraySum.java",
     ]
     required_outputs.extend(
-        DOCS_OUTPUT / volume["slug"] / "index.html" for volume in volumes
+        DOCS_OUTPUT / module["slug"] / "index.html" for module in modules
     )
 
     missing = [path.relative_to(ROOT) for path in required_outputs if not path.is_file()]

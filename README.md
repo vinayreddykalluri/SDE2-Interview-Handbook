@@ -1,138 +1,113 @@
-# SDE2 Interview Handbook
+# SDE-2 Interview Handbook
 
-[![Handbook quality](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/actions/workflows/build-books.yml/badge.svg)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/actions/workflows/build-books.yml)
-[![Deploy documentation](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/actions/workflows/deploy-pages.yml)
-[![Code license: MIT](https://img.shields.io/badge/code-MIT-green.svg)](LICENSE)
-[![Content license: CC BY 4.0](https://img.shields.io/badge/content-CC%20BY%204.0-blue.svg)](LICENSE-CONTENT.md)
-[![Java 17+](https://img.shields.io/badge/Java-17%2B-orange.svg)](examples/java/README.md)
+[![License: MIT](https://img.shields.io/badge/code-MIT-0b6e4f.svg)](LICENSE)
+[![Content: CC BY 4.0](https://img.shields.io/badge/content-CC%20BY%204.0-b45309.svg)](LICENSE-CONTENT.md)
+[![Java 17+](https://img.shields.io/badge/Java-17%2B-1f4e79.svg)](examples/java/README.md)
 
-A detailed, printable, and fully open-source interview preparation system for Java, JVM internals, data structures, algorithms, and SDE-2 engineering judgment.
+A local-first, open-source preparation system for SDE-2 backend interviews. It combines a structured backend interview track, 19 coding-foundation modules, runnable Java examples, searchable MkDocs documentation, a responsive learning portal, and printable PDF/DOCX builds.
 
-Explore the [interactive learning portal](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/) or open the [complete searchable handbook](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/docs/).
+> **Current delivery status:** local builds are the source of truth. GitHub Actions and public Pages deployment are intentionally disabled until the local product is approved. A version-controlled Vercel static-build contract is ready for preview deployment, but this repository does not claim that a production URL is live.
 
-## Start here
+## Choose Your Path
 
-| Goal | Best entry point |
-| --- | --- |
-| Study in order | [Getting Started](docs/getting-started.md) and [Study Plan](docs/study-plan.md) |
-| Prepare for SDE-2 backend interviews | [Backend Interview Track](docs/backend-interview/index.md) |
-| Repeat and retain advanced material | [Structured Revision System](docs/backend-interview/revision-system.md) |
-| Explore learning paths and track progress | [Interactive portal](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/) |
-| Search concepts and diagrams | [Complete documentation](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/docs/) |
-| Practice Java implementations | [Java examples](examples/java/README.md) |
-| Download PDF or DOCX books | [GitHub Actions artifacts](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/actions/workflows/build-books.yml) |
-| Improve the project | [Contributing guide](CONTRIBUTING.md) |
+| Goal | Start here | Outcome |
+|---|---|---|
+| Prepare end-to-end for an SDE-2 backend loop | [Backend interview track](docs/backend-interview/index.md) | Programming, LLD, HLD, databases, distributed systems, reliability, cloud, security, and leadership |
+| Rebuild algorithm and Java fundamentals | [Coding foundations](docs/coding-foundations/index.md) | A repeatable 19-module sequence with theory, diagrams, drills, and runnable examples |
+| Run and extend the code | [Java examples](examples/README.md) | Independently compilable examples organized by interview topic |
+| Understand the repository before contributing | [Repository structure](docs/community/repository-structure.md) | Clear source ownership and naming rules |
+| Pick a useful contribution | [Project roadmap](ROADMAP.md) | Prioritized work without duplicating completed modules |
+| Create a hosted preview | [Vercel deployment guide](DEPLOYMENT.md) | Reproducible static build without GitHub Actions |
 
-## What is included
-
-- 19 ordered volumes from Java execution fundamentals through dynamic programming.
-- A numbered backend SDE-2 track covering problem solving, LLD, HLD, APIs, data, distributed systems, production, cloud, security, and leadership.
-- First-principles explanations, interviewer perspective, production trade-offs, exercises, and revision sheets.
-- Mermaid architecture, memory, control-flow, and algorithm diagrams.
-- Semantically named Java examples in a standard source layout.
-- Interactive curriculum, learning paths, local progress tracking, theme controls, and keyboard search.
-- Searchable MkDocs Material site with mobile and print-friendly styles.
-- Automated structure, link, Java compilation, site, PDF, and DOCX checks.
-- GitHub Pages deployment and downloadable book artifacts.
-
-## System architecture
+## Learning Architecture
 
 ```mermaid
 flowchart LR
-    Authors["Authors and contributors"] --> Markdown["Markdown chapters"]
-    Authors --> Web["Web portal source"]
-    Authors --> Java["Java example sources"]
-    Markdown --> Validation["Structure and link validation"]
-    Web --> WebValidation["Metadata and asset validation"]
-    Java --> Compile["Java compile and smoke checks"]
-    Validation --> MkDocs["MkDocs Material"]
-    WebValidation --> Portal["Interactive portal"]
-    Compile --> Quality["Quality gate"]
-    MkDocs --> DocsPath["GitHub Pages /docs/"]
-    Portal --> RootPath["GitHub Pages /"]
-    Markdown --> Books["PDF and DOCX builders"]
-    Books --> Artifacts["GitHub Actions artifacts"]
+    Start["Choose interview goal"] --> Backend["Backend interview track"]
+    Start --> Foundations["Coding foundations"]
+    Backend --> Practice["Explain, design, implement, review"]
+    Foundations --> Practice
+    Practice --> Code["Runnable Java examples"]
+    Practice --> Notes["Revision notes and diagrams"]
+    Code --> Mock["Timed mock interview"]
+    Notes --> Mock
+    Mock --> Review["Gap log and next module"]
+    Review --> Backend
+    Review --> Foundations
 ```
 
-## Quick setup
+The curriculum uses progressive disclosure: overview first, detailed theory second, code and diagrams next, then interview prompts, trade-offs, and a revision loop.
 
-Prerequisites:
+## Run Locally
 
-- Python 3.11 or newer
-- JDK 17 or newer
-- Pandoc and XeLaTeX for printable books
-- GNU Make
+### macOS one-command setup
 
 ```bash
-git clone https://github.com/vinayreddykalluri/SDE2-Interview-Handbook.git
-cd SDE2-Interview-Handbook
-make install
+make bootstrap
+make doctor
+make validate
 make serve-web
 ```
 
-Open `http://127.0.0.1:8000` for the portal or `http://127.0.0.1:8000/docs/` for the complete handbook. Use `make serve` when developing only the MkDocs documentation.
+Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) after the server starts.
 
-### macOS
-
-```bash
-brew install python pandoc mactex-no-gui openjdk@17
-make install
-make validate
-make build-all
-```
-
-### Ubuntu or Debian
+### Manual setup
 
 ```bash
-sudo apt-get update
-sudo apt-get install -y python3 python3-pip pandoc texlive-xetex openjdk-17-jdk make
+python3 -m venv .venv
 make install
+make doctor
 make validate
-make build-all
+make serve-web
 ```
 
-## Quality commands
+Use `make serve` when you only need the MkDocs handbook. Use `make serve-web` for the complete portal with the handbook mounted under `/docs/`. See [LOCAL_DEVELOPMENT.md](LOCAL_DEVELOPMENT.md) for prerequisites, output paths, and troubleshooting.
 
-| Command | Purpose |
-| --- | --- |
-| `make serve-web` | Build and serve the portal plus complete docs |
-| `make serve` | Run only the MkDocs documentation server |
-| `make validate` | Validate structure, links, Java sources, and web metadata |
-| `make validate-layout` | Enforce the single repository root and ordered backend modules |
-| `make validate-web` | Validate portal assets and docs/code metadata alignment |
-| `make validate-code` | Compile all Java examples and run smoke checks |
-| `make build-site` | Build the production website |
-| `make build-pdf` | Generate individual and combined PDFs |
-| `make build-docx` | Generate individual and combined DOCX books |
-| `make build-all` | Run the full publication pipeline |
-
-## Repository map
+## Repository Map
 
 ```text
-docs/                  Handbook chapters, backend track, diagrams, and reader guides
-web/                   Interactive portal source, styles, scripts, and metadata
-examples/java/         Independently compilable Java source and smoke tests
-scripts/               Validation and book-generation automation
-templates/             Print and document templates
-.github/workflows/     CI, artifact generation, and GitHub Pages deployment
-.github/ISSUE_TEMPLATE Structured contributor intake forms
-output/                Generated local artifacts (not committed)
-site/                  Generated portal plus docs deployment artifact
+.
+|-- .github/                    GitHub ownership, issue forms, Dependabot, disabled workflows
+|-- docs/
+|   |-- backend-interview/      Primary SDE-2 backend preparation track
+|   |-- coding-foundations/     Ordered Java, DSA, and problem-solving modules
+|   |-- community/              Architecture and contribution documentation
+|   |-- examples/               Documentation-side code index
+|   +-- assets/                 Diagrams and documentation assets
+|-- examples/                   Runnable source code, separated from prose
+|   +-- java/
+|-- overrides/                  MkDocs Material theme customizations
+|-- scripts/                    Build and validation entry points
+|-- templates/                  PDF and DOCX rendering inputs
+|-- web/                        Standalone learning-portal shell and metadata
+|-- vercel.json                 Hosted static-build contract
+|-- requirements-web.txt       Minimal website-only Python dependencies
+|-- mkdocs.yml                  Documentation navigation and rendering configuration
+|-- Makefile                    Stable local commands
++-- requirements.txt            Pinned Python documentation toolchain
 ```
 
-## Generated artifacts
+The root-level license, governance, security, support, citation, contribution, and build-entry files are intentionally kept at the root so GitHub and new contributors can discover them without custom tooling.
 
-- `output/pdf/Volume-XX-Topic.pdf`
-- `output/docx/Volume-XX-Topic.docx`
-- `output/combined/SDE2-Interview-Handbook.pdf`
-- `output/combined/SDE2-Interview-Handbook.docx`
+## Quality Gate
 
-Generated books are intentionally excluded from Git. Every successful handbook workflow publishes them as downloadable GitHub Actions artifacts.
+```bash
+make validate
+make build-site
+```
 
-## Open-source model
+The validation suite checks repository layout, MkDocs navigation, internal links, Java compilation and smoke execution, portal metadata, local assets, and JavaScript syntax. Printable outputs are available through `make build-pdf`, `make build-docx`, or `make build-all`.
 
-- Source code, automation, and configuration are licensed under the [MIT License](LICENSE).
-- Handbook prose, diagrams, and learning material are licensed under [Creative Commons Attribution 4.0](LICENSE-CONTENT.md).
-- Contributions are accepted under the license that applies to the files being changed.
+`make validate-deployment` checks the committed Vercel contract. See [DEPLOYMENT.md](DEPLOYMENT.md) before importing the repository into Vercel.
 
-See [Governance](GOVERNANCE.md), [Security](SECURITY.md), [Support](SUPPORT.md), and the [Code of Conduct](CODE_OF_CONDUCT.md) for project-wide expectations.
+Generated files belong in ignored `site/` and `output/` directories. Do not commit generated books, compiled classes, virtual environments, or caches.
+
+## Contributing
+
+Start with [CONTRIBUTING.md](CONTRIBUTING.md), then use the issue form that matches the change. Keep prose and runnable code synchronized when a concept includes an implementation. Small, focused contributions are easier to review than mixed content, design, and tooling changes.
+
+Project conduct and stewardship are documented in [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md), [GOVERNANCE.md](GOVERNANCE.md), [SECURITY.md](SECURITY.md), and [SUPPORT.md](SUPPORT.md).
+
+## Licensing
+
+Source code is available under the [MIT License](LICENSE). Handbook prose, diagrams, and other educational content are available under [CC BY 4.0](LICENSE-CONTENT.md). Contributions are accepted under the applicable license for the files changed.

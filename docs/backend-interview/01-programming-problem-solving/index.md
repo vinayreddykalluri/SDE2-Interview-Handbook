@@ -49,7 +49,7 @@ The loop is deliberately circular. A changed constraint can invalidate the repre
 | [Problem-solving framework](problem-solving-framework.md) | How do I control an unfamiliar problem from prompt to proof? | A repeatable 35-minute interview script and correctness checklist |
 | [Patterns and performance](patterns-and-performance.md) | Which representation and invariant fit these constraints? | A constraint-to-pattern decision map with rejection rules |
 | [Advanced review](advanced-review.md) | Can I defend the solution under deeper theory and production follow-ups? | A proof, performance, streaming, and concurrency review sheet |
-| [Coding foundations](../../volume-02-time-space-complexity/index.md) | Where do I refresh a specific data structure or algorithm mechanic? | Focused implementation drills from the concept library |
+| [Coding foundations](../../coding-foundations/02-complexity/index.md) | Where do I refresh a specific data structure or algorithm mechanic? | Focused implementation drills from the concept library |
 
 ## Preparation roadmap
 
@@ -111,11 +111,11 @@ The theory pages explain contracts, invariants, proofs, and trade-offs. Canonica
     <h3>Linear and range state</h3>
     <p>Hashing, windows, two pointers, and signed prefix reasoning.</p>
     <ul class="example-list">
-      <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume09/HashingDemo.java">Frequency hashing</a></li>
-      <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume10/SlidingWindow.java">Unique variable window</a></li>
+      <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/codingfoundations/hashing/HashingDemo.java">Frequency hashing</a></li>
+      <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/codingfoundations/slidingwindow/SlidingWindow.java">Unique variable window</a></li>
       <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/problemsolving/MinimumSizeSubarraySum.java">Minimum threshold window</a></li>
-      <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume11/TwoPointers.java">Sorted two pointers</a></li>
-      <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume12/PrefixSum.java">Immutable prefix ranges</a></li>
+      <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/codingfoundations/twopointers/TwoPointers.java">Sorted two pointers</a></li>
+      <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/codingfoundations/prefixsum/PrefixSum.java">Immutable prefix ranges</a></li>
       <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/problemsolving/SubarraySumCount.java">Signed prefix plus hash</a></li>
     </ul>
   </section>
@@ -123,18 +123,18 @@ The theory pages explain contracts, invariants, proofs, and trade-offs. Canonica
     <h3>Ordered and monotone state</h3>
     <p>Boundary search, monotonic candidates, and deque behavior.</p>
     <ul class="example-list">
-      <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume13/BinarySearch.java">Lower-bound binary search</a></li>
+      <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/codingfoundations/binarysearch/BinarySearch.java">Lower-bound binary search</a></li>
       <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/problemsolving/MinimumShipCapacity.java">Binary search on answer</a></li>
-      <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume14/StackPatterns.java">Nested stack state</a></li>
+      <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/codingfoundations/stacks/StackPatterns.java">Nested stack state</a></li>
       <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/problemsolving/NextGreaterElement.java">Monotonic stack</a></li>
-      <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume15/QueuePatterns.java">Monotonic deque</a></li>
+      <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/codingfoundations/queues/QueuePatterns.java">Monotonic deque</a></li>
     </ul>
   </section>
   <section class="example-card">
     <h3>Graphs and connectivity</h3>
     <p>Frontiers, dependencies, weighted paths, and component state.</p>
     <ul class="example-list">
-      <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume18/GraphPatterns.java">Breadth-first traversal</a></li>
+      <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/codingfoundations/graphs/GraphPatterns.java">Breadth-first traversal</a></li>
       <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/problemsolving/CourseScheduleOrder.java">Topological ordering</a></li>
       <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/problemsolving/DijkstraShortestPath.java">Non-negative shortest paths</a></li>
       <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/problemsolving/DisjointSet.java">Union-find connectivity</a></li>
@@ -146,7 +146,7 @@ The theory pages explain contracts, invariants, proofs, and trade-offs. Canonica
     <ul class="example-list">
       <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/problemsolving/TopKFrequentElements.java">Top-k heap</a></li>
       <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/problemsolving/IntervalScheduling.java">Greedy interval scheduling</a></li>
-      <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume19/DpPatterns.java">Compressed dynamic programming</a></li>
+      <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/codingfoundations/dynamicprogramming/DpPatterns.java">Compressed dynamic programming</a></li>
       <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/problemsolving/CoinChange.java">Minimum-coin DP</a></li>
       <li><a href="../../../examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/problemsolving/UniquePermutations.java">Duplicate-safe backtracking</a></li>
     </ul>

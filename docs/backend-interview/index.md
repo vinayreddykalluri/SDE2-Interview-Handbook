@@ -1,6 +1,6 @@
 # SDE-2 Backend Interview Track
 
-This track extends the Java and data-structures volumes into the competencies expected from an SDE-2 backend engineer. It is organized by interview signal rather than technology brand: solve clearly, model maintainable code, design scalable services, reason about failure, and communicate ownership.
+This track extends the Java and data-structure modules into the competencies expected from an SDE-2 backend engineer. It is organized by interview signal rather than technology brand: solve clearly, model maintainable code, design scalable services, reason about failure, and communicate ownership.
 
 !!! info "Curriculum status"
     These pages are structured expansion contracts. Each page defines scope, interview drills, required artifacts, diagrams, and completion criteria so contributors can deepen one topic without fragmenting the learning path.

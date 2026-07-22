@@ -1,4 +1,4 @@
-.PHONY: bootstrap install doctor serve serve-web build-site build-pdf build-docx build-all validate validate-layout validate-web validate-code verify clean
+.PHONY: bootstrap install doctor serve serve-web build-site build-pdf build-docx build-all validate validate-layout validate-web validate-code validate-deployment verify clean
 
 SYSTEM_PYTHON ?= python3
 PYTHON ?= .venv/bin/python
@@ -38,6 +38,7 @@ validate:
 	$(PYTHON) scripts/validate_links.py
 	$(PYTHON) scripts/validate_java_examples.py
 	$(PYTHON) scripts/validate_web.py
+	$(PYTHON) scripts/validate_deployment.py
 
 validate-layout:
 	$(PYTHON) scripts/validate_repository_layout.py
@@ -47,6 +48,9 @@ validate-web:
 
 validate-code:
 	$(PYTHON) scripts/validate_java_examples.py
+
+validate-deployment:
+	$(PYTHON) scripts/validate_deployment.py
 
 verify: validate build-site
 

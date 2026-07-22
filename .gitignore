@@ -5,6 +5,7 @@ __pycache__/
 *.pyc
 *.class
 .venv/
+.vercel/
 .env
 
 # Build outputs (regenerate when needed)

@@ -1,6 +1,6 @@
 # Downloads and Printing
 
-The repository generates individual volume books and a combined handbook from the same Markdown used by the website.
+The repository generates individual module books and a combined handbook from the same Markdown used by the website.
 
 ## Download without a local toolchain
 
@@ -22,8 +22,8 @@ make build-all
 
 Outputs:
 
-- `output/pdf/` contains one PDF per volume.
-- `output/docx/` contains one DOCX per volume.
+- `output/pdf/` contains one PDF per module.
+- `output/docx/` contains one DOCX per module.
 - `output/combined/` contains the complete handbook in both formats.
 
 ## Print settings

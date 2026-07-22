@@ -1,5 +1,10 @@
 # Contributing
 
+## Start with the repository map
+
+Read [the repository structure guide](docs/community/repository-structure.md) before moving or adding files. Documentation, runnable code, the portal shell, build tooling, and generated output have separate ownership boundaries. The [project roadmap](ROADMAP.md) lists current contribution priorities.
+
+
 Contributions to explanations, diagrams, exercises, Java examples, automation, accessibility, and editorial quality are welcome.
 
 By participating, you agree to follow the [Code of Conduct](CODE_OF_CONDUCT.md).
@@ -26,7 +31,7 @@ Windows PowerShell users can activate the environment with `.venv\Scripts\Activa
 
 ## Documentation standards
 
-1. Put numbered chapters in the matching `docs/volume-XX-topic/` directory.
+1. Put numbered chapters in the matching `docs/coding-foundations/NN-topic/` directory.
 2. Use lowercase kebab-case filenames such as `02-breadth-first-search.md`.
 3. Start from `docs/chapter-template.md` and retain all required sections.
 4. Explain the invariant, trade-offs, failure modes, and complexity instead of only presenting a solution.

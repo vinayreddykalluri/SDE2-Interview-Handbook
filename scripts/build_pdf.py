@@ -14,7 +14,7 @@ OUTPUT = ROOT / "output"
 TEMPLATES = ROOT / "templates"
 SITE = ROOT / "site"
 
-VOLUME_DIRS = sorted(DOCS.glob("volume-*"), key=lambda p: p.name)
+MODULE_DIRS = sorted(DOCS.glob("coding-foundations/[0-9][0-9]-*"), key=lambda p: p.name)
 
 
 def resolve_pdf_engine() -> str:
@@ -54,20 +54,20 @@ def combine_markdown_files(paths: Iterable[Path], title: str) -> Path:
     return out
 
 
-def gather_volume_chapters(volume_dir: Path) -> List[Path]:
-    return sorted([p for p in volume_dir.glob("*.md") if p.name != "index.md"], key=lambda p: p.name)
+def gather_module_chapters(module_dir: Path) -> List[Path]:
+    return sorted([p for p in module_dir.glob("*.md") if p.name != "index.md"], key=lambda p: p.name)
 
 
-def build_volume_pdf(volume_dir: Path, keep: bool = False) -> Path:
-    vol_title = volume_dir.name.replace("-", " ").replace("volume", "Volume").title()
-    chapters = [volume_dir / "index.md", *gather_volume_chapters(volume_dir)]
+def build_module_pdf(module_dir: Path, keep: bool = False) -> Path:
+    module_title = "Module " + module_dir.name.replace("-", " ").title()
+    chapters = [module_dir / "index.md", *gather_module_chapters(module_dir)]
     exists = [p for p in chapters if p.exists()]
     if not exists:
-        raise RuntimeError(f"No chapters found in {volume_dir}")
+        raise RuntimeError(f"No chapters found in {module_dir}")
 
-    combined = combine_markdown_files(exists, vol_title)
+    combined = combine_markdown_files(exists, module_title)
 
-    output_pdf = OUTPUT / "pdf" / f"{volume_dir.name.replace('volume-', 'Volume-').replace('-', ' ').title().replace(' ', '-')}.pdf"
+    output_pdf = OUTPUT / "pdf" / f"{module_dir.name.replace('module-', 'Module-').replace('-', ' ').title().replace(' ', '-')}.pdf"
     output_pdf.parent.mkdir(parents=True, exist_ok=True)
 
     if shutil.which("pandoc") is None:
@@ -103,11 +103,11 @@ def build_volume_pdf(volume_dir: Path, keep: bool = False) -> Path:
 
 def build_combined_pdf() -> Path:
     vol_chapters: List[Path] = []
-    for v in VOLUME_DIRS:
+    for v in MODULE_DIRS:
         idx = v / "index.md"
         if idx.exists():
             vol_chapters.append(idx)
-            vol_chapters.extend([p for p in gather_volume_chapters(v) if p.exists()])
+            vol_chapters.extend([p for p in gather_module_chapters(v) if p.exists()])
     if not vol_chapters:
         raise RuntimeError("No markdown found to generate combined PDF")
 
@@ -149,10 +149,10 @@ def render_all() -> None:
     OUTPUT.joinpath("pdf").mkdir(parents=True, exist_ok=True)
     OUTPUT.joinpath("combined").mkdir(parents=True, exist_ok=True)
 
-    for volume in VOLUME_DIRS:
-        if not any(volume.glob("*.md")):
+    for module in MODULE_DIRS:
+        if not any(module.glob("*.md")):
             continue
-        build_volume_pdf(volume)
+        build_module_pdf(module)
 
     build_combined_pdf()
     print("PDF generation completed")
@@ -160,15 +160,15 @@ def render_all() -> None:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--volume", choices=[v.name for v in VOLUME_DIRS], help="Specific volume")
+    parser.add_argument("--module", choices=[v.name for v in MODULE_DIRS], help="Specific module")
     parser.add_argument("--keep", action="store_true", help="Keep temporary combined source")
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
-    if args.volume:
-        build_volume_pdf((DOCS / args.volume))
+    if args.module:
+        build_module_pdf((DOCS / "coding-foundations" / args.module))
     else:
         render_all()
 

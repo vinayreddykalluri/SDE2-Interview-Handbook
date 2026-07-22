@@ -17,7 +17,7 @@ The handbook supports three complementary workflows: guided reading, code practi
 Java implementations are maintained outside the documentation source so they can be compiled and tested independently.
 
 1. Open the [Code Library](examples/README.md).
-2. Choose the volume and pattern.
+2. Choose the module and pattern.
 3. Read the assumptions before the implementation.
 4. Trace at least one normal case and one edge case.
 5. Change the input and predict the result before running it.
@@ -62,7 +62,7 @@ Expected combined outputs:
 - `output/combined/SDE2-Interview-Handbook.pdf`
 - `output/combined/SDE2-Interview-Handbook.docx`
 
-Individual volume books are written to `output/pdf/` and `output/docx/`. You can also download generated artifacts from the GitHub Actions handbook workflow without installing the print toolchain.
+individual module books are written to `output/pdf/` and `output/docx/`. Remote artifacts are intentionally unavailable while GitHub Actions remain disabled; build and inspect the books locally.
 
 ## Recommended interview loop
 

@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "python3 -m pip install --disable-pip-version-check -r requirements-web.txt",
+  "buildCommand": "python3 scripts/build_site.py && python3 scripts/configure_deployment_urls.py",
+  "outputDirectory": "site"
+}

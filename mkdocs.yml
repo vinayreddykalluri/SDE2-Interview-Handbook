@@ -66,82 +66,83 @@ nav:
           - Advanced Review: backend-interview/10-practice/advanced-review.md
   - Coding Foundations:
       - Java and Runtime:
-          - Foundation Overview: volume-01-java-fundamentals/index.md
-          - Java Ecosystem and Execution: volume-01-java-fundamentals/01-java-ecosystem-execution-model.md
-          - JVM Architecture: volume-01-java-fundamentals/02-jvm-architecture.md
-          - Class Loading: volume-01-java-fundamentals/03-class-loader-subsystem.md
-          - Runtime Data Areas: volume-01-java-fundamentals/04-runtime-data-areas.md
-          - JIT and Execution Engine: volume-01-java-fundamentals/05-execution-engine-jit.md
-          - Garbage Collection: volume-01-java-fundamentals/06-garbage-collection.md
-          - Java Memory Model: volume-01-java-fundamentals/07-java-memory-model.md
-          - Primitive Types: volume-01-java-fundamentals/08-primitive-types.md
-          - Operators: volume-01-java-fundamentals/09-operators.md
-          - Control Flow: volume-01-java-fundamentals/10-control-flow.md
-          - Methods: volume-01-java-fundamentals/11-methods.md
-          - Arrays in Java: volume-01-java-fundamentals/12-arrays-java-perspective.md
-          - Strings in Java: volume-01-java-fundamentals/13-strings.md
-          - Wrapper Classes: volume-01-java-fundamentals/14-wrapper-classes.md
-          - Collections Overview: volume-01-java-fundamentals/15-collections-overview.md
-          - Java Interview Questions: volume-01-java-fundamentals/16-interview-questions.md
-          - Java Coding Exercises: volume-01-java-fundamentals/17-coding-exercises.md
-          - Java Revision Sheet: volume-01-java-fundamentals/18-revision-cheat-sheet.md
+          - Track Overview: coding-foundations/index.md
+          - Foundation Overview: coding-foundations/01-java-runtime/index.md
+          - Java Ecosystem and Execution: coding-foundations/01-java-runtime/01-java-ecosystem-execution-model.md
+          - JVM Architecture: coding-foundations/01-java-runtime/02-jvm-architecture.md
+          - Class Loading: coding-foundations/01-java-runtime/03-class-loader-subsystem.md
+          - Runtime Data Areas: coding-foundations/01-java-runtime/04-runtime-data-areas.md
+          - JIT and Execution Engine: coding-foundations/01-java-runtime/05-execution-engine-jit.md
+          - Garbage Collection: coding-foundations/01-java-runtime/06-garbage-collection.md
+          - Java Memory Model: coding-foundations/01-java-runtime/07-java-memory-model.md
+          - Primitive Types: coding-foundations/01-java-runtime/08-primitive-types.md
+          - Operators: coding-foundations/01-java-runtime/09-operators.md
+          - Control Flow: coding-foundations/01-java-runtime/10-control-flow.md
+          - Methods: coding-foundations/01-java-runtime/11-methods.md
+          - Arrays in Java: coding-foundations/01-java-runtime/12-arrays-java-perspective.md
+          - Strings in Java: coding-foundations/01-java-runtime/13-strings.md
+          - Wrapper Classes: coding-foundations/01-java-runtime/14-wrapper-classes.md
+          - Collections Overview: coding-foundations/01-java-runtime/15-collections-overview.md
+          - Java Interview Questions: coding-foundations/01-java-runtime/16-interview-questions.md
+          - Java Coding Exercises: coding-foundations/01-java-runtime/17-coding-exercises.md
+          - Java Revision Sheet: coding-foundations/01-java-runtime/18-revision-cheat-sheet.md
       - Reasoning Building Blocks:
           - Complexity Analysis:
-              - Overview: volume-02-time-space-complexity/index.md
-              - Time and Space Analysis: volume-02-time-space-complexity/01-time-space-analysis.md
+              - Overview: coding-foundations/02-complexity/index.md
+              - Time and Space Analysis: coding-foundations/02-complexity/01-time-space-analysis.md
           - Math Foundations:
-              - Overview: volume-03-math-fundamentals/index.md
-              - Core Math: volume-03-math-fundamentals/01-math-foundations.md
+              - Overview: coding-foundations/03-math/index.md
+              - Core Math: coding-foundations/03-math/01-math-foundations.md
           - Loop Reasoning:
-              - Overview: volume-04-loop-mastery/index.md
-              - Loop Patterns and Pitfalls: volume-04-loop-mastery/01-loop-patterns.md
+              - Overview: coding-foundations/04-loop-reasoning/index.md
+              - Loop Patterns and Pitfalls: coding-foundations/04-loop-reasoning/01-loop-patterns.md
           - Index Calculations:
-              - Overview: volume-05-index-calculations/index.md
-              - Indexing in Practice: volume-05-index-calculations/01-indexing-in-practice.md
+              - Overview: coding-foundations/05-indexing/index.md
+              - Indexing in Practice: coding-foundations/05-indexing/01-indexing-in-practice.md
           - Bit Manipulation:
-              - Overview: volume-06-bit-manipulation/index.md
-              - Bitwise Cookbook: volume-06-bit-manipulation/01-bitwise-cookbook.md
+              - Overview: coding-foundations/06-bit-manipulation/index.md
+              - Bitwise Cookbook: coding-foundations/06-bit-manipulation/01-bitwise-cookbook.md
       - Linear Data Patterns:
           - Arrays:
-              - Overview: volume-07-arrays/index.md
-              - Array Mental Model: volume-07-arrays/01-array-mental-model.md
+              - Overview: coding-foundations/07-arrays/index.md
+              - Array Mental Model: coding-foundations/07-arrays/01-array-mental-model.md
           - Strings:
-              - Overview: volume-08-strings/index.md
-              - String Internals and Patterns: volume-08-strings/01-string-internals-and-patterns.md
+              - Overview: coding-foundations/08-strings/index.md
+              - String Internals and Patterns: coding-foundations/08-strings/01-string-internals-and-patterns.md
           - Hashing:
-              - Overview: volume-09-hashing/index.md
-              - Hashing Intuition and Collisions: volume-09-hashing/01-hashing-intuition-and-collision-strategy.md
+              - Overview: coding-foundations/09-hashing/index.md
+              - Hashing Intuition and Collisions: coding-foundations/09-hashing/01-hashing-intuition-and-collision-strategy.md
           - Sliding Window:
-              - Overview: volume-10-sliding-window/index.md
-              - Sliding Window Patterns: volume-10-sliding-window/01-sliding-window-patterns.md
+              - Overview: coding-foundations/10-sliding-window/index.md
+              - Sliding Window Patterns: coding-foundations/10-sliding-window/01-sliding-window-patterns.md
           - Two Pointers:
-              - Overview: volume-11-two-pointers/index.md
-              - Two-Pointer Patterns: volume-11-two-pointers/01-two-pointers-patterns.md
+              - Overview: coding-foundations/11-two-pointers/index.md
+              - Two-Pointer Patterns: coding-foundations/11-two-pointers/01-two-pointers-patterns.md
           - Prefix Sum:
-              - Overview: volume-12-prefix-sum/index.md
-              - Prefix Sum and Difference: volume-12-prefix-sum/01-prefix-sum-and-difference.md
+              - Overview: coding-foundations/12-prefix-sum/index.md
+              - Prefix Sum and Difference: coding-foundations/12-prefix-sum/01-prefix-sum-and-difference.md
           - Binary Search:
-              - Overview: volume-13-binary-search/index.md
-              - Binary Search Framework: volume-13-binary-search/01-binary-search-framework.md
+              - Overview: coding-foundations/13-binary-search/index.md
+              - Binary Search Framework: coding-foundations/13-binary-search/01-binary-search-framework.md
       - Structural Data Patterns:
           - Stacks and Recursion:
-              - Overview: volume-14-stack/index.md
-              - Stack and Recursion Patterns: volume-14-stack/01-stack-and-recursion.md
+              - Overview: coding-foundations/14-stacks-recursion/index.md
+              - Stack and Recursion Patterns: coding-foundations/14-stacks-recursion/01-stack-and-recursion.md
           - Queues and Deques:
-              - Overview: volume-15-queue/index.md
-              - Queues, Deques, and Buffers: volume-15-queue/01-queues-deques-and-buffers.md
+              - Overview: coding-foundations/15-queues-deques/index.md
+              - Queues, Deques, and Buffers: coding-foundations/15-queues-deques/01-queues-deques-and-buffers.md
           - Linked Lists:
-              - Overview: volume-16-linked-list/index.md
-              - Linked List Patterns: volume-16-linked-list/01-linked-list-patterns.md
+              - Overview: coding-foundations/16-linked-lists/index.md
+              - Linked List Patterns: coding-foundations/16-linked-lists/01-linked-list-patterns.md
           - Trees:
-              - Overview: volume-17-trees/index.md
-              - Trees and Recursive Structure: volume-17-trees/01-trees-and-recursive-structure.md
+              - Overview: coding-foundations/17-trees/index.md
+              - Trees and Recursive Structure: coding-foundations/17-trees/01-trees-and-recursive-structure.md
           - Graphs:
-              - Overview: volume-18-graphs/index.md
-              - Graphs and Traversal: volume-18-graphs/01-graphs-and-traversal.md
+              - Overview: coding-foundations/18-graphs/index.md
+              - Graphs and Traversal: coding-foundations/18-graphs/01-graphs-and-traversal.md
       - State Optimization:
-          - Dynamic Programming Overview: volume-19-dynamic-programming/index.md
-          - DP State Design: volume-19-dynamic-programming/01-dp-state-design.md
+          - Dynamic Programming Overview: coding-foundations/19-dynamic-programming/index.md
+          - DP State Design: coding-foundations/19-dynamic-programming/01-dp-state-design.md
   - Practice and Resources:
       - Review Log: backend-interview/review-log.md
       - Code Library: examples/README.md
@@ -150,6 +151,7 @@ nav:
       - Open Source and Licensing: community/open-source.md
       - Contributor Guide: community/contributing.md
       - Architecture: community/architecture.md
+      - Repository Structure: community/repository-structure.md
       - Quality Standards: community/code-quality.md
 
 theme:

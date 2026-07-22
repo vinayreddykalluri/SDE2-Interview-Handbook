@@ -32,9 +32,9 @@ examples/java/
 └── src/
     ├── main/java/io/github/vinayreddykalluri/interviewhandbook/
     │   ├── problemsolving/
-    │   ├── volume01/
-    │   ├── volume02/
-    │   └── ... volume19/
+    │   ├── javafundamentals/
+    │   ├── complexity/
+    │   └── ... dynamicprogramming/
     └── test/java/io/github/vinayreddykalluri/interviewhandbook/tests/
         └── ExampleSmokeTest.java
 ```
@@ -62,9 +62,9 @@ The full validator is the preferred route. To experiment with an individual main
 ```bash
 mkdir -p /tmp/sde2-handbook-classes
 javac --release 17 -d /tmp/sde2-handbook-classes \
-  examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/volume01/PrimitiveDemo.java
+  examples/java/src/main/java/io/github/vinayreddykalluri/interviewhandbook/codingfoundations/javafundamentals/PrimitiveDemo.java
 java -cp /tmp/sde2-handbook-classes \
-  io.github.vinayreddykalluri.interviewhandbook.volume01.PrimitiveDemo
+  io.github.vinayreddykalluri.interviewhandbook.codingfoundations.javafundamentals.PrimitiveDemo
 ```
 
 Use the actual semantic filename and fully qualified class name shown in the source tree.

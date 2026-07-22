@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate web metadata, navigation assets, docs, and Java source alignment."""
+"""Validate portal metadata, assets, documentation, and Java source alignment."""
 
 from __future__ import annotations
 
@@ -28,9 +28,10 @@ JAVA = (
     / "vinayreddykalluri"
     / "interviewhandbook"
 )
-VOLUMES_FILE = WEB / "content" / "volumes.json"
+MODULES_FILE = WEB / "content" / "coding-foundations.json"
 NUMBERED_CHAPTER = re.compile(r"^\d{2}-.+\.md$")
 ROOT_RELATIVE_REFERENCE = re.compile(r"(?:href|src|fetch)\s*\(?(?:=\s*)?[\"']/")
+SAFE_CODE_PACKAGE = re.compile(r"^codingfoundations/[a-z][a-z0-9]*$")
 
 
 class AssetCollector(HTMLParser):
@@ -53,9 +54,8 @@ def fail(errors: list[str], message: str) -> None:
 
 
 def validate_local_assets(errors: list[str]) -> None:
-    html_file = WEB / "index.html"
     parser = AssetCollector()
-    parser.feed(html_file.read_text(encoding="utf-8"))
+    parser.feed((WEB / "index.html").read_text(encoding="utf-8"))
 
     for reference in parser.references:
         parsed = urlsplit(reference)
@@ -73,74 +73,77 @@ def validate_local_assets(errors: list[str]) -> None:
     for source in [WEB / "index.html", WEB / "404.html", WEB / "assets" / "app.js"]:
         text = source.read_text(encoding="utf-8")
         if ROOT_RELATIVE_REFERENCE.search(text):
-            fail(errors, f"Root-relative URL breaks GitHub project Pages: {source.relative_to(ROOT)}")
+            fail(errors, f"Root-relative URL breaks project Pages: {source.relative_to(ROOT)}")
 
 
-def validate_volumes(errors: list[str]) -> None:
+def validate_modules(errors: list[str]) -> None:
     try:
-        volumes = json.loads(VOLUMES_FILE.read_text(encoding="utf-8"))
+        modules = json.loads(MODULES_FILE.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as error:
-        fail(errors, f"Cannot read {VOLUMES_FILE.relative_to(ROOT)}: {error}")
+        fail(errors, f"Cannot read {MODULES_FILE.relative_to(ROOT)}: {error}")
         return
 
-    if not isinstance(volumes, list):
-        fail(errors, "web/content/volumes.json must contain a JSON array")
+    if not isinstance(modules, list):
+        fail(errors, "web/content/coding-foundations.json must contain a JSON array")
         return
 
     expected_ids = [f"{number:02d}" for number in range(1, 20)]
-    ids = [str(volume.get("id", "")) for volume in volumes]
-    slugs = [str(volume.get("slug", "")) for volume in volumes]
+    ids = [str(module.get("id", "")) for module in modules]
+    slugs = [str(module.get("slug", "")) for module in modules]
+    code_packages = [str(module.get("codePackage", "")) for module in modules]
     if ids != expected_ids:
-        fail(errors, f"Volume IDs must be ordered 01-19; found {ids}")
+        fail(errors, f"Module IDs must be ordered 01-19; found {ids}")
     if len(slugs) != len(set(slugs)):
-        fail(errors, "Volume slugs must be unique")
+        fail(errors, "Module slugs must be unique")
+    if len(code_packages) != len(set(code_packages)):
+        fail(errors, "Module Java packages must be unique")
 
     required_fields = {
-        "id",
-        "roman",
-        "title",
-        "slug",
-        "stage",
-        "level",
-        "duration",
-        "chapters",
-        "codeExamples",
-        "summary",
-        "keywords",
+        "id", "roman", "title", "slug", "codePackage", "stage", "level",
+        "duration", "chapters", "codeExamples", "summary", "keywords",
     }
     metadata_chapters = 0
     metadata_examples = 0
     actual_chapters = 0
     actual_examples = 0
 
-    for volume in volumes:
-        missing_fields = required_fields - set(volume)
-        volume_id = str(volume.get("id", "??"))
+    for module in modules:
+        missing_fields = required_fields - set(module)
+        module_id = str(module.get("id", "??"))
         if missing_fields:
-            fail(errors, f"Volume {volume_id} is missing fields: {sorted(missing_fields)}")
+            fail(errors, f"Module {module_id} is missing fields: {sorted(missing_fields)}")
             continue
 
-        metadata_chapters += int(volume["chapters"])
-        metadata_examples += int(volume["codeExamples"])
+        slug = str(module["slug"])
+        code_package = str(module["codePackage"])
+        if not slug.startswith(f"coding-foundations/{module_id}-"):
+            fail(errors, f"Module {module_id} has noncanonical slug: {slug}")
+        if not SAFE_CODE_PACKAGE.fullmatch(code_package):
+            fail(errors, f"Module {module_id} has unsafe Java package path: {code_package}")
 
-        docs_dir = DOCS / str(volume["slug"])
+        metadata_chapters += int(module["chapters"])
+        metadata_examples += int(module["codeExamples"])
+
+        docs_dir = DOCS / slug
         chapter_count = sum(
-            1 for path in docs_dir.glob("*.md") if NUMBERED_CHAPTER.match(path.name)
+            1 for path in docs_dir.glob("*.md") if NUMBERED_CHAPTER.fullmatch(path.name)
         )
         actual_chapters += chapter_count
-        if chapter_count != int(volume["chapters"]):
+        if chapter_count != int(module["chapters"]):
             fail(
                 errors,
-                f"Volume {volume_id} metadata says {volume['chapters']} chapters; found {chapter_count}",
+                f"Module {module_id} metadata says {module['chapters']} chapters; "
+                f"found {chapter_count}",
             )
 
-        java_dir = JAVA / f"volume{volume_id}"
+        java_dir = JAVA / code_package
         example_count = sum(1 for _ in java_dir.glob("*.java"))
         actual_examples += example_count
-        if example_count != int(volume["codeExamples"]):
+        if example_count != int(module["codeExamples"]):
             fail(
                 errors,
-                f"Volume {volume_id} metadata says {volume['codeExamples']} examples; found {example_count}",
+                f"Module {module_id} metadata says {module['codeExamples']} examples; "
+                f"found {example_count}",
             )
 
     if metadata_chapters != 36 or actual_chapters != 36:
@@ -175,7 +178,7 @@ def main() -> int:
         WEB / ".nojekyll",
         WEB / "assets" / "styles.css",
         WEB / "assets" / "app.js",
-        VOLUMES_FILE,
+        MODULES_FILE,
     ]
     for path in required_files:
         if not path.is_file():
@@ -187,7 +190,7 @@ def main() -> int:
         return 1
 
     validate_local_assets(errors)
-    validate_volumes(errors)
+    validate_modules(errors)
     validate_javascript(errors)
 
     if errors:
@@ -195,7 +198,7 @@ def main() -> int:
             print(f"ERROR: {error}", file=sys.stderr)
         return 1
 
-    print("Web validation passed: 19 volumes, 36 chapters, 66 Java examples")
+    print("Web validation passed: 19 modules, 36 chapters, 66 foundation Java examples")
     return 0
 
 

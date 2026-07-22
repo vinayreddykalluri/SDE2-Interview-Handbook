@@ -12,7 +12,7 @@ body:
         - Java validation
         - PDF generation
         - DOCX generation
-        - GitHub Actions
+        - Local build or disabled workflow definition
         - GitHub Pages
     validations:
       required: true

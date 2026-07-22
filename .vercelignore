@@ -1,0 +1,11 @@
+.git/
+.github/workflows-disabled/
+.venv/
+examples/
+output/
+site/
+templates/
+__pycache__/
+*.class
+*.docx
+*.pdf
