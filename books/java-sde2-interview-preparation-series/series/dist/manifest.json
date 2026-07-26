@@ -1,0 +1,267 @@
+{
+  "series": "Java SDE-2 Interview Preparation Series",
+  "author": "Vinay Reddy Kalluri",
+  "release_date": "2026-07-25",
+  "public_stages": 18,
+  "physical_volumes": 28,
+  "volumes": [
+    {
+      "page_count": 198,
+      "sha256": "d036948d8f076451eaa8aa507f8f5bf44e53c32c4c4336a5f40cc8898c1f869a",
+      "bytes": 4145324,
+      "id": "03",
+      "stage": "3",
+      "title": "Java Foundations for Problem Solving",
+      "file": "Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf"
+    },
+    {
+      "page_count": 79,
+      "sha256": "b371cc5e3cd29a4eb09b6ecca2a655e7513cebc662cd5c9b770e4b2682048aed",
+      "bytes": 3837739,
+      "id": "02",
+      "stage": "2",
+      "title": "Time and Space Complexity for Java Interviews",
+      "file": "Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf"
+    },
+    {
+      "page_count": 125,
+      "sha256": "8a23bb3c8f1cf34b3fedad591750ad5e0550f543fa95e433ede0c2fbe7917815",
+      "bytes": 6248979,
+      "id": "01",
+      "stage": "1",
+      "title": "Number Systems and Math Foundations for DSA Interviews",
+      "file": "Java-SDE2-DSA-01-Number-Systems-and-Math-Foundations.pdf"
+    },
+    {
+      "page_count": 137,
+      "sha256": "143080589afcefd67682c9d64b4c9c91c6688110184bdbe63779baef75ad2906",
+      "bytes": 3973634,
+      "id": "01B",
+      "stage": "1",
+      "title": "Number Systems Interview Patterns and Rapid Revision",
+      "file": "Java-SDE2-DSA-01B-Number-Systems-Interview-Workbook.pdf"
+    },
+    {
+      "page_count": 109,
+      "sha256": "bb05810581843a230158ff47a1d1d607b862c9c086243e9f47ce0035f1ea0908",
+      "bytes": 3901568,
+      "id": "04",
+      "stage": "4",
+      "title": "Bit Manipulation in Java",
+      "file": "Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf"
+    },
+    {
+      "page_count": 95,
+      "sha256": "c3013c223e853be621a76e0a86eae554061044b6a11eace99d72f6d62a748eee",
+      "bytes": 4982020,
+      "id": "05",
+      "stage": "5",
+      "title": "Loop Mastery, Patterns, and Index Calculations",
+      "file": "Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf"
+    },
+    {
+      "page_count": 40,
+      "sha256": "2cd17c14ee642bc3292951cec8a4a1141409fbaa93ad9c600943931d796fea5a",
+      "bytes": 3731028,
+      "id": "06",
+      "stage": "6",
+      "title": "Arrays and Array Problem-Solving Patterns",
+      "file": "Java-SDE2-DSA-06-Arrays-and-Array-Patterns.pdf"
+    },
+    {
+      "page_count": 32,
+      "sha256": "903ed78c23320d55218de127103a7bd3516b6e03c47a888bfce08d755dbc6ad8",
+      "bytes": 3709884,
+      "id": "07",
+      "stage": "7",
+      "title": "Strings and String Problem-Solving Patterns",
+      "file": "Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf"
+    },
+    {
+      "page_count": 43,
+      "sha256": "8b453597500df4eef891c4b55445bc885e8c15a59ede3b8e436a5fb8f96df153",
+      "bytes": 3741882,
+      "id": "08",
+      "stage": "8",
+      "title": "Hashing: Maps, Sets, Frequency, and Prefix State",
+      "file": "Java-SDE2-DSA-08-Hashing-Maps-Sets-and-Prefix-State.pdf"
+    },
+    {
+      "page_count": 23,
+      "sha256": "d0f97c54fb5a7c74081a9da3e28e05996197f171dee1ba9c7a2abc021bd4451f",
+      "bytes": 3682010,
+      "id": "09",
+      "stage": "9",
+      "title": "Recursion and Backtracking in Java",
+      "file": "Java-SDE2-DSA-09-Recursion-and-Backtracking.pdf"
+    },
+    {
+      "page_count": 24,
+      "sha256": "6bf23c970114a4b10e8713e413881c447a4c4b54035283760fa0d1f3159dfd4d",
+      "bytes": 3680720,
+      "id": "10",
+      "stage": "10",
+      "title": "Linked Lists: Pointer Reasoning and Mutation",
+      "file": "Java-SDE2-DSA-10-Linked-Lists.pdf"
+    },
+    {
+      "page_count": 23,
+      "sha256": "152a294f2ad77b0bcc43dc73e4e50f7aaa39acafc20e65c38674347ecea49bd3",
+      "bytes": 3682382,
+      "id": "11",
+      "stage": "11",
+      "title": "Stacks, Queues, Deques, and Monotonic Patterns",
+      "file": "Java-SDE2-DSA-11-Stacks-Queues-Deques-and-Monotonic-Patterns.pdf"
+    },
+    {
+      "page_count": 22,
+      "sha256": "936160ee561259c8dd79e29b81c45d224a5d8245849dfe64a12e636484e6b1eb",
+      "bytes": 3680793,
+      "id": "12",
+      "stage": "12",
+      "title": "Binary Search: Bounds, Answers, and Invariants",
+      "file": "Java-SDE2-DSA-12-Binary-Search.pdf"
+    },
+    {
+      "page_count": 25,
+      "sha256": "d8db4f1923ea0e165108d648efe50ddcf633d803085970185c138afb797b5812",
+      "bytes": 3685409,
+      "id": "13",
+      "stage": "13",
+      "title": "Trees, Binary Search Trees, and Tries",
+      "file": "Java-SDE2-DSA-13-Trees-BSTs-and-Tries.pdf"
+    },
+    {
+      "page_count": 24,
+      "sha256": "7a9a856e7552a89baf65051fe72ad5891357767a99181a45af46a204e84b4604",
+      "bytes": 3683324,
+      "id": "14",
+      "stage": "14",
+      "title": "Heaps, Priority Queues, Selection, and Top-K",
+      "file": "Java-SDE2-DSA-14-Heaps-Priority-Queues-and-Top-K.pdf"
+    },
+    {
+      "page_count": 32,
+      "sha256": "892b318784730b95841a6001c9277e02ff13fa1c833404ea3e77d75ca1088e72",
+      "bytes": 3697427,
+      "id": "15",
+      "stage": "15",
+      "title": "Graphs: Traversal, Ordering, Paths, and Union-Find",
+      "file": "Java-SDE2-DSA-15-Graphs.pdf"
+    },
+    {
+      "page_count": 27,
+      "sha256": "e65f45cee9fadc5c6024bf3cae2585f542fc76c07f548e922510886e91bd7d64",
+      "bytes": 3690099,
+      "id": "16",
+      "stage": "16",
+      "title": "Greedy Algorithms: Recognition, Proofs, and Scheduling",
+      "file": "Java-SDE2-DSA-16-Greedy-Algorithms.pdf"
+    },
+    {
+      "page_count": 31,
+      "sha256": "0ff3521b50a2ac7bedf4e9bebc67a8b525f19419e95bea11b51896bda712d4d1",
+      "bytes": 3697665,
+      "id": "17",
+      "stage": "17",
+      "title": "Dynamic Programming: State, Transitions, and Optimization",
+      "file": "Java-SDE2-DSA-17-Dynamic-Programming.pdf"
+    },
+    {
+      "page_count": 84,
+      "sha256": "2399503851fa75bf780c8766cd09b623d13a7af322efd0aa6f19dd9cfdc3aa78",
+      "bytes": 4468813,
+      "id": "18A",
+      "stage": "18",
+      "title": "Advanced Java A: JVM and Execution",
+      "file": "Java-SDE2-ADV-18A-JVM-and-Execution.pdf"
+    },
+    {
+      "page_count": 93,
+      "sha256": "49f91f0cb7fe5df21132687096274431275855a614107ef7d825bd352e74d0f7",
+      "bytes": 3900404,
+      "id": "18B",
+      "stage": "18",
+      "title": "Advanced Java B: Language, OOP, and Modern Java",
+      "file": "Java-SDE2-ADV-18B-Language-OOP-and-Modern-Java.pdf"
+    },
+    {
+      "page_count": 95,
+      "sha256": "07186f74889d20ffe0bdc73e81ec3e78240d6915d9407a4def6eb8b902f95835",
+      "bytes": 4128814,
+      "id": "18C",
+      "stage": "18",
+      "title": "Advanced Java C: Collections, Streams, and I/O",
+      "file": "Java-SDE2-ADV-18C-Collections-Streams-and-IO.pdf"
+    },
+    {
+      "page_count": 69,
+      "sha256": "371341508b2fd6ff8acc137e47c4750090468d90a8445153501ff4a5b3e25109",
+      "bytes": 4131938,
+      "id": "18D",
+      "stage": "18",
+      "title": "Advanced Java D: Concurrency and the Memory Model",
+      "file": "Java-SDE2-ADV-18D-Concurrency-and-Memory-Model.pdf"
+    },
+    {
+      "page_count": 47,
+      "sha256": "733793d6f6bb0ce40c3afd4b0e7fe1564bcc43095882b7a05b6bfb2921df84ea",
+      "bytes": 3755159,
+      "id": "18E",
+      "stage": "18",
+      "title": "Advanced Java E: Performance, Diagnostics, and GC Incidents",
+      "file": "Java-SDE2-ADV-18E-Performance-Diagnostics-and-GC.pdf"
+    },
+    {
+      "page_count": 49,
+      "sha256": "474a415eed6ccbda7bfe746429b6236504161760408f49fa081be6ad9d76d738",
+      "bytes": 3767598,
+      "id": "18F",
+      "stage": "18",
+      "title": "Advanced Java F: Design, Backend, Testing, and Security",
+      "file": "Java-SDE2-ADV-18F-Design-Backend-Testing-and-Security.pdf"
+    },
+    {
+      "page_count": 95,
+      "sha256": "bd5d1f76ce3df739b2edb0085bb197e4a1b5f2f91ede25a7f897b4f642a56ed2",
+      "bytes": 4004648,
+      "id": "18G",
+      "stage": "18",
+      "title": "Advanced Java G: Question Bank, Study Plan, and Reference",
+      "file": "Java-SDE2-ADV-18G-Question-Bank-Study-Plan-and-Reference.pdf"
+    },
+    {
+      "page_count": 67,
+      "sha256": "61368da29f86d63e05e445f65b3e38a4bcfadc4bc8130c3a3150dcd33dd16f89",
+      "bytes": 3829630,
+      "id": "18H",
+      "stage": "18",
+      "title": "Advanced Java H: Spring Boot and REST APIs",
+      "file": "Java-SDE2-ADV-18H-Spring-Boot-and-REST.pdf"
+    },
+    {
+      "page_count": 64,
+      "sha256": "f70d25336792d68d4d9a38cb3910f2b950ee097ed2087804142b7c6d7829a365",
+      "bytes": 3825459,
+      "id": "18I",
+      "stage": "18",
+      "title": "Advanced Java I: Persistence, SQL, JPA, and Caching",
+      "file": "Java-SDE2-ADV-18I-Persistence-SQL-and-Caching.pdf"
+    },
+    {
+      "page_count": 71,
+      "sha256": "b77aaffe432bb561efa48d7538125826d93bd340a10939c81101031e3ffe5018",
+      "bytes": 3841354,
+      "id": "18J",
+      "stage": "18",
+      "title": "Advanced Java J: Distributed Systems and System Design",
+      "file": "Java-SDE2-ADV-18J-Distributed-Systems-and-System-Design.pdf"
+    }
+  ],
+  "index": {
+    "file": "Java-SDE2-Interview-Preparation-Series-Index.pdf",
+    "page_count": 13,
+    "sha256": "3c6232f7570623717dd4b3f2be61d8788664fcd5d2c7fe89b83f594864be5883",
+    "bytes": 3640460
+  }
+}

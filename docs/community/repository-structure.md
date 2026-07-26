@@ -26,6 +26,13 @@ examples/
         |   +-- codingfoundations/<topic>/
         +-- test/java/
 
+books/
++-- java-sde2-interview-preparation-series/
+    |-- series/volumes/        Focused canonical sources and Java companions
+    |-- series/dist/           Versioned individual PDFs and release manifest
+    |-- book/                  Master-book chapters and appendices
+    +-- scripts/               Book-specific build and validation tooling
+
 web/
 |-- assets/
 |-- content/
@@ -45,6 +52,7 @@ web/
 | Build behavior | `scripts/` | `Makefile` and local-development documentation |
 | Hosted static delivery | `vercel.json` and `DEPLOYMENT.md` | Web requirements and deployment validation |
 | Printable styling | `templates/` | Local PDF and DOCX inspection |
+| Published book content or release PDF | `books/java-sde2-interview-preparation-series/` | Book audit/coverage report, companion code, and affected PDF |
 | Contribution policy | Root community files or `.github/` | Relevant community page |
 
 ## Naming Rules
@@ -55,7 +63,7 @@ web/
 - Markdown chapter files use `NN-descriptive-topic.md`; every module has `index.md`.
 - Portal metadata uses the documentation path as `slug` and the Java source path as `codePackage`.
 - Assets use descriptive kebab-case names and live near the documentation system that owns them.
-- Generated `site/`, `output/`, `.venv/`, `__pycache__/`, `*.class`, and editor artifacts remain untracked.
+- Generated `site/`, root `output/`, `.venv/`, `__pycache__/`, `*.class`, and editor artifacts remain untracked. The PDFs in the published book series' `series/dist/` directory are intentional versioned release artifacts.
 
 ## Synchronization Contract
 

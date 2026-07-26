@@ -7,6 +7,8 @@ Read [the repository structure guide](docs/community/repository-structure.md) be
 
 Contributions to explanations, diagrams, exercises, Java examples, automation, accessibility, and editorial quality are welcome.
 
+The independently navigable PDF series and its canonical sources live under [`books/java-sde2-interview-preparation-series/`](books/java-sde2-interview-preparation-series/). Book contributions should improve an existing canonical source rather than create a competing copy.
+
 By participating, you agree to follow the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Choose the right contribution path
@@ -39,6 +41,15 @@ Windows PowerShell users can activate the environment with `.venv\Scripts\Activa
 6. Link to canonical source under `examples/java/src/main/java/` instead of embedding large implementations in prose.
 7. Add attribution for material adapted from another source and ensure its license is compatible.
 
+## Published book standards
+
+- Preserve the existing Markdown, Java 21, diagram, and PDF publishing system.
+- Teach prerequisites before dependent interview patterns.
+- Keep valid complete Java examples compiling and isolate intentionally invalid snippets.
+- Update the affected audit, coverage, validation, changelog, or build evidence in proportion to the change.
+- Rebuild and inspect affected PDFs when prose, code, tables, diagrams, covers, links, or navigation change.
+- Add publication-level individual credit to [AUTHORS.md](AUTHORS.md) when the contribution qualifies.
+
 ## Java example standards
 
 - Target Java 17 language features unless the chapter explicitly compares Java 8, 17, and 21.
@@ -69,6 +80,7 @@ make build-all
 - Include screenshots for visual site changes.
 - Identify any generated artifact that was manually inspected.
 - Do not commit `site/`, `output/`, virtual environments, IDE state, or secrets.
+- The versioned PDFs under `books/java-sde2-interview-preparation-series/series/dist/` and the master book PDF are intentional release artifacts, not disposable root build output.
 
 ## Review criteria
 

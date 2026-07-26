@@ -22,7 +22,7 @@
     "stage": "Runtime Foundations",
     "level": "Core",
     "duration": "2 hours",
-    "chapters": 1,
+    "chapters": 2,
     "codeExamples": 1,
     "summary": "Analyze operation growth, auxiliary memory, recursion depth, amortized cost, and the practical meaning behind asymptotic notation.",
     "keywords": ["big o", "complexity", "amortized", "recursion", "space"]
@@ -36,7 +36,7 @@
     "stage": "Runtime Foundations",
     "level": "Core",
     "duration": "2 hours",
-    "chapters": 1,
+    "chapters": 2,
     "codeExamples": 1,
     "summary": "Use divisibility, Euclid's algorithm, combinatorics, modular reasoning, and overflow-safe arithmetic in coding problems.",
     "keywords": ["gcd", "combinatorics", "modulo", "prime", "overflow"]
@@ -50,7 +50,7 @@
     "stage": "Runtime Foundations",
     "level": "Core",
     "duration": "90 minutes",
-    "chapters": 1,
+    "chapters": 2,
     "codeExamples": 1,
     "summary": "Reason about initialization, termination, invariants, nested loops, early exit, and off-by-one failures.",
     "keywords": ["loop", "invariant", "termination", "off by one", "iteration"]
@@ -64,7 +64,7 @@
     "stage": "Runtime Foundations",
     "level": "Core",
     "duration": "90 minutes",
-    "chapters": 1,
+    "chapters": 2,
     "codeExamples": 1,
     "summary": "Control inclusive and half-open ranges, midpoint arithmetic, flattened coordinates, and boundary-safe traversal.",
     "keywords": ["index", "range", "boundary", "midpoint", "matrix"]
@@ -78,7 +78,7 @@
     "stage": "Runtime Foundations",
     "level": "Essential",
     "duration": "2 hours",
-    "chapters": 1,
+    "chapters": 2,
     "codeExamples": 1,
     "summary": "Understand masks, shifts, signed representation, bit toggles, subset encoding, and power-of-two reasoning.",
     "keywords": ["bits", "mask", "xor", "shift", "binary"]
@@ -92,8 +92,8 @@
     "stage": "Linear Data Patterns",
     "level": "Essential",
     "duration": "3 hours",
-    "chapters": 1,
-    "codeExamples": 1,
+    "chapters": 5,
+    "codeExamples": 4,
     "summary": "Use contiguous storage, in-place transforms, compaction, rotations, partitions, and cache-aware iteration.",
     "keywords": ["array", "in place", "compaction", "partition", "rotation"]
   },
@@ -106,7 +106,7 @@
     "stage": "Linear Data Patterns",
     "level": "Essential",
     "duration": "3 hours",
-    "chapters": 1,
+    "chapters": 2,
     "codeExamples": 1,
     "summary": "Handle immutable text, character representation, builders, tokenization, normalization, and pattern-oriented scans.",
     "keywords": ["string", "unicode", "stringbuilder", "token", "palindrome"]
@@ -120,7 +120,7 @@
     "stage": "Linear Data Patterns",
     "level": "Essential",
     "duration": "3 hours",
-    "chapters": 1,
+    "chapters": 2,
     "codeExamples": 1,
     "summary": "Model hash distribution, collision handling, equality contracts, frequency maps, sets, and deterministic tie-breaking.",
     "keywords": ["hashmap", "hashset", "collision", "frequency", "equality"]
@@ -134,7 +134,7 @@
     "stage": "Linear Data Patterns",
     "level": "Pattern",
     "duration": "3 hours",
-    "chapters": 1,
+    "chapters": 2,
     "codeExamples": 1,
     "summary": "Derive fixed and variable windows using expand-shrink invariants, frequency state, and monotonic progress.",
     "keywords": ["sliding window", "substring", "subarray", "expand", "shrink"]
@@ -148,7 +148,7 @@
     "stage": "Linear Data Patterns",
     "level": "Pattern",
     "duration": "2 hours",
-    "chapters": 1,
+    "chapters": 2,
     "codeExamples": 1,
     "summary": "Use sorted elimination, opposing scans, read-write pointers, and fast-slow movement without losing correctness.",
     "keywords": ["two pointers", "sorted", "pair", "fast slow", "read write"]
@@ -162,7 +162,7 @@
     "stage": "Linear Data Patterns",
     "level": "Pattern",
     "duration": "2 hours",
-    "chapters": 1,
+    "chapters": 2,
     "codeExamples": 1,
     "summary": "Trade preprocessing for constant-time range queries using prefixes, differences, and coordinate-aware accumulation.",
     "keywords": ["prefix sum", "difference array", "range query", "subarray", "preprocessing"]
@@ -176,7 +176,7 @@
     "stage": "Linear Data Patterns",
     "level": "Pattern",
     "duration": "3 hours",
-    "chapters": 1,
+    "chapters": 2,
     "codeExamples": 1,
     "summary": "Write search from an explicit interval invariant, then extend it to bounds and monotonic answer spaces.",
     "keywords": ["binary search", "lower bound", "upper bound", "monotonic", "answer space"]
@@ -190,7 +190,7 @@
     "stage": "Structural Patterns",
     "level": "Essential",
     "duration": "3 hours",
-    "chapters": 1,
+    "chapters": 2,
     "codeExamples": 1,
     "summary": "Model nested obligations, expression evaluation, monotonic stacks, recursion, and last-in-first-out state.",
     "keywords": ["stack", "monotonic stack", "parentheses", "recursion", "expression"]
@@ -204,7 +204,7 @@
     "stage": "Structural Patterns",
     "level": "Essential",
     "duration": "2 hours",
-    "chapters": 1,
+    "chapters": 2,
     "codeExamples": 1,
     "summary": "Use FIFO worklists, ring buffers, deques, monotonic queues, and backpressure-aware buffering.",
     "keywords": ["queue", "deque", "bfs", "ring buffer", "monotonic queue"]
@@ -218,7 +218,7 @@
     "stage": "Structural Patterns",
     "level": "Essential",
     "duration": "3 hours",
-    "chapters": 1,
+    "chapters": 2,
     "codeExamples": 1,
     "summary": "Make pointer ownership explicit for reversal, cycle detection, midpoint discovery, merging, and deletion.",
     "keywords": ["linked list", "pointer", "reverse", "cycle", "merge"]
@@ -232,7 +232,7 @@
     "stage": "Structural Patterns",
     "level": "Advanced",
     "duration": "4 hours",
-    "chapters": 1,
+    "chapters": 2,
     "codeExamples": 1,
     "summary": "Define recursive contracts for traversal, aggregation, search trees, depth, path state, and balanced decomposition.",
     "keywords": ["tree", "dfs", "traversal", "binary tree", "recursion"]
@@ -246,7 +246,7 @@
     "stage": "Structural Patterns",
     "level": "Advanced",
     "duration": "5 hours",
-    "chapters": 1,
+    "chapters": 2,
     "codeExamples": 1,
     "summary": "Choose representations and traversal state for BFS, DFS, connectivity, cycles, ordering, and shortest paths.",
     "keywords": ["graph", "bfs", "dfs", "topological", "shortest path"]
@@ -260,7 +260,7 @@
     "stage": "State Optimization",
     "level": "Advanced",
     "duration": "6 hours",
-    "chapters": 1,
+    "chapters": 2,
     "codeExamples": 1,
     "summary": "Design state meaning, transitions, base cases, evaluation order, memoization, tabulation, and memory compression.",
     "keywords": ["dynamic programming", "memoization", "tabulation", "state", "transition"]

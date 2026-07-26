@@ -146,10 +146,10 @@ def validate_modules(errors: list[str]) -> None:
                 f"found {example_count}",
             )
 
-    if metadata_chapters != 36 or actual_chapters != 36:
-        fail(errors, f"Expected 36 chapters; metadata={metadata_chapters}, source={actual_chapters}")
-    if metadata_examples != 66 or actual_examples != 66:
-        fail(errors, f"Expected 66 Java examples; metadata={metadata_examples}, source={actual_examples}")
+    if metadata_chapters != 57 or actual_chapters != 57:
+        fail(errors, f"Expected 57 chapters; metadata={metadata_chapters}, source={actual_chapters}")
+    if metadata_examples != 69 or actual_examples != 69:
+        fail(errors, f"Expected 69 Java examples; metadata={metadata_examples}, source={actual_examples}")
 
 
 def validate_javascript(errors: list[str]) -> None:
@@ -198,7 +198,7 @@ def main() -> int:
             print(f"ERROR: {error}", file=sys.stderr)
         return 1
 
-    print("Web validation passed: 19 modules, 36 chapters, 66 foundation Java examples")
+    print("Web validation passed: 19 modules, 57 chapters, 69 foundation Java examples")
     return 0
 
 

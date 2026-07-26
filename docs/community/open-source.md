@@ -19,6 +19,8 @@ Suggested attribution:
 
 > Adapted from the SDE2 Interview Handbook by Vinay Reddy Kalluri and contributors, licensed under CC BY 4.0.
 
+Vinay Reddy Kalluri is the project creator, founding author, Editor-in-Chief, and Chief Auditor. Accepted contributors receive individual credit in the root author registry, Git history, and pull requests.
+
 ## Contribution rights
 
 Only submit material you created or have the right to contribute. External material must have a compatible license and clear attribution. Do not copy proprietary interview questions, confidential hiring material, paid-course content, or copyrighted diagrams without permission.
@@ -26,3 +28,5 @@ Only submit material you created or have the right to contribute. External mater
 ## Open development
 
 Technical decisions, corrections, and roadmap discussions should happen in public issues and pull requests unless they involve private security or conduct reports. Generated artifacts are reproducible from the public source tree.
+
+The reviewed PDF release artifacts under `books/java-sde2-interview-preparation-series/` are intentionally versioned so readers can use the books without installing the publishing toolchain.

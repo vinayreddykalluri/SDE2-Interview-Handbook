@@ -1,19 +1,18 @@
 # Downloads and Printing
 
-The repository generates individual module books and a combined handbook from the same Markdown used by the website.
+The repository provides a versioned Java SDE-2 PDF series and can also generate printable handbook output from the website's Markdown.
 
-## Download without a local toolchain
+## Download the published book series
 
-1. Open the [Build Interview Handbook workflow](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/actions/workflows/build-books.yml).
-2. Select the newest successful run on the default branch.
-3. Download the PDF, DOCX, or combined artifact bundle.
-4. Extract the archive before opening the book.
+Open the [latest GitHub release](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest). Every focused module is attached as an individually named PDF, together with the complete master PDF and integrity manifest.
 
-GitHub requires a signed-in account to download workflow artifacts.
+The canonical published files are also versioned under [`books/java-sde2-interview-preparation-series/`](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series).
+
+Start with Java Foundations, then Time and Space Complexity, Number Systems, Bit Manipulation, and Loop Mastery before continuing to the remaining DSA modules.
 
 ## Build locally
 
-Install Pandoc and XeLaTeX in addition to the normal site prerequisites.
+For the website-derived handbook, install Pandoc and XeLaTeX in addition to the normal site prerequisites.
 
 ```bash
 make install
@@ -44,3 +43,5 @@ For a single chapter, use the browser's print command on that chapter. The custo
 ## Artifact trust
 
 Use artifacts from successful runs on `master` or from a tagged release. The workflow builds from committed source and applies the same structural, link, and Java checks used for contributions.
+
+Published book assets include `manifest.json` with page counts, byte sizes, and SHA-256 hashes for integrity checks.

@@ -106,8 +106,8 @@ def validate_foundations(errors: list[str]) -> tuple[int, int]:
             errors.append(f"No numbered chapters in {module_dir.relative_to(ROOT)}")
         chapter_count += len(chapters)
 
-    if chapter_count != 36:
-        errors.append(f"Expected 36 coding-foundation chapters; found {chapter_count}")
+    if chapter_count != 57:
+        errors.append(f"Expected 57 coding-foundation chapters; found {chapter_count}")
 
     legacy_dirs = sorted(path.name for path in DOCS.glob("volume-*") if path.is_dir())
     if legacy_dirs:

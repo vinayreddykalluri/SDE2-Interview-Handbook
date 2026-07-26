@@ -15,6 +15,14 @@ output/combined/*.tmp/
 output/
 examples/java/out/
 
+# Versioned book sources keep only canonical source and published artifacts
+books/java-sde2-interview-preparation-series/build/
+books/java-sde2-interview-preparation-series/tmp/
+books/java-sde2-interview-preparation-series/output/
+books/java-sde2-interview-preparation-series/series/build/
+books/java-sde2-interview-preparation-series/series/tmp/
+books/java-sde2-interview-preparation-series/code-examples/build/
+
 # OS and editors
 .DS_Store
 *.swp

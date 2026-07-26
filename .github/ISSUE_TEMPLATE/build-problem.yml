@@ -11,6 +11,7 @@ body:
         - Structure or link validation
         - Java validation
         - PDF generation
+        - Published book series or release asset
         - DOCX generation
         - Local build or disabled workflow definition
         - GitHub Pages
