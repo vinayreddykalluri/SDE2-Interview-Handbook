@@ -19,7 +19,7 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUT = (
     ROOT
-    / "series"
+    / "content"
     / "volumes"
     / "01-number-systems-and-math-foundations"
     / "assets"

@@ -57,14 +57,15 @@ from reportlab.platypus.doctemplate import ActionFlowable
 
 
 ROOT = Path(__file__).resolve().parents[1]
-BOOK = ROOT / "book"
+BOOK = ROOT / "content" / "master"
 APPENDICES = BOOK / "appendices"
 BUILD = ROOT / "build"
 TMP = ROOT / "tmp" / "pdfs"
+DIST = ROOT / "dist"
 
-MASTER_MD = ROOT / "java-sde2-interview-book.md"
-FINAL_DOCX = ROOT / "java-sde2-interview-book.docx"
-FINAL_PDF = ROOT / "java-sde2-interview-book.pdf"
+MASTER_MD = DIST / "java-sde2-interview-book.md"
+FINAL_DOCX = DIST / "java-sde2-interview-book.docx"
+FINAL_PDF = DIST / "java-sde2-interview-book.pdf"
 REFERENCE_DOCX = BUILD / "reference.docx"
 
 TITLE = "Java Foundations to Advanced Engineering"
@@ -335,7 +336,7 @@ rights: "Copyright 2026 {AUTHOR} and credited contributors. CC BY 4.0 content; M
             figure = ""
             if number in FIGURES:
                 filename, caption = FIGURES[number]
-                figure = f"\n\n![Figure {number}.1 - {caption}](diagrams/{filename})\n"
+                figure = f"\n\n![Figure {number}.1 - {caption}](assets/diagrams/{filename})\n"
             block = f"{heading}{figure}\n\n{chapter_body}".strip()
             pieces.append(block)
             content_pieces.append(block)
@@ -1997,6 +1998,7 @@ def main() -> None:
 
     BUILD.mkdir(parents=True, exist_ok=True)
     TMP.mkdir(parents=True, exist_ok=True)
+    DIST.mkdir(parents=True, exist_ok=True)
     content_path, docx_input = assemble_sources(args.allow_incomplete)
     if args.only in ("docx", "all"):
         build_docx(docx_input)

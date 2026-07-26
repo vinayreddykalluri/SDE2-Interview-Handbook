@@ -7,6 +7,7 @@ Scripts are deterministic orchestration entry points. Use the stable `Makefile` 
 | `bootstrap_macos.sh` | Install and configure the supported local macOS toolchain |
 | `check_local_environment.py` | Report required and optional local software |
 | `build_site.py` | Assemble the portal and MkDocs handbook into `site/` |
+| `sync_book_catalog.py` | Generate the portal book catalog from publishing metadata and the PDF manifest |
 | `build_pdf.py` | Render module and combined PDF books |
 | `build_docx.py` | Render module and combined DOCX books |
 | `build_all.py` | Run all local output builders |
@@ -18,4 +19,4 @@ Scripts are deterministic orchestration entry points. Use the stable `Makefile` 
 | `configure_deployment_urls.py` | Normalize canonical URLs in a hosted static artifact |
 | `validate_deployment.py` | Validate the Vercel build and dependency contract |
 
-Generated files belong in ignored output directories. Scripts must not modify canonical documentation or source examples as a side effect of validation.
+Generated files belong in ignored output directories. `web/content/books.json` is the one committed generated metadata file because it gives static deployments a deterministic book catalog; use `--check` in validation. Scripts must not modify canonical documentation or source examples as a side effect of validation.

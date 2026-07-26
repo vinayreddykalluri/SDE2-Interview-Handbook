@@ -52,6 +52,7 @@ Open these addresses after the server starts:
 - Searchable docs: <http://127.0.0.1:8000/docs/>
 - Backend SDE-2 track: <http://127.0.0.1:8000/docs/backend-interview/>
 - Downloads: <http://127.0.0.1:8000/downloads/>
+- Published book catalog: <http://127.0.0.1:8000/#books>
 
 Stop the server with `Ctrl+C`.
 
@@ -71,7 +72,6 @@ flowchart LR
 
 ## GitHub Actions status
 
-Remote builds are intentionally disabled until local output is approved. Workflow
-definitions are retained under `.github/workflows-disabled/`; GitHub does not run
-files from that directory. Move them back to `.github/workflows/` only when remote
-automation is explicitly approved.
+Published-book source and Java validation runs in `.github/workflows/validate-books.yml`.
+Website deployment and the legacy root artifact workflow remain under
+`.github/workflows-disabled/` until they receive separate approval.

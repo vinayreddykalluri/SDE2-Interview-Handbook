@@ -18,9 +18,9 @@ from pypdf import PdfReader
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SERIES = ROOT / "series"
-DIST = SERIES / "dist"
-SERIES_SPEC = SERIES / "series.json"
+VOLUMES = ROOT / "content" / "volumes"
+DIST = ROOT / "dist"
+SERIES_SPEC = ROOT / "publishing" / "series.json"
 ARTIFACT_MANIFEST = DIST / "manifest.json"
 INDEX_NAME = "Java-SDE2-Interview-Preparation-Series-Index.pdf"
 AUTHOR = "Vinay Reddy Kalluri"
@@ -92,7 +92,7 @@ def check_sources(spec: dict[str, Any]) -> None:
             check_markdown(
                 path,
                 require_ascii=source["path"].startswith(
-                    "series/volumes/01-number-systems-and-math-foundations/"
+                    "content/volumes/01-number-systems-and-math-foundations/"
                 ),
             )
         companion = volume.get("code_companion")
@@ -107,7 +107,7 @@ def check_sources(spec: dict[str, Any]) -> None:
             if DRAFT_MARKER.search(code):
                 fail(f"Draft marker found in Java companion: {path}")
 
-    chapter_dir = SERIES / "volumes" / "01-number-systems-and-math-foundations" / "chapters"
+    chapter_dir = VOLUMES / "01-number-systems-and-math-foundations" / "chapters"
     chapters = sorted(chapter_dir.glob("*.md"))
     expected_chapters = {
         "01-why-number-systems-matter.md",
@@ -163,7 +163,7 @@ def check_sources(spec: dict[str, Any]) -> None:
         if count != expected:
             fail(f"Expected {expected} {label}; found {count}")
 
-    assets = SERIES / "volumes" / "01-number-systems-and-math-foundations" / "assets"
+    assets = VOLUMES / "01-number-systems-and-math-foundations" / "assets"
     diagrams = sorted(
         path for path in assets.glob("*.png") if "contact-sheet" not in path.name
     )

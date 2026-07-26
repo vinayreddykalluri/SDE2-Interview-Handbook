@@ -5,6 +5,9 @@ type: book
 authors:
   - family-names: "Kalluri"
     given-names: "Vinay Reddy"
+    alias: "vinayreddykalluri"
+    website: "https://www.linkedin.com/in/vinayreddykalluri/"
+abstract: "An open-source SDE-2 interview handbook and Java 21 book series covering programming foundations, data structures, algorithms, backend engineering, and interview practice."
 repository-code: "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook"
 url: "https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/"
 license: "CC-BY-4.0"

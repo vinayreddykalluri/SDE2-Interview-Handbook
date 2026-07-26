@@ -6,6 +6,9 @@ repo_url: https://github.com/vinayreddykalluri/SDE2-Interview-Handbook
 repo_name: vinayreddykalluri/SDE2-Interview-Handbook
 edit_uri: edit/master/docs/
 copyright: Copyright &copy; 2026 Vinay Reddy Kalluri and contributors. Content licensed CC BY 4.0.
+not_in_nav: |
+  /404.md
+  /chapter-template.md
 
 nav:
   - Start Here:
@@ -174,6 +177,7 @@ nav:
       - Contributor Guide: community/contributing.md
       - Architecture: community/architecture.md
       - Repository Structure: community/repository-structure.md
+      - Repository Organization Audit: community/repository-audit-2026-07.md
       - Quality Standards: community/code-quality.md
 
 theme:
@@ -222,7 +226,7 @@ plugins:
   - search
   - git-revision-date-localized:
       enable_creation_date: true
-      enable_git_follow: false
+      enable_git_follow: true
       type: date
 
 extra_css:

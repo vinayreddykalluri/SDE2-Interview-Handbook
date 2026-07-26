@@ -9,8 +9,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BACKEND_TRACK = ROOT / "docs" / "backend-interview"
+BOOK_ROOT = ROOT / "books" / "java-sde2-interview-preparation-series"
 
 REQUIRED_ROOT_FILES = {
+    ".gitattributes",
     ".gitignore",
     "CONTRIBUTING.md",
     "LICENSE",
@@ -25,6 +27,7 @@ REQUIRED_ROOT_DIRECTORIES = {
     ".github",
     "docs",
     "examples",
+    "books",
     "scripts",
     "templates",
     "web",
@@ -42,6 +45,24 @@ BACKEND_MODULES = [
     "09-leadership-behavioral",
     "10-practice",
 ]
+
+BOOK_DIRECTORIES = {
+    "assets",
+    "content",
+    "dist",
+    "docs",
+    "examples",
+    "publishing",
+    "reports",
+    "scripts",
+}
+
+FORBIDDEN_BOOK_DIRECTORIES = {
+    "book",
+    "code-examples",
+    "diagrams",
+    "series",
+}
 
 
 def main() -> int:
@@ -89,6 +110,33 @@ def main() -> int:
             f"Backend track must retain at least 42 curriculum pages; found {backend_page_count}"
         )
 
+    for name in sorted(BOOK_DIRECTORIES):
+        if not (BOOK_ROOT / name).is_dir():
+            errors.append(f"Missing canonical book directory: {name}/")
+
+    for name in sorted(FORBIDDEN_BOOK_DIRECTORIES):
+        if (BOOK_ROOT / name).exists():
+            errors.append(f"Legacy book directory must not return: {name}/")
+
+    for path in [
+        BOOK_ROOT / "publishing" / "series.json",
+        BOOK_ROOT / "content" / "README.md",
+        BOOK_ROOT / "dist" / "manifest.json",
+        ROOT / "web" / "content" / "books.json",
+    ]:
+        if not path.is_file():
+            errors.append(f"Missing synchronized publication file: {path.relative_to(ROOT)}")
+
+    allowed_book_markdown = {"CHANGELOG.md", "README.md"}
+    unexpected_book_markdown = sorted(
+        path.name for path in BOOK_ROOT.glob("*.md") if path.name not in allowed_book_markdown
+    )
+    if unexpected_book_markdown:
+        errors.append(
+            "Book workspace root contains misplaced Markdown: "
+            + ", ".join(unexpected_book_markdown)
+        )
+
     if errors:
         for error in errors:
             print(f"ERROR: {error}", file=sys.stderr)
@@ -96,7 +144,8 @@ def main() -> int:
 
     print(
         "Repository layout passed: single Git root, "
-        f"{len(BACKEND_MODULES)} backend modules, {backend_page_count} curriculum pages"
+        f"{len(BACKEND_MODULES)} backend modules, {backend_page_count} curriculum pages, "
+        f"{len(BOOK_DIRECTORIES)} canonical book sections"
     )
     return 0
 

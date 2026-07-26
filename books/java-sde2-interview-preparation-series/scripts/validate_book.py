@@ -15,7 +15,7 @@ from pypdf import PdfReader
 
 
 ROOT = Path(__file__).resolve().parents[1]
-BOOK = ROOT / "book"
+BOOK = ROOT / "content" / "master"
 APPENDICES = BOOK / "appendices"
 
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -187,7 +187,7 @@ def validate_diagrams(checks: Checks) -> None:
     from PIL import Image
 
     for _, (filename, _) in FIGURES.items():
-        path = ROOT / "diagrams" / filename
+        path = ROOT / "assets" / "diagrams" / filename
         if not path.exists():
             checks.error(f"Missing diagram: {filename}")
             continue
@@ -201,7 +201,7 @@ def validate_diagrams(checks: Checks) -> None:
 
 
 def validate_examples(checks: Checks) -> None:
-    sources = sorted((ROOT / "code-examples" / "src" / "main" / "java").rglob("*.java"))
+    sources = sorted((ROOT / "examples" / "java" / "src" / "main" / "java").rglob("*.java"))
     if not sources:
         checks.error("No Java code examples found")
         return
@@ -226,7 +226,7 @@ def validate_examples(checks: Checks) -> None:
 
 
 def validate_docx(checks: Checks) -> None:
-    path = ROOT / "java-sde2-interview-book.docx"
+    path = ROOT / "dist" / "java-sde2-interview-book.docx"
     if not path.exists():
         checks.error("Final DOCX is missing")
         return
@@ -258,7 +258,7 @@ def validate_docx(checks: Checks) -> None:
 
 
 def validate_pdf(checks: Checks) -> None:
-    path = ROOT / "java-sde2-interview-book.pdf"
+    path = ROOT / "dist" / "java-sde2-interview-book.pdf"
     if not path.exists():
         checks.error("Final PDF is missing")
         return
@@ -303,9 +303,9 @@ def validate_pdf(checks: Checks) -> None:
 
 def validate_outputs(checks: Checks) -> None:
     for relative in (
-        Path("java-sde2-interview-book.md"),
-        Path("output/pdf/java-sde2-interview-book.pdf"),
-        Path("output/docx/java-sde2-interview-book.docx"),
+        Path("dist/java-sde2-interview-book.md"),
+        Path("dist/java-sde2-interview-book.pdf"),
+        Path("dist/java-sde2-interview-book.docx"),
     ):
         path = ROOT / relative
         if not path.exists() or path.stat().st_size == 0:

@@ -50,6 +50,20 @@ Windows PowerShell users can activate the environment with `.venv\Scripts\Activa
 - Rebuild and inspect affected PDFs when prose, code, tables, diagrams, covers, links, or navigation change.
 - Add publication-level individual credit to [AUTHORS.md](AUTHORS.md) when the contribution qualifies.
 
+### Book contribution workflow
+
+1. Choose the existing volume under `books/java-sde2-interview-preparation-series/content/volumes/` or the master chapter under `content/master/`.
+2. Confirm its mapping in `books/java-sde2-interview-preparation-series/publishing/series.json`.
+3. Add the smallest prerequisite explanation before adding an advanced pattern.
+4. Keep exercises and reasoning-based solutions in the owning focused volume.
+5. Add or update a compiling companion under the owning volume's `code/` directory when executable evidence is required.
+6. Update the relevant file under `books/java-sde2-interview-preparation-series/reports/`.
+7. Build and inspect the affected PDF in `books/java-sde2-interview-preparation-series/dist/`.
+
+Open an issue before adding or removing a volume, changing the Java baseline, changing the learning path, or introducing a publishing dependency. This prevents parallel contributors from producing competing sources.
+
+Good first book contributions include one confusing-paragraph rewrite, one verified edge case, one output-prediction or debugging exercise with explanation, one accessibility correction, or one reproducible PDF layout report.
+
 ## Java example standards
 
 - Target Java 17 language features unless the chapter explicitly compares Java 8, 17, and 21.
@@ -80,7 +94,7 @@ make build-all
 - Include screenshots for visual site changes.
 - Identify any generated artifact that was manually inspected.
 - Do not commit `site/`, `output/`, virtual environments, IDE state, or secrets.
-- The versioned PDFs under `books/java-sde2-interview-preparation-series/series/dist/` and the master book PDF are intentional release artifacts, not disposable root build output.
+- The versioned artifacts under `books/java-sde2-interview-preparation-series/dist/` are intentional release files, not disposable root build output.
 
 ## Review criteria
 

@@ -18,6 +18,7 @@ A local-first, open-source preparation system for SDE-2 backend interviews. It c
 | Read or download the publication-ready books | [Published Java SDE-2 book series](docs/books.md) | Individual PDFs from Java basics through DSA and advanced backend engineering |
 | Run and extend the code | [Java examples](examples/README.md) | Independently compilable examples organized by interview topic |
 | Understand the repository before contributing | [Repository structure](docs/community/repository-structure.md) | Clear source ownership and naming rules |
+| Review the latest organization audit | [July 2026 repository audit](docs/community/repository-audit-2026-07.md) | Migration map, synchronization contracts, and open book backlog |
 | Pick a useful contribution | [Project roadmap](ROADMAP.md) | Prioritized work without duplicating completed modules |
 | Create a hosted preview | [Vercel deployment guide](DEPLOYMENT.md) | Reproducible static build without GitHub Actions |
 
@@ -42,19 +43,19 @@ The curriculum uses progressive disclosure: overview first, detailed theory seco
 
 ## Published Java SDE-2 Book Series
 
-[![Java SDE-2 Interview Preparation Series cover](books/java-sde2-interview-preparation-series/docs/images/series-index-cover.png)](books/java-sde2-interview-preparation-series/series/dist/Java-SDE2-Interview-Preparation-Series-Index.pdf)
+[![Java SDE-2 Interview Preparation Series cover](books/java-sde2-interview-preparation-series/assets/covers/series-index-cover.png)](books/java-sde2-interview-preparation-series/dist/Java-SDE2-Interview-Preparation-Series-Index.pdf)
 
 The consolidated repository includes 28 focused topic books, a 13-page series index, and a 616-page master book. The focused release contains 1,836 pages and preserves every module as an individually navigable PDF.
 
 [Download the latest release](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest) or start directly:
 
-- [Java Foundations for Problem Solving](books/java-sde2-interview-preparation-series/series/dist/Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf)
-- [Time and Space Complexity for Java Interviews](books/java-sde2-interview-preparation-series/series/dist/Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf)
-- [Number Systems and Math Foundations](books/java-sde2-interview-preparation-series/series/dist/Java-SDE2-DSA-01-Number-Systems-and-Math-Foundations.pdf)
-- [Number Systems Interview Workbook](books/java-sde2-interview-preparation-series/series/dist/Java-SDE2-DSA-01B-Number-Systems-Interview-Workbook.pdf)
-- [Bit Manipulation in Java](books/java-sde2-interview-preparation-series/series/dist/Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf)
-- [Loop Mastery, Patterns, and Index Calculations](books/java-sde2-interview-preparation-series/series/dist/Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf)
-- [Complete 616-page master book](books/java-sde2-interview-preparation-series/java-sde2-interview-book.pdf)
+- [Java Foundations for Problem Solving](books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf)
+- [Time and Space Complexity for Java Interviews](books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf)
+- [Number Systems and Math Foundations](books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-01-Number-Systems-and-Math-Foundations.pdf)
+- [Number Systems Interview Workbook](books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-01B-Number-Systems-Interview-Workbook.pdf)
+- [Bit Manipulation in Java](books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf)
+- [Loop Mastery, Patterns, and Index Calculations](books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf)
+- [Complete 616-page master book](books/java-sde2-interview-preparation-series/dist/java-sde2-interview-book.pdf)
 
 The recommended route is Java Foundations → Time and Space Complexity → Number Systems → Bit Manipulation → Loop Mastery → remaining DSA modules → Advanced Java. Stable PDF numbers are retained for filenames; learning-step labels inside the books show the intended order.
 
@@ -129,7 +130,7 @@ python3 scripts/validate_series.py --source-only
 
 `make validate-deployment` checks the committed Vercel contract. See [DEPLOYMENT.md](DEPLOYMENT.md) before importing the repository into Vercel.
 
-Generated files belong in ignored `site/` and root `output/` directories. Do not commit compiled classes, virtual environments, caches, or temporary render workspaces. The reviewed PDFs under `books/java-sde2-interview-preparation-series/series/dist/` and the master book PDF are intentional versioned release artifacts.
+Generated files belong in ignored `site/` and root `output/` directories. Do not commit compiled classes, virtual environments, caches, or temporary render workspaces. The reviewed PDFs under `books/java-sde2-interview-preparation-series/dist/` and the master book PDF are intentional versioned release artifacts.
 
 ## Contributing
 

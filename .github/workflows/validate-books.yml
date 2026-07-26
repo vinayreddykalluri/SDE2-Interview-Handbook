@@ -56,7 +56,7 @@ jobs:
 
       - name: Compile master Java examples
         run: |
-          mkdir -p code-examples/build/classes
-          find code-examples/src/main/java -name '*.java' -print0 \
-            | xargs -0 javac --release 21 -Xlint:all -Werror -d code-examples/build/classes
-          java -cp code-examples/build/classes com.interviewbook.examples.AllExamplesSmokeTest
+          mkdir -p examples/java/build/classes
+          find examples/java/src/main/java -name '*.java' -print0 \
+            | xargs -0 javac --release 21 -Xlint:all -Werror -d examples/java/build/classes
+          java -cp examples/java/build/classes com.interviewbook.examples.AllExamplesSmokeTest

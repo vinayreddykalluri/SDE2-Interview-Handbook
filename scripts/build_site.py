@@ -17,6 +17,7 @@ DOCS_OUTPUT = SITE_OUTPUT / "docs"
 EXAMPLES_SOURCE = ROOT / "examples"
 EXAMPLES_OUTPUT = SITE_OUTPUT / "examples"
 MODULES_FILE = WEB_SOURCE / "content" / "coding-foundations.json"
+BOOKS_FILE = WEB_SOURCE / "content" / "books.json"
 
 
 def main() -> int:
@@ -47,6 +48,7 @@ def main() -> int:
         SITE_OUTPUT / "assets" / "styles.css",
         SITE_OUTPUT / "assets" / "app.js",
         SITE_OUTPUT / "content" / "coding-foundations.json",
+        SITE_OUTPUT / "content" / "books.json",
         DOCS_OUTPUT / "index.html",
         EXAMPLES_OUTPUT
         / "java"

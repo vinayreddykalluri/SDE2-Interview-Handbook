@@ -41,12 +41,12 @@ import build_book as master
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SERIES = ROOT / "series"
-MANIFEST = SERIES / "series.json"
-BUILD = SERIES / "build"
-DIST = SERIES / "dist"
-TMP = SERIES / "tmp" / "pdfs"
-COVER_BACKGROUND = SERIES / "assets" / "modern-series-cover-background-v2.png"
+PUBLISHING = ROOT / "publishing"
+MANIFEST = PUBLISHING / "series.json"
+BUILD = ROOT / "build" / "series"
+DIST = ROOT / "dist"
+TMP = ROOT / "tmp" / "pdfs"
+COVER_BACKGROUND = PUBLISHING / "assets" / "modern-series-cover-background-v2.png"
 
 AUTHOR = "Vinay Reddy Kalluri"
 SERIES_TITLE = "Java SDE-2 Interview Preparation Series"

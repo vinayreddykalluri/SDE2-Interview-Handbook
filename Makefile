@@ -1,4 +1,4 @@
-.PHONY: bootstrap install doctor serve serve-web build-site build-pdf build-docx build-all validate validate-layout validate-web validate-code validate-deployment verify clean
+.PHONY: bootstrap install doctor serve serve-web build-site build-pdf build-docx build-all sync-book-catalog check-book-catalog validate validate-layout validate-web validate-code validate-deployment verify clean
 
 SYSTEM_PYTHON ?= python3
 PYTHON ?= .venv/bin/python
@@ -22,6 +22,12 @@ serve-web: build-site
 
 build-site:
 	$(PYTHON) scripts/build_site.py
+
+sync-book-catalog:
+	$(PYTHON) scripts/sync_book_catalog.py
+
+check-book-catalog:
+	$(PYTHON) scripts/sync_book_catalog.py --check
 
 build-pdf:
 	$(PYTHON) scripts/build_pdf.py

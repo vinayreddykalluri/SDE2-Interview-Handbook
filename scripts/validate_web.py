@@ -29,6 +29,8 @@ JAVA = (
     / "interviewhandbook"
 )
 MODULES_FILE = WEB / "content" / "coding-foundations.json"
+BOOKS_FILE = WEB / "content" / "books.json"
+BOOK_DIST = ROOT / "books" / "java-sde2-interview-preparation-series" / "dist"
 NUMBERED_CHAPTER = re.compile(r"^\d{2}-.+\.md$")
 ROOT_RELATIVE_REFERENCE = re.compile(r"(?:href|src|fetch)\s*\(?(?:=\s*)?[\"']/")
 SAFE_CODE_PACKAGE = re.compile(r"^codingfoundations/[a-z][a-z0-9]*$")
@@ -152,6 +154,55 @@ def validate_modules(errors: list[str]) -> None:
         fail(errors, f"Expected 69 Java examples; metadata={metadata_examples}, source={actual_examples}")
 
 
+def validate_books(errors: list[str]) -> None:
+    sync = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "sync_book_catalog.py"), "--check"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if sync.returncode:
+        fail(errors, sync.stderr.strip() or sync.stdout.strip())
+        return
+
+    try:
+        catalog = json.loads(BOOKS_FILE.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        fail(errors, f"Cannot read {BOOKS_FILE.relative_to(ROOT)}: {error}")
+        return
+
+    books = catalog.get("books")
+    release = catalog.get("release")
+    if not isinstance(books, list) or not isinstance(release, dict):
+        fail(errors, "web/content/books.json must contain release metadata and a books array")
+        return
+    if len(books) != 28:
+        fail(errors, f"Expected 28 focused books; found {len(books)}")
+    if [book.get("id") for book in books[:6]] != ["03", "02", "01", "01B", "04", "05"]:
+        fail(errors, "Book catalog must begin Java -> Complexity -> Number Systems -> Bits -> Loops")
+    if release.get("totalPdfCount") != 30 or release.get("totalPageCount") != 2452:
+        fail(errors, "Book catalog totals must remain 30 PDFs and 2,452 reviewed pages")
+
+    required_fields = {
+        "order", "step", "id", "track", "title", "shortTitle", "subtitle",
+        "purpose", "filename", "pageCount", "pdfHref", "sourceHref",
+    }
+    filenames: list[str] = []
+    for book in books:
+        missing = required_fields - set(book)
+        if missing:
+            fail(errors, f"Book {book.get('id', '??')} is missing fields: {sorted(missing)}")
+            continue
+        filename = str(book["filename"])
+        filenames.append(filename)
+        if not (BOOK_DIST / filename).is_file():
+            fail(errors, f"Published book is missing from dist/: {filename}")
+        if "/releases/download/" not in str(book["pdfHref"]):
+            fail(errors, f"Book {book['id']} does not use a stable release download URL")
+    if len(filenames) != len(set(filenames)):
+        fail(errors, "Book catalog filenames must be unique")
+
+
 def validate_javascript(errors: list[str]) -> None:
     node = shutil.which("node")
     if not node:
@@ -179,6 +230,7 @@ def main() -> int:
         WEB / "assets" / "styles.css",
         WEB / "assets" / "app.js",
         MODULES_FILE,
+        BOOKS_FILE,
     ]
     for path in required_files:
         if not path.is_file():
@@ -191,6 +243,7 @@ def main() -> int:
 
     validate_local_assets(errors)
     validate_modules(errors)
+    validate_books(errors)
     validate_javascript(errors)
 
     if errors:
@@ -198,7 +251,10 @@ def main() -> int:
             print(f"ERROR: {error}", file=sys.stderr)
         return 1
 
-    print("Web validation passed: 19 modules, 57 chapters, 69 foundation Java examples")
+    print(
+        "Web validation passed: 19 modules, 57 chapters, 69 foundation Java examples, "
+        "and 30 published PDFs"
+    )
     return 0
 
 

@@ -10,7 +10,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "series" / "volumes" / "05-loop-mastery-and-index-calculations" / "assets"
+OUT = ROOT / "content" / "volumes" / "05-loop-mastery-and-index-calculations" / "assets"
 
 W, H = 2400, 1450
 NAVY = "#0B2545"

@@ -38,6 +38,10 @@ The default branch is the continuously published source of truth. Tagged release
 
 Published book sources and release PDFs live under `books/java-sde2-interview-preparation-series/`. Individual credit follows [AUTHORS.md](AUTHORS.md), Git history, and accepted pull requests.
 
+### Book release gates
+
+A changed volume is publishable only when prerequisites precede dependent concepts, valid complete Java examples compile under the declared baseline, invalid snippets are isolated and labeled, affected PDFs build, and representative contents/code/table/diagram pages are inspected. Accuracy, attribution, accessibility, manifest integrity, and navigation are independent release gates; a successful PDF build alone is not approval.
+
 ## Changes to governance
 
 Governance changes use the normal pull-request process and should clearly explain the motivation and community impact.

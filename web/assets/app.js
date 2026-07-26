@@ -1,14 +1,23 @@
 const JOURNEY_URL = "content/interview-path.json";
+const BOOKS_URL = "content/books.json";
 const PROGRESS_KEY = "sde2-interview-journey-progress-v1";
 const THEME_KEY = "sde2-handbook-theme";
 
 let stages = [];
+let books = [];
+let bookRelease = null;
 let completedStages = new Set(loadStoredArray(PROGRESS_KEY));
 let searchIndex = [];
 let activeSearchResult = -1;
 let allStagesExpanded = false;
 
 const stageList = document.querySelector("#stage-list");
+const bookList = document.querySelector("#book-grid");
+const bookSearch = document.querySelector("#book-search");
+const bookSummary = document.querySelector("#book-library-summary");
+const bookReleaseLink = document.querySelector("#book-release-link");
+const masterBookLink = document.querySelector("#master-book-link");
+const seriesIndexLink = document.querySelector("#series-index-link");
 const journeySearch = document.querySelector("#journey-search");
 const completedCount = document.querySelector("#completed-count");
 const stageCount = document.querySelector("#stage-count");
@@ -63,6 +72,62 @@ function stageSearchText(stage) {
       return [resource.label, resource.note, resource.type];
     })
   ).join(" ").toLowerCase();
+}
+
+function bookSearchText(book) {
+  return [
+    book.id,
+    book.step,
+    book.track,
+    book.title,
+    book.shortTitle,
+    book.subtitle,
+    book.purpose
+  ].join(" ").toLowerCase();
+}
+
+function buildBookCard(book) {
+  const article = createElement("article", "book-card");
+  article.dataset.bookSearch = bookSearchText(book);
+
+  const meta = createElement("div", "book-card-meta");
+  meta.append(
+    createElement("span", "book-step", "STEP " + book.step),
+    createElement("span", "book-pages", book.pageCount + " pages")
+  );
+
+  const title = createElement("h3", "", book.shortTitle);
+  const subtitle = createElement("p", "book-subtitle", book.subtitle);
+  const track = createElement("p", "book-track", book.track + " / PDF " + book.id);
+  const actions = createElement("div", "book-card-actions");
+  const read = createElement("a", "button button-primary", "Open PDF");
+  read.href = book.pdfHref;
+  const source = createElement("a", "text-link", "View source");
+  source.href = book.sourceHref;
+  actions.append(read, source);
+  article.append(meta, track, title, subtitle, actions);
+  return article;
+}
+
+function renderBooks() {
+  const query = (bookSearch.value || "").trim().toLowerCase();
+  const matches = books.filter(function (book) {
+    return !query || bookSearchText(book).includes(query);
+  });
+
+  bookList.replaceChildren();
+  if (!matches.length) {
+    bookList.append(createElement("div", "empty-state", "No published book matches that search."));
+  } else {
+    matches.forEach(function (book) {
+      bookList.append(buildBookCard(book));
+    });
+  }
+
+  const total = books.length;
+  bookSummary.textContent = query
+    ? matches.length + " of " + total + " focused books match your search."
+    : total + " focused books in learning order, plus the series index and complete master book.";
 }
 
 function buildStageCard(stage, index, firstIncomplete) {
@@ -251,7 +316,8 @@ function buildSearchIndex() {
     { type: "Plan", label: "12-week roadmap", note: "Follow the complete preparation schedule", href: "docs/backend-interview/roadmap/" },
     { type: "Practice", label: "Question bank and rubric", note: "Run scored interview simulations", href: "docs/backend-interview/10-practice/question-bank-and-rubric/" },
     { type: "Review", label: "Structured revision system", note: "Retain material through repeated recall", href: "docs/backend-interview/revision-system/" },
-    { type: "Code", label: "Java example library", note: "Open the separate runnable source tree", href: "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/examples/java" }
+    { type: "Code", label: "Java example library", note: "Open the separate runnable source tree", href: "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/examples/java" },
+    { type: "Books", label: "Published PDF library", note: "Browse every focused book in learning order", href: "#books" }
   ];
 
   const stageEntries = [];
@@ -276,7 +342,17 @@ function buildSearchIndex() {
     });
   });
 
-  searchIndex = fixedDestinations.concat(stageEntries);
+  const bookEntries = books.map(function (book) {
+    return {
+      type: "Book " + book.id,
+      label: book.shortTitle,
+      note: "Learning step " + book.step + " · " + book.pageCount + " pages",
+      href: book.pdfHref,
+      keywords: bookSearchText(book)
+    };
+  });
+
+  searchIndex = fixedDestinations.concat(bookEntries, stageEntries);
 }
 
 function matchedSearchResults(query) {
@@ -384,12 +460,43 @@ async function initializeJourney() {
   }
 }
 
+async function initializeBooks() {
+  try {
+    const response = await fetch(BOOKS_URL);
+    if (!response.ok) throw new Error("Book catalog request failed with " + response.status);
+    const catalog = await response.json();
+    if (!catalog || !Array.isArray(catalog.books) || !catalog.release) {
+      throw new Error("Book catalog has an invalid shape");
+    }
+    books = catalog.books;
+    bookRelease = catalog.release;
+    bookReleaseLink.href = bookRelease.url;
+    masterBookLink.href = bookRelease.master.pdfHref;
+    seriesIndexLink.href = bookRelease.index.pdfHref;
+    document.querySelector("[data-book-stat='pdfs']").textContent = bookRelease.totalPdfCount + " PDFs";
+    renderBooks();
+    buildSearchIndex();
+  } catch (error) {
+    const fallback = createElement("div", "empty-state");
+    fallback.append(
+      document.createTextNode("The book catalog could not load. "),
+      Object.assign(createElement("a", "", "Open the latest GitHub release."), {
+        href: "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest"
+      })
+    );
+    bookList.replaceChildren(fallback);
+    bookSummary.textContent = "The web catalog is temporarily unavailable.";
+    console.error(error);
+  }
+}
+
 stageList.addEventListener("change", function (event) {
   const checkbox = event.target.closest("[data-complete-stage]");
   if (checkbox) setStageCompletion(checkbox.dataset.completeStage, checkbox.checked);
 });
 
 journeySearch.addEventListener("input", applyJourneyFilter);
+bookSearch.addEventListener("input", renderBooks);
 continueButton.addEventListener("click", continueJourney);
 expandButton.addEventListener("click", toggleAllStages);
 
@@ -490,3 +597,4 @@ if ("IntersectionObserver" in window) {
 
 initializeTheme();
 initializeJourney();
+initializeBooks();
