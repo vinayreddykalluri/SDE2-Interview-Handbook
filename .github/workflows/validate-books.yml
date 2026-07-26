@@ -3,14 +3,8 @@ name: Validate published books
 on:
   pull_request:
     branches: [master]
-    paths:
-      - "books/java-sde2-interview-preparation-series/**"
-      - ".github/workflows/validate-books.yml"
   push:
     branches: [master]
-    paths:
-      - "books/java-sde2-interview-preparation-series/**"
-      - ".github/workflows/validate-books.yml"
   workflow_dispatch:
 
 permissions:
