@@ -8,14 +8,15 @@ import sys
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 CONFIG = ROOT / "vercel.json"
-WEB_REQUIREMENTS = ROOT / "requirements-web.txt"
+IGNORE = ROOT / ".vercelignore"
+WEB_REQUIREMENTS = ROOT / "tooling" / "requirements" / "portal.txt"
 
 EXPECTED = {
     "$schema": "https://openapi.vercel.sh/vercel.json",
-    "installCommand": "python3 -m pip install --disable-pip-version-check -r requirements-web.txt",
-    "buildCommand": "python3 scripts/build_site.py && python3 scripts/configure_deployment_urls.py",
+    "installCommand": "python3 -m pip install --disable-pip-version-check -r tooling/requirements/portal.txt",
+    "buildCommand": "python3 tooling/automation/build_site.py && python3 tooling/automation/configure_deployment_urls.py",
     "outputDirectory": "site",
 }
 REQUIRED_PACKAGES = {
@@ -28,6 +29,7 @@ REQUIRED_PACKAGES = {
     "pyyaml",
 }
 ACTIVE_WORKFLOW_ALLOWLIST = {"validate-books.yml"}
+REQUIRED_IGNORES = {".github/", ".venv/", "books/", "site/", "tooling/publishing-templates/"}
 
 
 def main() -> int:
@@ -45,7 +47,7 @@ def main() -> int:
     try:
         lines = WEB_REQUIREMENTS.read_text(encoding="utf-8").splitlines()
     except OSError as error:
-        errors.append(f"Cannot read requirements-web.txt: {error}")
+        errors.append(f"Cannot read tooling/requirements/portal.txt: {error}")
         lines = []
 
     packages = {
@@ -55,9 +57,24 @@ def main() -> int:
     }
     missing = sorted(REQUIRED_PACKAGES - packages)
     if missing:
-        errors.append(f"requirements-web.txt is missing: {missing}")
+        errors.append(f"tooling/requirements/portal.txt is missing: {missing}")
     if any("==" not in line for line in lines if line.strip() and not line.startswith("#")):
         errors.append("Every hosted dependency must use an exact == pin")
+
+    try:
+        ignored = {
+            line.strip()
+            for line in IGNORE.read_text(encoding="utf-8").splitlines()
+            if line.strip() and not line.lstrip().startswith("#")
+        }
+    except OSError as error:
+        errors.append(f"Cannot read .vercelignore: {error}")
+        ignored = set()
+    missing_ignores = sorted(REQUIRED_IGNORES - ignored)
+    if missing_ignores:
+        errors.append(f".vercelignore is missing non-deployment inputs: {missing_ignores}")
+    if "examples/" in ignored:
+        errors.append(".vercelignore must retain examples/ because build_site.py publishes it")
 
     workflows_dir = ROOT / ".github" / "workflows"
     active_workflows = (
@@ -74,9 +91,9 @@ def main() -> int:
         )
 
     for relative in [
-        "scripts/build_site.py",
-        "scripts/configure_deployment_urls.py",
-        "web/index.html",
+        "tooling/automation/build_site.py",
+        "tooling/automation/configure_deployment_urls.py",
+        "apps/portal/index.html",
         "mkdocs.yml",
         ".vercelignore",
     ]:

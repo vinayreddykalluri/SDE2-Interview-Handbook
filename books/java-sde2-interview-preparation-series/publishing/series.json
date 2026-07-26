@@ -6,7 +6,7 @@
   "content_license": "CC BY 4.0",
   "code_license": "MIT",
   "repository": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook",
-  "contributors_file": "../../AUTHORS.md",
+  "contributors_file": "../../docs/community/authors.md",
   "release_tag": "books-v2026.07.0",
   "release_date": "2026-07-25",
   "public_stages": 18,

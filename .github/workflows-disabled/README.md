@@ -4,7 +4,7 @@ GitHub Actions are intentionally disabled while the handbook is validated locall
 GitHub only discovers workflow files under `.github/workflows/`, so the YAML files in
 this directory cannot run on pushes or through manual dispatch.
 
-Use the [local development guide](../../LOCAL_DEVELOPMENT.md) to bootstrap, validate,
+Use the [local development guide](../../docs/project/local-development.md) to bootstrap, validate,
 build, and serve the complete handbook before restoring automation.
 
 When local approval is complete, restore automation with:

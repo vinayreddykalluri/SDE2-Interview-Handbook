@@ -20,7 +20,7 @@ flowchart LR
 - Search existing issues and pull requests.
 - Identify the exact chapter, example, or build behavior affected.
 - For major structural changes, open an issue before investing in a large patch.
-- Read the root [CONTRIBUTING.md](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/CONTRIBUTING.md).
+- Read the canonical [contribution guide](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/.github/CONTRIBUTING.md).
 - For book changes, identify the canonical source under `books/java-sde2-interview-preparation-series/` and avoid creating a duplicate volume.
 
 ## Definition of done

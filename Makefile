@@ -4,15 +4,15 @@ SYSTEM_PYTHON ?= python3
 PYTHON ?= .venv/bin/python
 
 bootstrap:
-	bash scripts/bootstrap_macos.sh
+	bash tooling/automation/bootstrap_macos.sh
 
 install:
 	test -x "$(PYTHON)" || $(SYSTEM_PYTHON) -m venv .venv
 	$(PYTHON) -m pip install --upgrade pip
-	$(PYTHON) -m pip install -r requirements.txt
+	$(PYTHON) -m pip install -r tooling/requirements/authoring.txt
 
 doctor:
-	$(SYSTEM_PYTHON) scripts/check_local_environment.py
+	$(SYSTEM_PYTHON) tooling/automation/check_local_environment.py
 
 serve:
 	$(PYTHON) -m mkdocs serve
@@ -21,42 +21,42 @@ serve-web: build-site
 	$(PYTHON) -m http.server 8000 --directory site
 
 build-site:
-	$(PYTHON) scripts/build_site.py
+	$(PYTHON) tooling/automation/build_site.py
 
 sync-book-catalog:
-	$(PYTHON) scripts/sync_book_catalog.py
+	$(PYTHON) tooling/automation/sync_book_catalog.py
 
 check-book-catalog:
-	$(PYTHON) scripts/sync_book_catalog.py --check
+	$(PYTHON) tooling/automation/sync_book_catalog.py --check
 
 build-pdf:
-	$(PYTHON) scripts/build_pdf.py
+	$(PYTHON) tooling/automation/build_pdf.py
 
 build-docx:
-	$(PYTHON) scripts/build_docx.py
+	$(PYTHON) tooling/automation/build_docx.py
 
 build-all:
-	$(PYTHON) scripts/build_all.py
+	$(PYTHON) tooling/automation/build_all.py
 
 validate:
-	$(PYTHON) scripts/validate_repository_layout.py
-	$(PYTHON) scripts/validate_structure.py
-	$(PYTHON) scripts/validate_links.py
-	$(PYTHON) scripts/validate_java_examples.py
-	$(PYTHON) scripts/validate_web.py
-	$(PYTHON) scripts/validate_deployment.py
+	$(PYTHON) tooling/automation/validate_repository_layout.py
+	$(PYTHON) tooling/automation/validate_structure.py
+	$(PYTHON) tooling/automation/validate_links.py
+	$(PYTHON) tooling/automation/validate_java_examples.py
+	$(PYTHON) tooling/automation/validate_web.py
+	$(PYTHON) tooling/automation/validate_deployment.py
 
 validate-layout:
-	$(PYTHON) scripts/validate_repository_layout.py
+	$(PYTHON) tooling/automation/validate_repository_layout.py
 
 validate-web:
-	$(PYTHON) scripts/validate_web.py
+	$(PYTHON) tooling/automation/validate_web.py
 
 validate-code:
-	$(PYTHON) scripts/validate_java_examples.py
+	$(PYTHON) tooling/automation/validate_java_examples.py
 
 validate-deployment:
-	$(PYTHON) scripts/validate_deployment.py
+	$(PYTHON) tooling/automation/validate_deployment.py
 
 verify: validate build-site
 

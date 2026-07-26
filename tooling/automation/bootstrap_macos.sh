@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "$ROOT"
 
 if [[ "$(uname -s)" != "Darwin" ]]; then
-  echo "This bootstrap script supports macOS. See LOCAL_DEVELOPMENT.md for manual setup." >&2
+  echo "This bootstrap script supports macOS. See docs/project/local-development.md for manual setup." >&2
   exit 1
 fi
 
@@ -65,8 +65,8 @@ if [[ ! -x .venv/bin/python ]]; then
 fi
 
 .venv/bin/python -m pip install --upgrade pip
-.venv/bin/python -m pip install -r requirements.txt
-python3 scripts/check_local_environment.py
+.venv/bin/python -m pip install -r tooling/requirements/authoring.txt
+python3 tooling/automation/check_local_environment.py
 
 echo
 echo "Local environment is ready. Run 'make build-all' followed by 'make serve-web'."

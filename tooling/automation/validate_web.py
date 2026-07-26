@@ -13,8 +13,8 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 
-ROOT = Path(__file__).resolve().parents[1]
-WEB = ROOT / "web"
+ROOT = Path(__file__).resolve().parents[2]
+WEB = ROOT / "apps" / "portal"
 DOCS = ROOT / "docs"
 JAVA = (
     ROOT
@@ -68,7 +68,7 @@ def validate_local_assets(errors: list[str]) -> None:
             continue
         target = (WEB / relative_path).resolve()
         if WEB.resolve() not in target.parents and target != WEB.resolve():
-            fail(errors, f"Asset escapes web/: {reference}")
+            fail(errors, f"Asset escapes apps/portal/: {reference}")
         elif not target.is_file():
             fail(errors, f"Missing web asset: {reference}")
 
@@ -86,7 +86,7 @@ def validate_modules(errors: list[str]) -> None:
         return
 
     if not isinstance(modules, list):
-        fail(errors, "web/content/coding-foundations.json must contain a JSON array")
+        fail(errors, "apps/portal/content/coding-foundations.json must contain a JSON array")
         return
 
     expected_ids = [f"{number:02d}" for number in range(1, 20)]
@@ -156,7 +156,7 @@ def validate_modules(errors: list[str]) -> None:
 
 def validate_books(errors: list[str]) -> None:
     sync = subprocess.run(
-        [sys.executable, str(ROOT / "scripts" / "sync_book_catalog.py"), "--check"],
+        [sys.executable, str(ROOT / "tooling" / "automation" / "sync_book_catalog.py"), "--check"],
         cwd=ROOT,
         capture_output=True,
         text=True,
@@ -174,7 +174,7 @@ def validate_books(errors: list[str]) -> None:
     books = catalog.get("books")
     release = catalog.get("release")
     if not isinstance(books, list) or not isinstance(release, dict):
-        fail(errors, "web/content/books.json must contain release metadata and a books array")
+        fail(errors, "apps/portal/content/books.json must contain release metadata and a books array")
         return
     if len(books) != 28:
         fail(errors, f"Expected 28 focused books; found {len(books)}")

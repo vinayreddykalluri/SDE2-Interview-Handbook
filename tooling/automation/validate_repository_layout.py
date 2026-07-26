@@ -7,27 +7,66 @@ import sys
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 BACKEND_TRACK = ROOT / "docs" / "backend-interview"
 BOOK_ROOT = ROOT / "books" / "java-sde2-interview-preparation-series"
 
 REQUIRED_ROOT_FILES = {
     ".gitattributes",
     ".gitignore",
-    "CONTRIBUTING.md",
     "LICENSE",
     "LICENSE-CONTENT.md",
     "Makefile",
     "README.md",
     "mkdocs.yml",
-    "requirements.txt",
 }
 
 REQUIRED_ROOT_DIRECTORIES = {
     ".github",
+    "apps",
+    "books",
     "docs",
     "examples",
-    "books",
+    "tooling",
+}
+
+REQUIRED_COMMUNITY_FILES = {
+    ".github/CODE_OF_CONDUCT.md",
+    ".github/CONTRIBUTING.md",
+    ".github/SECURITY.md",
+    ".github/SUPPORT.md",
+    "docs/community/authors.md",
+    "docs/community/governance.md",
+}
+
+REQUIRED_PROJECT_FILES = {
+    "docs/project/deployment.md",
+    "docs/project/local-development.md",
+    "docs/project/roadmap.md",
+}
+
+REQUIRED_TOOLING_PATHS = {
+    "tooling/automation/build_site.py",
+    "tooling/automation/validate_repository_layout.py",
+    "tooling/mkdocs-overrides/main.html",
+    "tooling/publishing-templates/reference.docx",
+    "tooling/requirements/authoring.txt",
+    "tooling/requirements/portal.txt",
+}
+
+FORBIDDEN_ROOT_ENTRIES = {
+    "AUTHORS.md",
+    "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
+    "DEPLOYMENT.md",
+    "GOVERNANCE.md",
+    "LOCAL_DEVELOPMENT.md",
+    "ROADMAP.md",
+    "SECURITY.md",
+    "SUPPORT.md",
+    "overrides",
+    "requirements-web.txt",
+    "requirements.txt",
     "scripts",
     "templates",
     "web",
@@ -82,6 +121,16 @@ def main() -> int:
         if not (ROOT / name).is_dir():
             errors.append(f"Missing required root directory: {name}/")
 
+    for relative in sorted(
+        REQUIRED_COMMUNITY_FILES | REQUIRED_PROJECT_FILES | REQUIRED_TOOLING_PATHS
+    ):
+        if not (ROOT / relative).is_file():
+            errors.append(f"Missing canonical repository file: {relative}")
+
+    for name in sorted(FORBIDDEN_ROOT_ENTRIES):
+        if (ROOT / name).exists():
+            errors.append(f"Legacy root entry must not return: {name}")
+
     for page in [
         "index.md",
         "roadmap.md",
@@ -122,7 +171,7 @@ def main() -> int:
         BOOK_ROOT / "publishing" / "series.json",
         BOOK_ROOT / "content" / "README.md",
         BOOK_ROOT / "dist" / "manifest.json",
-        ROOT / "web" / "content" / "books.json",
+        ROOT / "apps" / "portal" / "content" / "books.json",
     ]:
         if not path.is_file():
             errors.append(f"Missing synchronized publication file: {path.relative_to(ROOT)}")
@@ -143,7 +192,7 @@ def main() -> int:
         return 1
 
     print(
-        "Repository layout passed: single Git root, "
+        "Repository layout passed: six intentional root sections, "
         f"{len(BACKEND_MODULES)} backend modules, {backend_page_count} curriculum pages, "
         f"{len(BOOK_DIRECTORIES)} canonical book sections"
     )

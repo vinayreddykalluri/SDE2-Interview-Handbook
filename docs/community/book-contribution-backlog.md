@@ -3,7 +3,7 @@
 The strongest beginner route is already published: Java Foundations, Time and Space Complexity, Number Systems, Bit Manipulation, Loop Mastery, and Arrays. The next community priority is to expand focused DSA volumes 07-17 from concise baselines into the same layered, publication-depth learning experience.
 
 [Open the contributor roadmap](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/27){ .md-button .md-button--primary }
-[Read the contribution guide](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/CONTRIBUTING.md){ .md-button }
+[Read the contribution guide](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/.github/CONTRIBUTING.md){ .md-button }
 
 ## Claim a module or a bounded contribution
 
@@ -25,4 +25,4 @@ You do not need to rewrite a complete book to contribute. Comment on the issue t
 
 Each issue lists the canonical source folder, topic-specific scope, acceptance criteria, exact validation commands, and publishing boundary. Improve the existing volume; do not create a parallel book or replace the working PDF framework.
 
-Accepted original work is credited through Git history, the pull request, and `AUTHORS.md`. Vinay Reddy Kalluri remains the founding author, Editor-in-Chief, and Chief Auditor; contributors retain individual credit for their work.
+Accepted original work is credited through Git history, the pull request, and `docs/community/authors.md`. Vinay Reddy Kalluri remains the founding author, Editor-in-Chief, and Chief Auditor; contributors retain individual credit for their work.

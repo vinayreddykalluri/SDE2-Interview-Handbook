@@ -2,7 +2,7 @@
 
 ## Outcome
 
-The handbook now has one discoverable home for each kind of work: curriculum under `docs/`, runnable website examples under `examples/`, the publication workspace under `books/`, static portal code under `web/`, and repository-wide automation under `scripts/`. The book workspace no longer mixes dozens of audits, master chapters, focused volumes, build metadata, Java projects, and release PDFs at one level.
+The handbook now has six intentional root sections: GitHub integration under `.github/`, deployable applications under `apps/`, publications under `books/`, curriculum and project guidance under `docs/`, runnable samples under `examples/`, and shared build infrastructure under `tooling/`. The root itself contains only repository entry points, licenses, and configuration that standard tools expect there.
 
 The website now reads a generated catalog derived from the same publishing manifest and PDF integrity manifest that build the books. This removes the former gap in which the portal described only the backend track and showed stale source counts while 30 published PDFs were difficult to discover.
 
@@ -18,10 +18,12 @@ At the audit point the repository contained 336 Markdown files, 106 Java files, 
 | Master and focused sources used unrelated `book/` and `series/volumes/` names | Source ownership was opaque | Consolidated under `content/master/` and `content/volumes/` |
 | Build output and public artifacts were nested below `series/` while the master PDF lived at root | Downloads and automation used inconsistent paths | Consolidated reviewed artifacts and `manifest.json` under `dist/` |
 | PDF files were treated as textual diffs by Git | Pull requests produced thousands of meaningless object-offset lines | Added `.gitattributes` binary rules for PDF, DOCX, and PNG artifacts |
-| Book package duplicated root governance, contribution, license, citation, security, and support files | Policy changes could drift | Kept GitHub-standard policy files at repository root and linked to them from the book workspace |
+| Book package duplicated repository governance, contribution, license, citation, security, and support files | Policy changes could drift | Kept one repository-level policy set and linked to it from the book workspace |
+| Portal, scripts, renderer templates, MkDocs overrides, and requirements were unrelated root siblings | The repository looked like a loose file collection | Grouped the portal under `apps/` and shared engineering infrastructure under `tooling/` |
+| Project guides and stewardship records were mixed with root configuration | The GitHub file list obscured the actual product areas | Moved project guides to `docs/project/`, stewardship records to `docs/community/`, and GitHub-recognized policies to `.github/` |
 | Several historical audit claims overstated later DSA volume depth | Contributors had no reliable backlog | Corrected the comprehensive audit and documented volumes 07–17 as published baselines needing expansion |
 | Portal exposed no structured book library | Readers could not navigate the publication from the web experience | Added a searchable, ordered catalog with page counts, source links, and release downloads |
-| Portal book data could be hand-maintained and drift | Website and PDFs could disagree | Added `scripts/sync_book_catalog.py` and validation of generated `web/content/books.json` |
+| Portal book data could be hand-maintained and drift | Website and PDFs could disagree | Added `tooling/automation/sync_book_catalog.py` and validation of generated `apps/portal/content/books.json` |
 | Validation encoded legacy book paths | Reorganization could silently break CI | Updated book scripts, CI paths, and repository-layout contracts |
 
 ## Book workspace migration map
@@ -42,19 +44,38 @@ At the audit point the repository contained 336 Markdown files, 106 Java files, 
 
 The old paths were moved with Git-aware renames. Removed duplicate policy files remain recoverable from Git history.
 
+## Repository-root migration map
+
+| Previous path | Canonical path |
+|---|---|
+| `web/` | `apps/portal/` |
+| `scripts/` | `tooling/automation/` |
+| `overrides/` | `tooling/mkdocs-overrides/` |
+| `templates/` | `tooling/publishing-templates/` |
+| `requirements.txt` | `tooling/requirements/authoring.txt` |
+| `requirements-web.txt` | `tooling/requirements/portal.txt` |
+| `DEPLOYMENT.md` | `docs/project/deployment.md` |
+| `LOCAL_DEVELOPMENT.md` | `docs/project/local-development.md` |
+| `ROADMAP.md` | `docs/project/roadmap.md` |
+| `AUTHORS.md` | `docs/community/authors.md` |
+| `GOVERNANCE.md` | `docs/community/governance.md` |
+| conduct, contribution, security, and support files | `.github/` |
+
+`README.md`, both licenses, `CITATION.cff`, `Makefile`, `mkdocs.yml`, and `vercel.json` remain at root because they are repository or tool entry points.
+
 ## Canonical synchronization contracts
 
 ### Coding-foundation module
 
-Keep the module directory under `docs/coding-foundations/`, its `mkdocs.yml` entry, `web/content/coding-foundations.json`, and its semantic Java package under `examples/java/` aligned.
+Keep the module directory under `docs/coding-foundations/`, its `mkdocs.yml` entry, `apps/portal/content/coding-foundations.json`, and its semantic Java package under `examples/java/` aligned.
 
 ### Published book
 
-Edit the canonical Markdown under `books/java-sde2-interview-preparation-series/content/`. Update `publishing/series.json` only for ordering, metadata, or source mapping. Rebuild the affected PDF and manifest, then run `make sync-book-catalog`. `web/content/books.json` is generated and must not be edited directly.
+Edit the canonical Markdown under `books/java-sde2-interview-preparation-series/content/`. Update `publishing/series.json` only for ordering, metadata, or source mapping. Rebuild the affected PDF and manifest, then run `make sync-book-catalog`. `apps/portal/content/books.json` is generated and must not be edited directly.
 
 ### Policy and authorship
 
-Repository-wide `AUTHORS.md`, `CONTRIBUTING.md`, `GOVERNANCE.md`, licenses, citation, conduct, security, and support files are canonical. The book README links to them. Vinay Reddy Kalluri remains creator, founding author, Editor-in-Chief, and Chief Auditor; accepted original contributors retain individual credit.
+Repository-wide authorship and governance records under `docs/community/`, GitHub community policies under `.github/`, and the root licenses and citation file are canonical. The book README links to them. Vinay Reddy Kalluri remains creator, founding author, Editor-in-Chief, and Chief Auditor; accepted original contributors retain individual credit.
 
 ## Open educational backlog
 

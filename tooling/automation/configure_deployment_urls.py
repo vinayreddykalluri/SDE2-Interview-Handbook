@@ -10,7 +10,7 @@ from pathlib import Path
 from urllib.parse import urlsplit
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 SITE = ROOT / "site"
 SOURCE_ORIGIN = "https://vinayreddykalluri.github.io/SDE2-Interview-Handbook"
 TEXT_SUFFIXES = {".html", ".json", ".js", ".txt", ".webmanifest", ".xml"}

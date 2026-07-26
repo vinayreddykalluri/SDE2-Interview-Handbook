@@ -173,8 +173,14 @@ nav:
       - Code Library: examples/README.md
       - Downloads and Printing: downloads.md
   - Project:
+      - Project Guides: project/index.md
+      - Local Development: project/local-development.md
+      - Deployment: project/deployment.md
+      - Project Roadmap: project/roadmap.md
       - Open Source and Licensing: community/open-source.md
       - Contributor Guide: community/contributing.md
+      - Authors and Editorial Credits: community/authors.md
+      - Governance: community/governance.md
       - Architecture: community/architecture.md
       - Repository Structure: community/repository-structure.md
       - Repository Organization Audit: community/repository-audit-2026-07.md
@@ -183,7 +189,7 @@ nav:
 
 theme:
   name: material
-  custom_dir: overrides
+  custom_dir: tooling/mkdocs-overrides
   logo: assets/images/s2-mark.svg
   favicon: assets/images/s2-mark.svg
   language: en

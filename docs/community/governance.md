@@ -36,7 +36,7 @@ Consistent contributors may be invited to maintain areas where they have demonst
 
 The default branch is the continuously published source of truth. Tagged releases may be used for stable book snapshots. GitHub Actions provides reproducible site and book artifacts from committed source.
 
-Published book sources and release PDFs live under `books/java-sde2-interview-preparation-series/`. Individual credit follows [AUTHORS.md](AUTHORS.md), Git history, and accepted pull requests.
+Published book sources and release PDFs live under `books/java-sde2-interview-preparation-series/`. Individual credit follows the [authorship record](authors.md), Git history, and accepted pull requests.
 
 ### Book release gates
 

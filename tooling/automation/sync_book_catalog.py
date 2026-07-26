@@ -10,11 +10,11 @@ from pathlib import Path
 from typing import Any
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 BOOK_ROOT = ROOT / "books" / "java-sde2-interview-preparation-series"
 SERIES_SPEC = BOOK_ROOT / "publishing" / "series.json"
 ARTIFACT_MANIFEST = BOOK_ROOT / "dist" / "manifest.json"
-OUTPUT = ROOT / "web" / "content" / "books.json"
+OUTPUT = ROOT / "apps" / "portal" / "content" / "books.json"
 REPOSITORY = "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook"
 BOOK_REPOSITORY_PATH = "books/java-sde2-interview-preparation-series"
 
@@ -110,7 +110,7 @@ def main() -> int:
     parser.add_argument(
         "--check",
         action="store_true",
-        help="Fail when web/content/books.json is not synchronized.",
+        help="Fail when apps/portal/content/books.json is not synchronized.",
     )
     args = parser.parse_args()
     expected = serialized_catalog()
@@ -118,7 +118,7 @@ def main() -> int:
     if args.check:
         if not OUTPUT.is_file() or OUTPUT.read_text(encoding="utf-8") != expected:
             print(
-                "Book catalog is stale. Run: python3 scripts/sync_book_catalog.py",
+                "Book catalog is stale. Run: make sync-book-catalog",
                 file=sys.stderr,
             )
             return 1

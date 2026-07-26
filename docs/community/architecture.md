@@ -8,10 +8,10 @@ The handbook is a content product with multiple renderers. Markdown and runnable
 flowchart LR
     Docs["docs/<br/>Canonical prose and diagrams"]
     Code["examples/<br/>Runnable reference code"]
-    Portal["web/<br/>Portal shell and learning metadata"]
-    Theme["overrides/<br/>MkDocs presentation"]
-    Templates["templates/<br/>Print presentation"]
-    Scripts["scripts/<br/>Build and validation"]
+    Portal["apps/portal/<br/>Portal shell and learning metadata"]
+    Theme["tooling/mkdocs-overrides/<br/>MkDocs presentation"]
+    Templates["tooling/publishing-templates/<br/>Print presentation"]
+    Scripts["tooling/automation/<br/>Build and validation"]
     Docs --> Scripts
     Code --> Scripts
     Portal --> Scripts
@@ -30,10 +30,10 @@ Generated outputs are disposable. A contributor should be able to remove `site/`
 |---|---|---|
 | `docs/` | Educational narrative, Mermaid diagrams, navigation targets, revision material | Compiled classes or copied portal assets |
 | `examples/` | Runnable implementations and tests | Long-form curriculum prose |
-| `web/` | Portal shell, responsive UX, search/filter metadata | Duplicate handbook chapters |
-| `overrides/` | Shared MkDocs page chrome and theme behavior | Curriculum content |
-| `scripts/` | Deterministic build and validation orchestration | Hidden source data that cannot be reviewed |
-| `templates/` | PDF/DOCX presentation inputs | Generated books |
+| `apps/portal/` | Portal shell, responsive UX, search/filter metadata | Duplicate handbook chapters |
+| `tooling/mkdocs-overrides/` | Shared MkDocs page chrome and theme behavior | Curriculum content |
+| `tooling/automation/` | Deterministic build and validation orchestration | Hidden source data that cannot be reviewed |
+| `tooling/publishing-templates/` | PDF/DOCX presentation inputs | Generated books |
 | `.github/` | Community intake, ownership, dependency policy, disabled automation definitions | Product source files |
 
 ## Curriculum Boundaries
@@ -42,7 +42,7 @@ Generated outputs are disposable. A contributor should be able to remove `site/`
 
 `docs/coding-foundations/` is the concept track. It organizes Java and algorithm mechanics in a stable numbered sequence.
 
-`examples/java/.../problemsolving/` contains code for the backend problem-solving track. `examples/java/.../codingfoundations/<topic>/` contains code for each coding-foundation module. Metadata in `web/content/coding-foundations.json` connects a documentation module to its semantic Java package.
+`examples/java/.../problemsolving/` contains code for the backend problem-solving track. `examples/java/.../codingfoundations/<topic>/` contains code for each coding-foundation module. Metadata in `apps/portal/content/coding-foundations.json` connects a documentation module to its semantic Java package.
 
 ## Local Delivery Pipeline
 
@@ -55,7 +55,7 @@ Generated outputs are disposable. A contributor should be able to remove `site/`
 
 GitHub workflow definitions are retained under `.github/workflows-disabled/` but are not executed. They move back to `.github/workflows/` only after explicit approval of the local product.
 
-Vercel is independent of GitHub Actions: it installs `requirements-web.txt`, runs the existing site builder, normalizes deployment URLs, and serves only `site/`.
+Vercel is independent of GitHub Actions: it installs `tooling/requirements/portal.txt`, runs the existing site builder, normalizes deployment URLs, and serves only `site/`.
 
 ## Design Constraints
 
@@ -64,6 +64,6 @@ Vercel is independent of GitHub Actions: it installs `requirements-web.txt`, run
 - Links must work under a GitHub project subpath and from the local portal.
 - Theme changes must preserve readable diagrams and code in light and dark modes.
 - Generated output, caches, and environments are never committed.
-- Root community files remain at the root because GitHub discovers them there.
+- GitHub community-health files remain under `.github/`, where GitHub discovers them automatically.
 
 See [Repository Structure](repository-structure.md) for change-routing and naming rules.

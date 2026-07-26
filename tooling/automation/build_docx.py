@@ -9,10 +9,10 @@ import zipfile
 from pathlib import Path
 from typing import List
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 DOCS = ROOT / "docs"
 OUTPUT = ROOT / "output"
-REFERENCE_DOC = ROOT / "templates" / "reference.docx"
+REFERENCE_DOC = ROOT / "tooling" / "publishing-templates" / "reference.docx"
 MODULE_DIRS = sorted(DOCS.glob("coding-foundations/[0-9][0-9]-*"), key=lambda p: p.name)
 
 

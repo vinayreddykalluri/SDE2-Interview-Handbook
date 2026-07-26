@@ -91,12 +91,12 @@ java -cp examples/java/build/classes com.interviewbook.examples.AllExamplesSmoke
 
 Repository-wide policies are canonical; the book workspace does not maintain competing copies.
 
-- [Contribution guide](../../CONTRIBUTING.md)
-- [Authors and individual credit](../../AUTHORS.md)
-- [Governance](../../GOVERNANCE.md)
-- [Code of Conduct](../../CODE_OF_CONDUCT.md)
-- [Security policy](../../SECURITY.md)
-- [Support](../../SUPPORT.md)
+- [Contribution guide](../../.github/CONTRIBUTING.md)
+- [Authors and individual credit](../../docs/community/authors.md)
+- [Governance](../../docs/community/governance.md)
+- [Code of Conduct](../../.github/CODE_OF_CONDUCT.md)
+- [Security policy](../../.github/SECURITY.md)
+- [Support](../../.github/SUPPORT.md)
 - [Citation metadata](../../CITATION.cff)
 - [Content license](../../LICENSE-CONTENT.md) and [code license](../../LICENSE)
 
@@ -106,4 +106,4 @@ The current expansion campaign is tracked in [issue #27](https://github.com/vina
 
 ## Editorial responsibility
 
-Vinay Reddy Kalluri is the series creator, founding author, Editor-in-Chief, and Chief Auditor. Individual contributors retain credit for accepted original work through [`../../AUTHORS.md`](../../AUTHORS.md), Git history, and pull requests.
+Vinay Reddy Kalluri is the series creator, founding author, Editor-in-Chief, and Chief Auditor. Individual contributors retain credit for accepted original work through the [repository authorship record](../../docs/community/authors.md), Git history, and pull requests.

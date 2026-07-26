@@ -19,4 +19,4 @@ Scripts are deterministic orchestration entry points. Use the stable `Makefile` 
 | `configure_deployment_urls.py` | Normalize canonical URLs in a hosted static artifact |
 | `validate_deployment.py` | Validate the Vercel build and dependency contract |
 
-Generated files belong in ignored output directories. `web/content/books.json` is the one committed generated metadata file because it gives static deployments a deterministic book catalog; use `--check` in validation. Scripts must not modify canonical documentation or source examples as a side effect of validation.
+Generated files belong in ignored output directories. `apps/portal/content/books.json` is the one committed generated metadata file because it gives static deployments a deterministic book catalog; use `--check` in validation. Automation must not modify canonical documentation or source examples as a side effect of validation.

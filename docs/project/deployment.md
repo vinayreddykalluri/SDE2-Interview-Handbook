@@ -6,11 +6,11 @@ The repository is configured as a static Vercel project. Vercel builds the same 
 
 `vercel.json` defines:
 
-- `installCommand`: install only the pinned website dependencies from `requirements-web.txt`;
+- `installCommand`: install only the pinned website dependencies from `tooling/requirements/portal.txt`;
 - `buildCommand`: build the portal and handbook, then normalize canonical deployment URLs;
 - `outputDirectory`: publish only `site/`.
 
-The full `requirements.txt` remains the local authoring and printable-book toolchain. Keeping the hosted dependency set separate avoids installing PDF and DOCX tooling during a static website build.
+The full `tooling/requirements/authoring.txt` manifest remains the local authoring and printable-book toolchain. Keeping the hosted dependency set separate avoids installing PDF and DOCX tooling during a static website build.
 
 ## Import from GitHub
 
@@ -29,7 +29,7 @@ The full `requirements.txt` remains the local authoring and printable-book toolc
 make validate-deployment
 make build-site
 PUBLIC_SITE_URL=https://handbook.example.com \
-  .venv/bin/python scripts/configure_deployment_urls.py --check
+  .venv/bin/python tooling/automation/configure_deployment_urls.py --check
 ```
 
 The check is read-only. A real Vercel build runs the URL normalizer without `--check` after `site/` is created.

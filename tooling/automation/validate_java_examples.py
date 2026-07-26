@@ -7,7 +7,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 JAVA_ROOT = ROOT / "examples" / "java" / "src"
 MAIN_ROOT = JAVA_ROOT / "main" / "java"
 TEST_ROOT = JAVA_ROOT / "test" / "java"

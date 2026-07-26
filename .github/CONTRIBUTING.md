@@ -2,12 +2,12 @@
 
 ## Start with the repository map
 
-Read [the repository structure guide](docs/community/repository-structure.md) before moving or adding files. Documentation, runnable code, the portal shell, build tooling, and generated output have separate ownership boundaries. The [project roadmap](ROADMAP.md) lists current contribution priorities.
+Read [the repository structure guide](../docs/community/repository-structure.md) before moving or adding files. Documentation, runnable code, the portal shell, build tooling, and generated output have separate ownership boundaries. The [project roadmap](../docs/project/roadmap.md) lists current contribution priorities.
 
 
 Contributions to explanations, diagrams, exercises, Java examples, automation, accessibility, and editorial quality are welcome.
 
-The independently navigable PDF series and its canonical sources live under [`books/java-sde2-interview-preparation-series/`](books/java-sde2-interview-preparation-series/). Book contributions should improve an existing canonical source rather than create a competing copy.
+The independently navigable PDF series and its canonical sources live under [`books/java-sde2-interview-preparation-series/`](../books/java-sde2-interview-preparation-series/). Book contributions should improve an existing canonical source rather than create a competing copy.
 
 By participating, you agree to follow the [Code of Conduct](CODE_OF_CONDUCT.md).
 
@@ -48,7 +48,7 @@ Windows PowerShell users can activate the environment with `.venv\Scripts\Activa
 - Keep valid complete Java examples compiling and isolate intentionally invalid snippets.
 - Update the affected audit, coverage, validation, changelog, or build evidence in proportion to the change.
 - Rebuild and inspect affected PDFs when prose, code, tables, diagrams, covers, links, or navigation change.
-- Add publication-level individual credit to [AUTHORS.md](AUTHORS.md) when the contribution qualifies.
+- Add publication-level individual credit to the [authorship record](../docs/community/authors.md) when the contribution qualifies.
 
 ### Book contribution workflow
 
@@ -102,4 +102,4 @@ Maintainers review technical accuracy, interview relevance, production realism, 
 
 ## Licensing
 
-Code and tooling contributions are accepted under the [MIT License](LICENSE). Documentation and diagram contributions are accepted under [CC BY 4.0](LICENSE-CONTENT.md). By submitting a contribution, you confirm that you have the right to license it under the applicable terms.
+Code and tooling contributions are accepted under the [MIT License](../LICENSE). Documentation and diagram contributions are accepted under [CC BY 4.0](../LICENSE-CONTENT.md). By submitting a contribution, you confirm that you have the right to license it under the applicable terms.

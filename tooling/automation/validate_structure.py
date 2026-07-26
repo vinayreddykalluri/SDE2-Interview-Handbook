@@ -11,7 +11,7 @@ from typing import Any
 import yaml
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 DOCS = ROOT / "docs"
 FOUNDATIONS = DOCS / "coding-foundations"
 BACKEND = DOCS / "backend-interview"
