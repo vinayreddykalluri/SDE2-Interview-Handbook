@@ -46,5 +46,5 @@
 - [x] Updated cover/index preview rendered and inspected
 - [x] Canonical book package isolated under `books/java-sde2-interview-preparation-series/`
 - [x] Existing public `SDE2-Interview-Handbook` repository selected as the single home
-- [ ] Consolidation branch pushed and release pull request opened
+- [x] Consolidation branch pushed and release pull request opened
 - [x] Consolidated repository topics, Discussions, and vulnerability reporting verified
