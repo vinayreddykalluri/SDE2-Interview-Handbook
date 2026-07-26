@@ -5,12 +5,12 @@ on:
     branches: [ master ]
     paths:
       - 'docs/**'
-      - 'web/**'
+      - 'apps/portal/**'
       - 'examples/java/**'
-      - 'scripts/validate_*.py'
-      - 'scripts/build_site.py'
+      - 'tooling/automation/validate_*.py'
+      - 'tooling/automation/build_site.py'
       - 'mkdocs.yml'
-      - 'requirements.txt'
+      - 'tooling/requirements/**'
       - 'Makefile'
       - '.github/workflows/deploy-pages.yml'
   workflow_dispatch:
@@ -50,7 +50,7 @@ jobs:
       - name: Install documentation dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -r requirements.txt
+          python -m pip install -r tooling/requirements/authoring.txt
 
       - name: Validate source
         run: make validate

@@ -34,11 +34,10 @@ except ImportError as exc:  # pragma: no cover - dependency boundary
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SERIES = ROOT / "series"
-DEFAULT_DIST = Path("series/dist")
-DEFAULT_SPEC = Path("series/series.json")
-DEFAULT_MASTER = Path("java-sde2-interview-book.pdf")
-DEFAULT_OUTPUT = Path("series/tmp/pdfs/semantic-layout-qa")
+DEFAULT_DIST = Path("dist")
+DEFAULT_SPEC = Path("publishing/series.json")
+DEFAULT_MASTER = Path("dist/java-sde2-interview-book.pdf")
+DEFAULT_OUTPUT = Path("tmp/pdfs/semantic-layout-qa")
 INDEX_NAME = "Java-SDE2-Interview-Preparation-Series-Index.pdf"
 
 LANGUAGE_LABEL = re.compile(
@@ -162,7 +161,7 @@ def semantic_category(text: str) -> str:
 def collect_headings(root: Path) -> dict[str, dict[str, Any]]:
     """Collect source H2/H3 labels used to distinguish headings from bold prose."""
     result: dict[str, dict[str, Any]] = {}
-    roots = (root / "book", root / "series" / "volumes")
+    roots = (root / "content" / "master", root / "content" / "volumes")
     for source_root in roots:
         if not source_root.exists():
             continue
@@ -919,7 +918,7 @@ def load_documents(
     spec_path: Path,
     include_patterns: Sequence[str],
 ) -> tuple[list[Document], list[str]]:
-    """Discover the master and every PDF physically present in series/dist."""
+    """Discover the master and every PDF physically present in dist."""
     expected: dict[str, tuple[str, str]] = {}
     expected_order: list[str] = []
     warnings: list[str] = []
@@ -939,6 +938,8 @@ def load_documents(
         warnings.append(f"Master PDF not found: {master}")
 
     discovered = {path.name: path for path in dist.glob("*.pdf")} if dist.exists() else {}
+    # The master is intentionally stored beside release PDFs; it was already added above.
+    discovered.pop(master.name, None)
     for filename in sorted(set(expected) - set(discovered)):
         warnings.append(f"Expected focused PDF not found: {dist / filename}")
     if INDEX_NAME not in discovered:
@@ -1088,11 +1089,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--core-start-max-page",
         type=int,
-        default=4,
+        default=5,
         help="Latest acceptable Chapter 1 page in focused volumes",
     )
     parser.add_argument(
-        "--index-max-pages", type=int, default=12, help="Maximum series-index pages"
+        "--index-max-pages", type=int, default=13, help="Maximum series-index pages"
     )
     parser.add_argument(
         "--heading-bottom-zone",

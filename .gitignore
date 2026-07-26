@@ -19,9 +19,8 @@ examples/java/out/
 books/java-sde2-interview-preparation-series/build/
 books/java-sde2-interview-preparation-series/tmp/
 books/java-sde2-interview-preparation-series/output/
-books/java-sde2-interview-preparation-series/series/build/
-books/java-sde2-interview-preparation-series/series/tmp/
-books/java-sde2-interview-preparation-series/code-examples/build/
+books/java-sde2-interview-preparation-series/examples/java/build/
+books/java-sde2-interview-preparation-series/examples/java/target/
 
 # OS and editors
 .DS_Store

@@ -2,7 +2,7 @@ version: 2
 
 updates:
   - package-ecosystem: "pip"
-    directory: "/"
+    directory: "/tooling/requirements"
     target-branch: "master"
     schedule:
       interval: "monthly"

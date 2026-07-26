@@ -13,9 +13,8 @@ from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SERIES = ROOT / "series"
-DIST = SERIES / "dist"
-SPEC = SERIES / "series.json"
+DIST = ROOT / "dist"
+SPEC = ROOT / "publishing" / "series.json"
 INDEX_NAME = "Java-SDE2-Interview-Preparation-Series-Index.pdf"
 
 

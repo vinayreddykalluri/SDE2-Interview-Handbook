@@ -62,7 +62,9 @@ Expected combined outputs:
 - `output/combined/SDE2-Interview-Handbook.pdf`
 - `output/combined/SDE2-Interview-Handbook.docx`
 
-individual module books are written to `output/pdf/` and `output/docx/`. Remote artifacts are intentionally unavailable while GitHub Actions remain disabled; build and inspect the books locally.
+Individual website-derived module books are written to `output/pdf/` and `output/docx/`. Build and inspect those outputs locally when changing handbook Markdown.
+
+The publication-ready Java and DSA series is separate from those website-derived builds. Download its 30 reviewed PDFs from the [latest release](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest), or browse the canonical files under `books/java-sde2-interview-preparation-series/dist/`.
 
 ## Recommended interview loop
 

@@ -11,7 +11,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "diagrams"
+OUT = ROOT / "assets" / "diagrams"
 
 W, H = 1800, 1080
 NAVY = "#0B2545"

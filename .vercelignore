@@ -1,10 +1,10 @@
 .git/
-.github/workflows-disabled/
+.github/
 .venv/
-examples/
+books/
 output/
 site/
-templates/
+tooling/publishing-templates/
 __pycache__/
 *.class
 *.docx
