@@ -27,6 +27,7 @@ REQUIRED_PACKAGES = {
     "pygments",
     "pyyaml",
 }
+ACTIVE_WORKFLOW_ALLOWLIST = {"validate-books.yml"}
 
 
 def main() -> int:
@@ -58,8 +59,19 @@ def main() -> int:
     if any("==" not in line for line in lines if line.strip() and not line.startswith("#")):
         errors.append("Every hosted dependency must use an exact == pin")
 
-    if (ROOT / ".github" / "workflows").exists():
-        errors.append("GitHub Actions must remain disabled under .github/workflows-disabled/")
+    workflows_dir = ROOT / ".github" / "workflows"
+    active_workflows = (
+        {path.name for path in workflows_dir.glob("*.yml")}
+        | {path.name for path in workflows_dir.glob("*.yaml")}
+        if workflows_dir.exists()
+        else set()
+    )
+    unexpected_workflows = sorted(active_workflows - ACTIVE_WORKFLOW_ALLOWLIST)
+    if unexpected_workflows:
+        errors.append(
+            "Website and deployment GitHub Actions must remain disabled; "
+            f"unexpected active workflows: {unexpected_workflows}"
+        )
 
     for relative in [
         "scripts/build_site.py",

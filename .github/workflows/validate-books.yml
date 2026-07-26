@@ -1,0 +1,62 @@
+name: Validate published books
+
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - "books/java-sde2-interview-preparation-series/**"
+      - ".github/workflows/validate-books.yml"
+  push:
+    branches: [master]
+    paths:
+      - "books/java-sde2-interview-preparation-series/**"
+      - ".github/workflows/validate-books.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: published-books-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: books/java-sde2-interview-preparation-series
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: books/java-sde2-interview-preparation-series/requirements.txt
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Install book dependencies
+        run: python -m pip install --upgrade pip && python -m pip install -r requirements.txt
+
+      - name: Validate master sources
+        run: python scripts/validate_book.py --source-only
+
+      - name: Validate focused series and Java companions
+        run: python scripts/validate_series.py --source-only
+
+      - name: Compile master Java examples
+        run: |
+          mkdir -p code-examples/build/classes
+          find code-examples/src/main/java -name '*.java' -print0 \
+            | xargs -0 javac --release 21 -Xlint:all -Werror -d code-examples/build/classes
+          java -cp code-examples/build/classes com.interviewbook.examples.AllExamplesSmokeTest

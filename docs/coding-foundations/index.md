@@ -57,3 +57,12 @@ flowchart LR
 
 For interview-level integration, continue with [Programming Problem Solving](../backend-interview/01-programming-problem-solving/index.md).
 
+
+## Consistent Module Structure
+
+Modules 02-19 use a repeatable foundation-to-deep-dive learning flow. Arrays extends this structure with three additional chapters: fundamentals, a DSA pattern catalog, and an advanced interview playbook.
+
+1. **Foundation chapter:** build the mental model, terminology, and baseline implementation.
+2. **Interview deep dive:** apply decision rules, invariants, correctness proofs, worked traces, production trade-offs, model questions and answers, and a progressive practice ladder.
+
+Each deep dive links directly to its semantic Java reference implementation, keeping readable handbook content separate from runnable source code.

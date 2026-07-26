@@ -1,0 +1,42 @@
+# Java Fundamentals Content Changelog
+
+Revision date: 2026-07-26  
+Scope: canonical Volume 03 only  
+Publishing system: preserved; shared cover artwork and author page enhanced
+
+| Final chapter/area | Original weakness | Change made | Examples added | Exercises added | Accuracy correction or strengthening | Content moved | Cross-reference added |
+|---|---|---|---|---|---|---|---|
+| Cover and metadata | Subtitle did not communicate beginner-to-SDE-2 fundamentals scope | Updated subtitle, deck, topic line, purpose, outcomes, and practice ladder; applied the shared modern cover artwork while preserving title/filename | none | none | Qualified scope and Java 21 target | none | recommended learning path |
+| 1 - Java and Program Foundations | No beginner entry, execution model, `main`, or failure-stage explanation | Added Java-for-DSA rationale, JDK/JRE/JVM model, first complete program, line-by-line reading, dry run, and error taxonomy | first program, argument sum, invalid local | K01-K06, C01, related output/debug/follow-up items | Rejected absolute speed/platform-independence claims; distinguished fields from locals | none | JVM and Advanced Java |
+| 2 - Variables, Primitive Types, Literals, Numeric Semantics | Strong but previously first chapter without prerequisites | Preserved after the new runway | companion examples 02-07 reinforce it | Lab A | Repeated exact promotion/overflow rules | shifted later in Volume 03 sequence only | Number Systems/JVM |
+| 3 - Operators, Expressions, Control Flow | Strong but practice volume was small | Preserved and connected to tagged output/debug tasks | examples 08-17 | Lab A | Reinforced short-circuit, compound-cast, division, termination behavior | none | Bit Manipulation/Loop Mastery |
+| 4 - Methods, Overloading, Varargs, Pass-by-value | Correct but pass-by-value cases were not presented as one beginner trio | Preserved and paired with primitive, shared-mutation, and reference-reassignment examples | examples 18-22 | Lab A | Explicitly states Java is always pass-by-value | none | Recursion/JVM |
+| 5 - Arrays, Strings, Text Blocks, Unicode | Strong but dense | Preserved and paired with object/reference practice | examples 23-31 | Lab B | Strengthened aliasing, shallow-copy, String identity, and Unicode contracts | none | Arrays and Strings volumes |
+| 6 - Practice Lab A | Missing measurable language practice | Added 25 knowledge, 19 output, 19 debug, 19 coding, 13 follow-up items and cumulative assessment 1 | references examples 01-22 | 96 tagged items + A01 | Requires a rule and boundary test, not recall alone | new volume-native content | chapters 1-5 and Solution Studio A |
+| 7 - Classes, Objects, and OOP Foundations | Entire object-oriented runway missing | Added classes/objects, constructors, `this`, static, access, packages, encapsulation, inheritance, polymorphism, abstraction, interfaces, composition, equality, hashing, immutability | examples 32-43 | Lab B | Corrected common myths about pass-by-reference, default constructors, abstract constructors, interface bodies, multiple class inheritance, static/field dispatch, and final/immutability | focused material added rather than importing deep master OOP chapters | LLD, Advanced Java, Hashing |
+| 8 - Practice Lab B | No distributed object/array/string drill path | Added 25 knowledge, 19 output, 19 debug, 19 coding, 13 follow-up items and cumulative assessment 2 | references examples 23-43 | 96 tagged items + A02 | Makes alias/copy/dispatch/equality rules explicit | new volume-native content | chapters 5 and 7; Solution Studio B |
+| 9 - Wrappers, Generics, Enums, Collections, I/O, Utilities | Wrappers shallow; generics/enums/I/O absent; collection introduction architecture-first | Added usage-first library runway and utility caveats | examples 44-59 | Lab C | Corrected wrapper identity/null, raw generic, LinkedList, HashMap complexity, PriorityQueue iteration, Stack, comparator, and Arrays.asList folklore | focused material precedes existing deep collection chapters | Hashing, Stacks, Queues, Heaps, Collections Internals, I/O |
+| 10 - Java Collections Basics for SDE-2 Interviews | Missing complete usage-first runway | Added interfaces versus implementations, List/Set/Map/Queue/Deque/PriorityQueue APIs, ordering, update methods, iterator removal, factories, copies/views, conversions, traps, and decision guide | examples 61-70 plus chapter examples | 8 focused practice prompts | Corrected remove-overload, fixed-size/unmodifiable, PriorityQueue iteration, mutable-key, null, and comparator misconceptions | inserted before architecture | Complexity/Hashing/Stacks/Queues/Heaps |
+| 11 - Exceptions | Strong | Preserved and supported by new boundary/ownership drills | examples 55-57 | Lab C | Reinforced catch ordering, broad-catch risk, finally limits, ownership | none | Advanced Java/JVM |
+| 12 - Collections Architecture | Too advanced for first collection exposure | Preserved after the dedicated basic-usage chapter and basic generics | examples 48-53 and 61-70 supply prerequisite use | Lab C plus chapter drills | Qualified cost and null/order/mutation policies | moved later relative to new prerequisites | collection-specific books |
+| 13 - Comparable/Comparator | Strong | Preserved and tied directly to comparator-overflow trap | safe comparator and heap examples | Lab C and D | Explicitly forbids subtraction comparator | none | Collections/Heaps |
+| 14 - Practice Lab C | Missing library/I/O practice | Added 25 knowledge, 19 output, 19 debug, 19 coding, 12 follow-up items and cumulative assessments 3-4 | references examples 44-59 and 61-70 | 95 tagged items + A03-A04 plus collection chapter drills | Resource ownership and contract-first collection choice required | new volume-native content | chapters 9-13 and Solution Studio C |
+| 15 - Java Coding Interview Playbook | Strong but no final executable refactor/readiness link | Preserved and connected to example 60 and final assessment | example 60 | C75, F50, A05/final | Safer accumulator/type/contract example | none | all later DSA volumes |
+| 16 - Forty Java Interview Traps | Traps scattered across chapters | Added one comprehensive prediction/explanation/correction/follow-up chapter | 40 runnable or intentionally guarded snippets | Lab D | Covers all 40 required behavior traps with version/contract nuance | consolidated without removing original detail | topic-specific volumes |
+| 17 - Practice Lab D | No full-volume retrieval test | Added 25 knowledge, 18 output, 18 debug, 18 coding, 12 follow-ups, A05, and final readiness assessment | references all 70 | 91 tagged items + A05 + final | Makes foundational misconceptions disqualifying even with a high raw score | new volume-native content | all earlier chapters |
+| 18-21 - Solution Studios | Solutions were only local/model Q&A, not a separated practice key | Added four delayed reasoning guides matching all tagged banks | selected implementation guidance | answers K01-K100, O01-O75, D01-D75, C01-C75, F01-F50, assessments | Every answer names the rule or contract | separated from immediate prompts | practice labs A-D |
+| 22 - Quick Reference | Strong | Preserved as end-of-learning reference | existing | existing | none | moved after solution studios in volume order | all subject chapters |
+| 23 - Seventy Compiling Java Fundamentals Examples | No Volume 03 executable companion | Added dependency-free Java 21 source with seventy named checks and one deterministic result | all 60 mandatory categories plus 10 collection-usage checks | executable assertions | Compiles with all lint warnings treated as errors | companion extended through existing builder | chapters 1-22 |
+| Entry-page UX | Long first list moved to next page, leaving sparse-looking lab/solution openings | Added concise Start Here/How to Review guidance to all eight affected chapters | none | usage routes | No layout-system change; repaired the content-induced pagination effect | none | named lab/solution pairing |
+
+## Net additions
+
+- Five focused teaching chapters.
+- Four distributed practice labs.
+- Four separated reasoning solution studios.
+- One Java 21 companion with 70 named executable examples.
+- Forty consolidated Java interview traps.
+- 381 structured practice/assessment items.
+- Explicit routes to eleven later book families.
+
+No master book chapter was rewritten merely to satisfy page count. Strong existing material remained canonical and was placed after the prerequisites it needs.

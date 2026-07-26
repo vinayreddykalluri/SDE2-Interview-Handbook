@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If this series supports your teaching, study, or research, cite it using this metadata."
+title: "Java SDE-2 Interview Preparation Series"
+type: book
+authors:
+  - family-names: "Kalluri"
+    given-names: "Vinay Reddy"
+    alias: "vinayreddykalluri"
+    website: "https://www.linkedin.com/in/vinayreddykalluri/"
+abstract: "An open-source, basics-to-advanced Java 21 and data-structures interview-preparation book series for SDE-2 candidates."
+date-released: 2026-07-26
+license: CC-BY-4.0
+repository-code: "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook"
+url: "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook"
+keywords:
+  - Java
+  - Java 21
+  - SDE-2
+  - data structures
+  - algorithms
+  - interview preparation
+  - backend engineering

@@ -4,6 +4,7 @@ The SDE2 Interview Handbook is an open-source learning system for engineers who 
 
 [Start the guided study path](getting-started.md){ .md-button .md-button--primary }
 [Browse runnable Java](examples/README.md){ .md-button }
+[Download the book series](books.md){ .md-button }
 
 ## Choose your path
 
@@ -15,6 +16,7 @@ The SDE2 Interview Handbook is an open-source learning system for engineers who 
 | revise in a limited time | the study plan and each chapter's one-page summary |
 | inspect or run implementations | the separate code library |
 | print or annotate offline | Downloads and Printing |
+| study through individually navigable Java/DSA books | Published Java SDE-2 Book Series |
 
 ## The complete learning sequence
 

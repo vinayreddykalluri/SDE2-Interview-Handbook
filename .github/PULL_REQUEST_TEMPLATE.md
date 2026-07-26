@@ -6,6 +6,7 @@ Describe the learner, contributor, or build problem and the change that addresse
 
 - [ ] Documentation or diagram
 - [ ] Java example or smoke check
+- [ ] Published book source, exercise, diagram, or PDF
 - [ ] Validation or build tooling
 - [ ] GitHub workflow or community health
 
@@ -18,6 +19,7 @@ Explain the invariant, source, standard, or implementation detail used to establ
 - [ ] `make validate`
 - [ ] `make build-site`
 - [ ] `make build-all`, when print output changed
+- [ ] Book-specific source and Java validation, when `books/` changed
 - [ ] Manual visual or artifact inspection, when applicable
 
 List any check that was not run and why.
@@ -27,6 +29,7 @@ List any check that was not run and why.
 - [ ] I created this contribution or have the right to submit it.
 - [ ] External sources and adaptations are attributed.
 - [ ] No proprietary interview material, private data, generated artifacts, or secrets are included.
+- [ ] Individual authorship credit and AI assistance are disclosed where applicable.
 
 ## Screenshots or artifact notes
 

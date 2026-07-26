@@ -11,7 +11,7 @@ body:
     attributes:
       label: Chapter or page
       description: Include the volume, chapter, heading, and URL when available.
-      placeholder: "Volume 13, Binary Search Framework, Loop Invariant"
+      placeholder: "Book Volume 05, Loop Invariants, or Coding Foundations Module 13"
     validations:
       required: true
 

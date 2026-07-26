@@ -21,10 +21,13 @@ flowchart LR
 - Identify the exact chapter, example, or build behavior affected.
 - For major structural changes, open an issue before investing in a large patch.
 - Read the root [CONTRIBUTING.md](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/CONTRIBUTING.md).
+- For book changes, identify the canonical source under `books/java-sde2-interview-preparation-series/` and avoid creating a duplicate volume.
 
 ## Definition of done
 
 A contribution is complete when the explanation is accurate, terminology is consistent, diagrams render, code compiles, links resolve, required chapter sections remain present, and the pull request states how the change was checked.
+
+Publication-level contributors are credited individually. AI-assisted work must be disclosed, reviewed, understood, and owned by the human submitter.
 
 ## Good content changes
 

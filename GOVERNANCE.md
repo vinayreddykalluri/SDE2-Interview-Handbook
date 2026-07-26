@@ -4,7 +4,19 @@
 
 The SDE2 Interview Handbook exists to provide accurate, practical, freely reusable preparation material for experienced software engineers.
 
-## Roles
+## Editorial leadership
+
+### Editor-in-Chief — Vinay Reddy Kalluri
+
+The Editor-in-Chief owns curriculum sequence, publication scope, voice, accessibility, contributor credit, and final editorial decisions across the handbook and published books.
+
+### Chief Auditor — Vinay Reddy Kalluri
+
+The Chief Auditor owns Java and API accuracy, executable evidence, complexity claims, PDF quality, attribution checks, and release-readiness approval. The auditor may block a release for unresolved correctness, licensing, privacy, build, or readability defects.
+
+The same person may hold both roles, but editorial and technical-audit responsibilities remain distinct release gates.
+
+## Community roles
 
 - Maintainers set project direction, merge changes, publish releases, and enforce community policies.
 - Contributors improve content, code, diagrams, automation, accessibility, and review quality.
@@ -14,7 +26,7 @@ The SDE2 Interview Handbook exists to provide accurate, practical, freely reusab
 
 Routine changes are decided through pull-request review. Significant changes to licensing, chapter architecture, supported Java versions, or publishing systems should begin with a public issue so trade-offs can be discussed before implementation.
 
-The maintainer has final responsibility for repository integrity and releases. Decisions should be documented in issues or pull requests and favor technical correctness, learner value, maintainability, and open access.
+The Editor-in-Chief has final editorial responsibility. The Chief Auditor has final technical release-gate responsibility. Decisions should be documented in issues or pull requests and favor technical correctness, learner value, maintainability, individual credit, and open access.
 
 ## Becoming a maintainer
 
@@ -23,6 +35,8 @@ Consistent contributors may be invited to maintain areas where they have demonst
 ## Releases
 
 The default branch is the continuously published source of truth. Tagged releases may be used for stable book snapshots. GitHub Actions provides reproducible site and book artifacts from committed source.
+
+Published book sources and release PDFs live under `books/java-sde2-interview-preparation-series/`. Individual credit follows [AUTHORS.md](AUTHORS.md), Git history, and accepted pull requests.
 
 ## Changes to governance
 

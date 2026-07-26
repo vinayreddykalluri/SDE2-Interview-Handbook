@@ -14,6 +14,7 @@ nav:
       - Backend Readiness Matrix: backend-interview/readiness-matrix.md
       - 12-Week Backend Roadmap: backend-interview/roadmap.md
       - General Study Plan: study-plan.md
+      - Published Java SDE-2 Books: books.md
   - Backend Interview Journey:
       - Journey Overview: backend-interview/index.md
       - Structured Revision System: backend-interview/revision-system.md
@@ -90,59 +91,80 @@ nav:
           - Complexity Analysis:
               - Overview: coding-foundations/02-complexity/index.md
               - Time and Space Analysis: coding-foundations/02-complexity/01-time-space-analysis.md
+              - Interview Deep Dive and Q&A: coding-foundations/02-complexity/02-interview-deep-dive.md
           - Math Foundations:
               - Overview: coding-foundations/03-math/index.md
               - Core Math: coding-foundations/03-math/01-math-foundations.md
+              - Interview Deep Dive and Q&A: coding-foundations/03-math/02-interview-deep-dive.md
           - Loop Reasoning:
               - Overview: coding-foundations/04-loop-reasoning/index.md
               - Loop Patterns and Pitfalls: coding-foundations/04-loop-reasoning/01-loop-patterns.md
+              - Interview Deep Dive and Q&A: coding-foundations/04-loop-reasoning/02-interview-deep-dive.md
           - Index Calculations:
               - Overview: coding-foundations/05-indexing/index.md
               - Indexing in Practice: coding-foundations/05-indexing/01-indexing-in-practice.md
+              - Interview Deep Dive and Q&A: coding-foundations/05-indexing/02-interview-deep-dive.md
           - Bit Manipulation:
               - Overview: coding-foundations/06-bit-manipulation/index.md
               - Bitwise Cookbook: coding-foundations/06-bit-manipulation/01-bitwise-cookbook.md
+              - Interview Deep Dive and Q&A: coding-foundations/06-bit-manipulation/02-interview-deep-dive.md
       - Linear Data Patterns:
           - Arrays:
               - Overview: coding-foundations/07-arrays/index.md
               - Array Mental Model: coding-foundations/07-arrays/01-array-mental-model.md
+              - Interview Deep Dive and Q&A: coding-foundations/07-arrays/02-interview-deep-dive.md
+              - Array Foundations: coding-foundations/07-arrays/03-array-foundations.md
+              - Array DSA Pattern Catalog: coding-foundations/07-arrays/04-array-dsa-patterns.md
+              - Advanced Arrays Interview Playbook: coding-foundations/07-arrays/05-advanced-array-interview-playbook.md
           - Strings:
               - Overview: coding-foundations/08-strings/index.md
               - String Internals and Patterns: coding-foundations/08-strings/01-string-internals-and-patterns.md
+              - Interview Deep Dive and Q&A: coding-foundations/08-strings/02-interview-deep-dive.md
           - Hashing:
               - Overview: coding-foundations/09-hashing/index.md
               - Hashing Intuition and Collisions: coding-foundations/09-hashing/01-hashing-intuition-and-collision-strategy.md
+              - Interview Deep Dive and Q&A: coding-foundations/09-hashing/02-interview-deep-dive.md
           - Sliding Window:
               - Overview: coding-foundations/10-sliding-window/index.md
               - Sliding Window Patterns: coding-foundations/10-sliding-window/01-sliding-window-patterns.md
+              - Interview Deep Dive and Q&A: coding-foundations/10-sliding-window/02-interview-deep-dive.md
           - Two Pointers:
               - Overview: coding-foundations/11-two-pointers/index.md
               - Two-Pointer Patterns: coding-foundations/11-two-pointers/01-two-pointers-patterns.md
+              - Interview Deep Dive and Q&A: coding-foundations/11-two-pointers/02-interview-deep-dive.md
           - Prefix Sum:
               - Overview: coding-foundations/12-prefix-sum/index.md
               - Prefix Sum and Difference: coding-foundations/12-prefix-sum/01-prefix-sum-and-difference.md
+              - Interview Deep Dive and Q&A: coding-foundations/12-prefix-sum/02-interview-deep-dive.md
           - Binary Search:
               - Overview: coding-foundations/13-binary-search/index.md
               - Binary Search Framework: coding-foundations/13-binary-search/01-binary-search-framework.md
+              - Interview Deep Dive and Q&A: coding-foundations/13-binary-search/02-interview-deep-dive.md
       - Structural Data Patterns:
           - Stacks and Recursion:
               - Overview: coding-foundations/14-stacks-recursion/index.md
               - Stack and Recursion Patterns: coding-foundations/14-stacks-recursion/01-stack-and-recursion.md
+              - Interview Deep Dive and Q&A: coding-foundations/14-stacks-recursion/02-interview-deep-dive.md
           - Queues and Deques:
               - Overview: coding-foundations/15-queues-deques/index.md
               - Queues, Deques, and Buffers: coding-foundations/15-queues-deques/01-queues-deques-and-buffers.md
+              - Interview Deep Dive and Q&A: coding-foundations/15-queues-deques/02-interview-deep-dive.md
           - Linked Lists:
               - Overview: coding-foundations/16-linked-lists/index.md
               - Linked List Patterns: coding-foundations/16-linked-lists/01-linked-list-patterns.md
+              - Interview Deep Dive and Q&A: coding-foundations/16-linked-lists/02-interview-deep-dive.md
           - Trees:
               - Overview: coding-foundations/17-trees/index.md
               - Trees and Recursive Structure: coding-foundations/17-trees/01-trees-and-recursive-structure.md
+              - Interview Deep Dive and Q&A: coding-foundations/17-trees/02-interview-deep-dive.md
           - Graphs:
               - Overview: coding-foundations/18-graphs/index.md
               - Graphs and Traversal: coding-foundations/18-graphs/01-graphs-and-traversal.md
+              - Interview Deep Dive and Q&A: coding-foundations/18-graphs/02-interview-deep-dive.md
       - State Optimization:
           - Dynamic Programming Overview: coding-foundations/19-dynamic-programming/index.md
           - DP State Design: coding-foundations/19-dynamic-programming/01-dp-state-design.md
+          - Interview Deep Dive and Q&A: coding-foundations/19-dynamic-programming/02-interview-deep-dive.md
   - Practice and Resources:
       - Review Log: backend-interview/review-log.md
       - Code Library: examples/README.md
