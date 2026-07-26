@@ -10,8 +10,8 @@ The current release contains:
 - 28 focused topic PDFs;
 - one 13-page series index;
 - one 616-page master book;
-- 1,836 pages in the focused release; and
-- 2,452 reviewed pages across 30 PDFs.
+- 1,889 pages in the focused release; and
+- 2,505 reviewed pages across 30 PDFs.
 
 ## Canonical reader order
 
@@ -36,7 +36,7 @@ The publishing manifest and website catalog now encode this same route.
 | 03 Java Foundations | Strong, prerequisite-first language and collection foundation | Maintain and validate against Java 21 |
 | 04 Bit Manipulation | Strong focused treatment with companion and practice | Maintain; add advanced optional drills only |
 | 05 Loop Mastery | Strong focused treatment with diagrams, companion, exercises, and solutions | Maintain; add targeted interview traces |
-| 06 Arrays | Adequate-to-strong baseline with multiple mapped website sources | Add a dedicated exercise/solution set when useful |
+| 06 Arrays | Strong prerequisite-first volume with diagrams, companion, practice, and solutions | Maintain; add only targeted drills and evidence-backed refinements |
 | 07 Strings | Published single-chapter baseline | Add Unicode diagrams, focused companion, exercises, and solutions |
 | 08 Hashing | Published single-chapter baseline | Add collision/equality diagrams, focused companion, exercises, and solutions |
 | 09 Recursion and Backtracking | Published single-chapter baseline | High-priority multi-chapter expansion |
@@ -55,7 +55,7 @@ The publishing manifest and website catalog now encode this same route.
 
 ## Source and code audit
 
-- The manifest maps 134 unique Markdown sources.
+- The manifest maps 142 unique Markdown sources.
 - Master content contains 54 numbered chapters, five front-matter files, and seven appendices.
 - Focused sources are organized by volume with local `chapters/`, `exercises/`, `solutions/`, `code/`, and `assets/` directories where those artifacts exist.
 - Nine Java files are colocated with focused volumes; seven are explicit injected companions and Number Systems has an algorithm/test pair.

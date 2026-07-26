@@ -6,11 +6,11 @@
     "date": "2026-07-25",
     "url": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/tag/books-v2026.07.0",
     "focusedBookCount": 28,
-    "focusedPageCount": 1823,
+    "focusedPageCount": 1876,
     "indexPageCount": 13,
     "masterPageCount": 616,
     "totalPdfCount": 30,
-    "totalPageCount": 2452,
+    "totalPageCount": 2505,
     "index": {
       "title": "Java SDE-2 Interview Preparation Series Index",
       "filename": "Java-SDE2-Interview-Preparation-Series-Index.pdf",
@@ -114,12 +114,12 @@
       "track": "Data Structures and Algorithms",
       "title": "Arrays and Array Problem-Solving Patterns",
       "shortTitle": "Arrays and Array Patterns",
-      "subtitle": "Traversal, In-Place Work, Pointers, Windows, Prefix Sums, and Sorting",
-      "purpose": "Arrays are the default interview state space. This volume joins Java representation rules with the pattern-selection reasoning needed for efficient solutions.",
+      "subtitle": "From First Indexes to SDE-2 Array Pattern Reasoning",
+      "purpose": "Arrays are the default interview state space. This volume begins with storage, indexes, references, copying, and traversal before building a constraint-driven pattern map for reliable SDE-2 solutions.",
       "filename": "Java-SDE2-DSA-06-Arrays-and-Array-Patterns.pdf",
-      "pageCount": 40,
+      "pageCount": 93,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-06-Arrays-and-Array-Patterns.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master"
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/06-arrays-and-array-patterns/chapters"
     },
     {
       "order": 8,
