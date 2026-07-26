@@ -102,6 +102,8 @@ Repository-wide policies are canonical; the book workspace does not maintain com
 
 Useful contributions include accuracy corrections, prerequisite-first rewrites, runnable edge cases, diagrams, exercises, solution explanations, accessibility improvements, and PDF layout reports. Start from a `help wanted`, `good first issue`, or `book` issue so parallel work stays coordinated.
 
+The current expansion campaign is tracked in [issue #27](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/27). Individual issues [#16](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/16) through [#26](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/26) cover Strings, Hashing, Recursion, Linked Lists, Stacks and Queues, Binary Search, Trees, Heaps, Graphs, Greedy, and Dynamic Programming.
+
 ## Editorial responsibility
 
 Vinay Reddy Kalluri is the series creator, founding author, Editor-in-Chief, and Chief Auditor. Individual contributors retain credit for accepted original work through [`../../AUTHORS.md`](../../AUTHORS.md), Git history, and pull requests.

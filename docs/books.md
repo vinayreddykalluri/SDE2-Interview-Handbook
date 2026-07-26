@@ -33,4 +33,6 @@ Vinay Reddy Kalluri is the project creator, founding author, Editor-in-Chief, an
 
 Use the repository's content-improvement issue form to report a confusing explanation or technical defect. See the contributor guide before proposing a large new chapter or changing the learning path.
 
+To help expand the remaining concise DSA volumes, open the [book contribution backlog](community/book-contribution-backlog.md). Every module from Strings through Dynamic Programming has a scoped issue with canonical paths, acceptance criteria, and validation commands; partial contributions are welcome.
+
 Book prose, exercises, diagrams, and PDFs use CC BY 4.0. Source code and publishing tools use MIT.
