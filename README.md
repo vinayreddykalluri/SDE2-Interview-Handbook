@@ -46,7 +46,7 @@ The curriculum uses progressive disclosure: overview first, detailed theory seco
 
 [![Java SDE-2 Interview Preparation Series cover](books/java-sde2-interview-preparation-series/assets/covers/series-index-cover.png)](books/java-sde2-interview-preparation-series/dist/Java-SDE2-Interview-Preparation-Series-Index.pdf)
 
-The consolidated repository includes 28 focused topic books, a 13-page series index, and a 616-page master book. The focused release contains 1,836 pages and preserves every module as an individually navigable PDF.
+The consolidated repository includes 28 focused topic books, a 13-page series index, and a 616-page master book. The focused release contains 1,889 pages and preserves every module as an individually navigable PDF.
 
 [Download the latest release](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest) or start directly:
 

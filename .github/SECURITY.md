@@ -25,3 +25,7 @@ If private vulnerability reporting is unavailable, contact the repository owner 
 ## Response process
 
 The maintainer will acknowledge a valid report, assess severity, prepare a fix, and coordinate disclosure. No fixed response-time guarantee is offered, but good-faith reports will be handled as promptly as practical.
+
+## Repository integrity
+
+The default branch uses mandatory pull-request, code-owner review, validation, conversation-resolution, linear-history, and anti-force-push controls. The intended configuration and audit procedure are documented in [Default Branch Protection](BRANCH_PROTECTION.md).

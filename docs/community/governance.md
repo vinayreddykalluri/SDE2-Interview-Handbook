@@ -26,6 +26,8 @@ The same person may hold both roles, but editorial and technical-audit responsib
 
 Routine changes are decided through pull-request review. Significant changes to licensing, chapter architecture, supported Java versions, or publishing systems should begin with a public issue so trade-offs can be discussed before implementation.
 
+The default branch follows the repository's [documented protection policy](../../.github/BRANCH_PROTECTION.md). Contributor changes require a pull request, successful validation, and approval from the Editor-in-Chief and Chief Auditor through the repository code-owner rule.
+
 The Editor-in-Chief has final editorial responsibility. The Chief Auditor has final technical release-gate responsibility. Decisions should be documented in issues or pull requests and favor technical correctness, learner value, maintainability, individual credit, and open access.
 
 ## Becoming a maintainer

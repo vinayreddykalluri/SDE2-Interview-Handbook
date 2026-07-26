@@ -19,7 +19,7 @@ Stable volume numbers remain in filenames, while the books' internal learning-st
 
 ## What is published
 
-- 28 focused topic books and one series index, totaling 1,836 pages
+- 28 focused topic books and one series index, totaling 1,889 pages
 - one complete 616-page master book
 - canonical Markdown and diagram sources
 - Java 21 companion programs and boundary tests
