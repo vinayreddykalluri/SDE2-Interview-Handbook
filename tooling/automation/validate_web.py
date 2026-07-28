@@ -180,8 +180,8 @@ def validate_books(errors: list[str]) -> None:
         fail(errors, f"Expected 28 focused books; found {len(books)}")
     if [book.get("id") for book in books[:6]] != ["03", "02", "01", "01B", "04", "05"]:
         fail(errors, "Book catalog must begin Java -> Complexity -> Number Systems -> Bits -> Loops")
-    if release.get("totalPdfCount") != 30 or release.get("totalPageCount") != 2505:
-        fail(errors, "Book catalog totals must remain 30 PDFs and 2,452 reviewed pages")
+    if release.get("totalPdfCount") != 30 or release.get("totalPageCount") != 2579:
+        fail(errors, "Book catalog totals must remain 30 PDFs and 2,579 reviewed pages")
 
     required_fields = {
         "order", "step", "id", "track", "title", "shortTitle", "subtitle",

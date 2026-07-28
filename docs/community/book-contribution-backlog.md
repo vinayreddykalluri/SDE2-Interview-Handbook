@@ -1,6 +1,6 @@
 # Book Contribution Backlog
 
-The strongest beginner route is already published: Java Foundations, Time and Space Complexity, Number Systems, Bit Manipulation, Loop Mastery, and Arrays. The next community priority is to expand focused DSA volumes 07-17 from concise baselines into the same layered, publication-depth learning experience.
+The strongest beginner route is already published: Java Foundations, Time and Space Complexity, Number Systems, Bit Manipulation, Loop Mastery, Arrays, and Strings. Strings is the completed reference for how an SDE-1 foundation should progress into SDE-2 patterns. The next community priority is to expand focused DSA volumes 08-17 into the same layered, publication-depth learning experience.
 
 [Open the contributor roadmap](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/27){ .md-button .md-button--primary }
 [Read the contribution guide](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/.github/CONTRIBUTING.md){ .md-button }
@@ -9,7 +9,7 @@ The strongest beginner route is already published: Java Foundations, Time and Sp
 
 | Volume | Module | Issue |
 |---:|---|---|
-| 07 | Strings and String Patterns | [#16](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/16) |
+| 07 | Strings and String Patterns - completed reference | [#16](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/16) |
 | 08 | Hashing, Maps, Sets, and Prefix State | [#17](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/17) |
 | 09 | Recursion and Backtracking | [#18](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/18) |
 | 10 | Linked Lists | [#19](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/19) |

@@ -7,14 +7,14 @@
 - Physical topic PDFs: 28
 - Series index PDFs: 1
 - Total release PDFs: 29
-- Topic pages: 1,876
+- Topic pages: 1,950
 - Index pages: 13
-- Total release pages: 1,889
+- Total release pages: 1,963
 - Umbrella master PDF pages: 616
-- Total pages represented across the release and 616-page master: 2,505
+- Total pages represented across the release and 616-page master: 2,579
 - Page format: US Letter
 - Java baseline: Java 21
-- Release date: 2026-07-26
+- Release date: 2026-07-25
 
 Stable volume numbers are preserved, while the recommended path now begins with Java Foundations (03), continues to Time and Space Complexity (02), then uses both Number Systems PDFs (01/01B). The advanced step is split into Parts A-J, with Parts H-J providing the Spring/backend, persistence, and distributed-systems specialist track.
 
@@ -29,7 +29,7 @@ Stable volume numbers are preserved, while the recommended path now begins with 
 | 04 | `Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf` | 109 |
 | 05 | `Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf` | 95 |
 | 06 | `Java-SDE2-DSA-06-Arrays-and-Array-Patterns.pdf` | 93 |
-| 07 | `Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf` | 32 |
+| 07 | `Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf` | 106 |
 | 08 | `Java-SDE2-DSA-08-Hashing-Maps-Sets-and-Prefix-State.pdf` | 43 |
 | 09 | `Java-SDE2-DSA-09-Recursion-and-Backtracking.pdf` | 23 |
 | 10 | `Java-SDE2-DSA-10-Linked-Lists.pdf` | 24 |
@@ -78,17 +78,19 @@ Every topic PDF includes:
 The current release passed the following enhancement-pass checks:
 
 - The unchanged full-series publisher generated 28 topic PDFs and the index successfully.
-- The final full-release structural audit checked all 29 PDFs and 1,889 pages for page bounds, metadata, content markers, Editor-in-Chief and Chief Auditor credit, CC BY 4.0 and MIT licensing references, LinkedIn/GitHub annotations, manifest hashes, and near-empty body pages; every check passed.
+- The final full-release structural audit checked all 29 PDFs and 1,963 pages for page bounds, metadata, content markers, Editor-in-Chief and Chief Auditor credit, CC BY 4.0 and MIT licensing references, LinkedIn/GitHub annotations, manifest hashes, and near-empty body pages; every check passed.
 - Java Fundamentals compiled with `javac -Xlint:all -Werror` and printed `PASS 70 Java Fundamentals examples`.
 - Time and Space Complexity compiled with `javac -Xlint:all -Werror` and printed `PASS 24 complexity examples`.
 - Loop Mastery compiled with `javac --release 21 -Xlint:all -Werror` and printed `PASS 40 Loop Mastery checks`.
 - Arrays compiled with `javac --release 21 -Xlint:all -Werror` and printed `PASS 50 Arrays checks`.
+- Strings compiled with `javac --release 21 -Xlint:all -Werror` and printed `PASS 50 Strings checks`, including 2,000 fixed-seed naive-versus-KMP comparisons.
 - The targeted 93-page Arrays rebuild passed semantic pagination with zero errors and zero warnings; fifteen representative rendered pages covered its cover, contents, diagrams, tables, code, practice, solutions, companion, and author profile.
+- The targeted 106-page Strings rebuild passed semantic pagination with zero errors and zero warnings; full contact sheets and representative full-page renders covered the cover, contents, ten diagrams, tables, code, practice, solutions, companion, and author profile.
 - Poppler renders were visually inspected for the series index, Java Fundamentals, Complexity, Bit Manipulation, Arrays, Graphs, and Advanced Java J, covering short and long titles, contents, roadmap, teaching, collections, practice, solutions, companion code, author pages, and publishing notes.
 - The first Complexity solutions render exposed excess whitespace; reader guidance was added, Volume 02 was rebuilt, and the affected page was re-rendered successfully.
 
-Focused evidence is recorded in the Java Fundamentals, Time/Space, Bit Manipulation, Loop Mastery, and Arrays audit, coverage, validation, changelog, and build reports. Machine-readable release metadata is in `dist/manifest.json`.
+Focused evidence is recorded in the Java Fundamentals, Time/Space, Bit Manipulation, Loop Mastery, Arrays, and Strings audit, coverage, validation, changelog, and build reports. Machine-readable release metadata is in `dist/manifest.json`.
 
 ## Publishing model
 
-The books retain an independent publishing workspace inside the consolidated `SDE2-Interview-Handbook` repository. Canonical source, code, diagrams, PDFs, reports, and the artifact manifest are versioned under `books/java-sde2-interview-preparation-series/`; regenerable build and visual-QA workspaces are excluded. The build commands themselves never stage, commit, push, merge, or open pull requests.
+The books retain an independent publishing workspace inside the consolidated `SDE2-Interview-Handbook` repository. Canonical source, code, diagrams, PDFs, reports, the artifact manifest, and `dist/00-START-HERE.md` are versioned under `books/java-sde2-interview-preparation-series/`; regenerable build, organized-copy, and visual-QA workspaces are excluded. `scripts/organize_pdf_library.py` creates grouped step-prefixed copies under `output/reader-library/` without moving stable artifacts. The build commands themselves never stage, commit, push, merge, or open pull requests.
