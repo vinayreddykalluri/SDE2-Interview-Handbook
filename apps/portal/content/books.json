@@ -6,11 +6,11 @@
     "date": "2026-07-25",
     "url": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/tag/books-v2026.07.0",
     "focusedBookCount": 28,
-    "focusedPageCount": 1876,
+    "focusedPageCount": 1950,
     "indexPageCount": 13,
     "masterPageCount": 616,
     "totalPdfCount": 30,
-    "totalPageCount": 2505,
+    "totalPageCount": 2579,
     "index": {
       "title": "Java SDE-2 Interview Preparation Series Index",
       "filename": "Java-SDE2-Interview-Preparation-Series-Index.pdf",
@@ -128,12 +128,12 @@
       "track": "Data Structures and Algorithms",
       "title": "Strings and String Problem-Solving Patterns",
       "shortTitle": "Strings and String Patterns",
-      "subtitle": "Unicode-Aware Traversal, Windows, Builders, Parsing, and Text Boundaries",
-      "purpose": "String interviews mix algorithm patterns with Java-specific text semantics. This volume makes that boundary explicit so code is both efficient and correct.",
+      "subtitle": "From SDE-1 String Basics to SDE-2 Text Algorithms",
+      "purpose": "This prerequisite-first volume takes a reader from SDE-1 String mechanics through the substring, frequency, window, parsing, and exact-search patterns expected in SDE-2 interviews. Every advanced technique follows a baseline, invariant, dry run, Java implementation, failure boundary, and complete complexity discussion.",
       "filename": "Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf",
-      "pageCount": 32,
+      "pageCount": 106,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master"
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/07-strings-and-string-patterns/chapters"
     },
     {
       "order": 9,

@@ -46,9 +46,9 @@ The curriculum uses progressive disclosure: overview first, detailed theory seco
 
 [![Java SDE-2 Interview Preparation Series cover](books/java-sde2-interview-preparation-series/assets/covers/series-index-cover.png)](books/java-sde2-interview-preparation-series/dist/Java-SDE2-Interview-Preparation-Series-Index.pdf)
 
-The consolidated repository includes 28 focused topic books, a 13-page series index, and a 616-page master book. The focused release contains 1,889 pages and preserves every module as an individually navigable PDF.
+The consolidated repository includes 28 focused topic books, a 13-page series index, and a 616-page master book. The focused release contains 1,963 pages; the complete 30-PDF library contains 2,579 reviewed pages. Every module remains an individual PDF.
 
-[Download the latest release](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest) or start directly:
+[Download the latest release](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest), [open the individual-PDF reading order](books/java-sde2-interview-preparation-series/dist/00-START-HERE.md), or start directly:
 
 - [Java Foundations for Problem Solving](books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf)
 - [Time and Space Complexity for Java Interviews](books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf)
@@ -56,9 +56,11 @@ The consolidated repository includes 28 focused topic books, a 13-page series in
 - [Number Systems Interview Workbook](books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-01B-Number-Systems-Interview-Workbook.pdf)
 - [Bit Manipulation in Java](books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf)
 - [Loop Mastery, Patterns, and Index Calculations](books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf)
+- [Arrays and Array Problem-Solving Patterns](books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-06-Arrays-and-Array-Patterns.pdf)
+- [Strings and String Problem-Solving Patterns](books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf)
 - [Complete 616-page master book](books/java-sde2-interview-preparation-series/dist/java-sde2-interview-book.pdf)
 
-The recommended route is Java Foundations → Time and Space Complexity → Number Systems → Bit Manipulation → Loop Mastery → remaining DSA modules → Advanced Java. Stable PDF numbers are retained for filenames; learning-step labels inside the books show the intended order.
+The recommended route is Java Foundations → Time and Space Complexity → Number Systems → Bit Manipulation → Loop Mastery → Arrays → Strings → remaining DSA modules → Advanced Java. Stable PDF numbers are retained for filenames; learning-step labels and the reader index show the intended order.
 
 ## Run Locally
 

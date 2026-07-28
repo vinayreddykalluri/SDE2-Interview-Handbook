@@ -2,7 +2,7 @@
 
 ## Audit conclusion
 
-The Java SDE-2 Interview Preparation Series is publishable as a complete baseline for mainstream Java backend SDE-2 preparation. Java Foundations, Time and Space Complexity, Number Systems, Bit Manipulation, Loop Mastery, Arrays, and the advanced Java/backend volumes have the strongest layered treatment. Several later DSA volumes remain intentionally concise single-chapter guides and are the highest-value targets for community expansion.
+The Java SDE-2 Interview Preparation Series is publishable as a complete baseline for mainstream Java backend SDE-2 preparation. Java Foundations, Time and Space Complexity, Number Systems, Bit Manipulation, Loop Mastery, Arrays, Strings, and the advanced Java/backend volumes have the strongest layered treatment. Several later DSA volumes remain intentionally concise single-chapter guides and are the highest-value targets for community expansion.
 
 The current release contains:
 
@@ -10,8 +10,8 @@ The current release contains:
 - 28 focused topic PDFs;
 - one 13-page series index;
 - one 616-page master book;
-- 1,889 pages in the focused release; and
-- 2,505 reviewed pages across 30 PDFs.
+- 1,963 pages in the focused release; and
+- 2,579 reviewed pages across 30 PDFs.
 
 ## Canonical reader order
 
@@ -37,7 +37,7 @@ The publishing manifest and website catalog now encode this same route.
 | 04 Bit Manipulation | Strong focused treatment with companion and practice | Maintain; add advanced optional drills only |
 | 05 Loop Mastery | Strong focused treatment with diagrams, companion, exercises, and solutions | Maintain; add targeted interview traces |
 | 06 Arrays | Strong prerequisite-first volume with diagrams, companion, practice, and solutions | Maintain; add only targeted drills and evidence-backed refinements |
-| 07 Strings | Published single-chapter baseline | Add Unicode diagrams, focused companion, exercises, and solutions |
+| 07 Strings | Strong prerequisite-first volume with Unicode diagrams, companion, practice, and solutions | Maintain; add only focused drills and evidence-backed refinements |
 | 08 Hashing | Published single-chapter baseline | Add collision/equality diagrams, focused companion, exercises, and solutions |
 | 09 Recursion and Backtracking | Published single-chapter baseline | High-priority multi-chapter expansion |
 | 10 Linked Lists | Published single-chapter baseline | High-priority pointer-diagram and mutation expansion |
@@ -55,10 +55,10 @@ The publishing manifest and website catalog now encode this same route.
 
 ## Source and code audit
 
-- The manifest maps 142 unique Markdown sources.
+- The manifest maps 150 unique Markdown sources.
 - Master content contains 54 numbered chapters, five front-matter files, and seven appendices.
 - Focused sources are organized by volume with local `chapters/`, `exercises/`, `solutions/`, `code/`, and `assets/` directories where those artifacts exist.
-- Nine Java files are colocated with focused volumes; seven are explicit injected companions and Number Systems has an algorithm/test pair.
+- Eleven Java files are colocated with focused volumes; nine are explicit injected companions and Number Systems has an algorithm/test pair.
 - The separate master-book Java 21 project contains 15 dependency-free examples.
 - The website Java project contains 69 foundation examples plus its smoke suite and problem-solving extensions.
 - Intentionally different Java projects remain separate because they target different baselines and publication contracts.
@@ -83,7 +83,7 @@ A topic name or one dense reference chapter is useful baseline coverage, but it 
 
 Every focused PDF includes a cover, `Start Here` gate, local contents, previous/next navigation, bookmarks, author and publishing information, a complete roadmap, and printed sibling filenames. The series index provides an entry map for both click-based and printed use.
 
-Canonical release artifacts and integrity metadata live under `dist/`. Regenerable assembly and visual-QA workspaces live under ignored `build/`, `tmp/`, and `output/` directories.
+Canonical release artifacts and integrity metadata live under `dist/`. `dist/00-START-HERE.md` gives the prerequisite-correct order without renaming stable files. `scripts/organize_pdf_library.py` validates the mapping and can create a grouped, step-prefixed local library under ignored `output/reader-library/`. Regenerable assembly and visual-QA workspaces live under ignored `build/`, `tmp/`, and `output/` directories.
 
 ## Evidence
 

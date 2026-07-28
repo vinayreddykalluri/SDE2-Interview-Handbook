@@ -13,19 +13,22 @@ This is the canonical book workspace inside the consolidated [SDE2 Interview Han
 
 ## Read or download
 
-The current release contains 28 focused books, one series index, and one 616-page master book: 30 PDFs and 2,505 reviewed pages in total.
+The current release contains 28 focused books, one series index, and one 616-page master book: 30 PDFs and 2,579 reviewed pages in total.
 
 - [Download the complete release](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest)
 - [Open the series index](dist/Java-SDE2-Interview-Preparation-Series-Index.pdf)
+- [Open the complete individual-PDF reading order](dist/00-START-HERE.md)
 - [Start with Java Foundations](dist/Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf)
 - [Continue to Time and Space Complexity](dist/Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf)
 - [Study Number Systems](dist/Java-SDE2-DSA-01-Number-Systems-and-Math-Foundations.pdf)
 - [Open the Number Systems workbook](dist/Java-SDE2-DSA-01B-Number-Systems-Interview-Workbook.pdf)
 - [Study Bit Manipulation](dist/Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf)
 - [Study Loop Mastery](dist/Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf)
+- [Study Arrays](dist/Java-SDE2-DSA-06-Arrays-and-Array-Patterns.pdf)
+- [Study Strings](dist/Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf)
 - [Open the complete master book](dist/java-sde2-interview-book.pdf)
 
-The complete sequence, prerequisites, and completion gates are in [the series roadmap](docs/roadmap.md).
+The complete sequence, prerequisites, and completion gates are in [the series roadmap](docs/roadmap.md). To create actual step-prefixed folders containing all 30 PDFs, see [PDF library organization](docs/pdf-library-organization.md) or run `python3 scripts/organize_pdf_library.py`.
 
 ## Directory map
 
@@ -66,6 +69,7 @@ python3 scripts/build_series.py
 python3 scripts/build_series.py --volume 05 --skip-index
 python3 scripts/generate_diagrams.py
 python3 scripts/build_book.py
+python3 scripts/organize_pdf_library.py --check
 ```
 
 Generated working directories remain under ignored `build/`, `tmp/`, and `output/` paths. Reviewed release artifacts are written to `dist/`.

@@ -8,7 +8,7 @@ Open the [latest GitHub release](https://github.com/vinayreddykalluri/SDE2-Inter
 
 The canonical published files are also versioned under [`books/java-sde2-interview-preparation-series/`](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series).
 
-Start with Java Foundations, then Time and Space Complexity, Number Systems, Bit Manipulation, and Loop Mastery before continuing to the remaining DSA modules.
+Start with Java Foundations, then Time and Space Complexity, Number Systems, Bit Manipulation, Loop Mastery, Arrays, and Strings before continuing to the remaining DSA modules. The [individual-PDF reading order](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/dist/00-START-HERE.md) groups all 30 PDFs without changing their stable release filenames.
 
 ## Build locally
 
