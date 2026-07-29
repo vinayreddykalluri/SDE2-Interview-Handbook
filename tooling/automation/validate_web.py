@@ -265,6 +265,7 @@ def main() -> int:
         WEB / ".nojekyll",
         WEB / "assets" / "styles.css",
         WEB / "assets" / "app.js",
+        WEB / "assets" / "s2-mark.svg",
         MODULES_FILE,
         BOOKS_FILE,
     ]
