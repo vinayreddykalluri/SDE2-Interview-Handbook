@@ -6,9 +6,9 @@ The focused series preserves the master guide rather than cloning or deleting it
 
 ## Series-native material
 
-Learning Step 3 uses 16 new chapters under `content/volumes/01-number-systems-and-math-foundations/chapters/`. Part A contains Chapters 1-13; Part B contains Chapters 14-16. Together they supply numeric foundations beyond the Java and complexity prerequisites: digit traversal, base conversion, large-number strings, interview divisibility, factors and primes, GCD/LCM, modular arithmetic, powers and roots, numeric traps, a 30-problem catalog, and rapid revision.
+Study Step 03 uses 16 new chapters under `content/volumes/01-number-systems-and-math-foundations/chapters/`. Part A contains Chapters 1-13; Part B contains Chapters 14-16. Together they supply numeric foundations beyond the Java and complexity prerequisites: digit traversal, base conversion, large-number strings, interview divisibility, factors and primes, GCD/LCM, modular arithmetic, powers and roots, numeric traps, a 30-problem catalog, and rapid revision.
 
-Focused series-native chapters exist for Learning Steps 4-17. Steps 4-6 are the most developed of these early DSA volumes. Steps 7-17 currently provide concise topic-specific baselines; most still need richer diagrams, companion programs, dry runs, exercises, and separated solutions. The open-source issue backlog tracks those expansions so contributors improve canonical volumes instead of creating parallel books.
+Focused series-native chapters exist for Study Steps 04-17. Steps 04-06 are the most developed of these early DSA volumes. Steps 07-17 currently provide concise topic-specific baselines; most still need richer diagrams, companion programs, dry runs, exercises, and separated solutions. The open-source issue backlog tracks those expansions so contributors improve canonical volumes instead of creating parallel books.
 
 Parts 18H-18J are also series-native. They form the backend specialist track: Spring Boot and REST; SQL, transactions, JPA/Hibernate, and caching; then capacity, consistency, Kafka, resilience, sagas, observability, and system design. Dependency-requiring framework sketches are labeled explicitly, while each volume includes a separate dependency-free Java 21 model that is compiled and executed by validation.
 
@@ -18,7 +18,7 @@ Parts 18H-18J are also series-native. They form the backend specialist track: Sp
 |---:|---|
 | 2 | Chapter 42, Appendix B, and measurement context from Chapter 39 |
 | 3 | Chapters 13-15, 20, 25, 30, 48, and Appendix A |
-| 4 | Fixed-width numeric semantics, the Stage 1 bridge, and a focused bit-pattern chapter |
+| 4 | Fixed-width numeric semantics, the Study Step 03 bridge, and a focused bit-pattern chapter |
 | 5 | Focused series-native loop and index patterns |
 | 6 | Master array/list/sort semantics plus focused array interview patterns |
 | 7 | Master string and text semantics plus focused string interview patterns |

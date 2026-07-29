@@ -1,7 +1,7 @@
 {
-  "name": "SDE2 Interview Handbook",
-  "short_name": "SDE2 Handbook",
-  "description": "Java, JVM, DSA, and SDE-2 interview curriculum.",
+  "name": "Java SDE-2 Study Path",
+  "short_name": "Java SDE2",
+  "description": "One ordered Java SDE-2 curriculum available as complete web books and matching PDFs.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

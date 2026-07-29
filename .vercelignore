@@ -1,7 +1,12 @@
 .git/
 .github/
 .venv/
-books/
+books/java-sde2-interview-preparation-series/dist/*
+!books/java-sde2-interview-preparation-series/dist/manifest.json
+books/java-sde2-interview-preparation-series/docs/
+books/java-sde2-interview-preparation-series/reports/
+books/java-sde2-interview-preparation-series/scripts/
+books/java-sde2-interview-preparation-series/publishing/assets/
 output/
 site/
 tooling/publishing-templates/

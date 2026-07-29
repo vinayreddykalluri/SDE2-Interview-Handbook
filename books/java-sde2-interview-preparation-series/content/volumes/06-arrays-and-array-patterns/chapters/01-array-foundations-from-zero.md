@@ -198,7 +198,7 @@ Arrays.sort(values);
 int position = Arrays.binarySearch(values, 3); // array must use same order
 ```
 
-Use `Arrays.deepToString` and `Arrays.deepEquals` for nested content. Calling `values.toString()` or comparing arrays with `==` observes object identity, not element content. Full binary-search patterns belong in Volume 12; here the API appears only to establish its sorted-input precondition.
+Use `Arrays.deepToString` and `Arrays.deepEquals` for nested content. Calling `values.toString()` or comparing arrays with `==` observes object identity, not element content. Full binary-search patterns belong in Study Step 12; here the API appears only to establish its sorted-input precondition.
 
 ## 1.10 Complexity baseline
 

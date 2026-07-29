@@ -25,6 +25,11 @@ ARTIFACT_MANIFEST = DIST / "manifest.json"
 INDEX_NAME = "Java-SDE2-Interview-Preparation-Series-Index.pdf"
 AUTHOR = "Vinay Reddy Kalluri"
 DRAFT_MARKER = re.compile(r"\b(?:TODO|TBD|FIXME|placeholder|lorem ipsum)\b", re.IGNORECASE)
+EXPECTED_PATH_LABELS = [
+    "01", "02", "03A", "03B", "04", "05", "06", "07", "08", "09", "10", "11",
+    "12", "13", "14", "15", "16", "17", "18A", "18B", "18C", "18D", "18E", "18F",
+    "18G", "18H", "18I", "18J",
+]
 
 
 def fail(message: str) -> None:
@@ -79,6 +84,28 @@ def check_markdown(path: Path, require_ascii: bool = False) -> None:
         if paragraph in seen:
             fail(f"Duplicate long paragraph found in {path}")
         seen.add(paragraph)
+
+
+def check_numbering_contract(spec: dict[str, Any]) -> None:
+    ids = [str(volume["id"]) for volume in spec["volumes"]]
+    learning_order = [str(volume_id) for volume_id in spec.get("learning_order", [])]
+    path_labels = {str(key): str(value) for key, value in spec.get("path_labels", {}).items()}
+    if len(learning_order) != len(ids) or set(learning_order) != set(ids):
+        fail("learning_order must contain every physical book exactly once")
+    if set(path_labels) != set(ids):
+        fail("path_labels must contain every physical book exactly once")
+    actual_labels = [path_labels[volume_id] for volume_id in learning_order]
+    if actual_labels != EXPECTED_PATH_LABELS:
+        fail(f"Public study codes are out of order: {actual_labels}")
+    if len(set(actual_labels)) != len(actual_labels):
+        fail("Public study codes must be unique")
+    by_id = {str(volume["id"]): volume for volume in spec["volumes"]}
+    for volume_id, label in zip(learning_order, actual_labels):
+        if int(re.match(r"\d+", label).group()) != int(by_id[volume_id]["stage"]):
+            fail(f"Study code {label} disagrees with stage for physical ID {volume_id}")
+        if not str(by_id[volume_id]["volume_label"]).startswith(f"Study Step {label} "):
+            fail(f"Cover label for physical ID {volume_id} does not start with Study Step {label}")
+    print("Numbering: one canonical 28-book path (01, 02, 03A-03B, 04-17, 18A-18J)")
 
 
 def check_sources(spec: dict[str, Any]) -> None:
@@ -243,6 +270,11 @@ def check_pdf(path: Path, volume: dict[str, Any], known_outputs: set[str]) -> di
             fail(f"{volume['id']} page {page_number} appears blank")
 
     full_text = normalized("\n".join(pages))
+    cover_text = normalized(pages[0])
+    if normalized(volume["volume_label"].upper()) not in cover_text:
+        fail(f"{volume['id']} cover is missing its canonical study code: {volume['volume_label']}")
+    if re.search(r"\bVOLUME\s+\d+\s+OF\s+18\b", cover_text):
+        fail(f"{volume['id']} cover still exposes a conflicting legacy volume number")
     for required in (
         volume["title"],
         AUTHOR,
@@ -305,9 +337,12 @@ def check_index(path: Path, spec: dict[str, Any], known_outputs: set[str]) -> di
     ):
         if required_publication_text not in text:
             fail(
-                f"{volume['id']} is missing public authorship/licensing text: "
+                "Series index is missing public authorship/licensing text: "
                 f"{required_publication_text}"
             )
+    for label in EXPECTED_PATH_LABELS:
+        if f"Study Step {label}" not in text:
+            fail(f"Series index is missing Study Step {label}")
     for required in (
         "Java SDE-2 Interview Preparation Series Index",
         "About the Author",
@@ -341,11 +376,16 @@ def check_artifacts(spec: dict[str, Any]) -> None:
         fail("Artifact manifest has an incorrect physical-volume count")
     if len(report.get("volumes", [])) != len(spec["volumes"]):
         fail("Artifact manifest does not contain every physical volume")
+    expected_order = [str(volume_id) for volume_id in spec["learning_order"]]
+    if [str(item["id"]) for item in report["volumes"]] != expected_order:
+        fail("Artifact manifest books are not in canonical learning order")
 
     known_outputs = {volume["output_name"] for volume in spec["volumes"]} | {INDEX_NAME}
     recorded = {item["id"]: item for item in report["volumes"]}
     total_pages = 0
-    for volume in spec["volumes"]:
+    by_id = {str(volume["id"]): volume for volume in spec["volumes"]}
+    for position, volume_id in enumerate(expected_order, start=1):
+        volume = by_id[volume_id]
         path = DIST / volume["output_name"]
         if not path.exists():
             fail(f"Missing focused PDF: {path}")
@@ -353,6 +393,9 @@ def check_artifacts(spec: dict[str, Any]) -> None:
         expected = recorded.get(volume["id"])
         if not expected:
             fail(f"Artifact manifest is missing volume {volume['id']}")
+        expected_label = str(spec["path_labels"][volume_id])
+        if expected.get("path_label") != expected_label or expected.get("book_position") != position:
+            fail(f"Artifact manifest has incorrect study position for {volume_id}")
         for key in ("page_count", "sha256", "bytes"):
             if expected.get(key) != actual[key]:
                 fail(f"Artifact manifest mismatch for {volume['id']} field {key}")
@@ -498,6 +541,7 @@ def main() -> None:
     args = parser.parse_args()
 
     spec = read_json(SERIES_SPEC)
+    check_numbering_contract(spec)
     if len(spec.get("stages", [])) != 18:
         fail("Series manifest must define 18 public stages")
     if len(spec.get("volumes", [])) < 18:

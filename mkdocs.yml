@@ -1,5 +1,5 @@
-site_name: SDE2 Interview Handbook
-site_description: A structured Backend SDE-2 interview handbook with coding, LLD, HLD, production, leadership, and practice material.
+site_name: Java SDE2 Topic Reference
+site_description: Supporting Java and backend reference material for the ordered Java SDE-2 web and PDF study path.
 site_author: Vinay Reddy Kalluri and contributors
 site_url: https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/docs/
 repo_url: https://github.com/vinayreddykalluri/SDE2-Interview-Handbook
@@ -195,7 +195,6 @@ theme:
   language: en
   features:
     - navigation.indexes
-    - navigation.tabs
     - navigation.sections
     - navigation.expand
     - navigation.top
@@ -276,6 +275,7 @@ markdown_extensions:
       toc_depth: 3
 
 extra:
+  surface: handbook
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/vinayreddykalluri/SDE2-Interview-Handbook

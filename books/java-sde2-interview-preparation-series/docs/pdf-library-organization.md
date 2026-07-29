@@ -20,7 +20,7 @@ Java Foundations
   -> Advanced Java and backend engineering
 ```
 
-The physical IDs in filenames are stable editorial IDs. The `Learning Step` label and the catalog order are the reader sequence.
+The physical IDs in filenames are stable technical IDs. The public `Study Step` codes are the reader sequence: `01`, `02`, `03A`, `03B`, `04` through `17`, and `18A` through `18J`. The website, PDF covers, roadmap, and organized folder names all use these same codes.
 
 ## Generated folder library
 
@@ -42,7 +42,7 @@ output/reader-library/
 +-- README.md
 ```
 
-Every focused PDF receives a two-digit reader-order prefix in the generated library. The canonical filename remains visible after that prefix. The generated `output/` tree is intentionally ignored by Git because it contains byte-for-byte copies of reviewed `dist/` artifacts.
+Every focused PDF receives its canonical Study Step prefix in the generated library. Suffixes distinguish the Number Systems book/workbook and the ten advanced books without inventing a second order. The canonical filename remains visible after that prefix. The generated `output/` tree is intentionally ignored by Git because it contains byte-for-byte copies of reviewed `dist/` artifacts.
 
 Validate the mapping without copying:
 

@@ -163,7 +163,7 @@ An interviewer may ask where a failure occurs. Answer with evidence: the compile
 
 ## Cross-book boundary
 
-Use this chapter's execution model for the rest of Volume 03. Continue to the JVM volume for class loading, JIT, garbage collection, stack frames, and memory diagnostics. Continue to Advanced Java for modules, packaging, and language evolution in depth.
+Use this chapter's execution model for the rest of Study Step 01. Continue to the JVM volume for class loading, JIT, garbage collection, stack frames, and memory diagnostics. Continue to Advanced Java for modules, packaging, and language evolution in depth.
 
 ## Chapter summary
 

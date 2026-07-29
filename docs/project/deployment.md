@@ -1,13 +1,13 @@
 # Vercel Deployment
 
-The repository is configured as a static Vercel project. Vercel builds the same portal and MkDocs output used locally, then serves the contents of `site/`. No GitHub Actions workflow is required.
+The repository is configured as a static Vercel project. Vercel builds the same portal, concise handbook, and complete web-book library used locally, then serves the contents of `site/`. No GitHub Actions workflow is required.
 
 ## Build Contract
 
 `vercel.json` defines:
 
 - `installCommand`: install only the pinned website dependencies from `tooling/requirements/portal.txt`;
-- `buildCommand`: build the portal and handbook, then normalize canonical deployment URLs;
+- `buildCommand`: build the portal, handbook, and all complete web books, then normalize canonical deployment URLs;
 - `outputDirectory`: publish only `site/`.
 
 The full `tooling/requirements/authoring.txt` manifest remains the local authoring and printable-book toolchain. Keeping the hosted dependency set separate avoids installing PDF and DOCX tooling during a static website build.
@@ -38,7 +38,9 @@ The check is read-only. A real Vercel build runs the URL normalizer without `--c
 
 - `/` opens the learning portal.
 - `/docs/` opens the searchable handbook.
+- `/books/` opens the 28-book searchable library, and every book exposes its contents and code index.
 - A coding-foundation module opens from the portal and from MkDocs navigation.
+- A portal book card opens its complete web reader and current PDF without a broken route.
 - Search, progress state, keyboard navigation, and the mobile menu work.
 - Mermaid diagrams and code blocks are readable in light and dark modes.
 - `/robots.txt`, `/sitemap.xml`, and canonical metadata use the intended production origin.

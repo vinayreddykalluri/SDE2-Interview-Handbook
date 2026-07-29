@@ -8,7 +8,7 @@ This book is deliberately broad. Start where your explanation, implementation, o
 
 | Your situation | Start here | Exit evidence |
 |---|---|---|
-| New to Java syntax | Focused Stage 03 basics, then Stages 01-02 | Write a method, loop, array, validation, and tests |
+| New to Java syntax | Study Step 01, then 02, 03A, and 03B | Write a method, loop, array, validation, and tests |
 | Rebuilding foundations | Focused 01, 01B, and 02, then 03-17 | Solve representative problems with invariants and complexity |
 | Experienced; eight weeks | Diagnostic baseline, then Chapter 54 | Pass coding, Java-depth, debugging, design, and behavioral mocks |
 | Interview in two to three weeks | Chapters 24, 27, 31, 33-38, and 42-53; timed mocks select gaps | Implement under time and defend production trade-offs |

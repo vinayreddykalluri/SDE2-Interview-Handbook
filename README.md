@@ -5,7 +5,7 @@
 [![Java 17+](https://img.shields.io/badge/Java-17%2B-1f4e79.svg)](examples/java/README.md)
 [![Book release](https://img.shields.io/github/v/release/vinayreddykalluri/SDE2-Interview-Handbook?label=books)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest)
 
-A local-first, open-source preparation system for SDE-2 backend interviews. It combines a structured backend interview track, 19 coding-foundation modules, runnable Java examples, searchable MkDocs documentation, a responsive learning portal, printable PDF/DOCX builds, and a publication-ready Java and DSA book series.
+A local-first, open-source preparation system for SDE-2 backend interviews. It combines a structured backend interview track, 19 coding-foundation modules, runnable Java examples, searchable MkDocs documentation, 28 complete web books generated from canonical source, a responsive learning portal, printable PDF/DOCX builds, and a publication-ready Java and DSA book series.
 
 > **Current delivery status:** the public `master` branch is the consolidated source of truth. Dedicated book validation runs in GitHub Actions. Website deployment and the legacy root book workflow remain disabled pending their own approval; the Vercel static-build contract remains available for preview deployments.
 
@@ -15,7 +15,7 @@ A local-first, open-source preparation system for SDE-2 backend interviews. It c
 |---|---|---|
 | Prepare end-to-end for an SDE-2 backend loop | [Backend interview track](docs/backend-interview/index.md) | Programming, LLD, HLD, databases, distributed systems, reliability, cloud, security, and leadership |
 | Rebuild algorithm and Java fundamentals | [Coding foundations](docs/coding-foundations/index.md) | A repeatable 19-module sequence with theory, diagrams, drills, and runnable examples |
-| Read or download the publication-ready books | [Published Java SDE-2 book series](docs/books.md) | Individual PDFs from Java basics through DSA and advanced backend engineering |
+| Read or download the publication-ready books | [Published Java SDE-2 book series](docs/books.md) | Complete searchable web books, implementation indexes, and individual PDFs from Java basics through advanced backend engineering |
 | Run and extend the code | [Java examples](examples/README.md) | Independently compilable examples organized by interview topic |
 | Understand the repository before contributing | [Repository structure](docs/community/repository-structure.md) | Clear source ownership and naming rules |
 | Review the latest organization audit | [July 2026 repository audit](docs/community/repository-audit-2026-07.md) | Migration map, synchronization contracts, and open book backlog |
@@ -46,9 +46,9 @@ The curriculum uses progressive disclosure: overview first, detailed theory seco
 
 [![Java SDE-2 Interview Preparation Series cover](books/java-sde2-interview-preparation-series/assets/covers/series-index-cover.png)](books/java-sde2-interview-preparation-series/dist/Java-SDE2-Interview-Preparation-Series-Index.pdf)
 
-The consolidated repository includes 28 focused topic books, a 13-page series index, and a 616-page master book. The focused release contains 1,963 pages; the complete 30-PDF library contains 2,579 reviewed pages. Every module remains an individual PDF.
+The consolidated repository includes 28 focused topic books, a 36-page series index, and a 616-page master book. The focused books contain 1,950 pages; the complete 30-PDF library contains 2,602 reviewed pages. Every module remains an individual PDF and is also rendered as a complete searchable web book from the same canonical Markdown and Java sources.
 
-[Download the latest release](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest), [open the individual-PDF reading order](books/java-sde2-interview-preparation-series/dist/00-START-HERE.md), or start directly:
+[Read all complete web books](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/), [download the latest release](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest), [open the individual-PDF reading order](books/java-sde2-interview-preparation-series/dist/00-START-HERE.md), or start directly:
 
 - [Java Foundations for Problem Solving](books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf)
 - [Time and Space Complexity for Java Interviews](books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf)

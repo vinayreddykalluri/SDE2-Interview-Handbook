@@ -17,13 +17,13 @@ INDEX_NAME = "Java-SDE2-Interview-Preparation-Series-Index.pdf"
 
 GROUPS = (
     ("00-start-here", "Start Here and Complete References", set()),
-    ("01-foundations", "Foundations - Learning Steps 1 to 5",
+    ("01-foundations", "Foundations - Study Steps 01 to 05",
      {"03", "02", "01", "01B", "04", "05"}),
-    ("02-core-dsa", "Core Data Structures and Algorithms - Learning Steps 6 to 15",
+    ("02-core-dsa", "Core Data Structures and Algorithms - Study Steps 06 to 15",
      {"06", "07", "08", "09", "10", "11", "12", "13", "14", "15"}),
-    ("03-algorithm-strategies", "Algorithm Strategies - Learning Steps 16 and 17",
+    ("03-algorithm-strategies", "Algorithm Strategies - Study Steps 16 and 17",
      {"16", "17"}),
-    ("04-advanced-java-backend", "Advanced Java and Backend Engineering - Learning Step 18",
+    ("04-advanced-java-backend", "Advanced Java and Backend Engineering - Study Steps 18A to 18J",
      {"18A", "18B", "18C", "18D", "18E", "18F", "18G", "18H", "18I", "18J"}),
 )
 
@@ -58,8 +58,12 @@ def validate(spec: dict) -> list[dict]:
 
     assignments: list[dict] = []
     seen_outputs: set[str] = set()
+    path_labels = spec.get("path_labels", {})
+    if set(path_labels) != set(volumes) or len(set(path_labels.values())) != len(volumes):
+        raise ValueError("path_labels must define one unique public study code per book")
     for ordinal, volume_id in enumerate(order, start=1):
         volume = volumes[volume_id]
+        path_label = str(path_labels[volume_id])
         source = DIST / volume["output_name"]
         if not source.is_file():
             raise FileNotFoundError(f"missing focused PDF: {source}")
@@ -69,11 +73,12 @@ def validate(spec: dict) -> list[dict]:
         directory, group_title = group_for(volume_id)
         assignments.append({
             "ordinal": ordinal,
+            "path_label": path_label,
             "volume": volume,
             "source": source,
             "directory": directory,
             "group_title": group_title,
-            "reader_name": f"{ordinal:02d}-{volume['output_name']}",
+            "reader_name": f"{path_label}-{volume['output_name']}",
         })
 
     expected = len(spec["volumes"])
@@ -94,8 +99,8 @@ def build_readme(spec: dict, assignments: list[dict]) -> str:
     lines = [
         "# Organized Java SDE-2 PDF Library",
         "",
-        "Read the numbered files in order. The prefix is the reader sequence; the stable",
-        "physical volume identifier remains inside each original filename and PDF.",
+        "Read the Study Step codes in order. The public code is shared by the website,",
+        "PDF cover, and this folder; the stable technical identifier remains only in the original filename.",
         "",
         "This directory is generated from `publishing/series.json`. Canonical reviewed",
         "artifacts remain in `dist/`, so repository links and release filenames do not break.",
@@ -113,7 +118,7 @@ def build_readme(spec: dict, assignments: list[dict]) -> str:
             lines.extend([f"## {item['group_title']}", ""])
         volume = item["volume"]
         lines.append(
-            f"{item['ordinal']}. [{volume['title']}]"
+            f"- **Study Step {item['path_label']}** - [{volume['title']}]"
             f"({item['directory']}/{item['reader_name']})"
         )
     lines.extend([
