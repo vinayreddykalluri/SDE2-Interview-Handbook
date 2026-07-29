@@ -123,6 +123,10 @@ body::before {
   font-weight: 600;
 }
 
+.md-header__source {
+  display: none;
+}
+
 .md-search__form {
   border: 1px solid var(--field-line-strong);
   border-radius: 0;
@@ -182,30 +186,37 @@ body::before {
 }
 
 .field-announcement {
-  min-height: 2.35rem;
+  min-height: 2.75rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1.25rem;
-  font: 500 0.59rem var(--field-mono);
+  font: 600 0.59rem var(--field-mono);
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
 .field-announcement > span {
   color: var(--field-signal);
+  white-space: nowrap;
 }
 
 .field-announcement nav {
   display: flex;
-  gap: 1.2rem;
+  gap: 0.25rem;
 }
 
 .field-announcement a {
+  min-height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  padding-inline: 0.65rem;
   color: #fffaf0;
 }
 
-.field-announcement a:hover {
+.field-announcement a:hover,
+.field-announcement a[aria-current="page"] {
+  background: rgba(255, 250, 240, 0.12);
   color: var(--field-signal);
 }
 
@@ -267,9 +278,7 @@ body::before {
 }
 
 .field-pagebar {
-  display: grid;
-  grid-template-columns: minmax(220px, 1fr) auto;
-  gap: 1.5rem;
+  display: block;
   align-items: center;
   margin: 0 0 2.1rem;
   padding: 0.85rem 1rem;
@@ -297,31 +306,6 @@ body::before {
   text-overflow: ellipsis;
   text-transform: uppercase;
   white-space: nowrap;
-}
-
-.field-pagebar nav {
-  display: flex;
-  gap: 0.35rem;
-}
-
-.field-pagebar nav a {
-  padding: 0.5rem 0.62rem;
-  border: 1px solid var(--field-line-strong);
-  color: var(--field-ink);
-  font: 600 0.56rem var(--field-mono);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.field-pagebar nav a:first-child {
-  border-color: var(--field-blue);
-  background: var(--field-blue);
-  color: #fff;
-}
-
-.field-pagebar nav a:hover {
-  border-color: var(--field-blue);
-  background: var(--field-deep);
 }
 
 .md-typeset {
@@ -577,19 +561,6 @@ body::before {
     overflow-x: auto;
     white-space: nowrap;
   }
-
-  .field-pagebar {
-    grid-template-columns: 1fr;
-  }
-
-  .field-pagebar nav {
-    overflow-x: auto;
-    padding-bottom: 0.2rem;
-  }
-
-  .field-pagebar nav a {
-    min-width: max-content;
-  }
 }
 
 @media screen and (max-width: 44em) {
@@ -602,18 +573,18 @@ body::before {
   }
 
   .field-announcement {
-    overflow: visible;
-    white-space: normal;
+    overflow-x: auto;
+    white-space: nowrap;
   }
 
   .field-announcement nav {
-    width: 100%;
-    justify-content: space-between;
-    gap: 0.45rem;
+    width: max-content;
+    gap: 0.15rem;
   }
 
   .field-announcement a {
-    font-size: 0.51rem;
+    padding-inline: 0.55rem;
+    font-size: 0.52rem;
   }
 
   .field-pagebar {

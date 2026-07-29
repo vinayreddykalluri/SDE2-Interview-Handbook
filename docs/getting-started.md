@@ -1,11 +1,18 @@
 # Getting Started
 
-The handbook supports three complementary workflows: guided reading, code practice, and printable revision.
+The project has one curriculum presented through four connected surfaces. The global navigation uses the same names everywhere, so changing depth does not change the learning order.
+
+| What you need | Open | Use it for |
+|---|---|---|
+| a complete explanation | <a href="../../books/">Books</a> | canonical chapters, diagrams, exercises, solutions, code indexes, and PDF downloads |
+| an ordered preparation sequence | <a href="../../#journey">Study path</a> | deciding what to study next and tracking readiness |
+| a concise lookup surface | [Handbook](index.md) | search, focused reference, and quick revision |
+| timed interview work | [Practice](backend-interview/10-practice/index.md) | question banks, scoring rubrics, review logs, and reassessment |
 
 ## Fastest route for readers
 
-1. Open the [Study Plan](study-plan.md).
-2. Start with the overview page for your target volume.
+1. If Java basics are not dependable, open the <a href="../../books/03-java-foundations-for-problem-solving/">Java Foundations book</a>.
+2. Otherwise, use the <a href="../../#journey">Study path</a> to locate your next gap.
 3. Read the numbered chapter and redraw its main diagram from memory.
 4. Open the linked Java source and identify its invariant, boundary conditions, and complexity.
 5. Reimplement the example without looking.
@@ -34,10 +41,10 @@ cd SDE2-Interview-Handbook
 python -m venv .venv
 source .venv/bin/activate
 make install
-make serve
+make serve-web
 ```
 
-Open `http://127.0.0.1:8000`. Search, navigation, syntax highlighting, Mermaid diagrams, and print styles work in the local site.
+Open `http://127.0.0.1:8000`. The complete book library is under `/books/`, and the concise handbook is under `/docs/`. Search, navigation, syntax highlighting, Mermaid diagrams, and print styles work in the local site.
 
 ## Validate a contribution
 

@@ -427,12 +427,14 @@ function toggleAllStages() {
 
 function buildSearchIndex() {
   const fixedDestinations = [
+    { type: "Books", label: "Complete book library", note: "Read all 28 canonical books with code and PDF downloads", href: "books/" },
+    { type: "Path", label: "Ordered study path", note: "Choose the next topic and track interview readiness", href: "#journey" },
+    { type: "Handbook", label: "Searchable handbook", note: "Use the concise reference and revision surface", href: "docs/" },
+    { type: "Practice", label: "Practice and assessment", note: "Run question banks, mocks, and scored reviews", href: "docs/backend-interview/10-practice/" },
     { type: "Start", label: "Readiness matrix", note: "Assess current interview readiness", href: "docs/backend-interview/readiness-matrix/" },
     { type: "Plan", label: "12-week roadmap", note: "Follow the complete preparation schedule", href: "docs/backend-interview/roadmap/" },
-    { type: "Practice", label: "Question bank and rubric", note: "Run scored interview simulations", href: "docs/backend-interview/10-practice/question-bank-and-rubric/" },
     { type: "Review", label: "Structured revision system", note: "Retain material through repeated recall", href: "docs/backend-interview/revision-system/" },
-    { type: "Code", label: "Java code and implementation indexes", note: "Browse code embedded across all complete web books", href: "books/" },
-    { type: "Books", label: "Complete web book library", note: "Read every focused book in learning order or download its PDF", href: "books/" }
+    { type: "Code", label: "Java code and implementation indexes", note: "Browse code embedded across all complete web books", href: "books/" }
   ];
 
   const stageEntries = [];

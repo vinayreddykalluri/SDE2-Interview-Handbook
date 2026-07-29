@@ -74,15 +74,26 @@ def safe_html(value: str) -> str:
     )
 
 
-def toolbar(*, portal_href: str, library_href: str, overview_href: str | None, pdf_href: str) -> str:
-    links = [
-        f'<a href="{portal_href}">Portal</a>',
-        f'<a href="{library_href}">All web books</a>',
-    ]
+def context_bar(
+    *,
+    label: str,
+    overview_href: str | None,
+    code_href: str | None,
+    pdf_href: str,
+) -> str:
+    links = []
     if overview_href:
-        links.append(f'<a href="{overview_href}">Book overview</a>')
+        links.append(f'<a href="{overview_href}">Overview</a>')
+    if code_href:
+        links.append(f'<a href="{code_href}">Code</a>')
     links.append(f'<a href="{pdf_href}">Download PDF</a>')
-    return '<nav class="book-reader-toolbar" aria-label="Book reader shortcuts">' + "".join(links) + "</nav>"
+    return (
+        '<div class="reader-contextbar">'
+        f'<span>{safe_html(label)}</span>'
+        '<nav aria-label="Current book actions">'
+        + "".join(links)
+        + "</nav></div>"
+    )
 
 
 def resolve_local_target(source_path: Path, target: str) -> Path | None:
@@ -173,7 +184,7 @@ def generate_code_page(
     table = "\n".join(rows) if rows else "| No fenced Java snippets | 0 | Use the linked implementation references |"
     page = f"""# Code and Implementation Index
 
-{toolbar(portal_href='../../../', library_href='../../', overview_href='../', pdf_href=book_pdf)}
+{context_bar(label=volume['short_title'], overview_href='../', code_href=None, pdf_href=book_pdf)}
 
 This page indexes the Java examples embedded throughout **{volume['title']}**. The chapter remains the source of truth for contracts, invariants, dry runs, and explanations; this index makes implementations easy to locate.
 
@@ -242,7 +253,7 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
                 next_link = f'[Continue: {next_title} →]({source_outputs[next_source]}){{ .md-button .md-button--primary }}'
             else:
                 next_link = '[Open the code index →](code.md){ .md-button .md-button--primary }'
-            page = f"""{toolbar(portal_href='../../../', library_href='../../', overview_href='../', pdf_href=pdf_url(volume['output_name']))}
+            page = f"""{context_bar(label=volume['short_title'], overview_href='../', code_href='../code/', pdf_href=pdf_url(volume['output_name']))}
 
 {rewritten.rstrip()}
 
@@ -300,8 +311,6 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
         source_word_count = sum(len(re.findall(r"\b[\w'-]+\b", entry["text"])) for entry in source_entries)
         index_page = f"""# {volume['title']}
 
-{toolbar(portal_href='../../', library_href='../', overview_href=None, pdf_href=pdf_url(volume['output_name']))}
-
 <div class="book-identity">
   <span>LEARNING STEP {safe_html(str(volume['stage']))}</span>
   <span>{artifact['page_count']} PDF PAGES</span>
@@ -344,11 +353,11 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
         book_nav.append({"Code": f"{slug}/code.md"})
 
         if order <= 8:
-            track = "Start Here: Foundations"
+            track = "Programming Foundations"
         elif volume_id.startswith("18"):
-            track = "Advanced Java and Backend"
+            track = "Advanced Java & Backend"
         else:
-            track = "DSA and Algorithms"
+            track = "Data Structures & Algorithms"
         nav_groups[track].append({f"{order:02d}. {volume['short_title']}": book_nav})
         built_books.append(
             {
@@ -367,14 +376,18 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
         f"| {index} | [{book['title']}]({book['slug']}/index.md) | {book['documents']} | {book['code_examples']} | {book['page_count']} | [PDF]({book['pdf']}) |"
         for index, book in enumerate(built_books, start=1)
     )
-    library_page = f"""# Java SDE-2 Web Book Library
-
-<nav class="book-reader-toolbar" aria-label="Library shortcuts"><a href="../">Portal</a><a href="../docs/books/">Book guide</a><a href="{REPOSITORY}">GitHub</a></nav>
+    library_page = f"""# Java + SDE2 Complete Book Library
 
 This library renders the complete canonical book Markdown as searchable web chapters. It contains **{len(built_books)} focused books**, **{total_documents} source documents**, and **{total_code_examples} indexed code entries**. Nothing here is a separate prose copy: rebuilding the site reads the same Markdown and Java files used by the PDFs.
 
 !!! tip "Recommended start"
     Begin with Java Foundations, then Time and Space Complexity, Number Systems, Bit Manipulation, Loop Mastery, Arrays, and Strings. Open advanced material only after its prerequisites are dependable.
+
+<div class="library-route-grid">
+  <a href="03-java-foundations-for-problem-solving/"><strong>New to Java?</strong><span>Start the first complete book</span></a>
+  <a href="../#journey"><strong>Need a study plan?</strong><span>Follow the ordered SDE-2 path</span></a>
+  <a href="../docs/"><strong>Need a quick answer?</strong><span>Search the concise handbook</span></a>
+</div>
 
 | Step | Full web book | Documents | Code | PDF pages | Offline |
 |---:|---|---:|---:|---:|---|
@@ -383,23 +396,22 @@ This library renders the complete canonical book Markdown as searchable web chap
     (staging_docs / "index.md").write_text(library_page, encoding="utf-8")
 
     nav = [{"Library": "index.md"}]
-    for name in ("Start Here: Foundations", "DSA and Algorithms", "Advanced Java and Backend"):
+    for name in ("Programming Foundations", "Data Structures & Algorithms", "Advanced Java & Backend"):
         nav.append({name: nav_groups[name]})
     return built_books, nav, total_documents, total_code_examples
 
 
 def write_config(path: Path, docs_dir: Path, nav: list[Any]) -> None:
     config: dict[str, Any] = {
-        "site_name": "Java SDE-2 Web Books",
+        "site_name": "S2 Complete Books",
         "site_description": "Complete Java SDE-2 books rendered from canonical Markdown with code, exercises, solutions, and PDF downloads.",
         "site_author": "Vinay Reddy Kalluri and contributors",
         "site_url": f"{PRODUCTION_ROOT}/books/",
-        "repo_url": REPOSITORY,
-        "repo_name": "vinayreddykalluri/SDE2-Interview-Handbook",
         "docs_dir": str(docs_dir),
         "use_directory_urls": True,
         "theme": {
             "name": "material",
+            "custom_dir": str(ROOT / "tooling" / "mkdocs-overrides"),
             "language": "en",
             "logo": "assets/s2-mark.svg",
             "favicon": "assets/s2-mark.svg",
@@ -421,6 +433,7 @@ def write_config(path: Path, docs_dir: Path, nav: list[Any]) -> None:
             "font": {"text": "Source Serif 4", "code": "IBM Plex Mono"},
         },
         "plugins": ["search"],
+        "extra": {"surface": "books"},
         "extra_css": ["assets/book-reader.css"],
         "extra_javascript": ["assets/mermaid.mjs"],
         "markdown_extensions": [

@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% set surface = config.extra.surface | default('handbook') %}
+
 {% block extrahead %}
   {{ super() }}
   <meta name="theme-color" content="#f4efe3">
@@ -7,18 +9,27 @@
 
 {% block announce %}
   <div class="field-announcement">
-    <span>BACKEND_SDE2 / INTERVIEW FIELD MANUAL</span>
-    <nav aria-label="Global handbook destinations">
-      <a href="{{ base_url }}/../#journey">Journey</a>
-      <a href="{{ 'backend-interview/readiness-matrix/' | url }}">Assess</a>
-      <a href="{{ 'backend-interview/revision-system/' | url }}">Review</a>
-      <a href="{{ 'backend-interview/10-practice/' | url }}">Practice</a>
-      <a href="{{ base_url }}/../">Web portal</a>
+    <span>S2 / JAVA + SDE2 LEARNING LIBRARY</span>
+    <nav aria-label="Global learning destinations">
+      <a href="{{ base_url }}/../">Home</a>
+      {% if surface == 'books' %}
+        <a href="{{ base_url }}/" aria-current="page">Books</a>
+        <a href="{{ base_url }}/../#journey">Study path</a>
+        <a href="{{ base_url }}/../docs/">Handbook</a>
+        <a href="{{ base_url }}/../docs/backend-interview/10-practice/">Practice</a>
+      {% else %}
+        <a href="{{ base_url }}/../books/">Books</a>
+        <a href="{{ base_url }}/../#journey">Study path</a>
+        <a href="{{ base_url }}/" aria-current="page">Handbook</a>
+        <a href="{{ 'backend-interview/10-practice/' | url }}">Practice</a>
+      {% endif %}
+      <a href="https://github.com/vinayreddykalluri/SDE2-Interview-Handbook">GitHub</a>
     </nav>
   </div>
 {% endblock %}
 
 {% block content %}
+  {% if surface == 'handbook' %}
   {% set current_url = page.url if page else '' %}
   <div class="field-pagebar">
     <div class="field-pagebar__current">
@@ -48,17 +59,12 @@
         {% elif 'community/' in current_url %}
           PROJECT / OPEN SOURCE
         {% else %}
-          BACKEND SDE2 / FIELD NOTE
+          S2 HANDBOOK / QUICK REFERENCE
         {% endif %}
       </span>
       <strong>{{ page.title if page else config.site_name }}</strong>
     </div>
-    <nav aria-label="Page workflow">
-      <a href="{{ base_url }}/../#journey">Journey</a>
-      <a href="{{ 'backend-interview/readiness-matrix/' | url }}">Assess</a>
-      <a href="{{ 'backend-interview/review-log/' | url }}">Log</a>
-      <a href="{{ 'backend-interview/10-practice/question-bank-and-rubric/' | url }}">Mock</a>
-    </nav>
   </div>
+  {% endif %}
   {{ super() }}
 {% endblock %}

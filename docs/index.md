@@ -1,10 +1,11 @@
-# SDE2 Interview Handbook
+# Java + SDE2 Searchable Handbook
 
-The SDE2 Interview Handbook is an open-source learning system for engineers who need more than memorized interview patterns. It connects Java and JVM internals, algorithm invariants, production trade-offs, communication strategy, and deliberate practice.
+This is the concise lookup surface of the S2 Java + SDE2 Learning Library. It connects Java and JVM mechanics, algorithm invariants, production trade-offs, communication strategy, and deliberate practice without replacing the complete web books.
 
-[Start the guided study path](getting-started.md){ .md-button .md-button--primary }
-[Browse runnable Java](examples/README.md){ .md-button }
-[Download the book series](books.md){ .md-button }
+<a class="md-button md-button--primary" href="../books/03-java-foundations-for-problem-solving/">Start Java Foundations</a>
+<a class="md-button" href="../books/">Browse complete books</a>
+<a class="md-button" href="../#journey">Follow the study path</a>
+[Open practice](backend-interview/10-practice/index.md){ .md-button }
 
 ## Choose your path
 

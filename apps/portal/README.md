@@ -2,6 +2,8 @@
 
 The portal is a lightweight, responsive shell around the canonical handbook. It provides track selection, module discovery, progress state, and links into the searchable MkDocs site.
 
+The shared navigation contract is **Home · Books · Study path · Handbook · Practice · GitHub**. Keep those labels and destinations consistent in the portal, the MkDocs theme override, the generated book reader, and the 404 recovery page. Page-level controls must remain contextual to the current surface rather than repeating another global menu.
+
 ## Ownership
 
 - `index.html` and `assets/` own portal presentation and behavior.
