@@ -18,6 +18,46 @@ OUTPUT = ROOT / "apps" / "portal" / "content" / "books.json"
 REPOSITORY = "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook"
 BOOK_REPOSITORY_PATH = "books/java-sde2-interview-preparation-series"
 
+# A focused PDF may span more than one concise website module. Keep these routes
+# explicit so a reader lands on a useful lesson instead of a generic catalog page.
+# Chapter names and counts are still derived from each volume's canonical Markdown.
+WEB_READING_PATHS: dict[str, list[tuple[str, str]]] = {
+    "03": [("Start Java fundamentals", "docs/coding-foundations/01-java-runtime/")],
+    "02": [("Read complexity lessons", "docs/coding-foundations/02-complexity/")],
+    "01": [("Read math foundations", "docs/coding-foundations/03-math/")],
+    "01B": [("Practice math foundations", "docs/coding-foundations/03-math/02-interview-deep-dive/")],
+    "04": [("Read bit manipulation", "docs/coding-foundations/06-bit-manipulation/")],
+    "05": [
+        ("Start loop reasoning", "docs/coding-foundations/04-loop-reasoning/"),
+        ("Continue with index safety", "docs/coding-foundations/05-indexing/"),
+    ],
+    "06": [("Read array lessons", "docs/coding-foundations/07-arrays/")],
+    "07": [("Read string lessons", "docs/coding-foundations/08-strings/")],
+    "08": [("Read hashing lessons", "docs/coding-foundations/09-hashing/")],
+    "09": [("Read recursion lessons", "docs/coding-foundations/14-stacks-recursion/")],
+    "10": [("Read linked-list lessons", "docs/coding-foundations/16-linked-lists/")],
+    "11": [
+        ("Start stack lessons", "docs/coding-foundations/14-stacks-recursion/"),
+        ("Continue with queues and deques", "docs/coding-foundations/15-queues-deques/"),
+    ],
+    "12": [("Read binary-search lessons", "docs/coding-foundations/13-binary-search/")],
+    "13": [("Read tree lessons", "docs/coding-foundations/17-trees/")],
+    "15": [("Read graph lessons", "docs/coding-foundations/18-graphs/")],
+    "17": [("Read dynamic-programming lessons", "docs/coding-foundations/19-dynamic-programming/")],
+    "18A": [("Read Java runtime lessons", "docs/coding-foundations/01-java-runtime/")],
+    "18B": [("Read Java language lessons", "docs/coding-foundations/01-java-runtime/")],
+    "18C": [("Read collections foundations", "docs/coding-foundations/01-java-runtime/15-collections-overview/")],
+    "18E": [("Read production engineering", "docs/backend-interview/07-production-engineering/")],
+    "18F": [
+        ("Read low-level design", "docs/backend-interview/02-low-level-design/"),
+        ("Continue with production engineering", "docs/backend-interview/07-production-engineering/"),
+    ],
+    "18G": [("Open interview practice", "docs/backend-interview/10-practice/")],
+    "18H": [("Read API and service design", "docs/backend-interview/04-api-service-design/")],
+    "18I": [("Read data and storage", "docs/backend-interview/05-data-storage/")],
+    "18J": [("Read distributed systems", "docs/backend-interview/06-distributed-systems/")],
+}
+
 
 def read_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
@@ -37,6 +77,48 @@ def source_href(volume: dict[str, Any]) -> str:
     return f"{REPOSITORY}/tree/master/{BOOK_REPOSITORY_PATH}/{source_path.as_posix()}"
 
 
+def source_file_href(source_path: Path) -> str:
+    return f"{REPOSITORY}/blob/master/{BOOK_REPOSITORY_PATH}/{source_path.as_posix()}"
+
+
+def markdown_title(path: Path) -> str:
+    if path.is_file():
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if line.startswith("# "):
+                return line[2:].strip()
+    return path.stem.replace("-", " ").title()
+
+
+def chapter_preview(volume: dict[str, Any]) -> tuple[int, int, list[dict[str, str]]]:
+    markdown_sources = [
+        Path(source["path"])
+        for source in volume.get("sources", [])
+        if Path(source["path"]).suffix.lower() == ".md"
+    ]
+    chapter_sources = [
+        source_path
+        for source_path in markdown_sources
+        if "chapters" in source_path.parts
+    ] or markdown_sources
+    preview = []
+    for source_path in chapter_sources[:3]:
+        preview.append(
+            {
+                "title": markdown_title(BOOK_ROOT / source_path),
+                "sourceHref": source_file_href(source_path),
+            }
+        )
+    supporting_source_count = len(markdown_sources) - len(chapter_sources)
+    return len(chapter_sources), supporting_source_count, preview
+
+
+def web_reads(volume_id: str) -> list[dict[str, str]]:
+    return [
+        {"label": label, "href": href}
+        for label, href in WEB_READING_PATHS.get(volume_id, [])
+    ]
+
+
 def build_catalog() -> dict[str, Any]:
     spec = read_json(SERIES_SPEC)
     artifact_manifest = read_json(ARTIFACT_MANIFEST)
@@ -47,11 +129,13 @@ def build_catalog() -> dict[str, Any]:
     release_tag = str(spec["release_tag"])
     release_url = f"{REPOSITORY}/releases/tag/{release_tag}"
     download_root = f"{REPOSITORY}/releases/download/{release_tag}"
+    current_download_root = f"{REPOSITORY}/raw/refs/heads/master/{BOOK_REPOSITORY_PATH}/dist"
 
     books: list[dict[str, Any]] = []
     for position, volume_id in enumerate(spec["learning_order"], start=1):
         volume = volumes_by_id[str(volume_id)]
         artifact = artifacts_by_id[str(volume_id)]
+        source_chapter_count, supporting_source_count, source_chapter_preview = chapter_preview(volume)
         books.append(
             {
                 "order": position,
@@ -64,8 +148,14 @@ def build_catalog() -> dict[str, Any]:
                 "purpose": volume["purpose"],
                 "filename": volume["output_name"],
                 "pageCount": int(artifact["page_count"]),
-                "pdfHref": f"{download_root}/{volume['output_name']}",
+                "pdfHref": f"{current_download_root}/{volume['output_name']}",
+                "releasePdfHref": f"{download_root}/{volume['output_name']}",
                 "sourceHref": source_href(volume),
+                "sourceChapterCount": source_chapter_count,
+                "supportingSourceCount": supporting_source_count,
+                "chapterPreview": source_chapter_preview,
+                "outcomes": list(volume.get("outcomes", []))[:3],
+                "webReads": web_reads(str(volume["id"])),
             }
         )
 
@@ -89,12 +179,14 @@ def build_catalog() -> dict[str, Any]:
             "index": {
                 "title": "Java SDE-2 Interview Preparation Series Index",
                 "filename": index["file"],
-                "pdfHref": f"{download_root}/{index['file']}",
+                "pdfHref": f"{current_download_root}/{index['file']}",
+                "releasePdfHref": f"{download_root}/{index['file']}",
             },
             "master": {
                 "title": master["title"],
                 "filename": master["file"],
-                "pdfHref": f"{download_root}/{master['file']}",
+                "pdfHref": f"{current_download_root}/{master['file']}",
+                "releasePdfHref": f"{download_root}/{master['file']}",
             },
         },
         "books": books,

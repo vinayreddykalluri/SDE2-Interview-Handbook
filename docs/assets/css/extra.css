@@ -597,6 +597,25 @@ body::before {
     display: none;
   }
 
+  .md-banner__inner {
+    padding-inline: 0.55rem;
+  }
+
+  .field-announcement {
+    overflow: visible;
+    white-space: normal;
+  }
+
+  .field-announcement nav {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.45rem;
+  }
+
+  .field-announcement a {
+    font-size: 0.51rem;
+  }
+
   .field-pagebar {
     margin-inline: -0.4rem;
     box-shadow: 3px 3px 0 var(--field-line);
