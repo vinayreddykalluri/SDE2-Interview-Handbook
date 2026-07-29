@@ -482,6 +482,28 @@ def run_java_validation() -> None:
     print(normalized(result.stdout) or "Java examples: validation passed")
 
 
+def run_git_book_validation(spec: dict[str, Any]) -> None:
+    git_volume = next((item for item in spec["volumes"] if item["id"] == "GIT"), None)
+    if not git_volume or git_volume.get("publication_status") == "planned":
+        return
+    script = ROOT / "content" / "volumes" / "J02-git-and-github" / "labs" / "validate_git_labs.sh"
+    if not script.exists():
+        fail(f"Missing Git/GitHub scenario validator: {script}")
+    result = subprocess.run(
+        ["bash", str(script)],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        check=False,
+        timeout=60,
+    )
+    if result.returncode:
+        print(result.stdout)
+        print(result.stderr)
+        fail("Git/GitHub scenario validation failed")
+    print(normalized(result.stdout) or "Git/GitHub scenarios: validation passed")
+
+
 def run_series_native_java_validation(spec: dict[str, Any]) -> None:
     """Compile and execute complete public Java classes in focused native chapters."""
     classes: dict[str, tuple[Path, str]] = {}
@@ -606,6 +628,7 @@ def main() -> None:
         fail("Series manifest must define the complete 40-book segmented catalog")
     check_sources(spec)
     run_java_validation()
+    run_git_book_validation(spec)
     run_series_native_java_validation(spec)
     if not args.source_only:
         check_artifacts(spec)

@@ -6,11 +6,11 @@
     "date": "2026-07-25",
     "url": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/tag/books-v2026.07.0",
     "focusedBookCount": 40,
-    "focusedPageCount": 2269,
+    "focusedPageCount": 2386,
     "indexPageCount": 17,
     "masterPageCount": 616,
     "totalPdfCount": 42,
-    "totalPageCount": 2902,
+    "totalPageCount": 3019,
     "index": {
       "title": "Java SDE-2 Interview Preparation Series Index",
       "filename": "Java-SDE2-Interview-Preparation-Series-Index.pdf",
@@ -126,33 +126,41 @@
       "segmentCode": "JAVA 02",
       "segmentPosition": 2,
       "segmentBookCount": 9,
-      "publicationStatus": "planned",
+      "publicationStatus": "published",
       "title": "Git and GitHub for Java Engineers",
       "shortTitle": "Git and GitHub",
-      "subtitle": "Version Control, Collaboration, Reviews, and Interview-Ready Delivery",
-      "purpose": "Define the complete learning path for the source-control skills expected from a Java SDE-2 engineer before the chapter set is expanded.",
+      "subtitle": "From First Commit to Secure CI, Release Recovery, and SDE-2 Delivery",
+      "purpose": "Build dependable Git and GitHub judgment from local snapshots through pull requests, protected branches, secure Java automation, releases, and production recovery.",
       "filename": "Java-SDE2-JAVA-02-Git-and-GitHub.pdf",
-      "pageCount": 10,
+      "pageCount": 127,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-JAVA-02-Git-and-GitHub.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-JAVA-02-Git-and-GitHub.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/J02-git-and-github/chapters",
       "fullBookHref": "books/19a-git-and-github/",
       "codeHref": "books/19a-git-and-github/code/",
-      "webDocumentCount": 1,
-      "wordCount": 266,
-      "codeExampleCount": 0,
-      "sourceChapterCount": 1,
+      "webDocumentCount": 17,
+      "wordCount": 23848,
+      "codeExampleCount": 6,
+      "sourceChapterCount": 17,
       "supportingSourceCount": 0,
       "chapterPreview": [
         {
-          "title": "Git and GitHub for Java Engineers - Planned Learning Roadmap",
-          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/J02-git-and-github/chapters/01-planned-learning-roadmap.md"
+          "title": "Git and GitHub Foundations for Java Engineers",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/J02-git-and-github/chapters/00-learning-path-and-foundations.md"
+        },
+        {
+          "title": "Everyday Local Git: Stage, Commit, Inspect, and Amend",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/J02-git-and-github/chapters/01-everyday-local-workflow.md"
+        },
+        {
+          "title": "Commit Graphs, Branches, HEAD, and Merges",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/J02-git-and-github/chapters/02-commit-graph-branches-and-merges.md"
         }
       ],
       "outcomes": [
-        "Understand the planned progression from local history to team collaboration",
-        "Know the practical and interview outcomes of the finished volume",
-        "Contribute content against explicit completion criteria"
+        "Predict working-tree, index, reference, and commit-graph changes before running commands",
+        "Collaborate through reviewable pull requests, protected branches, and trustworthy Java CI",
+        "Recover lost work and lead complex GitHub delivery incidents without unsafe history changes"
       ],
       "webReads": []
     },

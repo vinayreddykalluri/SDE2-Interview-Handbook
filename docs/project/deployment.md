@@ -38,7 +38,7 @@ The check is read-only. A real Vercel build runs the URL normalizer without `--c
 
 - `/` opens the learning portal.
 - `/docs/` opens the searchable handbook.
-- `/books/` opens the 28-book searchable library, and every book exposes its contents and code index.
+- `/books/` opens the 40-book searchable library, and every book exposes its contents and code index.
 - A coding-foundation module opens from the portal and from MkDocs navigation.
 - A portal book card opens its complete web reader and current PDF without a broken route.
 - Search, progress state, keyboard navigation, and the mobile menu work.
