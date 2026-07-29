@@ -185,9 +185,11 @@ def validate_books(errors: list[str]) -> None:
 
     required_fields = {
         "order", "step", "id", "track", "title", "shortTitle", "subtitle",
-        "purpose", "filename", "pageCount", "pdfHref", "sourceHref",
+        "purpose", "filename", "pageCount", "pdfHref", "releasePdfHref", "sourceHref",
+        "sourceChapterCount", "supportingSourceCount", "chapterPreview", "outcomes", "webReads",
     }
     filenames: list[str] = []
+    web_readable_books = 0
     for book in books:
         missing = required_fields - set(book)
         if missing:
@@ -197,10 +199,44 @@ def validate_books(errors: list[str]) -> None:
         filenames.append(filename)
         if not (BOOK_DIST / filename).is_file():
             fail(errors, f"Published book is missing from dist/: {filename}")
-        if "/releases/download/" not in str(book["pdfHref"]):
-            fail(errors, f"Book {book['id']} does not use a stable release download URL")
+        if "/raw/refs/heads/master/" not in str(book["pdfHref"]):
+            fail(errors, f"Book {book['id']} does not use the current master PDF URL")
+        if "/releases/download/" not in str(book["releasePdfHref"]):
+            fail(errors, f"Book {book['id']} does not retain a versioned release PDF URL")
+        chapter_preview = book["chapterPreview"]
+        if not isinstance(chapter_preview, list) or not chapter_preview:
+            fail(errors, f"Book {book['id']} has no Markdown-derived chapter preview")
+        elif int(book["sourceChapterCount"]) < len(chapter_preview):
+            fail(errors, f"Book {book['id']} chapter preview exceeds its source count")
+        else:
+            for chapter in chapter_preview:
+                if not chapter.get("title") or "/blob/master/" not in str(chapter.get("sourceHref", "")):
+                    fail(errors, f"Book {book['id']} has an invalid source chapter entry")
+
+        web_reads = book["webReads"]
+        if not isinstance(web_reads, list):
+            fail(errors, f"Book {book['id']} webReads must be an array")
+            continue
+        if web_reads:
+            web_readable_books += 1
+        for web_read in web_reads:
+            href = str(web_read.get("href", ""))
+            if not web_read.get("label") or not href.startswith("docs/"):
+                fail(errors, f"Book {book['id']} has an invalid web reading route")
+                continue
+            relative = Path(href.removeprefix("docs/").strip("/"))
+            index_source = DOCS / relative / "index.md"
+            page_source = (DOCS / relative).with_suffix(".md")
+            if not index_source.is_file() and not page_source.is_file():
+                fail(errors, f"Book {book['id']} web reading route has no Markdown source: {href}")
     if len(filenames) != len(set(filenames)):
         fail(errors, "Book catalog filenames must be unique")
+    if web_readable_books < 24:
+        fail(errors, f"Expected at least 24 books with a web reading route; found {web_readable_books}")
+
+    strings = next((book for book in books if book.get("id") == "07"), None)
+    if not strings or int(strings.get("sourceChapterCount", 0)) < 7:
+        fail(errors, "Strings must expose all seven publication-depth Markdown chapters")
 
 
 def validate_javascript(errors: list[str]) -> None:
@@ -229,6 +265,7 @@ def main() -> int:
         WEB / ".nojekyll",
         WEB / "assets" / "styles.css",
         WEB / "assets" / "app.js",
+        WEB / "assets" / "s2-mark.svg",
         MODULES_FILE,
         BOOKS_FILE,
     ]

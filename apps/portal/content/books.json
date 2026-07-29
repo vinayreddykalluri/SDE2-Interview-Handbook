@@ -14,12 +14,14 @@
     "index": {
       "title": "Java SDE-2 Interview Preparation Series Index",
       "filename": "Java-SDE2-Interview-Preparation-Series-Index.pdf",
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-Interview-Preparation-Series-Index.pdf"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-Interview-Preparation-Series-Index.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-Interview-Preparation-Series-Index.pdf"
     },
     "master": {
       "title": "Java Foundations to Advanced Engineering",
       "filename": "java-sde2-interview-book.pdf",
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/java-sde2-interview-book.pdf"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/java-sde2-interview-book.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/java-sde2-interview-book.pdf"
     }
   },
   "books": [
@@ -34,8 +36,36 @@
       "purpose": "This volume is the canonical Java language foundation and the recommended first book in the series. It starts with source-to-execution and program structure, builds through types, control flow, methods, arrays, strings, objects, core libraries, exceptions, generics, and usage-first collections, then converts that knowledge into interview-quality implementation and debugging skill.",
       "filename": "Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf",
       "pageCount": 198,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/03-java-foundations-for-problem-solving/chapters"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/03-java-foundations-for-problem-solving/chapters",
+      "sourceChapterCount": 5,
+      "supportingSourceCount": 17,
+      "chapterPreview": [
+        {
+          "title": "Java and Program Foundations",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/03-java-foundations-for-problem-solving/chapters/01-platform-program-foundations.md"
+        },
+        {
+          "title": "Classes, Objects, and Object-Oriented Foundations",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/03-java-foundations-for-problem-solving/chapters/02-object-oriented-foundations.md"
+        },
+        {
+          "title": "Wrappers, Generics, Enums, Collections, I/O, and Utilities",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/03-java-foundations-for-problem-solving/chapters/03-wrappers-generics-enums-io-utilities.md"
+        }
+      ],
+      "outcomes": [
+        "Explain Java program execution and write compiling Java from the first program onward",
+        "Use types, control flow, methods, arrays, strings, objects, exceptions, generics, and core collections precisely",
+        "Diagnose common Java interview traps and write safe comparators and numeric expressions"
+      ],
+      "webReads": [
+        {
+          "label": "Start Java fundamentals",
+          "href": "docs/coding-foundations/01-java-runtime/"
+        }
+      ]
     },
     {
       "order": 2,
@@ -48,8 +78,36 @@
       "purpose": "This volume is the bridge from Java syntax to algorithmic problem solving. It begins with concrete operation counts, introduces growth and space gently, then develops the qualified cost models, constraints, invariants, amortization, and optimization explanations expected in SDE-2 interviews.",
       "filename": "Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf",
       "pageCount": 79,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/02-time-and-space-complexity/chapters"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/02-time-and-space-complexity/chapters",
+      "sourceChapterCount": 5,
+      "supportingSourceCount": 3,
+      "chapterPreview": [
+        {
+          "title": "Time Complexity from Zero",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/02-time-and-space-complexity/chapters/01-complexity-from-zero.md"
+        },
+        {
+          "title": "Reading Time Complexity from Java Code",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/02-time-and-space-complexity/chapters/02-reading-complexity-from-java-code.md"
+        },
+        {
+          "title": "Space Complexity from Zero",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/02-time-and-space-complexity/chapters/03-space-complexity-from-zero.md"
+        }
+      ],
+      "outcomes": [
+        "Derive time, auxiliary space, and output space from Java code",
+        "Qualify best, worst, expected, amortized, and output-sensitive claims",
+        "Select Java collections using semantics and defensible cost models"
+      ],
+      "webReads": [
+        {
+          "label": "Read complexity lessons",
+          "href": "docs/coding-foundations/02-complexity/"
+        }
+      ]
     },
     {
       "order": 3,
@@ -62,8 +120,36 @@
       "purpose": "This volume closes the mathematical prerequisite gap before bit manipulation, arrays, binary search, hashing, and number-based coding problems. It is practical DSA mathematics, not an academic number-theory textbook.",
       "filename": "Java-SDE2-DSA-01-Number-Systems-and-Math-Foundations.pdf",
       "pageCount": 125,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-01-Number-Systems-and-Math-Foundations.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/01-number-systems-and-math-foundations/chapters"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-01-Number-Systems-and-Math-Foundations.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-01-Number-Systems-and-Math-Foundations.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/01-number-systems-and-math-foundations/chapters",
+      "sourceChapterCount": 13,
+      "supportingSourceCount": 0,
+      "chapterPreview": [
+        {
+          "title": "Chapter 1: Why Number Systems Matter in DSA",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/01-number-systems-and-math-foundations/chapters/01-why-number-systems-matter.md"
+        },
+        {
+          "title": "Chapter 2: Decimal Number System for Coding Problems",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/01-number-systems-and-math-foundations/chapters/02-decimal-number-system.md"
+        },
+        {
+          "title": "Chapter 3: Binary Number System",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/01-number-systems-and-math-foundations/chapters/03-binary-number-system.md"
+        }
+      ],
+      "outcomes": [
+        "Implement overflow-aware digit and base algorithms in Java",
+        "Choose among int, long, exact arithmetic, numeric strings, and BigInteger",
+        "Use divisibility, GCD, LCM, modulo, powers, and roots in interview problems"
+      ],
+      "webReads": [
+        {
+          "label": "Read math foundations",
+          "href": "docs/coding-foundations/03-math/"
+        }
+      ]
     },
     {
       "order": 4,
@@ -76,8 +162,36 @@
       "purpose": "This linked workbook completes Stage 1 with the 52-implementation catalog, Java number traps, conceptual and code-output questions, debugging tasks, coding exercises, solutions, follow-up chains, cheat sheet, and readiness assessment.",
       "filename": "Java-SDE2-DSA-01B-Number-Systems-Interview-Workbook.pdf",
       "pageCount": 137,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-01B-Number-Systems-Interview-Workbook.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/01-number-systems-and-math-foundations/chapters"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-01B-Number-Systems-Interview-Workbook.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-01B-Number-Systems-Interview-Workbook.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/01-number-systems-and-math-foundations/chapters",
+      "sourceChapterCount": 5,
+      "supportingSourceCount": 0,
+      "chapterPreview": [
+        {
+          "title": "Chapter 14: Thirty Core Interview Problem Patterns",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/01-number-systems-and-math-foundations/chapters/14-essential-interview-patterns.md"
+        },
+        {
+          "title": "Chapter 14A: Fifty-Two Implementation Reference",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/01-number-systems-and-math-foundations/chapters/14a-fifty-two-implementation-reference.md"
+        },
+        {
+          "title": "Chapter 15: Java Interview Traps Related to Numbers",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/01-number-systems-and-math-foundations/chapters/15-java-number-traps.md"
+        }
+      ],
+      "outcomes": [
+        "Implement and explain all 52 mandatory number algorithms",
+        "Diagnose Java numeric traps from failing inputs",
+        "Complete short and medium problems under explicit contracts"
+      ],
+      "webReads": [
+        {
+          "label": "Practice math foundations",
+          "href": "docs/coding-foundations/03-math/02-interview-deep-dive/"
+        }
+      ]
     },
     {
       "order": 5,
@@ -90,8 +204,36 @@
       "purpose": "This dedicated volume turns the binary foundation from Volume 01 into a progressive Java interview toolkit. It begins with visible bit patterns and safe operators, derives each shortcut instead of asking readers to memorize it, then develops XOR families, subset state, SDE-2 problem patterns, Java APIs, and production-quality bit fields.",
       "filename": "Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf",
       "pageCount": 109,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/04-bit-manipulation-in-java/chapters"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/04-bit-manipulation-in-java/chapters",
+      "sourceChapterCount": 6,
+      "supportingSourceCount": 2,
+      "chapterPreview": [
+        {
+          "title": "Bits and Java Operators from Zero",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/04-bit-manipulation-in-java/chapters/01-bits-and-java-operators-from-zero.md"
+        },
+        {
+          "title": "Masks, Core Techniques, and Safe Shortcuts",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/04-bit-manipulation-in-java/chapters/02-masks-core-techniques-and-shortcuts.md"
+        },
+        {
+          "title": "XOR Patterns and Prefix State",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/04-bit-manipulation-in-java/chapters/03-xor-patterns-and-prefix-state.md"
+        }
+      ],
+      "outcomes": [
+        "Trace Java int and long bit patterns, shifts, promotion, and sign behavior",
+        "Derive and implement safe test, set, clear, toggle, low-bit, count, power-of-two, and range-mask techniques",
+        "Select and prove XOR, prefix-XOR, subset, submask, range-AND, and maximum-XOR patterns"
+      ],
+      "webReads": [
+        {
+          "label": "Read bit manipulation",
+          "href": "docs/coding-foundations/06-bit-manipulation/"
+        }
+      ]
     },
     {
       "order": 6,
@@ -104,8 +246,40 @@
       "purpose": "This volume is the bridge from basic Java control flow to reliable array and string problem solving. It begins with the execution model of for, while, do-while, and enhanced-for loops; builds a visual language for ranges and invariants; then derives pointer, compaction, window, search, and matrix patterns without asking the reader to memorize templates blindly.",
       "filename": "Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf",
       "pageCount": 95,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/05-loop-mastery-and-index-calculations/chapters"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/05-loop-mastery-and-index-calculations/chapters",
+      "sourceChapterCount": 6,
+      "supportingSourceCount": 2,
+      "chapterPreview": [
+        {
+          "title": "Loop Execution from Zero",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/05-loop-mastery-and-index-calculations/chapters/01-loop-execution-from-zero.md"
+        },
+        {
+          "title": "Index Ranges, Invariants, and Search",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/05-loop-mastery-and-index-calculations/chapters/02-index-ranges-invariants-and-search.md"
+        },
+        {
+          "title": "Two Pointers, Compaction, and Merge",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/05-loop-mastery-and-index-calculations/chapters/03-two-pointers-compaction-and-merge.md"
+        }
+      ],
+      "outcomes": [
+        "Trace every Java loop form using condition, body, update, and exit state",
+        "Design half-open ranges, invariants, and progress measures before coding",
+        "Implement two pointers, compaction, windows, lower bound, and matrix traversals safely"
+      ],
+      "webReads": [
+        {
+          "label": "Start loop reasoning",
+          "href": "docs/coding-foundations/04-loop-reasoning/"
+        },
+        {
+          "label": "Continue with index safety",
+          "href": "docs/coding-foundations/05-indexing/"
+        }
+      ]
     },
     {
       "order": 7,
@@ -118,8 +292,36 @@
       "purpose": "Arrays are the default interview state space. This volume begins with storage, indexes, references, copying, and traversal before building a constraint-driven pattern map for reliable SDE-2 solutions.",
       "filename": "Java-SDE2-DSA-06-Arrays-and-Array-Patterns.pdf",
       "pageCount": 93,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-06-Arrays-and-Array-Patterns.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/06-arrays-and-array-patterns/chapters"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-06-Arrays-and-Array-Patterns.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-06-Arrays-and-Array-Patterns.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/06-arrays-and-array-patterns/chapters",
+      "sourceChapterCount": 7,
+      "supportingSourceCount": 4,
+      "chapterPreview": [
+        {
+          "title": "Array Foundations from Zero",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/06-arrays-and-array-patterns/chapters/01-array-foundations-from-zero.md"
+        },
+        {
+          "title": "Traversal, Copying, and Basic Transformations",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/06-arrays-and-array-patterns/chapters/02-traversal-copying-and-transformations.md"
+        },
+        {
+          "title": "Two Pointers, Compaction, and Partition",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/06-arrays-and-array-patterns/chapters/03-two-pointers-compaction-and-partition.md"
+        }
+      ],
+      "outcomes": [
+        "Use Java arrays without bounds, aliasing, equality, printing, or shallow-copy mistakes",
+        "Derive two-pointer, compaction, partition, window, prefix, interval, and index-placement solutions",
+        "State invariants, mutation contracts, numeric safety, and complete complexity"
+      ],
+      "webReads": [
+        {
+          "label": "Read array lessons",
+          "href": "docs/coding-foundations/07-arrays/"
+        }
+      ]
     },
     {
       "order": 8,
@@ -132,8 +334,36 @@
       "purpose": "This prerequisite-first volume takes a reader from SDE-1 String mechanics through the substring, frequency, window, parsing, and exact-search patterns expected in SDE-2 interviews. Every advanced technique follows a baseline, invariant, dry run, Java implementation, failure boundary, and complete complexity discussion.",
       "filename": "Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf",
       "pageCount": 106,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/07-strings-and-string-patterns/chapters"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/07-strings-and-string-patterns/chapters",
+      "sourceChapterCount": 7,
+      "supportingSourceCount": 2,
+      "chapterPreview": [
+        {
+          "title": "String Foundations from Zero",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/07-strings-and-string-patterns/chapters/01-string-foundations-from-zero.md"
+        },
+        {
+          "title": "Traversal, Unicode, and Text Boundaries",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/07-strings-and-string-patterns/chapters/02-traversal-unicode-and-text-boundaries.md"
+        },
+        {
+          "title": "Building, Parsing, and Conversion",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/07-strings-and-string-patterns/chapters/03-building-parsing-and-conversion.md"
+        }
+      ],
+      "outcomes": [
+        "Use Java String and StringBuilder APIs without identity, immutability, regex, parsing, or indexing mistakes",
+        "Choose UTF-16 units, code points, graphemes, or bytes deliberately and preserve compatible result indexes",
+        "Derive palindrome, frequency, anagram, fixed-window, variable-window, minimum-cover, and replacement patterns"
+      ],
+      "webReads": [
+        {
+          "label": "Read string lessons",
+          "href": "docs/coding-foundations/08-strings/"
+        }
+      ]
     },
     {
       "order": 9,
@@ -146,8 +376,28 @@
       "purpose": "Hashing is both a DSA pattern and a Java object-contract problem. This volume connects the two so expected O(1) claims remain defensible.",
       "filename": "Java-SDE2-DSA-08-Hashing-Maps-Sets-and-Prefix-State.pdf",
       "pageCount": 43,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-08-Hashing-Maps-Sets-and-Prefix-State.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-08-Hashing-Maps-Sets-and-Prefix-State.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-08-Hashing-Maps-Sets-and-Prefix-State.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master",
+      "sourceChapterCount": 1,
+      "supportingSourceCount": 3,
+      "chapterPreview": [
+        {
+          "title": "SDE-2 Hashing, Maps, Sets, and Prefix-State Patterns",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/08-hashing-maps-sets-and-prefix-state/chapters/01-sde2-hashing-patterns.md"
+        }
+      ],
+      "outcomes": [
+        "Design correct equals and hashCode contracts",
+        "Use frequency, membership, grouping, and prefix-state patterns",
+        "Explain collisions, resizing, load factor, and expected complexity"
+      ],
+      "webReads": [
+        {
+          "label": "Read hashing lessons",
+          "href": "docs/coding-foundations/09-hashing/"
+        }
+      ]
     },
     {
       "order": 10,
@@ -160,8 +410,28 @@
       "purpose": "This volume separates recursion as a method contract from backtracking as controlled state-space search, with Java stack and mutation behavior made explicit.",
       "filename": "Java-SDE2-DSA-09-Recursion-and-Backtracking.pdf",
       "pageCount": 23,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-09-Recursion-and-Backtracking.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/09-recursion-and-backtracking/chapters"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-09-Recursion-and-Backtracking.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-09-Recursion-and-Backtracking.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/09-recursion-and-backtracking/chapters",
+      "sourceChapterCount": 1,
+      "supportingSourceCount": 0,
+      "chapterPreview": [
+        {
+          "title": "Recursive Contracts and Backtracking Patterns for SDE-2",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/09-recursion-and-backtracking/chapters/01-sde2-recursion-and-backtracking-patterns.md"
+        }
+      ],
+      "outcomes": [
+        "Write precise recursive contracts and base cases",
+        "Analyze call depth and output-sensitive work",
+        "Implement choose-explore-unchoose safely"
+      ],
+      "webReads": [
+        {
+          "label": "Read recursion lessons",
+          "href": "docs/coding-foundations/14-stacks-recursion/"
+        }
+      ]
     },
     {
       "order": 11,
@@ -174,8 +444,28 @@
       "purpose": "Linked-list problems expose whether a candidate can preserve reachability while mutating references. This volume makes those invariants visible.",
       "filename": "Java-SDE2-DSA-10-Linked-Lists.pdf",
       "pageCount": 24,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-10-Linked-Lists.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/10-linked-lists/chapters"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-10-Linked-Lists.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-10-Linked-Lists.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/10-linked-lists/chapters",
+      "sourceChapterCount": 1,
+      "supportingSourceCount": 0,
+      "chapterPreview": [
+        {
+          "title": "Linked-List Pointer Reasoning and Mutation for SDE-2",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/10-linked-lists/chapters/01-sde2-linked-list-patterns.md"
+        }
+      ],
+      "outcomes": [
+        "Reverse and merge without losing nodes",
+        "Use sentinels and fast-slow pointers",
+        "Detect cycles and reason about midpoint behavior"
+      ],
+      "webReads": [
+        {
+          "label": "Read linked-list lessons",
+          "href": "docs/coding-foundations/16-linked-lists/"
+        }
+      ]
     },
     {
       "order": 12,
@@ -188,8 +478,32 @@
       "purpose": "This volume unifies ordering data structures around the state each one preserves, then applies monotonic structures to linear-time interview patterns.",
       "filename": "Java-SDE2-DSA-11-Stacks-Queues-Deques-and-Monotonic-Patterns.pdf",
       "pageCount": 23,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-11-Stacks-Queues-Deques-and-Monotonic-Patterns.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/11-stacks-queues-deques-and-monotonic-patterns/chapters"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-11-Stacks-Queues-Deques-and-Monotonic-Patterns.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-11-Stacks-Queues-Deques-and-Monotonic-Patterns.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/11-stacks-queues-deques-and-monotonic-patterns/chapters",
+      "sourceChapterCount": 1,
+      "supportingSourceCount": 0,
+      "chapterPreview": [
+        {
+          "title": "Stacks, Queues, Deques, and Monotonic Patterns for SDE-2",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/11-stacks-queues-deques-and-monotonic-patterns/chapters/01-sde2-stack-queue-deque-patterns.md"
+        }
+      ],
+      "outcomes": [
+        "Use ArrayDeque for stack and queue roles",
+        "Distinguish queue, deque, and priority semantics",
+        "Implement next-greater and sliding-window maximum"
+      ],
+      "webReads": [
+        {
+          "label": "Start stack lessons",
+          "href": "docs/coding-foundations/14-stacks-recursion/"
+        },
+        {
+          "label": "Continue with queues and deques",
+          "href": "docs/coding-foundations/15-queues-deques/"
+        }
+      ]
     },
     {
       "order": 13,
@@ -202,8 +516,28 @@
       "purpose": "Binary search is a proof pattern over monotone state. This volume centers interval semantics, duplicates, insertion points, overflow-safe midpoint calculation, and search on answers.",
       "filename": "Java-SDE2-DSA-12-Binary-Search.pdf",
       "pageCount": 22,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-12-Binary-Search.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/12-binary-search/chapters"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-12-Binary-Search.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-12-Binary-Search.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/12-binary-search/chapters",
+      "sourceChapterCount": 1,
+      "supportingSourceCount": 0,
+      "chapterPreview": [
+        {
+          "title": "Binary Search: Bounds, Monotone Answers, and Invariants for SDE-2",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/12-binary-search/chapters/01-sde2-binary-search-patterns.md"
+        }
+      ],
+      "outcomes": [
+        "Choose closed or half-open interval templates",
+        "Implement lower bounds and insertion points",
+        "Use Java binarySearch APIs without misreading negative results"
+      ],
+      "webReads": [
+        {
+          "label": "Read binary-search lessons",
+          "href": "docs/coding-foundations/13-binary-search/"
+        }
+      ]
     },
     {
       "order": 14,
@@ -216,8 +550,28 @@
       "purpose": "Tree interviews test recursion, state ownership, structural invariants, and the ability to translate ordering into pruning.",
       "filename": "Java-SDE2-DSA-13-Trees-BSTs-and-Tries.pdf",
       "pageCount": 25,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-13-Trees-BSTs-and-Tries.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/13-trees-bsts-and-tries/chapters"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-13-Trees-BSTs-and-Tries.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-13-Trees-BSTs-and-Tries.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/13-trees-bsts-and-tries/chapters",
+      "sourceChapterCount": 1,
+      "supportingSourceCount": 0,
+      "chapterPreview": [
+        {
+          "title": "Trees, Binary Search Trees, and Tries for SDE-2",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/13-trees-bsts-and-tries/chapters/01-sde2-tree-bst-trie-patterns.md"
+        }
+      ],
+      "outcomes": [
+        "Implement and explain recursive and iterative traversals",
+        "Reason about depth, paths, LCA, and BST invariants",
+        "Serialize, reconstruct, and validate tree structure"
+      ],
+      "webReads": [
+        {
+          "label": "Read tree lessons",
+          "href": "docs/coding-foundations/17-trees/"
+        }
+      ]
     },
     {
       "order": 15,
@@ -230,8 +584,23 @@
       "purpose": "This volume distinguishes heap order from global sorting and develops priority-based interview patterns without hiding comparator or mutation risks.",
       "filename": "Java-SDE2-DSA-14-Heaps-Priority-Queues-and-Top-K.pdf",
       "pageCount": 24,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-14-Heaps-Priority-Queues-and-Top-K.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/14-heaps-priority-queues-and-top-k/chapters"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-14-Heaps-Priority-Queues-and-Top-K.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-14-Heaps-Priority-Queues-and-Top-K.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/14-heaps-priority-queues-and-top-k/chapters",
+      "sourceChapterCount": 1,
+      "supportingSourceCount": 0,
+      "chapterPreview": [
+        {
+          "title": "SDE-2 Heaps, Priority Queues, Selection, and Top-K Patterns",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/14-heaps-priority-queues-and-top-k/chapters/01-sde2-heap-and-selection-patterns.md"
+        }
+      ],
+      "outcomes": [
+        "Explain array-backed heap invariants",
+        "Use PriorityQueue safely",
+        "Choose between sorting, selection, and a bounded heap"
+      ],
+      "webReads": []
     },
     {
       "order": 16,
@@ -244,8 +613,28 @@
       "purpose": "Graph problems become manageable once the model and edge semantics are explicit. This volume emphasizes algorithm selection, state, overflow, and correctness.",
       "filename": "Java-SDE2-DSA-15-Graphs.pdf",
       "pageCount": 32,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-15-Graphs.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/15-graphs/chapters"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-15-Graphs.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-15-Graphs.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/15-graphs/chapters",
+      "sourceChapterCount": 1,
+      "supportingSourceCount": 0,
+      "chapterPreview": [
+        {
+          "title": "SDE-2 Graph Modeling and Algorithm Patterns",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/15-graphs/chapters/01-sde2-graph-patterns.md"
+        }
+      ],
+      "outcomes": [
+        "Model graph state deliberately",
+        "Implement BFS, DFS, topological sort, Dijkstra, and union-find",
+        "Select a shortest-path algorithm from weight constraints"
+      ],
+      "webReads": [
+        {
+          "label": "Read graph lessons",
+          "href": "docs/coding-foundations/18-graphs/"
+        }
+      ]
     },
     {
       "order": 17,
@@ -258,8 +647,23 @@
       "purpose": "Greedy solutions are short to code and hard to justify. This volume centers the proof obligation, not the superficial loop.",
       "filename": "Java-SDE2-DSA-16-Greedy-Algorithms.pdf",
       "pageCount": 27,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-16-Greedy-Algorithms.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/16-greedy-algorithms/chapters"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-16-Greedy-Algorithms.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-16-Greedy-Algorithms.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/16-greedy-algorithms/chapters",
+      "sourceChapterCount": 1,
+      "supportingSourceCount": 0,
+      "chapterPreview": [
+        {
+          "title": "SDE-2 Greedy Algorithms: Recognition, Proof, and Boundaries",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/16-greedy-algorithms/chapters/01-sde2-greedy-patterns.md"
+        }
+      ],
+      "outcomes": [
+        "State a greedy-choice property",
+        "Use exchange and stays-ahead reasoning",
+        "Implement interval scheduling safely"
+      ],
+      "webReads": []
     },
     {
       "order": 18,
@@ -272,8 +676,28 @@
       "purpose": "This volume makes dynamic programming a specification process: define exactly what a state means, how it depends on smaller states, and what information can be compressed.",
       "filename": "Java-SDE2-DSA-17-Dynamic-Programming.pdf",
       "pageCount": 31,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-17-Dynamic-Programming.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/17-dynamic-programming/chapters"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-17-Dynamic-Programming.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-17-Dynamic-Programming.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/17-dynamic-programming/chapters",
+      "sourceChapterCount": 1,
+      "supportingSourceCount": 0,
+      "chapterPreview": [
+        {
+          "title": "SDE-2 Dynamic Programming: Derivation, Reconstruction, and Optimization",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/17-dynamic-programming/chapters/01-sde2-dynamic-programming-patterns.md"
+        }
+      ],
+      "outcomes": [
+        "Define DP state and transitions precisely",
+        "Choose memoization or tabulation",
+        "Reconstruct a solution and compress safe dimensions"
+      ],
+      "webReads": [
+        {
+          "label": "Read dynamic-programming lessons",
+          "href": "docs/coding-foundations/19-dynamic-programming/"
+        }
+      ]
     },
     {
       "order": 19,
@@ -286,8 +710,36 @@
       "purpose": "Part A builds the execution model needed to reason about Java behavior beneath syntax without presenting implementation details as language guarantees.",
       "filename": "Java-SDE2-ADV-18A-JVM-and-Execution.pdf",
       "pageCount": 84,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-ADV-18A-JVM-and-Execution.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-ADV-18A-JVM-and-Execution.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-ADV-18A-JVM-and-Execution.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master",
+      "sourceChapterCount": 10,
+      "supportingSourceCount": 0,
+      "chapterPreview": [
+        {
+          "title": "Chapter 1: Why Java Exists",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/01-why-java-exists.md"
+        },
+        {
+          "title": "Chapter 2: JDK, JRE, JVM, Editions, and Distributions",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/02-jdk-jre-jvm-editions-and-distributions.md"
+        },
+        {
+          "title": "Chapter 3: Compilation, Bytecode, and the Execution Pipeline",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/03-compilation-bytecode-and-execution-pipeline.md"
+        }
+      ],
+      "outcomes": [
+        "Explain the Java execution pipeline",
+        "Model runtime memory and object creation",
+        "Reason about loading and initialization"
+      ],
+      "webReads": [
+        {
+          "label": "Read Java runtime lessons",
+          "href": "docs/coding-foundations/01-java-runtime/"
+        }
+      ]
     },
     {
       "order": 20,
@@ -300,8 +752,36 @@
       "purpose": "Part B covers the language-engineering depth expected when SDE-2 interviews move beyond coding patterns into API design and type safety.",
       "filename": "Java-SDE2-ADV-18B-Language-OOP-and-Modern-Java.pdf",
       "pageCount": 93,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-ADV-18B-Language-OOP-and-Modern-Java.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-ADV-18B-Language-OOP-and-Modern-Java.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-ADV-18B-Language-OOP-and-Modern-Java.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master",
+      "sourceChapterCount": 10,
+      "supportingSourceCount": 0,
+      "chapterPreview": [
+        {
+          "title": "16. Classes, Objects, Access Control, and Packages",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/16-classes-objects-access-control-packages.md"
+        },
+        {
+          "title": "17. Inheritance, Polymorphism, and Composition",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/17-inheritance-polymorphism-composition.md"
+        },
+        {
+          "title": "18. Interfaces, Abstract Classes, Sealed Types, and Pattern Matching",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/18-interfaces-abstract-classes-sealed-types-pattern-matching.md"
+        }
+      ],
+      "outcomes": [
+        "Design cohesive classes and interfaces",
+        "Implement equality and immutability correctly",
+        "Use exceptions, generics, lambdas, and reflection deliberately"
+      ],
+      "webReads": [
+        {
+          "label": "Read Java language lessons",
+          "href": "docs/coding-foundations/01-java-runtime/"
+        }
+      ]
     },
     {
       "order": 21,
@@ -314,8 +794,36 @@
       "purpose": "Part C is the advanced Java-library companion to the DSA volumes, emphasizing API contracts, representation costs, resource ownership, and production boundaries.",
       "filename": "Java-SDE2-ADV-18C-Collections-Streams-and-IO.pdf",
       "pageCount": 95,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-ADV-18C-Collections-Streams-and-IO.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-ADV-18C-Collections-Streams-and-IO.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-ADV-18C-Collections-Streams-and-IO.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master",
+      "sourceChapterCount": 10,
+      "supportingSourceCount": 0,
+      "chapterPreview": [
+        {
+          "title": "25. Collections Framework Architecture",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/25-collections-framework.md"
+        },
+        {
+          "title": "Appendix D - Java 17 and Java 21 Feature Matrix",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/appendices/d-java-feature-matrix.md"
+        },
+        {
+          "title": "26. ArrayList, LinkedList, and List Trade-offs",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/26-arraylist-linkedlist-and-list-trade-offs.md"
+        }
+      ],
+      "outcomes": [
+        "Select and size Java collections",
+        "Use ordering and navigation APIs safely",
+        "Design correct stream and collector pipelines"
+      ],
+      "webReads": [
+        {
+          "label": "Read collections foundations",
+          "href": "docs/coding-foundations/01-java-runtime/15-collections-overview/"
+        }
+      ]
     },
     {
       "order": 22,
@@ -328,8 +836,31 @@
       "purpose": "Part D develops concurrency correctness from first principles and then connects it to production scheduling, cancellation, backpressure, and testing.",
       "filename": "Java-SDE2-ADV-18D-Concurrency-and-Memory-Model.pdf",
       "pageCount": 69,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-ADV-18D-Concurrency-and-Memory-Model.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-ADV-18D-Concurrency-and-Memory-Model.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-ADV-18D-Concurrency-and-Memory-Model.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master",
+      "sourceChapterCount": 7,
+      "supportingSourceCount": 0,
+      "chapterPreview": [
+        {
+          "title": "Chapter 11: The Java Memory Model from First Principles",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/11-java-memory-model.md"
+        },
+        {
+          "title": "Chapter 33: Threads, Lifecycle, Interruption, and Cancellation",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/33-threads-lifecycle-interruption-and-cancellation.md"
+        },
+        {
+          "title": "Chapter 34: Synchronization, Intrinsic Locks, and Explicit Locks",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/34-synchronization-intrinsic-locks-and-explicit-locks.md"
+        }
+      ],
+      "outcomes": [
+        "Use happens-before to explain visibility",
+        "Choose locks, atomics, or immutability",
+        "Design executor and cancellation policies"
+      ],
+      "webReads": []
     },
     {
       "order": 23,
@@ -342,8 +873,36 @@
       "purpose": "Part E teaches an evidence-first diagnostic method so performance claims and tuning actions remain falsifiable and operationally safe.",
       "filename": "Java-SDE2-ADV-18E-Performance-Diagnostics-and-GC.pdf",
       "pageCount": 47,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-ADV-18E-Performance-Diagnostics-and-GC.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-ADV-18E-Performance-Diagnostics-and-GC.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-ADV-18E-Performance-Diagnostics-and-GC.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master",
+      "sourceChapterCount": 4,
+      "supportingSourceCount": 0,
+      "chapterPreview": [
+        {
+          "title": "39. Performance Methodology and JMH Benchmarking",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/39-performance-methodology-and-jmh-benchmarking.md"
+        },
+        {
+          "title": "40. JVM Diagnostics with jcmd, jstack, jmap, JFR, and Mission Control",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/40-jvm-diagnostics-with-jcmd-jstack-jmap-jfr-and-mission-control.md"
+        },
+        {
+          "title": "41. Memory Leaks, GC Incidents, and Tuning Playbooks",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/41-memory-leaks-gc-incidents-and-tuning-playbooks.md"
+        }
+      ],
+      "outcomes": [
+        "Design meaningful performance measurements",
+        "Use core JDK diagnostic tools",
+        "Analyze leaks and GC incidents"
+      ],
+      "webReads": [
+        {
+          "label": "Read production engineering",
+          "href": "docs/backend-interview/07-production-engineering/"
+        }
+      ]
     },
     {
       "order": 24,
@@ -356,8 +915,40 @@
       "purpose": "Part F covers the engineering judgment that distinguishes SDE-2 candidates from syntax-only candidates: boundaries, invariants, failure policy, observability, and maintainability.",
       "filename": "Java-SDE2-ADV-18F-Design-Backend-Testing-and-Security.pdf",
       "pageCount": 49,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-ADV-18F-Design-Backend-Testing-and-Security.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-ADV-18F-Design-Backend-Testing-and-Security.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-ADV-18F-Design-Backend-Testing-and-Security.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master",
+      "sourceChapterCount": 4,
+      "supportingSourceCount": 0,
+      "chapterPreview": [
+        {
+          "title": "49. Clean Java APIs, SOLID Design, and Low-Level Design Patterns",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/49-clean-java-apis-solid-design-and-low-level-design-patterns.md"
+        },
+        {
+          "title": "50. Backend Java Boundaries: JDBC, Transactions, Serialization, and Services",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/50-backend-java-boundaries-jdbc-transactions-serialization-and-services.md"
+        },
+        {
+          "title": "51. Testing, Build Tools, Static Analysis, and Dependency Management",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/51-testing-build-tools-static-analysis-and-dependency-management.md"
+        }
+      ],
+      "outcomes": [
+        "Design cohesive APIs and LLD components",
+        "Reason about JDBC, transactions, and services",
+        "Build testable and diagnosable systems"
+      ],
+      "webReads": [
+        {
+          "label": "Read low-level design",
+          "href": "docs/backend-interview/02-low-level-design/"
+        },
+        {
+          "label": "Continue with production engineering",
+          "href": "docs/backend-interview/07-production-engineering/"
+        }
+      ]
     },
     {
       "order": 25,
@@ -370,8 +961,36 @@
       "purpose": "Part G is the core Java revision system. It consolidates interview questions, selected solutions, study loops, terminology, and primary references without replacing deliberate practice.",
       "filename": "Java-SDE2-ADV-18G-Question-Bank-Study-Plan-and-Reference.pdf",
       "pageCount": 95,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-ADV-18G-Question-Bank-Study-Plan-and-Reference.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-ADV-18G-Question-Bank-Study-Plan-and-Reference.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-ADV-18G-Question-Bank-Study-Plan-and-Reference.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master",
+      "sourceChapterCount": 6,
+      "supportingSourceCount": 0,
+      "chapterPreview": [
+        {
+          "title": "48. The Java Coding Interview Playbook",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/48-the-java-coding-interview-playbook.md"
+        },
+        {
+          "title": "Chapter 53: SDE-2 Java Interview Question Bank",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/53-sde-2-java-interview-question-bank.md"
+        },
+        {
+          "title": "Chapter 54: Eight-Week Study Plan and Mock Interview Loops",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/54-eight-week-study-plan-and-mock-interview-loops.md"
+        }
+      ],
+      "outcomes": [
+        "Answer SDE-2 Java questions with structured depth",
+        "Run coding, debugging, design, and behavioral mock loops",
+        "Use solutions as delayed feedback"
+      ],
+      "webReads": [
+        {
+          "label": "Open interview practice",
+          "href": "docs/backend-interview/10-practice/"
+        }
+      ]
     },
     {
       "order": 26,
@@ -384,8 +1003,36 @@
       "purpose": "Part H opens the backend specialist track with the Spring and HTTP reasoning expected in Java SDE-2 interviews, while keeping framework behavior tied to explicit contracts and failure modes.",
       "filename": "Java-SDE2-ADV-18H-Spring-Boot-and-REST.pdf",
       "pageCount": 67,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-ADV-18H-Spring-Boot-and-REST.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/18H-spring-boot-and-rest/chapters"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-ADV-18H-Spring-Boot-and-REST.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-ADV-18H-Spring-Boot-and-REST.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/18H-spring-boot-and-rest/chapters",
+      "sourceChapterCount": 4,
+      "supportingSourceCount": 0,
+      "chapterPreview": [
+        {
+          "title": "Spring Container, Configuration, Proxies, and Transaction Boundaries",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/18H-spring-boot-and-rest/chapters/01-container-configuration-proxies-and-transactions.md"
+        },
+        {
+          "title": "Spring MVC and Durable REST Contracts",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/18H-spring-boot-and-rest/chapters/02-spring-mvc-rest-contracts-and-errors.md"
+        },
+        {
+          "title": "Idempotent APIs, Operational Boundaries, and Spring Testing",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/18H-spring-boot-and-rest/chapters/03-idempotency-operations-and-testing.md"
+        }
+      ],
+      "outcomes": [
+        "Explain Spring container, proxy, configuration, and transaction behavior",
+        "Design stable REST request, response, error, and pagination contracts",
+        "Implement idempotency and operational boundaries"
+      ],
+      "webReads": [
+        {
+          "label": "Read API and service design",
+          "href": "docs/backend-interview/04-api-service-design/"
+        }
+      ]
     },
     {
       "order": 27,
@@ -398,8 +1045,36 @@
       "purpose": "Part I develops the persistence judgment needed to design correct, measurable Java data paths instead of treating databases, ORMs, and caches as interchangeable storage APIs.",
       "filename": "Java-SDE2-ADV-18I-Persistence-SQL-and-Caching.pdf",
       "pageCount": 64,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-ADV-18I-Persistence-SQL-and-Caching.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/18I-persistence-sql-and-caching/chapters"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-ADV-18I-Persistence-SQL-and-Caching.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-ADV-18I-Persistence-SQL-and-Caching.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/18I-persistence-sql-and-caching/chapters",
+      "sourceChapterCount": 4,
+      "supportingSourceCount": 0,
+      "chapterPreview": [
+        {
+          "title": "Relational Modeling, Index Design, and Query Plans",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/18I-persistence-sql-and-caching/chapters/01-relational-modeling-indexes-and-query-plans.md"
+        },
+        {
+          "title": "Transactions, Isolation, Locks, Pools, Migrations, and Outbox Boundaries",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/18I-persistence-sql-and-caching/chapters/02-transactions-locks-pools-migrations-and-outbox.md"
+        },
+        {
+          "title": "JPA and Hibernate: Lifecycle, Fetching, Equality, and Locking",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/18I-persistence-sql-and-caching/chapters/03-jpa-hibernate-lifecycle-fetching-and-locking.md"
+        }
+      ],
+      "outcomes": [
+        "Design relational schemas and evidence-based indexes",
+        "Reason about isolation, locks, pools, migrations, and outbox delivery",
+        "Use JPA and Hibernate lifecycle and fetching deliberately"
+      ],
+      "webReads": [
+        {
+          "label": "Read data and storage",
+          "href": "docs/backend-interview/05-data-storage/"
+        }
+      ]
     },
     {
       "order": 28,
@@ -412,8 +1087,36 @@
       "purpose": "Part J completes the backend specialist track with a constraint-first system-design method spanning distributed data, messaging, failure control, and operations.",
       "filename": "Java-SDE2-ADV-18J-Distributed-Systems-and-System-Design.pdf",
       "pageCount": 71,
-      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-ADV-18J-Distributed-Systems-and-System-Design.pdf",
-      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/18J-distributed-systems-and-system-design/chapters"
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-ADV-18J-Distributed-Systems-and-System-Design.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-ADV-18J-Distributed-Systems-and-System-Design.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/18J-distributed-systems-and-system-design/chapters",
+      "sourceChapterCount": 5,
+      "supportingSourceCount": 0,
+      "chapterPreview": [
+        {
+          "title": "Capacity, Partitioning, Replication, and Consistency",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/18J-distributed-systems-and-system-design/chapters/01-capacity-partitioning-replication-and-consistency.md"
+        },
+        {
+          "title": "Kafka Partitions, Consumer Groups, and Delivery Semantics",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/18J-distributed-systems-and-system-design/chapters/02-kafka-streaming-and-delivery-semantics.md"
+        },
+        {
+          "title": "Deadlines, Retries, Circuit Breakers, Backpressure, and Sagas",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/18J-distributed-systems-and-system-design/chapters/03-deadlines-retries-resilience-and-sagas.md"
+        }
+      ],
+      "outcomes": [
+        "Estimate capacity and choose partitioning, replication, and consistency contracts",
+        "Explain Kafka partitions, groups, offsets, rebalances, and delivery semantics",
+        "Design deadlines, retries, bulkheads, rate limits, backpressure, and sagas"
+      ],
+      "webReads": [
+        {
+          "label": "Read distributed systems",
+          "href": "docs/backend-interview/06-distributed-systems/"
+        }
+      ]
     }
   ]
 }

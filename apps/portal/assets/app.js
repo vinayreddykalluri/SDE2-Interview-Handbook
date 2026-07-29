@@ -10,11 +10,14 @@ let completedStages = new Set(loadStoredArray(PROGRESS_KEY));
 let searchIndex = [];
 let activeSearchResult = -1;
 let allStagesExpanded = false;
+let activeBookFilter = "all";
 
 const stageList = document.querySelector("#stage-list");
 const bookList = document.querySelector("#book-grid");
 const bookSearch = document.querySelector("#book-search");
 const bookSummary = document.querySelector("#book-library-summary");
+const bookStartPath = document.querySelector("#book-start-path");
+const bookFilterButtons = document.querySelectorAll("[data-book-filter]");
 const bookReleaseLink = document.querySelector("#book-release-link");
 const masterBookLink = document.querySelector("#master-book-link");
 const seriesIndexLink = document.querySelector("#series-index-link");
@@ -83,12 +86,40 @@ function bookSearchText(book) {
     book.shortTitle,
     book.subtitle,
     book.purpose
-  ].join(" ").toLowerCase();
+  ].concat(
+    book.outcomes || [],
+    (book.chapterPreview || []).map(function (chapter) { return chapter.title; })
+  ).join(" ").toLowerCase();
+}
+
+function buildFoundationPath() {
+  const foundationBooks = books.filter(function (book) {
+    return Number(book.step) <= 7 && book.id !== "01B";
+  });
+
+  bookStartPath.replaceChildren();
+  foundationBooks.forEach(function (book) {
+    const item = createElement("li", "book-path-step");
+    const destination = book.webReads && book.webReads.length
+      ? book.webReads[0].href
+      : "#book-" + book.id;
+    const link = createElement("a");
+    link.href = destination;
+    link.append(
+      createElement("span", "", String(book.step).padStart(2, "0")),
+      createElement("strong", "", book.shortTitle),
+      createElement("small", "", book.webReads && book.webReads.length ? "Read on web" : "Open book card")
+    );
+    item.append(link);
+    bookStartPath.append(item);
+  });
 }
 
 function buildBookCard(book) {
   const article = createElement("article", "book-card");
+  article.id = "book-" + book.id;
   article.dataset.bookSearch = bookSearchText(book);
+  article.dataset.bookTrack = book.track;
 
   const meta = createElement("div", "book-card-meta");
   meta.append(
@@ -99,20 +130,89 @@ function buildBookCard(book) {
   const title = createElement("h3", "", book.shortTitle);
   const subtitle = createElement("p", "book-subtitle", book.subtitle);
   const track = createElement("p", "book-track", book.track + " / PDF " + book.id);
+  const purpose = createElement("p", "book-purpose", book.purpose);
+
+  const contents = createElement("details", "book-contents");
+  const contentsSummary = createElement(
+    "summary",
+    "",
+    "Inside " + book.sourceChapterCount + " canonical Markdown chapter" + (book.sourceChapterCount === 1 ? "" : "s")
+  );
+  const contentsBody = createElement("div", "book-contents-body");
+  const chapterList = createElement("ol", "book-chapter-preview");
+  (book.chapterPreview || []).forEach(function (chapter) {
+    const item = createElement("li");
+    const link = createElement("a", "", chapter.title);
+    link.href = chapter.sourceHref;
+    item.append(link);
+    chapterList.append(item);
+  });
+  const sourceNotes = createElement("div", "book-source-notes");
+  if (book.sourceChapterCount > (book.chapterPreview || []).length) {
+    sourceNotes.append(createElement(
+      "p",
+      "",
+      "+ " + (book.sourceChapterCount - book.chapterPreview.length) + " more in the canonical source"
+    ));
+  }
+  if (book.supportingSourceCount > 0) {
+    sourceNotes.append(createElement(
+      "p",
+      "",
+      "+ " + book.supportingSourceCount + " supporting practice or solution source" + (book.supportingSourceCount === 1 ? "" : "s")
+    ));
+  }
+  contentsBody.append(chapterList);
+  if (sourceNotes.childElementCount) contentsBody.append(sourceNotes);
+
+  if ((book.outcomes || []).length) {
+    contentsBody.append(createElement("strong", "book-outcomes-title", "You will be able to"));
+    const outcomes = createElement("ul", "book-outcomes");
+    book.outcomes.slice(0, 2).forEach(function (outcome) {
+      outcomes.append(createElement("li", "", outcome));
+    });
+    contentsBody.append(outcomes);
+  }
+
+  if ((book.webReads || []).length > 1) {
+    const related = createElement("div", "book-related-reading");
+    related.append(createElement("strong", "", "Continue on the web"));
+    book.webReads.slice(1).forEach(function (webRead) {
+      const link = createElement("a", "", webRead.label + " →");
+      link.href = webRead.href;
+      related.append(link);
+    });
+    contentsBody.append(related);
+  }
+
+  contents.append(contentsSummary, contentsBody);
   const actions = createElement("div", "book-card-actions");
-  const read = createElement("a", "button button-primary", "Open PDF");
-  read.href = book.pdfHref;
-  const source = createElement("a", "text-link", "View source");
+  if ((book.webReads || []).length) {
+    const read = createElement("a", "button button-primary", "Read on web");
+    read.href = book.webReads[0].href;
+    read.setAttribute("aria-label", book.webReads[0].label + ": " + book.shortTitle);
+    actions.append(read);
+  }
+  const download = createElement(
+    "a",
+    (book.webReads || []).length ? "button button-secondary" : "button button-primary",
+    "Download PDF"
+  );
+  download.href = book.pdfHref;
+  download.setAttribute("aria-label", "Download " + book.shortTitle + " PDF, " + book.pageCount + " pages");
+  const source = createElement("a", "text-link", "Source Markdown");
   source.href = book.sourceHref;
-  actions.append(read, source);
-  article.append(meta, track, title, subtitle, actions);
+  actions.append(download, source);
+  article.append(meta, track, title, subtitle, purpose, contents, actions);
   return article;
 }
 
 function renderBooks() {
   const query = (bookSearch.value || "").trim().toLowerCase();
   const matches = books.filter(function (book) {
-    return !query || bookSearchText(book).includes(query);
+    const matchesQuery = !query || bookSearchText(book).includes(query);
+    const matchesTrack = activeBookFilter === "all" || book.track === activeBookFilter;
+    return matchesQuery && matchesTrack;
   });
 
   bookList.replaceChildren();
@@ -125,9 +225,20 @@ function renderBooks() {
   }
 
   const total = books.length;
-  bookSummary.textContent = query
-    ? matches.length + " of " + total + " focused books match your search."
-    : total + " focused books in learning order, plus the series index and complete master book.";
+  const filtered = query || activeBookFilter !== "all";
+  bookSummary.textContent = filtered
+    ? matches.length + " of " + total + " focused books match the current search and track."
+    : total + " focused books in learning order. Read concise lessons on the web, download the publication-depth PDF, or inspect the canonical Markdown.";
+}
+
+function selectBookFilter(filter) {
+  activeBookFilter = filter;
+  bookFilterButtons.forEach(function (button) {
+    const isActive = button.dataset.bookFilter === filter;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+  renderBooks();
 }
 
 function buildStageCard(stage, index, firstIncomplete) {
@@ -343,11 +454,12 @@ function buildSearchIndex() {
   });
 
   const bookEntries = books.map(function (book) {
+    const hasWebReading = book.webReads && book.webReads.length;
     return {
       type: "Book " + book.id,
       label: book.shortTitle,
-      note: "Learning step " + book.step + " · " + book.pageCount + " pages",
-      href: book.pdfHref,
+      note: "Learning step " + book.step + " · " + (hasWebReading ? "web lessons + " : "") + book.pageCount + "-page PDF",
+      href: hasWebReading ? book.webReads[0].href : book.pdfHref,
       keywords: bookSearchText(book)
     };
   });
@@ -474,6 +586,7 @@ async function initializeBooks() {
     masterBookLink.href = bookRelease.master.pdfHref;
     seriesIndexLink.href = bookRelease.index.pdfHref;
     document.querySelector("[data-book-stat='pdfs']").textContent = bookRelease.totalPdfCount + " PDFs";
+    buildFoundationPath();
     renderBooks();
     buildSearchIndex();
   } catch (error) {
@@ -497,6 +610,11 @@ stageList.addEventListener("change", function (event) {
 
 journeySearch.addEventListener("input", applyJourneyFilter);
 bookSearch.addEventListener("input", renderBooks);
+bookFilterButtons.forEach(function (button) {
+  button.addEventListener("click", function () {
+    selectBookFilter(button.dataset.bookFilter || "all");
+  });
+});
 continueButton.addEventListener("click", continueJourney);
 expandButton.addEventListener("click", toggleAllStages);
 

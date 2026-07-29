@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="title">
+  <title id="title">SDE2 Interview Handbook</title>
+  <rect x="2" y="2" width="40" height="40" fill="#f6ae2d" stroke="#112022" stroke-width="3"/>
+  <path d="M42 8h4v38H8v-4h34z" fill="#112022"/>
+  <text x="22" y="29" fill="#112022" font-family="IBM Plex Mono, monospace" font-size="14" font-weight="700" text-anchor="middle">S2</text>
+</svg>
