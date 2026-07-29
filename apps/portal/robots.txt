@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/sitemap.xml
+Sitemap: https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/sitemap.xml

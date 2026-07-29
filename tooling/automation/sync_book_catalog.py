@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -17,6 +18,8 @@ ARTIFACT_MANIFEST = BOOK_ROOT / "dist" / "manifest.json"
 OUTPUT = ROOT / "apps" / "portal" / "content" / "books.json"
 REPOSITORY = "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook"
 BOOK_REPOSITORY_PATH = "books/java-sde2-interview-preparation-series"
+JAVA_FENCE = re.compile(r"^```java(?:\s|$)", re.MULTILINE | re.IGNORECASE)
+WORD = re.compile(r"\b[\w'-]+\b")
 
 # A focused PDF may span more than one concise website module. Keep these routes
 # explicit so a reader lands on a useful lesson instead of a generic catalog page.
@@ -81,6 +84,10 @@ def source_file_href(source_path: Path) -> str:
     return f"{REPOSITORY}/blob/master/{BOOK_REPOSITORY_PATH}/{source_path.as_posix()}"
 
 
+def full_book_href(volume: dict[str, Any]) -> str:
+    return f"books/{str(volume['id']).lower()}-{volume['slug']}/"
+
+
 def markdown_title(path: Path) -> str:
     if path.is_file():
         for line in path.read_text(encoding="utf-8").splitlines():
@@ -112,6 +119,23 @@ def chapter_preview(volume: dict[str, Any]) -> tuple[int, int, list[dict[str, st
     return len(chapter_sources), supporting_source_count, preview
 
 
+def source_metrics(volume: dict[str, Any]) -> tuple[int, int, int]:
+    markdown_sources = [
+        Path(source["path"])
+        for source in volume.get("sources", [])
+        if Path(source["path"]).suffix.lower() == ".md"
+    ]
+    word_count = 0
+    code_entries = 0
+    for source_path in markdown_sources:
+        text = (BOOK_ROOT / source_path).read_text(encoding="utf-8")
+        word_count += len(WORD.findall(text))
+        code_entries += len(JAVA_FENCE.findall(text))
+    if volume.get("code_companion"):
+        code_entries += 1
+    return len(markdown_sources), word_count, code_entries
+
+
 def web_reads(volume_id: str) -> list[dict[str, str]]:
     return [
         {"label": label, "href": href}
@@ -136,6 +160,8 @@ def build_catalog() -> dict[str, Any]:
         volume = volumes_by_id[str(volume_id)]
         artifact = artifacts_by_id[str(volume_id)]
         source_chapter_count, supporting_source_count, source_chapter_preview = chapter_preview(volume)
+        web_document_count, word_count, code_example_count = source_metrics(volume)
+        book_href = full_book_href(volume)
         books.append(
             {
                 "order": position,
@@ -151,6 +177,11 @@ def build_catalog() -> dict[str, Any]:
                 "pdfHref": f"{current_download_root}/{volume['output_name']}",
                 "releasePdfHref": f"{download_root}/{volume['output_name']}",
                 "sourceHref": source_href(volume),
+                "fullBookHref": book_href,
+                "codeHref": f"{book_href}code/",
+                "webDocumentCount": web_document_count,
+                "wordCount": word_count,
+                "codeExampleCount": code_example_count,
                 "sourceChapterCount": source_chapter_count,
                 "supportingSourceCount": supporting_source_count,
                 "chapterPreview": source_chapter_preview,
@@ -164,7 +195,7 @@ def build_catalog() -> dict[str, Any]:
     focused_pages = sum(book["pageCount"] for book in books)
     total_pages = focused_pages + int(index["page_count"]) + int(master["page_count"])
     return {
-        "schemaVersion": 1,
+        "schemaVersion": 2,
         "generatedFrom": f"{BOOK_REPOSITORY_PATH}/publishing/series.json",
         "release": {
             "tag": release_tag,

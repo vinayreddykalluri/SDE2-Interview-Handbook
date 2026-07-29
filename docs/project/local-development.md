@@ -1,9 +1,10 @@
 # Local development
 
-This repository supports three outputs from one source tree:
+This repository supports four outputs from one source tree:
 
 - The web portal at `/`
 - The searchable MkDocs handbook at `/docs/`
+- The complete generated web-book library at `/books/`
 - Printable PDF and editable DOCX books under `output/`
 
 ## One-command macOS setup
@@ -53,6 +54,7 @@ Open these addresses after the server starts:
 - Backend SDE-2 track: <http://127.0.0.1:8000/docs/backend-interview/>
 - Downloads: <http://127.0.0.1:8000/downloads/>
 - Published book catalog: <http://127.0.0.1:8000/#books>
+- Complete web books and code indexes: <http://127.0.0.1:8000/books/>
 
 Stop the server with `Ctrl+C`.
 
@@ -60,10 +62,12 @@ Stop the server with `Ctrl+C`.
 
 ```mermaid
 flowchart LR
-    A["Markdown chapters"] --> B["MkDocs build"]
+    A["Handbook Markdown"] --> B["Handbook MkDocs build"]
+    J["Canonical book Markdown + Java"] --> K["Complete web-book build"]
     C["Web portal source"] --> D["Unified site directory"]
     B --> D
-    A --> E["Pandoc"]
+    K --> D
+    J --> E["Pandoc"]
     E --> F["Tectonic or XeLaTeX"]
     F --> G["Printable PDFs"]
     E --> H["Editable DOCX books"]

@@ -6,12 +6,13 @@ The portal is a lightweight, responsive shell around the canonical handbook. It 
 
 - `index.html` and `assets/` own portal presentation and behavior.
 - `content/coding-foundations.json` owns compact discovery metadata for the 19 foundation modules.
-- `content/books.json` is a generated catalog for the 28 focused PDFs, matching web reading routes, and canonical Markdown chapter previews.
+- `content/books.json` is a generated catalog for the 28 focused books, complete web-reader and code routes, current PDFs, quick lessons, and canonical Markdown chapter previews.
 - Canonical lesson prose remains under `docs/` and is not duplicated here.
-- `tooling/automation/build_site.py` copies this shell to `site/` and mounts MkDocs at `site/docs/`.
+- `tooling/automation/build_book_web_library.py` renders every Markdown source declared by every volume into `site/books/`, with a searchable contents tree and code index.
+- `tooling/automation/build_site.py` copies this shell to `site/`, mounts the concise handbook at `site/docs/`, and builds the complete books at `site/books/`.
 
-The book catalog is derived from `books/java-sde2-interview-preparation-series/publishing/series.json`, the Markdown files listed by each volume, and `dist/manifest.json`. Update those canonical files, then run `make sync-book-catalog`; do not edit `content/books.json` by hand. `make validate-web` fails if the catalog is stale, a web-reading route has no Markdown page, or a chapter preview loses its source link.
+The book catalog is derived from `books/java-sde2-interview-preparation-series/publishing/series.json`, the Markdown files listed by each volume, optional Java companions, and `dist/manifest.json`. Update those canonical files, then run `make sync-book-catalog`; do not edit `content/books.json` by hand. `make validate-web` fails if the catalog is stale, a route has no Markdown page, a complete-book path is unsafe, or web document and code counts drift from the canonical sources.
 
 Run `make validate-web` after portal changes and `make serve-web` to inspect the complete local experience at [http://127.0.0.1:8000/](http://127.0.0.1:8000/).
 
-Primary download actions use the PDF committed on `master`, so the deployed website and its downloadable book update together without copying PDFs into the website bundle. The catalog also retains the versioned release URL for archival snapshots, and the toolbar links to the tagged release. Book cards prefer a concise website lesson when one exists, keep the current publication-depth PDF one click away, and expose canonical source Markdown for review and contribution.
+Primary download actions use the PDF committed on `master`, so the deployed website and its downloadable book update together without copying PDFs into the website bundle. The catalog also retains the versioned release URL for archival snapshots. Every card leads first to the complete web book, then to its implementation index, current PDF, quick lessons, and canonical source. The web reader is generated—not hand-copied—so an approved Markdown or Java companion change reaches both publishing surfaces through the normal build.

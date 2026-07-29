@@ -6,7 +6,7 @@ The repository provides a versioned Java SDE-2 PDF series and can also generate 
 
 Open the [latest GitHub release](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest) for a versioned snapshot. Every focused module is attached as an individually named PDF, together with the complete master PDF and integrity manifest.
 
-If you are deciding what to read next, use the [interactive web + PDF library](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/#books). It keeps the beginner-first learning order visible, links each compatible book to its searchable web lessons, previews chapter headings from canonical Markdown, and downloads the current PDF committed on `master`. This makes the web lesson, source, and PDF advance together when an approved book update is merged.
+If you are deciding what to read next, use the [interactive catalog](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/#books) or open the [complete web book library](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/). Every focused book is available as searchable canonical chapters with exercises, solutions, a code index, and next-page navigation. Its card also downloads the current PDF committed on `master`, so the web reader, source, and PDF advance together when an approved update is merged.
 
 The canonical published files are also versioned under [`books/java-sde2-interview-preparation-series/`](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series).
 

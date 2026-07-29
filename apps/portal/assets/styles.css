@@ -415,6 +415,14 @@ button, a, input, summary { -webkit-tap-highlight-color: transparent; }
   -webkit-line-clamp: 4;
 }
 
+.book-web-stats {
+  margin: -6px 0 18px;
+  color: var(--blue);
+  font: 600 0.58rem/1.55 var(--mono);
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
 .book-contents { margin: 0 0 20px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .book-contents summary { padding: 11px 0; color: var(--blue); cursor: pointer; font: 600 0.62rem var(--mono); letter-spacing: 0.04em; text-transform: uppercase; }
 .book-contents[open] summary { border-bottom: 1px solid var(--line); }
@@ -427,9 +435,9 @@ button, a, input, summary { -webkit-tap-highlight-color: transparent; }
 .book-outcomes-title, .book-related-reading strong { display: block; margin: 16px 0 7px; font: 600 0.58rem var(--mono); letter-spacing: 0.06em; text-transform: uppercase; }
 .book-related-reading { display: grid; gap: 5px; }
 .book-related-reading a { color: var(--blue); font: 600 0.62rem var(--mono); text-transform: uppercase; }
-.book-card-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: auto; }
+.book-card-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: auto; }
 .book-card-actions .button { min-height: 42px; padding-inline: 14px; font-size: 0.61rem; }
-.book-card-actions .text-link { font-size: 0.6rem; }
+.book-card-actions .text-link { margin-left: 4px; font-size: 0.6rem; }
 .book-grid > .empty-state { grid-column: 1 / -1; border-right: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong); }
 
 .journey {

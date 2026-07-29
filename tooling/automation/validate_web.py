@@ -31,6 +31,8 @@ JAVA = (
 MODULES_FILE = WEB / "content" / "coding-foundations.json"
 BOOKS_FILE = WEB / "content" / "books.json"
 BOOK_DIST = ROOT / "books" / "java-sde2-interview-preparation-series" / "dist"
+BOOK_WEB_BUILDER = ROOT / "tooling" / "automation" / "build_book_web_library.py"
+BOOK_WEB_CSS = ROOT / "tooling" / "book-web" / "book-reader.css"
 NUMBERED_CHAPTER = re.compile(r"^\d{2}-.+\.md$")
 ROOT_RELATIVE_REFERENCE = re.compile(r"(?:href|src|fetch)\s*\(?(?:=\s*)?[\"']/")
 SAFE_CODE_PACKAGE = re.compile(r"^codingfoundations/[a-z][a-z0-9]*$")
@@ -176,6 +178,8 @@ def validate_books(errors: list[str]) -> None:
     if not isinstance(books, list) or not isinstance(release, dict):
         fail(errors, "apps/portal/content/books.json must contain release metadata and a books array")
         return
+    if catalog.get("schemaVersion") != 2:
+        fail(errors, "Book catalog schemaVersion must be 2 for complete web-book routes")
     if len(books) != 28:
         fail(errors, f"Expected 28 focused books; found {len(books)}")
     if [book.get("id") for book in books[:6]] != ["03", "02", "01", "01B", "04", "05"]:
@@ -186,9 +190,11 @@ def validate_books(errors: list[str]) -> None:
     required_fields = {
         "order", "step", "id", "track", "title", "shortTitle", "subtitle",
         "purpose", "filename", "pageCount", "pdfHref", "releasePdfHref", "sourceHref",
+        "fullBookHref", "codeHref", "webDocumentCount", "wordCount", "codeExampleCount",
         "sourceChapterCount", "supportingSourceCount", "chapterPreview", "outcomes", "webReads",
     }
     filenames: list[str] = []
+    full_book_routes: list[str] = []
     web_readable_books = 0
     for book in books:
         missing = required_fields - set(book)
@@ -197,6 +203,18 @@ def validate_books(errors: list[str]) -> None:
             continue
         filename = str(book["filename"])
         filenames.append(filename)
+        full_book_href = str(book["fullBookHref"])
+        code_href = str(book["codeHref"])
+        full_book_routes.append(full_book_href)
+        expected_prefix = f"books/{str(book['id']).lower()}-"
+        if not full_book_href.startswith(expected_prefix) or not full_book_href.endswith("/") or ".." in full_book_href:
+            fail(errors, f"Book {book['id']} has an invalid complete web-book route")
+        if code_href != f"{full_book_href}code/":
+            fail(errors, f"Book {book['id']} code route must be nested under its complete web book")
+        if int(book["webDocumentCount"]) != int(book["sourceChapterCount"]) + int(book["supportingSourceCount"]):
+            fail(errors, f"Book {book['id']} web document count does not cover every Markdown source")
+        if int(book["wordCount"]) <= 0 or int(book["codeExampleCount"]) < 0:
+            fail(errors, f"Book {book['id']} has invalid web content metrics")
         if not (BOOK_DIST / filename).is_file():
             fail(errors, f"Published book is missing from dist/: {filename}")
         if "/raw/refs/heads/master/" not in str(book["pdfHref"]):
@@ -231,12 +249,21 @@ def validate_books(errors: list[str]) -> None:
                 fail(errors, f"Book {book['id']} web reading route has no Markdown source: {href}")
     if len(filenames) != len(set(filenames)):
         fail(errors, "Book catalog filenames must be unique")
+    if len(full_book_routes) != len(set(full_book_routes)):
+        fail(errors, "Complete web-book routes must be unique")
     if web_readable_books < 24:
         fail(errors, f"Expected at least 24 books with a web reading route; found {web_readable_books}")
 
     strings = next((book for book in books if book.get("id") == "07"), None)
     if not strings or int(strings.get("sourceChapterCount", 0)) < 7:
         fail(errors, "Strings must expose all seven publication-depth Markdown chapters")
+    elif int(strings.get("wordCount", 0)) < 14000 or int(strings.get("codeExampleCount", 0)) < 75:
+        fail(errors, "Strings must retain publication-depth web content and code coverage")
+
+    total_documents = sum(int(book.get("webDocumentCount", 0)) for book in books)
+    total_code_entries = sum(int(book.get("codeExampleCount", 0)) for book in books)
+    if total_documents < 161 or total_code_entries < 800:
+        fail(errors, f"Complete web library is unexpectedly shallow: {total_documents} documents, {total_code_entries} code entries")
 
 
 def validate_javascript(errors: list[str]) -> None:
@@ -266,6 +293,8 @@ def main() -> int:
         WEB / "assets" / "styles.css",
         WEB / "assets" / "app.js",
         WEB / "assets" / "s2-mark.svg",
+        BOOK_WEB_BUILDER,
+        BOOK_WEB_CSS,
         MODULES_FILE,
         BOOKS_FILE,
     ]
@@ -289,8 +318,8 @@ def main() -> int:
         return 1
 
     print(
-        "Web validation passed: 19 modules, 57 chapters, 69 foundation Java examples, "
-        "and 30 published PDFs"
+        "Web validation passed: 28 complete books, 161 canonical documents, 860 book code entries, "
+        "19 learning modules, 69 foundation Java files, and 30 published PDFs"
     )
     return 0
 

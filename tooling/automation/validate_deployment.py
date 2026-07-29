@@ -29,7 +29,16 @@ REQUIRED_PACKAGES = {
     "pyyaml",
 }
 ACTIVE_WORKFLOW_ALLOWLIST = {"validate-books.yml"}
-REQUIRED_IGNORES = {".github/", ".venv/", "books/", "site/", "tooling/publishing-templates/"}
+REQUIRED_IGNORES = {
+    ".github/",
+    ".venv/",
+    "site/",
+    "tooling/publishing-templates/",
+    "books/java-sde2-interview-preparation-series/dist/*",
+    "!books/java-sde2-interview-preparation-series/dist/manifest.json",
+    "books/java-sde2-interview-preparation-series/reports/",
+    "books/java-sde2-interview-preparation-series/scripts/",
+}
 
 
 def main() -> int:
@@ -75,6 +84,8 @@ def main() -> int:
         errors.append(f".vercelignore is missing non-deployment inputs: {missing_ignores}")
     if "examples/" in ignored:
         errors.append(".vercelignore must retain examples/ because build_site.py publishes it")
+    if "books/" in ignored:
+        errors.append(".vercelignore must retain canonical book Markdown and Java inputs for the complete web library")
 
     workflows_dir = ROOT / ".github" / "workflows"
     active_workflows = (
