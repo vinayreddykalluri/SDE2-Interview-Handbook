@@ -46,4 +46,4 @@ Each volume had a technically useful SDE-2 pattern chapter, but volumes 09-17 be
 
 ## Final content condition
 
-The ten volumes now contain 53 canonical web documents, 69,343 indexed words, 109 indexed Java entries, 30 full interview-room simulations, 153 new practice prompts, ten standalone companions, and 41 executable companion checks. The affected PDF set grew from 284 to 406 pages without changing filenames or the publishing toolchain.
+After the second publication audit, the ten volumes contain 63 canonical web documents, 78,150 indexed words, 119 indexed Java entries, 30 full interview-room simulations, 168 distributed practice prompts, ten standalone companions, and ten additional executable clinic classes. The affected PDF set grew from 284 to 455 pages without changing filenames or the publishing toolchain. Detailed V2 findings are recorded in `DSA_08_17_PUBLICATION_AUDIT_V2.md`.

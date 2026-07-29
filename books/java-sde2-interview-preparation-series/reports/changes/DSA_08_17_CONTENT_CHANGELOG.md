@@ -14,3 +14,20 @@
 | 17 Dynamic Programming | state derivation needed a repeatable protocol | added eight-question DP foundation | 3 full rounds | evaluation order, pseudo-polynomial cost, safe compression |
 
 All physical PDF names, cover conventions, segment numbering, author credit, and build tools were preserved.
+
+## Second publication audit
+
+| Book | Gap promoted from exercise/boundary | Taught additions | Practice additions |
+|---|---|---|---:|
+| 08 Hashing | XOR and exact-cardinality state | prefix-XOR frequency; exactly-K via at-most subtraction | 2 |
+| 09 Recursion | constrained generation and dense constraint state | balanced parentheses; validated restoring Sudoku solver | 1 |
+| 10 Linked Lists | bidirectional ownership | doubly linked invariants; complete LRU cache | 1 |
+| 11 Ordering Structures | popped-boundary proof | histogram area; trapped rain water | 1 |
+| 12 Binary Search | partition and implicit rank | median of two arrays; kth matrix occurrence | 2 |
+| 13 Trees | returned state versus global answer | maximum path sum; inorder successor | 2 |
+| 14 Heaps | bounded and synchronized frontiers | k closest; smallest range covering k lists | 2 |
+| 15 Graphs | frontier policy by source/weight | multi-source BFS; 0-1 BFS and weighted routing | 2 |
+| 16 Greedy | lower-bound and closing-obligation proofs | candy; partition labels | 1 |
+| 17 Dynamic Programming | missing prefix state and shallow interval boundary | word break; matrix-chain multiplication | 1 |
+
+The V2 pass also expanded validation to compile complete Java classes embedded in mapped chapters even when a separate companion exists. Visual QA found and removed three single-answer tail pages created by the new content.

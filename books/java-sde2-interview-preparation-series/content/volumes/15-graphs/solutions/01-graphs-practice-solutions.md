@@ -15,3 +15,5 @@
 13. DSU handles undirected additions and connectivity efficiently. Deletions or directed reachability require different structures/offline techniques.
 14. A chain can create O(V) call depth and `StackOverflowError`; use an explicit deque for untrusted depth.
 15. Partition vertices/edges, stream adjacency, use compressed IDs, external storage, frontier batching, and explicit consistency/failure contracts. Complexity alone does not solve distribution.
+16. Enqueue all sources at distance zero and mark them discovered before traversal. Ordinary BFS then processes distance layers from the complete source set, equivalent to adding a synthetic source with zero-cost edges. Each traversable cell enters once, so time and output storage are O(rows*columns).
+17. Use BFS for equal weights, deque-based 0-1 BFS for weights zero or one, Dijkstra for arbitrary nonnegative weights, topological relaxation for a DAG, Bellman-Ford when negative edges may exist, and Floyd-Warshall for suitable moderate all-pairs cases. Bellman-Ford relaxes all edges up to V-1 times; any further reachable improvement proves a reachable negative cycle.

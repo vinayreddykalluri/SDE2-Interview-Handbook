@@ -52,7 +52,7 @@ Choose only one segment initially. Inside it, use the book numbers as the prereq
 
 [![Java SDE-2 Interview Preparation Series cover](books/java-sde2-interview-preparation-series/assets/covers/series-index-cover.png)](books/java-sde2-interview-preparation-series/dist/Java-SDE2-Interview-Preparation-Series-Index.pdf)
 
-The consolidated repository includes 40 focused books, a 17-page series index, and a 616-page master book. The focused books contain 2,220 pages; the complete 42-PDF library contains 2,853 pages.
+The consolidated repository includes 40 focused books, a 17-page series index, and a 616-page master book. The focused books contain 2,269 pages; the complete 42-PDF library contains 2,902 pages.
 
 | Publication status | Books | Meaning |
 |---|---:|---|

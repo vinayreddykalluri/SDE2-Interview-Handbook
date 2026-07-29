@@ -15,3 +15,4 @@
 13. Identify the information needed to compare alternative histories, such as best value up to item/index/capacity, then define transitions instead of committing irrevocably.
 14. Add a secondary key only among choices equivalent under the proof's primary criterion. Confirm it does not change feasibility or objective.
 15. Offline algorithms see all requests and can sort. Online algorithms need competitive objectives, buffering, preemption, or approximation; exact offline optimality may be impossible with irrevocable decisions.
+16. Initialize one candy each. A left-to-right pass raises a child's count above a lower-rated left neighbor; a right-to-left pass raises it above a lower-rated right neighbor, taking the maximum with the existing count. Each direction establishes a necessary lower bound, and their pointwise maximum satisfies both without excess. Time is O(n), auxiliary space O(n), and the total should use `long` for large n.

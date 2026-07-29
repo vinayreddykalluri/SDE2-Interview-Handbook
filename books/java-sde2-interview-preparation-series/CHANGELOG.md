@@ -6,6 +6,7 @@
 - Added 30 original interview-room simulations with clarification dialogue, baseline reasoning, optimized Java, invariants or dry runs, complexity, tests, and follow-up answers.
 - Added 153 focused practice prompts, separated reasoning solutions, and ten dependency-free Java companions with 41 executable checks.
 - Rebuilt the ten canonical PDFs from 284 to 406 pages and synchronized their source counts, code indexes, downloads, and chapter navigation with the web library.
+- Completed a second publication audit of DSA 08-17, adding ten essential-pattern clinics, 15 practice/solution pairs, and 30 validated runtime assertions; the affected set now totals 455 pages.
 - Added consolidated audit, coverage, changelog, validation, and build evidence for the expansion.
 
 ## 2026-07-29 - Three learning segments and backend roadmap editions

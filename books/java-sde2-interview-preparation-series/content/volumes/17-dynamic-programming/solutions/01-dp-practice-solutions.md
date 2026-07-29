@@ -15,3 +15,4 @@
 13. O(n * amount) is polynomial in numeric amount but exponential in the number of bits required to encode a potentially huge amount.
 14. Compress only after dependency analysis. Keep the full table or parent choices when an actual solution path is required and memory permits.
 15. DP evaluates a DAG of states, greedy commits using a proof, and shortest path optimizes edge-cost accumulation. Equivalent state graphs can reveal alternative algorithms, but edge weights and acyclicity determine validity.
+16. Let `reachable[end]` mean prefix `[0,end)` can be segmented, with `reachable[0]=true`. From every reachable start, try dictionary words or endings up to the maximum word length; record the predecessor start on the first successful transition to each end. Reconstruct backward from n and reverse. The abstract transition count can be O(nL), but Java substring creation and hashing add character/allocation cost; a trie or region comparison can avoid temporary strings.

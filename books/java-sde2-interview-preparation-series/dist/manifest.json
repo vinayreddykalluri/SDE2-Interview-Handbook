@@ -246,9 +246,9 @@
       "file": "Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf"
     },
     {
-      "page_count": 60,
-      "sha256": "0d4eea757cff9c98622c7ca7c8c9569c684d4a7af46fac35de40c9e28f29f84b",
-      "bytes": 3802252,
+      "page_count": 64,
+      "sha256": "ea0eca3f427103c0461aab8ffb28f168b9e379e01bba9a7604f3b690f7967e95",
+      "bytes": 3813848,
       "id": "08",
       "stage": "8",
       "path_label": "08",
@@ -261,9 +261,9 @@
       "file": "Java-SDE2-DSA-08-Hashing-Maps-Sets-and-Prefix-State.pdf"
     },
     {
-      "page_count": 37,
-      "sha256": "5a2ebb87e29d81748f70d4e60867cfbda5bf07e51b30ce509573a513f2b8aea2",
-      "bytes": 3731293,
+      "page_count": 43,
+      "sha256": "94be53244239bd7f25647f43eb104e0b62df6868c21a775371b86bbe9fd3b80d",
+      "bytes": 3745355,
       "id": "09",
       "stage": "9",
       "path_label": "09",
@@ -276,9 +276,9 @@
       "file": "Java-SDE2-DSA-09-Recursion-and-Backtracking.pdf"
     },
     {
-      "page_count": 36,
-      "sha256": "76b0afcc0bb42a9e97eea5924cdd2d2de0ffe169bca2a9f915091315031cecb7",
-      "bytes": 3725833,
+      "page_count": 42,
+      "sha256": "629ae397d48c7803d518d2330a3c37be5b18dbe9bc51234a61efb44413201917",
+      "bytes": 3738069,
       "id": "10",
       "stage": "10",
       "path_label": "10",
@@ -291,9 +291,9 @@
       "file": "Java-SDE2-DSA-10-Linked-Lists.pdf"
     },
     {
-      "page_count": 36,
-      "sha256": "4bddb9ae99a0b6d72ae8b1578702bb1896bf4360666282788a2651ed7ab3601b",
-      "bytes": 3727013,
+      "page_count": 41,
+      "sha256": "beeff8673734d1ee792df202062111b95876e203a572eb99f4a3d12608e921de",
+      "bytes": 3737871,
       "id": "11",
       "stage": "11",
       "path_label": "11",
@@ -306,9 +306,9 @@
       "file": "Java-SDE2-DSA-11-Stacks-Queues-Deques-and-Monotonic-Patterns.pdf"
     },
     {
-      "page_count": 36,
-      "sha256": "907b244c17e9a07ce244e121f000833907a90a59f9daaaac8df617630485920d",
-      "bytes": 3726045,
+      "page_count": 41,
+      "sha256": "385feaa154017eb2e80890de601adde5c0032c0635b61dbc62906a5dd6554848",
+      "bytes": 3738082,
       "id": "12",
       "stage": "12",
       "path_label": "12",
@@ -321,9 +321,9 @@
       "file": "Java-SDE2-DSA-12-Binary-Search.pdf"
     },
     {
-      "page_count": 38,
-      "sha256": "544a80a973356a35a67f38126f14ec11039052cf2bfa6a6daaa228a205d0df08",
-      "bytes": 3729705,
+      "page_count": 42,
+      "sha256": "9f8fc84c9c133a3a665e9f0618b15f59fde467bc6f1556e52601cdc11eb5f1ac",
+      "bytes": 3739576,
       "id": "13",
       "stage": "13",
       "path_label": "13",
@@ -336,9 +336,9 @@
       "file": "Java-SDE2-DSA-13-Trees-BSTs-and-Tries.pdf"
     },
     {
-      "page_count": 36,
-      "sha256": "172f7df3fded34d0fd2fc75f652b3bf17cab8b39f5d98b4e3a5da426ec9a6850",
-      "bytes": 3726580,
+      "page_count": 41,
+      "sha256": "bf640694ff39d4d556fabd826c733820752015f7f88e614f9aaeb6cd58a441f9",
+      "bytes": 3738244,
       "id": "14",
       "stage": "14",
       "path_label": "14",
@@ -351,9 +351,9 @@
       "file": "Java-SDE2-DSA-14-Heaps-Priority-Queues-and-Top-K.pdf"
     },
     {
-      "page_count": 45,
-      "sha256": "a9350adf52787f9f122e3489330424cc8ed1950bb068ccafd683ea70fac53a5e",
-      "bytes": 3744169,
+      "page_count": 50,
+      "sha256": "fa7b5a1266254a436ecd63343424b111cadbfc57adc64d483a7e930b09818669",
+      "bytes": 3756595,
       "id": "15",
       "stage": "15",
       "path_label": "15",
@@ -366,9 +366,9 @@
       "file": "Java-SDE2-DSA-15-Graphs.pdf"
     },
     {
-      "page_count": 39,
-      "sha256": "61adbcb0657ec8744a5b55fca67f2ffb2bff54a37ad917dd9fbcccaa336042b7",
-      "bytes": 3733905,
+      "page_count": 43,
+      "sha256": "dcc7c31d6f58e6bd9ce6f704563ef0ddb05c4ab6c948113335a6b091151ba78a",
+      "bytes": 3743268,
       "id": "16",
       "stage": "16",
       "path_label": "16",
@@ -381,9 +381,9 @@
       "file": "Java-SDE2-DSA-16-Greedy-Algorithms.pdf"
     },
     {
-      "page_count": 43,
-      "sha256": "ff3949101da18107e2abcf3d7104af244770f45ff146ba993c23b8b41ed78eb1",
-      "bytes": 3742489,
+      "page_count": 48,
+      "sha256": "7144dc7199ccf78844eb4dfbd02e76408e2531f2a0e7bd8b38d6ee31a4255857",
+      "bytes": 3753580,
       "id": "17",
       "stage": "17",
       "path_label": "17",

@@ -15,3 +15,5 @@
 13. Explain lazy deletion and its memory-cleanup obligation.
 14. Design a stable priority scheduler with equal priorities.
 15. Explain why arbitrary deletion is a boundary for Java `PriorityQueue`.
+16. **Interview Core:** Return the k closest points with a bounded max-heap, overflow-safe squared distance, and deterministic tie-breaking.
+17. **SDE-2 Follow-up:** Find the smallest range containing at least one value from each of k sorted lists. Explain why only the list supplying the current minimum advances.

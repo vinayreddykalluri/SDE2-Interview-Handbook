@@ -28,3 +28,8 @@
 15. Sorting costs O(n log n) and may be in-place; it groups duplicates and has predictable iteration locality. Hashing is expected O(n) but uses O(u) object-heavy state and does not preserve sorted order.
 16. Distinct keys can grow without bound. Exactness requires retention or durable aggregation; bounded memory requires eviction, a time window, domain bounds, or approximation.
 17. Poor distribution or adversarial keys can increase collision work and allocation pressure. Validate request size, rate-limit, cap state, use robust platform implementations, and avoid exposing attacker-controlled custom hash behavior.
+
+## Essential clinic answers
+
+18. Seed prefix-XOR frequency with `0 -> 1`. After applying the current value, every earlier prefix equal to `prefix XOR target` produces one valid subarray. Add its frequency before recording the current prefix. Use `long` because even an all-zero array with target zero has `n(n+1)/2` answers.
+19. Compute `atMost(K) - atMost(K-1)`. In each at-most window, shrink until the distinct count is legal. Then every start in `[left,right]` creates a valid subarray ending at `right`, which is exactly `right-left+1` choices. Each endpoint moves only forward, so expected time is O(n) and state is O(K) under the active-window contract.

@@ -15,3 +15,4 @@
 13. Explain pseudo-polynomial complexity.
 14. Decide when space compression is worth losing reconstruction data.
 15. Compare DP, greedy, and shortest-path formulations of the same state graph.
+16. **Interview Core:** Solve word break as prefix feasibility, return one valid segmentation, and discuss substring-allocation cost in Java.

@@ -15,3 +15,4 @@
 13. Convert a failed greedy formulation into a DP state.
 14. Design deterministic tie-breaking without changing optimality.
 15. Discuss online versus offline scheduling limitations.
+16. **Interview Core:** Derive the minimum-candy allocation with two directional passes and prove why taking the maximum of the two lower bounds is minimal.

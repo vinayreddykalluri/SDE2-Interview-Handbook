@@ -486,6 +486,7 @@ def run_series_native_java_validation(spec: dict[str, Any]) -> None:
     """Compile and execute complete public Java classes in focused native chapters."""
     classes: dict[str, tuple[Path, str]] = {}
     volume_classes: dict[str, list[str]] = {}
+    companion_classes: dict[str, str] = {}
     native_volumes: set[str] = set()
     fence = re.compile(r"```java\s*\n(.*?)\n```", re.DOTALL)
     declaration = re.compile(r"\bpublic\s+final\s+class\s+([A-Za-z_$][\w$]*)\b")
@@ -523,8 +524,15 @@ def run_series_native_java_validation(spec: dict[str, Any]) -> None:
                 code = path.read_text(encoding="ascii")
             except UnicodeDecodeError as exc:
                 fail(f"Series-native Java companion is not ASCII: {path}: {exc}")
+            before = set(classes)
             register(volume_id, path, code)
-            continue
+            added = set(classes) - before
+            if len(added) != 1:
+                fail(
+                    f"Focused volume {volume_id} companion must expose exactly one "
+                    f"complete public class: {path}"
+                )
+            companion_classes[volume_id] = added.pop()
         for source in native_sources:
             path = (ROOT / source["path"]).resolve()
             text = path.read_text(encoding="utf-8")
@@ -535,6 +543,8 @@ def run_series_native_java_validation(spec: dict[str, Any]) -> None:
         fail("No focused series-native public Java classes were found")
     for volume_id in sorted(native_volumes):
         companions = volume_classes.get(volume_id, [])
+        if volume_id in companion_classes:
+            continue
         if len(companions) != 1:
             fail(
                 f"Focused volume {volume_id} must expose exactly one complete "

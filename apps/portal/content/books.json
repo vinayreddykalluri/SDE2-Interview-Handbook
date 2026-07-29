@@ -6,11 +6,11 @@
     "date": "2026-07-25",
     "url": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/tag/books-v2026.07.0",
     "focusedBookCount": 40,
-    "focusedPageCount": 2220,
+    "focusedPageCount": 2269,
     "indexPageCount": 17,
     "masterPageCount": 616,
     "totalPdfCount": 42,
-    "totalPageCount": 2853,
+    "totalPageCount": 2902,
     "index": {
       "title": "Java SDE-2 Interview Preparation Series Index",
       "filename": "Java-SDE2-Interview-Preparation-Series-Index.pdf",
@@ -945,16 +945,16 @@
       "subtitle": "Equality Contracts, Frequency Maps, Deduplication, and Expected Complexity",
       "purpose": "Hashing is both a DSA pattern and a Java object-contract problem. This volume connects the two so expected O(1) claims remain defensible.",
       "filename": "Java-SDE2-DSA-08-Hashing-Maps-Sets-and-Prefix-State.pdf",
-      "pageCount": 60,
+      "pageCount": 64,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-08-Hashing-Maps-Sets-and-Prefix-State.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-08-Hashing-Maps-Sets-and-Prefix-State.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/08-hashing-maps-sets-and-prefix-state/chapters",
       "fullBookHref": "books/08-hashing-maps-sets-and-prefix-state/",
       "codeHref": "books/08-hashing-maps-sets-and-prefix-state/code/",
-      "webDocumentCount": 8,
-      "wordCount": 14270,
-      "codeExampleCount": 25,
-      "sourceChapterCount": 3,
+      "webDocumentCount": 9,
+      "wordCount": 15146,
+      "codeExampleCount": 26,
+      "sourceChapterCount": 4,
       "supportingSourceCount": 5,
       "chapterPreview": [
         {
@@ -966,8 +966,8 @@
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/08-hashing-maps-sets-and-prefix-state/chapters/01-sde2-hashing-patterns.md"
         },
         {
-          "title": "Realistic Hashing Interview Rounds with Model Answers",
-          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/08-hashing-maps-sets-and-prefix-state/chapters/02-realistic-hashing-interview-rounds.md"
+          "title": "Essential Hashing Pattern Clinics",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/08-hashing-maps-sets-and-prefix-state/chapters/02-essential-pattern-clinics.md"
         }
       ],
       "outcomes": [
@@ -1001,16 +1001,16 @@
       "subtitle": "Contracts, Call Stacks, Search Trees, Pruning, and State Restoration",
       "purpose": "This volume separates recursion as a method contract from backtracking as controlled state-space search, with Java stack and mutation behavior made explicit.",
       "filename": "Java-SDE2-DSA-09-Recursion-and-Backtracking.pdf",
-      "pageCount": 37,
+      "pageCount": 43,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-09-Recursion-and-Backtracking.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-09-Recursion-and-Backtracking.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/09-recursion-and-backtracking/chapters",
       "fullBookHref": "books/09-recursion-and-backtracking/",
       "codeHref": "books/09-recursion-and-backtracking/code/",
-      "webDocumentCount": 5,
-      "wordCount": 6324,
-      "codeExampleCount": 9,
-      "sourceChapterCount": 3,
+      "webDocumentCount": 6,
+      "wordCount": 7312,
+      "codeExampleCount": 10,
+      "sourceChapterCount": 4,
       "supportingSourceCount": 2,
       "chapterPreview": [
         {
@@ -1022,8 +1022,8 @@
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/09-recursion-and-backtracking/chapters/01-sde2-recursion-and-backtracking-patterns.md"
         },
         {
-          "title": "Realistic Recursion and Backtracking Interview Rounds",
-          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/09-recursion-and-backtracking/chapters/02-realistic-recursion-interview-rounds.md"
+          "title": "Essential Recursion and Backtracking Pattern Clinics",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/09-recursion-and-backtracking/chapters/02-essential-pattern-clinics.md"
         }
       ],
       "outcomes": [
@@ -1057,16 +1057,16 @@
       "subtitle": "Nodes, Sentinels, Fast-Slow Pointers, Reversal, Cycles, and Merging",
       "purpose": "Linked-list problems expose whether a candidate can preserve reachability while mutating references. This volume makes those invariants visible.",
       "filename": "Java-SDE2-DSA-10-Linked-Lists.pdf",
-      "pageCount": 36,
+      "pageCount": 42,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-10-Linked-Lists.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-10-Linked-Lists.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/10-linked-lists/chapters",
       "fullBookHref": "books/10-linked-lists/",
       "codeHref": "books/10-linked-lists/code/",
-      "webDocumentCount": 5,
-      "wordCount": 5792,
-      "codeExampleCount": 12,
-      "sourceChapterCount": 3,
+      "webDocumentCount": 6,
+      "wordCount": 6605,
+      "codeExampleCount": 13,
+      "sourceChapterCount": 4,
       "supportingSourceCount": 2,
       "chapterPreview": [
         {
@@ -1078,8 +1078,8 @@
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/10-linked-lists/chapters/01-sde2-linked-list-patterns.md"
         },
         {
-          "title": "Realistic Linked-List Interview Rounds",
-          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/10-linked-lists/chapters/02-realistic-linked-list-interview-rounds.md"
+          "title": "Essential Linked-List Pattern Clinics",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/10-linked-lists/chapters/02-essential-pattern-clinics.md"
         }
       ],
       "outcomes": [
@@ -1113,16 +1113,16 @@
       "subtitle": "LIFO, FIFO, Sliding Extrema, Next-Greater State, and Java ArrayDeque",
       "purpose": "This volume unifies ordering data structures around the state each one preserves, then applies monotonic structures to linear-time interview patterns.",
       "filename": "Java-SDE2-DSA-11-Stacks-Queues-Deques-and-Monotonic-Patterns.pdf",
-      "pageCount": 36,
+      "pageCount": 41,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-11-Stacks-Queues-Deques-and-Monotonic-Patterns.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-11-Stacks-Queues-Deques-and-Monotonic-Patterns.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/11-stacks-queues-deques-and-monotonic-patterns/chapters",
       "fullBookHref": "books/11-stacks-queues-deques-and-monotonic-patterns/",
       "codeHref": "books/11-stacks-queues-deques-and-monotonic-patterns/code/",
-      "webDocumentCount": 5,
-      "wordCount": 5703,
-      "codeExampleCount": 7,
-      "sourceChapterCount": 3,
+      "webDocumentCount": 6,
+      "wordCount": 6467,
+      "codeExampleCount": 8,
+      "sourceChapterCount": 4,
       "supportingSourceCount": 2,
       "chapterPreview": [
         {
@@ -1134,8 +1134,8 @@
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/11-stacks-queues-deques-and-monotonic-patterns/chapters/01-sde2-stack-queue-deque-patterns.md"
         },
         {
-          "title": "Realistic Stack, Queue, and Deque Interview Rounds",
-          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/11-stacks-queues-deques-and-monotonic-patterns/chapters/02-realistic-stack-queue-interview-rounds.md"
+          "title": "Essential Monotonic-Structure Pattern Clinics",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/11-stacks-queues-deques-and-monotonic-patterns/chapters/02-essential-pattern-clinics.md"
         }
       ],
       "outcomes": [
@@ -1173,16 +1173,16 @@
       "subtitle": "Exact Matches, Lower Bounds, Monotone Predicates, and Safe Midpoints",
       "purpose": "Binary search is a proof pattern over monotone state. This volume centers interval semantics, duplicates, insertion points, overflow-safe midpoint calculation, and search on answers.",
       "filename": "Java-SDE2-DSA-12-Binary-Search.pdf",
-      "pageCount": 36,
+      "pageCount": 41,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-12-Binary-Search.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-12-Binary-Search.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/12-binary-search/chapters",
       "fullBookHref": "books/12-binary-search/",
       "codeHref": "books/12-binary-search/code/",
-      "webDocumentCount": 5,
-      "wordCount": 5594,
-      "codeExampleCount": 9,
-      "sourceChapterCount": 3,
+      "webDocumentCount": 6,
+      "wordCount": 6518,
+      "codeExampleCount": 10,
+      "sourceChapterCount": 4,
       "supportingSourceCount": 2,
       "chapterPreview": [
         {
@@ -1194,8 +1194,8 @@
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/12-binary-search/chapters/01-sde2-binary-search-patterns.md"
         },
         {
-          "title": "Realistic Binary Search Interview Rounds",
-          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/12-binary-search/chapters/02-realistic-binary-search-interview-rounds.md"
+          "title": "Essential Advanced Binary-Search Pattern Clinics",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/12-binary-search/chapters/02-essential-pattern-clinics.md"
         }
       ],
       "outcomes": [
@@ -1229,16 +1229,16 @@
       "subtitle": "Traversal Contracts, Path State, Ordering, Balance, and Prefix Search",
       "purpose": "Tree interviews test recursion, state ownership, structural invariants, and the ability to translate ordering into pruning.",
       "filename": "Java-SDE2-DSA-13-Trees-BSTs-and-Tries.pdf",
-      "pageCount": 38,
+      "pageCount": 42,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-13-Trees-BSTs-and-Tries.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-13-Trees-BSTs-and-Tries.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/13-trees-bsts-and-tries/chapters",
       "fullBookHref": "books/13-trees-bsts-and-tries/",
       "codeHref": "books/13-trees-bsts-and-tries/code/",
-      "webDocumentCount": 5,
-      "wordCount": 6158,
-      "codeExampleCount": 10,
-      "sourceChapterCount": 3,
+      "webDocumentCount": 6,
+      "wordCount": 7052,
+      "codeExampleCount": 11,
+      "sourceChapterCount": 4,
       "supportingSourceCount": 2,
       "chapterPreview": [
         {
@@ -1250,8 +1250,8 @@
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/13-trees-bsts-and-tries/chapters/01-sde2-tree-bst-trie-patterns.md"
         },
         {
-          "title": "Realistic Tree, BST, and Trie Interview Rounds",
-          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/13-trees-bsts-and-tries/chapters/02-realistic-tree-interview-rounds.md"
+          "title": "Essential Tree and BST Pattern Clinics",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/13-trees-bsts-and-tries/chapters/02-essential-pattern-clinics.md"
         }
       ],
       "outcomes": [
@@ -1285,16 +1285,16 @@
       "subtitle": "Heap Invariants, Comparator Safety, K-Way Processing, and Partial Ordering",
       "purpose": "This volume distinguishes heap order from global sorting and develops priority-based interview patterns without hiding comparator or mutation risks.",
       "filename": "Java-SDE2-DSA-14-Heaps-Priority-Queues-and-Top-K.pdf",
-      "pageCount": 36,
+      "pageCount": 41,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-14-Heaps-Priority-Queues-and-Top-K.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-14-Heaps-Priority-Queues-and-Top-K.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/14-heaps-priority-queues-and-top-k/chapters",
       "fullBookHref": "books/14-heaps-priority-queues-and-top-k/",
       "codeHref": "books/14-heaps-priority-queues-and-top-k/code/",
-      "webDocumentCount": 5,
-      "wordCount": 5809,
-      "codeExampleCount": 11,
-      "sourceChapterCount": 3,
+      "webDocumentCount": 6,
+      "wordCount": 6785,
+      "codeExampleCount": 12,
+      "sourceChapterCount": 4,
       "supportingSourceCount": 2,
       "chapterPreview": [
         {
@@ -1306,8 +1306,8 @@
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/14-heaps-priority-queues-and-top-k/chapters/01-sde2-heap-and-selection-patterns.md"
         },
         {
-          "title": "Realistic Heap and Priority-Queue Interview Rounds",
-          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/14-heaps-priority-queues-and-top-k/chapters/02-realistic-heap-interview-rounds.md"
+          "title": "Essential Heap Pattern Clinics",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/14-heaps-priority-queues-and-top-k/chapters/02-essential-pattern-clinics.md"
         }
       ],
       "outcomes": [
@@ -1336,16 +1336,16 @@
       "subtitle": "Modeling, BFS, DFS, Topological Sort, Shortest Paths, and Connectivity",
       "purpose": "Graph problems become manageable once the model and edge semantics are explicit. This volume emphasizes algorithm selection, state, overflow, and correctness.",
       "filename": "Java-SDE2-DSA-15-Graphs.pdf",
-      "pageCount": 45,
+      "pageCount": 50,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-15-Graphs.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-15-Graphs.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/15-graphs/chapters",
       "fullBookHref": "books/15-graphs/",
       "codeHref": "books/15-graphs/code/",
-      "webDocumentCount": 5,
-      "wordCount": 6834,
-      "codeExampleCount": 10,
-      "sourceChapterCount": 3,
+      "webDocumentCount": 6,
+      "wordCount": 7841,
+      "codeExampleCount": 11,
+      "sourceChapterCount": 4,
       "supportingSourceCount": 2,
       "chapterPreview": [
         {
@@ -1357,8 +1357,8 @@
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/15-graphs/chapters/01-sde2-graph-patterns.md"
         },
         {
-          "title": "Realistic Graph Interview Rounds",
-          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/15-graphs/chapters/02-realistic-graph-interview-rounds.md"
+          "title": "Essential Graph Frontier and Weight Clinics",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/15-graphs/chapters/02-essential-pattern-clinics.md"
         }
       ],
       "outcomes": [
@@ -1392,16 +1392,16 @@
       "subtitle": "Local Choices, Exchange Arguments, Counterexamples, and Interval Decisions",
       "purpose": "Greedy solutions are short to code and hard to justify. This volume centers the proof obligation, not the superficial loop.",
       "filename": "Java-SDE2-DSA-16-Greedy-Algorithms.pdf",
-      "pageCount": 39,
+      "pageCount": 43,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-16-Greedy-Algorithms.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-16-Greedy-Algorithms.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/16-greedy-algorithms/chapters",
       "fullBookHref": "books/16-greedy-algorithms/",
       "codeHref": "books/16-greedy-algorithms/code/",
-      "webDocumentCount": 5,
-      "wordCount": 6219,
-      "codeExampleCount": 8,
-      "sourceChapterCount": 3,
+      "webDocumentCount": 6,
+      "wordCount": 6962,
+      "codeExampleCount": 9,
+      "sourceChapterCount": 4,
       "supportingSourceCount": 2,
       "chapterPreview": [
         {
@@ -1413,8 +1413,8 @@
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/16-greedy-algorithms/chapters/01-sde2-greedy-patterns.md"
         },
         {
-          "title": "Realistic Greedy Interview Rounds",
-          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/16-greedy-algorithms/chapters/02-realistic-greedy-interview-rounds.md"
+          "title": "Essential Greedy Invariant Clinics",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/16-greedy-algorithms/chapters/02-essential-pattern-clinics.md"
         }
       ],
       "outcomes": [
@@ -1443,16 +1443,16 @@
       "subtitle": "Memoization, Tabulation, Reconstruction, Dimensions, and Space Compression",
       "purpose": "This volume makes dynamic programming a specification process: define exactly what a state means, how it depends on smaller states, and what information can be compressed.",
       "filename": "Java-SDE2-DSA-17-Dynamic-Programming.pdf",
-      "pageCount": 43,
+      "pageCount": 48,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-17-Dynamic-Programming.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-17-Dynamic-Programming.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/17-dynamic-programming/chapters",
       "fullBookHref": "books/17-dynamic-programming/",
       "codeHref": "books/17-dynamic-programming/code/",
-      "webDocumentCount": 5,
-      "wordCount": 6640,
-      "codeExampleCount": 8,
-      "sourceChapterCount": 3,
+      "webDocumentCount": 6,
+      "wordCount": 7462,
+      "codeExampleCount": 9,
+      "sourceChapterCount": 4,
       "supportingSourceCount": 2,
       "chapterPreview": [
         {
@@ -1464,8 +1464,8 @@
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/17-dynamic-programming/chapters/01-sde2-dynamic-programming-patterns.md"
         },
         {
-          "title": "Realistic Dynamic Programming Interview Rounds",
-          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/17-dynamic-programming/chapters/02-realistic-dp-interview-rounds.md"
+          "title": "Essential Dynamic-Programming Pattern Clinics",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/17-dynamic-programming/chapters/02-essential-pattern-clinics.md"
         }
       ],
       "outcomes": [

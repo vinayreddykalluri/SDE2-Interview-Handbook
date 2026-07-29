@@ -15,3 +15,5 @@
 13. Explain how duplicates change rotated-array worst-case complexity.
 14. Compare binary search on an array with search in a linked list.
 15. Define a safe stopping rule for floating-point binary search.
+16. **SDE-2 Follow-up:** Find the median of two sorted arrays by binary-searching a partition in the shorter array. Explain all four boundary values.
+17. **SDE-2 Follow-up:** Find the kth smallest occurrence in a row-and-column sorted matrix by searching the value domain. Prove the `count(values <= middle)` predicate is monotone.

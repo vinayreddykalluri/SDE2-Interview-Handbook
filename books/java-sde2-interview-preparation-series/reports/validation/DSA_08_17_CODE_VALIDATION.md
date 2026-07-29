@@ -36,6 +36,18 @@ PASS 5 dynamic-programming checks
 
 ## Repository source validation
 
-`python3 scripts/validate_series.py --source-only` passed. It compiled and ran 19 series-native classes across the complete series and retained the existing Number Systems validation of 820 assertions plus 24 standalone printed examples.
+`python3 scripts/validate_series.py --source-only` passed under Java 21 with `-Xlint:all -Werror`.
 
-Markdown method excerpts are educational fragments; the complete companion class in each volume is the executable source of truth for the newly added checks.
+| Publication-validation metric | Result |
+|---|---:|
+| Complete series-native classes compiled and executed | 40 |
+| Complete classes belonging to DSA 08-17 | 30 |
+| Existing DSA 08-17 companion classes | 10 |
+| Existing DSA 08-17 main pattern classes | 10 |
+| New essential-clinic classes | 10 |
+| New clinic runtime assertions | 30 |
+| Compilation or execution failures | 0 |
+| Existing Number Systems assertions retained | 820 |
+| Existing Number Systems standalone printed examples retained | 24 |
+
+The validator now scans mapped chapter classes even when the volume also supplies a separate companion. Incomplete educational method fragments remain excluded; every complete public class with `main` is compiled and executed.

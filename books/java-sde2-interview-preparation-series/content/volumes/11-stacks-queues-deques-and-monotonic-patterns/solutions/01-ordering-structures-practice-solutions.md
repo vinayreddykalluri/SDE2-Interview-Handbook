@@ -15,3 +15,4 @@
 13. A heap guarantees only that the head is minimal. Its backing-array iteration order is heap order, not global sorted order; repeatedly poll a copy for sorted output.
 14. A deque is O(n) total and specialized for FIFO window expiry plus maximum. A tree supports broader ordered queries in O(log k) per update and handles arbitrary deletions if counts are managed.
 15. State whether producers block, reject, drop newest, drop oldest, or time out; define capacity, fairness, shutdown, metrics, and interruption behavior.
+16. Keep indexes in nonincreasing-height order. A taller current bar pops a basin bottom. If no left boundary remains, no water is enclosed; otherwise width is `right-left-1` and bounded height is `min(height[left],height[right])-height[bottom]`. Every index is pushed and popped at most once, giving O(n) time and O(n) stack space. A two-pointer formulation can reduce auxiliary space to O(1).

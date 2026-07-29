@@ -15,3 +15,5 @@
 13. Choose an algorithm for dynamic edge additions and connectivity queries.
 14. Explain recursion depth risk in graph DFS.
 15. Design memory boundaries for a graph too large for one process.
+16. **Interview Core:** Compute every grid cell's distance to the nearest source with one multi-source BFS. Explain the synthetic-source equivalence.
+17. **SDE-2 Follow-up:** Give the shortest-path decision rule for unweighted, 0/1, nonnegative, negative-edge, DAG, and all-pairs inputs. Include reachable negative-cycle detection.

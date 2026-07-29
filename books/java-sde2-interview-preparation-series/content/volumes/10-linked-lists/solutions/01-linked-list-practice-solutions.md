@@ -15,3 +15,4 @@
 13. Shared nodes can be appended twice or relinked into a cycle. Validate disjointness or define copy/ownership semantics.
 14. An immutable cons list shares its tail. Prepending is O(1); changing an interior element copies the path to it. Readers avoid mutation races.
 15. `ArrayDeque` has compact array storage and efficient operations at both ends. `LinkedList` allocates a node per element and has poorer locality; it is useful only when its specific contracts matter.
+16. Map each key to its one live node. Sentinels bound a most-recent-to-least-recent doubly linked list. An access detaches the found node and inserts it after the front sentinel; insertion evicts `back.previous` when size exceeds capacity and removes that node from the map. At every public boundary, map membership and list membership must be bijective and size must not exceed capacity. `get` changes recency order, so concurrent safety must cover both structures as one operation.

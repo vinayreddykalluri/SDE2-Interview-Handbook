@@ -15,3 +15,5 @@
 13. Explain recursion risk for a million-node chain.
 14. Compare a BST, `TreeMap`, and trie for prefix queries.
 15. Design LCA queries when the tree is static and queries are frequent.
+16. **Interview Core:** Return the maximum path sum when a path may start and end anywhere. Separate the value returned to the parent from the complete through-node candidate.
+17. **Interview Core:** Find a BST node's inorder successor without parent pointers. State a distinct-key policy and the missing-target behavior.

@@ -33,3 +33,8 @@ Do these without reading the solutions. Write the key, stored value, invariant, 
 15. Compare sorting and hashing for deduplication when input mutation is allowed.
 16. Explain why an exact frequency service over an unbounded key stream needs a memory policy.
 17. Explain how a denial-of-service input could challenge a hash-based design and what layer should mitigate it.
+
+## Essential clinic tasks
+
+18. **Interview Core:** Count subarrays whose XOR equals a target. State the empty-prefix seed and why the answer uses `long`.
+19. **SDE-2 Follow-up:** Count subarrays with exactly K distinct values by deriving the result from two at-most counts. Prove what `right - left + 1` counts.

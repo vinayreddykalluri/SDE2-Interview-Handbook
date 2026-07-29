@@ -16,3 +16,4 @@
 14. Use boolean short-circuiting for existence or first-solution queries; collect only when the contract requires enumeration.
 15. The output itself can be exponential and includes copied elements. Complexity should include nodes visited and total emitted representation.
 16. Check a cancellation token at defined boundaries and guarantee undo in `finally`. Partial output and input mutation policies must be documented.
+17. Validate shape, symbols, and duplicate starting digits while initializing three `boolean[9][10]` tables. At an empty cell, try only digits unused by its row, column, and box; mark, recurse, and unmark on failure. Returning `false` after complete search means a valid initial board has no solution, while malformed or contradictory input should be rejected before search. Minimum-remaining-values ordering can reduce the practical tree without changing correctness.

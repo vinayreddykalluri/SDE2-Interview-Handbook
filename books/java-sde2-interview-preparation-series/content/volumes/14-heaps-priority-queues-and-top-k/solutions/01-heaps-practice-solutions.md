@@ -15,3 +15,5 @@
 13. Stale heap entries remain until they reach the top. Track validity/version counts and periodically compact if stale memory can grow too large.
 14. Compare priority first and monotonic sequence number second. Sequence generation, overflow, and concurrency must be controlled.
 15. `remove(object)` generally searches linearly before repairing the heap. Use an indexed heap or lazy invalidation when arbitrary updates/removals are core operations.
+16. Keep at most k points in a max-heap whose root is the worst retained candidate. Compute squared distance in `long`, compare with `Long.compare`, and evict after each insertion beyond k. Sorting the retained k values is necessary only when the output contract requires order. Time is O(n log k), space O(k).
+17. Seed a min-heap with one entry per list and track the frontier maximum. The heap minimum and maximum define a complete range. Advancing a nonminimum list cannot improve the left boundary, so advance the minimum's source. Stop when that source ends because no later frontier covers every list. Total time is O(N log k), space O(k).

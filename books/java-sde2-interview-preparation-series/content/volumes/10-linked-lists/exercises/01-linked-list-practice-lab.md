@@ -26,3 +26,7 @@
 13. Explain the risk of destructively merging two lists that may overlap.
 14. Design an immutable persistent list and compare update cost.
 15. Explain why Java's `LinkedList` is rarely the default choice for interview queues.
+
+## Essential clinic task
+
+16. **SDE-2 Follow-up:** Implement a fixed-capacity LRU cache with a hash map and sentinel-based doubly linked list. Write the representation invariants and explain why `get` is a mutation.

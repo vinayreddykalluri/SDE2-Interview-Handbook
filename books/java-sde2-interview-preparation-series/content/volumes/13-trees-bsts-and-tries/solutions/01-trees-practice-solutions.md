@@ -15,3 +15,5 @@
 13. Recursive depth becomes O(n) and can overflow the Java stack. Use an explicit deque or constrain input depth.
 14. A hand-built BST gives ordering but not prefix structure; `TreeMap` is balanced and can support range queries; a trie follows prefixes directly but may use much more memory.
 15. Options include parent pointers plus depth alignment, binary lifting, Euler tour plus RMQ, or offline algorithms. Choose from update frequency, memory, and query latency.
+16. A child returns only its best nonnegative downward contribution because a parent can extend one branch. At the current node, update a global best with node value plus both nonnegative child contributions. Initialize below every node value so an all-negative tree selects its least-negative node. Time is O(n), with O(h) call depth.
+17. Search from the root while recording the current node whenever moving left; it is the best greater ancestor seen so far. If the target has a right subtree, return that subtree's leftmost node. Return empty when no successor exists and reject or explicitly return empty for a missing target according to the API contract.

@@ -27,3 +27,7 @@
 14. When would you use a boolean return instead of collecting all solutions?
 15. Explain why output-sensitive complexity is more honest for subsets and permutations.
 16. Describe how cancellation or time budgets should interact with restoration.
+
+## Essential clinic task
+
+17. **SDE-2 Follow-up:** Implement a Sudoku solver that validates the initial board, uses row/column/box constraint state, restores every failed choice, and distinguishes invalid input from a valid board with no completion.

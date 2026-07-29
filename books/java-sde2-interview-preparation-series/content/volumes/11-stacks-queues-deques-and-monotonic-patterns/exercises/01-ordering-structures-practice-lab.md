@@ -15,3 +15,4 @@
 13. Explain why `PriorityQueue` iteration is not sorted output.
 14. Compare a monotonic deque with a balanced tree for sliding maximum.
 15. Define backpressure behavior for a bounded work queue.
+16. **Interview Core:** Compute trapped rain water with a monotonic stack. For every popped basin bottom, identify the left boundary, right boundary, width, and bounded height.
