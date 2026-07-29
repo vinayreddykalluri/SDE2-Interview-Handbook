@@ -319,6 +319,14 @@ def load_manifest() -> dict[str, Any]:
     outputs = [item["output_name"] for item in volumes]
     if len(outputs) != len(set(outputs)):
         raise RuntimeError("series.json contains duplicate output names")
+    path_labels = data.get("path_labels", {})
+    if set(path_labels) != set(ids):
+        raise RuntimeError("path_labels must define exactly one public study code per physical volume")
+    if len(set(path_labels.values())) != len(ids):
+        raise RuntimeError("path_labels contains duplicate public study codes")
+    for position, item in enumerate(learning_volumes(data), start=1):
+        item["path_label"] = str(path_labels[item["id"]])
+        item["book_position"] = position
     return data
 
 
@@ -442,7 +450,7 @@ def orientation_markdown(spec: dict[str, Any], previous: dict[str, Any] | None, 
     signals = compact(spec["recognition_signals"])
     outcomes = compact(spec["outcomes"])
     fallback = (
-        f"{previous['id']} - {previous['short_title']}"
+        f"Study Step {previous['path_label']} - {previous['short_title']}"
         if previous
         else "the Absolute Beginner route in the series index"
     )
@@ -474,12 +482,12 @@ def orientation_markdown(spec: dict[str, Any], previous: dict[str, Any] | None, 
 def handoff_markdown(spec: dict[str, Any], previous: dict[str, Any] | None, next_spec: dict[str, Any] | None) -> str:
     practice = "\n".join(f"- {item}" for item in spec["practice_ladder"])
     previous_line = (
-        f"[Previous volume: {previous['id']} - {previous['title']}]({previous['output_name']})"
+        f"[Previous book: Study Step {previous['path_label']} - {previous['title']}]({previous['output_name']})"
         if previous
         else "This is the first volume in the sequence."
     )
     next_line = (
-        f"[Next volume: {next_spec['id']} - {next_spec['title']}]({next_spec['output_name']})"
+        f"[Next book: Study Step {next_spec['path_label']} - {next_spec['title']}]({next_spec['output_name']})"
         if next_spec
         else f"[Return to the complete series index]({INDEX_NAME})"
     )
@@ -677,6 +685,7 @@ def about_author_story(
 
 
 def stage_rows(manifest: dict[str, Any]) -> list[dict[str, str]]:
+    """Return the 18 conceptual stages for compact summary uses."""
     by_stage = {str(item["stage"]): item for item in manifest["stages"]}
     ordered: list[dict[str, str]] = []
     seen: set[str] = set()
@@ -686,7 +695,7 @@ def stage_rows(manifest: dict[str, Any]) -> list[dict[str, str]]:
             continue
         seen.add(stage_id)
         row = dict(by_stage[stage_id])
-        row["path_step"] = str(len(ordered) + 1)
+        row["path_step"] = stage_id.zfill(2)
         ordered.append(row)
     return ordered
 
@@ -723,11 +732,12 @@ def roadmap_story(
     rows: list[list[Paragraph]] = [
         [Paragraph("STEP", head_style), Paragraph("FOCUSED LEARNING PATH", head_style)]
     ]
-    for stage in stage_rows(manifest):
-        link = html.escape(stage["entry_pdf"], quote=True)
-        number = Paragraph(f'<link href="{link}" color="#0B2545"><b>{stage["path_step"]}</b></link>', number_style)
+    ordered_books = learning_volumes(manifest)
+    for book in ordered_books:
+        link = html.escape(book["output_name"], quote=True)
+        number = Paragraph(f'<link href="{link}" color="#0B2545"><b>{book["path_label"]}</b></link>', number_style)
         title = Paragraph(
-            f'<link href="{link}" color="#17212B">{html.escape(stage["title"])}</link>',
+            f'<link href="{link}" color="#17212B">{html.escape(book["title"])}</link>',
             cell_style,
         )
         rows.append([number, title])
@@ -741,9 +751,8 @@ def roadmap_story(
         ("LEFTPADDING", (0, 0), (-1, -1), 6),
         ("RIGHTPADDING", (0, 0), (-1, -1), 6),
     ]
-    current_stage = str(spec.get("stage", ""))
-    for row_index, stage in enumerate(stage_rows(manifest), start=1):
-        if str(stage["stage"]) == current_stage:
+    for row_index, book in enumerate(ordered_books, start=1):
+        if str(book["id"]) == str(spec.get("id", "")):
             commands.append(("BACKGROUND", (0, row_index), (-1, row_index), PALE))
             commands.append(("LINEBEFORE", (0, row_index), (0, row_index), 3, GOLD))
     table.setStyle(TableStyle(commands))
@@ -753,14 +762,14 @@ def roadmap_story(
     return [
         title,
         Paragraph(
-            "Complete the learning steps in order when rebuilding from fundamentals, or enter at the first step whose readiness checks expose a gap. Stable volume numbers remain in filenames; the steps below show the recommended reading order. Click a title when your PDF viewer permits local sibling-file links.",
+            "Complete the study steps in order when rebuilding from fundamentals, or enter at the first step whose readiness checks expose a gap. The same public study codes appear on the website and every PDF cover. Click a title when your PDF viewer permits local sibling-file links.",
             styles["small"],
         ),
         Spacer(1, 7),
         table,
         Spacer(1, 7),
         Paragraph(
-            "Learning Step 3 uses a linked Number Systems foundations volume and workbook; the final advanced stage uses a ten-part collection, including a three-volume backend specialist track. These splits keep every file focused and printable.",
+            "Study Step 03 uses linked foundations (03A) and workbook (03B) books. Study Step 18 uses ten focused books (18A-18J), including a three-book backend specialist track. These suffixes keep every file focused while preserving one unambiguous route.",
             styles["small"],
         ),
         PageBreak(),
@@ -825,7 +834,7 @@ def local_navigation_story(
     def linked(item: dict[str, Any] | None, fallback: str) -> Paragraph:
         if item is None:
             return Paragraph(fallback, nav_style)
-        label = f"{item['id']} - {item['short_title']}"
+        label = f"{item['path_label']} - {item['short_title']}"
         return Paragraph(
             f'<link href="{html.escape(item["output_name"], quote=True)}" color="#164E63">{html.escape(label)}</link>',
             nav_style,
@@ -833,7 +842,7 @@ def local_navigation_story(
 
     rows = [[
         linked(previous, "START OF SERIES"),
-        Paragraph(f"YOU ARE HERE<br/>{html.escape(spec['id'])} - {html.escape(spec['short_title'])}", current_style),
+        Paragraph(f"YOU ARE HERE<br/>{html.escape(spec['path_label'])} - {html.escape(spec['short_title'])}", current_style),
         linked(next_spec, "SERIES COMPLETE"),
     ]]
     table = Table(rows, colWidths=[CONTENT_W * 0.27, CONTENT_W * 0.46, CONTENT_W * 0.27])
@@ -854,7 +863,7 @@ def local_navigation_story(
             ]
         )
     )
-    heading = Paragraph("Volume Position", styles["h2"])
+    heading = Paragraph("Study Path Position", styles["h2"])
     heading._heading_level = 2
     heading._bookmark_text = "Contents and Navigation"
     return [heading, table, Spacer(1, 13)]
@@ -981,7 +990,7 @@ def index_markdown(manifest: dict[str, Any]) -> str:
     lines = [
         "# How to Use the Series",
         "",
-        "The stable numbered filenames, covers, roadmap pages, bookmarks, and previous/next links form one learning system. When rebuilding fundamentals, begin with Java Foundations (Volume 03), continue to Time and Space Complexity (Volume 02), and then study Number Systems (Volume 01 and 01B). For targeted revision, begin with the first learning step whose readiness checks are not yet automatic.",
+        "The website, PDF covers, roadmap pages, bookmarks, and previous/next links form one learning system. When rebuilding fundamentals, begin with Java Foundations (Study Step 01), continue to Time and Space Complexity (02), and then complete Number Systems foundations (03A) and its interview workbook (03B). For targeted revision, begin with the first study step whose readiness checks are not yet automatic.",
         "",
         "Keep the PDFs together in the same directory so relative links can work in viewers that permit local-file navigation. The printed filenames remain the fallback when a viewer blocks those links.",
         "",
@@ -991,9 +1000,9 @@ def index_markdown(manifest: dict[str, Any]) -> str:
         "",
         "| Your current situation | Start here | Continue with |",
         "|---|---|---|",
-        "| Never written Java | 03 from Chapter 1 | 02, then 01 and 01B, then 04-17 |",
-        "| Rebuilding from fundamentals | 03 | 02, then 01 and 01B, then 04-17 |",
-        "| Comfortable with Java syntax but weak in DSA | 02 | 01 and 01B, then the first weak volume in 04-17 |",
+        "| Never written Java | 01 from Chapter 1 | 02, then 03A and 03B, then 04-17 |",
+        "| Rebuilding from fundamentals | 01 | 02, then 03A and 03B, then 04-17 |",
+        "| Comfortable with Java syntax but weak in DSA | 02 | 03A and 03B, then the first weak step in 04-17 |",
         "| Strong in DSA but weak in Java internals | 18A | 18B through 18F as needed |",
         "| Preparing for a Java backend role | 18B and 18D | 18F, then 18H through 18J |",
         "| Entering final interview revision | 18G | Revisit only the gaps exposed by mocks |",
@@ -1012,33 +1021,24 @@ def index_markdown(manifest: dict[str, Any]) -> str:
     by_stage: dict[str, list[dict[str, Any]]] = {}
     for volume in learning_volumes(manifest):
         by_stage.setdefault(str(volume["stage"]), []).append(volume)
-    for stage in stage_rows(manifest):
-        number = str(stage["stage"])
-        if number == "18":
+    for item in learning_volumes(manifest):
+        if str(item["stage"]) == "18":
             continue
-        stage_volumes = by_stage[number]
-        for part_index, item in enumerate(stage_volumes):
-            part = (
-                f" - Part {chr(ord('A') + part_index)}"
-                if len(stage_volumes) > 1
-                else ""
-            )
-            lines.extend(
-                [
-                    f"# Learning Step {stage['path_step']}{part} - {item['title']}",
-                    "",
-                    item["purpose"],
-                    "",
-                    f"Open [{item['output_name']}]({item['output_name']}).",
-                    "",
-                ]
-            )
-    advanced_step = next(item["path_step"] for item in stage_rows(manifest) if item["stage"] == "18")
+        lines.extend(
+            [
+                f"# Study Step {item['path_label']} - {item['title']}",
+                "",
+                item["purpose"],
+                "",
+                f"Open [{item['output_name']}]({item['output_name']}).",
+                "",
+            ]
+        )
     lines.extend(["# Part II - Advanced Java Collection", ""])
     for item in by_stage["18"]:
         lines.extend(
             [
-                f"# Learning Step {advanced_step} ({item['id']}) - {item['title']}",
+                f"# Study Step {item['path_label']} - {item['title']}",
                 "",
                 item["purpose"],
                 "",
@@ -1066,7 +1066,7 @@ def build_index(manifest: dict[str, Any], fonts: dict[str, str]) -> dict[str, An
         "short_title": "Series Index",
         "subtitle": "A Basics-to-Advanced Navigation Guide",
         "output_name": INDEX_NAME,
-        "volume_label": "Series Index - 18 Stages",
+        "volume_label": "Series Index - 18 Steps / 28 Books",
         "release_date": manifest["release_date"],
         "cover_deck": "One ordered path through mathematical foundations, DSA patterns, Java engineering, production judgment, and SDE-2 interview practice.",
         "topic_line": "FOUNDATIONS | DSA | JAVA | JVM | BACKEND | INTERVIEW LOOPS",
@@ -1115,7 +1115,7 @@ def main() -> None:
         result = build_pdf(spec, manifest, markdown, temporary, fonts)
         final_path = DIST / spec["output_name"]
         shutil.copy2(temporary, final_path)
-        result.update({"id": spec["id"], "stage": spec["stage"], "title": spec["title"], "file": spec["output_name"]})
+        result.update({"id": spec["id"], "stage": spec["stage"], "path_label": spec["path_label"], "book_position": spec["book_position"], "title": spec["title"], "file": spec["output_name"]})
         results.append(result)
         print(f"{spec['id']}: {final_path} ({result['page_count']} pages)")
 

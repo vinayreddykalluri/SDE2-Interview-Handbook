@@ -125,4 +125,4 @@ Complete without notes:
 5. Complete five coding tasks chosen randomly from C01-C75 and explain time and auxiliary space.
 6. Answer ten follow-ups chosen randomly from F01-F50 without relying on folklore.
 
-Readiness standard: at least 80 percent on prediction/debugging, compiling solutions for all five coding tasks, no incorrect pass-by-reference or equality explanation, and explicit boundary tests. If numeric overflow is weak, return to Number Systems. If loop invariants are weak, continue with Loop Mastery after Volume 02. Otherwise proceed to Bit Manipulation, Arrays, Strings, and Hashing.
+Readiness standard: at least 80 percent on prediction/debugging, compiling solutions for all five coding tasks, no incorrect pass-by-reference or equality explanation, and explicit boundary tests. If numeric overflow is weak, return to Number Systems. If loop invariants are weak, continue with Loop Mastery after Study Step 02. Otherwise proceed to Bit Manipulation, Arrays, Strings, and Hashing.

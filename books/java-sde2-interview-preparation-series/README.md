@@ -13,7 +13,7 @@ This is the canonical book workspace inside the consolidated [SDE2 Interview Han
 
 ## Read or download
 
-The current release contains 28 focused books, one series index, and one 616-page master book: 30 PDFs and 2,579 reviewed pages in total.
+The current release contains 28 focused books (1,950 pages), one 36-page series index, and one 616-page master book: 30 PDFs and 2,602 reviewed pages in total.
 
 - [Download the complete release](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest)
 - [Open the series index](dist/Java-SDE2-Interview-Preparation-Series-Index.pdf)

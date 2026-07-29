@@ -2,24 +2,24 @@
 
 ## Purpose
 
-This series turns the comprehensive Java master guide into a sequence that is easier to finish, print, revise, and revisit. Stable volume numbers identify files; the recommended learning steps now begin with Java Fundamentals, continue to Time and Space Complexity, and then establish Number Systems before the DSA pattern books.
+This series turns the comprehensive Java master guide into a sequence that is easier to finish, print, revise, and revisit. One set of public Study Step codes identifies the learning order on the web and in every PDF; stable technical IDs remain only inside published filenames.
 
 The learning roadmap has 18 steps. Number Systems is packaged as a core foundation plus an interview workbook, and the advanced step is packaged as ten physical PDFs so the material remains focused, including three backend specialist volumes. The complete release therefore contains 28 topic PDFs plus one series-index PDF.
 
-## Ordered learning path
+## Ordered study path
 
-| Learning step | Focus | Stable physical PDF |
+| Study Step | Focus | Stable PDF filename |
 |---:|---|---|
-| 1 | Java Foundations for Problem Solving | `Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf` |
-| 2 | Time and Space Complexity | `Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf` |
+| 01 | Java Foundations for Problem Solving | `Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf` |
+| 02 | Time and Space Complexity | `Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf` |
 | 3A | Number Systems and Math Foundations for DSA Interviews | `Java-SDE2-DSA-01-Number-Systems-and-Math-Foundations.pdf` |
 | 3B | Number Systems Interview Patterns and Rapid Revision | `Java-SDE2-DSA-01B-Number-Systems-Interview-Workbook.pdf` |
-| 4 | Bit Manipulation in Java | `Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf` |
-| 5 | Loop Mastery, Patterns, and Index Calculations | `Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf` |
-| 6 | Arrays and Array Problem-Solving Patterns | `Java-SDE2-DSA-06-Arrays-and-Array-Patterns.pdf` |
-| 7 | Strings and String Problem-Solving Patterns | `Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf` |
-| 8 | Hashing: Maps, Sets, Frequency, and Prefix State | `Java-SDE2-DSA-08-Hashing-Maps-Sets-and-Prefix-State.pdf` |
-| 9 | Recursion and Backtracking | `Java-SDE2-DSA-09-Recursion-and-Backtracking.pdf` |
+| 04 | Bit Manipulation in Java | `Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf` |
+| 05 | Loop Mastery, Patterns, and Index Calculations | `Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf` |
+| 06 | Arrays and Array Problem-Solving Patterns | `Java-SDE2-DSA-06-Arrays-and-Array-Patterns.pdf` |
+| 07 | Strings and String Problem-Solving Patterns | `Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf` |
+| 08 | Hashing: Maps, Sets, Frequency, and Prefix State | `Java-SDE2-DSA-08-Hashing-Maps-Sets-and-Prefix-State.pdf` |
+| 09 | Recursion and Backtracking | `Java-SDE2-DSA-09-Recursion-and-Backtracking.pdf` |
 | 10 | Linked Lists | `Java-SDE2-DSA-10-Linked-Lists.pdf` |
 | 11 | Stacks, Queues, Deques, and Monotonic Patterns | `Java-SDE2-DSA-11-Stacks-Queues-Deques-and-Monotonic-Patterns.pdf` |
 | 12 | Binary Search | `Java-SDE2-DSA-12-Binary-Search.pdf` |
@@ -41,15 +41,15 @@ The learning roadmap has 18 steps. Number Systems is packaged as a core foundati
 
 ## How to choose a starting point
 
-When rebuilding from basics, start with Java Foundations Volume 03, continue to Time and Space Complexity Volume 02, then complete both Number Systems PDFs (01 and 01B). The volume numbers remain stable identifiers rather than reading positions. For targeted revision, scan each volume's recognition signals and completion check, then enter at the first learning step where the answers are not yet automatic. Complete Number Systems before Bit Manipulation when signed binary, powers of two, numeric limits, or overflow still cause hesitation.
+When rebuilding from basics, start with Java Foundations Study Step 01, continue to Time and Space Complexity Study Step 02, then complete Number Systems foundations (03A) and its interview workbook (03B). The same public codes appear on the website and PDF covers; technical filename IDs remain unchanged only to protect published links. For targeted revision, scan each book's recognition signals and completion check, then enter at the first study step where the answers are not yet automatic. Complete Number Systems before Bit Manipulation when signed binary, powers of two, numeric limits, or overflow still cause hesitation.
 
-Stage 18 is a capstone rather than a prerequisite for every DSA problem. Use 18A-18D for Java-depth interviews, 18E for performance-oriented roles, 18F for framework-neutral backend design, and 18G for core mixed revision. Use 18H-18J as the backend specialist track for Spring REST services, SQL/JPA/caching, Kafka, distributed systems, resilience, observability, and system design; then revisit the 18G mock loops with those deeper cases.
+Study Step 18 is a capstone rather than a prerequisite for every DSA problem. Use 18A-18D for Java-depth interviews, 18E for performance-oriented roles, 18F for framework-neutral backend design, and 18G for core mixed revision. Use 18H-18J as the backend specialist track for Spring REST services, SQL/JPA/caching, Kafka, distributed systems, resilience, observability, and system design; then revisit the 18G mock loops with those deeper cases.
 
 ## Navigation contract
 
 - Keep the PDFs together in `dist/` so relative links can work in compatible viewers.
 - Use `Java-SDE2-Interview-Preparation-Series-Index.pdf` as the durable entry point.
-- Each topic PDF repeats the complete 18-step roadmap and highlights its current stable stage.
+- Each topic PDF repeats the complete 28-book path and highlights its current Study Step.
 - Each topic PDF has local bookmarks and a local table of contents.
 - Previous and next filenames are printed even when a viewer blocks local-file links.
 - `dist/manifest.json` records page counts and SHA-256 hashes for artifact verification.

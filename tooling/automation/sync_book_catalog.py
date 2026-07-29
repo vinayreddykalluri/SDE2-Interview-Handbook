@@ -85,7 +85,7 @@ def source_file_href(source_path: Path) -> str:
 
 
 def full_book_href(volume: dict[str, Any]) -> str:
-    return f"books/{str(volume['id']).lower()}-{volume['slug']}/"
+    return f"books/{str(volume['path_label']).lower()}-{volume['slug']}/"
 
 
 def markdown_title(path: Path) -> str:
@@ -157,7 +157,8 @@ def build_catalog() -> dict[str, Any]:
 
     books: list[dict[str, Any]] = []
     for position, volume_id in enumerate(spec["learning_order"], start=1):
-        volume = volumes_by_id[str(volume_id)]
+        volume = dict(volumes_by_id[str(volume_id)])
+        volume["path_label"] = str(spec["path_labels"][str(volume_id)])
         artifact = artifacts_by_id[str(volume_id)]
         source_chapter_count, supporting_source_count, source_chapter_preview = chapter_preview(volume)
         web_document_count, word_count, code_example_count = source_metrics(volume)
@@ -165,7 +166,9 @@ def build_catalog() -> dict[str, Any]:
         books.append(
             {
                 "order": position,
-                "step": str(volume["stage"]),
+                "bookPosition": position,
+                "step": volume["path_label"],
+                "pathLabel": volume["path_label"],
                 "id": str(volume["id"]),
                 "track": track_for(str(volume["id"])),
                 "title": volume["title"],
@@ -195,7 +198,7 @@ def build_catalog() -> dict[str, Any]:
     focused_pages = sum(book["pageCount"] for book in books)
     total_pages = focused_pages + int(index["page_count"]) + int(master["page_count"])
     return {
-        "schemaVersion": 2,
+        "schemaVersion": 3,
         "generatedFrom": f"{BOOK_REPOSITORY_PATH}/publishing/series.json",
         "release": {
             "tag": release_tag,

@@ -35,6 +35,7 @@ function bookSearchText(book) {
   return [
     book.id,
     book.step,
+    book.pathLabel,
     book.track,
     book.title,
     book.shortTitle,
@@ -52,7 +53,7 @@ function formatCount(value) {
 
 function buildFoundationPath() {
   const foundationBooks = books.filter(function (book) {
-    return Number(book.step) <= 7 && book.id !== "01B";
+    return Number(book.bookPosition) <= 8;
   });
 
   bookStartPath.replaceChildren();
@@ -61,7 +62,7 @@ function buildFoundationPath() {
     const link = createElement("a");
     link.href = book.fullBookHref;
     link.append(
-      createElement("span", "", String(book.step).padStart(2, "0")),
+      createElement("span", "", book.pathLabel),
       createElement("strong", "", book.shortTitle),
       createElement("small", "", "Continue on the web")
     );
@@ -78,8 +79,8 @@ function buildBookCard(book) {
 
   const meta = createElement("div", "book-card-meta");
   meta.append(
-    createElement("span", "book-step", "STEP " + book.step),
-    createElement("span", "book-pages", book.pageCount + " PDF pages")
+    createElement("span", "book-step", "STUDY STEP " + book.pathLabel),
+    createElement("span", "book-pages", "BOOK " + book.bookPosition + " OF " + books.length + " · " + book.pageCount + " PDF PAGES")
   );
 
   const title = createElement("h3", "", book.shortTitle);
@@ -171,7 +172,7 @@ function selectBookFilter(filter) {
 function buildSearchIndex() {
   const fixedDestinations = [
     { type: "Path", label: "Complete Java SDE-2 study path", note: "Follow all books in beginner-first order", href: "books/" },
-    { type: "Start", label: "Java Problem-Solving Foundations", note: "Begin step 01 on the web", href: "books/03-java-foundations-for-problem-solving/" },
+    { type: "Start", label: "Java Problem-Solving Foundations", note: "Begin Study Step 01 on the web", href: "books/01-java-foundations-for-problem-solving/" },
     { type: "Practice", label: "Interview practice", note: "Use question banks, mocks, rubrics, and review logs", href: "docs/backend-interview/10-practice/" },
     { type: "Reference", label: "Topic reference", note: "Look up a concise explanation without changing the study order", href: "docs/" },
     { type: "About", label: "About the curriculum", note: "Understand the web, PDF, and open-source publishing model", href: "#about" },
@@ -180,7 +181,7 @@ function buildSearchIndex() {
 
   const bookEntries = books.map(function (book) {
     return {
-      type: "Step " + book.step,
+      type: "Study Step " + book.pathLabel,
       label: book.shortTitle,
       note: formatCount(book.webDocumentCount) + " web chapters · " + formatCount(book.codeExampleCount) + " code entries · PDF included",
       href: book.fullBookHref,

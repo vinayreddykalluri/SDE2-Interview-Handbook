@@ -11,7 +11,7 @@ The project has one ordered curriculum presented in two formats: a complete web 
 
 ## Fastest route for readers
 
-1. If Java basics are not dependable, open the <a href="../../books/03-java-foundations-for-problem-solving/">Java Foundations book</a>.
+1. If Java basics are not dependable, open <a href="../../books/01-java-foundations-for-problem-solving/">Study Step 01: Java Foundations</a>.
 2. Otherwise, open the <a href="../../books/">study path</a> and continue with the next numbered book whose prerequisites are dependable.
 3. Read the numbered chapter and redraw its main diagram from memory.
 4. Open the linked Java source and identify its invariant, boundary conditions, and complexity.

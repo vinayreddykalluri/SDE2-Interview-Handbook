@@ -4,9 +4,9 @@
 
 The complete master book remains the umbrella reference. For a more finishable basics-to-advanced route, use the companion **Java SDE-2 Interview Preparation Series** in `dist/`. It contains 18 public stages: Number Systems, complexity, Java problem-solving foundations, bit manipulation, loops and indexing, arrays, strings, hashing, recursion and backtracking, linked lists, stacks and queues, binary search, trees, heaps, graphs, greedy algorithms, dynamic programming, and advanced Java engineering.
 
-Start with `Java-SDE2-Interview-Preparation-Series-Index.pdf`. Stage 18 is deliberately packaged as Parts 18A through 18J so JVM execution, modern Java, libraries, concurrency, diagnostics, design and testing, final interview revision, Spring REST services, persistence, and distributed systems/system design remain individually printable. Parts 18H through 18J form the backend specialist track. Every focused PDF includes the complete roadmap plus previous/next navigation.
+Start with `Java-SDE2-Interview-Preparation-Series-Index.pdf`. Study Step 18 is deliberately packaged as 18A through 18J so JVM execution, modern Java, libraries, concurrency, diagnostics, design and testing, final interview revision, Spring REST services, persistence, and distributed systems/system design remain individually printable. Study Steps 18H through 18J form the backend specialist track. Every focused PDF includes the complete roadmap plus previous/next navigation.
 
-When rebuilding from basics, complete Stages 1 through 17 in order and then select the Stage 18 parts required by the role. When revising, enter at the first stage whose recognition signals or completion check expose a gap.
+When rebuilding from basics, complete Study Steps 01 through 17 in order and then select the Study Step 18 books required by the role. When revising, enter at the first study step whose recognition signals or completion check expose a gap.
 
 ## Diagnostic baseline
 

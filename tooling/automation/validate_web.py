@@ -178,17 +178,26 @@ def validate_books(errors: list[str]) -> None:
     if not isinstance(books, list) or not isinstance(release, dict):
         fail(errors, "apps/portal/content/books.json must contain release metadata and a books array")
         return
-    if catalog.get("schemaVersion") != 2:
-        fail(errors, "Book catalog schemaVersion must be 2 for complete web-book routes")
+    if catalog.get("schemaVersion") != 3:
+        fail(errors, "Book catalog schemaVersion must be 3 for canonical study codes")
     if len(books) != 28:
         fail(errors, f"Expected 28 focused books; found {len(books)}")
     if [book.get("id") for book in books[:6]] != ["03", "02", "01", "01B", "04", "05"]:
         fail(errors, "Book catalog must begin Java -> Complexity -> Number Systems -> Bits -> Loops")
-    if release.get("totalPdfCount") != 30 or release.get("totalPageCount") != 2579:
-        fail(errors, "Book catalog totals must remain 30 PDFs and 2,579 reviewed pages")
+    expected_path_labels = [
+        "01", "02", "03A", "03B", "04", "05", "06", "07", "08", "09", "10", "11",
+        "12", "13", "14", "15", "16", "17", "18A", "18B", "18C", "18D", "18E", "18F",
+        "18G", "18H", "18I", "18J",
+    ]
+    if [str(book.get("pathLabel")) for book in books] != expected_path_labels:
+        fail(errors, "Book catalog public Study Step codes are incomplete or out of order")
+    focused_pages = sum(int(book.get("pageCount", 0)) for book in books)
+    expected_total_pages = focused_pages + int(release.get("indexPageCount", 0)) + int(release.get("masterPageCount", 0))
+    if release.get("totalPdfCount") != 30 or int(release.get("totalPageCount", 0)) != expected_total_pages:
+        fail(errors, "Book catalog PDF and page totals do not reconcile with canonical artifacts")
 
     required_fields = {
-        "order", "step", "id", "track", "title", "shortTitle", "subtitle",
+        "order", "bookPosition", "step", "pathLabel", "id", "track", "title", "shortTitle", "subtitle",
         "purpose", "filename", "pageCount", "pdfHref", "releasePdfHref", "sourceHref",
         "fullBookHref", "codeHref", "webDocumentCount", "wordCount", "codeExampleCount",
         "sourceChapterCount", "supportingSourceCount", "chapterPreview", "outcomes", "webReads",
@@ -206,11 +215,13 @@ def validate_books(errors: list[str]) -> None:
         full_book_href = str(book["fullBookHref"])
         code_href = str(book["codeHref"])
         full_book_routes.append(full_book_href)
-        expected_prefix = f"books/{str(book['id']).lower()}-"
+        expected_prefix = f"books/{str(book['pathLabel']).lower()}-"
         if not full_book_href.startswith(expected_prefix) or not full_book_href.endswith("/") or ".." in full_book_href:
             fail(errors, f"Book {book['id']} has an invalid complete web-book route")
         if code_href != f"{full_book_href}code/":
             fail(errors, f"Book {book['id']} code route must be nested under its complete web book")
+        if str(book["step"]) != str(book["pathLabel"]) or int(book["bookPosition"]) != int(book["order"]):
+            fail(errors, f"Book {book['id']} has inconsistent study numbering")
         if int(book["webDocumentCount"]) != int(book["sourceChapterCount"]) + int(book["supportingSourceCount"]):
             fail(errors, f"Book {book['id']} web document count does not cover every Markdown source")
         if int(book["wordCount"]) <= 0 or int(book["codeExampleCount"]) < 0:

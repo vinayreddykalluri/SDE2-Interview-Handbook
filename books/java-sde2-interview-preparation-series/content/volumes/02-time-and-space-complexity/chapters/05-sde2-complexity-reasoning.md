@@ -16,7 +16,7 @@ Coding interviews at this level do not reward pattern recall alone. The intervie
 
 The same skill appears in production. A service incident might require estimating whether a loop is linear in records, quadratic in tenant pairs, or bounded by output. A design review might hinge on whether memory is O(n) per request or O(n) for the whole process. Complexity vocabulary is useful only when tied to named inputs and an execution model.
 
-> **Learning-path position:** This chapter converts the foundations from Chapters 1-4 into an SDE-2 explanation method. After completing this volume, continue to Number Systems Volume 01 for numeric representations, overflow boundaries, modular arithmetic, powers, roots, and the mathematical tools used by later DSA books.
+> **Learning-path position:** This chapter converts the foundations from Chapters 1-4 into an SDE-2 explanation method. After completing this volume, continue to Number Systems Study Step 03A for numeric representations, overflow boundaries, modular arithmetic, powers, roots, and the mathematical tools used by later DSA books.
 
 ## First-principles model
 

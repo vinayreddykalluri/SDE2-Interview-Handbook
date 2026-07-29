@@ -135,7 +135,7 @@ This book is deliberately broad. Start where your explanation, implementation, o
 
 | Your situation | Start here | Exit evidence |
 |---|---|---|
-| New to Java syntax | Focused Stage 03 basics, then Stages 01-02 | Write a method, loop, array, validation, and tests |
+| New to Java syntax | Study Step 01, then 02, 03A, and 03B | Write a method, loop, array, validation, and tests |
 | Rebuilding foundations | Focused 01, 01B, and 02, then 03-17 | Solve representative problems with invariants and complexity |
 | Experienced; eight weeks | Diagnostic baseline, then Chapter 54 | Pass coding, Java-depth, debugging, design, and behavioral mocks |
 | Interview in two to three weeks | Chapters 24, 27, 31, 33-38, and 42-53; timed mocks select gaps | Implement under time and defend production trade-offs |
@@ -361,9 +361,9 @@ Checkmarks in revision lists are promises to yourself, not completion badges. Re
 
 The complete master book remains the umbrella reference. For a more finishable basics-to-advanced route, use the companion **Java SDE-2 Interview Preparation Series** in `dist/`. It contains 18 public stages: Number Systems, complexity, Java problem-solving foundations, bit manipulation, loops and indexing, arrays, strings, hashing, recursion and backtracking, linked lists, stacks and queues, binary search, trees, heaps, graphs, greedy algorithms, dynamic programming, and advanced Java engineering.
 
-Start with `Java-SDE2-Interview-Preparation-Series-Index.pdf`. Stage 18 is deliberately packaged as Parts 18A through 18J so JVM execution, modern Java, libraries, concurrency, diagnostics, design and testing, final interview revision, Spring REST services, persistence, and distributed systems/system design remain individually printable. Parts 18H through 18J form the backend specialist track. Every focused PDF includes the complete roadmap plus previous/next navigation.
+Start with `Java-SDE2-Interview-Preparation-Series-Index.pdf`. Study Step 18 is deliberately packaged as 18A through 18J so JVM execution, modern Java, libraries, concurrency, diagnostics, design and testing, final interview revision, Spring REST services, persistence, and distributed systems/system design remain individually printable. Study Steps 18H through 18J form the backend specialist track. Every focused PDF includes the complete roadmap plus previous/next navigation.
 
-When rebuilding from basics, complete Stages 1 through 17 in order and then select the Stage 18 parts required by the role. When revising, enter at the first stage whose recognition signals or completion check expose a gap.
+When rebuilding from basics, complete Study Steps 01 through 17 in order and then select the Study Step 18 books required by the role. When revising, enter at the first study step whose recognition signals or completion check expose a gap.
 
 ## Diagnostic baseline
 
@@ -2878,7 +2878,7 @@ Many production failures are not algorithm failures. They are representation fai
 
 Interviewers also use short numeric expressions to test whether a candidate reasons from Java rules instead of intuition borrowed from another language. The goal is not memorizing puzzles. It is building a reliable model for conversions and evaluation.
 
-> **Learning-path note:** Build the Java language model in this chapter first. After Java Foundations and Time and Space Complexity, continue to Number Systems Volume 01 for digit algorithms, base conversion, overflow-safe arithmetic, large-number strings, GCD/LCM, modular arithmetic, powers, roots, and number-oriented practice.
+> **Learning-path note:** Build the Java language model in this chapter first. After Java Foundations and Time and Space Complexity, continue to Number Systems Study Step 03A for digit algorithms, base conversion, overflow-safe arithmetic, large-number strings, GCD/LCM, modular arithmetic, powers, roots, and number-oriented practice.
 
 ## 12.3 First-principles model
 
@@ -3125,7 +3125,7 @@ Control flow is where requirements become executable decisions. At SDE-2 level, 
 
 Interview code often compresses these questions into a loop or conditional. Production code spreads them across authorization, retries, state transitions, and pricing rules. A precise expression model makes both settings easier.
 
-> **Focused series path:** Finish this Java foundation first, then study Time and Space Complexity Volume 02. Continue to Number Systems Volume 01 for mathematical modulo and overflow-safe numeric patterns, Volume 04 for full bit manipulation, and Volume 05 for loop, pattern, and index-calculation drills. The stable filenames and recommended order are listed in `Java-SDE2-Interview-Preparation-Series-Index.pdf`.
+> **Focused series path:** Finish this Java foundation first, then study Time and Space Complexity Study Step 02. Continue to Number Systems Study Step 03A for mathematical modulo and overflow-safe numeric patterns, Study Step 04 for full bit manipulation, and Study Step 05 for loop, pattern, and index-calculation drills. The stable filenames and recommended order are listed in `Java-SDE2-Interview-Preparation-Series-Index.pdf`.
 
 ## 13.3 First-principles model
 
@@ -11225,7 +11225,7 @@ Coding interviews at this level do not reward pattern recall alone. The intervie
 
 The same skill appears in production. A service incident might require estimating whether a loop is linear in records, quadratic in tenant pairs, or bounded by output. A design review might hinge on whether memory is O(n) per request or O(n) for the whole process. Complexity vocabulary is useful only when tied to named inputs and an execution model.
 
-> **Focused series path:** Use Series Volume 1 first when powers of two, repeated halving, logarithms, integer square roots, or overflow boundaries are not yet automatic. Continue with Volume 2, `Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf`, for a compact complexity-first study path.
+> **Focused series path:** Use Study Step 03A first when powers of two, repeated halving, logarithms, integer square roots, or overflow boundaries are not yet automatic. Use Study Step 02, `Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf`, for a compact complexity-first study path.
 
 ## 42.3 First-principles model
 
@@ -11504,7 +11504,7 @@ Arrays and strings dominate coding screens because they expose reasoning without
 
 At SDE-2, naming "sliding window" is not sufficient. You must explain why shrinking restores validity, why no candidate is skipped, whether negative values break monotonicity, and whether a map stores the earliest index, latest index, frequency, or count of prefix states. Those details are the algorithm.
 
-> **Focused prerequisites:** Series Volume 1 establishes numeric boundaries, prefix sums under modulo, and safe index arithmetic. The topic then continues through Volumes 5-8 for loops and indices, arrays, strings, and hashing. Use the series index PDF for the ordered filenames.
+> **Focused prerequisites:** Study Step 03A establishes numeric boundaries, prefix sums under modulo, and safe index arithmetic. The topic then continues through Study Steps 05-08 for loops and indices, arrays, strings, and hashing. Use the series index PDF for the ordered filenames.
 
 ## 43.3 First-principles model
 
@@ -13350,7 +13350,7 @@ The interviewer is evaluating several channels at once: correctness, problem dec
 
 This chapter is not a script to recite. It is a feedback loop. Each artifact - contract, example, baseline, invariant, dry run, and complexity statement - makes the next decision safer and gives the interviewer a chance to correct a misunderstanding early.
 
-> **Focused practice path:** The 18-stage companion series turns this playbook into shorter topic loops. Begin with the first volume whose completion check is not yet automatic, and use Stage 18G for question-bank, mock-loop, and final revision work.
+> **Focused practice path:** The 18-step companion series turns this playbook into shorter topic loops. Begin with the first book whose completion check is not yet automatic, and use Study Step 18G for question-bank, mock-loop, and final revision work.
 
 ## 48.3 First-principles model
 

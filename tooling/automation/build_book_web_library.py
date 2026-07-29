@@ -39,13 +39,16 @@ def read_json(path: Path) -> dict[str, Any]:
 
 
 def web_slug(volume: dict[str, Any]) -> str:
-    return f"{str(volume['id']).lower()}-{volume['slug']}"
+    return f"{str(volume['path_label']).lower()}-{volume['slug']}"
 
 
 def source_title(path: Path) -> str:
     text = path.read_text(encoding="utf-8")
     match = HEADING.search(text)
-    return match.group(1).strip() if match else path.stem.replace("-", " ").title()
+    if not match:
+        return path.stem.replace("-", " ").title()
+    title = match.group(1).strip()
+    return re.sub(r"^(?:Chapter\s+)?\d+\s*(?::|\.|-)\s*", "", title, flags=re.IGNORECASE).strip()
 
 
 def source_group(path: Path) -> str:
@@ -94,6 +97,31 @@ def context_bar(
         + "".join(links)
         + "</nav></div>"
     )
+
+
+def study_status(*, path_label: str, book_position: int, book_count: int, chapter_position: int | None = None, chapter_count: int | None = None) -> str:
+    if chapter_position is None or chapter_count is None:
+        progress = round(book_position / book_count * 100)
+        chapter_text = "BOOK OVERVIEW"
+    else:
+        progress = round(chapter_position / chapter_count * 100)
+        chapter_text = f"CHAPTER {chapter_position:02d} OF {chapter_count:02d}"
+    return f'''<section class="reader-study-status" aria-label="Study progress">
+  <div class="reader-study-status__labels">
+    <strong>STUDY STEP {safe_html(path_label)}</strong>
+    <span>BOOK {book_position:02d} OF {book_count:02d}</span>
+    <span>{chapter_text}</span>
+  </div>
+  <div class="reader-progress" role="progressbar" aria-label="Current reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{progress}"><i style="width:{progress}%"></i></div>
+  <p>READ <b>·</b> TRACE <b>·</b> PRACTICE <b>·</b> EXPLAIN</p>
+</section>'''
+
+
+def reader_pagination(previous_href: str, previous_label: str, next_href: str, next_label: str) -> str:
+    return f'''<nav class="reader-pagination" aria-label="Chapter navigation">
+  <a href="{previous_href}"><span>PREVIOUS</span><strong>{safe_html(previous_label)}</strong></a>
+  <a href="{next_href}"><span>NEXT</span><strong>{safe_html(next_label)}</strong></a>
+</nav>'''
 
 
 def resolve_local_target(source_path: Path, target: str) -> Path | None:
@@ -184,7 +212,9 @@ def generate_code_page(
     table = "\n".join(rows) if rows else "| No fenced Java snippets | 0 | Use the linked implementation references |"
     page = f"""# Code and Implementation Index
 
-{context_bar(label=volume['short_title'], overview_href='../', code_href=None, pdf_href=book_pdf)}
+{context_bar(label=f"STEP {volume['path_label']} · {volume['short_title']}", overview_href='../', code_href=None, pdf_href=book_pdf)}
+
+{study_status(path_label=volume['path_label'], book_position=volume['book_position'], book_count=volume['book_count'])}
 
 This page indexes the Java examples embedded throughout **{volume['title']}**. The chapter remains the source of truth for contracts, invariants, dry runs, and explanations; this index makes implementations easy to locate.
 
@@ -212,7 +242,13 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
     manifest = read_json(ARTIFACT_MANIFEST)
     artifacts = {str(item["id"]): item for item in manifest["volumes"]}
     volumes = {str(item["id"]): item for item in spec["volumes"]}
-    ordered = [volumes[str(volume_id)] for volume_id in spec["learning_order"]]
+    ordered = []
+    for position, volume_id in enumerate(spec["learning_order"], start=1):
+        volume = dict(volumes[str(volume_id)])
+        volume["path_label"] = str(spec["path_labels"][str(volume_id)])
+        volume["book_position"] = position
+        volume["book_count"] = len(spec["learning_order"])
+        ordered.append(volume)
 
     (staging_docs / "assets").mkdir(parents=True, exist_ok=True)
     shutil.copy2(READER_CSS, staging_docs / "assets" / "book-reader.css")
@@ -246,14 +282,20 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
             output = source_outputs[relative_source]
             raw_text = absolute_source.read_text(encoding="utf-8")
             rewritten = rewrite_links(raw_text, relative_source, source_outputs, volume_dir)
-            next_link = ""
+            rewritten = HEADING.sub(f"# {title}", rewritten, count=1)
+            previous_href = "../" if position == 1 else f"../{Path(source_outputs[markdown_sources[position - 2]]).stem}/"
+            previous_label = "Book overview" if position == 1 else source_title(BOOK_ROOT / markdown_sources[position - 2])
             if position < len(markdown_sources):
                 next_source = markdown_sources[position]
                 next_title = source_title(BOOK_ROOT / next_source)
-                next_link = f'[Continue: {next_title} →]({source_outputs[next_source]}){{ .md-button .md-button--primary }}'
+                next_href = f"../{Path(source_outputs[next_source]).stem}/"
+                next_label = next_title
             else:
-                next_link = '[Open the code index →](code.md){ .md-button .md-button--primary }'
-            page = f"""{context_bar(label=volume['short_title'], overview_href='../', code_href='../code/', pdf_href=pdf_url(volume['output_name']))}
+                next_href = "../code/"
+                next_label = "Code and implementation index"
+            page = f"""{context_bar(label=f"STEP {volume['path_label']} · {volume['short_title']}", overview_href='../', code_href='../code/', pdf_href=pdf_url(volume['output_name']))}
+
+{study_status(path_label=volume['path_label'], book_position=volume['book_position'], book_count=volume['book_count'], chapter_position=position, chapter_count=len(markdown_sources))}
 
 {rewritten.rstrip()}
 
@@ -261,7 +303,7 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
 
 <div class="book-reader-endnote"><strong>Source:</strong> <a href="{source_url(relative_source)}">canonical Markdown</a></div>
 
-{next_link}
+{reader_pagination(previous_href, previous_label, next_href, next_label)}
 """
             (volume_dir / output).write_text(page, encoding="utf-8")
             source_entries.append(
@@ -288,7 +330,7 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
             if not entries:
                 continue
             reading_sections.append(f"## {group}\n\n" + "\n".join(
-                f"{index}. [{entry['title']}]({entry['output']})"
+                f"{volume['path_label']}.{index:02d} [{entry['title']}]({entry['output']})"
                 for index, entry in enumerate(entries, start=1)
             ))
 
@@ -311,8 +353,13 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
         source_word_count = sum(len(re.findall(r"\b[\w'-]+\b", entry["text"])) for entry in source_entries)
         index_page = f"""# {volume['title']}
 
+{context_bar(label=f"STEP {volume['path_label']} · {volume['short_title']}", overview_href=None, code_href='code/', pdf_href=pdf_url(volume['output_name']))}
+
+{study_status(path_label=volume['path_label'], book_position=volume['book_position'], book_count=volume['book_count'])}
+
 <div class="book-identity">
-  <span>LEARNING STEP {safe_html(str(volume['stage']))}</span>
+  <span>STUDY STEP {safe_html(volume['path_label'])}</span>
+  <span>BOOK {volume['book_position']} OF {volume['book_count']}</span>
   <span>{artifact['page_count']} PDF PAGES</span>
   <span>{len(source_entries)} WEB DOCUMENTS</span>
   <span>{source_word_count:,} WORDS</span>
@@ -348,8 +395,8 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
         (volume_dir / "index.md").write_text(index_page, encoding="utf-8")
 
         book_nav: list[Any] = [{"Overview": f"{slug}/index.md"}]
-        for entry in source_entries:
-            book_nav.append({entry["title"]: f"{slug}/{entry['output']}"})
+        for chapter_position, entry in enumerate(source_entries, start=1):
+            book_nav.append({f"{volume['path_label']}.{chapter_position:02d} · {entry['title']}": f"{slug}/{entry['output']}"})
         book_nav.append({"Code": f"{slug}/code.md"})
 
         if order <= 8:
@@ -358,10 +405,12 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
             track = "Advanced Java & Backend"
         else:
             track = "Data Structures & Algorithms"
-        nav_groups[track].append({f"{order:02d}. {volume['short_title']}": book_nav})
+        nav_groups[track].append({f"{volume['path_label']} · {volume['short_title']}": book_nav})
         built_books.append(
             {
                 "id": volume_id,
+                "path_label": volume["path_label"],
+                "book_position": volume["book_position"],
                 "slug": slug,
                 "title": volume["title"],
                 "page_count": int(artifact["page_count"]),
@@ -372,9 +421,23 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
             }
         )
 
+        legacy_slug = f"{volume_id.lower()}-{volume['slug']}"
+        if legacy_slug != slug:
+            legacy_dir = staging_docs / legacy_slug
+            legacy_dir.mkdir(parents=True, exist_ok=True)
+            (legacy_dir / "index.md").write_text(
+                f'''<meta http-equiv="refresh" content="0; url=../{slug}/">
+
+# This book moved
+
+[Continue to Study Step {volume['path_label']}: {volume['title']}](../{slug}/index.md)
+''',
+                encoding="utf-8",
+            )
+
     library_rows = "\n".join(
-        f"| {index} | [{book['title']}]({book['slug']}/index.md) | {book['documents']} | {book['code_examples']} | {book['page_count']} | [PDF]({book['pdf']}) |"
-        for index, book in enumerate(built_books, start=1)
+        f"| {book['path_label']} | [{book['title']}]({book['slug']}/index.md) | {book['book_position']} of {len(built_books)} | {book['documents']} | {book['code_examples']} | {book['page_count']} | [PDF]({book['pdf']}) |"
+        for book in built_books
     )
     library_page = f"""# Java SDE-2 Study Path
 
@@ -384,13 +447,13 @@ Follow these **{len(built_books)} focused books** in order. Every step is availa
     Begin with Java Foundations, then Time and Space Complexity, Number Systems, Bit Manipulation, Loop Mastery, Arrays, and Strings. Open advanced material only after its prerequisites are dependable.
 
 <div class="library-route-grid">
-  <a href="03-java-foundations-for-problem-solving/"><strong>01 · Learn</strong><span>Start Java Foundations on the web</span></a>
+  <a href="01-java-foundations-for-problem-solving/"><strong>01 · Learn</strong><span>Start Java Foundations on the web</span></a>
   <a href="{pdf_url('Java-SDE2-Interview-Preparation-Series-Index.pdf')}"><strong>02 · Revise</strong><span>Open the matching PDF index</span></a>
   <a href="../docs/backend-interview/10-practice/"><strong>03 · Prove</strong><span>Practice after completing the lesson</span></a>
 </div>
 
-| Step | Continue on the web | Chapters | Code | PDF pages | Offline |
-|---:|---|---:|---:|---:|---|
+| Step | Continue on the web | Book | Chapters | Code | PDF pages | Offline |
+|---:|---|---:|---:|---:|---:|---|
 {library_rows}
 """
     (staging_docs / "index.md").write_text(library_page, encoding="utf-8")

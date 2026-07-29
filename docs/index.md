@@ -3,7 +3,7 @@
 This concise reference supports the ordered Java SDE-2 study path. Use it to look up a focused explanation or practice artifact, then return to the current web book. It is not a second curriculum.
 
 <a class="md-button md-button--primary" href="../books/">Return to the study path</a>
-<a class="md-button" href="../books/03-java-foundations-for-problem-solving/">Start Java Foundations</a>
+<a class="md-button" href="../books/01-java-foundations-for-problem-solving/">Start Java Foundations</a>
 [Open practice](backend-interview/10-practice/index.md){ .md-button }
 
 ## Use this reference without leaving the path

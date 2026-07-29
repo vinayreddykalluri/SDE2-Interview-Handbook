@@ -21,17 +21,18 @@ The interactive library uses the publishing manifest for book order and release 
 
 ## Start here: the foundation route
 
-Do not jump directly into pattern-heavy DSA if Java mechanics, loop boundaries, or cost analysis are uncertain. Use the first seven steps in order.
+Do not jump directly into pattern-heavy DSA if Java mechanics, loop boundaries, or cost analysis are uncertain. Use the first eight focused books in order; Study Step 03 deliberately has a foundations book and a workbook.
 
 | Step | Topic | Read on the web | Publication-depth PDF |
 |---:|---|---|---|
-| 1 | Java Foundations | [Read full web book](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/03-java-foundations-for-problem-solving/) | [Download PDF](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf) |
-| 2 | Time and Space Complexity | [Read full web book](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/02-time-and-space-complexity/) | [Download PDF](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf) |
-| 3 | Number Systems and Math | [Read full web book](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/01-number-systems-and-math-foundations/) | [Main book](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-01-Number-Systems-and-Math-Foundations.pdf) · [Workbook](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-01B-Number-Systems-Interview-Workbook.pdf) |
-| 4 | Bit Manipulation | [Read full web book](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/04-bit-manipulation-in-java/) | [Download PDF](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf) |
-| 5 | Loops and Index Calculations | [Read full web book](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/05-loop-mastery-and-index-calculations/) | [Download PDF](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf) |
-| 6 | Arrays and Array Patterns | [Read full web book](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/06-arrays-and-array-patterns/) | [Download PDF](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-06-Arrays-and-Array-Patterns.pdf) |
-| 7 | Strings and String Patterns | [Read full web book](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/07-strings-and-string-patterns/) | [Download PDF](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf) |
+| 01 | Java Foundations | [Read full web book](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/01-java-foundations-for-problem-solving/) | [Download PDF](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf) |
+| 02 | Time and Space Complexity | [Read full web book](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/02-time-and-space-complexity/) | [Download PDF](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf) |
+| 03A | Number Systems and Math | [Read full web book](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/03a-number-systems-and-math-foundations/) | [Download PDF](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-01-Number-Systems-and-Math-Foundations.pdf) |
+| 03B | Number Systems Workbook | [Read full web book](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/03b-number-systems-interview-workbook/) | [Download PDF](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-01B-Number-Systems-Interview-Workbook.pdf) |
+| 04 | Bit Manipulation | [Read full web book](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/04-bit-manipulation-in-java/) | [Download PDF](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf) |
+| 05 | Loops and Index Calculations | [Read full web book](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/05-loop-mastery-and-index-calculations/) | [Download PDF](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf) |
+| 06 | Arrays and Array Patterns | [Read full web book](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/06-arrays-and-array-patterns/) | [Download PDF](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-06-Arrays-and-Array-Patterns.pdf) |
+| 07 | Strings and String Patterns | [Read full web book](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/07-strings-and-string-patterns/) | [Download PDF](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf) |
 
 After step seven, use the interactive library's DSA filter to continue with Hashing, Recursion, Linked Lists, Stacks and Queues, Binary Search, Trees, Heaps, Graphs, Greedy Algorithms, and Dynamic Programming.
 
@@ -48,13 +49,13 @@ After step seven, use the interactive library's DSA filter to continue with Hash
 9. Greedy Algorithms and Dynamic Programming
 10. Advanced Java and backend engineering volumes A-J
 
-Stable volume numbers remain in filenames, while the books' internal learning-step labels show the recommended route. The reader index groups every individual PDF into Foundations, Core DSA, Algorithm Strategies, and Advanced Java/Backend sections. Contributors can also generate actual step-prefixed local folders with `scripts/organize_pdf_library.py`.
+Stable technical IDs remain in filenames, while one set of public Study Step codes appears on the web, PDF covers, index, and generated folders. The reader index groups every individual PDF into Foundations, Core DSA, Algorithm Strategies, and Advanced Java/Backend sections. Contributors can also generate actual step-prefixed local folders with `scripts/organize_pdf_library.py`.
 
 ## What is published
 
-- 28 focused topic books and one series index, totaling 1,963 pages
+- 28 focused topic books (1,950 pages) and one 36-page series index
 - one complete 616-page master book
-- 30 individual PDFs and 2,579 reviewed pages across the complete library
+- 30 individual PDFs and 2,602 reviewed pages across the complete library
 - canonical Markdown and diagram sources
 - Java 21 companion programs and boundary tests
 - exercises with separated solutions
