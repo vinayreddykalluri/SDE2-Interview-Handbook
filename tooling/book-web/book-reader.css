@@ -79,6 +79,11 @@ body::before {
 .field-announcement nav { display: flex; gap: 0.25rem; }
 .field-announcement a { min-height: 2rem; display: inline-flex; align-items: center; padding-inline: 0.65rem; color: #fffaf0; }
 .field-announcement a:hover, .field-announcement a[aria-current="page"] { background: rgba(255, 250, 240, 0.12); color: var(--reader-signal); }
+.field-theme-control { min-height: 2rem; display: inline-flex; align-items: center; gap: 0.35rem; padding-inline: 0.55rem 0.4rem; border-left: 1px solid rgba(255, 250, 240, 0.25); background: rgba(255, 250, 240, 0.08); color: #fffaf0; }
+.field-theme-control span { color: var(--reader-signal); }
+.field-theme-control select { min-height: 1.75rem; max-width: 5.4rem; border: 0; outline: 0; background: transparent; color: #fffaf0; cursor: pointer; font: 600 0.56rem var(--reader-mono); letter-spacing: 0.04em; text-transform: uppercase; }
+.field-theme-control:focus-within { outline: 2px solid var(--reader-signal); outline-offset: -2px; }
+.field-theme-control option { background: #12304a; color: #fffaf0; }
 .md-sidebar, .md-nav { font-family: var(--reader-mono); }
 .md-nav__title { color: var(--reader-ink); font-size: 0.65rem; letter-spacing: 0.06em; text-transform: uppercase; }
 .md-nav__item { font-size: 0.68rem; }
@@ -216,6 +221,9 @@ body::before {
   .md-banner__inner { padding-inline: 0.55rem; }
   .field-announcement nav { width: max-content; gap: 0.15rem; }
   .field-announcement a { padding-inline: 0.55rem; font-size: 0.52rem; }
+  .field-theme-control { padding-inline: 0.45rem 0.3rem; }
+  .field-theme-control > span { display: none; }
+  .field-theme-control select { max-width: 4.7rem; font-size: 0.52rem; }
   .reader-contextbar { position: static; display: grid; gap: 0; }
   .reader-contextbar > span { padding-block: 0.7rem; }
   .reader-contextbar nav { width: 100%; margin: 0; border-top: 1px solid var(--reader-line); }

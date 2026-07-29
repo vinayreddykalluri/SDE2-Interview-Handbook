@@ -33,6 +33,8 @@ BOOKS_FILE = WEB / "content" / "books.json"
 BOOK_DIST = ROOT / "books" / "java-sde2-interview-preparation-series" / "dist"
 BOOK_WEB_BUILDER = ROOT / "tooling" / "automation" / "build_book_web_library.py"
 BOOK_WEB_CSS = ROOT / "tooling" / "book-web" / "book-reader.css"
+PORTAL_THEME_MANAGER = WEB / "assets" / "theme-manager.js"
+DOCS_THEME_MANAGER = DOCS / "assets" / "javascripts" / "theme-manager.js"
 NUMBERED_CHAPTER = re.compile(r"^\d{2}-.+\.md$")
 ROOT_RELATIVE_REFERENCE = re.compile(r"(?:href|src|fetch)\s*\(?(?:=\s*)?[\"']/")
 SAFE_CODE_PACKAGE = re.compile(r"^codingfoundations/[a-z][a-z0-9]*$")
@@ -78,6 +80,18 @@ def validate_local_assets(errors: list[str]) -> None:
         text = source.read_text(encoding="utf-8")
         if ROOT_RELATIVE_REFERENCE.search(text):
             fail(errors, f"Root-relative URL breaks project Pages: {source.relative_to(ROOT)}")
+
+    for page in [WEB / "index.html", WEB / "404.html"]:
+        text = page.read_text(encoding="utf-8")
+        if 'src="assets/theme-manager.js"' not in text or "data-theme-selector" not in text:
+            fail(errors, f"Theme management is missing from {page.relative_to(ROOT)}")
+
+    override = (ROOT / "tooling" / "mkdocs-overrides" / "main.html").read_text(encoding="utf-8")
+    if "theme-manager.js" not in override or "data-theme-selector" not in override:
+        fail(errors, "MkDocs pages must expose the shared theme manager and selector")
+
+    if PORTAL_THEME_MANAGER.read_bytes() != DOCS_THEME_MANAGER.read_bytes():
+        fail(errors, "Portal and MkDocs theme-manager assets must remain identical")
 
 
 def validate_modules(errors: list[str]) -> None:
@@ -174,26 +188,28 @@ def validate_books(errors: list[str]) -> None:
         return
 
     books = catalog.get("books")
+    segments = catalog.get("segments")
     release = catalog.get("release")
-    if not isinstance(books, list) or not isinstance(release, dict):
-        fail(errors, "apps/portal/content/books.json must contain release metadata and a books array")
+    if not isinstance(books, list) or not isinstance(segments, list) or not isinstance(release, dict):
+        fail(errors, "apps/portal/content/books.json must contain segments, release metadata, and a books array")
         return
-    if catalog.get("schemaVersion") != 3:
-        fail(errors, "Book catalog schemaVersion must be 3 for canonical study codes")
-    if len(books) != 28:
-        fail(errors, f"Expected 28 focused books; found {len(books)}")
-    if [book.get("id") for book in books[:6]] != ["03", "02", "01", "01B", "04", "05"]:
-        fail(errors, "Book catalog must begin Java -> Complexity -> Number Systems -> Bits -> Loops")
-    expected_path_labels = [
-        "01", "02", "03A", "03B", "04", "05", "06", "07", "08", "09", "10", "11",
-        "12", "13", "14", "15", "16", "17", "18A", "18B", "18C", "18D", "18E", "18F",
-        "18G", "18H", "18I", "18J",
+    if catalog.get("schemaVersion") != 4:
+        fail(errors, "Book catalog schemaVersion must be 4 for segmented navigation")
+    if len(books) != 40:
+        fail(errors, f"Expected 40 focused books; found {len(books)}")
+    expected_segments = [
+        ("java", "JAVA", 9),
+        ("dsa", "DSA", 17),
+        ("system-design", "SD", 14),
     ]
-    if [str(book.get("pathLabel")) for book in books] != expected_path_labels:
-        fail(errors, "Book catalog public Study Step codes are incomplete or out of order")
+    actual_segments = [(item.get("id"), item.get("code"), item.get("bookCount")) for item in segments]
+    if actual_segments != expected_segments:
+        fail(errors, f"Book catalog segments are incorrect: {actual_segments}")
+    if [book.get("id") for book in books[:6]] != ["03", "GIT", "BUILD", "18B", "18C", "18A"]:
+        fail(errors, "Book catalog must begin with the ordered Java Engineering segment")
     focused_pages = sum(int(book.get("pageCount", 0)) for book in books)
     expected_total_pages = focused_pages + int(release.get("indexPageCount", 0)) + int(release.get("masterPageCount", 0))
-    if release.get("totalPdfCount") != 30 or int(release.get("totalPageCount", 0)) != expected_total_pages:
+    if release.get("totalPdfCount") != 42 or int(release.get("totalPageCount", 0)) != expected_total_pages:
         fail(errors, "Book catalog PDF and page totals do not reconcile with canonical artifacts")
 
     required_fields = {
@@ -201,6 +217,8 @@ def validate_books(errors: list[str]) -> None:
         "purpose", "filename", "pageCount", "pdfHref", "releasePdfHref", "sourceHref",
         "fullBookHref", "codeHref", "webDocumentCount", "wordCount", "codeExampleCount",
         "sourceChapterCount", "supportingSourceCount", "chapterPreview", "outcomes", "webReads",
+        "segmentId", "segmentTitle", "segmentShortTitle", "segmentCode", "segmentPosition",
+        "segmentBookCount", "publicationStatus",
     }
     filenames: list[str] = []
     full_book_routes: list[str] = []
@@ -222,6 +240,11 @@ def validate_books(errors: list[str]) -> None:
             fail(errors, f"Book {book['id']} code route must be nested under its complete web book")
         if str(book["step"]) != str(book["pathLabel"]) or int(book["bookPosition"]) != int(book["order"]):
             fail(errors, f"Book {book['id']} has inconsistent study numbering")
+        expected_segment_code = next((segment["code"] for segment in segments if segment["id"] == book["segmentId"]), None)
+        if not expected_segment_code or book["segmentCode"] != f"{expected_segment_code} {int(book['segmentPosition']):02d}":
+            fail(errors, f"Book {book['id']} has inconsistent segment numbering")
+        if book["publicationStatus"] not in {"published", "planned"}:
+            fail(errors, f"Book {book['id']} has an invalid publication status")
         if int(book["webDocumentCount"]) != int(book["sourceChapterCount"]) + int(book["supportingSourceCount"]):
             fail(errors, f"Book {book['id']} web document count does not cover every Markdown source")
         if int(book["wordCount"]) <= 0 or int(book["codeExampleCount"]) < 0:
@@ -273,7 +296,7 @@ def validate_books(errors: list[str]) -> None:
 
     total_documents = sum(int(book.get("webDocumentCount", 0)) for book in books)
     total_code_entries = sum(int(book.get("codeExampleCount", 0)) for book in books)
-    if total_documents < 161 or total_code_entries < 800:
+    if total_documents < 173 or total_code_entries < 800:
         fail(errors, f"Complete web library is unexpectedly shallow: {total_documents} documents, {total_code_entries} code entries")
 
 
@@ -282,14 +305,15 @@ def validate_javascript(errors: list[str]) -> None:
     if not node:
         print("WARN: node is unavailable; skipped JavaScript syntax validation")
         return
-    result = subprocess.run(
-        [node, "--check", str(WEB / "assets" / "app.js")],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
-    )
-    if result.returncode:
-        fail(errors, f"JavaScript syntax error:\n{result.stderr.strip()}")
+    for script in [WEB / "assets" / "app.js", PORTAL_THEME_MANAGER, DOCS_THEME_MANAGER]:
+        result = subprocess.run(
+            [node, "--check", str(script)],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        )
+        if result.returncode:
+            fail(errors, f"JavaScript syntax error in {script.relative_to(ROOT)}:\n{result.stderr.strip()}")
 
 
 def main() -> int:
@@ -303,7 +327,9 @@ def main() -> int:
         WEB / ".nojekyll",
         WEB / "assets" / "styles.css",
         WEB / "assets" / "app.js",
+        PORTAL_THEME_MANAGER,
         WEB / "assets" / "s2-mark.svg",
+        DOCS_THEME_MANAGER,
         BOOK_WEB_BUILDER,
         BOOK_WEB_CSS,
         MODULES_FILE,
@@ -329,8 +355,8 @@ def main() -> int:
         return 1
 
     print(
-        "Web validation passed: 28 complete books, 161 canonical documents, 860 book code entries, "
-        "19 learning modules, 69 foundation Java files, and 30 published PDFs"
+        "Web validation passed: 40 books in 3 segments, at least 173 canonical documents, "
+        "at least 800 book code entries, 19 learning modules, 69 foundation Java files, and 42 PDFs"
     )
     return 0
 

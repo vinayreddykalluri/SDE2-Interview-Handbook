@@ -9,11 +9,11 @@ This is the canonical book workspace inside the consolidated [SDE2 Interview Han
 
 [![Cover of the Java SDE-2 Interview Preparation Series Index](assets/covers/series-index-cover.png)](dist/Java-SDE2-Interview-Preparation-Series-Index.pdf)
 
-> Start with Java Foundations. Continue to Time and Space Complexity, then Number Systems, Bit Manipulation, Loop Mastery, the remaining DSA volumes, and Advanced Java.
+> Choose Java Engineering, Data Structures and Algorithms, or System Design and Backend. Start at Book 01 inside that segment and continue in order.
 
 ## Read or download
 
-The current release contains 28 focused books (1,950 pages), one 36-page series index, and one 616-page master book: 30 PDFs and 2,602 reviewed pages in total.
+The library contains 40 focused books (2,098 pages), one 17-page series index, and one 616-page master book: 42 PDFs and 2,731 pages in total. Twelve clearly marked roadmap editions establish the sequence and intended depth for topics that will be expanded one by one.
 
 - [Download the complete release](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest)
 - [Open the series index](dist/Java-SDE2-Interview-Preparation-Series-Index.pdf)
@@ -28,7 +28,7 @@ The current release contains 28 focused books (1,950 pages), one 36-page series 
 - [Study Strings](dist/Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf)
 - [Open the complete master book](dist/java-sde2-interview-book.pdf)
 
-The complete sequence, prerequisites, and completion gates are in [the series roadmap](docs/roadmap.md). To create actual step-prefixed folders containing all 30 PDFs, see [PDF library organization](docs/pdf-library-organization.md) or run `python3 scripts/organize_pdf_library.py`.
+The three segment sequences, prerequisites, and completion gates are in [the series roadmap](docs/roadmap.md). To create actual segment-prefixed folders containing all 42 PDFs, see [PDF library organization](docs/pdf-library-organization.md) or run `python3 scripts/organize_pdf_library.py`.
 
 ## Directory map
 

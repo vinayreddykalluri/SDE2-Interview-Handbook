@@ -289,8 +289,12 @@ def validate_pdf(checks: Checks) -> None:
             checks.error(f"PDF page {index} appears blank")
 
     full_text = "\n".join(page_texts)
-    if AUTHOR not in page_texts[0]:
+    cover_text = page_texts[0]
+    if AUTHOR not in cover_text or "BY" not in cover_text:
         checks.error("PDF cover is missing the author name")
+    for legacy_credit in ("FOUNDING AUTHOR", "EDITOR-IN-CHIEF", "CHIEF AUDITOR"):
+        if legacy_credit in cover_text:
+            checks.error(f"PDF cover still exposes the legacy credit: {legacy_credit}")
     if "About the Author" not in full_text or AUTHOR not in full_text:
         checks.error("PDF is missing the About the Author front matter")
     for number, title in CHAPTERS:

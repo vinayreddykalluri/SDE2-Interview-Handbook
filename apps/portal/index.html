@@ -1,18 +1,19 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="light" data-theme-mode="system">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="One ordered Java and SDE-2 study path from fundamentals to backend interviews. Read every book on the web or download the matching PDF.">
+  <meta name="description" content="Choose Java, DSA, or System Design and Backend, then follow a clear SDE-2 learning sequence on the web or in matching PDFs.">
   <meta name="theme-color" content="#f4efe3">
-  <meta property="og:title" content="Java SDE-2 Study Path">
-  <meta property="og:description" content="Follow one beginner-first Java SDE-2 curriculum. Read each complete book on the web or use the matching PDF offline.">
+  <meta property="og:title" content="Java SDE-2 Learning Library">
+  <meta property="og:description" content="Choose a focused Java, DSA, or System Design learning segment. Read each book on the web or use the matching PDF offline.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/">
-  <title>Java SDE-2 Study Path</title>
+  <title>Java SDE-2 Learning Library</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <script src="assets/theme-manager.js"></script>
   <link rel="stylesheet" href="assets/styles.css">
   <link rel="icon" href="assets/s2-mark.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
@@ -27,13 +28,13 @@
       <span class="brand-mark">S2</span>
       <span class="brand-copy">
         <strong>JAVA / SDE2</strong>
-        <small>ONE STUDY PATH</small>
+        <small>THREE FOCUSED SEGMENTS</small>
       </span>
     </a>
 
     <nav class="primary-nav" id="primary-nav" aria-label="Primary navigation">
       <a href="#home" class="is-active">Home</a>
-      <a href="#study-path">Study path</a>
+      <a href="#study-path">Choose a segment</a>
       <a href="docs/backend-interview/10-practice/">Practice</a>
       <a href="#about">About</a>
       <a href="https://github.com/vinayreddykalluri/SDE2-Interview-Handbook">GitHub</a>
@@ -43,7 +44,14 @@
       <button class="header-button search-trigger" type="button" aria-label="Search the learning library" aria-keyshortcuts="Meta+K Control+K">
         Search <kbd>&#8984;K</kbd>
       </button>
-      <button class="header-button theme-toggle" type="button" aria-label="Switch color theme">Dark</button>
+      <label class="theme-control">
+        <span class="theme-control__label">Theme</span>
+        <select data-theme-selector aria-label="Color theme">
+          <option value="system">System</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </label>
       <button class="menu-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Open navigation">Menu</button>
     </div>
   </header>
@@ -56,20 +64,20 @@
           <span class="availability"><i></i> OPEN SOURCE</span>
         </div>
         <h1 id="hero-title">
-          One study path.
-          <em>Web first. PDF ready.</em>
+          Choose your segment.
+          <em>Build it in order.</em>
         </h1>
         <p class="hero-lede">
-          Start with Java basics, build complexity intuition, master DSA patterns, and finish with advanced Java and backend engineering—in one deliberate order.
+          Start with Java Engineering, Data Structures and Algorithms, or System Design and Backend. Each segment has its own prerequisite-aware book order.
         </p>
         <p class="hero-note">
-          Read each complete book on the web. Download its matching PDF when you want offline study or focused revision. The content and order stay the same.
+          Learn from the complete web edition or download the matching PDF. Existing books stay intact; roadmap editions make upcoming Git, build, database, Spring, Kafka, and caching coverage visible now.
         </p>
         <div class="hero-actions">
-          <a class="button button-primary" href="books/01-java-foundations-for-problem-solving/">
-            Start step 01 on the web <span aria-hidden="true">&rarr;</span>
+          <a class="button button-primary" href="#study-path">
+            Choose Java, DSA, or System Design <span aria-hidden="true">&rarr;</span>
           </a>
-          <a class="button button-secondary" href="#study-path">See the full study path</a>
+          <a class="button button-secondary" href="books/">Open the complete library</a>
         </div>
       </div>
 
@@ -78,60 +86,60 @@
           <span>START_PROTOCOL / 00</span>
           <span class="live-label">READY</span>
         </div>
-        <h2 id="next-action-title">How the path works</h2>
+        <h2 id="next-action-title">How the library works</h2>
         <ol class="action-sequence">
           <li>
             <span>01</span>
             <div>
-              <strong>Learn on the web</strong>
-              <a href="books/01-java-foundations-for-problem-solving/">Start the complete Java Foundations book</a>
+              <strong>Choose a segment</strong>
+              <a href="#study-path">Java, DSA, or System Design and Backend</a>
             </div>
           </li>
           <li>
             <span>02</span>
             <div>
-              <strong>Use the PDF offline</strong>
-              <a href="https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf">Download the same book for revision</a>
+              <strong>Start at Book 01</strong>
+              <a href="#study-path">Follow the order inside your selected segment</a>
             </div>
           </li>
           <li>
             <span>03</span>
             <div>
-              <strong>Complete the checks</strong>
-              <a href="books/01-java-foundations-for-problem-solving/">Work through examples, exercises, and solutions</a>
+              <strong>Learn on web or PDF</strong>
+              <a href="books/">Use the same canonical content in either format</a>
             </div>
           </li>
           <li>
             <span>04</span>
             <div>
-              <strong>Move to the next book</strong>
-              <a href="books/02-time-and-space-complexity/">Continue to Time and Space Complexity</a>
+              <strong>Prove readiness</strong>
+              <a href="docs/backend-interview/10-practice/">Complete checks before moving to the next book</a>
             </div>
           </li>
         </ol>
         <div class="panel-footer">
           <span>NO SIGNUP</span>
-          <span>ONE ORDER</span>
+          <span>CLEAR ORDER</span>
           <span>WEB + PDF</span>
         </div>
       </aside>
     </section>
 
     <section class="signal-strip" aria-label="Study path scope">
-      <div><span>One ordered path</span><strong data-book-stat="books">28 books</strong><small>basics through backend SDE-2</small></div>
-      <div><span>Complete web lessons</span><strong data-book-stat="documents">161 chapters</strong><small>examples, practice, and solutions</small></div>
+      <div><span>Three focused segments</span><strong data-book-stat="books">40 books</strong><small>Java, DSA, and System Design</small></div>
+      <div><span>Canonical web lessons</span><strong data-book-stat="documents">173 chapters</strong><small>full books and roadmap editions</small></div>
       <div><span>Runnable knowledge</span><strong data-book-stat="code">860 code entries</strong><small>integrated with the lessons</small></div>
-      <div><span>Offline format</span><strong data-book-stat="pdfs">30 PDFs</strong><small>the same curriculum for revision</small></div>
+      <div><span>Offline format</span><strong data-book-stat="pdfs">42 PDFs</strong><small>matching downloadable editions</small></div>
     </section>
 
     <section class="book-library shell" id="study-path" aria-labelledby="books-title">
       <div class="section-heading">
         <div>
-          <p class="section-kicker">THE ONLY CURRICULUM ROUTE</p>
-          <h2 id="books-title">Follow the books from step 01 onward.</h2>
+          <p class="section-kicker">THREE CLEAR STARTING POINTS</p>
+          <h2 id="books-title">Choose your segment, then follow its books in order.</h2>
         </div>
         <p>
-          Do not choose between competing roadmaps. Begin with Java Foundations, continue through complexity and DSA, and open advanced Java only after the prerequisites are dependable.
+          Java develops language and engineering depth. DSA develops coding-round problem solving. System Design and Backend develops services, data, Spring, messaging, and distributed-system judgment.
         </p>
       </div>
 
@@ -150,12 +158,12 @@
 
       <div class="book-start-block" aria-labelledby="book-start-title">
         <div class="book-start-copy">
-          <p class="section-kicker">BEGINNER-FIRST FOUNDATION ROUTE</p>
-          <h3 id="book-start-title">Eight foundation books before pattern-heavy DSA</h3>
-          <p>Follow these books in order. Study Step 03 has two deliberate parts: learn the numeric foundation in 03A, then prove it with the 03B interview workbook.</p>
+          <p class="section-kicker">SELECT A LEARNING SEGMENT</p>
+          <h3 id="book-start-title">Three independent Book 01 starting points</h3>
+          <p>Pick the goal you are preparing for now. Each segment keeps its own book numbers and next-step navigation, so Java, DSA, and backend preparation never become one confusing list.</p>
         </div>
-        <ol class="book-start-path" id="book-start-path" aria-label="First eight books in the study path">
-          <li class="loading-state"><span></span><p>Loading the foundation route...</p></li>
+        <ol class="book-start-path" id="book-start-path" aria-label="Available learning segments">
+          <li class="loading-state"><span></span><p>Loading the learning segments...</p></li>
         </ol>
       </div>
 
@@ -165,7 +173,7 @@
           <input id="book-search" type="search" placeholder="Try Java, arrays, graphs, Spring..." autocomplete="off">
         </label>
         <div class="book-release-actions">
-          <a class="button button-primary" href="books/">Open the web study path</a>
+          <a class="button button-primary" href="books/">Open the web library</a>
           <a class="button button-secondary" id="master-book-link" href="https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest">Download full PDF</a>
           <a class="text-link" id="series-index-link" href="https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest">View PDF index</a>
           <a class="visually-hidden" id="book-release-link" href="https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest">Current release</a>
@@ -174,9 +182,9 @@
 
       <div class="book-filters" role="group" aria-label="Filter books by track">
         <button class="book-filter is-active" type="button" data-book-filter="all" aria-pressed="true">All books</button>
-        <button class="book-filter" type="button" data-book-filter="Programming Foundations" aria-pressed="false">Foundations</button>
+        <button class="book-filter" type="button" data-book-filter="Java Engineering" aria-pressed="false">Java</button>
         <button class="book-filter" type="button" data-book-filter="Data Structures and Algorithms" aria-pressed="false">DSA</button>
-        <button class="book-filter" type="button" data-book-filter="Advanced Java and Backend" aria-pressed="false">Advanced Java + backend</button>
+        <button class="book-filter" type="button" data-book-filter="System Design and Backend" aria-pressed="false">System Design + backend</button>
       </div>
 
       <p class="book-library-summary" id="book-library-summary" aria-live="polite">Loading the published book catalog...</p>
@@ -208,7 +216,7 @@
         <p class="section-kicker">CLOSE THE LOOP</p>
         <h2 id="practice-title">Convert knowledge into interview evidence.</h2>
         <p>
-          Practice is the final activity inside the study path, not a second roadmap. Finish each book cycle with retrieval, a timed simulation, and a written correction.
+          Practice closes every segment; it is not a competing roadmap. Finish each book cycle with retrieval, a timed simulation, and a written correction.
         </p>
       </div>
 
@@ -233,8 +241,8 @@
 
     <section class="resource-strip shell" id="about" aria-labelledby="resources-title">
       <div>
-        <p class="section-kicker">ONE CURRICULUM / TWO FORMATS</p>
-        <h2 id="resources-title">The web and PDFs teach the same path.</h2>
+        <p class="section-kicker">ONE LIBRARY / TWO FORMATS</p>
+        <h2 id="resources-title">The web and PDFs teach the same segmented curriculum.</h2>
       </div>
       <div class="resource-links">
         <a href="books/"><span>PRIMARY FORMAT</span><strong>Study on the web</strong><small>Complete chapters, navigation, examples, exercises, solutions, code, and PDF links</small></a>
@@ -251,12 +259,12 @@
   <footer class="site-footer">
     <a class="brand footer-brand" href="./">
       <span class="brand-mark">S2</span>
-      <span class="brand-copy"><strong>JAVA / SDE2</strong><small>ONE STUDY PATH</small></span>
+      <span class="brand-copy"><strong>JAVA / SDE2</strong><small>THREE FOCUSED SEGMENTS</small></span>
     </a>
-    <p>One ordered curriculum. Read on the web or use the matching PDF.</p>
+    <p>Three focused segments. Read on the web or use the matching PDF.</p>
     <nav aria-label="Footer navigation">
       <a href="./">Home</a>
-      <a href="#study-path">Study path</a>
+      <a href="#study-path">Choose a segment</a>
       <a href="docs/backend-interview/10-practice/">Practice</a>
       <a href="#about">About</a>
       <a href="https://github.com/vinayreddykalluri/SDE2-Interview-Handbook">GitHub</a>
@@ -277,6 +285,6 @@
   </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <noscript>This page needs JavaScript to render the catalog. The complete ordered study path remains available under <a href="books/">web books</a>.</noscript>
+  <noscript>This page needs JavaScript to render the catalog. The complete segmented library remains available under <a href="books/">web books</a>.</noscript>
 </body>
 </html>

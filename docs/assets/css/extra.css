@@ -220,6 +220,35 @@ body::before {
   color: var(--field-signal);
 }
 
+.field-theme-control {
+  min-height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding-inline: 0.55rem 0.4rem;
+  border-left: 1px solid rgba(255, 250, 240, 0.25);
+  background: rgba(255, 250, 240, 0.08);
+  color: #fffaf0;
+}
+
+.field-theme-control span { color: var(--field-signal); }
+
+.field-theme-control select {
+  min-height: 1.75rem;
+  max-width: 5.4rem;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #fffaf0;
+  cursor: pointer;
+  font: 600 0.56rem var(--field-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.field-theme-control:focus-within { outline: 2px solid var(--field-signal); outline-offset: -2px; }
+.field-theme-control option { background: var(--field-navy); color: #fffaf0; }
+
 .md-main__inner {
   margin-top: 1.8rem;
 }
@@ -584,6 +613,17 @@ body::before {
 
   .field-announcement a {
     padding-inline: 0.55rem;
+    font-size: 0.52rem;
+  }
+
+  .field-theme-control {
+    padding-inline: 0.45rem 0.3rem;
+  }
+
+  .field-theme-control > span { display: none; }
+
+  .field-theme-control select {
+    max-width: 4.7rem;
     font-size: 0.52rem;
   }
 

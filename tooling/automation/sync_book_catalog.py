@@ -66,14 +66,6 @@ def read_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def track_for(volume_id: str) -> str:
-    if volume_id.startswith("18"):
-        return "Advanced Java and Backend"
-    if volume_id in {"03", "02", "01", "01B", "04", "05"}:
-        return "Programming Foundations"
-    return "Data Structures and Algorithms"
-
-
 def source_href(volume: dict[str, Any]) -> str:
     first_source = Path(volume["sources"][0]["path"])
     source_path = first_source.parent if first_source.suffix else first_source
@@ -154,12 +146,35 @@ def build_catalog() -> dict[str, Any]:
     release_url = f"{REPOSITORY}/releases/tag/{release_tag}"
     download_root = f"{REPOSITORY}/releases/download/{release_tag}"
     current_download_root = f"{REPOSITORY}/raw/refs/heads/master/{BOOK_REPOSITORY_PATH}/dist"
+    segment_by_book: dict[str, dict[str, Any]] = {}
+    segments: list[dict[str, Any]] = []
+    for segment in spec["segments"]:
+        segment_books = [str(item) for item in segment["books"]]
+        segment_entry = {
+            "id": segment["id"],
+            "code": segment["code"],
+            "title": segment["title"],
+            "shortTitle": segment["short_title"],
+            "description": segment["description"],
+            "bookCount": len(segment_books),
+            "startBookId": segment_books[0],
+        }
+        first_volume = volumes_by_id[segment_books[0]]
+        first_volume = {**first_volume, "path_label": spec["path_labels"][segment_books[0]]}
+        segment_entry["startHref"] = full_book_href(first_volume)
+        segments.append(segment_entry)
+        for segment_position, volume_id in enumerate(segment_books, start=1):
+            segment_by_book[volume_id] = {
+                **segment_entry,
+                "segmentPosition": segment_position,
+            }
 
     books: list[dict[str, Any]] = []
     for position, volume_id in enumerate(spec["learning_order"], start=1):
         volume = dict(volumes_by_id[str(volume_id)])
         volume["path_label"] = str(spec["path_labels"][str(volume_id)])
         artifact = artifacts_by_id[str(volume_id)]
+        segment = segment_by_book[str(volume_id)]
         source_chapter_count, supporting_source_count, source_chapter_preview = chapter_preview(volume)
         web_document_count, word_count, code_example_count = source_metrics(volume)
         book_href = full_book_href(volume)
@@ -170,7 +185,14 @@ def build_catalog() -> dict[str, Any]:
                 "step": volume["path_label"],
                 "pathLabel": volume["path_label"],
                 "id": str(volume["id"]),
-                "track": track_for(str(volume["id"])),
+                "track": segment["title"],
+                "segmentId": segment["id"],
+                "segmentTitle": segment["title"],
+                "segmentShortTitle": segment["shortTitle"],
+                "segmentCode": f"{segment['code']} {segment['segmentPosition']:02d}",
+                "segmentPosition": segment["segmentPosition"],
+                "segmentBookCount": segment["bookCount"],
+                "publicationStatus": volume.get("publication_status", "published"),
                 "title": volume["title"],
                 "shortTitle": volume["short_title"],
                 "subtitle": volume["subtitle"],
@@ -198,7 +220,7 @@ def build_catalog() -> dict[str, Any]:
     focused_pages = sum(book["pageCount"] for book in books)
     total_pages = focused_pages + int(index["page_count"]) + int(master["page_count"])
     return {
-        "schemaVersion": 3,
+        "schemaVersion": 4,
         "generatedFrom": f"{BOOK_REPOSITORY_PATH}/publishing/series.json",
         "release": {
             "tag": release_tag,
@@ -223,6 +245,7 @@ def build_catalog() -> dict[str, Any]:
                 "releasePdfHref": f"{download_root}/{master['file']}",
             },
         },
+        "segments": segments,
         "books": books,
     }
 

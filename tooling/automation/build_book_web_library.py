@@ -28,6 +28,7 @@ PRODUCTION_ROOT = "https://vinayreddykalluri.github.io/SDE2-Interview-Handbook"
 READER_CSS = ROOT / "tooling" / "book-web" / "book-reader.css"
 PORTAL_ICON = ROOT / "apps" / "portal" / "assets" / "s2-mark.svg"
 MERMAID_SCRIPT = ROOT / "docs" / "assets" / "javascripts" / "mermaid.mjs"
+THEME_MANAGER_SCRIPT = ROOT / "docs" / "assets" / "javascripts" / "theme-manager.js"
 
 MARKDOWN_LINK = re.compile(r"(?P<prefix>\]\()(?P<target><?[^)\s>]+>?)(?P<rest>[^)]*\))")
 JAVA_FENCE = re.compile(r"^```java(?:\s|$)", re.MULTILINE | re.IGNORECASE)
@@ -99,7 +100,7 @@ def context_bar(
     )
 
 
-def study_status(*, path_label: str, book_position: int, book_count: int, chapter_position: int | None = None, chapter_count: int | None = None) -> str:
+def study_status(*, segment_code: str, book_position: int, book_count: int, chapter_position: int | None = None, chapter_count: int | None = None) -> str:
     if chapter_position is None or chapter_count is None:
         progress = round(book_position / book_count * 100)
         chapter_text = "BOOK OVERVIEW"
@@ -108,7 +109,7 @@ def study_status(*, path_label: str, book_position: int, book_count: int, chapte
         chapter_text = f"CHAPTER {chapter_position:02d} OF {chapter_count:02d}"
     return f'''<section class="reader-study-status" aria-label="Study progress">
   <div class="reader-study-status__labels">
-    <strong>STUDY STEP {safe_html(path_label)}</strong>
+    <strong>{safe_html(segment_code)}</strong>
     <span>BOOK {book_position:02d} OF {book_count:02d}</span>
     <span>{chapter_text}</span>
   </div>
@@ -212,9 +213,9 @@ def generate_code_page(
     table = "\n".join(rows) if rows else "| No fenced Java snippets | 0 | Use the linked implementation references |"
     page = f"""# Code and Implementation Index
 
-{context_bar(label=f"STEP {volume['path_label']} · {volume['short_title']}", overview_href='../', code_href=None, pdf_href=book_pdf)}
+{context_bar(label=f"{volume['segment_code']} · {volume['short_title']}", overview_href='../', code_href=None, pdf_href=book_pdf)}
 
-{study_status(path_label=volume['path_label'], book_position=volume['book_position'], book_count=volume['book_count'])}
+{study_status(segment_code=volume['segment_code'], book_position=volume['segment_position'], book_count=volume['segment_count'])}
 
 This page indexes the Java examples embedded throughout **{volume['title']}**. The chapter remains the source of truth for contracts, invariants, dry runs, and explanations; this index makes implementations easy to locate.
 
@@ -243,17 +244,25 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
     artifacts = {str(item["id"]): item for item in manifest["volumes"]}
     volumes = {str(item["id"]): item for item in spec["volumes"]}
     ordered = []
-    for position, volume_id in enumerate(spec["learning_order"], start=1):
+    for global_position, volume_id in enumerate(spec["learning_order"], start=1):
+        segment = next(item for item in spec["segments"] if str(volume_id) in item["books"])
+        segment_position = [str(item) for item in segment["books"]].index(str(volume_id)) + 1
         volume = dict(volumes[str(volume_id)])
         volume["path_label"] = str(spec["path_labels"][str(volume_id)])
-        volume["book_position"] = position
-        volume["book_count"] = len(spec["learning_order"])
+        volume["book_position"] = global_position
+        volume["segment_id"] = segment["id"]
+        volume["segment_title"] = segment["title"]
+        volume["segment_short_title"] = segment["short_title"]
+        volume["segment_code"] = f"{segment['code']} {segment_position:02d}"
+        volume["segment_position"] = segment_position
+        volume["segment_count"] = len(segment["books"])
         ordered.append(volume)
 
     (staging_docs / "assets").mkdir(parents=True, exist_ok=True)
     shutil.copy2(READER_CSS, staging_docs / "assets" / "book-reader.css")
     shutil.copy2(PORTAL_ICON, staging_docs / "assets" / "s2-mark.svg")
     shutil.copy2(MERMAID_SCRIPT, staging_docs / "assets" / "mermaid.mjs")
+    shutil.copy2(THEME_MANAGER_SCRIPT, staging_docs / "assets" / "theme-manager.js")
 
     nav_groups: dict[str, list[Any]] = defaultdict(list)
     built_books: list[dict[str, Any]] = []
@@ -293,9 +302,9 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
             else:
                 next_href = "../code/"
                 next_label = "Code and implementation index"
-            page = f"""{context_bar(label=f"STEP {volume['path_label']} · {volume['short_title']}", overview_href='../', code_href='../code/', pdf_href=pdf_url(volume['output_name']))}
+            page = f"""{context_bar(label=f"{volume['segment_code']} · {volume['short_title']}", overview_href='../', code_href='../code/', pdf_href=pdf_url(volume['output_name']))}
 
-{study_status(path_label=volume['path_label'], book_position=volume['book_position'], book_count=volume['book_count'], chapter_position=position, chapter_count=len(markdown_sources))}
+{study_status(segment_code=volume['segment_code'], book_position=volume['segment_position'], book_count=volume['segment_count'], chapter_position=position, chapter_count=len(markdown_sources))}
 
 {rewritten.rstrip()}
 
@@ -330,7 +339,7 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
             if not entries:
                 continue
             reading_sections.append(f"## {group}\n\n" + "\n".join(
-                f"{volume['path_label']}.{index:02d} [{entry['title']}]({entry['output']})"
+                f"{volume['segment_code']}.{index:02d} [{entry['title']}]({entry['output']})"
                 for index, entry in enumerate(entries, start=1)
             ))
 
@@ -353,13 +362,15 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
         source_word_count = sum(len(re.findall(r"\b[\w'-]+\b", entry["text"])) for entry in source_entries)
         index_page = f"""# {volume['title']}
 
-{context_bar(label=f"STEP {volume['path_label']} · {volume['short_title']}", overview_href=None, code_href='code/', pdf_href=pdf_url(volume['output_name']))}
+{context_bar(label=f"{volume['segment_code']} · {volume['short_title']}", overview_href=None, code_href='code/', pdf_href=pdf_url(volume['output_name']))}
 
-{study_status(path_label=volume['path_label'], book_position=volume['book_position'], book_count=volume['book_count'])}
+{study_status(segment_code=volume['segment_code'], book_position=volume['segment_position'], book_count=volume['segment_count'])}
 
 <div class="book-identity">
-  <span>STUDY STEP {safe_html(volume['path_label'])}</span>
-  <span>BOOK {volume['book_position']} OF {volume['book_count']}</span>
+  <span>{safe_html(volume['segment_title'])}</span>
+  <span>{safe_html(volume['segment_code'])}</span>
+  <span>BOOK {volume['segment_position']} OF {volume['segment_count']}</span>
+  <span>{'ROADMAP EDITION' if volume.get('publication_status') == 'planned' else 'FULL EDITION'}</span>
   <span>{artifact['page_count']} PDF PAGES</span>
   <span>{len(source_entries)} WEB DOCUMENTS</span>
   <span>{source_word_count:,} WORDS</span>
@@ -396,21 +407,21 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
 
         book_nav: list[Any] = [{"Overview": f"{slug}/index.md"}]
         for chapter_position, entry in enumerate(source_entries, start=1):
-            book_nav.append({f"{volume['path_label']}.{chapter_position:02d} · {entry['title']}": f"{slug}/{entry['output']}"})
+            book_nav.append({f"{volume['segment_code']}.{chapter_position:02d} · {entry['title']}": f"{slug}/{entry['output']}"})
         book_nav.append({"Code": f"{slug}/code.md"})
 
-        if order <= 8:
-            track = "Programming Foundations"
-        elif volume_id.startswith("18"):
-            track = "Advanced Java & Backend"
-        else:
-            track = "Data Structures & Algorithms"
-        nav_groups[track].append({f"{volume['path_label']} · {volume['short_title']}": book_nav})
+        nav_groups[volume["segment_title"]].append({f"{volume['segment_code']} · {volume['short_title']}": book_nav})
         built_books.append(
             {
                 "id": volume_id,
                 "path_label": volume["path_label"],
                 "book_position": volume["book_position"],
+                "segment_id": volume["segment_id"],
+                "segment_title": volume["segment_title"],
+                "segment_code": volume["segment_code"],
+                "segment_position": volume["segment_position"],
+                "segment_count": volume["segment_count"],
+                "publication_status": volume.get("publication_status", "published"),
                 "slug": slug,
                 "title": volume["title"],
                 "page_count": int(artifact["page_count"]),
@@ -430,43 +441,43 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
 
 # This book moved
 
-[Continue to Study Step {volume['path_label']}: {volume['title']}](../{slug}/index.md)
+[Continue to {volume['segment_code']}: {volume['title']}](../{slug}/index.md)
 ''',
                 encoding="utf-8",
             )
 
     library_rows = "\n".join(
-        f"| {book['path_label']} | [{book['title']}]({book['slug']}/index.md) | {book['book_position']} of {len(built_books)} | {book['documents']} | {book['code_examples']} | {book['page_count']} | [PDF]({book['pdf']}) |"
+        f"| {book['segment_title']} | {book['segment_code']} | [{book['title']}]({book['slug']}/index.md) | {book['segment_position']} of {book['segment_count']} | {'Roadmap' if book['publication_status'] == 'planned' else 'Full'} | {book['documents']} | {book['code_examples']} | {book['page_count']} | [PDF]({book['pdf']}) |"
         for book in built_books
     )
-    library_page = f"""# Java SDE-2 Study Path
+    library_page = f"""# Java SDE-2 Learning Library
 
-Follow these **{len(built_books)} focused books** in order. Every step is available as a complete web book and a matching PDF; they are two formats of the same curriculum, not separate learning paths. The web books contain **{total_documents} chapters** and **{total_code_examples} indexed code entries** generated from the canonical sources used by the PDFs.
+Choose **Java Engineering**, **Data Structures and Algorithms**, or **System Design and Backend**. Follow the books inside your selected segment in order. Every book is available on the web and as a matching PDF; these are two formats of the same curriculum. The library contains **{len(built_books)} focused books**, **{total_documents} web documents**, and **{total_code_examples} indexed code entries** generated from canonical sources.
 
-!!! tip "Recommended start"
-    Begin with Java Foundations, then Time and Space Complexity, Number Systems, Bit Manipulation, Loop Mastery, Arrays, and Strings. Open advanced material only after its prerequisites are dependable.
+!!! tip "Choose before you begin"
+    New to Java? Start with JAVA 01. Preparing for coding rounds? Start with DSA 01. Preparing for backend and architecture rounds? Start with SD 01. A roadmap edition shows committed scope and ordering while its complete chapter set is developed.
 
 <div class="library-route-grid">
-  <a href="01-java-foundations-for-problem-solving/"><strong>01 · Learn</strong><span>Start Java Foundations on the web</span></a>
-  <a href="{pdf_url('Java-SDE2-Interview-Preparation-Series-Index.pdf')}"><strong>02 · Revise</strong><span>Open the matching PDF index</span></a>
-  <a href="../docs/backend-interview/10-practice/"><strong>03 · Prove</strong><span>Practice after completing the lesson</span></a>
+  <a href="01-java-foundations-for-problem-solving/"><strong>JAVA 01</strong><span>Language, tooling, runtime, and Java engineering</span></a>
+  <a href="02-time-and-space-complexity/"><strong>DSA 01</strong><span>Complexity, patterns, structures, and algorithms</span></a>
+  <a href="18f-design-backend-testing-and-security/"><strong>SD 01</strong><span>Backend foundations, data, Spring, and distributed systems</span></a>
 </div>
 
-| Step | Continue on the web | Book | Chapters | Code | PDF pages | Offline |
-|---:|---|---:|---:|---:|---:|---|
+| Segment | Code | Continue on the web | Book | Edition | Chapters | Code | PDF pages | Offline |
+|---|---:|---|---:|---|---:|---:|---:|---|
 {library_rows}
 """
     (staging_docs / "index.md").write_text(library_page, encoding="utf-8")
 
-    nav = [{"Study Path": "index.md"}]
-    for name in ("Programming Foundations", "Data Structures & Algorithms", "Advanced Java & Backend"):
+    nav = [{"Choose a Segment": "index.md"}]
+    for name in ("Java Engineering", "Data Structures and Algorithms", "System Design and Backend"):
         nav.append({name: nav_groups[name]})
     return built_books, nav, total_documents, total_code_examples
 
 
 def write_config(path: Path, docs_dir: Path, nav: list[Any]) -> None:
     config: dict[str, Any] = {
-        "site_name": "Java SDE2 Study Path",
+        "site_name": "Java SDE2 Learning Library",
         "site_description": "Complete Java SDE-2 books rendered from canonical Markdown with code, exercises, solutions, and PDF downloads.",
         "site_author": "Vinay Reddy Kalluri and contributors",
         "site_url": f"{PRODUCTION_ROOT}/books/",
@@ -489,10 +500,7 @@ def write_config(path: Path, docs_dir: Path, nav: list[Any]) -> None:
                 "content.code.copy",
                 "content.code.annotate",
             ],
-            "palette": [
-                {"media": "(prefers-color-scheme: light)", "scheme": "default", "primary": "slate", "accent": "amber"},
-                {"media": "(prefers-color-scheme: dark)", "scheme": "slate", "primary": "black", "accent": "amber"},
-            ],
+            "palette": {"scheme": "default", "primary": "slate", "accent": "amber"},
             "font": {"text": "Source Serif 4", "code": "IBM Plex Mono"},
         },
         "plugins": ["search"],
