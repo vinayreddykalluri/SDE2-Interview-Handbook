@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-07-29 - DSA 08-17 publication-depth expansion
+
+- Added prerequisite-first foundation chapters to Hashing, Recursion, Linked Lists, Stacks/Queues/Deques, Binary Search, Trees, Heaps, Graphs, Greedy, and Dynamic Programming.
+- Added 30 original interview-room simulations with clarification dialogue, baseline reasoning, optimized Java, invariants or dry runs, complexity, tests, and follow-up answers.
+- Added 153 focused practice prompts, separated reasoning solutions, and ten dependency-free Java companions with 41 executable checks.
+- Rebuilt the ten canonical PDFs from 284 to 406 pages and synchronized their source counts, code indexes, downloads, and chapter navigation with the web library.
+- Added consolidated audit, coverage, changelog, validation, and build evidence for the expansion.
+
 ## 2026-07-29 - Three learning segments and backend roadmap editions
 
 - Reorganized the reader experience into Java Engineering (9 books), Data Structures and Algorithms (17 books), and System Design and Backend (14 books).

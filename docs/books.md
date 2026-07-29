@@ -35,9 +35,9 @@ Stable technical IDs remain in existing filenames and URLs. Reader-facing segmen
 
 ## What is published
 
-- 40 focused books (2,098 pages) and one 17-page series index
+- 40 focused books (2,220 pages) and one 17-page series index
 - one complete 616-page master book
-- 42 individual PDFs and 2,731 pages across the complete library
+- 42 individual PDFs and 2,853 pages across the complete library
 - canonical Markdown and diagram sources
 - Java 21 companion programs and boundary tests
 - exercises with separated solutions
