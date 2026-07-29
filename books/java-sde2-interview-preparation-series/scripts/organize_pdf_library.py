@@ -15,19 +15,6 @@ DIST = ROOT / "dist"
 DEFAULT_OUTPUT = ROOT / "output" / "reader-library"
 INDEX_NAME = "Java-SDE2-Interview-Preparation-Series-Index.pdf"
 
-GROUPS = (
-    ("00-start-here", "Start Here and Complete References", set()),
-    ("01-foundations", "Foundations - Study Steps 01 to 05",
-     {"03", "02", "01", "01B", "04", "05"}),
-    ("02-core-dsa", "Core Data Structures and Algorithms - Study Steps 06 to 15",
-     {"06", "07", "08", "09", "10", "11", "12", "13", "14", "15"}),
-    ("03-algorithm-strategies", "Algorithm Strategies - Study Steps 16 and 17",
-     {"16", "17"}),
-    ("04-advanced-java-backend", "Advanced Java and Backend Engineering - Study Steps 18A to 18J",
-     {"18A", "18B", "18C", "18D", "18E", "18F", "18G", "18H", "18I", "18J"}),
-)
-
-
 def arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT,
@@ -39,13 +26,6 @@ def arguments() -> argparse.Namespace:
 
 def load_spec() -> dict:
     return json.loads(SPEC_PATH.read_text(encoding="utf-8"))
-
-
-def group_for(volume_id: str) -> tuple[str, str]:
-    for directory, title, identifiers in GROUPS[1:]:
-        if volume_id in identifiers:
-            return directory, title
-    raise ValueError(f"volume {volume_id} has no reader-library group")
 
 
 def validate(spec: dict) -> list[dict]:
@@ -61,6 +41,15 @@ def validate(spec: dict) -> list[dict]:
     path_labels = spec.get("path_labels", {})
     if set(path_labels) != set(volumes) or len(set(path_labels.values())) != len(volumes):
         raise ValueError("path_labels must define one unique public study code per book")
+    segment_by_book: dict[str, tuple[dict, int]] = {}
+    for segment_number, segment in enumerate(spec["segments"], start=1):
+        for segment_position, volume_id in enumerate(segment["books"], start=1):
+            if volume_id in segment_by_book:
+                raise ValueError(f"volume {volume_id} is assigned to multiple segments")
+            segment_by_book[volume_id] = (segment, segment_position)
+    if set(segment_by_book) != set(volumes):
+        raise ValueError("segments must assign every focused volume exactly once")
+
     for ordinal, volume_id in enumerate(order, start=1):
         volume = volumes[volume_id]
         path_label = str(path_labels[volume_id])
@@ -70,7 +59,10 @@ def validate(spec: dict) -> list[dict]:
         if volume["output_name"] in seen_outputs:
             raise ValueError(f"duplicate output name: {volume['output_name']}")
         seen_outputs.add(volume["output_name"])
-        directory, group_title = group_for(volume_id)
+        segment, segment_position = segment_by_book[volume_id]
+        segment_number = spec["segments"].index(segment) + 1
+        directory = f"{segment_number:02d}-{segment['id']}"
+        group_title = f"{segment['title']} - {len(segment['books'])} Books"
         assignments.append({
             "ordinal": ordinal,
             "path_label": path_label,
@@ -78,7 +70,9 @@ def validate(spec: dict) -> list[dict]:
             "source": source,
             "directory": directory,
             "group_title": group_title,
-            "reader_name": f"{path_label}-{volume['output_name']}",
+            "segment": segment,
+            "segment_position": segment_position,
+            "reader_name": f"{segment['code']}-{segment_position:02d}-{volume['output_name']}",
         })
 
     expected = len(spec["volumes"])
@@ -99,8 +93,8 @@ def build_readme(spec: dict, assignments: list[dict]) -> str:
     lines = [
         "# Organized Java SDE-2 PDF Library",
         "",
-        "Read the Study Step codes in order. The public code is shared by the website,",
-        "PDF cover, and this folder; the stable technical identifier remains only in the original filename.",
+        "Choose Java, DSA, or System Design and Backend, then read the books inside",
+        "that segment in order. Segment codes are shared by the website, PDF cover, and this folder.",
         "",
         "This directory is generated from `publishing/series.json`. Canonical reviewed",
         "artifacts remain in `dist/`, so repository links and release filenames do not break.",
@@ -118,7 +112,7 @@ def build_readme(spec: dict, assignments: list[dict]) -> str:
             lines.extend([f"## {item['group_title']}", ""])
         volume = item["volume"]
         lines.append(
-            f"- **Study Step {item['path_label']}** - [{volume['title']}]"
+            f"- **{item['segment']['code']} {item['segment_position']:02d}** - [{volume['title']}]"
             f"({item['directory']}/{item['reader_name']})"
         )
     lines.extend([
@@ -136,7 +130,8 @@ def build_readme(spec: dict, assignments: list[dict]) -> str:
 def copy_library(spec: dict, assignments: list[dict], output: Path) -> None:
     output = output.resolve()
     output.mkdir(parents=True, exist_ok=True)
-    for directory, _, _ in GROUPS:
+    directories = {"00-start-here"} | {item["directory"] for item in assignments}
+    for directory in sorted(directories):
         (output / directory).mkdir(parents=True, exist_ok=True)
 
     reference_files = (INDEX_NAME, spec["master_artifact"]["file"])

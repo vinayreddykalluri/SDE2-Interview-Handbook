@@ -324,9 +324,40 @@ def load_manifest() -> dict[str, Any]:
         raise RuntimeError("path_labels must define exactly one public study code per physical volume")
     if len(set(path_labels.values())) != len(ids):
         raise RuntimeError("path_labels contains duplicate public study codes")
-    for position, item in enumerate(learning_volumes(data), start=1):
+    ordered = learning_volumes(data)
+    segments = data.get("segments", [])
+    if not segments:
+        raise RuntimeError("series.json must define at least one selectable segment")
+    flattened: list[str] = []
+    by_id = {item["id"]: item for item in volumes}
+    for segment in segments:
+        book_ids = segment.get("books", [])
+        if not book_ids:
+            raise RuntimeError(f"Segment {segment.get('id', '<unknown>')} has no books")
+        flattened.extend(book_ids)
+        for segment_position, item_id in enumerate(book_ids, start=1):
+            if item_id not in by_id:
+                raise RuntimeError(f"Unknown volume {item_id} in segment {segment['id']}")
+            item = by_id[item_id]
+            if "segment_id" in item:
+                raise RuntimeError(f"Volume {item_id} appears in more than one segment")
+            item["segment_id"] = segment["id"]
+            item["segment_title"] = segment["title"]
+            item["segment_short_title"] = segment["short_title"]
+            item["segment_code"] = segment["code"]
+            item["segment_position"] = segment_position
+            item["segment_count"] = len(book_ids)
+    if flattened != data.get("learning_order"):
+        raise RuntimeError("learning_order must equal the three segment book lists in order")
+    if set(flattened) != set(ids) or len(flattened) != len(ids):
+        raise RuntimeError("segments must contain every physical volume exactly once")
+    for position, item in enumerate(ordered, start=1):
         item["path_label"] = str(path_labels[item["id"]])
         item["book_position"] = position
+        item["volume_label"] = (
+            f"{item['segment_title']} - Book {item['segment_position']:02d} "
+            f"of {item['segment_count']:02d} - Study Step {item['path_label']}"
+        )
     return data
 
 
@@ -344,6 +375,12 @@ def learning_volumes(manifest: dict[str, Any]) -> list[dict[str, Any]]:
         omitted = sorted(set(by_id) - set(requested))
         raise RuntimeError(f"learning_order omits physical volume IDs: {omitted}")
     return [by_id[item_id] for item_id in requested]
+
+
+def segment_volumes(manifest: dict[str, Any], segment_id: str) -> list[dict[str, Any]]:
+    by_id = {item["id"]: item for item in manifest["volumes"]}
+    segment = next(item for item in manifest["segments"] if item["id"] == segment_id)
+    return [by_id[item_id] for item_id in segment["books"]]
 
 
 def safe_source_path(relative: str) -> Path:
@@ -450,9 +487,9 @@ def orientation_markdown(spec: dict[str, Any], previous: dict[str, Any] | None, 
     signals = compact(spec["recognition_signals"])
     outcomes = compact(spec["outcomes"])
     fallback = (
-        f"Study Step {previous['path_label']} - {previous['short_title']}"
+        f"{previous['segment_code']} {previous['segment_position']:02d} - {previous['short_title']}"
         if previous
-        else "the Absolute Beginner route in the series index"
+        else f"Book 01 in the {spec['segment_title']} segment"
     )
     return master.ascii_safe(
         f"""# Start Here - Your Route Through This Volume
@@ -482,12 +519,12 @@ def orientation_markdown(spec: dict[str, Any], previous: dict[str, Any] | None, 
 def handoff_markdown(spec: dict[str, Any], previous: dict[str, Any] | None, next_spec: dict[str, Any] | None) -> str:
     practice = "\n".join(f"- {item}" for item in spec["practice_ladder"])
     previous_line = (
-        f"[Previous book: Study Step {previous['path_label']} - {previous['title']}]({previous['output_name']})"
+        f"[Previous book: {previous['segment_code']} {previous['segment_position']:02d} - {previous['title']}]({previous['output_name']})"
         if previous
-        else "This is the first volume in the sequence."
+        else f"This is the first volume in the {spec['segment_title']} segment."
     )
     next_line = (
-        f"[Next book: Study Step {next_spec['path_label']} - {next_spec['title']}]({next_spec['output_name']})"
+        f"[Next book: {next_spec['segment_code']} {next_spec['segment_position']:02d} - {next_spec['title']}]({next_spec['output_name']})"
         if next_spec
         else f"[Return to the complete series index]({INDEX_NAME})"
     )
@@ -588,9 +625,8 @@ def cover_story(spec: dict[str, Any], styles: dict[str, ParagraphStyle], fonts: 
         Paragraph(html.escape(spec["title"]), cover_title),
         Paragraph(html.escape(spec["subtitle"]), styles["cover_subtitle"]),
         HRFlowable(width="48%", thickness=2, color=GOLD, spaceBefore=4, spaceAfter=15),
-        Paragraph("FOUNDING AUTHOR", styles["cover_author_label"]),
+        Paragraph("BY", styles["cover_author_label"]),
         Paragraph(AUTHOR, styles["cover_author"]),
-        Paragraph("EDITOR-IN-CHIEF | CHIEF AUDITOR", styles["cover_meta"]),
         Paragraph(html.escape(spec["cover_deck"]), styles["cover_deck"]),
         Spacer(1, 22),
         HRFlowable(width=COVER_W, thickness=0.8, color=GOLD, spaceBefore=0, spaceAfter=7),
@@ -685,19 +721,8 @@ def about_author_story(
 
 
 def stage_rows(manifest: dict[str, Any]) -> list[dict[str, str]]:
-    """Return the 18 conceptual stages for compact summary uses."""
-    by_stage = {str(item["stage"]): item for item in manifest["stages"]}
-    ordered: list[dict[str, str]] = []
-    seen: set[str] = set()
-    for volume in learning_volumes(manifest):
-        stage_id = str(volume["stage"])
-        if stage_id in seen:
-            continue
-        seen.add(stage_id)
-        row = dict(by_stage[stage_id])
-        row["path_step"] = stage_id.zfill(2)
-        ordered.append(row)
-    return ordered
+    """Return the three selectable learning segments for compact summaries."""
+    return [dict(item) for item in manifest["segments"]]
 
 
 def roadmap_story(
@@ -730,18 +755,19 @@ def roadmap_story(
         alignment=TA_CENTER,
     )
     rows: list[list[Paragraph]] = [
-        [Paragraph("STEP", head_style), Paragraph("FOCUSED LEARNING PATH", head_style)]
+        [Paragraph("SEGMENT", head_style), Paragraph("BOOK", head_style), Paragraph("FOCUSED LEARNING PATH", head_style)]
     ]
     ordered_books = learning_volumes(manifest)
     for book in ordered_books:
         link = html.escape(book["output_name"], quote=True)
-        number = Paragraph(f'<link href="{link}" color="#0B2545"><b>{book["path_label"]}</b></link>', number_style)
+        segment = Paragraph(html.escape(book["segment_short_title"]), cell_style)
+        number = Paragraph(f'<link href="{link}" color="#0B2545"><b>{book["segment_code"]} {book["segment_position"]:02d}</b></link>', number_style)
         title = Paragraph(
             f'<link href="{link}" color="#17212B">{html.escape(book["title"])}</link>',
             cell_style,
         )
-        rows.append([number, title])
-    table = Table(rows, colWidths=[54, CONTENT_W - 54], repeatRows=1, hAlign="LEFT")
+        rows.append([segment, number, title])
+    table = Table(rows, colWidths=[72, 62, CONTENT_W - 134], repeatRows=1, hAlign="LEFT")
     commands: list[tuple[Any, ...]] = [
         ("BACKGROUND", (0, 0), (-1, 0), NAVY),
         ("GRID", (0, 0), (-1, -1), 0.35, LINE),
@@ -762,14 +788,14 @@ def roadmap_story(
     return [
         title,
         Paragraph(
-            "Complete the study steps in order when rebuilding from fundamentals, or enter at the first step whose readiness checks expose a gap. The same public study codes appear on the website and every PDF cover. Click a title when your PDF viewer permits local sibling-file links.",
+            "Choose Java, DSA, or System Design and Backend first, then follow the books inside that segment in order. Stable study-step codes remain on filenames and links; the clearer segment book codes appear on the website and every PDF cover.",
             styles["small"],
         ),
         Spacer(1, 7),
         table,
         Spacer(1, 7),
         Paragraph(
-            "Study Step 03 uses linked foundations (03A) and workbook (03B) books. Study Step 18 uses ten focused books (18A-18J), including a three-book backend specialist track. These suffixes keep every file focused while preserving one unambiguous route.",
+            "Roadmap editions identify planned books whose chapter sets will be expanded one at a time. Existing deep-dive books remain available later in each segment, so no published material is displaced.",
             styles["small"],
         ),
         PageBreak(),
@@ -808,9 +834,9 @@ def local_navigation_story(
     fonts: dict[str, str],
 ) -> list[Flowable]:
     """Show the reader exactly where this file sits without a full roadmap."""
-    volumes = learning_volumes(manifest)
     if spec["id"] == "00":
         return []
+    volumes = segment_volumes(manifest, spec["segment_id"])
     index = next(i for i, item in enumerate(volumes) if item["id"] == spec["id"])
     previous = volumes[index - 1] if index else None
     next_spec = volumes[index + 1] if index + 1 < len(volumes) else None
@@ -834,16 +860,16 @@ def local_navigation_story(
     def linked(item: dict[str, Any] | None, fallback: str) -> Paragraph:
         if item is None:
             return Paragraph(fallback, nav_style)
-        label = f"{item['path_label']} - {item['short_title']}"
+        label = f"{item['segment_code']} {item['segment_position']:02d} - {item['short_title']}"
         return Paragraph(
             f'<link href="{html.escape(item["output_name"], quote=True)}" color="#164E63">{html.escape(label)}</link>',
             nav_style,
         )
 
     rows = [[
-        linked(previous, "START OF SERIES"),
-        Paragraph(f"YOU ARE HERE<br/>{html.escape(spec['path_label'])} - {html.escape(spec['short_title'])}", current_style),
-        linked(next_spec, "SERIES COMPLETE"),
+        linked(previous, "START OF SEGMENT"),
+        Paragraph(f"YOU ARE HERE<br/>{html.escape(spec['segment_code'])} {spec['segment_position']:02d} - {html.escape(spec['short_title'])}", current_style),
+        linked(next_spec, "SEGMENT COMPLETE"),
     ]]
     table = Table(rows, colWidths=[CONTENT_W * 0.27, CONTENT_W * 0.46, CONTENT_W * 0.27])
     table.setStyle(
@@ -863,7 +889,7 @@ def local_navigation_story(
             ]
         )
     )
-    heading = Paragraph("Study Path Position", styles["h2"])
+    heading = Paragraph(f"{spec['segment_short_title']} Segment Position", styles["h2"])
     heading._heading_level = 2
     heading._bookmark_text = "Contents and Navigation"
     return [heading, table, Spacer(1, 13)]
@@ -988,24 +1014,21 @@ def build_pdf(
 
 def index_markdown(manifest: dict[str, Any]) -> str:
     lines = [
-        "# How to Use the Series",
+        "# Choose Your Learning Segment",
         "",
-        "The website, PDF covers, roadmap pages, bookmarks, and previous/next links form one learning system. When rebuilding fundamentals, begin with Java Foundations (Study Step 01), continue to Time and Space Complexity (02), and then complete Number Systems foundations (03A) and its interview workbook (03B). For targeted revision, begin with the first study step whose readiness checks are not yet automatic.",
+        "This library has three independent starting points: Java Engineering, Data Structures and Algorithms, and System Design and Backend. Choose the segment that matches your immediate goal, then follow its numbered books in order. You can study a second segment in parallel after its prerequisites are comfortable.",
         "",
         "Keep the PDFs together in the same directory so relative links can work in viewers that permit local-file navigation. The printed filenames remain the fallback when a viewer blocks those links.",
         "",
         "## Choose your starting point in 60 seconds",
         "",
-        "> **Start rule:** choose the earliest row that describes a real gap. Do not begin with the most advanced-sounding topic; begin where your explanation or implementation first becomes unreliable.",
+        "> **Start rule:** select one segment first. Inside it, begin with Book 01 unless you can pass that book's readiness checks without notes.",
         "",
-        "| Your current situation | Start here | Continue with |",
+        "| Your goal | Start here | Continue with |",
         "|---|---|---|",
-        "| Never written Java | 01 from Chapter 1 | 02, then 03A and 03B, then 04-17 |",
-        "| Rebuilding from fundamentals | 01 | 02, then 03A and 03B, then 04-17 |",
-        "| Comfortable with Java syntax but weak in DSA | 02 | 03A and 03B, then the first weak step in 04-17 |",
-        "| Strong in DSA but weak in Java internals | 18A | 18B through 18F as needed |",
-        "| Preparing for a Java backend role | 18B and 18D | 18F, then 18H through 18J |",
-        "| Entering final interview revision | 18G | Revisit only the gaps exposed by mocks |",
+        "| Learn or rebuild Java | JAVA 01 - Java Foundations | Continue through the Java segment in order |",
+        "| Build interview problem-solving skill | DSA 01 - Time and Space Complexity | Continue through the DSA segment in order |",
+        "| Prepare for Java backend and design rounds | SD 01 - Backend and Design Foundations | Continue through databases, Spring, messaging, and distributed systems |",
         "",
         "## The learning loop for every volume",
         "",
@@ -1015,44 +1038,35 @@ def index_markdown(manifest: dict[str, Any]) -> str:
         "4. **Explain:** give the complexity, trade-offs, and one production follow-up aloud.",
         "5. **Prove readiness:** pass the completion check before opening the next volume.",
         "",
-        "# Part I - Foundation and DSA Learning Steps",
-        "",
     ]
-    by_stage: dict[str, list[dict[str, Any]]] = {}
-    for volume in learning_volumes(manifest):
-        by_stage.setdefault(str(volume["stage"]), []).append(volume)
-    for item in learning_volumes(manifest):
-        if str(item["stage"]) == "18":
-            continue
+    for part_number, segment in enumerate(manifest["segments"], start=1):
         lines.extend(
             [
-                f"# Study Step {item['path_label']} - {item['title']}",
+                f"# Part {part_number} - {segment['title']}",
                 "",
-                item["purpose"],
-                "",
-                f"Open [{item['output_name']}]({item['output_name']}).",
+                segment["description"],
                 "",
             ]
         )
-    lines.extend(["# Part II - Advanced Java Collection", ""])
-    for item in by_stage["18"]:
-        lines.extend(
-            [
-                f"# Study Step {item['path_label']} - {item['title']}",
-                "",
-                item["purpose"],
-                "",
-                f"Open [{item['output_name']}]({item['output_name']}).",
-                "",
-            ]
-        )
+        for item in segment_volumes(manifest, segment["id"]):
+            status = " - Roadmap Edition" if item.get("publication_status") == "planned" else ""
+            lines.extend(
+                [
+                    f"## {segment['code']} {item['segment_position']:02d} - {item['title']}{status}",
+                    "",
+                    item["purpose"],
+                    "",
+                    f"Open [{item['output_name']}]({item['output_name']}).",
+                    "",
+                ]
+            )
     lines.extend(
         [
-            "# Part III - Recommended Study Rhythm",
+            "# Part IV - Recommended Study Rhythm",
             "",
             "# Build, Practice, Explain, Revisit",
             "",
-            "For each volume, complete one learning pass, one no-notes implementation pass, one spoken explanation pass, and one delayed revision pass. Keep an error log organized by contract, invariant, numeric safety, data-structure choice, complexity, and test coverage. Use the advanced collection only after the algorithmic foundation is stable or when a role requires deeper Java engineering immediately.",
+            "For each volume, complete one learning pass, one no-notes implementation pass, one spoken explanation pass, and one delayed revision pass. Keep an error log organized by contract, invariant, numeric safety, data-structure choice, complexity, and test coverage. A roadmap edition establishes ordering and scope; return as its chapter set expands rather than treating it as finished instruction.",
         ]
     )
     return master.ascii_safe("\n".join(lines).strip() + "\n")
@@ -1066,10 +1080,10 @@ def build_index(manifest: dict[str, Any], fonts: dict[str, str]) -> dict[str, An
         "short_title": "Series Index",
         "subtitle": "A Basics-to-Advanced Navigation Guide",
         "output_name": INDEX_NAME,
-        "volume_label": "Series Index - 18 Steps / 28 Books",
+        "volume_label": "Series Index - 3 Segments / 40 Books",
         "release_date": manifest["release_date"],
-        "cover_deck": "One ordered path through mathematical foundations, DSA patterns, Java engineering, production judgment, and SDE-2 interview practice.",
-        "topic_line": "FOUNDATIONS | DSA | JAVA | JVM | BACKEND | INTERVIEW LOOPS",
+        "cover_deck": "Choose Java, DSA, or System Design and Backend, then follow a clear prerequisite-aware path within the segment.",
+        "topic_line": "JAVA ENGINEERING | DSA | SYSTEM DESIGN AND BACKEND",
         "min_pages": 8,
         "max_pages": 50,
     }
@@ -1093,8 +1107,11 @@ def select_volumes(manifest: dict[str, Any], requested: str | None) -> list[dict
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--volume", help="build one physical volume, such as 01 or 18C")
+    parser.add_argument("--index-only", action="store_true", help="rebuild the index and refresh metadata for existing focused PDFs")
     parser.add_argument("--skip-index", action="store_true")
     args = parser.parse_args()
+    if args.index_only and (args.volume or args.skip_index):
+        parser.error("--index-only cannot be combined with --volume or --skip-index")
 
     manifest = load_manifest()
     BUILD.mkdir(parents=True, exist_ok=True)
@@ -1102,22 +1119,29 @@ def main() -> None:
     TMP.mkdir(parents=True, exist_ok=True)
     fonts = master.register_fonts()
     all_volumes = learning_volumes(manifest)
-    selected = select_volumes(manifest, args.volume)
+    selected = [] if args.index_only else select_volumes(manifest, args.volume)
     results: list[dict[str, Any]] = []
 
     for spec in selected:
-        index = all_volumes.index(spec)
-        previous = all_volumes[index - 1] if index > 0 else None
-        next_spec = all_volumes[index + 1] if index + 1 < len(all_volumes) else None
+        local_volumes = segment_volumes(manifest, spec["segment_id"])
+        index = local_volumes.index(spec)
+        previous = local_volumes[index - 1] if index > 0 else None
+        next_spec = local_volumes[index + 1] if index + 1 < len(local_volumes) else None
         build_dir = BUILD / f"{spec['id']}-{spec['slug']}"
         markdown = assemble_volume(spec, previous, next_spec, build_dir)
         temporary = TMP / f"{spec['output_name']}.tmp.pdf"
         result = build_pdf(spec, manifest, markdown, temporary, fonts)
         final_path = DIST / spec["output_name"]
         shutil.copy2(temporary, final_path)
-        result.update({"id": spec["id"], "stage": spec["stage"], "path_label": spec["path_label"], "book_position": spec["book_position"], "title": spec["title"], "file": spec["output_name"]})
+        result.update({"id": spec["id"], "stage": spec["stage"], "path_label": spec["path_label"], "book_position": spec["book_position"], "segment_id": spec["segment_id"], "segment_code": spec["segment_code"], "segment_position": spec["segment_position"], "publication_status": spec.get("publication_status", "published"), "title": spec["title"], "file": spec["output_name"]})
         results.append(result)
         print(f"{spec['id']}: {final_path} ({result['page_count']} pages)")
+
+    if args.index_only:
+        for spec in all_volumes:
+            result = validate_pdf(DIST / spec["output_name"], spec)
+            result.update({"id": spec["id"], "stage": spec["stage"], "path_label": spec["path_label"], "book_position": spec["book_position"], "segment_id": spec["segment_id"], "segment_code": spec["segment_code"], "segment_position": spec["segment_position"], "publication_status": spec.get("publication_status", "published"), "title": spec["title"], "file": spec["output_name"]})
+            results.append(result)
 
     index_result: dict[str, Any] | None = None
     if not args.skip_index and args.volume is None:
@@ -1134,7 +1158,7 @@ def main() -> None:
         "series": SERIES_TITLE,
         "author": AUTHOR,
         "release_date": manifest["release_date"],
-        "public_stages": 18,
+        "public_segments": len(manifest["segments"]),
         "physical_volumes": len(all_volumes),
         "volumes": [by_id[item["id"]] for item in all_volumes if item["id"] in by_id],
     }

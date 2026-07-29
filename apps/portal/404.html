@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="light" data-theme-mode="system">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+  <script src="assets/theme-manager.js"></script>
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body class="error-page">
@@ -18,17 +19,27 @@
       <span class="brand-mark">S2</span>
       <span class="brand-copy">
         <strong>JAVA / SDE2</strong>
-        <small>ONE STUDY PATH</small>
+        <small>THREE FOCUSED SEGMENTS</small>
       </span>
     </a>
     <nav class="primary-nav" aria-label="Recovery navigation">
       <a href="./">Home</a>
-      <a href="books/">Study path</a>
+      <a href="books/">Choose a segment</a>
       <a href="docs/backend-interview/10-practice/">Practice</a>
       <a href="./#about">About</a>
       <a href="https://github.com/vinayreddykalluri/SDE2-Interview-Handbook">GitHub</a>
     </nav>
-    <a class="header-cta" href="./">Return home</a>
+    <div class="header-actions">
+      <label class="theme-control">
+        <span class="theme-control__label">Theme</span>
+        <select data-theme-selector aria-label="Color theme">
+          <option value="system">System</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </label>
+      <a class="header-cta" href="./">Return home</a>
+    </div>
   </header>
 
   <main class="error-shell">
@@ -36,10 +47,10 @@
       <p class="section-kicker">HTTP / RECOVERY PATH</p>
       <p class="error-code">404</p>
       <h1>Wrong pointer.<br>Clear recovery.</h1>
-      <p>The requested page moved, was renamed, or never existed. Return to the single ordered study path and continue from the correct book.</p>
+      <p>The requested page moved, was renamed, or never existed. Return to the learning library, choose Java, DSA, or System Design, and continue from the correct book.</p>
       <div class="hero-actions">
         <a class="button button-primary" href="./">Return home</a>
-        <a class="button button-secondary" href="books/">Open study path</a>
+        <a class="button button-secondary" href="books/">Choose a segment</a>
       </div>
     </div>
 
@@ -55,11 +66,11 @@
   <footer class="site-footer">
     <a class="brand footer-brand" href="./">
       <span class="brand-mark">S2</span>
-      <span class="brand-copy"><strong>JAVA / SDE2</strong><small>ONE STUDY PATH</small></span>
+      <span class="brand-copy"><strong>JAVA / SDE2</strong><small>THREE FOCUSED SEGMENTS</small></span>
     </a>
     <p>One ordered curriculum. Read on the web or use the matching PDF.</p>
     <nav aria-label="Footer navigation">
-      <a href="books/">Study path</a>
+      <a href="books/">Choose a segment</a>
       <a href="docs/backend-interview/10-practice/">Practice</a>
       <a href="./#about">About</a>
       <a href="https://github.com/vinayreddykalluri/SDE2-Interview-Handbook">GitHub</a>

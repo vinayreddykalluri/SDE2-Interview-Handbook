@@ -25,13 +25,6 @@ ARTIFACT_MANIFEST = DIST / "manifest.json"
 INDEX_NAME = "Java-SDE2-Interview-Preparation-Series-Index.pdf"
 AUTHOR = "Vinay Reddy Kalluri"
 DRAFT_MARKER = re.compile(r"\b(?:TODO|TBD|FIXME|placeholder|lorem ipsum)\b", re.IGNORECASE)
-EXPECTED_PATH_LABELS = [
-    "01", "02", "03A", "03B", "04", "05", "06", "07", "08", "09", "10", "11",
-    "12", "13", "14", "15", "16", "17", "18A", "18B", "18C", "18D", "18E", "18F",
-    "18G", "18H", "18I", "18J",
-]
-
-
 def fail(message: str) -> None:
     raise RuntimeError(message)
 
@@ -86,6 +79,43 @@ def check_markdown(path: Path, require_ascii: bool = False) -> None:
         seen.add(paragraph)
 
 
+def decorate_segments(spec: dict[str, Any]) -> None:
+    by_id = {str(volume["id"]): volume for volume in spec["volumes"]}
+    flattened: list[str] = []
+    for segment in spec.get("segments", []):
+        book_ids = [str(item) for item in segment.get("books", [])]
+        if not book_ids:
+            fail(f"Segment {segment.get('id', '<unknown>')} has no books")
+        flattened.extend(book_ids)
+        for position, volume_id in enumerate(book_ids, start=1):
+            if volume_id not in by_id:
+                fail(f"Segment {segment['id']} contains unknown volume {volume_id}")
+            volume = by_id[volume_id]
+            if "segment_id" in volume:
+                fail(f"Volume {volume_id} appears in multiple segments")
+            volume.update(
+                {
+                    "segment_id": segment["id"],
+                    "segment_title": segment["title"],
+                    "segment_code": segment["code"],
+                    "segment_position": position,
+                    "segment_count": len(book_ids),
+                }
+            )
+    if flattened != [str(item) for item in spec.get("learning_order", [])]:
+        fail("learning_order must equal the segment book lists in order")
+    if len(flattened) != len(by_id) or set(flattened) != set(by_id):
+        fail("Segments must contain every physical volume exactly once")
+    for global_position, volume_id in enumerate(flattened, start=1):
+        volume = by_id[volume_id]
+        volume["book_position"] = global_position
+        volume["path_label"] = str(spec["path_labels"][volume_id])
+        volume["volume_label"] = (
+            f"{volume['segment_title']} - Book {volume['segment_position']:02d} "
+            f"of {volume['segment_count']:02d} - Study Step {volume['path_label']}"
+        )
+
+
 def check_numbering_contract(spec: dict[str, Any]) -> None:
     ids = [str(volume["id"]) for volume in spec["volumes"]]
     learning_order = [str(volume_id) for volume_id in spec.get("learning_order", [])]
@@ -95,17 +125,18 @@ def check_numbering_contract(spec: dict[str, Any]) -> None:
     if set(path_labels) != set(ids):
         fail("path_labels must contain every physical book exactly once")
     actual_labels = [path_labels[volume_id] for volume_id in learning_order]
-    if actual_labels != EXPECTED_PATH_LABELS:
-        fail(f"Public study codes are out of order: {actual_labels}")
     if len(set(actual_labels)) != len(actual_labels):
         fail("Public study codes must be unique")
-    by_id = {str(volume["id"]): volume for volume in spec["volumes"]}
-    for volume_id, label in zip(learning_order, actual_labels):
-        if int(re.match(r"\d+", label).group()) != int(by_id[volume_id]["stage"]):
-            fail(f"Study code {label} disagrees with stage for physical ID {volume_id}")
-        if not str(by_id[volume_id]["volume_label"]).startswith(f"Study Step {label} "):
-            fail(f"Cover label for physical ID {volume_id} does not start with Study Step {label}")
-    print("Numbering: one canonical 28-book path (01, 02, 03A-03B, 04-17, 18A-18J)")
+    segments = spec.get("segments", [])
+    if len(segments) != 3:
+        fail("Series manifest must define exactly three selectable segments")
+    codes = [segment.get("code") for segment in segments]
+    if len(set(codes)) != len(codes):
+        fail("Segment codes must be unique")
+    print(
+        "Segments: "
+        + ", ".join(f"{segment['title']} ({len(segment['books'])} books)" for segment in segments)
+    )
 
 
 def check_sources(spec: dict[str, Any]) -> None:
@@ -275,6 +306,11 @@ def check_pdf(path: Path, volume: dict[str, Any], known_outputs: set[str]) -> di
         fail(f"{volume['id']} cover is missing its canonical study code: {volume['volume_label']}")
     if re.search(r"\bVOLUME\s+\d+\s+OF\s+18\b", cover_text):
         fail(f"{volume['id']} cover still exposes a conflicting legacy volume number")
+    if "BY" not in cover_text or AUTHOR not in cover_text:
+        fail(f"{volume['id']} cover is missing the simple author byline")
+    for legacy_credit in ("FOUNDING AUTHOR", "EDITOR-IN-CHIEF", "CHIEF AUDITOR"):
+        if legacy_credit in cover_text:
+            fail(f"{volume['id']} cover still exposes the legacy credit: {legacy_credit}")
     for required in (
         volume["title"],
         AUTHOR,
@@ -306,9 +342,9 @@ def check_pdf(path: Path, volume: dict[str, Any], known_outputs: set[str]) -> di
         fail(f"{volume['id']} has too few bookmarks: {outlines}")
 
     uris = annotation_uris(reader)
-    stage_entries = {stage["entry_pdf"] for stage in read_json(SERIES_SPEC)["stages"]}
-    if not stage_entries.issubset(uris):
-        missing = sorted(stage_entries - uris)
+    sibling_outputs = {name for name in known_outputs if name != INDEX_NAME}
+    if not sibling_outputs.issubset(uris):
+        missing = sorted(sibling_outputs - uris)
         fail(f"{volume['id']} roadmap is missing sibling links: {missing}")
     for uri in uris:
         if (
@@ -329,9 +365,15 @@ def check_index(path: Path, spec: dict[str, Any], known_outputs: set[str]) -> di
     metadata = reader.metadata or {}
     if metadata.get("/Author") != AUTHOR:
         fail("Series index has incorrect author metadata")
-    text = normalized("\n".join((page.extract_text() or "") for page in reader.pages))
+    page_texts = [page.extract_text() or "" for page in reader.pages]
+    text = normalized("\n".join(page_texts))
+    cover_text = normalized(page_texts[0])
+    if "BY" not in cover_text or AUTHOR not in cover_text:
+        fail("Series index cover is missing the simple author byline")
+    for legacy_credit in ("FOUNDING AUTHOR", "EDITOR-IN-CHIEF", "CHIEF AUDITOR"):
+        if legacy_credit in cover_text:
+            fail(f"Series index cover still exposes the legacy credit: {legacy_credit}")
     for required_publication_text in (
-        "EDITOR-IN-CHIEF | CHIEF AUDITOR",
         "CC BY 4.0",
         "AUTHORS.md",
     ):
@@ -340,15 +382,17 @@ def check_index(path: Path, spec: dict[str, Any], known_outputs: set[str]) -> di
                 "Series index is missing public authorship/licensing text: "
                 f"{required_publication_text}"
             )
-    for label in EXPECTED_PATH_LABELS:
-        if f"Study Step {label}" not in text:
-            fail(f"Series index is missing Study Step {label}")
+    for segment in spec["segments"]:
+        if segment["title"] not in text:
+            fail(f"Series index is missing segment {segment['title']}")
+        for position in range(1, len(segment["books"]) + 1):
+            if f"{segment['code']} {position:02d}" not in text:
+                fail(f"Series index is missing {segment['code']} {position:02d}")
     for required in (
         "Java SDE-2 Interview Preparation Series Index",
         "About the Author",
         "Series Roadmap",
         "Contents",
-        "EDITOR-IN-CHIEF | CHIEF AUDITOR",
         "CC BY 4.0",
         "AUTHORS.md",
     ):
@@ -396,6 +440,9 @@ def check_artifacts(spec: dict[str, Any]) -> None:
         expected_label = str(spec["path_labels"][volume_id])
         if expected.get("path_label") != expected_label or expected.get("book_position") != position:
             fail(f"Artifact manifest has incorrect study position for {volume_id}")
+        for key in ("segment_id", "segment_code", "segment_position"):
+            if expected.get(key) != volume.get(key):
+                fail(f"Artifact manifest has incorrect {key} for {volume_id}")
         for key in ("page_count", "sha256", "bytes"):
             if expected.get(key) != actual[key]:
                 fail(f"Artifact manifest mismatch for {volume['id']} field {key}")
@@ -458,6 +505,8 @@ def run_series_native_java_validation(spec: dict[str, Any]) -> None:
 
     for volume in spec["volumes"]:
         volume_id = str(volume["id"])
+        if volume.get("publication_status") == "planned":
+            continue
         native_sources = [
             source
             for source in volume["sources"]
@@ -541,11 +590,10 @@ def main() -> None:
     args = parser.parse_args()
 
     spec = read_json(SERIES_SPEC)
+    decorate_segments(spec)
     check_numbering_contract(spec)
-    if len(spec.get("stages", [])) != 18:
-        fail("Series manifest must define 18 public stages")
-    if len(spec.get("volumes", [])) < 18:
-        fail("Series manifest must define at least one physical volume per public stage")
+    if len(spec.get("volumes", [])) != 40:
+        fail("Series manifest must define the complete 40-book segmented catalog")
     check_sources(spec)
     run_java_validation()
     run_series_native_java_validation(spec)

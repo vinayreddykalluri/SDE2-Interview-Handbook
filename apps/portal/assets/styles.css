@@ -63,9 +63,9 @@ body {
 
 body::selection { background: var(--signal); color: #112022; }
 a { color: inherit; text-decoration: none; }
-button, input { color: inherit; font: inherit; }
+button, input, select { color: inherit; font: inherit; }
 button { cursor: pointer; }
-button, a, input, summary { -webkit-tap-highlight-color: transparent; }
+button, a, input, select, summary { -webkit-tap-highlight-color: transparent; }
 :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
 
 .page-grid {
@@ -182,6 +182,47 @@ button, a, input, summary { -webkit-tap-highlight-color: transparent; }
 .header-cta { display: inline-grid; place-items: center; border-color: var(--ink); background: var(--ink); color: var(--paper-raised); }
 .header-cta:hover { border-color: var(--blue); background: var(--blue); }
 .menu-toggle { display: none; }
+
+.theme-control {
+  position: relative;
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding-left: 11px;
+  border: 1px solid var(--line-strong);
+  background: color-mix(in srgb, var(--paper-raised) 70%, transparent);
+  font: 600 0.58rem var(--mono);
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+.theme-control:hover { background: var(--paper-deep); }
+.theme-control:focus-within { outline: 3px solid var(--blue); outline-offset: 3px; }
+
+.theme-control::after {
+  margin-right: 9px;
+  color: var(--blue);
+  content: "\25BE";
+  pointer-events: none;
+}
+
+.theme-control__label { color: var(--ink-soft); }
+
+.theme-control select {
+  min-height: 36px;
+  max-width: 6.4rem;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.theme-control option { background: var(--paper-raised); color: var(--ink); text-transform: none; }
 
 .hero {
   display: grid;
@@ -336,7 +377,7 @@ button, a, input, summary { -webkit-tap-highlight-color: transparent; }
 
 .book-start-path {
   display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   margin: 0;
   padding: 0;
   border-top: 1px solid rgba(255, 250, 240, 0.34);
@@ -718,7 +759,7 @@ noscript { display: block; padding: 18px; border-top: 1px solid var(--line-stron
 @media (max-width: 1160px) {
   .site-header { gap: 18px; }
   .primary-nav { gap: 16px; }
-  .header-cta, .theme-toggle { display: none; }
+  .header-cta, .search-trigger { display: none; }
   .hero { grid-template-columns: 1fr 0.8fr; gap: 45px; }
   .method-flow { grid-template-columns: repeat(3, 1fr); }
   .method-flow li { border-bottom: 1px solid var(--line); }
@@ -729,7 +770,7 @@ noscript { display: block; padding: 18px; border-top: 1px solid var(--line-stron
   .round-card:nth-child(-n + 2) { border-bottom: 1px solid var(--line); }
   .practice-board a { grid-template-columns: 90px 0.8fr 1fr; }
   .practice-board strong { grid-column: 2 / -1; }
-  .book-start-path { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .book-start-path { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 @media (max-width: 900px) {
@@ -783,6 +824,9 @@ noscript { display: block; padding: 18px; border-top: 1px solid var(--line-stron
 @media (max-width: 620px) {
   body { font-size: 16px; }
   .brand-copy small { display: none; }
+  .theme-control { gap: 4px; padding-left: 9px; }
+  .theme-control__label { display: none; }
+  .theme-control select { max-width: 5rem; }
   .hero-meta { display: grid; }
   .hero-actions, .journey-footer, .clone-command { align-items: stretch; flex-direction: column; }
   .hero h1 { font-size: clamp(3.7rem, 19vw, 5.4rem); }

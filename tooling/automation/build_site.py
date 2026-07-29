@@ -93,10 +93,13 @@ def main() -> int:
         SITE_OUTPUT / "index.html",
         SITE_OUTPUT / "assets" / "styles.css",
         SITE_OUTPUT / "assets" / "app.js",
+        SITE_OUTPUT / "assets" / "theme-manager.js",
         SITE_OUTPUT / "content" / "coding-foundations.json",
         SITE_OUTPUT / "content" / "books.json",
         DOCS_OUTPUT / "index.html",
+        DOCS_OUTPUT / "assets" / "javascripts" / "theme-manager.js",
         BOOKS_OUTPUT / "index.html",
+        BOOKS_OUTPUT / "assets" / "theme-manager.js",
         BOOKS_OUTPUT / "manifest.json",
         EXAMPLES_OUTPUT
         / "java"

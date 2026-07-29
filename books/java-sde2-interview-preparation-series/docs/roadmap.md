@@ -1,65 +1,87 @@
 # Java SDE-2 Interview Preparation Series Roadmap
 
-## Purpose
+## Choose a segment first
 
-This series turns the comprehensive Java master guide into a sequence that is easier to finish, print, revise, and revisit. One set of public Study Step codes identifies the learning order on the web and in every PDF; stable technical IDs remain only inside published filenames.
+The library has three independent learning segments. Select the skill area you need now, begin with Book 01 in that segment, and continue in order. Existing stable filenames and URLs are preserved; the reader-facing codes `JAVA`, `DSA`, and `SD` make the intended order clear.
 
-The learning roadmap has 18 steps. Number Systems is packaged as a core foundation plus an interview workbook, and the advanced step is packaged as ten physical PDFs so the material remains focused, including three backend specialist volumes. The complete release therefore contains 28 topic PDFs plus one series-index PDF.
+| Segment | Start | Books | Primary outcome |
+|---|---|---:|---|
+| Java Engineering | JAVA 01 | 9 | Language fluency, developer tooling, runtime depth, concurrency, performance, and Java interview readiness |
+| Data Structures and Algorithms | DSA 01 | 17 | Complexity reasoning, implementation patterns, data structures, algorithms, and coding-round fluency |
+| System Design and Backend | SD 01 | 14 | Backend boundaries, databases, Spring, messaging, caching, distributed systems, and architecture judgment |
 
-## Ordered study path
+`Roadmap edition` means the PDF is published now to establish scope, prerequisites, chapter order, interview outcomes, and completion criteria. Its full chapters, examples, exercises, and validation will be added one book at a time.
 
-| Study Step | Focus | Stable PDF filename |
-|---:|---|---|
-| 01 | Java Foundations for Problem Solving | `Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf` |
-| 02 | Time and Space Complexity | `Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf` |
-| 3A | Number Systems and Math Foundations for DSA Interviews | `Java-SDE2-DSA-01-Number-Systems-and-Math-Foundations.pdf` |
-| 3B | Number Systems Interview Patterns and Rapid Revision | `Java-SDE2-DSA-01B-Number-Systems-Interview-Workbook.pdf` |
-| 04 | Bit Manipulation in Java | `Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf` |
-| 05 | Loop Mastery, Patterns, and Index Calculations | `Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf` |
-| 06 | Arrays and Array Problem-Solving Patterns | `Java-SDE2-DSA-06-Arrays-and-Array-Patterns.pdf` |
-| 07 | Strings and String Problem-Solving Patterns | `Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf` |
-| 08 | Hashing: Maps, Sets, Frequency, and Prefix State | `Java-SDE2-DSA-08-Hashing-Maps-Sets-and-Prefix-State.pdf` |
-| 09 | Recursion and Backtracking | `Java-SDE2-DSA-09-Recursion-and-Backtracking.pdf` |
-| 10 | Linked Lists | `Java-SDE2-DSA-10-Linked-Lists.pdf` |
-| 11 | Stacks, Queues, Deques, and Monotonic Patterns | `Java-SDE2-DSA-11-Stacks-Queues-Deques-and-Monotonic-Patterns.pdf` |
-| 12 | Binary Search | `Java-SDE2-DSA-12-Binary-Search.pdf` |
-| 13 | Trees, Binary Search Trees, and Tries | `Java-SDE2-DSA-13-Trees-BSTs-and-Tries.pdf` |
-| 14 | Heaps, Priority Queues, Selection, and Top-K | `Java-SDE2-DSA-14-Heaps-Priority-Queues-and-Top-K.pdf` |
-| 15 | Graphs | `Java-SDE2-DSA-15-Graphs.pdf` |
-| 16 | Greedy Algorithms | `Java-SDE2-DSA-16-Greedy-Algorithms.pdf` |
-| 17 | Dynamic Programming | `Java-SDE2-DSA-17-Dynamic-Programming.pdf` |
-| 18A | JVM and Execution | `Java-SDE2-ADV-18A-JVM-and-Execution.pdf` |
-| 18B | Language, OOP, and Modern Java | `Java-SDE2-ADV-18B-Language-OOP-and-Modern-Java.pdf` |
-| 18C | Collections, Streams, and I/O | `Java-SDE2-ADV-18C-Collections-Streams-and-IO.pdf` |
-| 18D | Concurrency and the Memory Model | `Java-SDE2-ADV-18D-Concurrency-and-Memory-Model.pdf` |
-| 18E | Performance, Diagnostics, and GC Incidents | `Java-SDE2-ADV-18E-Performance-Diagnostics-and-GC.pdf` |
-| 18F | Design, Backend, Testing, and Security | `Java-SDE2-ADV-18F-Design-Backend-Testing-and-Security.pdf` |
-| 18G | Question Bank, Study Plan, and Reference | `Java-SDE2-ADV-18G-Question-Bank-Study-Plan-and-Reference.pdf` |
-| 18H | Spring Boot and REST APIs | `Java-SDE2-ADV-18H-Spring-Boot-and-REST.pdf` |
-| 18I | Persistence, SQL, JPA, and Caching | `Java-SDE2-ADV-18I-Persistence-SQL-and-Caching.pdf` |
-| 18J | Distributed Systems and System Design | `Java-SDE2-ADV-18J-Distributed-Systems-and-System-Design.pdf` |
+## Java Engineering
 
-## How to choose a starting point
+| Book | Focus | Edition | Stable PDF filename |
+|---:|---|---|---|
+| JAVA 01 | Java Foundations for Problem Solving | Full | `Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf` |
+| JAVA 02 | Git and GitHub | Roadmap | `Java-SDE2-JAVA-02-Git-and-GitHub.pdf` |
+| JAVA 03 | Maven and Gradle | Roadmap | `Java-SDE2-JAVA-03-Maven-and-Gradle.pdf` |
+| JAVA 04 | Language, OOP, and Modern Java | Full | `Java-SDE2-ADV-18B-Language-OOP-and-Modern-Java.pdf` |
+| JAVA 05 | Collections, Streams, and I/O | Full | `Java-SDE2-ADV-18C-Collections-Streams-and-IO.pdf` |
+| JAVA 06 | JVM and Execution | Full | `Java-SDE2-ADV-18A-JVM-and-Execution.pdf` |
+| JAVA 07 | Concurrency and the Memory Model | Full | `Java-SDE2-ADV-18D-Concurrency-and-Memory-Model.pdf` |
+| JAVA 08 | Performance, Diagnostics, and GC Incidents | Full | `Java-SDE2-ADV-18E-Performance-Diagnostics-and-GC.pdf` |
+| JAVA 09 | Question Bank, Study Plan, and Reference | Full | `Java-SDE2-ADV-18G-Question-Bank-Study-Plan-and-Reference.pdf` |
 
-When rebuilding from basics, start with Java Foundations Study Step 01, continue to Time and Space Complexity Study Step 02, then complete Number Systems foundations (03A) and its interview workbook (03B). The same public codes appear on the website and PDF covers; technical filename IDs remain unchanged only to protect published links. For targeted revision, scan each book's recognition signals and completion check, then enter at the first study step where the answers are not yet automatic. Complete Number Systems before Bit Manipulation when signed binary, powers of two, numeric limits, or overflow still cause hesitation.
+## Data Structures and Algorithms
 
-Study Step 18 is a capstone rather than a prerequisite for every DSA problem. Use 18A-18D for Java-depth interviews, 18E for performance-oriented roles, 18F for framework-neutral backend design, and 18G for core mixed revision. Use 18H-18J as the backend specialist track for Spring REST services, SQL/JPA/caching, Kafka, distributed systems, resilience, observability, and system design; then revisit the 18G mock loops with those deeper cases.
+| Book | Focus | Edition | Stable PDF filename |
+|---:|---|---|---|
+| DSA 01 | Time and Space Complexity | Full | `Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf` |
+| DSA 02 | Number Systems and Math Foundations | Full | `Java-SDE2-DSA-01-Number-Systems-and-Math-Foundations.pdf` |
+| DSA 03 | Number Systems Interview Workbook | Full | `Java-SDE2-DSA-01B-Number-Systems-Interview-Workbook.pdf` |
+| DSA 04 | Bit Manipulation | Full | `Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf` |
+| DSA 05 | Loop Mastery and Index Calculations | Full | `Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf` |
+| DSA 06 | Arrays and Array Patterns | Full | `Java-SDE2-DSA-06-Arrays-and-Array-Patterns.pdf` |
+| DSA 07 | Strings and String Patterns | Full | `Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf` |
+| DSA 08 | Hashing, Maps, Sets, and Prefix State | Full | `Java-SDE2-DSA-08-Hashing-Maps-Sets-and-Prefix-State.pdf` |
+| DSA 09 | Recursion and Backtracking | Full | `Java-SDE2-DSA-09-Recursion-and-Backtracking.pdf` |
+| DSA 10 | Linked Lists | Full | `Java-SDE2-DSA-10-Linked-Lists.pdf` |
+| DSA 11 | Stacks, Queues, Deques, and Monotonic Patterns | Full | `Java-SDE2-DSA-11-Stacks-Queues-Deques-and-Monotonic-Patterns.pdf` |
+| DSA 12 | Binary Search | Full | `Java-SDE2-DSA-12-Binary-Search.pdf` |
+| DSA 13 | Trees, BSTs, and Tries | Full | `Java-SDE2-DSA-13-Trees-BSTs-and-Tries.pdf` |
+| DSA 14 | Heaps, Priority Queues, and Top-K | Full | `Java-SDE2-DSA-14-Heaps-Priority-Queues-and-Top-K.pdf` |
+| DSA 15 | Graphs | Full | `Java-SDE2-DSA-15-Graphs.pdf` |
+| DSA 16 | Greedy Algorithms | Full | `Java-SDE2-DSA-16-Greedy-Algorithms.pdf` |
+| DSA 17 | Dynamic Programming | Full | `Java-SDE2-DSA-17-Dynamic-Programming.pdf` |
+
+## System Design and Backend
+
+| Book | Focus | Edition | Stable PDF filename |
+|---:|---|---|---|
+| SD 01 | Design, Backend, Testing, and Security Foundations | Full | `Java-SDE2-ADV-18F-Design-Backend-Testing-and-Security.pdf` |
+| SD 02 | MySQL | Roadmap | `Java-SDE2-SD-02-MySQL.pdf` |
+| SD 03 | Hibernate and JPA | Roadmap | `Java-SDE2-SD-03-Hibernate-and-JPA.pdf` |
+| SD 04 | Spring Framework | Roadmap | `Java-SDE2-SD-04-Spring-Framework.pdf` |
+| SD 05 | Spring Boot | Roadmap | `Java-SDE2-SD-05-Spring-Boot.pdf` |
+| SD 06 | Spring Data | Roadmap | `Java-SDE2-SD-06-Spring-Data.pdf` |
+| SD 07 | MongoDB | Roadmap | `Java-SDE2-SD-07-MongoDB.pdf` |
+| SD 08 | Redis | Roadmap | `Java-SDE2-SD-08-Redis.pdf` |
+| SD 09 | Apache Kafka and Spring Kafka | Roadmap | `Java-SDE2-SD-09-Apache-Kafka-and-Spring-Kafka.pdf` |
+| SD 10 | Spring Ecosystem Extensions | Roadmap | `Java-SDE2-SD-10-Spring-Ecosystem-Extensions.pdf` |
+| SD 11 | Spring AI | Roadmap | `Java-SDE2-SD-11-Spring-AI.pdf` |
+| SD 12 | Spring Boot and REST APIs Deep Dive | Full | `Java-SDE2-ADV-18H-Spring-Boot-and-REST.pdf` |
+| SD 13 | Persistence, SQL, JPA, and Caching Deep Dive | Full | `Java-SDE2-ADV-18I-Persistence-SQL-and-Caching.pdf` |
+| SD 14 | Distributed Systems and System Design | Full | `Java-SDE2-ADV-18J-Distributed-Systems-and-System-Design.pdf` |
+
+The Spring Ecosystem Extensions roadmap reserves explicit coverage for Spring Security, Spring Cloud, Spring WebFlux, Spring Batch, Spring Integration, Actuator/observability, and Spring testing. This captures major Spring areas without forcing every specialization into the prerequisite chain.
 
 ## Navigation contract
 
 - Keep the PDFs together in `dist/` so relative links can work in compatible viewers.
 - Use `Java-SDE2-Interview-Preparation-Series-Index.pdf` as the durable entry point.
-- Each topic PDF repeats the complete 28-book path and highlights its current Study Step.
-- Each topic PDF has local bookmarks and a local table of contents.
-- Previous and next filenames are printed even when a viewer blocks local-file links.
-- `dist/manifest.json` records page counts and SHA-256 hashes for artifact verification.
+- Every PDF lists all three segments and highlights the current book.
+- Previous and next links stay inside the current segment.
+- Local bookmarks and the table of contents navigate chapters inside a PDF.
+- `dist/manifest.json` records segment positions, page counts, byte sizes, and SHA-256 hashes.
 
-## Build
-
-From the independent book folder:
+## Build and validate
 
 ```bash
 python3 scripts/build_series.py
+python3 scripts/validate_series.py
+python3 scripts/organize_pdf_library.py --check
 ```
-
-No Git operation is part of the authoring, build, validation, or release workflow for this series.

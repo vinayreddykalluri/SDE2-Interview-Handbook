@@ -1,5 +1,5 @@
 site_name: Java SDE2 Topic Reference
-site_description: Supporting Java and backend reference material for the ordered Java SDE-2 web and PDF study path.
+site_description: Supporting reference material for the Java, DSA, and System Design segments in the Java SDE-2 web and PDF learning library.
 site_author: Vinay Reddy Kalluri and contributors
 site_url: https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/docs/
 repo_url: https://github.com/vinayreddykalluri/SDE2-Interview-Handbook
@@ -210,20 +210,9 @@ theme:
     - content.tabs.link
     - content.footnote
   palette:
-    - media: '(prefers-color-scheme: light)'
-      scheme: default
-      primary: slate
-      accent: amber
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-    - media: '(prefers-color-scheme: dark)'
-      scheme: slate
-      primary: black
-      accent: amber
-      toggle:
-        icon: material/brightness-4
-        name: Switch to light mode
+    scheme: default
+    primary: slate
+    accent: amber
   font:
     text: Source Serif 4
     code: IBM Plex Mono

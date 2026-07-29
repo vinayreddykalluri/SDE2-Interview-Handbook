@@ -1,7 +1,7 @@
 const BOOKS_URL = "content/books.json";
-const THEME_KEY = "sde2-study-path-theme";
 
 let books = [];
+let segments = [];
 let bookRelease = null;
 let searchIndex = [];
 let activeSearchResult = -1;
@@ -18,7 +18,6 @@ const seriesIndexLink = document.querySelector("#series-index-link");
 const footerPdfIndex = document.querySelector("#footer-pdf-index");
 const primaryNav = document.querySelector("#primary-nav");
 const menuButton = document.querySelector(".menu-toggle");
-const themeButton = document.querySelector(".theme-toggle");
 const searchDialog = document.querySelector("#search-dialog");
 const globalSearch = document.querySelector("#global-search");
 const searchResults = document.querySelector("#search-results");
@@ -36,6 +35,8 @@ function bookSearchText(book) {
     book.id,
     book.step,
     book.pathLabel,
+    book.segmentCode,
+    book.segmentTitle,
     book.track,
     book.title,
     book.shortTitle,
@@ -51,20 +52,16 @@ function formatCount(value) {
   return Number(value || 0).toLocaleString("en-US");
 }
 
-function buildFoundationPath() {
-  const foundationBooks = books.filter(function (book) {
-    return Number(book.bookPosition) <= 8;
-  });
-
+function buildSegmentPath() {
   bookStartPath.replaceChildren();
-  foundationBooks.forEach(function (book) {
+  segments.forEach(function (segment) {
     const item = createElement("li", "book-path-step");
     const link = createElement("a");
-    link.href = book.fullBookHref;
+    link.href = segment.startHref;
     link.append(
-      createElement("span", "", book.pathLabel),
-      createElement("strong", "", book.shortTitle),
-      createElement("small", "", "Continue on the web")
+      createElement("span", "", segment.code + " / " + segment.bookCount + " BOOKS"),
+      createElement("strong", "", segment.title),
+      createElement("small", "", "Start with " + segment.code + " 01")
     );
     item.append(link);
     bookStartPath.append(item);
@@ -79,13 +76,16 @@ function buildBookCard(book) {
 
   const meta = createElement("div", "book-card-meta");
   meta.append(
-    createElement("span", "book-step", "STUDY STEP " + book.pathLabel),
-    createElement("span", "book-pages", "BOOK " + book.bookPosition + " OF " + books.length + " · " + book.pageCount + " PDF PAGES")
+    createElement("span", "book-step", book.segmentCode),
+    createElement("span", "book-pages", "BOOK " + book.segmentPosition + " OF " + book.segmentBookCount + " · " + book.pageCount + " PDF PAGES")
   );
 
   const title = createElement("h3", "", book.shortTitle);
   const subtitle = createElement("p", "book-subtitle", book.subtitle);
-  const track = createElement("p", "book-track", book.track);
+  const trackLabel = book.publicationStatus === "planned"
+    ? book.track + " · ROADMAP EDITION"
+    : book.track + " · FULL EDITION";
+  const track = createElement("p", "book-track", trackLabel);
   const purpose = createElement("p", "book-purpose", book.purpose);
   const webStats = createElement(
     "p",
@@ -96,7 +96,7 @@ function buildBookCard(book) {
   );
 
   const contents = createElement("details", "book-contents");
-  const contentsSummary = createElement("summary", "", "Preview this step");
+  const contentsSummary = createElement("summary", "", "Preview this book");
   const contentsBody = createElement("div", "book-contents-body");
   const chapterList = createElement("ol", "book-chapter-preview");
   (book.chapterPreview || []).forEach(function (chapter) {
@@ -124,7 +124,7 @@ function buildBookCard(book) {
   contents.append(contentsSummary, contentsBody);
 
   const actions = createElement("div", "book-card-actions");
-  const read = createElement("a", "button button-primary", "Continue on web");
+  const read = createElement("a", "button button-primary", book.publicationStatus === "planned" ? "Open roadmap" : "Continue on web");
   read.href = book.fullBookHref;
   read.setAttribute("aria-label", "Continue with " + book.shortTitle + " on the web");
   const download = createElement("a", "button button-secondary", "Download PDF");
@@ -155,8 +155,8 @@ function renderBooks() {
 
   const filtered = query || activeBookFilter !== "all";
   bookSummary.textContent = filtered
-    ? matches.length + " of " + books.length + " ordered books match the current filter."
-    : books.length + " books in one learning order. Continue on the web or download the matching PDF; both formats follow the same curriculum.";
+    ? matches.length + " of " + books.length + " books match the current segment or search."
+    : books.length + " books across three segments. Choose Java, DSA, or System Design, then follow its book order.";
 }
 
 function selectBookFilter(filter) {
@@ -171,8 +171,10 @@ function selectBookFilter(filter) {
 
 function buildSearchIndex() {
   const fixedDestinations = [
-    { type: "Path", label: "Complete Java SDE-2 study path", note: "Follow all books in beginner-first order", href: "books/" },
-    { type: "Start", label: "Java Problem-Solving Foundations", note: "Begin Study Step 01 on the web", href: "books/01-java-foundations-for-problem-solving/" },
+    { type: "Library", label: "Complete Java SDE-2 learning library", note: "Choose Java, DSA, or System Design", href: "books/" },
+    { type: "Java", label: "Java Engineering", note: "Begin JAVA 01 with language foundations", href: "books/01-java-foundations-for-problem-solving/" },
+    { type: "DSA", label: "Data Structures and Algorithms", note: "Begin DSA 01 with complexity", href: "books/02-time-and-space-complexity/" },
+    { type: "System Design", label: "System Design and Backend", note: "Begin SD 01 with backend and design foundations", href: "books/18f-design-backend-testing-and-security/" },
     { type: "Practice", label: "Interview practice", note: "Use question banks, mocks, rubrics, and review logs", href: "docs/backend-interview/10-practice/" },
     { type: "Reference", label: "Topic reference", note: "Look up a concise explanation without changing the study order", href: "docs/" },
     { type: "About", label: "About the curriculum", note: "Understand the web, PDF, and open-source publishing model", href: "#about" },
@@ -181,7 +183,7 @@ function buildSearchIndex() {
 
   const bookEntries = books.map(function (book) {
     return {
-      type: "Study Step " + book.pathLabel,
+      type: book.segmentCode,
       label: book.shortTitle,
       note: formatCount(book.webDocumentCount) + " web chapters · " + formatCount(book.codeExampleCount) + " code entries · PDF included",
       href: book.fullBookHref,
@@ -254,37 +256,16 @@ function showToast(message) {
   }, 1800);
 }
 
-function applyTheme(theme) {
-  document.documentElement.dataset.theme = theme;
-  themeButton.textContent = theme === "dark" ? "Light" : "Dark";
-  themeButton.setAttribute("aria-label", "Switch to " + (theme === "dark" ? "light" : "dark") + " theme");
-  try {
-    localStorage.setItem(THEME_KEY, theme);
-  } catch {
-    // Theme persistence is optional.
-  }
-}
-
-function initializeTheme() {
-  let storedTheme = null;
-  try {
-    storedTheme = localStorage.getItem(THEME_KEY);
-  } catch {
-    // Use system preference.
-  }
-  const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  applyTheme(storedTheme || systemTheme);
-}
-
 async function initializeBooks() {
   try {
     const response = await fetch(BOOKS_URL);
     if (!response.ok) throw new Error("Book catalog request failed with " + response.status);
     const catalog = await response.json();
-    if (!catalog || !Array.isArray(catalog.books) || !catalog.release) {
+    if (!catalog || !Array.isArray(catalog.books) || !Array.isArray(catalog.segments) || !catalog.release) {
       throw new Error("Book catalog has an invalid shape");
     }
     books = catalog.books;
+    segments = catalog.segments;
     bookRelease = catalog.release;
     bookReleaseLink.href = bookRelease.url;
     masterBookLink.href = bookRelease.master.pdfHref;
@@ -296,7 +277,7 @@ async function initializeBooks() {
       formatCount(books.reduce(function (total, book) { return total + Number(book.webDocumentCount || 0); }, 0)) + " chapters";
     document.querySelector("[data-book-stat='code']").textContent =
       formatCount(books.reduce(function (total, book) { return total + Number(book.codeExampleCount || 0); }, 0)) + " code entries";
-    buildFoundationPath();
+    buildSegmentPath();
     renderBooks();
     buildSearchIndex();
   } catch (error) {
@@ -328,10 +309,6 @@ primaryNav.addEventListener("click", function () {
   primaryNav.classList.remove("is-open");
   menuButton.setAttribute("aria-expanded", "false");
   menuButton.textContent = "Menu";
-});
-
-themeButton.addEventListener("click", function () {
-  applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
 });
 
 document.querySelectorAll(".search-trigger").forEach(function (button) {
@@ -400,6 +377,5 @@ window.addEventListener("scroll", function () {
   window.requestAnimationFrame(updateActiveNavigation);
 }, { passive: true });
 
-initializeTheme();
 initializeBooks();
 updateActiveNavigation();

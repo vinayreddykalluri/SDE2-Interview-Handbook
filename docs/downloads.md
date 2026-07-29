@@ -10,7 +10,7 @@ If you are deciding what to read next, use the [interactive catalog](https://vin
 
 The canonical published files are also versioned under [`books/java-sde2-interview-preparation-series/`](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series).
 
-Start with Java Foundations, then Time and Space Complexity, Number Systems, Bit Manipulation, Loop Mastery, Arrays, and Strings before continuing to the remaining DSA modules. The [individual-PDF reading order](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/dist/00-START-HERE.md) groups all 30 PDFs without changing their stable release filenames.
+Choose Java Engineering, Data Structures and Algorithms, or System Design and Backend, then follow the books inside that segment in order. The [individual-PDF reading order](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/dist/00-START-HERE.md) groups all 42 PDFs without changing stable release filenames.
 
 ## Build locally
 
