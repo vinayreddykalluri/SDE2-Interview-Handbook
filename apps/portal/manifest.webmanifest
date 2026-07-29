@@ -1,7 +1,7 @@
 {
-  "name": "S2 Java + SDE2 Learning Library",
-  "short_name": "S2 Learning",
-  "description": "One Java and SDE-2 curriculum across complete books, a searchable handbook, code, practice, and PDFs.",
+  "name": "Java SDE-2 Study Path",
+  "short_name": "Java SDE2",
+  "description": "One ordered Java SDE-2 curriculum available as complete web books and matching PDFs.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

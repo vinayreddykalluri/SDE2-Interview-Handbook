@@ -1,13 +1,12 @@
-# Java + SDE2 Searchable Handbook
+# Java SDE-2 Topic Reference
 
-This is the concise lookup surface of the S2 Java + SDE2 Learning Library. It connects Java and JVM mechanics, algorithm invariants, production trade-offs, communication strategy, and deliberate practice without replacing the complete web books.
+This concise reference supports the ordered Java SDE-2 study path. Use it to look up a focused explanation or practice artifact, then return to the current web book. It is not a second curriculum.
 
-<a class="md-button md-button--primary" href="../books/03-java-foundations-for-problem-solving/">Start Java Foundations</a>
-<a class="md-button" href="../books/">Browse complete books</a>
-<a class="md-button" href="../#journey">Follow the study path</a>
+<a class="md-button md-button--primary" href="../books/">Return to the study path</a>
+<a class="md-button" href="../books/03-java-foundations-for-problem-solving/">Start Java Foundations</a>
 [Open practice](backend-interview/10-practice/index.md){ .md-button }
 
-## Choose your path
+## Use this reference without leaving the path
 
 | If you need to... | Start here |
 | --- | --- |
@@ -19,7 +18,7 @@ This is the concise lookup surface of the S2 Java + SDE2 Learning Library. It co
 | print or annotate offline | Downloads and Printing |
 | study through individually navigable Java/DSA books | Published Java SDE-2 Book Series |
 
-## The complete learning sequence
+## Curriculum phases
 
 | Stage | Modules | Outcome |
 | --- | --- | --- |

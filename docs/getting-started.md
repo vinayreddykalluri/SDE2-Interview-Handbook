@@ -1,18 +1,18 @@
-# Getting Started
+# Follow One Study Path
 
-The project has one curriculum presented through four connected surfaces. The global navigation uses the same names everywhere, so changing depth does not change the learning order.
+The project has one ordered curriculum presented in two formats: a complete web book for active learning and the matching PDF for offline study. The topic reference and practice pages support that curriculum; they do not create another route.
 
-| What you need | Open | Use it for |
+| What you need | Use | What to do |
 |---|---|---|
-| a complete explanation | <a href="../../books/">Books</a> | canonical chapters, diagrams, exercises, solutions, code indexes, and PDF downloads |
-| an ordered preparation sequence | <a href="../../#journey">Study path</a> | deciding what to study next and tracking readiness |
-| a concise lookup surface | [Handbook](index.md) | search, focused reference, and quick revision |
-| timed interview work | [Practice](backend-interview/10-practice/index.md) | question banks, scoring rubrics, review logs, and reassessment |
+| active learning | <a href="../../books/">Web study path</a> | follow the numbered books, run examples, complete exercises, and open solutions |
+| offline reading or revision | PDF link inside the current web book | annotate or review the same content without changing sequence |
+| a quick clarification | [Topic reference](index.md) | look up the concept, then return to the current book |
+| evidence of readiness | [Practice](backend-interview/10-practice/index.md) | run a timed prompt after completing the relevant material |
 
 ## Fastest route for readers
 
 1. If Java basics are not dependable, open the <a href="../../books/03-java-foundations-for-problem-solving/">Java Foundations book</a>.
-2. Otherwise, use the <a href="../../#journey">Study path</a> to locate your next gap.
+2. Otherwise, open the <a href="../../books/">study path</a> and continue with the next numbered book whose prerequisites are dependable.
 3. Read the numbered chapter and redraw its main diagram from memory.
 4. Open the linked Java source and identify its invariant, boundary conditions, and complexity.
 5. Reimplement the example without looking.
@@ -44,7 +44,7 @@ make install
 make serve-web
 ```
 
-Open `http://127.0.0.1:8000`. The complete book library is under `/books/`, and the concise handbook is under `/docs/`. Search, navigation, syntax highlighting, Mermaid diagrams, and print styles work in the local site.
+Open `http://127.0.0.1:8000`. The ordered web study path is under `/books/`, and its supporting topic reference is under `/docs/`. Search, navigation, syntax highlighting, Mermaid diagrams, and print styles work in the local site.
 
 ## Validate a contribution
 

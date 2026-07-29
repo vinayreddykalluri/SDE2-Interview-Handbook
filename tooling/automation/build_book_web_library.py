@@ -376,26 +376,26 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
         f"| {index} | [{book['title']}]({book['slug']}/index.md) | {book['documents']} | {book['code_examples']} | {book['page_count']} | [PDF]({book['pdf']}) |"
         for index, book in enumerate(built_books, start=1)
     )
-    library_page = f"""# Java + SDE2 Complete Book Library
+    library_page = f"""# Java SDE-2 Study Path
 
-This library renders the complete canonical book Markdown as searchable web chapters. It contains **{len(built_books)} focused books**, **{total_documents} source documents**, and **{total_code_examples} indexed code entries**. Nothing here is a separate prose copy: rebuilding the site reads the same Markdown and Java files used by the PDFs.
+Follow these **{len(built_books)} focused books** in order. Every step is available as a complete web book and a matching PDF; they are two formats of the same curriculum, not separate learning paths. The web books contain **{total_documents} chapters** and **{total_code_examples} indexed code entries** generated from the canonical sources used by the PDFs.
 
 !!! tip "Recommended start"
     Begin with Java Foundations, then Time and Space Complexity, Number Systems, Bit Manipulation, Loop Mastery, Arrays, and Strings. Open advanced material only after its prerequisites are dependable.
 
 <div class="library-route-grid">
-  <a href="03-java-foundations-for-problem-solving/"><strong>New to Java?</strong><span>Start the first complete book</span></a>
-  <a href="../#journey"><strong>Need a study plan?</strong><span>Follow the ordered SDE-2 path</span></a>
-  <a href="../docs/"><strong>Need a quick answer?</strong><span>Search the concise handbook</span></a>
+  <a href="03-java-foundations-for-problem-solving/"><strong>01 · Learn</strong><span>Start Java Foundations on the web</span></a>
+  <a href="{pdf_url('Java-SDE2-Interview-Preparation-Series-Index.pdf')}"><strong>02 · Revise</strong><span>Open the matching PDF index</span></a>
+  <a href="../docs/backend-interview/10-practice/"><strong>03 · Prove</strong><span>Practice after completing the lesson</span></a>
 </div>
 
-| Step | Full web book | Documents | Code | PDF pages | Offline |
+| Step | Continue on the web | Chapters | Code | PDF pages | Offline |
 |---:|---|---:|---:|---:|---|
 {library_rows}
 """
     (staging_docs / "index.md").write_text(library_page, encoding="utf-8")
 
-    nav = [{"Library": "index.md"}]
+    nav = [{"Study Path": "index.md"}]
     for name in ("Programming Foundations", "Data Structures & Algorithms", "Advanced Java & Backend"):
         nav.append({name: nav_groups[name]})
     return built_books, nav, total_documents, total_code_examples
@@ -403,7 +403,7 @@ This library renders the complete canonical book Markdown as searchable web chap
 
 def write_config(path: Path, docs_dir: Path, nav: list[Any]) -> None:
     config: dict[str, Any] = {
-        "site_name": "S2 Complete Books",
+        "site_name": "Java SDE2 Study Path",
         "site_description": "Complete Java SDE-2 books rendered from canonical Markdown with code, exercises, solutions, and PDF downloads.",
         "site_author": "Vinay Reddy Kalluri and contributors",
         "site_url": f"{PRODUCTION_ROOT}/books/",

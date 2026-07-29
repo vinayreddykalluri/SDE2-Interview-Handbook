@@ -95,6 +95,17 @@ button, a, input, summary { -webkit-tap-highlight-color: transparent; }
 }
 
 .skip-link:focus { transform: translateY(0); }
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
 .shell { width: var(--shell); margin-inline: auto; }
 
 .site-header {
@@ -284,7 +295,7 @@ button, a, input, summary { -webkit-tap-highlight-color: transparent; }
 
 .reading-formats {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   margin-bottom: 34px;
   border-top: 1px solid var(--line-strong);
   border-left: 1px solid var(--line-strong);

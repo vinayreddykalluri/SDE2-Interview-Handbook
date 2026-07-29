@@ -9,19 +9,17 @@
 
 {% block announce %}
   <div class="field-announcement">
-    <span>S2 / JAVA + SDE2 LEARNING LIBRARY</span>
-    <nav aria-label="Global learning destinations">
+    <span>S2 / JAVA SDE2 STUDY PATH</span>
+    <nav aria-label="Global study navigation">
       <a href="{{ base_url }}/../">Home</a>
       {% if surface == 'books' %}
-        <a href="{{ base_url }}/" aria-current="page">Books</a>
-        <a href="{{ base_url }}/../#journey">Study path</a>
-        <a href="{{ base_url }}/../docs/">Handbook</a>
+        <a href="{{ base_url }}/" aria-current="page">Study path</a>
         <a href="{{ base_url }}/../docs/backend-interview/10-practice/">Practice</a>
+        <a href="{{ base_url }}/../#about">About</a>
       {% else %}
-        <a href="{{ base_url }}/../books/">Books</a>
-        <a href="{{ base_url }}/../#journey">Study path</a>
-        <a href="{{ base_url }}/" aria-current="page">Handbook</a>
+        <a href="{{ base_url }}/../books/">Study path</a>
         <a href="{{ 'backend-interview/10-practice/' | url }}">Practice</a>
+        <a href="{{ base_url }}/../#about">About</a>
       {% endif %}
       <a href="https://github.com/vinayreddykalluri/SDE2-Interview-Handbook">GitHub</a>
     </nav>
@@ -35,31 +33,31 @@
     <div class="field-pagebar__current">
       <span class="field-pagebar__route">
         {% if '01-programming-problem-solving' in current_url %}
-          STAGE 01 / PROGRAMMING AND PROBLEM SOLVING
+          REFERENCE / PROGRAMMING AND PROBLEM SOLVING
         {% elif '02-low-level-design' in current_url %}
-          STAGE 02 / LOW-LEVEL DESIGN
+          REFERENCE / LOW-LEVEL DESIGN
         {% elif '03-high-level-system-design' in current_url %}
-          STAGE 03 / HIGH-LEVEL SYSTEM DESIGN
+          REFERENCE / HIGH-LEVEL SYSTEM DESIGN
         {% elif '04-api-service-design' in current_url %}
-          STAGE 04 / API AND SERVICE DESIGN
+          REFERENCE / API AND SERVICE DESIGN
         {% elif '05-data-storage' in current_url %}
-          STAGE 05 / DATA AND STORAGE
+          REFERENCE / DATA AND STORAGE
         {% elif '06-distributed-systems' in current_url %}
-          STAGE 06 / DISTRIBUTED SYSTEMS
+          REFERENCE / DISTRIBUTED SYSTEMS
         {% elif '07-production-engineering' in current_url %}
-          STAGE 07 / PRODUCTION ENGINEERING
+          REFERENCE / PRODUCTION ENGINEERING
         {% elif '08-cloud-platform' in current_url %}
-          STAGE 08 / CLOUD AND PLATFORM
+          REFERENCE / CLOUD AND PLATFORM
         {% elif '09-leadership-behavioral' in current_url %}
-          STAGE 09 / LEADERSHIP AND BEHAVIORAL
+          REFERENCE / LEADERSHIP AND BEHAVIORAL
         {% elif '10-practice' in current_url %}
-          STAGE 10 / PRACTICE AND ASSESSMENT
+          PRACTICE / ASSESSMENT
         {% elif 'volume-' in current_url %}
           CODING FOUNDATIONS / CONCEPT LIBRARY
         {% elif 'community/' in current_url %}
           PROJECT / OPEN SOURCE
         {% else %}
-          S2 HANDBOOK / QUICK REFERENCE
+          STUDY PATH / TOPIC REFERENCE
         {% endif %}
       </span>
       <strong>{{ page.title if page else config.site_name }}</strong>

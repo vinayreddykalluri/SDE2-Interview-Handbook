@@ -1,18 +1,12 @@
-const JOURNEY_URL = "content/interview-path.json";
 const BOOKS_URL = "content/books.json";
-const PROGRESS_KEY = "sde2-interview-journey-progress-v1";
-const THEME_KEY = "sde2-handbook-theme";
+const THEME_KEY = "sde2-study-path-theme";
 
-let stages = [];
 let books = [];
 let bookRelease = null;
-let completedStages = new Set(loadStoredArray(PROGRESS_KEY));
 let searchIndex = [];
 let activeSearchResult = -1;
-let allStagesExpanded = false;
 let activeBookFilter = "all";
 
-const stageList = document.querySelector("#stage-list");
 const bookList = document.querySelector("#book-grid");
 const bookSearch = document.querySelector("#book-search");
 const bookSummary = document.querySelector("#book-library-summary");
@@ -21,13 +15,7 @@ const bookFilterButtons = document.querySelectorAll("[data-book-filter]");
 const bookReleaseLink = document.querySelector("#book-release-link");
 const masterBookLink = document.querySelector("#master-book-link");
 const seriesIndexLink = document.querySelector("#series-index-link");
-const journeySearch = document.querySelector("#journey-search");
-const completedCount = document.querySelector("#completed-count");
-const stageCount = document.querySelector("#stage-count");
-const progressFill = document.querySelector("#progress-fill");
-const continueButton = document.querySelector("#continue-stage");
-const expandButton = document.querySelector("#expand-stages");
-const resetButton = document.querySelector("#reset-progress");
+const footerPdfIndex = document.querySelector("#footer-pdf-index");
 const primaryNav = document.querySelector("#primary-nav");
 const menuButton = document.querySelector(".menu-toggle");
 const themeButton = document.querySelector(".theme-toggle");
@@ -36,45 +24,11 @@ const globalSearch = document.querySelector("#global-search");
 const searchResults = document.querySelector("#search-results");
 const toast = document.querySelector("#toast");
 
-function loadStoredArray(key) {
-  try {
-    const value = JSON.parse(localStorage.getItem(key) || "[]");
-    return Array.isArray(value) ? value : [];
-  } catch {
-    return [];
-  }
-}
-
 function createElement(tag, className, text) {
   const element = document.createElement(tag);
   if (className) element.className = className;
   if (text !== undefined) element.textContent = text;
   return element;
-}
-
-function persistProgress() {
-  try {
-    localStorage.setItem(PROGRESS_KEY, JSON.stringify(Array.from(completedStages)));
-  } catch {
-    showToast("Progress could not be saved");
-  }
-}
-
-function stageSearchText(stage) {
-  return [
-    stage.id,
-    stage.phase,
-    stage.category,
-    stage.title,
-    stage.summary,
-    stage.outcome
-  ].concat(
-    stage.tasks,
-    stage.topics,
-    stage.resources.flatMap(function (resource) {
-      return [resource.label, resource.note, resource.type];
-    })
-  ).join(" ").toLowerCase();
 }
 
 function bookSearchText(book) {
@@ -109,7 +63,7 @@ function buildFoundationPath() {
     link.append(
       createElement("span", "", String(book.step).padStart(2, "0")),
       createElement("strong", "", book.shortTitle),
-      createElement("small", "", "Open full book")
+      createElement("small", "", "Continue on the web")
     );
     item.append(link);
     bookStartPath.append(item);
@@ -125,53 +79,29 @@ function buildBookCard(book) {
   const meta = createElement("div", "book-card-meta");
   meta.append(
     createElement("span", "book-step", "STEP " + book.step),
-    createElement("span", "book-pages", book.pageCount + " pages")
+    createElement("span", "book-pages", book.pageCount + " PDF pages")
   );
 
   const title = createElement("h3", "", book.shortTitle);
   const subtitle = createElement("p", "book-subtitle", book.subtitle);
-  const track = createElement("p", "book-track", book.track + " / PDF " + book.id);
+  const track = createElement("p", "book-track", book.track);
   const purpose = createElement("p", "book-purpose", book.purpose);
   const webStats = createElement(
     "p",
     "book-web-stats",
-    formatCount(book.webDocumentCount) + " web documents · " +
+    formatCount(book.webDocumentCount) + " web chapters · " +
       formatCount(book.wordCount) + " words · " +
       formatCount(book.codeExampleCount) + " code entries"
   );
 
   const contents = createElement("details", "book-contents");
-  const contentsSummary = createElement(
-    "summary",
-    "",
-    "Explore the complete contents"
-  );
+  const contentsSummary = createElement("summary", "", "Preview this step");
   const contentsBody = createElement("div", "book-contents-body");
   const chapterList = createElement("ol", "book-chapter-preview");
   (book.chapterPreview || []).forEach(function (chapter) {
-    const item = createElement("li");
-    const link = createElement("a", "", chapter.title);
-    link.href = chapter.sourceHref;
-    item.append(link);
-    chapterList.append(item);
+    chapterList.append(createElement("li", "", chapter.title));
   });
-  const sourceNotes = createElement("div", "book-source-notes");
-  if (book.sourceChapterCount > (book.chapterPreview || []).length) {
-    sourceNotes.append(createElement(
-      "p",
-      "",
-      "+ " + (book.sourceChapterCount - book.chapterPreview.length) + " more in the canonical source"
-    ));
-  }
-  if (book.supportingSourceCount > 0) {
-    sourceNotes.append(createElement(
-      "p",
-      "",
-      "+ " + book.supportingSourceCount + " supporting practice or solution source" + (book.supportingSourceCount === 1 ? "" : "s")
-    ));
-  }
   contentsBody.append(chapterList);
-  if (sourceNotes.childElementCount) contentsBody.append(sourceNotes);
 
   if ((book.outcomes || []).length) {
     contentsBody.append(createElement("strong", "book-outcomes-title", "You will be able to"));
@@ -182,31 +112,25 @@ function buildBookCard(book) {
     contentsBody.append(outcomes);
   }
 
-  if ((book.webReads || []).length) {
-    const related = createElement("div", "book-related-reading");
-    related.append(createElement("strong", "", "Quick lesson path"));
-    book.webReads.forEach(function (webRead) {
-      const link = createElement("a", "", webRead.label + " →");
-      link.href = webRead.href;
-      related.append(link);
-    });
-    contentsBody.append(related);
-  }
-
+  const supporting = createElement("div", "book-related-reading");
+  supporting.append(createElement("strong", "", "Included with the web book"));
+  const codeLink = createElement("a", "", "Open the code index →");
+  codeLink.href = book.codeHref;
+  const sourceLink = createElement("a", "", "Review or contribute to the source →");
+  sourceLink.href = book.sourceHref;
+  supporting.append(codeLink, sourceLink);
+  contentsBody.append(supporting);
   contents.append(contentsSummary, contentsBody);
+
   const actions = createElement("div", "book-card-actions");
-  const read = createElement("a", "button button-primary", "Read full book");
+  const read = createElement("a", "button button-primary", "Continue on web");
   read.href = book.fullBookHref;
-  read.setAttribute("aria-label", "Read the complete " + book.shortTitle + " book on the web");
-  const code = createElement("a", "button button-secondary", "Browse code");
-  code.href = book.codeHref;
-  code.setAttribute("aria-label", "Browse code examples for " + book.shortTitle);
+  read.setAttribute("aria-label", "Continue with " + book.shortTitle + " on the web");
   const download = createElement("a", "button button-secondary", "Download PDF");
   download.href = book.pdfHref;
   download.setAttribute("aria-label", "Download " + book.shortTitle + " PDF, " + book.pageCount + " pages");
-  const source = createElement("a", "text-link", "Source Markdown");
-  source.href = book.sourceHref;
-  actions.append(read, code, download, source);
+  actions.append(read, download);
+
   article.append(meta, track, title, subtitle, purpose, webStats, contents, actions);
   return article;
 }
@@ -221,18 +145,17 @@ function renderBooks() {
 
   bookList.replaceChildren();
   if (!matches.length) {
-    bookList.append(createElement("div", "empty-state", "No published book matches that search."));
+    bookList.append(createElement("div", "empty-state", "No study-path book matches that search."));
   } else {
     matches.forEach(function (book) {
       bookList.append(buildBookCard(book));
     });
   }
 
-  const total = books.length;
   const filtered = query || activeBookFilter !== "all";
   bookSummary.textContent = filtered
-    ? matches.length + " of " + total + " focused books match the current search and track."
-    : total + " focused books in learning order. Read every canonical chapter on the web, browse its Java code, download the PDF, or inspect the source Markdown.";
+    ? matches.length + " of " + books.length + " ordered books match the current filter."
+    : books.length + " books in one learning order. Continue on the web or download the matching PDF; both formats follow the same curriculum.";
 }
 
 function selectBookFilter(filter) {
@@ -245,231 +168,27 @@ function selectBookFilter(filter) {
   renderBooks();
 }
 
-function buildStageCard(stage, index, firstIncomplete) {
-  const isComplete = completedStages.has(stage.id);
-  const details = createElement("details", "stage-card");
-  details.id = "stage-" + stage.id;
-  details.dataset.stageId = stage.id;
-  details.dataset.stageSearch = stageSearchText(stage);
-  details.style.animationDelay = Math.min(index * 30, 240) + "ms";
-  details.open = stage.id === firstIncomplete || (!firstIncomplete && index === 0);
-
-  const summary = createElement("summary");
-  summary.append(createElement("span", "stage-index", stage.id));
-
-  const summaryCopy = createElement("span", "stage-summary-copy");
-  summaryCopy.append(
-    createElement("span", "stage-kicker", stage.phase + " / " + stage.category),
-    createElement("strong", "stage-title", stage.title)
-  );
-
-  const status = createElement("span", "stage-status" + (isComplete ? " is-complete" : ""), isComplete ? "Complete" : "Ready to start");
-  status.dataset.stageStatus = stage.id;
-
-  summary.append(
-    summaryCopy,
-    createElement("span", "stage-duration", stage.duration),
-    status,
-    createElement("span", "stage-toggle-icon", "+")
-  );
-
-  const content = createElement("div", "stage-content");
-
-  const outcome = createElement("div", "stage-outcome");
-  outcome.append(
-    createElement("h3", "", "Exit outcome"),
-    createElement("p", "", stage.outcome),
-    createElement("p", "stage-summary", stage.summary)
-  );
-
-  const checklistBlock = createElement("div");
-  checklistBlock.append(createElement("h3", "", "Preparation checklist"));
-  const checklist = createElement("ol", "stage-checklist");
-  stage.tasks.forEach(function (task) {
-    checklist.append(createElement("li", "", task));
-  });
-  checklistBlock.append(checklist);
-
-  const topics = createElement("div", "stage-topics");
-  topics.setAttribute("aria-label", "Topics covered");
-  stage.topics.forEach(function (topic) {
-    topics.append(createElement("span", "", topic));
-  });
-
-  const resources = createElement("div", "stage-resources");
-  stage.resources.forEach(function (resource) {
-    const link = createElement("a", "stage-resource");
-    link.href = resource.href;
-    link.append(
-      createElement("span", "", resource.type),
-      createElement("strong", "", resource.label),
-      createElement("small", "", resource.note)
-    );
-    resources.append(link);
-  });
-
-  const completionLabel = createElement("label", "stage-complete-control");
-  const checkbox = createElement("input");
-  checkbox.type = "checkbox";
-  checkbox.dataset.completeStage = stage.id;
-  checkbox.checked = isComplete;
-  completionLabel.append(checkbox, document.createTextNode(" I can produce the exit outcome without notes"));
-
-  content.append(outcome, checklistBlock, topics, resources, completionLabel);
-  details.append(summary, content);
-  return details;
-}
-
-function renderStages() {
-  stageList.replaceChildren();
-
-  if (!stages.length) {
-    stageList.append(createElement("div", "empty-state", "No journey stages are available."));
-    return;
-  }
-
-  const firstIncompleteStage = stages.find(function (stage) {
-    return !completedStages.has(stage.id);
-  });
-  const firstIncomplete = firstIncompleteStage ? firstIncompleteStage.id : null;
-
-  stages.forEach(function (stage, index) {
-    stageList.append(buildStageCard(stage, index, firstIncomplete));
-  });
-
-  updateProgress();
-  applyJourneyFilter();
-}
-
-function updateProgress() {
-  const validIds = new Set(stages.map(function (stage) { return stage.id; }));
-  completedStages = new Set(Array.from(completedStages).filter(function (id) {
-    return validIds.has(id);
-  }));
-
-  const complete = completedStages.size;
-  const total = stages.length || 1;
-  completedCount.textContent = String(complete);
-  stageCount.textContent = String(stages.length);
-  progressFill.style.width = Math.round((complete / total) * 100) + "%";
-
-  document.querySelectorAll("[data-stage-status]").forEach(function (element) {
-    const isComplete = completedStages.has(element.dataset.stageStatus);
-    element.textContent = isComplete ? "Complete" : "Ready to start";
-    element.classList.toggle("is-complete", isComplete);
-  });
-
-  continueButton.textContent = complete === stages.length ? "Review from start" : "Continue next";
-}
-
-function setStageCompletion(stageId, checked) {
-  if (checked) {
-    completedStages.add(stageId);
-  } else {
-    completedStages.delete(stageId);
-  }
-  persistProgress();
-  updateProgress();
-  showToast(checked ? "Stage marked complete" : "Stage reopened");
-}
-
-function applyJourneyFilter() {
-  const query = (journeySearch.value || "").trim().toLowerCase();
-  let visibleCount = 0;
-
-  document.querySelectorAll(".stage-card").forEach(function (card) {
-    const matches = !query || card.dataset.stageSearch.includes(query);
-    card.hidden = !matches;
-    if (matches) {
-      visibleCount += 1;
-      if (query) card.open = true;
-    }
-  });
-
-  const existingEmpty = stageList.querySelector(".empty-state.filter-empty");
-  if (!visibleCount && !existingEmpty) {
-    const empty = createElement("div", "empty-state filter-empty", "No stage matches that search.");
-    stageList.append(empty);
-  } else if (visibleCount && existingEmpty) {
-    existingEmpty.remove();
-  }
-}
-
-function findStageCard(stageId) {
-  return Array.from(document.querySelectorAll(".stage-card")).find(function (card) {
-    return card.dataset.stageId === stageId;
-  });
-}
-
-function openStage(stageId) {
-  journeySearch.value = "";
-  applyJourneyFilter();
-  const card = findStageCard(stageId);
-  if (!card) return;
-  card.open = true;
-  card.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
-function continueJourney() {
-  const next = stages.find(function (stage) {
-    return !completedStages.has(stage.id);
-  }) || stages[0];
-  if (next) openStage(next.id);
-}
-
-function toggleAllStages() {
-  allStagesExpanded = !allStagesExpanded;
-  document.querySelectorAll(".stage-card:not([hidden])").forEach(function (card) {
-    card.open = allStagesExpanded;
-  });
-  expandButton.textContent = allStagesExpanded ? "Collapse all" : "Expand all";
-}
-
 function buildSearchIndex() {
   const fixedDestinations = [
-    { type: "Books", label: "Complete book library", note: "Read all 28 canonical books with code and PDF downloads", href: "books/" },
-    { type: "Path", label: "Ordered study path", note: "Choose the next topic and track interview readiness", href: "#journey" },
-    { type: "Handbook", label: "Searchable handbook", note: "Use the concise reference and revision surface", href: "docs/" },
-    { type: "Practice", label: "Practice and assessment", note: "Run question banks, mocks, and scored reviews", href: "docs/backend-interview/10-practice/" },
-    { type: "Start", label: "Readiness matrix", note: "Assess current interview readiness", href: "docs/backend-interview/readiness-matrix/" },
-    { type: "Plan", label: "12-week roadmap", note: "Follow the complete preparation schedule", href: "docs/backend-interview/roadmap/" },
-    { type: "Review", label: "Structured revision system", note: "Retain material through repeated recall", href: "docs/backend-interview/revision-system/" },
-    { type: "Code", label: "Java code and implementation indexes", note: "Browse code embedded across all complete web books", href: "books/" }
+    { type: "Path", label: "Complete Java SDE-2 study path", note: "Follow all books in beginner-first order", href: "books/" },
+    { type: "Start", label: "Java Problem-Solving Foundations", note: "Begin step 01 on the web", href: "books/03-java-foundations-for-problem-solving/" },
+    { type: "Practice", label: "Interview practice", note: "Use question banks, mocks, rubrics, and review logs", href: "docs/backend-interview/10-practice/" },
+    { type: "Reference", label: "Topic reference", note: "Look up a concise explanation without changing the study order", href: "docs/" },
+    { type: "About", label: "About the curriculum", note: "Understand the web, PDF, and open-source publishing model", href: "#about" },
+    { type: "Code", label: "Java implementation indexes", note: "Open code from the relevant web book", href: "books/" }
   ];
-
-  const stageEntries = [];
-  stages.forEach(function (stage) {
-    stageEntries.push({
-      type: "Stage " + stage.id,
-      label: stage.title,
-      note: stage.outcome,
-      href: "#stage-" + stage.id,
-      stageId: stage.id,
-      keywords: stageSearchText(stage)
-    });
-
-    stage.resources.forEach(function (resource) {
-      stageEntries.push({
-        type: resource.type,
-        label: resource.label,
-        note: resource.note,
-        href: resource.href,
-        keywords: stage.title + " " + stage.category + " " + stage.topics.join(" ")
-      });
-    });
-  });
 
   const bookEntries = books.map(function (book) {
     return {
-      type: "Book " + book.id,
+      type: "Step " + book.step,
       label: book.shortTitle,
-      note: "Learning step " + book.step + " · " + formatCount(book.webDocumentCount) + " web documents · " + formatCount(book.codeExampleCount) + " code entries",
+      note: formatCount(book.webDocumentCount) + " web chapters · " + formatCount(book.codeExampleCount) + " code entries · PDF included",
       href: book.fullBookHref,
       keywords: bookSearchText(book)
     };
   });
 
-  searchIndex = fixedDestinations.concat(bookEntries, stageEntries);
+  searchIndex = fixedDestinations.concat(bookEntries);
 }
 
 function matchedSearchResults(query) {
@@ -486,7 +205,7 @@ function renderGlobalSearch() {
   searchResults.replaceChildren();
 
   if (!matches.length) {
-    searchResults.append(createElement("div", "empty-state", "No matching stage or resource."));
+    searchResults.append(createElement("div", "empty-state", "No matching book or topic."));
     return;
   }
 
@@ -494,7 +213,6 @@ function renderGlobalSearch() {
     const result = createElement("a", "search-result" + (index === activeSearchResult ? " is-active" : ""));
     result.href = item.href;
     result.dataset.searchPosition = String(index);
-    if (item.stageId) result.dataset.openStage = item.stageId;
     result.append(
       createElement("span", "", item.type),
       createElement("strong", "", item.label),
@@ -557,26 +275,6 @@ function initializeTheme() {
   applyTheme(storedTheme || systemTheme);
 }
 
-async function initializeJourney() {
-  try {
-    const response = await fetch(JOURNEY_URL);
-    if (!response.ok) throw new Error("Journey request failed with " + response.status);
-    stages = await response.json();
-    if (!Array.isArray(stages)) throw new Error("Journey data must be an array");
-    renderStages();
-    buildSearchIndex();
-    document.querySelector("[data-stat='stages']").textContent = stages.length + " steps";
-  } catch (error) {
-    const fallback = createElement("div", "empty-state");
-    fallback.append(
-      document.createTextNode("The journey map could not load. "),
-      Object.assign(createElement("a", "", "Open the Backend SDE-2 handbook."), { href: "docs/backend-interview/" })
-    );
-    stageList.replaceChildren(fallback);
-    console.error(error);
-  }
-}
-
 async function initializeBooks() {
   try {
     const response = await fetch(BOOKS_URL);
@@ -590,9 +288,11 @@ async function initializeBooks() {
     bookReleaseLink.href = bookRelease.url;
     masterBookLink.href = bookRelease.master.pdfHref;
     seriesIndexLink.href = bookRelease.index.pdfHref;
+    footerPdfIndex.href = bookRelease.index.pdfHref;
+    document.querySelector("[data-book-stat='books']").textContent = books.length + " books";
     document.querySelector("[data-book-stat='pdfs']").textContent = bookRelease.totalPdfCount + " PDFs";
     document.querySelector("[data-book-stat='documents']").textContent =
-      formatCount(books.reduce(function (total, book) { return total + Number(book.webDocumentCount || 0); }, 0)) + " documents";
+      formatCount(books.reduce(function (total, book) { return total + Number(book.webDocumentCount || 0); }, 0)) + " chapters";
     document.querySelector("[data-book-stat='code']").textContent =
       formatCount(books.reduce(function (total, book) { return total + Number(book.codeExampleCount || 0); }, 0)) + " code entries";
     buildFoundationPath();
@@ -601,38 +301,20 @@ async function initializeBooks() {
   } catch (error) {
     const fallback = createElement("div", "empty-state");
     fallback.append(
-      document.createTextNode("The book catalog could not load. "),
-      Object.assign(createElement("a", "", "Open the latest GitHub release."), {
-        href: "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest"
-      })
+      document.createTextNode("The study-path catalog could not load. "),
+      Object.assign(createElement("a", "", "Open the complete web path."), { href: "books/" })
     );
     bookList.replaceChildren(fallback);
-    bookSummary.textContent = "The web catalog is temporarily unavailable.";
+    bookSummary.textContent = "The catalog is temporarily unavailable.";
     console.error(error);
   }
 }
 
-stageList.addEventListener("change", function (event) {
-  const checkbox = event.target.closest("[data-complete-stage]");
-  if (checkbox) setStageCompletion(checkbox.dataset.completeStage, checkbox.checked);
-});
-
-journeySearch.addEventListener("input", applyJourneyFilter);
 bookSearch.addEventListener("input", renderBooks);
 bookFilterButtons.forEach(function (button) {
   button.addEventListener("click", function () {
     selectBookFilter(button.dataset.bookFilter || "all");
   });
-});
-continueButton.addEventListener("click", continueJourney);
-expandButton.addEventListener("click", toggleAllStages);
-
-resetButton.addEventListener("click", function () {
-  if (!window.confirm("Reset all locally stored journey progress?")) return;
-  completedStages.clear();
-  persistProgress();
-  renderStages();
-  showToast("Progress reset");
 });
 
 menuButton.addEventListener("click", function () {
@@ -672,14 +354,6 @@ globalSearch.addEventListener("keydown", function (event) {
   }
 });
 
-searchResults.addEventListener("click", function (event) {
-  const result = event.target.closest("[data-open-stage]");
-  if (!result) return;
-  event.preventDefault();
-  closeSearch();
-  openStage(result.dataset.openStage);
-});
-
 document.addEventListener("keydown", function (event) {
   if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
     event.preventDefault();
@@ -700,28 +374,31 @@ document.querySelectorAll("[data-copy]").forEach(function (button) {
   });
 });
 
-const observedSections = Array.from(document.querySelectorAll("main section[id]"));
 const sectionLinks = Array.from(primaryNav.querySelectorAll('a[href^="#"]'));
+const trackedSections = sectionLinks.map(function (link) {
+  return document.querySelector(link.getAttribute("href"));
+}).filter(Boolean);
+let navUpdateScheduled = false;
 
-if ("IntersectionObserver" in window) {
-  const sectionObserver = new IntersectionObserver(function (entries) {
-    const visible = entries.filter(function (entry) {
-      return entry.isIntersecting;
-    }).sort(function (a, b) {
-      return b.intersectionRatio - a.intersectionRatio;
-    })[0];
-
-    if (!visible) return;
-    sectionLinks.forEach(function (link) {
-      link.classList.toggle("is-active", link.getAttribute("href") === "#" + visible.target.id);
-    });
-  }, { rootMargin: "-25% 0px -60%", threshold: [0.1, 0.4] });
-
-  observedSections.forEach(function (section) {
-    sectionObserver.observe(section);
+function updateActiveNavigation() {
+  const headerHeight = document.querySelector(".site-header").offsetHeight;
+  const probe = window.scrollY + headerHeight + (window.innerHeight * 0.18);
+  let activeId = trackedSections[0] ? trackedSections[0].id : "";
+  trackedSections.forEach(function (section) {
+    if (section.offsetTop <= probe) activeId = section.id;
   });
+  sectionLinks.forEach(function (link) {
+    link.classList.toggle("is-active", link.getAttribute("href") === "#" + activeId);
+  });
+  navUpdateScheduled = false;
 }
 
+window.addEventListener("scroll", function () {
+  if (navUpdateScheduled) return;
+  navUpdateScheduled = true;
+  window.requestAnimationFrame(updateActiveNavigation);
+}, { passive: true });
+
 initializeTheme();
-initializeJourney();
 initializeBooks();
+updateActiveNavigation();
