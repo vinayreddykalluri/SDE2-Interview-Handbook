@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-07-29 - Git and GitHub publication edition
+
+- Replaced the 10-page JAVA 02 roadmap with 17 prerequisite-ordered chapters and a dependency-free Java 21 companion.
+- Added local-state and graph foundations, Java pull-request review, conflict and reflog recovery, GitHub governance, Maven/Gradle Actions, supply-chain security, releases, scale workflows, and 16 production incident playbooks.
+- Added 14 realistic interview dialogues, 146 structured practice tasks, seven executable Git repository scenarios, and selected reasoning solutions.
+- Rebuilt the stable PDF as a visually inspected 127-page publication edition and synchronized 17 web chapters, source links, code, and download metadata.
+- Added content audit, topic coverage, content changelog, scenario-validation, and build evidence reports.
+
+## 2026-07-29 - DSA 08-17 publication-depth expansion
+
+- Added prerequisite-first foundation chapters to Hashing, Recursion, Linked Lists, Stacks/Queues/Deques, Binary Search, Trees, Heaps, Graphs, Greedy, and Dynamic Programming.
+- Added 30 original interview-room simulations with clarification dialogue, baseline reasoning, optimized Java, invariants or dry runs, complexity, tests, and follow-up answers.
+- Added 153 focused practice prompts, separated reasoning solutions, and ten dependency-free Java companions with 41 executable checks.
+- Rebuilt the ten canonical PDFs from 284 to 406 pages and synchronized their source counts, code indexes, downloads, and chapter navigation with the web library.
+- Completed a second publication audit of DSA 08-17, adding ten essential-pattern clinics, 15 practice/solution pairs, and 30 validated runtime assertions; the affected set now totals 455 pages.
+- Added consolidated audit, coverage, changelog, validation, and build evidence for the expansion.
+
 ## 2026-07-29 - Three learning segments and backend roadmap editions
 
 - Reorganized the reader experience into Java Engineering (9 books), Data Structures and Algorithms (17 books), and System Design and Backend (14 books).

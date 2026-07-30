@@ -13,7 +13,7 @@ This is the canonical book workspace inside the consolidated [SDE2 Interview Han
 
 ## Read or download
 
-The library contains 40 focused books (2,098 pages), one 17-page series index, and one 616-page master book: 42 PDFs and 2,731 pages in total. Twelve clearly marked roadmap editions establish the sequence and intended depth for topics that will be expanded one by one.
+The library contains 40 focused books (2,386 pages), one 17-page series index, and one 616-page master book: 42 PDFs and 3,019 pages in total. Eleven clearly marked roadmap editions establish the sequence and intended depth for topics that will be expanded one by one. JAVA 02 - Git and GitHub is now a 127-page publication edition with executable labs and interview simulations.
 
 - [Download the complete release](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest)
 - [Open the series index](dist/Java-SDE2-Interview-Preparation-Series-Index.pdf)

@@ -1,6 +1,6 @@
 # Book Contribution Backlog
 
-The strongest beginner route is already published: Java Foundations, Time and Space Complexity, Number Systems, Bit Manipulation, Loop Mastery, Arrays, and Strings. Strings is the completed reference for how an SDE-1 foundation should progress into SDE-2 patterns. The next community priority is to expand focused DSA volumes 08-17 into the same layered, publication-depth learning experience.
+The prerequisite-first DSA route is now published from Java Foundations through Dynamic Programming. Volumes 08-17 now include a foundations-first chapter, the established SDE-2 pattern chapter, realistic interview-room rounds with model answers, a focused practice lab, separated reasoning solutions, and a compiling Java companion. The issues below remain the best place to report accuracy problems or claim a bounded follow-up such as a diagram, additional adversarial test, accessibility repair, or deeper exercise set.
 
 [Open the contributor roadmap](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/27){ .md-button .md-button--primary }
 [Read the contribution guide](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/.github/CONTRIBUTING.md){ .md-button }
@@ -10,16 +10,16 @@ The strongest beginner route is already published: Java Foundations, Time and Sp
 | Volume | Module | Issue |
 |---:|---|---|
 | 07 | Strings and String Patterns - completed reference | [#16](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/16) |
-| 08 | Hashing, Maps, Sets, and Prefix State | [#17](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/17) |
-| 09 | Recursion and Backtracking | [#18](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/18) |
-| 10 | Linked Lists | [#19](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/19) |
-| 11 | Stacks, Queues, Deques, and Monotonic Patterns | [#20](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/20) |
-| 12 | Binary Search | [#21](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/21) |
-| 13 | Trees, BSTs, and Tries | [#22](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/22) |
-| 14 | Heaps, Priority Queues, and Top-K | [#23](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/23) |
-| 15 | Graphs | [#24](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/24) |
-| 16 | Greedy Algorithms | [#25](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/25) |
-| 17 | Dynamic Programming | [#26](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/26) |
+| 08 | Hashing, Maps, Sets, and Prefix State - expanded baseline | [#17](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/17) |
+| 09 | Recursion and Backtracking - expanded baseline | [#18](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/18) |
+| 10 | Linked Lists - expanded baseline | [#19](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/19) |
+| 11 | Stacks, Queues, Deques, and Monotonic Patterns - expanded baseline | [#20](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/20) |
+| 12 | Binary Search - expanded baseline | [#21](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/21) |
+| 13 | Trees, BSTs, and Tries - expanded baseline | [#22](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/22) |
+| 14 | Heaps, Priority Queues, and Top-K - expanded baseline | [#23](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/23) |
+| 15 | Graphs - expanded baseline | [#24](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/24) |
+| 16 | Greedy Algorithms - expanded baseline | [#25](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/25) |
+| 17 | Dynamic Programming - expanded baseline | [#26](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/26) |
 
 You do not need to rewrite a complete book to contribute. Comment on the issue to claim a chapter, diagram, Java companion, dry run, exercise set, solution set, accuracy correction, accessibility improvement, or PDF layout repair. Small, focused pull requests are easier to validate and credit.
 
