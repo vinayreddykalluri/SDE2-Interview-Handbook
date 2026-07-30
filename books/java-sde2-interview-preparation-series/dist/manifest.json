@@ -21,9 +21,9 @@
       "file": "Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf"
     },
     {
-      "page_count": 10,
-      "sha256": "dbe09c9da3f6324786045122bf0587d22866e24944f7ef4ffeef60e90856d302",
-      "bytes": 3641053,
+      "page_count": 127,
+      "sha256": "3f79bd292437f1dfcc45b4393d9ec33db22beda22cb53b82405bd53ece12445f",
+      "bytes": 3987511,
       "id": "GIT",
       "stage": "19",
       "path_label": "19A",
@@ -31,7 +31,7 @@
       "segment_id": "java",
       "segment_code": "JAVA",
       "segment_position": 2,
-      "publication_status": "planned",
+      "publication_status": "published",
       "title": "Git and GitHub for Java Engineers",
       "file": "Java-SDE2-JAVA-02-Git-and-GitHub.pdf"
     },

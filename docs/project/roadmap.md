@@ -10,7 +10,7 @@ This roadmap defines open-source priorities for the SDE-2 Interview Handbook. It
 - Separate documentation, runnable code, portal, build tooling, and rendering-template layers.
 - Local validation for structure, links, Java examples, portal assets, MkDocs, PDF, and DOCX generation.
 - A Vercel-ready static build contract for review deployments without GitHub Actions.
-- A versioned Java SDE-2 book series with canonical source, 28 focused topic PDFs, a series index, a complete master book, and integrity metadata under `books/`.
+- A versioned Java SDE-2 book series with canonical source, 40 focused topic PDFs, a series index, a complete master book, and integrity metadata under `books/`.
 - Dedicated GitHub Actions validation for the published books; website deployment and legacy root publication workflows remain disabled pending separate approval.
 
 ## Priority 1: Curriculum Depth and Consistency
