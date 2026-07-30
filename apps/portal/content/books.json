@@ -6,11 +6,11 @@
     "date": "2026-07-25",
     "url": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/tag/books-v2026.07.0",
     "focusedBookCount": 40,
-    "focusedPageCount": 2386,
+    "focusedPageCount": 2469,
     "indexPageCount": 17,
     "masterPageCount": 616,
     "totalPdfCount": 42,
-    "totalPageCount": 3019,
+    "totalPageCount": 3102,
     "index": {
       "title": "Java SDE-2 Interview Preparation Series Index",
       "filename": "Java-SDE2-Interview-Preparation-Series-Index.pdf",
@@ -177,33 +177,41 @@
       "segmentCode": "JAVA 03",
       "segmentPosition": 3,
       "segmentBookCount": 9,
-      "publicationStatus": "planned",
+      "publicationStatus": "published",
       "title": "Maven and Gradle for Java Engineers",
       "shortTitle": "Maven and Gradle",
-      "subtitle": "One Build-Tool Guide for Dependencies, Tests, Packaging, and Delivery",
-      "purpose": "Keep both dominant Java build tools together so readers learn shared concepts first and tool-specific mechanics second.",
+      "subtitle": "From First Build to Reproducible Delivery and SDE-2 Diagnostics",
+      "purpose": "Teach one durable Java build model first, map Maven and Gradle to it precisely, and develop the diagnostic and delivery judgment expected in SDE-2 interviews and production ownership.",
       "filename": "Java-SDE2-JAVA-03-Maven-and-Gradle.pdf",
-      "pageCount": 10,
+      "pageCount": 93,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-JAVA-03-Maven-and-Gradle.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-JAVA-03-Maven-and-Gradle.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/J03-maven-and-gradle/chapters",
       "fullBookHref": "books/19b-maven-and-gradle/",
       "codeHref": "books/19b-maven-and-gradle/code/",
-      "webDocumentCount": 1,
-      "wordCount": 252,
-      "codeExampleCount": 0,
-      "sourceChapterCount": 1,
+      "webDocumentCount": 17,
+      "wordCount": 14230,
+      "codeExampleCount": 2,
+      "sourceChapterCount": 17,
       "supportingSourceCount": 0,
       "chapterPreview": [
         {
-          "title": "Maven and Gradle Together - Planned Learning Roadmap",
-          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/J03-maven-and-gradle/chapters/01-planned-learning-roadmap.md"
+          "title": "Build Foundations and the Learning Path",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/J03-maven-and-gradle/chapters/00-build-foundations-and-learning-path.md"
+        },
+        {
+          "title": "Your First Java Build, Side by Side",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/J03-maven-and-gradle/chapters/01-first-java-build-side-by-side.md"
+        },
+        {
+          "title": "Maven: Model, Lifecycle, Plugins, and Effective Build",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/J03-maven-and-gradle/chapters/02-maven-model-lifecycle-and-effective-build.md"
         }
       ],
       "outcomes": [
-        "Understand the planned shared build model",
-        "See how Maven and Gradle map to the same engineering concerns",
-        "Know the completion criteria for production-ready coverage"
+        "Explain the shared build contract before choosing Maven or Gradle syntax",
+        "Operate Maven lifecycle, effective model, reactor, scopes, testing, and publication with evidence",
+        "Operate Gradle lifecycle, tasks, configurations, variants, caches, multi-project builds, and publication with evidence"
       ],
       "webReads": []
     },

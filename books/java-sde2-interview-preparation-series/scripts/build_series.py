@@ -531,7 +531,7 @@ def handoff_markdown(spec: dict[str, Any], previous: dict[str, Any] | None, next
     return master.ascii_safe(
         f"""# Part II - Practice and Handoff
 
-# Practice Ladder and Next Steps
+## Practice Ladder and Next Steps
 
 ## Practice ladder
 

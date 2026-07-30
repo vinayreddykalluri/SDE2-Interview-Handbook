@@ -504,6 +504,35 @@ def run_git_book_validation(spec: dict[str, Any]) -> None:
     print(normalized(result.stdout) or "Git/GitHub scenarios: validation passed")
 
 
+def run_build_book_validation(spec: dict[str, Any]) -> None:
+    build_volume = next((item for item in spec["volumes"] if item["id"] == "BUILD"), None)
+    if not build_volume or build_volume.get("publication_status") == "planned":
+        return
+    script = (
+        ROOT
+        / "content"
+        / "volumes"
+        / "J03-maven-and-gradle"
+        / "labs"
+        / "validate_build_labs.sh"
+    )
+    if not script.exists():
+        fail(f"Missing Maven/Gradle scenario validator: {script}")
+    result = subprocess.run(
+        ["bash", str(script)],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        check=False,
+        timeout=300,
+    )
+    if result.returncode:
+        print(result.stdout)
+        print(result.stderr)
+        fail("Maven/Gradle scenario validation failed")
+    print(normalized(result.stdout) or "Maven/Gradle scenarios: validation passed")
+
+
 def run_series_native_java_validation(spec: dict[str, Any]) -> None:
     """Compile and execute complete public Java classes in focused native chapters."""
     classes: dict[str, tuple[Path, str]] = {}
@@ -629,6 +658,7 @@ def main() -> None:
     check_sources(spec)
     run_java_validation()
     run_git_book_validation(spec)
+    run_build_book_validation(spec)
     run_series_native_java_validation(spec)
     if not args.source_only:
         check_artifacts(spec)
