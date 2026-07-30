@@ -471,9 +471,9 @@
       "file": "Java-SDE2-SD-05-Spring-Boot.pdf"
     },
     {
-      "page_count": 10,
-      "sha256": "4e8e2f47b34b9a3e3cadb80de351824420618be91d15a78e3495713c7496bb37",
-      "bytes": 3640592,
+      "page_count": 52,
+      "sha256": "4724911e077aa93131b63f21e718a06fe7cf08b81e2266a795da4e51e8c36492",
+      "bytes": 3763575,
       "id": "DATA",
       "stage": "19",
       "path_label": "19G",
@@ -481,7 +481,7 @@
       "segment_id": "system-design",
       "segment_code": "SD",
       "segment_position": 6,
-      "publication_status": "planned",
+      "publication_status": "enhanced",
       "title": "Spring Data for Java Backend Engineers",
       "file": "Java-SDE2-SD-06-Spring-Data.pdf"
     },
