@@ -456,9 +456,9 @@
       "file": "Java-SDE2-SD-04-Spring-Framework.pdf"
     },
     {
-      "page_count": 10,
-      "sha256": "c2a3469372f58facf6aaea809025c6d9640aa0852220f5f217ad32f5c74831e6",
-      "bytes": 3640558,
+      "page_count": 113,
+      "sha256": "e5eb2a607739e388ec5484571b162535406144de942ce35b0763c5b697d8f735",
+      "bytes": 3922488,
       "id": "BOOT",
       "stage": "19",
       "path_label": "19F",
@@ -466,7 +466,7 @@
       "segment_id": "system-design",
       "segment_code": "SD",
       "segment_position": 5,
-      "publication_status": "planned",
+      "publication_status": "published",
       "title": "Spring Boot for Java Backend Engineers",
       "file": "Java-SDE2-SD-05-Spring-Boot.pdf"
     },

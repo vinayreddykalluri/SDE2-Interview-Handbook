@@ -45,7 +45,7 @@ Every focused book is an individual PDF. Choose one segment, start at Book 01, a
 2. **SD 02** - [MySQL - roadmap edition](Java-SDE2-SD-02-MySQL.pdf)
 3. **SD 03** - [Hibernate and JPA - roadmap edition](Java-SDE2-SD-03-Hibernate-and-JPA.pdf)
 4. **SD 04** - [Spring Framework - publication edition](Java-SDE2-SD-04-Spring-Framework.pdf)
-5. **SD 05** - [Spring Boot - roadmap edition](Java-SDE2-SD-05-Spring-Boot.pdf)
+5. **SD 05** - [Spring Boot - publication edition](Java-SDE2-SD-05-Spring-Boot.pdf)
 6. **SD 06** - [Spring Data - roadmap edition](Java-SDE2-SD-06-Spring-Data.pdf)
 7. **SD 07** - [MongoDB - roadmap edition](Java-SDE2-SD-07-MongoDB.pdf)
 8. **SD 08** - [Redis - roadmap edition](Java-SDE2-SD-08-Redis.pdf)

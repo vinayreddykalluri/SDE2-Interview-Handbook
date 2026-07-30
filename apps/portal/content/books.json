@@ -6,11 +6,11 @@
     "date": "2026-07-25",
     "url": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/tag/books-v2026.07.0",
     "focusedBookCount": 40,
-    "focusedPageCount": 2581,
+    "focusedPageCount": 2684,
     "indexPageCount": 17,
     "masterPageCount": 616,
     "totalPdfCount": 42,
-    "totalPageCount": 3214,
+    "totalPageCount": 3317,
     "index": {
       "title": "Java SDE-2 Interview Preparation Series Index",
       "filename": "Java-SDE2-Interview-Preparation-Series-Index.pdf",
@@ -1706,33 +1706,41 @@
       "segmentCode": "SD 05",
       "segmentPosition": 5,
       "segmentBookCount": 14,
-      "publicationStatus": "planned",
+      "publicationStatus": "published",
       "title": "Spring Boot for Java Backend Engineers",
       "shortTitle": "Spring Boot",
-      "subtitle": "Auto-Configuration, Application Structure, Configuration, Operations, and Testing",
-      "purpose": "Build on Spring Framework mechanics to teach Boot conventions, application boundaries, configuration, and operations.",
+      "subtitle": "From First Application to Auto-Configuration, Production Operations, and SDE-2 Incidents",
+      "purpose": "Build on Spring Framework mechanics to teach how Boot assembles, configures, tests, packages, observes, secures, and operates production Java services from beginner foundations through SDE-2 incident reasoning.",
       "filename": "Java-SDE2-SD-05-Spring-Boot.pdf",
-      "pageCount": 10,
+      "pageCount": 113,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-05-Spring-Boot.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-SD-05-Spring-Boot.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/SD05-spring-boot/chapters",
       "fullBookHref": "books/19f-spring-boot/",
       "codeHref": "books/19f-spring-boot/code/",
-      "webDocumentCount": 1,
-      "wordCount": 221,
-      "codeExampleCount": 0,
-      "sourceChapterCount": 1,
+      "webDocumentCount": 23,
+      "wordCount": 15374,
+      "codeExampleCount": 37,
+      "sourceChapterCount": 23,
       "supportingSourceCount": 0,
       "chapterPreview": [
         {
-          "title": "Spring Boot for Production Java Services - Planned Learning Roadmap",
-          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/SD05-spring-boot/chapters/01-planned-learning-roadmap.md"
+          "title": "Learning Path and Spring Boot First Principles",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/SD05-spring-boot/chapters/00-learning-path-and-boot-first-principles.md"
+        },
+        {
+          "title": "First Application and Project Anatomy",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/SD05-spring-boot/chapters/01-first-application-and-project-anatomy.md"
+        },
+        {
+          "title": "SpringApplication Startup and Lifecycle",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/SD05-spring-boot/chapters/02-spring-application-startup-and-lifecycle.md"
         }
       ],
       "outcomes": [
-        "Understand the planned Spring Boot sequence",
-        "Relate Boot conventions to underlying Spring mechanics",
-        "Know the production and interview capabilities required"
+        "Build, package, and trace a Spring Boot application from main method through readiness",
+        "Predict starter, BOM, plugin, condition, back-off, property precedence, binding, and profile behavior",
+        "Design stable REST, error, pagination, idempotency, outbound-client, data, and migration boundaries"
       ],
       "webReads": []
     },
