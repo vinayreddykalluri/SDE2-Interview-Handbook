@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-07-29 - Maven and Gradle publication edition
+
+- Replaced the 10-page JAVA 03 roadmap with 17 prerequisite-ordered concept and interview chapters.
+- Added side-by-side Maven and Gradle coverage for lifecycles, dependencies, tests, packaging, modules, wrappers, toolchains, CI, caching, publishing, security, and migration.
+- Added 18 complex failure playbooks, 18 realistic interview rounds, 50 workbook tasks, five cumulative assessments, and a final readiness assessment.
+- Added paired two-module Maven and Gradle fixtures plus a dependency-free Java 21 build-graph companion and executable validator.
+- Rebuilt the stable PDF as a 93-page publication edition and synchronized the web catalog, code index, source navigation, validation, and release documentation.
+
 ## 2026-07-29 - Git and GitHub publication edition
 
 - Replaced the 10-page JAVA 02 roadmap with 17 prerequisite-ordered chapters and a dependency-free Java 21 companion.

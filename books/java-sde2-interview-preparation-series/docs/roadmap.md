@@ -18,7 +18,7 @@ The library has three independent learning segments. Select the skill area you n
 |---:|---|---|---|
 | JAVA 01 | Java Foundations for Problem Solving | Full | `Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf` |
 | JAVA 02 | Git and GitHub | Full | `Java-SDE2-JAVA-02-Git-and-GitHub.pdf` |
-| JAVA 03 | Maven and Gradle | Roadmap | `Java-SDE2-JAVA-03-Maven-and-Gradle.pdf` |
+| JAVA 03 | Maven and Gradle | Full | `Java-SDE2-JAVA-03-Maven-and-Gradle.pdf` |
 | JAVA 04 | Language, OOP, and Modern Java | Full | `Java-SDE2-ADV-18B-Language-OOP-and-Modern-Java.pdf` |
 | JAVA 05 | Collections, Streams, and I/O | Full | `Java-SDE2-ADV-18C-Collections-Streams-and-IO.pdf` |
 | JAVA 06 | JVM and Execution | Full | `Java-SDE2-ADV-18A-JVM-and-Execution.pdf` |

@@ -36,9 +36,9 @@
       "file": "Java-SDE2-JAVA-02-Git-and-GitHub.pdf"
     },
     {
-      "page_count": 10,
-      "sha256": "3087dd113f0b7e735001ffc475626450e01f023deb4fe1e21fdec9ecebefdb0f",
-      "bytes": 3640976,
+      "page_count": 93,
+      "sha256": "d2a8cf8c8c8f0638e164481aeda9e297aacd7471e2bfe12fd3b4d08f526e787a",
+      "bytes": 3879769,
       "id": "BUILD",
       "stage": "19",
       "path_label": "19B",
@@ -46,7 +46,7 @@
       "segment_id": "java",
       "segment_code": "JAVA",
       "segment_position": 3,
-      "publication_status": "planned",
+      "publication_status": "published",
       "title": "Maven and Gradle for Java Engineers",
       "file": "Java-SDE2-JAVA-03-Maven-and-Gradle.pdf"
     },

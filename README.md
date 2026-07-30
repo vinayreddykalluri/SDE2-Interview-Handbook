@@ -5,7 +5,7 @@
 [![Java 17+](https://img.shields.io/badge/Java-17%2B-1f4e79.svg)](examples/java/README.md)
 [![Book release](https://img.shields.io/github/v/release/vinayreddykalluri/SDE2-Interview-Handbook?label=books)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest)
 
-A local-first, open-source preparation system for Java SDE-2 interviews. Its 40-book learning library is divided into Java Engineering, Data Structures and Algorithms, and System Design and Backend. The same canonical sources power 239 web documents and 42 downloadable PDFs, alongside runnable Java examples and searchable reference material.
+A local-first, open-source preparation system for Java SDE-2 interviews. Its 40-book learning library is divided into Java Engineering, Data Structures and Algorithms, and System Design and Backend. The same canonical sources power 255 web documents and 42 downloadable PDFs, alongside runnable Java examples and searchable reference material.
 
 > **Canonical source:** the public `master` branch owns the book sources, web catalog, validation tooling, and reviewed PDFs. The web library and downloadable editions are generated from the same publishing manifest so their titles, status, counts, and ordering remain synchronized.
 
@@ -52,12 +52,12 @@ Choose only one segment initially. Inside it, use the book numbers as the prereq
 
 [![Java SDE-2 Interview Preparation Series cover](books/java-sde2-interview-preparation-series/assets/covers/series-index-cover.png)](books/java-sde2-interview-preparation-series/dist/Java-SDE2-Interview-Preparation-Series-Index.pdf)
 
-The consolidated repository includes 40 focused books, a 17-page series index, and a 616-page master book. The focused books contain 2,386 pages; the complete 42-PDF library contains 3,019 pages.
+The consolidated repository includes 40 focused books, a 17-page series index, and a 616-page master book. The focused books contain 2,469 pages; the complete 42-PDF library contains 3,102 pages.
 
 | Publication status | Books | Meaning |
 |---|---:|---|
-| Full edition | 29 | Developed instructional content with examples, practice, navigation, and technical validation |
-| Roadmap edition | 11 | Published scope, prerequisites, chapter plan, interview outcomes, and completion gate; expanded one book at a time |
+| Full edition | 30 | Developed instructional content with examples, practice, navigation, and technical validation |
+| Roadmap edition | 10 | Published scope, prerequisites, chapter plan, interview outcomes, and completion gate; expanded one book at a time |
 
 Roadmap editions are intentionally labeled on the website, PDF cover, reader index, and catalog. They are not presented as finished publication-depth instruction.
 
@@ -69,7 +69,7 @@ Start with [JAVA 01: Java Foundations](books/java-sde2-interview-preparation-ser
 
 `Git and GitHub → Maven and Gradle → Language/OOP/Modern Java → Collections/Streams/I/O → JVM → Concurrency → Performance → Interview Revision`
 
-Publication-depth tooling book: [Git and GitHub](books/java-sde2-interview-preparation-series/dist/Java-SDE2-JAVA-02-Git-and-GitHub.pdf) · Next roadmap edition: [Maven and Gradle](books/java-sde2-interview-preparation-series/dist/Java-SDE2-JAVA-03-Maven-and-Gradle.pdf)
+Publication-depth tooling books: [Git and GitHub](books/java-sde2-interview-preparation-series/dist/Java-SDE2-JAVA-02-Git-and-GitHub.pdf) · [Maven and Gradle](books/java-sde2-interview-preparation-series/dist/Java-SDE2-JAVA-03-Maven-and-Gradle.pdf)
 
 ### Data Structures and Algorithms — DSA 01 to DSA 17
 
