@@ -44,7 +44,7 @@ Every focused book is an individual PDF. Choose one segment, start at Book 01, a
 1. **SD 01** - [Design, Backend, Testing, and Security Foundations](Java-SDE2-ADV-18F-Design-Backend-Testing-and-Security.pdf)
 2. **SD 02** - [MySQL - roadmap edition](Java-SDE2-SD-02-MySQL.pdf)
 3. **SD 03** - [Hibernate and JPA - roadmap edition](Java-SDE2-SD-03-Hibernate-and-JPA.pdf)
-4. **SD 04** - [Spring Framework - roadmap edition](Java-SDE2-SD-04-Spring-Framework.pdf)
+4. **SD 04** - [Spring Framework - publication edition](Java-SDE2-SD-04-Spring-Framework.pdf)
 5. **SD 05** - [Spring Boot - roadmap edition](Java-SDE2-SD-05-Spring-Boot.pdf)
 6. **SD 06** - [Spring Data - roadmap edition](Java-SDE2-SD-06-Spring-Data.pdf)
 7. **SD 07** - [MongoDB - roadmap edition](Java-SDE2-SD-07-MongoDB.pdf)

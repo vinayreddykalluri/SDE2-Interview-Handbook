@@ -5,7 +5,7 @@
 [![Java 17+](https://img.shields.io/badge/Java-17%2B-1f4e79.svg)](examples/java/README.md)
 [![Book release](https://img.shields.io/github/v/release/vinayreddykalluri/SDE2-Interview-Handbook?label=books)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest)
 
-A local-first, open-source preparation system for Java SDE-2 interviews. Its 40-book learning library is divided into Java Engineering, Data Structures and Algorithms, and System Design and Backend. The same canonical sources power 255 web documents and 42 downloadable PDFs, alongside runnable Java examples and searchable reference material.
+A local-first, open-source preparation system for Java SDE-2 interviews. Its 40-book learning library is divided into Java Engineering, Data Structures and Algorithms, and System Design and Backend. The same canonical sources power 275 web documents and 42 downloadable PDFs, alongside runnable Java examples and searchable reference material.
 
 > **Canonical source:** the public `master` branch owns the book sources, web catalog, validation tooling, and reviewed PDFs. The web library and downloadable editions are generated from the same publishing manifest so their titles, status, counts, and ordering remain synchronized.
 
@@ -52,12 +52,12 @@ Choose only one segment initially. Inside it, use the book numbers as the prereq
 
 [![Java SDE-2 Interview Preparation Series cover](books/java-sde2-interview-preparation-series/assets/covers/series-index-cover.png)](books/java-sde2-interview-preparation-series/dist/Java-SDE2-Interview-Preparation-Series-Index.pdf)
 
-The consolidated repository includes 40 focused books, a 17-page series index, and a 616-page master book. The focused books contain 2,469 pages; the complete 42-PDF library contains 3,102 pages.
+The consolidated repository includes 40 focused books, a 17-page series index, and a 616-page master book. The focused books contain 2,581 pages; the complete 42-PDF library contains 3,214 pages.
 
 | Publication status | Books | Meaning |
 |---|---:|---|
-| Full edition | 30 | Developed instructional content with examples, practice, navigation, and technical validation |
-| Roadmap edition | 10 | Published scope, prerequisites, chapter plan, interview outcomes, and completion gate; expanded one book at a time |
+| Full edition | 31 | Developed instructional content with examples, practice, navigation, and technical validation |
+| Roadmap edition | 9 | Published scope, prerequisites, chapter plan, interview outcomes, and completion gate; expanded one book at a time |
 
 Roadmap editions are intentionally labeled on the website, PDF cover, reader index, and catalog. They are not presented as finished publication-depth instruction.
 
@@ -81,7 +81,9 @@ Start with [DSA 01: Time and Space Complexity](books/java-sde2-interview-prepara
 
 Start with [SD 01: Backend and Design Foundations](books/java-sde2-interview-preparation-series/dist/Java-SDE2-ADV-18F-Design-Backend-Testing-and-Security.pdf), then continue through databases, persistence, Spring, messaging, caching, and distributed-system design.
 
-New roadmap PDFs: [MySQL](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-02-MySQL.pdf) · [Hibernate and JPA](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-03-Hibernate-and-JPA.pdf) · [Spring Framework](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-04-Spring-Framework.pdf) · [Spring Boot](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-05-Spring-Boot.pdf) · [Spring Data](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-06-Spring-Data.pdf) · [MongoDB](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-07-MongoDB.pdf) · [Redis](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-08-Redis.pdf) · [Apache Kafka and Spring Kafka](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-09-Apache-Kafka-and-Spring-Kafka.pdf) · [Spring Ecosystem Extensions](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-10-Spring-Ecosystem-Extensions.pdf) · [Spring AI](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-11-Spring-AI.pdf)
+Publication-depth framework book: [Spring Framework](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-04-Spring-Framework.pdf), with 21 web/PDF chapters, executable Spring 7 behavior tests, realistic interview rounds, and production failure playbooks.
+
+Roadmap PDFs still being expanded: [MySQL](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-02-MySQL.pdf) · [Hibernate and JPA](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-03-Hibernate-and-JPA.pdf) · [Spring Boot](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-05-Spring-Boot.pdf) · [Spring Data](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-06-Spring-Data.pdf) · [MongoDB](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-07-MongoDB.pdf) · [Redis](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-08-Redis.pdf) · [Apache Kafka and Spring Kafka](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-09-Apache-Kafka-and-Spring-Kafka.pdf) · [Spring Ecosystem Extensions](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-10-Spring-Ecosystem-Extensions.pdf) · [Spring AI](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-11-Spring-AI.pdf)
 
 Stable legacy identifiers remain in existing filenames and URLs. Reader-facing segment codes appear on the website, covers, index, and generated folders.
 

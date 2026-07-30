@@ -533,6 +533,37 @@ def run_build_book_validation(spec: dict[str, Any]) -> None:
     print(normalized(result.stdout) or "Maven/Gradle scenarios: validation passed")
 
 
+def run_spring_framework_book_validation(spec: dict[str, Any]) -> None:
+    spring_volume = next(
+        (item for item in spec["volumes"] if item["id"] == "SPRING"), None
+    )
+    if not spring_volume or spring_volume.get("publication_status") == "planned":
+        return
+    script = (
+        ROOT
+        / "content"
+        / "volumes"
+        / "SD04-spring-framework"
+        / "labs"
+        / "validate_spring_framework_labs.sh"
+    )
+    if not script.exists():
+        fail(f"Missing Spring Framework scenario validator: {script}")
+    result = subprocess.run(
+        ["bash", str(script)],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        check=False,
+        timeout=300,
+    )
+    if result.returncode:
+        print(result.stdout)
+        print(result.stderr)
+        fail("Spring Framework scenario validation failed")
+    print(normalized(result.stdout) or "Spring Framework scenarios: validation passed")
+
+
 def run_series_native_java_validation(spec: dict[str, Any]) -> None:
     """Compile and execute complete public Java classes in focused native chapters."""
     classes: dict[str, tuple[Path, str]] = {}
@@ -659,6 +690,7 @@ def main() -> None:
     run_java_validation()
     run_git_book_validation(spec)
     run_build_book_validation(spec)
+    run_spring_framework_book_validation(spec)
     run_series_native_java_validation(spec)
     if not args.source_only:
         check_artifacts(spec)

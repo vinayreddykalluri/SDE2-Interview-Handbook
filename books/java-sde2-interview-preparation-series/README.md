@@ -13,7 +13,7 @@ This is the canonical book workspace inside the consolidated [SDE2 Interview Han
 
 ## Read or download
 
-The library contains 40 focused books (2,469 pages), one 17-page series index, and one 616-page master book: 42 PDFs and 3,102 pages in total. Ten clearly marked roadmap editions establish the sequence and intended depth for topics that will be expanded one by one. JAVA 02 - Git and GitHub and JAVA 03 - Maven and Gradle are publication editions with executable labs and interview simulations.
+The library contains 40 focused books (2,581 pages), one 17-page series index, and one 616-page master book: 42 PDFs and 3,214 pages in total. Nine clearly marked roadmap editions establish the sequence and intended depth for topics that will be expanded one by one. JAVA 02 - Git and GitHub, JAVA 03 - Maven and Gradle, and SD 04 - Spring Framework are publication editions with executable labs and interview simulations.
 
 - [Download the complete release](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest)
 - [Open the series index](dist/Java-SDE2-Interview-Preparation-Series-Index.pdf)
@@ -21,6 +21,7 @@ The library contains 40 focused books (2,469 pages), one 17-page series index, a
 - [Start with Java Foundations](dist/Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf)
 - [Study Git and GitHub](dist/Java-SDE2-JAVA-02-Git-and-GitHub.pdf)
 - [Study Maven and Gradle](dist/Java-SDE2-JAVA-03-Maven-and-Gradle.pdf)
+- [Study Spring Framework](dist/Java-SDE2-SD-04-Spring-Framework.pdf)
 - [Continue to Time and Space Complexity](dist/Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf)
 - [Study Number Systems](dist/Java-SDE2-DSA-01-Number-Systems-and-Math-Foundations.pdf)
 - [Open the Number Systems workbook](dist/Java-SDE2-DSA-01B-Number-Systems-Interview-Workbook.pdf)

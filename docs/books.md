@@ -17,7 +17,7 @@ The repository includes a free, open-source series of individually navigable Jav
 | Study a topic to publication depth | Focused PDF | Full explanations, diagrams, dry runs, exercises, solutions, and offline reading |
 | Correct or extend the material | Canonical Markdown | Review the exact editable source and submit a focused contribution |
 
-The interactive library uses the publishing manifest for segment order and release links, then reads the canonical Markdown and declared Java companions for routes, chapter previews, document counts, word counts, and code counts. The build renders all 255 current source documents into 40 searchable web books. A newly added canonical chapter therefore reaches the catalog and full reader through `make sync-book-catalog` and `make build-site`; the website does not maintain a hand-written shadow copy of book prose.
+The interactive library uses the publishing manifest for segment order and release links, then reads the canonical Markdown and declared Java companions for routes, chapter previews, document counts, word counts, and code counts. The build renders all 275 current source documents into 40 searchable web books. A newly added canonical chapter therefore reaches the catalog and full reader through `make sync-book-catalog` and `make build-site`; the website does not maintain a hand-written shadow copy of book prose.
 
 ## Choose a segment
 
@@ -35,14 +35,16 @@ Stable technical IDs remain in existing filenames and URLs. Reader-facing segmen
 
 ## What is published
 
-- 40 focused books (2,469 pages) and one 17-page series index
+- 40 focused books (2,581 pages) and one 17-page series index
 - one complete 616-page master book
-- 42 individual PDFs and 3,102 pages across the complete library
+- 42 individual PDFs and 3,214 pages across the complete library
 - canonical Markdown and diagram sources
 - Java 21 companion programs and boundary tests
 - exercises with separated solutions
 - content audits, coverage matrices, change logs, validation reports, and build reports
 - a SHA-256 artifact manifest
+
+SD 04 - Spring Framework is now a 122-page publication edition with 21 canonical web chapters, 24 answered interview rounds, 170 structured practice/debug tasks, a Java 21 reasoning companion, and six real Spring Framework 7 behavior tests.
 
 ## Editorial leadership and contribution
 

@@ -441,9 +441,9 @@
       "file": "Java-SDE2-SD-03-Hibernate-and-JPA.pdf"
     },
     {
-      "page_count": 10,
-      "sha256": "05cee8ab86adbdc6ce4d2bb931318d1333f8057bb0c28a94c98ba8a0760b2ab3",
-      "bytes": 3640571,
+      "page_count": 122,
+      "sha256": "f2368011b48bec566bcdfaf3b2aa3e44de55628304f152acbb7780b68c21d991",
+      "bytes": 3963607,
       "id": "SPRING",
       "stage": "19",
       "path_label": "19E",
@@ -451,7 +451,7 @@
       "segment_id": "system-design",
       "segment_code": "SD",
       "segment_position": 4,
-      "publication_status": "planned",
+      "publication_status": "published",
       "title": "Spring Framework for Java Engineers",
       "file": "Java-SDE2-SD-04-Spring-Framework.pdf"
     },

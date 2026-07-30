@@ -55,7 +55,7 @@ The library has three independent learning segments. Select the skill area you n
 | SD 01 | Design, Backend, Testing, and Security Foundations | Full | `Java-SDE2-ADV-18F-Design-Backend-Testing-and-Security.pdf` |
 | SD 02 | MySQL | Roadmap | `Java-SDE2-SD-02-MySQL.pdf` |
 | SD 03 | Hibernate and JPA | Roadmap | `Java-SDE2-SD-03-Hibernate-and-JPA.pdf` |
-| SD 04 | Spring Framework | Roadmap | `Java-SDE2-SD-04-Spring-Framework.pdf` |
+| SD 04 | Spring Framework | Full | `Java-SDE2-SD-04-Spring-Framework.pdf` |
 | SD 05 | Spring Boot | Roadmap | `Java-SDE2-SD-05-Spring-Boot.pdf` |
 | SD 06 | Spring Data | Roadmap | `Java-SDE2-SD-06-Spring-Data.pdf` |
 | SD 07 | MongoDB | Roadmap | `Java-SDE2-SD-07-MongoDB.pdf` |

@@ -6,11 +6,11 @@
     "date": "2026-07-25",
     "url": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/tag/books-v2026.07.0",
     "focusedBookCount": 40,
-    "focusedPageCount": 2469,
+    "focusedPageCount": 2581,
     "indexPageCount": 17,
     "masterPageCount": 616,
     "totalPdfCount": 42,
-    "totalPageCount": 3102,
+    "totalPageCount": 3214,
     "index": {
       "title": "Java SDE-2 Interview Preparation Series Index",
       "filename": "Java-SDE2-Interview-Preparation-Series-Index.pdf",
@@ -1655,33 +1655,41 @@
       "segmentCode": "SD 04",
       "segmentPosition": 4,
       "segmentBookCount": 14,
-      "publicationStatus": "planned",
+      "publicationStatus": "published",
       "title": "Spring Framework for Java Engineers",
       "shortTitle": "Spring Framework",
-      "subtitle": "IoC, Dependency Injection, Beans, AOP, Transactions, and Testing Foundations",
-      "purpose": "Make core Spring behavior explicit before readers use Spring Boot conventions and automation.",
+      "subtitle": "From IoC First Principles to Proxies, Transactions, Web Boundaries, and SDE-2 Incidents",
+      "purpose": "Build a precise Java object-graph and proxy mental model before Spring Boot automation, then develop the transaction, web, testing, concurrency, and incident judgment expected from SDE-2 backend engineers.",
       "filename": "Java-SDE2-SD-04-Spring-Framework.pdf",
-      "pageCount": 10,
+      "pageCount": 122,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-04-Spring-Framework.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-SD-04-Spring-Framework.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/SD04-spring-framework/chapters",
       "fullBookHref": "books/19e-spring-framework/",
       "codeHref": "books/19e-spring-framework/code/",
-      "webDocumentCount": 1,
-      "wordCount": 226,
-      "codeExampleCount": 0,
-      "sourceChapterCount": 1,
+      "webDocumentCount": 21,
+      "wordCount": 18577,
+      "codeExampleCount": 76,
+      "sourceChapterCount": 21,
       "supportingSourceCount": 0,
       "chapterPreview": [
         {
-          "title": "Spring Framework Foundations - Planned Learning Roadmap",
-          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/SD04-spring-framework/chapters/01-planned-learning-roadmap.md"
+          "title": "Learning Path and Container First Principles",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/SD04-spring-framework/chapters/00-learning-path-and-container-first-principles.md"
+        },
+        {
+          "title": "Plain Java to the First Application Context",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/SD04-spring-framework/chapters/01-plain-java-to-first-application-context.md"
+        },
+        {
+          "title": "Bean Definitions, Java Configuration, and Component Scanning",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/SD04-spring-framework/chapters/02-bean-definitions-java-configuration-and-component-scanning.md"
         }
       ],
       "outcomes": [
-        "Understand the planned Spring Framework progression",
-        "Distinguish container contracts from conveniences",
-        "Know the core mechanics expected in SDE-2 interviews"
+        "Construct and diagnose Spring contexts from plain Java through explicit and scanned bean definitions",
+        "Predict dependency resolution, lifecycle, scope, configuration mode, event, and validation behavior",
+        "Reason exactly about JDK and subclass proxies, self-invocation, advice order, and declarative transactions"
       ],
       "webReads": []
     },

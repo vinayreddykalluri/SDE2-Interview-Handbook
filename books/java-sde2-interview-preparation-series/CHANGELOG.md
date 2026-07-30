@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-07-29 - Spring Framework publication edition
+
+- Replaced the 10-page SD 04 roadmap with 21 prerequisite-ordered chapters progressing from plain Java object graphs and the first context through dependency resolution, lifecycle, scopes, configuration mechanics, events, validation, AOP, proxies, transactions, MVC, async work, testing, and production diagnosis.
+- Added 24 realistic interview rounds with direct model answers, 95 distributed chapter tasks, 60 final practice prompts, 15 debugging reviews, five cumulative assessments, and a final readiness assessment.
+- Added a dependency-free Java 21 runtime-reasoning companion and a six-test Spring Framework 7.0.8 Maven fixture covering injection, scopes, lifecycle, events, self-invocation, and transaction rollback behavior.
+- Rebuilt the stable PDF as a 122-page publication edition and synchronized 21 canonical chapters, 76 code entries, source navigation, and the downloadable PDF with the web library.
+- Added content audit, topic coverage, content changelog, scenario-validation, and build evidence reports.
+
 ## 2026-07-29 - Maven and Gradle publication edition
 
 - Replaced the 10-page JAVA 03 roadmap with 17 prerequisite-ordered concept and interview chapters.
