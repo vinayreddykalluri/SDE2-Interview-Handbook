@@ -10,7 +10,7 @@ If you are deciding what to read next, use the [interactive catalog](https://vin
 
 The canonical published files are also versioned under [`books/java-sde2-interview-preparation-series/`](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series).
 
-Choose Java Engineering, Data Structures and Algorithms, Frameworks/Data/Messaging, or System Design, then follow the books inside that segment in order. The canonical `dist/` library groups all 42 PDFs under `00-start-here`, `01-java`, `02-dsa`, `03-frameworks`, and `04-system-design` without changing stable release filenames.
+Choose Java Engineering, Data Structures and Algorithms, Frameworks/Data/Messaging, or System Design, then follow the books inside that segment in order. The canonical `dist/` library groups all 43 PDFs under `00-start-here`, `01-java`, `02-dsa`, `03-frameworks`, and `04-system-design` without changing stable release filenames.
 
 ## Build locally
 

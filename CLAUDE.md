@@ -8,7 +8,7 @@ Working context for AI agents and contributors. Audited 2026-08-02 against `mast
 
 A local-first, open-source Java SDE-2 interview preparation system. Markdown is the single source of truth; everything else (MkDocs site, standalone book web library, 42 PDFs, DOCX) is **generated** from it via Python tooling.
 
-- 32 commits, ~1,099 tracked files (excluding `.git`), 705 Markdown files, 175 Java files, 42 PDFs.
+- ~1,110 tracked files (excluding `.git`), 713 Markdown files, 176 Java files, 43 PDFs.
 - 185 MB working tree / 67.6 MB packfile — **163 MB of that is `books/.../dist/*.pdf` committed to git**.
 - Licensing is split: MIT for code, CC BY 4.0 for content.
 
@@ -18,9 +18,9 @@ A local-first, open-source Java SDE-2 interview preparation system. Markdown is 
 apps/portal/          Static portal (vanilla HTML/CSS/JS + 3 JSON content feeds). No build step, no package.json.
 books/java-sde2-interview-preparation-series/
   content/master/     Canonical master-book Markdown (616-page reference)
-  content/volumes/    47 volume directories across java/ dsa/ frameworks/ system-design/
+  content/volumes/    48 volume directories across java/ dsa/ frameworks/ system-design/
   publishing/         series.json + author-notes.json — the publishing manifest (source of truth for catalog)
-  dist/               42 committed PDFs + manifest.json  (163 MB)
+  dist/               43 committed PDFs + manifest.json  (~167 MB)
   scripts/            Book-local build/validate/diagram Python (16 scripts)
   examples/java/      Maven project, package com.interviewbook.examples
   reports/            Per-book audit/build/changelog/coverage/validation reports (historical, append-only)
@@ -45,7 +45,7 @@ make validate-all     # strict path CI uses: all validators + PDF integrity
 make validate-pdfs    # PDFs vs dist/manifest.json only
 make build-site       # MkDocs -> site/
 make build-book-web   # standalone book library -> site/books
-make build-books      # full series rebuild: 40 volumes + index + master, then validate
+make build-books      # full series rebuild: 41 volumes + index + master, then validate
 make build-pdf|docx|all
 make sync-book-catalog / check-book-catalog   # reconcile series.json <-> portal catalog <-> dist/manifest.json
 make verify           # validate + build-site
@@ -69,7 +69,7 @@ python scripts/validate_series.py --source-only
 | `validate_repository_layout` | pass — 6 root sections, 10 backend modules, 42 curriculum pages |
 | `validate_structure` | pass — 19 foundation modules, 57 chapters, 138 nav targets |
 | `validate_links` | pass — 153 documents |
-| `validate_web` | pass — 40 books / 4 segments / 40 focused PDFs reconciled to 42 total |
+| `validate_web` | pass — 41 books / 4 segments / 41 focused PDFs reconciled to 43 total |
 | `validate_deployment` | pass — pinned static Vercel build publishing `site/` |
 | `build_all.py --check-only` | pass |
 | `validate_java_examples` | **not run** — requires `javac` 17+ |
@@ -100,6 +100,12 @@ The validation layer is genuinely strong and self-consistent. No content/catalog
 **R5 — Release automation re-enabled.** `build-books.yml` and `deploy-pages.yml` moved into `.github/workflows/`. `deploy-pages.yml` now also triggers on book content and publishing changes; without those paths the site silently served the previous edition after a content change.
 
 **R6 — `make validate` no longer hard-fails without a JDK** (was H3). It skips Java validation with a loud warning; `make validate-all` is the strict path.
+
+**R8 — Vercel and CI environment assumptions fixed.** Three separate environment defects surfaced only once the workflows and the deployment actually ran: the Makefile hardcoded `.venv/bin/python` so every `make` target died instantly in CI; `$(CURDIR)/$(PYTHON)` broke once `PYTHON` resolved absolute; and Vercel's build image now ships a uv-managed Python that refuses `pip install` under PEP 668, so `installCommand` builds a venv. `build-books.yml` is also split into independent `book-series` and `handbook-pdf` jobs so the unverified LaTeX path cannot block the series.
+
+**R9 — Hardcoded catalog counts derived instead.** `validate_web.py` asserted `len(books) != 40` and `totalPdfCount != 42`. Adding a volume failed validation in a place unrelated to the change, and the "fix" was to edit the validator - which is how a checked invariant becomes a number someone bumps to make the build pass. Both are now derived from `publishing/series.json`.
+
+**R10 — SD-03 Generative AI System Design added.** A new system-design volume covering the generative-AI design round: token and latency budgeting, RAG architecture with authorization pushed into the query, agent bounds and idempotency, indirect prompt injection, and evaluating a probabilistic system. 78 pages, with an executable Java model.
 
 **R7 — Java coverage gaps closed.** Added master chapters 55–58 (`java.time`, regular expressions, JPMS, Java 22–25) as new Part IX, wired into the JAVA-04/05/06 volumes at their correct reading positions. `LocalDate` previously appeared nowhere in 15,677 lines of master content.
 
@@ -167,7 +173,7 @@ C1 is now the *only* thing standing between this repo and a clean release proces
 
 ## 7. Conventions
 
-- Book IDs: `JAVA-01..09`, `DSA-01..17`, `FW-01..12`, `SD-01..02`. Filenames follow `Java-SDE2-<SEG>-<NN>-<Title-In-Kebab>.pdf`.
+- Book IDs: `JAVA-01..09`, `DSA-01..17`, `FW-01..12`, `SD-01..03`. Filenames follow `Java-SDE2-<SEG>-<NN>-<Title-In-Kebab>.pdf`.
 - Volume directories mirror the ID: `content/volumes/<segment>/<ID>-<slug>/`.
 - Book numbering is prerequisite order, not difficulty order — do not renumber without updating `series.json`, the portal catalog, and every cross-reference.
 - Reports are named `<TOPIC>_<KIND>_REPORT.md` / `_AUDIT.md` / `_CHANGELOG.md`, screaming snake case.

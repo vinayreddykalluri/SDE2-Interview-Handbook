@@ -4,7 +4,7 @@ The repository is configured as a static Vercel project. Vercel builds the same 
 
 ## Why the PDFs are not deployed
 
-`.vercelignore` excludes `books/java-sde2-interview-preparation-series/dist/*` and keeps only `manifest.json`. The 42 PDFs are 163 MB, which is above the 100 MB Hobby upload limit and would be pointless to serve twice — every download link in the site points at GitHub instead.
+`.vercelignore` excludes `books/java-sde2-interview-preparation-series/dist/*` and keeps only `manifest.json`. The 43 PDFs are 163 MB, which is above the 100 MB Hobby upload limit and would be pointless to serve twice — every download link in the site points at GitHub instead.
 
 This has one non-obvious consequence, and it broke the build until it was fixed. The generated book pages are compiled by `mkdocs build --strict`, which fails on any internal link it cannot resolve. Link rewriting used to resolve PDF targets by looking for the file on disk, so with `dist/` stripped a relative link such as `../00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf` resolved to nothing, survived into the generated Markdown as a relative path, and aborted the deployment.
 
@@ -31,14 +31,14 @@ grep -roh 'href="[^"]*\.pdf"' site/ | grep -v '^href="https://'   # must print n
 | Commercial use | not permitted on Hobby | Move to Pro if the books are ever monetized |
 | Git organization repos | not supported on Hobby | Repo is under a personal account — fine |
 
-The one number worth watching is transfer. Generated pages average about 219 KB because MkDocs Material inlines the full navigation tree for 407 documents into every page, so the library is roughly 147 MB of HTML. At 100 GB/month that supports a few hundred thousand page views, which is ample — but if it ever becomes a constraint, the fix is `navigation.prune` in `mkdocs.yml`, which emits only the visible portion of the nav per page. The `Cache-Control` headers in `vercel.json` already keep hashed theme assets out of repeat transfers.
+The one number worth watching is transfer. Generated pages average about 219 KB because MkDocs Material inlines the full navigation tree for 414 documents into every page, so the library is roughly 147 MB of HTML. At 100 GB/month that supports a few hundred thousand page views, which is ample — but if it ever becomes a constraint, the fix is `navigation.prune` in `mkdocs.yml`, which emits only the visible portion of the nav per page. The `Cache-Control` headers in `vercel.json` already keep hashed theme assets out of repeat transfers.
 
 ## Build Contract
 
 `vercel.json` defines:
 
-- `installCommand`: install only the pinned website dependencies from `tooling/requirements/portal.txt`;
-- `buildCommand`: build the portal, handbook, and all complete web books, then normalize canonical deployment URLs;
+- `installCommand`: create `.vercel-venv` and install only the pinned website dependencies from `tooling/requirements/portal.txt`. The venv is required because Vercel's build image ships a uv-managed, externally-managed Python that refuses a plain `pip install`;
+- `buildCommand`: run the portal, handbook, and web-book builds through `.vercel-venv/bin/python`, then normalize canonical deployment URLs;
 - `outputDirectory`: publish only `site/`.
 
 The full `tooling/requirements/authoring.txt` manifest remains the local authoring and printable-book toolchain. Keeping the hosted dependency set separate avoids installing PDF and DOCX tooling during a static website build.
@@ -69,7 +69,7 @@ The check is read-only. A real Vercel build runs the URL normalizer without `--c
 
 - `/` opens the learning portal.
 - `/docs/` opens the searchable handbook.
-- `/books/` opens the 40-book searchable library, and every book exposes its contents and code index.
+- `/books/` opens the 41-book searchable library, and every book exposes its contents and code index.
 - A coding-foundation module opens from the portal and from MkDocs navigation.
 - A portal book card opens its complete web reader and current PDF without a broken route.
 - Search, progress state, keyboard navigation, and the mobile menu work.

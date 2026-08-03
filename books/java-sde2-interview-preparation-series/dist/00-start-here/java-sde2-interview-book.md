@@ -9643,6 +9643,7 @@ Composition transforms state without blocking a worker merely to wait for anothe
 - **Completion stage:** Dependent asynchronous computation triggered by another completion.
 - **Fan-out/fan-in:** Start multiple tasks and combine their completions.
 - **Deadline:** Absolute remaining-time budget propagated across operations.
+- **ThreadLocal:** Per-thread variable whose lifetime is the thread's, not the task's.
 
 ## 36.5 Detailed mechanics
 
@@ -9681,7 +9682,41 @@ Non-`Async` dependent actions can run in the thread that completes the previous 
 
 `CompletableFuture.cancel` completes the future exceptionally with `CancellationException`; the `mayInterruptIfRunning` parameter has no interrupt effect for its asynchronous processing according to this class's contract. Cancellation must be designed into the underlying task/resource, not assumed from the graph handle.
 
-> **Specification boundary:** `java.util.concurrent` specifies lifecycle, completion, cancellation requests, and memory-consistency effects. It does not guarantee task start order unless an executor says so, fair worker scheduling, task termination after cancel, or one thread per task.
+### Per-thread state on a pooled executor
+
+`ThreadLocal` gives each thread its own copy of a variable. On a pool this creates a lifetime mismatch that is the source of two distinct production failures, and it is worth stating precisely because the fix for one is not the fix for the other.
+
+The value's lifetime is the *thread's*, but the meaning you assigned it is the *task's*. A pooled worker outlives every task it runs, so whatever a task leaves behind is still there when the next task arrives.
+
+```java
+private static final ThreadLocal<String> TENANT = new ThreadLocal<>();
+
+// Wrong: the value survives this task and leaks into the next one.
+executor.submit(() -> {
+    TENANT.set(request.tenantId());
+    handle(request);
+});
+
+// Correct: the task owns the binding for exactly its own duration.
+executor.submit(() -> {
+    TENANT.set(request.tenantId());
+    try {
+        handle(request);
+    } finally {
+        TENANT.remove();
+    }
+});
+```
+
+**Failure one is correctness, and it is the dangerous one.** Without the `remove`, task N+1 observes task N's tenant, user, or trace id. It does not throw. It silently attributes work to the wrong principal, and in a multi-tenant service that is a data-disclosure bug that no test with a single request will find.
+
+**Failure two is memory.** `Thread` holds a `ThreadLocalMap`; entries have weak keys but **strong values**. When the `ThreadLocal` object itself becomes unreachable the key clears, yet the value stays reachable from the live pooled thread until an incidental map operation happens to purge that slot. A discarded large buffer can be retained for the life of the pool. Chapter 41 walks the root path.
+
+`InheritableThreadLocal` copies the parent's map into each new thread at construction. On a pool that is nearly useless, because workers were constructed long before your request arrived and inherit from whichever thread created the pool. With virtual threads it is worse than useless: a per-thread map copy does not scale to millions of threads.
+
+This is the design pressure that produced `ScopedValue` (Chapter 58). A `ScopedValue` is immutable, its lifetime is exactly the dynamic extent of the `run` call so there is nothing to remove, and a structured scope shares the binding with child threads rather than copying it. Where you control the code, prefer it on Java 25. Where you do not - an MDC in a logging framework, a security context in a framework filter - `ThreadLocal` remains, and the `try/finally` discipline above is not optional.
+
+> **Specification boundary:** `java.util.concurrent` specifies lifecycle, completion, cancellation requests, and memory-consistency effects. It does not guarantee task start order unless an executor says so, fair worker scheduling, task termination after cancel, or one thread per task. `ThreadLocal` specifies per-thread storage and weak key references; it does not specify when a stale entry's value is reclaimed, so leak timing is an implementation behavior rather than a contract.
 
 ## 36.6 Worked Java example
 

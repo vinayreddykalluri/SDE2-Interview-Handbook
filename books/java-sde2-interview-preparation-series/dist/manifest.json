@@ -4,7 +4,7 @@
   "release_date": "2026-07-25",
   "edition_date": "2026-08-02",
   "public_segments": 4,
-  "physical_volumes": 40,
+  "physical_volumes": 41,
   "volumes": [
     {
       "page_count": 188,
@@ -645,6 +645,22 @@
       "title": "Distributed Systems and System Design",
       "file": "04-system-design/Java-SDE2-SD-02-Distributed-Systems-and-System-Design.pdf",
       "output_name": "Java-SDE2-SD-02-Distributed-Systems-and-System-Design.pdf"
+    },
+    {
+      "page_count": 78,
+      "sha256": "ab081543304f979fa2546a0f5c4bb8bbca8aa550e31cd5ad06464890556acd1b",
+      "bytes": 3858882,
+      "id": "GENAI",
+      "stage": "18",
+      "path_label": "SD-03",
+      "book_position": 41,
+      "segment_id": "system-design",
+      "segment_code": "SD",
+      "segment_position": 3,
+      "publication_status": "published",
+      "title": "Generative AI System Design",
+      "file": "04-system-design/Java-SDE2-SD-03-Generative-AI-System-Design.pdf",
+      "output_name": "Java-SDE2-SD-03-Generative-AI-System-Design.pdf"
     }
   ],
   "index": {

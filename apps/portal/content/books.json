@@ -6,12 +6,12 @@
     "date": "2026-07-25",
     "editionDate": "2026-08-02",
     "url": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/tag/books-v2026.07.0",
-    "focusedBookCount": 40,
-    "focusedPageCount": 3389,
+    "focusedBookCount": 41,
+    "focusedPageCount": 3467,
     "indexPageCount": 17,
-    "masterPageCount": 656,
-    "totalPdfCount": 42,
-    "totalPageCount": 4062,
+    "masterPageCount": 657,
+    "totalPdfCount": 43,
+    "totalPageCount": 4141,
     "index": {
       "title": "Java SDE-2 Interview Preparation Series Index",
       "filename": "Java-SDE2-Interview-Preparation-Series-Index.pdf",
@@ -67,7 +67,7 @@
       "title": "System Design",
       "shortTitle": "System Design",
       "description": "Move from component boundaries to distributed-system reasoning after the Java backend foundations are secure.",
-      "bookCount": 2,
+      "bookCount": 3,
       "startBookId": "18F",
       "artifactDir": "04-system-design",
       "startHref": "books/sd-01-design-backend-testing-and-security/"
@@ -930,8 +930,8 @@
       "fullBookHref": "books/java-07-concurrency-and-memory-model/",
       "codeHref": "books/java-07-concurrency-and-memory-model/code/",
       "webDocumentCount": 8,
-      "wordCount": 19194,
-      "codeExampleCount": 20,
+      "wordCount": 19631,
+      "codeExampleCount": 21,
       "sourceChapterCount": 1,
       "supportingSourceCount": 7,
       "chapterPreview": [
@@ -4468,7 +4468,7 @@
       "segmentShortTitle": "System Design",
       "segmentCode": "SD 01",
       "segmentPosition": 1,
-      "segmentBookCount": 2,
+      "segmentBookCount": 3,
       "publicationStatus": "published",
       "title": "Design, Backend, Testing, and Security",
       "shortTitle": "Backend Design and Security",
@@ -4570,7 +4570,7 @@
       "segmentShortTitle": "System Design",
       "segmentCode": "SD 02",
       "segmentPosition": 2,
-      "segmentBookCount": 2,
+      "segmentBookCount": 3,
       "publicationStatus": "published",
       "title": "Distributed Systems and System Design",
       "shortTitle": "Distributed Systems and System Design",
@@ -4665,6 +4665,104 @@
           "href": "docs/backend-interview/06-distributed-systems/"
         }
       ]
+    },
+    {
+      "order": 41,
+      "bookPosition": 41,
+      "step": "SD-03",
+      "pathLabel": "SD-03",
+      "id": "GENAI",
+      "track": "System Design",
+      "segmentId": "system-design",
+      "segmentTitle": "System Design",
+      "segmentShortTitle": "System Design",
+      "segmentCode": "SD 03",
+      "segmentPosition": 3,
+      "segmentBookCount": 3,
+      "publicationStatus": "published",
+      "title": "Generative AI System Design",
+      "shortTitle": "Generative AI System Design",
+      "subtitle": "Inference Cost, Retrieval, Agents, Guardrails, and Evaluating a Probabilistic System",
+      "purpose": "This book covers the generative-AI design round that entered standard interview loops after 2024. It treats inference latency, token cost, and non-determinism as capacity constraints, and applies the same constraint-first method used for traditional distributed-system design.",
+      "authorNote": "A model in the request path is still a dependency with a latency budget, a bill, and a failure mode. Estimate the tokens before you draw the boxes, push authorization into the query rather than trusting a prompt, and decide what your system does on the day the provider is down. The judgement being tested is the same one you already use on any distributed system; only the component is unfamiliar.",
+      "filename": "Java-SDE2-SD-03-Generative-AI-System-Design.pdf",
+      "artifactPath": "04-system-design/Java-SDE2-SD-03-Generative-AI-System-Design.pdf",
+      "pageCount": 78,
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/04-system-design/Java-SDE2-SD-03-Generative-AI-System-Design.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-SD-03-Generative-AI-System-Design.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-03-generative-ai-system-design/chapters",
+      "fullBookHref": "books/sd-03-generative-ai-system-design/",
+      "codeHref": "books/sd-03-generative-ai-system-design/code/",
+      "webDocumentCount": 7,
+      "wordCount": 17664,
+      "codeExampleCount": 2,
+      "sourceChapterCount": 5,
+      "supportingSourceCount": 2,
+      "chapterPreview": [
+        {
+          "title": "1. Designing With a Model in the Request Path",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-03-generative-ai-system-design/chapters/01-designing-with-a-model-in-the-request-path.md",
+          "webHref": "books/sd-03-generative-ai-system-design/01-01-designing-with-a-model-in-the-request-path/"
+        },
+        {
+          "title": "2. Retrieval-Augmented Generation: Architecture and Failure Modes",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-03-generative-ai-system-design/chapters/02-retrieval-augmented-generation-architecture.md",
+          "webHref": "books/sd-03-generative-ai-system-design/02-02-retrieval-augmented-generation-architecture/"
+        },
+        {
+          "title": "3. Agentic Workflows, Tool Calling, and Orchestration",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-03-generative-ai-system-design/chapters/03-agentic-workflows-tools-and-orchestration.md",
+          "webHref": "books/sd-03-generative-ai-system-design/03-03-agentic-workflows-tools-and-orchestration/"
+        },
+        {
+          "title": "4. Evaluation, Guardrails, and Operating a Probabilistic System",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-03-generative-ai-system-design/chapters/04-evaluation-guardrails-and-operating-a-probabilistic-system.md",
+          "webHref": "books/sd-03-generative-ai-system-design/04-04-evaluation-guardrails-and-operating-a-probabilistic-system/"
+        }
+      ],
+      "chapterContents": [
+        {
+          "title": "1. Designing With a Model in the Request Path",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-03-generative-ai-system-design/chapters/01-designing-with-a-model-in-the-request-path.md",
+          "webHref": "books/sd-03-generative-ai-system-design/01-01-designing-with-a-model-in-the-request-path/"
+        },
+        {
+          "title": "2. Retrieval-Augmented Generation: Architecture and Failure Modes",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-03-generative-ai-system-design/chapters/02-retrieval-augmented-generation-architecture.md",
+          "webHref": "books/sd-03-generative-ai-system-design/02-02-retrieval-augmented-generation-architecture/"
+        },
+        {
+          "title": "3. Agentic Workflows, Tool Calling, and Orchestration",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-03-generative-ai-system-design/chapters/03-agentic-workflows-tools-and-orchestration.md",
+          "webHref": "books/sd-03-generative-ai-system-design/03-03-agentic-workflows-tools-and-orchestration/"
+        },
+        {
+          "title": "4. Evaluation, Guardrails, and Operating a Probabilistic System",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-03-generative-ai-system-design/chapters/04-evaluation-guardrails-and-operating-a-probabilistic-system.md",
+          "webHref": "books/sd-03-generative-ai-system-design/04-04-evaluation-guardrails-and-operating-a-probabilistic-system/"
+        },
+        {
+          "title": "5. The GenAI Design Interview: Method, Worked Cases, and Question Bank",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-03-generative-ai-system-design/chapters/05-the-genai-design-interview-method-and-worked-cases.md",
+          "webHref": "books/sd-03-generative-ai-system-design/05-05-the-genai-design-interview-method-and-worked-cases/"
+        },
+        {
+          "title": "Generative AI Design Drills",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-03-generative-ai-system-design/exercises/generative-ai-design-drills.md",
+          "webHref": "books/sd-03-generative-ai-system-design/06-generative-ai-design-drills/"
+        },
+        {
+          "title": "Generative AI Design Drills: Worked Solutions",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-03-generative-ai-system-design/solutions/generative-ai-design-solutions.md",
+          "webHref": "books/sd-03-generative-ai-system-design/07-generative-ai-design-solutions/"
+        }
+      ],
+      "outcomes": [
+        "Estimate tokens, cost, and latency before designing anything",
+        "Build a retrieval pipeline with authorization pushed into the query",
+        "Bound an agent and make its side effects idempotent and compensable"
+      ],
+      "webReads": []
     }
   ]
 }

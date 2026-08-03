@@ -71,7 +71,7 @@ Expected combined outputs:
 
 Individual website-derived module books are written to `output/pdf/` and `output/docx/`. Build and inspect those outputs locally when changing handbook Markdown.
 
-The publication-ready book library is separate from those website-derived builds. Download its 42 PDFs from the [latest release](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest), or browse the canonical files under `books/java-sde2-interview-preparation-series/dist/`.
+The publication-ready book library is separate from those website-derived builds. Download its 43 PDFs from the [latest release](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest), or browse the canonical files under `books/java-sde2-interview-preparation-series/dist/`.
 
 ## Recommended interview loop
 

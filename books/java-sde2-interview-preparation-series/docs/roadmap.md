@@ -15,11 +15,11 @@ All forty focused books are publication editions. The roadmap now records readin
 
 ## Current publication snapshot
 
-- 4 learning segments and 40 published focused books
-- 403 declared source entries resolving to 396 unique mapped Markdown documents
-- 3,371 focused-book pages
-- one 18-page series index and one 616-page master reference
-- 42 PDFs and 4,005 pages across the complete library
+- 4 learning segments and 41 published focused books
+- 414 declared source entries resolving to 407 unique mapped Markdown documents
+- 3,467 focused-book pages
+- one 17-page series index and one 657-page master reference
+- 43 PDFs and 4,141 pages across the complete library
 
 ## Java Engineering
 
