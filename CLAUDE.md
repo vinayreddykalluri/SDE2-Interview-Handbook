@@ -175,6 +175,8 @@ C1 is now the *only* thing standing between this repo and a clean release proces
 
 ## 8. Gotchas
 
+- `make` picks `.venv/bin/python` when a venv exists and falls back to the system interpreter otherwise. Targets that `cd` into a subdirectory must use `$(PYTHON_ABS)`, not `$(CURDIR)/$(PYTHON)` — the latter breaks the moment `PYTHON` resolves to an absolute path.
+- `build-books.yml` is two independent jobs. `book-series` renders through pandoc and ReportLab; `handbook-pdf` renders through LaTeX. They share no tooling, so a missing TeX package must not be able to stop the series from building.
 - `make clean` deletes `site/` and `output/` but never `dist/` — `dist/` is tracked, not build output.
 - `mkdocs.yml` nav is validated by `validate_structure.py`; adding a doc without a nav entry fails the build.
 - `vercel.json` pins a static build publishing `site/`; `validate_deployment.py` asserts this, so changing the output dir breaks validation.

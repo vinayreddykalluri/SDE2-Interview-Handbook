@@ -3,7 +3,18 @@
 BOOK_DIR := books/java-sde2-interview-preparation-series
 
 SYSTEM_PYTHON ?= python3
-PYTHON ?= .venv/bin/python
+# Prefer the local venv when `make install` has created one, otherwise fall
+# back to the interpreter already on PATH. Hardcoding .venv/bin/python meant
+# every target failed instantly on any machine without a venv -- including CI,
+# which installs into the runner's Python. The failure was
+# "make: .venv/bin/python: No such file or directory", which does not point at
+# the cause. Setting PYTHON in the environment still overrides both.
+PYTHON ?= $(shell test -x .venv/bin/python && echo .venv/bin/python || command -v python3 || command -v python)
+
+# Targets that cd into a subdirectory need an absolute interpreter path.
+# $(abspath) leaves an already-absolute path alone and resolves a relative one
+# against the repository root, so this works for both the venv and system cases.
+PYTHON_ABS := $(abspath $(PYTHON))
 
 bootstrap:
 	bash tooling/automation/bootstrap_macos.sh
@@ -32,9 +43,9 @@ build-book-web:
 # dist/manifest.json and must run last), then the master book. Resumable --
 # rerun after an interruption and it picks up where it stopped.
 build-books:
-	cd $(BOOK_DIR) && $(CURDIR)/$(PYTHON) scripts/build_all_volumes.py
-	cd $(BOOK_DIR) && $(CURDIR)/$(PYTHON) scripts/build_series.py --index-only
-	cd $(BOOK_DIR) && $(CURDIR)/$(PYTHON) scripts/build_book.py --only all
+	cd $(BOOK_DIR) && $(PYTHON_ABS) scripts/build_all_volumes.py
+	cd $(BOOK_DIR) && $(PYTHON_ABS) scripts/build_series.py --index-only
+	cd $(BOOK_DIR) && $(PYTHON_ABS) scripts/build_book.py --only all
 	$(MAKE) validate-pdfs
 
 sync-book-catalog:
@@ -76,7 +87,7 @@ validate-all:
 	$(MAKE) validate-pdfs
 
 validate-pdfs:
-	cd $(BOOK_DIR) && $(CURDIR)/$(PYTHON) scripts/validate_pdfs.py --quick
+	cd $(BOOK_DIR) && $(PYTHON_ABS) scripts/validate_pdfs.py --quick
 
 validate-layout:
 	$(PYTHON) tooling/automation/validate_repository_layout.py

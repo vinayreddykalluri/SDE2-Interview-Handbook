@@ -31,6 +31,13 @@ concurrency:
   group: github-pages
   cancel-in-progress: true
 
+env:
+  # The Makefile defaults to PYTHON = .venv/bin/python for local development.
+  # CI installs into the runner's Python and never creates a venv, so every
+  # make target died instantly with "make: .venv/bin/python: No such file or
+  # directory". The default uses ?=, so this environment variable overrides it.
+  PYTHON: python
+
 jobs:
   build:
     runs-on: ubuntu-latest

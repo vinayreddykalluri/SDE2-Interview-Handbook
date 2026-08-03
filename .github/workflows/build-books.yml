@@ -21,9 +21,19 @@ env:
   # the first table with "not enough values to unpack (expected 6, got 5)".
   # Pin the version explicitly rather than inheriting whatever apt provides.
   PANDOC_VERSION: '3.1.11'
+  # The Makefile prefers .venv/bin/python for local development. CI installs
+  # into the runner's Python and never creates a venv, so make targets used to
+  # die instantly with "make: .venv/bin/python: No such file or directory".
+  # The Makefile now falls back on its own; this keeps the choice explicit.
+  PYTHON: python
 
+# Two independent jobs on purpose. The book series renders through pandoc and
+# ReportLab; the handbook PDFs render through LaTeX. They share no tooling, and
+# a missing TeX package should not stop the series -- which is the artifact
+# people actually download -- from building and being validated.
 jobs:
-  build:
+  book-series:
+    name: Book series (pandoc + ReportLab)
     runs-on: ubuntu-latest
     timeout-minutes: 45
 
@@ -53,19 +63,14 @@ jobs:
           rm pandoc.deb
           pandoc --version | head -1
 
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y texlive-xetex texlive-fonts-recommended
-
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
           python -m pip install -r tooling/requirements/authoring.txt
           python -m pip install -r books/java-sde2-interview-preparation-series/requirements.txt
 
-      - name: Validate and build all publications
-        run: make build-all
+      - name: Validate source and release metadata
+        run: make validate-all
 
       - name: Rebuild the published book series
         working-directory: books/java-sde2-interview-preparation-series
@@ -74,11 +79,11 @@ jobs:
           python scripts/build_series.py --index-only
           python scripts/build_book.py --only all
 
-      # Runs after the rebuild so it checks the artifacts this job produced,
-      # not the ones committed to the branch. Page counts, byte sizes, and
-      # SHA-256 digests must agree with dist/manifest.json, and every page
-      # must yield extractable text -- a font that fails to embed still
-      # renders visibly but is invisible to search and screen readers.
+      # Runs against the artifacts this job just produced, not the ones
+      # committed to the branch. Page counts, byte sizes, and SHA-256 digests
+      # must agree with dist/manifest.json, and every page must yield
+      # extractable text -- a font that fails to embed still renders visibly
+      # but is invisible to search and screen readers.
       - name: Validate rendered PDFs
         working-directory: books/java-sde2-interview-preparation-series
         run: python scripts/validate_pdfs.py
@@ -90,6 +95,50 @@ jobs:
           path: books/java-sde2-interview-preparation-series/dist/
           if-no-files-found: error
           retention-days: 30
+
+  handbook-pdf:
+    name: Handbook PDF and DOCX (LaTeX)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Set up Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Install pinned pandoc
+        run: |
+          curl -fsSL -o pandoc.deb \
+            "https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-1-amd64.deb"
+          sudo dpkg -i pandoc.deb
+          rm pandoc.deb
+
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-xetex texlive-fonts-recommended
+          xelatex --version | head -1
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r tooling/requirements/authoring.txt
+
+      - name: Build handbook publications
+        run: make build-all
 
       - name: Upload PDFs
         uses: actions/upload-artifact@v4
