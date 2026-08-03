@@ -25,6 +25,19 @@ BOOKS_BUILDER = ROOT / "tooling" / "automation" / "build_book_web_library.py"
 LOCAL_REFERENCE = re.compile(r'(?:href|src)="([^"]+)"')
 PAGES_PREFIX = "/SDE2-Interview-Handbook/"
 
+# Runtime-only routes: served by the host, never present in site/.
+#
+# broken_book_links() below requires every local reference to resolve to a real
+# file under site/, which is the right rule - it is what catches a renamed
+# chapter before it ships. The Vercel Web Analytics script is the one reference
+# that legitimately cannot satisfy it: Vercel serves it from the edge at this
+# fixed path, so it exists at request time and never on disk.
+#
+# Kept as an exact-match set rather than a prefix or a pattern, so this stays a
+# hole for one known path instead of a general escape hatch. validate_web.py
+# carries the same allowance for the portal shell, under VERCEL_INSIGHTS_SCRIPT.
+RUNTIME_ONLY_REFERENCES = frozenset({"/_vercel/insights/script.js"})
+
 
 def broken_book_links() -> list[tuple[Path, str]]:
     broken: list[tuple[Path, str]] = []
@@ -34,6 +47,8 @@ def broken_book_links() -> list[tuple[Path, str]]:
         for reference in LOCAL_REFERENCE.findall(page.read_text(encoding="utf-8")):
             parsed = urlsplit(reference)
             if parsed.scheme or parsed.netloc or reference.startswith(("#", "//")):
+                continue
+            if reference in RUNTIME_ONLY_REFERENCES:
                 continue
             raw_path = unquote(parsed.path)
             if not raw_path:
