@@ -113,6 +113,13 @@ The examples are provided without warranty. Review correctness, security, perfor
 - [Chapter 53 - SDE-2 Java Interview Question Bank](#chapter-53-sde-2-java-interview-question-bank)
 - [Chapter 54 - Eight-Week Study Plan and Mock Interview Loops](#chapter-54-eight-week-study-plan-and-mock-interview-loops)
 
+## Part IX - Core Library Depth and the Modern Java Baseline
+
+- [Chapter 55 - Dates, Times, Zones, and the java.time API](#chapter-55-dates-times-zones-and-the-java-time-api)
+- [Chapter 56 - Regular Expressions and Text Processing](#chapter-56-regular-expressions-and-text-processing)
+- [Chapter 57 - The Module System, JPMS, and Strong Encapsulation](#chapter-57-the-module-system-jpms-and-strong-encapsulation)
+- [Chapter 58 - Java 22 to 25: The Modern LTS Baseline](#chapter-58-java-22-to-25-the-modern-lts-baseline)
+
 ## Appendices
 
 - [Appendix A - Java Syntax and Language Quick Reference](#appendix-a-java-syntax-and-language-quick-reference)
@@ -16022,6 +16029,1381 @@ An effective eight-week plan alternates learning with retrieval, implementation,
 - [ ] My production stories include evidence, trade-offs, actions, and measured outcomes.
 - [ ] I have a reduced-volume plan for missed time or burnout.
 - [ ] The final 48 hours prioritize retrieval, logistics, and sleep.
+
+<!-- PAGE_BREAK -->
+
+# Part IX - Core Library Depth and the Modern Java Baseline
+
+<!-- PAGE_BREAK -->
+
+# Chapter 55 - Dates, Times, Zones, and the java.time API
+
+## 55.1 Learning objectives
+
+By the end of this chapter, you should be able to:
+
+- choose the correct `java.time` type for an instant, a local date, a wall-clock appointment, and a duration;
+- explain the difference between `Instant`, `LocalDateTime`, `OffsetDateTime`, and `ZonedDateTime`;
+- reason about time zones, daylight-saving gaps and overlaps, and the tzdb update cycle;
+- apply `Duration`, `Period`, and `ChronoUnit` without conflating machine time and calendar time; and
+- design storage, serialization, and test boundaries so that time is an injected dependency rather than ambient state.
+
+## 55.2 Why this matters at SDE-2
+
+Time bugs are rarely caught by unit tests and are almost always found in production. A scheduled job fires twice on the night the clocks go back. A subscription renews an hour early for users in one region. A report joins two tables whose timestamps mean different things, and nobody notices until the totals disagree at a quarter boundary.
+
+The legacy `java.util.Date` and `Calendar` types encouraged these failures: `Date` is a mutable instant with a misleading name, `Calendar` months are zero-based, and neither type distinguishes a point on the timeline from a local calendar reading. `java.time` replaced them with immutable types whose names state their meaning. At SDE-2, the interview question is usually "how do you store a timestamp," and the correct answer depends on whether the value is an event that happened or an appointment that will happen.
+
+## 55.3 First-principles model
+
+There are two fundamentally different kinds of time, and most defects come from using one where the other is required.
+
+**Machine time** is a point on a continuous timeline, independent of any calendar or location. `Instant` models this: a count of seconds and nanoseconds from the 1970-01-01T00:00:00Z epoch. Two observers anywhere in the world agree on an `Instant`.
+
+**Calendar time** is a human reading - a date and a wall-clock time as displayed by a local calendar. `LocalDate`, `LocalTime`, and `LocalDateTime` model this. They carry no zone and therefore do not identify a point on the timeline. `2026-03-08T02:30` is a valid `LocalDateTime` and, in several time zones, an instant that never existed.
+
+A zone converts between the two. `ZoneId` names a region with a full history of offset rules ("America/New_York"); `ZoneOffset` is a fixed displacement from UTC ("-05:00"). A region is not an offset: New York is `-05:00` in January and `-04:00` in July. `ZonedDateTime` is a local date-time plus a zone plus the resolved offset, so it identifies a real instant and remembers the rules that produced it.
+
+> **Specification boundary:** Java specifies the ISO-8601 calendar system, the arithmetic of each `java.time` type, and the resolution strategy for daylight-saving gaps and overlaps. It does not specify the contents of the time-zone database. Zone rules are political, change several times a year, and ship as tzdb data inside the JDK or from `-Djava.time.zone.DefaultZoneRulesProvider`. Correct code can produce wrong answers on a stale runtime.
+
+## 55.4 Core terminology
+
+- **Instant:** a point on the timeline, in UTC, with nanosecond field precision.
+- **LocalDate / LocalTime / LocalDateTime:** calendar readings with no zone and no offset.
+- **ZoneId:** a region whose UTC offset varies over time according to tzdb rules.
+- **ZoneOffset:** a fixed offset from UTC; a `ZoneId` subtype with no rule history.
+- **OffsetDateTime:** a local date-time plus a fixed offset - a real instant, no rule history.
+- **ZonedDateTime:** a local date-time plus a `ZoneId` plus the resolved offset.
+- **Duration:** machine-time amount measured in seconds and nanoseconds.
+- **Period:** calendar-time amount measured in years, months, and days.
+- **Gap:** a local time that does not exist because the clocks sprang forward.
+- **Overlap:** a local time that occurs twice because the clocks fell back.
+- **Clock:** the injectable abstraction supplying "now" and the default zone.
+
+## 55.5 Detailed mechanics
+
+### Choosing the type
+
+The decision is driven by what the value means, not by what is convenient to store.
+
+| The value is | Use | Reason |
+|---|---|---|
+| Something that happened - a log line, an audit record, a payment capture | `Instant` | The event has one unambiguous time; local readings are a display concern. |
+| A birthday, an invoice date, a holiday | `LocalDate` | There is no time and no zone; the date is the same fact everywhere. |
+| A store's opening time, a recurring alarm | `LocalTime` | The wall-clock reading is the requirement, whatever the offset that day. |
+| A future appointment in a named place | `ZonedDateTime` | The user means "9 a.m. in Chicago," which must survive a rule change. |
+| An API or database timestamp with a known offset | `OffsetDateTime` | Unambiguous instant, and it round-trips through `TIMESTAMP WITH TIME ZONE`. |
+| An elapsed measurement or a timeout | `Duration` | Machine time; must not be affected by calendar arithmetic. |
+| "One month later" on a billing cycle | `Period` | Calendar time; the day count deliberately varies by month. |
+
+The two rows most often confused are the first and the fourth. Store a *past* event as an `Instant`. Store a *future* appointment as a `ZonedDateTime` or as a `LocalDateTime` plus a `ZoneId` column. If you collapse a future appointment to an `Instant` at write time and the region later changes its rules, the meeting silently moves.
+
+### Immutability and the wither pattern
+
+Every `java.time` value is immutable and thread-safe. Mutating methods do not exist; `plusDays`, `withHour`, and `truncatedTo` return new values.
+
+```java
+LocalDate date = LocalDate.of(2026, 1, 31);
+date.plusMonths(1);              // result discarded - a common bug
+LocalDate next = date.plusMonths(1);   // 2026-02-28
+```
+
+Note the clamping in the second call. Adding one calendar month to 31 January yields 28 February, because month arithmetic resolves to the last valid day. This is intentional and specified, but it is not reversible: `date.plusMonths(1).minusMonths(1)` is 28 January, not 31 January. Any billing logic that assumes round-tripping is wrong.
+
+### Duration versus Period
+
+`Duration` counts elapsed seconds. `Period` counts calendar fields. On a daylight-saving boundary they disagree, and that disagreement is the point.
+
+```java
+ZoneId chicago = ZoneId.of("America/Chicago");
+ZonedDateTime before = ZonedDateTime.of(
+        LocalDate.of(2026, 3, 7), LocalTime.of(12, 0), chicago);
+
+ZonedDateTime plusPeriod = before.plus(Period.ofDays(1));   // 2026-03-08T12:00-05:00
+ZonedDateTime plusDuration = before.plus(Duration.ofDays(1)); // 2026-03-08T13:00-05:00
+```
+
+`Period.ofDays(1)` means "same wall-clock time tomorrow" and consumes 23 real hours across the spring-forward boundary. `Duration.ofDays(1)` means "86,400 seconds later" and lands an hour further along the clock. A daily 12:00 job must use `Period` or a `ZonedDateTime` field addition; a one-day cache expiry must use `Duration`.
+
+### Gaps and overlaps
+
+When a local date-time does not exist, `ZonedDateTime.of` does not throw. It shifts the result forward by the size of the gap.
+
+```java
+ZoneId chicago = ZoneId.of("America/Chicago");
+LocalDateTime springForward = LocalDateTime.of(2026, 3, 8, 2, 30);
+ZonedDateTime resolved = ZonedDateTime.of(springForward, chicago);
+// 2026-03-08T03:30-05:00 - 02:30 never occurred
+```
+
+When a local date-time occurs twice, `of` selects the **earlier** offset. `withLaterOffsetAtOverlap()` selects the other. Silently picking the earlier one is right for most displays and wrong for anything that must not fire twice; consult `ZoneRules.getValidOffsets` when the distinction matters.
+
+```java
+ZoneRules rules = chicago.getRules();
+LocalDateTime fallBack = LocalDateTime.of(2026, 11, 1, 1, 30);
+List<ZoneOffset> valid = rules.getValidOffsets(fallBack);
+// size 0 -> gap, size 1 -> normal, size 2 -> overlap
+```
+
+A scheduler that treats "size 2" as ordinary will run the 01:30 job twice each November.
+
+### Parsing, formatting, and the locale trap
+
+`DateTimeFormatter` is immutable and thread-safe - unlike `SimpleDateFormat`, which is not and which caused a long tail of production corruption when shared across threads.
+
+Formatters default to the JVM's locale unless told otherwise. `DateTimeFormatter.ofPattern("MMM d")` produces "Jan 5" on one host and a localized month name on another. Always pin the locale for machine-readable output, and prefer the predefined ISO constants for wire formats.
+
+```java
+DateTimeFormatter machine = DateTimeFormatter.ISO_INSTANT;
+DateTimeFormatter human = DateTimeFormatter
+        .ofPattern("d MMMM yyyy", Locale.US)
+        .withZone(ZoneId.of("America/Chicago"));
+```
+
+The pattern letters are a frequent source of defects: `yyyy` is the calendar year and `YYYY` is the week-based year. They differ for a few days each January, which is why "the dashboard showed 2025 for three days" is a recurring new-year incident.
+
+### Clock injection
+
+`Instant.now()` reads the system clock and the default zone. Both are ambient global state, and code that calls them directly cannot be tested deterministically without changing the machine.
+
+`Clock` is the seam. Inject it, default it to `Clock.systemUTC()`, and substitute a fixed clock in tests.
+
+```java
+public final class TrialService {
+    private final Clock clock;
+
+    public TrialService(Clock clock) {
+        this.clock = clock;
+    }
+
+    public boolean expired(Instant startedAt, Duration trialLength) {
+        return Instant.now(clock).isAfter(startedAt.plus(trialLength));
+    }
+}
+```
+
+`Clock.fixed(instant, zone)` freezes time; `Clock.offset(base, duration)` shifts it. Neither requires mocking a static method, which is why this design is worth the one extra constructor parameter.
+
+## 55.6 Worked Java example
+
+A billing service that renews a subscription must add a calendar month in the customer's own zone, then resolve to an instant for storage.
+
+```java
+import java.time.Clock;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Period;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
+public final class RenewalSchedule {
+    private final Clock clock;
+
+    public RenewalSchedule(Clock clock) {
+        this.clock = clock;
+    }
+
+    /**
+     * Next renewal at the same local billing hour, one calendar month later,
+     * resolved in the customer's zone. Returned as an Instant because the
+     * scheduler compares against a monotonic timeline.
+     */
+    public Instant nextRenewal(LocalDate anchorDate, LocalTime billingHour, ZoneId customerZone) {
+        ZonedDateTime current = ZonedDateTime.of(anchorDate, billingHour, customerZone);
+        ZonedDateTime next = current.plus(Period.ofMonths(1));
+        return next.toInstant();
+    }
+
+    public boolean dueNow(Instant renewalAt) {
+        return !Instant.now(clock).isBefore(renewalAt);
+    }
+
+    public static void main(String[] args) {
+        RenewalSchedule schedule = new RenewalSchedule(Clock.systemUTC());
+        ZoneId chicago = ZoneId.of("America/Chicago");
+
+        Instant fromJan31 = schedule.nextRenewal(
+                LocalDate.of(2026, 1, 31), LocalTime.of(2, 30), chicago);
+        System.out.println(fromJan31); // 2026-02-28T08:30:00Z
+
+        Instant acrossDst = schedule.nextRenewal(
+                LocalDate.of(2026, 2, 8), LocalTime.of(2, 30), chicago);
+        System.out.println(acrossDst); // 2026-03-08T08:30:00Z
+    }
+}
+```
+
+The first call demonstrates month clamping: 31 January has no counterpart in February, so the renewal lands on the 28th. The second call crosses the spring-forward boundary; 02:30 on 8 March does not exist in Chicago, so the resolution rule shifts it to 03:30 local, which is 08:30Z.
+
+## 55.7 Execution or memory walkthrough
+
+`ZonedDateTime.of(anchorDate, billingHour, customerZone)` builds a `LocalDateTime`, asks `ZoneRules` for the valid offsets of that local value, and stores the local value, the zone, and the chosen offset as three fields. No lookup table is copied; `ZoneRules` instances are shared per zone.
+
+`plus(Period.ofMonths(1))` operates on the **local** fields first. It adds one to the month, clamps the day to the month length, and then re-resolves the offset against the zone rules. This ordering is what makes the result "the same wall-clock time next month" rather than "a fixed number of seconds later."
+
+`toInstant()` subtracts the resolved offset from the local date-time and converts to epoch seconds. The returned `Instant` holds two primitive fields - a long of seconds and an int of nanoseconds - and carries no zone. The zone information is deliberately discarded, which is why the *future* appointment case needs the `ZonedDateTime` retained rather than only its instant.
+
+Every intermediate value here is a separate immutable object. The allocation is real but small and short-lived; these objects die in the young generation.
+
+## 55.8 Complexity and performance
+
+All field arithmetic is O(1). Offset resolution is a binary search over the zone's transition table - O(log t) in the number of historical transitions, typically a few hundred - and the table is loaded once per zone and cached.
+
+`ZoneId.of` and `DateTimeFormatter.ofPattern` are the expensive calls. Both parse and build structures that should be hoisted to `static final` fields rather than constructed per request. Formatting and parsing dominate any realistic profile of date-heavy code; the arithmetic does not.
+
+`Instant` comparison is a long comparison. Prefer comparing instants over comparing formatted strings, which is both slower and wrong across offsets.
+
+> **HotSpot note:** `java.time` values are ordinary heap objects. They are good escape-analysis candidates - a `LocalDate` created and consumed inside one inlined method may be scalar-replaced - but this is an optimization, not a guarantee. Do not restructure clear date logic to avoid allocation without a benchmark showing the allocation matters.
+
+## 55.9 Edge cases and common mistakes
+
+- Treating `LocalDateTime` as an instant. It has no zone; converting it assumes a default that varies by host.
+- Storing a future appointment as an `Instant`, losing the intent when zone rules change.
+- Using `ZoneOffset` where `ZoneId` is required, freezing an offset that is only correct half the year.
+- Assuming `plusMonths(1).minusMonths(1)` is the identity. Month clamping is lossy.
+- Using `Duration.ofDays` for calendar days across a DST boundary.
+- Sharing a `SimpleDateFormat` across threads. Migrate to `DateTimeFormatter`, which is immutable.
+- `YYYY` instead of `yyyy` in a pattern, producing a wrong year for a few days each January.
+- Calling `LocalDate.now()` with no argument in domain logic, making the code untestable and host-dependent.
+- Assuming a day has 86,400 seconds. Leap seconds are smeared by most infrastructure, but DST alone breaks the assumption.
+- Comparing timestamps with `equals` across types. `Instant` and `OffsetDateTime` never compare equal; use `isEqual` or compare instants.
+- Persisting to a database column that silently converts. MySQL `TIMESTAMP` normalizes to UTC using the session zone; `DATETIME` does not. Know which you have.
+- Relying on a JDK's bundled tzdb in a long-lived container image. A container built two years ago has two-year-old political data.
+
+## 55.10 Production engineering notes
+
+Store instants in UTC and convert at the edges. The database column should be `TIMESTAMP WITH TIME ZONE` or an explicit UTC-normalized type; the application should convert to the user's zone only at rendering time. This single rule removes most cross-region reporting defects.
+
+Keep the customer's `ZoneId` as first-class data when future scheduling is involved. A subscription row that carries `next_renewal_local` and `zone_id` survives a tzdb update correctly; one that carries only `next_renewal_utc` does not.
+
+Update tzdb deliberately. The JDK ships it, so a base-image bump changes time behavior. Treat that as a production change with the same care as a dependency upgrade, and know that `TZUpdater` exists for patching a JDK in place when a full upgrade is not available.
+
+Inject `Clock` in every service that reads the current time. This is the difference between a test that asserts renewal behavior across a DST boundary in milliseconds and a test that cannot be written at all.
+
+Log in ISO-8601 with an explicit offset. `2026-03-08T08:30:00Z` is greppable, sortable, and unambiguous; `Mar 8 03:30:00` is none of those and has lost the information needed to reconstruct the event ordering.
+
+## 55.11 Interview questions and model answers
+
+**What is the difference between `Instant` and `LocalDateTime`?**
+
+`Instant` is a point on the timeline in UTC - an unambiguous moment every observer agrees on. `LocalDateTime` is a calendar reading with no zone, so it does not identify a moment. Converting between them requires a zone, and choosing the wrong one is the most common time defect in a distributed system.
+
+**When would you use `ZonedDateTime` instead of `Instant`?**
+
+For future events tied to a place. "9 a.m. in Chicago next March" must remain 9 a.m. even if the offset rules change before then, so the zone must be retained rather than collapsed to an instant at write time. Past events go the other way: they already happened at one moment, so `Instant` is correct.
+
+**What is the difference between `Duration` and `Period`?**
+
+`Duration` is machine time - seconds and nanoseconds - and is unaffected by calendars. `Period` is calendar time - years, months, days - and deliberately varies in real length. Across a spring-forward boundary, `Period.ofDays(1)` advances 23 hours while `Duration.ofDays(1)` advances 24.
+
+**What happens when you construct a `ZonedDateTime` for a time that does not exist?**
+
+It does not throw. The gap resolution rule shifts the result forward by the length of the gap, so 02:30 on a spring-forward morning becomes 03:30. If you need to detect this rather than absorb it, call `ZoneRules.getValidOffsets` and check for an empty list.
+
+**Why is `java.time` preferred over `Date` and `Calendar`?**
+
+The types are immutable and thread-safe, the names state whether a value has a zone, months are one-based, and the API separates machine time from calendar time. `SimpleDateFormat`'s thread-unsafety alone caused a large class of production bugs that `DateTimeFormatter` cannot reproduce.
+
+**How do you make time-dependent code testable?**
+
+Inject a `Clock` and read the current time through it. `Clock.fixed` then makes DST boundaries, month-end clamping, and expiry edges ordinary unit tests rather than untestable behavior.
+
+## 55.12 Exercises
+
+1. Write a method that returns every local time between 01:00 and 03:00 on a fall-back date in a zone of your choice, and mark which readings are ambiguous.
+2. Take an existing service that calls `Instant.now()` directly and refactor it to accept a `Clock`; add a test that asserts behavior at a month boundary.
+3. Demonstrate the `yyyy` versus `YYYY` discrepancy by formatting 29 December through 2 January.
+4. Model a monthly subscription anchored on the 31st and produce twelve renewal dates. Explain each clamped result.
+5. Store the same appointment as an `Instant` and as a `ZonedDateTime`, then simulate a zone-rule change and show which representation survives.
+6. Benchmark `DateTimeFormatter.ofPattern` inside a loop against a hoisted `static final` formatter and report the difference.
+
+## 55.13 Chapter summary
+
+`java.time` separates machine time from calendar time, and nearly every date defect comes from confusing the two. `Instant` is a moment; `LocalDate` and `LocalDateTime` are calendar readings without a zone; `ZonedDateTime` binds a local reading to a region's rule history and therefore to a real moment. `Duration` measures elapsed seconds while `Period` measures calendar fields, and they diverge exactly where daylight-saving boundaries make the divergence matter. Every type is immutable and thread-safe, so formatters can be shared and values can cross threads freely. Store past events as UTC instants, retain the zone for future appointments, pin locales on formatters, treat tzdb as production data, and inject `Clock` so that the hard cases become testable.
+
+## 55.14 Revision checklist
+
+- [ ] I can state which `java.time` type models an event, a birthday, an appointment, and a timeout.
+- [ ] I can explain why `LocalDateTime` does not identify a moment.
+- [ ] I know the difference between `ZoneId` and `ZoneOffset` and when each is wrong.
+- [ ] I can predict the result of `Period.ofDays(1)` and `Duration.ofDays(1)` across a DST boundary.
+- [ ] I can detect a gap and an overlap using `ZoneRules.getValidOffsets`.
+- [ ] I know why month arithmetic does not round-trip.
+- [ ] I pin the locale on every human-facing formatter and hoist formatters to constants.
+- [ ] I inject `Clock` rather than calling `Instant.now()` in domain logic.
+- [ ] I can explain how a stale tzdb produces correct code with wrong answers.
+
+<!-- PAGE_BREAK -->
+
+# Chapter 56 - Regular Expressions and Text Processing
+
+## 56.1 Learning objectives
+
+By the end of this chapter, you should be able to:
+
+- use `Pattern` and `Matcher` correctly, including their very different threading rules;
+- explain greedy, reluctant, and possessive quantifiers and choose between them deliberately;
+- recognize catastrophic backtracking and rewrite a pattern to eliminate it;
+- apply groups, named groups, lookaround, and boundaries without over-reaching; and
+- decide when a regular expression is the wrong tool.
+
+## 56.2 Why this matters at SDE-2
+
+Regular expressions appear in log parsing, input validation, routing rules, data migration, and every ad-hoc extraction task that outlives its author. They are also one of the few places where a single line of application code can take down a service: a pattern that runs in microseconds on typical input can run for hours on a crafted string, and the thread is not interruptible while it does.
+
+The SDE-2 signal is not whether you can recall the syntax for a character class. It is whether you can reason about how the engine executes the pattern, whether you know that `String.split` compiles a pattern on every call, and whether you can tell an interviewer why `(a+)+b` is a denial-of-service vector.
+
+## 56.3 First-principles model
+
+Java's `java.util.regex` is a **backtracking** engine. It does not build a deterministic automaton and run the input through it once. It walks the pattern, and whenever a construct could match in more than one way, it takes one branch, continues, and - if the rest of the pattern fails - returns and tries the next alternative.
+
+That single design fact explains almost everything that matters in practice. Backtracking is what makes backreferences and lookaround expressible. It is also what makes the worst case exponential rather than linear, because a pattern with nested ambiguous quantifiers can have exponentially many ways to divide the same substring, and a failing match forces the engine to try all of them.
+
+A `Pattern` is a compiled, immutable, thread-safe program. A `Matcher` is the mutable execution state for one pattern against one input: current position, group boundaries, and the backtracking stack. Compiling is expensive; matching is cheap; sharing a `Matcher` across threads is a data race.
+
+> **Specification boundary:** Java specifies the pattern syntax, the greediness of each quantifier, group numbering, and the semantics of the flags. It does not specify a time bound. Match time is a property of the engine's backtracking strategy, not of the language, and no timeout facility is built in - a runaway match is not interruptible by `Thread.interrupt`.
+
+## 56.4 Core terminology
+
+- **Pattern:** compiled immutable regular expression; thread-safe and reusable.
+- **Matcher:** mutable, single-threaded engine state for one input.
+- **Greedy quantifier:** `*`, `+`, `?` - consume as much as possible, then give back on failure.
+- **Reluctant quantifier:** `*?`, `+?`, `??` - consume as little as possible, then take more.
+- **Possessive quantifier:** `*+`, `++`, `?+` - consume maximally and never give back.
+- **Atomic group:** `(?>...)` - once matched, discards its backtracking alternatives.
+- **Capturing group:** `(...)` - numbered left to right by opening parenthesis.
+- **Named group:** `(?<name>...)` - retrieved by name rather than index.
+- **Lookahead / lookbehind:** `(?=)`, `(?!)`, `(?<=)`, `(?<!)` - zero-width assertions.
+- **Catastrophic backtracking:** exponential match time from nested ambiguous quantifiers.
+- **Region:** the sub-range of input a `Matcher` is restricted to.
+
+## 56.5 Detailed mechanics
+
+### Pattern is shared; Matcher is not
+
+This is the single most important operational rule.
+
+```java
+public final class LogParser {
+    // Compiled once. Immutable. Safe to share across every thread.
+    private static final Pattern LEVEL =
+            Pattern.compile("^(?<level>TRACE|DEBUG|INFO|WARN|ERROR)\\s+(?<rest>.*)$");
+
+    public Optional<String> level(String line) {
+        Matcher matcher = LEVEL.matcher(line);   // fresh Matcher per call
+        return matcher.matches() ? Optional.of(matcher.group("level")) : Optional.empty();
+    }
+}
+```
+
+Hoisting the `Pattern` to a `static final` field is not micro-optimization. `Pattern.compile` parses the expression and builds a node tree; doing that per request in a hot path is often the largest single cost in a parsing routine.
+
+The convenience methods hide this. `String.matches`, `String.split`, and `String.replaceAll` all call `Pattern.compile` internally on every invocation. In a loop, replace them with a hoisted pattern.
+
+```java
+// Recompiles the pattern on every iteration.
+for (String line : lines) {
+    if (line.matches("\\d{4}-\\d{2}-\\d{2}")) { ... }
+}
+
+// Compiles once.
+private static final Pattern ISO_DATE = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
+for (String line : lines) {
+    if (ISO_DATE.matcher(line).matches()) { ... }
+}
+```
+
+`String.split` has one documented fast path: a single-character, non-metacharacter separator bypasses the regex engine entirely. `split(",")` is cheap; `split("\\s*,\\s*")` is not.
+
+### matches, find, and lookingAt
+
+Three methods, three anchoring rules, and a frequent source of wrong results.
+
+- `matches()` - the pattern must consume the **entire** input.
+- `lookingAt()` - the pattern must match at the **start**, need not reach the end.
+- `find()` - the pattern may match **anywhere**, and successive calls advance through the input.
+
+```java
+Pattern digits = Pattern.compile("\\d+");
+Matcher m = digits.matcher("abc123def456");
+
+m.matches();     // false - the whole string is not digits
+m.reset().lookingAt();  // false - does not start with digits
+m.reset();
+while (m.find()) {
+    System.out.println(m.group() + " at " + m.start());  // 123 at 3, 456 at 9
+}
+```
+
+A validation method that uses `find()` where it meant `matches()` accepts every string containing a valid fragment. This is how "email validation" regularly accepts `not-an-email a@b.co garbage`.
+
+### Greedy, reluctant, and possessive
+
+Consider extracting the content of the first HTML-like tag from `<a><b>`.
+
+```java
+Pattern greedy    = Pattern.compile("<(.+)>");    // group: "a><b"
+Pattern reluctant = Pattern.compile("<(.+?)>");   // group: "a"
+Pattern possessive= Pattern.compile("<(.++)>");   // no match at all
+```
+
+The greedy `.+` consumes to the end, then backs off one character at a time until the trailing `>` can match - landing on the last `>`. The reluctant `.+?` starts with one character and grows only as needed, landing on the first `>`. The possessive `.++` consumes everything and refuses to give any back, so the final `>` has nothing left to match and the whole attempt fails.
+
+Possessive quantifiers and atomic groups are the deliberate tools for bounding backtracking. They say: once this part has matched, never reconsider it. When you know a sub-expression's match is unambiguous, making it possessive converts a potential exponential blowup into a linear scan.
+
+### Catastrophic backtracking
+
+The classic failing shape is a quantifier applied to something that is itself ambiguously quantified, followed by something that fails.
+
+```java
+Pattern bad = Pattern.compile("(a+)+b");
+bad.matcher("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!").matches();
+```
+
+The input has thirty `a` characters and no `b`. The engine must prove no match exists. `(a+)+` can partition those thirty characters into groups in exponentially many ways, and the trailing `b` fails for every one of them. Match time roughly doubles per added `a`. At thirty characters this takes seconds; at forty it outlives the request timeout; the thread is pinned and cannot be interrupted.
+
+Three fixes, in order of preference:
+
+```java
+Pattern fixed1 = Pattern.compile("a+b");        // remove the redundant nesting
+Pattern fixed2 = Pattern.compile("(?>a+)+b");   // atomic group: no re-partitioning
+Pattern fixed3 = Pattern.compile("(a++)+b");    // possessive: same effect
+```
+
+The first is usually available and always best - the nesting was adding nothing. Reach for atomic groups when the structure is genuinely needed.
+
+The engineering rule: any pattern applied to untrusted input should either be provably linear or be run with a bound. Since Java offers no timeout, the practical bound is a `CharSequence` wrapper whose `charAt` throws after a budget is exhausted, or running the match on a task you can abandon while accepting the pinned thread.
+
+### Groups, named groups, and numbering
+
+Groups are numbered by the position of their **opening** parenthesis, left to right, starting at 1. Group 0 is the entire match. Nesting does not reset the count.
+
+```java
+Pattern p = Pattern.compile("((\\d{4})-(\\d{2}))-(\\d{2})");
+Matcher m = p.matcher("2026-08-02");
+m.matches();
+m.group(0);  // 2026-08-02
+m.group(1);  // 2026-08
+m.group(2);  // 2026
+m.group(3);  // 08
+m.group(4);  // 02
+```
+
+Counting parentheses is a maintenance hazard: inserting a group anywhere shifts every later index. Named groups remove the problem.
+
+```java
+Pattern p = Pattern.compile("(?<year>\\d{4})-(?<month>\\d{2})-(?<day>\\d{2})");
+Matcher m = p.matcher("2026-08-02");
+if (m.matches()) {
+    String year = m.group("year");
+}
+```
+
+Use `(?:...)` for grouping without capturing. It expresses intent and avoids allocating group state you will not read.
+
+An unmatched group returns `null`, not an empty string - a routine `NullPointerException` source when a group sits behind an optional branch.
+
+### Lookaround
+
+Lookaround asserts without consuming. The position does not advance, and the assertion contributes nothing to the match text.
+
+```java
+Pattern beforeK = Pattern.compile("\\d+(?=k)");   // digits followed by k
+Pattern notK    = Pattern.compile("\\d+(?!k)");   // digits not followed by k
+Pattern afterUsd= Pattern.compile("(?<=\\$)\\d+");// digits preceded by $
+```
+
+Java requires lookbehind to be **bounded** in length - `(?<=a{1,5})` is legal, `(?<=a*)` is not. Lookahead has no such restriction.
+
+Lookahead is the honest way to express "all of these must hold" without dictating order, which is why password-policy checks read as a chain of assertions rather than one tangled alternation.
+
+### Flags and Unicode
+
+Flags may be passed to `compile` or embedded inline as `(?i)`.
+
+- `CASE_INSENSITIVE` is ASCII-only unless combined with `UNICODE_CASE`.
+- `DOTALL` makes `.` match line terminators; by default it does not.
+- `MULTILINE` makes `^` and `$` match at line boundaries rather than only input boundaries.
+- `COMMENTS` allows whitespace and `#` comments inside the pattern - genuinely worth using for anything long.
+
+The default word boundary `\b` and shorthand classes such as `\w` are ASCII-oriented. `UNICODE_CHARACTER_CLASS` redefines them against Unicode properties, which matters the moment real names or non-English text arrive.
+
+```java
+Pattern ascii   = Pattern.compile("\\w+");
+Pattern unicode = Pattern.compile("\\w+", Pattern.UNICODE_CHARACTER_CLASS);
+// On a string containing "naive" spelled with a diaeresis over the i,
+// the ASCII pattern finds two fragments, "na" and "ve", because the accented
+// character is not an ASCII word character. The Unicode pattern finds the
+// whole word. The same split happens to any name outside ASCII.
+```
+
+Because Java strings are UTF-16, a character outside the Basic Multilingual Plane is two `char` values. `.` matches a full code point, but a hand-rolled class such as `[a-zA-Z]` reasons in code units and will happily split a surrogate pair.
+
+### Replacement pitfalls
+
+In the replacement string of `replaceAll`, `$` introduces a group reference and `\` escapes. Any user-supplied replacement text must be escaped, or a stray `$1` in the data becomes a group reference and a stray `$` throws.
+
+```java
+String replacement = Matcher.quoteReplacement(userInput);
+String result = pattern.matcher(source).replaceAll(replacement);
+```
+
+Symmetrically, `Pattern.quote` escapes user input used as a *pattern*, turning it into a literal. Building a pattern by concatenating unescaped user input is regular-expression injection: it is at best a wrong result and at worst a supplied `(a+)+b` that hangs the thread.
+
+Prefer `replaceAll(Function<MatchResult, String>)` when the replacement is computed, since it avoids the escaping rules entirely.
+
+## 56.6 Worked Java example
+
+Extracting structured fields from a log line, with the pattern hoisted, named groups, and a bounded quantifier.
+
+```java
+import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public final class AccessLogParser {
+
+    // Anchored, no nested quantifiers, bounded status field.
+    private static final Pattern ENTRY = Pattern.compile(
+            "^(?<ip>[0-9.]{7,15})\\s+"
+          + "\\[(?<timestamp>[^\\]]++)\\]\\s+"      // possessive: content is unambiguous
+          + "\"(?<method>[A-Z]{3,7})\\s(?<path>[^\"]++)\"\\s+"
+          + "(?<status>\\d{3})\\s+"
+          + "(?<bytes>\\d++)$");
+
+    public record Entry(String ip, String timestamp, String method,
+                        String path, int status, long bytes) {}
+
+    public Optional<Entry> parse(String line) {
+        Matcher m = ENTRY.matcher(line);
+        if (!m.matches()) {
+            return Optional.empty();
+        }
+        return Optional.of(new Entry(
+                m.group("ip"),
+                m.group("timestamp"),
+                m.group("method"),
+                m.group("path"),
+                Integer.parseInt(m.group("status")),
+                Long.parseLong(m.group("bytes"))));
+    }
+
+    public static void main(String[] args) {
+        AccessLogParser parser = new AccessLogParser();
+        String line = "10.0.0.7 [02/Aug/2026:14:22:01 +0000] \"GET /api/orders\" 200 4821";
+        System.out.println(parser.parse(line).orElseThrow());
+        // Entry[ip=10.0.0.7, timestamp=02/Aug/2026:14:22:01 +0000,
+        //       method=GET, path=/api/orders, status=200, bytes=4821]
+        System.out.println(parser.parse("garbage").isPresent()); // false
+    }
+}
+```
+
+Three deliberate choices. `matches()` rather than `find()`, so a partially valid line is rejected rather than silently accepted. The quantifiers are possessive, because each field's extent is fixed by its delimiter - there is no legitimate reason for the engine to reconsider them. Named groups mean adding a field later cannot renumber the existing ones.
+
+The `path` group is worth dwelling on, because the obvious spelling is wrong. Writing it as `\\S++` looks natural - a path contains no whitespace - but `\"` is also not whitespace, so the possessive quantifier consumes the closing quote and then refuses to give it back. The pattern fails on every well-formed line. Negating the actual delimiter with `[^\"]++` is correct: a possessive quantifier is only safe when its character class genuinely cannot overlap what follows it. This is the possessive trade-off in miniature - you gain a guarantee against backtracking and you give up the engine's ability to rescue an imprecise class.
+
+## 56.7 Execution or memory walkthrough
+
+`Pattern.compile` runs once at class initialization. It parses the expression into a linked tree of node objects - one per construct - and stores the group count and name-to-index map. This tree is immutable, which is what makes the `Pattern` shareable.
+
+`ENTRY.matcher(line)` allocates a `Matcher` holding a reference to the input `CharSequence`, an int array of group boundaries sized to the group count, and the append position. Nothing is copied from the input.
+
+`matches()` anchors at position 0 and requires the terminal node to sit at the input end. The engine walks the node tree, each node advancing the position and calling the next. When `[A-Z]{3,7}` matches `GET` and the following node fails, a greedy node would restore the saved position and retry at a shorter length; the possessive nodes in this pattern discard that saved state immediately, so those regions are scanned exactly once.
+
+`m.group("ip")` resolves the name to an index, reads the start and end offsets from the int array, and calls `subSequence` - the only string allocation in the whole parse, and only for groups actually read. This is why unnecessary capturing groups cost more than `(?:...)`: the boundary bookkeeping happens whether or not you read them.
+
+## 56.8 Complexity and performance
+
+For a pattern without ambiguous nesting, matching is O(n-m) in input length and pattern size, and in practice close to linear. For a pattern with nested ambiguous quantifiers, the worst case is **exponential** in input length, and the bad case is reached by a failing match, not a successful one - so tests built from valid inputs never find it.
+
+Compilation is the dominant cost in code that recompiles. A hoisted `static final Pattern` removes it entirely.
+
+Allocation comes from group extraction and from `split`, which builds an array of substrings. Where only presence matters, `find()` without calling `group()` allocates nothing beyond the `Matcher`.
+
+> **HotSpot note:** the matcher's inner loop is ordinary Java and inlines well, so a simple pattern over short input is genuinely fast. JIT compilation does not change algorithmic behavior: no amount of warmup rescues a pattern whose backtracking is exponential.
+
+## 56.9 Edge cases and common mistakes
+
+- Compiling inside a loop or a request handler instead of hoisting to `static final`.
+- Using `find()` for validation where `matches()` was meant, accepting any string with a valid fragment.
+- Nested ambiguous quantifiers such as `(a+)+`, `(a*)*`, or `(\\s+)+` on untrusted input.
+- Assuming a runaway match can be interrupted. It cannot; `Thread.interrupt` has no effect.
+- Building a pattern from unescaped user input - regex injection. Use `Pattern.quote`.
+- Forgetting `Matcher.quoteReplacement` for user-supplied replacement text containing `$` or `\`.
+- Reading a group that did not participate in the match and dereferencing the `null`.
+- Counting group numbers by hand, then inserting a group and shifting every later index.
+- Expecting `\\w` and `\\b` to handle non-ASCII without `UNICODE_CHARACTER_CLASS`.
+- Expecting `.` to cross a line terminator without `DOTALL`.
+- Using an unbounded lookbehind, which Java rejects at compile time.
+- Sharing a `Matcher` between threads. `Pattern` is safe; `Matcher` is not.
+- Reaching for a regular expression to parse HTML, JSON, or any nested structure - these are not regular languages, and no pattern parses them correctly.
+- Using `split` on a single-character separator with an escaped metacharacter, losing the fast path for no reason.
+
+## 56.10 Production engineering notes
+
+Treat every pattern that touches untrusted input as a potential availability risk. Review it for nested quantifiers, prefer possessive or atomic forms where the extent is unambiguous, and fuzz it with long non-matching inputs - the failing case is the dangerous one.
+
+Keep patterns in named constants next to the code that uses them, with `COMMENTS` mode and inline documentation once they exceed a line. A pattern nobody can read is a pattern nobody can safely change.
+
+Prefer a real parser when the input has structure. CSV with embedded quotes, HTML, and JSON all have grammars that regular expressions cannot express, and the "almost working" pattern is worse than an obvious dependency because it fails on the rare row.
+
+Where a regex is user-configurable - routing rules, alert filters, redaction patterns - you have accepted arbitrary code with unbounded runtime from your users. Validate on submission, keep the evaluation off the request thread, and constrain what the configuration surface allows.
+
+Log the pattern name rather than the pattern text when reporting a match failure, and never log the input if it may contain secrets. Redaction patterns in particular tend to run over exactly the data you must not emit.
+
+## 56.11 Interview questions and model answers
+
+**Is `Pattern` thread-safe? Is `Matcher`?**
+
+`Pattern` is immutable and safe to share; the standard practice is one `static final` instance per pattern. `Matcher` holds mutable position and group state, so each thread must create its own via `pattern.matcher(input)`.
+
+**What is catastrophic backtracking and how do you fix it?**
+
+A pattern with nested ambiguous quantifiers, such as `(a+)+b`, can partition the same input exponentially many ways. On a failing match the engine tries all of them, so time doubles with each added character. Fix it by removing the redundant nesting, or by making the inner quantifier possessive or the group atomic so the engine cannot re-partition.
+
+**What is the difference between greedy, reluctant, and possessive quantifiers?**
+
+Greedy consumes as much as possible and gives back on failure. Reluctant consumes as little as possible and takes more on failure. Possessive consumes maximally and never gives back, which prevents backtracking and can turn an exponential pattern into a linear one - at the cost of failing some matches a greedy quantifier would find.
+
+**Why is `String.matches` a problem in a loop?**
+
+It compiles the pattern on every call. Hoist a `static final Pattern` and reuse it; compilation is far more expensive than the match for short inputs.
+
+**How does `matches()` differ from `find()`?**
+
+`matches()` requires the pattern to consume the entire input; `find()` searches for a match anywhere and can be called repeatedly to iterate. Using `find()` for validation is a common defect, since it accepts any input containing a valid substring.
+
+**Can you parse HTML with a regular expression?**
+
+No. HTML is arbitrarily nested and regular expressions cannot count nesting depth. A pattern can extract from a known fixed shape, but any general parsing needs a real parser.
+
+## 56.12 Exercises
+
+1. Write `(a+)+b`, time it against inputs of 20, 25, and 30 `a` characters with no `b`, and plot the growth. Then fix it three ways and re-measure.
+2. Convert a validation method that uses `find()` to one that uses `matches()`, and find an input whose acceptance changes.
+3. Take a pattern with six numbered groups, convert it to named groups, then insert a new group at the front and confirm nothing else breaks.
+4. Demonstrate the difference between `\\w+` with and without `UNICODE_CHARACTER_CLASS` on a string containing accented characters and an emoji.
+5. Write a `replaceAll` whose replacement text comes from user input containing `$1`, observe the failure, then fix it with `Matcher.quoteReplacement`.
+6. Benchmark `split(",")` against `split("\\s*,\\s*")` on a large file and explain the gap using the single-character fast path.
+7. Rewrite the `AccessLogParser` pattern with greedy quantifiers throughout and measure the difference on ten thousand lines, including malformed ones.
+
+## 56.13 Chapter summary
+
+Java's regex engine backtracks, and that one fact drives everything practical about it. `Pattern` is immutable, expensive to build, and meant to be hoisted and shared; `Matcher` is mutable, cheap, and strictly per-thread. Greedy quantifiers give back on failure, reluctant ones grow on demand, and possessive quantifiers and atomic groups refuse to reconsider - which is the primary defense against catastrophic backtracking, an exponential failure mode that only appears on inputs that *fail* to match and therefore survives most test suites. Anchor validation with `matches()` rather than `find()`, prefer named groups over hand-counted indices, escape user input with `Pattern.quote` and replacements with `Matcher.quoteReplacement`, and enable Unicode classes when real-world text arrives. When the input has nested structure, use a parser: the correct regular expression does not exist.
+
+## 56.14 Revision checklist
+
+- [ ] I hoist every pattern to a `static final` field and never compile in a loop.
+- [ ] I know `Pattern` is thread-safe and `Matcher` is not.
+- [ ] I can explain `matches()`, `find()`, and `lookingAt()` and pick the right one for validation.
+- [ ] I can predict what greedy, reluctant, and possessive quantifiers extract from `<a><b>`.
+- [ ] I can recognize a catastrophic pattern and fix it three ways.
+- [ ] I know a runaway match cannot be interrupted.
+- [ ] I use named groups and `(?:...)` rather than counting parentheses.
+- [ ] I escape user input with `Pattern.quote` and replacements with `Matcher.quoteReplacement`.
+- [ ] I know when `\\w` and `\\b` need `UNICODE_CHARACTER_CLASS`.
+- [ ] I can explain why regular expressions cannot parse HTML.
+
+<!-- PAGE_BREAK -->
+
+# Chapter 57 - The Module System, JPMS, and Strong Encapsulation
+
+## 57.1 Learning objectives
+
+By the end of this chapter, you should be able to:
+
+- explain what a module declares and why `public` stopped meaning "accessible to everyone";
+- distinguish the module path from the class path, and named, automatic, and unnamed modules;
+- read and write a `module-info.java` including `requires transitive`, `exports ... to`, and `opens`;
+- diagnose `InaccessibleObjectException` and split-package errors from the message alone; and
+- decide whether modularizing a given service is worth the cost.
+
+## 57.2 Why this matters at SDE-2
+
+Most Java services are not modularized, and many engineers conclude the module system is therefore irrelevant. It is not, for two reasons.
+
+First, the JDK itself is modular and has been since Java 9. Strong encapsulation of JDK internals became the default in Java 16 and was made final in Java 17, so reflective access into `java.base` now throws rather than warns. When a serialization library, a mocking framework, or an ORM fails with `InaccessibleObjectException` after a JDK upgrade, that is JPMS enforcing a boundary - and someone has to know what `--add-opens` actually does before pasting it into a startup script.
+
+Second, the vocabulary appears in interviews as a proxy for how well you understand accessibility, class loading, and dependency hygiene. "Why does `public` no longer mean accessible?" is a question about encapsulation design, not about syntax.
+
+## 57.3 First-principles model
+
+Before Java 9, the unit of reuse was the JAR and the unit of accessibility was the package. Neither was enforced meaningfully. Any JAR on the class path could read any `public` type in any other JAR; the class path was a flat, ordered search list with no notion of dependencies; two JARs could both contain `com.example.util` and the loader would silently take whichever came first.
+
+A **module** adds a name, an explicit dependency list, and an explicit export list to a set of packages. Three consequences follow directly:
+
+1. **Accessibility becomes two-dimensional.** A type is accessible only if it is `public` *and* its package is exported by its module *and* the reading module requires that module. `public` became necessary but no longer sufficient.
+2. **Dependencies become declared and verified.** The module graph is resolved at startup. A missing module is an error at launch rather than a `NoClassDefFoundError` on the unlucky code path six hours in.
+3. **Packages become unique.** A package may belong to only one module in a configuration. Split packages, previously silent, are now a startup failure.
+
+> **Specification boundary:** Java specifies module declarations, the readability and accessibility rules, and resolution at startup. It does not specify versions. `module-info.java` has no version constraint syntax and the module system performs no version selection or conflict resolution - that remains entirely the job of Maven, Gradle, or whatever builds your module path.
+
+## 57.4 Core terminology
+
+- **Named module:** has a `module-info.class`; declares its own name, requires, and exports.
+- **Automatic module:** a plain JAR placed on the module path; gets a name, reads everything, exports everything.
+- **Unnamed module:** everything loaded from the class path; reads all modules, exports all its packages.
+- **Module path:** `--module-path` / `-p`; entries are resolved as modules.
+- **Class path:** `-cp`; entries land in the unnamed module with legacy behavior.
+- **requires:** this module reads another.
+- **requires transitive:** readers of this module also read that one - implied readability.
+- **requires static:** needed at compile time, optional at run time.
+- **exports:** package is accessible at compile time and run time.
+- **opens:** package is available for deep reflection at run time only.
+- **uses / provides:** the `ServiceLoader` declaration pair.
+- **Strong encapsulation:** non-exported packages are inaccessible even to reflection.
+
+## 57.5 Detailed mechanics
+
+### Reading a module declaration
+
+`module-info.java` sits at the source root and compiles to `module-info.class`.
+
+```java
+module com.example.orders {
+    requires java.sql;                       // I use JDBC types internally
+    requires transitive com.example.model;   // my API signatures expose model types
+    requires static com.example.codegen;     // compile-time only annotation processor
+
+    exports com.example.orders.api;                       // public API
+    exports com.example.orders.spi to com.example.admin;  // qualified: one consumer only
+
+    opens com.example.orders.entity;         // deep reflection for the ORM
+
+    uses com.example.orders.spi.PricingRule;                    // I consume this service
+    provides com.example.orders.spi.PricingRule
+            with com.example.orders.internal.StandardPricing;   // I supply this implementation
+}
+```
+
+Everything not listed is inaccessible. `com.example.orders.internal` is not exported, so no other module can reference it - the compiler rejects the import and reflection throws at run time.
+
+### requires transitive and API leakage
+
+`requires transitive` exists for one situation: when your public API's signatures mention types from another module.
+
+```java
+// In com.example.orders
+public Order lookup(CustomerId id);   // CustomerId comes from com.example.model
+```
+
+Any caller of `lookup` must be able to name `CustomerId`. Without `requires transitive com.example.model`, every consumer would have to add its own `requires com.example.model` - and would be baffled as to why. The rule is mechanical: if a type from module M appears in your exported signatures, `requires transitive M`. Otherwise use plain `requires`, which keeps the dependency an implementation detail you can change later.
+
+This makes API leakage visible in a way the class path never did. A module needing ten `requires transitive` entries is telling you its public surface depends on ten other modules.
+
+### exports versus opens
+
+This distinction is the one that actually bites in production.
+
+- `exports` grants **compile-time and run-time access to public types**. It does not grant reflective access to non-public members. `setAccessible(true)` on a private field in an exported-but-not-opened package throws.
+- `opens` grants **run-time deep reflection** into all members, including private ones, but grants nothing at compile time.
+
+Frameworks that populate fields reflectively - JPA providers, Jackson, Spring, most mocking libraries - need `opens`, not `exports`. Entity packages are the canonical case: you rarely want application code importing entity internals, but Hibernate must reach private fields.
+
+```java
+opens com.example.orders.entity;                        // to everyone
+opens com.example.orders.entity to org.hibernate.orm.core;  // qualified, preferred
+```
+
+`open module com.example.orders { ... }` opens every package at once. It is the pragmatic escape hatch when migrating a large codebase, and it discards most of the encapsulation benefit, so treat it as a transition state rather than a destination.
+
+### The three kinds of module
+
+Understanding migration requires understanding what happens to code that has no `module-info`.
+
+**Unnamed module** - everything on the class path. It reads every other module, and all its packages are exported. This is why an unmodularized application still runs on a modern JDK: the unnamed module is deliberately permissive. But no named module can `requires` the unnamed module, because it has no name. That asymmetry is the entire difficulty of incremental migration: you must modularize bottom-up, dependencies first.
+
+**Automatic module** - a plain JAR on the *module* path. It gets a name (from `Automatic-Module-Name` in the manifest, or derived from the filename), reads every other module including the unnamed one, and exports all its packages. It is the bridge that lets a named module depend on a not-yet-modularized library.
+
+Deriving a module name from a filename is fragile - the name changes if the artifact is renamed - so a library that has not modularized should at minimum publish `Automatic-Module-Name` in its manifest. That is a one-line manifest addition and it stabilizes the name for every downstream consumer.
+
+**Named module** - has `module-info.class`, enforces its declaration.
+
+### Strong encapsulation of the JDK
+
+The change most engineers actually encounter. JDK internals such as `sun.misc.Unsafe` and much of `java.lang` reflection were accessible on Java 8, warned about in 9 through 15, and denied from 16 onward.
+
+```text
+java.lang.reflect.InaccessibleObjectException: Unable to make
+field private final java.lang.String java.lang.String.value accessible:
+module java.base does not "opens java.lang" to unnamed module @1b6d3586
+```
+
+The message is precise and worth reading closely: it names the field, the owning module (`java.base`), the missing directive (`opens java.lang`), and the requesting module (`unnamed`, so the caller is on the class path). The corresponding flag mirrors that structure exactly:
+
+```bash
+java --add-opens java.base/java.lang=ALL-UNNAMED -jar app.jar
+```
+
+`--add-opens module/package=target` grants deep reflection; `--add-exports` grants only public access. `ALL-UNNAMED` targets everything on the class path.
+
+Two warnings. First, these flags are a compatibility bridge, not a fix - they belong in a build file with a comment naming the library that needs them and the ticket to remove them. Second, they must be present at every launch, so a flag that works locally and is missing from the container entrypoint produces a failure that appears only in deployment.
+
+### Split packages
+
+A package may exist in only one module on a given path. Two JARs both containing `com.example.util` fail at startup rather than silently shadowing:
+
+```text
+Error occurred during initialization of boot layer
+java.lang.LayerInstantiationException: Package com.example.util in both
+module lib.b and module lib.a
+```
+
+This surfaces genuine problems - shaded JARs, forked libraries, an old `javax.annotation` split - that the class path had been hiding.
+
+### Services
+
+JPMS makes `ServiceLoader` a first-class, declared relationship. The consumer declares `uses`, the provider declares `provides ... with`, and resolution binds them without either module referencing the other's implementation package.
+
+```java
+// consumer module
+uses com.example.orders.spi.PricingRule;
+
+// provider module, in a different artifact
+provides com.example.orders.spi.PricingRule with com.example.pricing.RegionalPricing;
+```
+
+The implementation class need not be in an exported package. This is genuinely better than the `META-INF/services` file it replaces: it is compile-checked, and a typo is a compilation error rather than a silent empty iterator.
+
+### jlink and runtime images
+
+Because dependencies are declared, the module graph can be computed and a custom runtime image containing only the reachable modules can be produced.
+
+```bash
+jlink --add-modules com.example.orders --output runtime --strip-debug --no-man-pages
+```
+
+For a service using a modest slice of the JDK this can cut a runtime image from a few hundred megabytes to under 60 - a real container-image win. `jlink` requires every module in the graph to be a named module, which in practice is the strongest concrete incentive to modularize.
+
+## 57.6 Worked Java example
+
+A two-module layout where the boundary is the point.
+
+```java
+// ---------- module com.example.model ----------
+// src/com.example.model/module-info.java
+module com.example.model {
+    exports com.example.model.api;
+    // com.example.model.internal is NOT exported
+}
+
+// src/com.example.model/com/example/model/api/CustomerId.java
+package com.example.model.api;
+
+public record CustomerId(String value) {
+    public CustomerId {
+        if (value == null || value.isBlank()) {
+            throw new IllegalArgumentException("customer id required");
+        }
+    }
+}
+
+// src/com.example.model/com/example/model/internal/IdCodec.java
+package com.example.model.internal;
+
+public final class IdCodec {           // public, but unreachable outside the module
+    public static String encode(String raw) { return raw.strip().toUpperCase(); }
+}
+```
+
+```java
+// ---------- module com.example.orders ----------
+// src/com.example.orders/module-info.java
+module com.example.orders {
+    requires transitive com.example.model;   // CustomerId appears in my API
+    exports com.example.orders.api;
+}
+
+// src/com.example.orders/com/example/orders/api/OrderService.java
+package com.example.orders.api;
+
+import com.example.model.api.CustomerId;
+// import com.example.model.internal.IdCodec;  // compile error: not exported
+
+public final class OrderService {
+    public String describe(CustomerId id) {
+        return "orders for " + id.value();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new OrderService().describe(new CustomerId("c-100")));
+        // orders for c-100
+    }
+}
+```
+
+Compile and run both modules:
+
+```bash
+javac -d out --module-source-path src $(find src -name '*.java')
+java --module-path out --module com.example.orders/com.example.orders.api.OrderService
+```
+
+Uncommenting the `IdCodec` import produces a compile error naming the reason:
+
+```text
+error: package com.example.model.internal is not visible
+  (package com.example.model.internal is declared in module
+   com.example.model, which does not export it)
+```
+
+`IdCodec` is `public`. It is still unreachable. That is the whole idea in one error message.
+
+## 57.7 Execution or memory walkthrough
+
+At launch, the module system resolves the graph before any application class loads. It reads the root modules named by `--module` or `--add-modules`, transitively reads their `requires` edges, and fails immediately on a missing module, a duplicate module name, a split package, or a cycle. Resolution produces a **configuration**, which is instantiated as the boot **layer**.
+
+Each module in the layer is assigned to a class loader - the built-in application loader for the module path - and the loader records which packages belong to which module. This is why a split package is detectable at all: the mapping from package to module must be a function.
+
+At link time, a reference from `com.example.orders` to `CustomerId` is checked twice. The compiler verifies that `com.example.orders` reads `com.example.model` and that the package is exported. The JVM verifies the same facts again during resolution, because a module path can differ at run time from the one used at compile time.
+
+An `IdCodec` reference would fail the second check with `IllegalAccessError` even if it somehow passed the first - which is the meaningful difference from the class path, where the check did not exist.
+
+Reflection consults the same tables. `setAccessible(true)` asks whether the target's package is *open* to the caller's module; the answer is a table lookup, and a negative answer throws `InaccessibleObjectException`. No bytecode is rewritten and no proxy is generated; the enforcement is a runtime check in `AccessibleObject`.
+
+## 57.8 Complexity and performance
+
+Resolution is roughly linear in the number of modules and edges, and it happens once. For a typical service the cost is a few milliseconds against a JVM startup measured in hundreds.
+
+Access checks are performed at resolution or first access and then cached in the constant pool, so steady-state throughput is unaffected. There is no per-call module check.
+
+The measurable wins are startup and image size. A `jlink` image containing only reachable modules loads a smaller class-data-sharing archive and produces a much smaller container image. The measurable cost is build complexity, which is where modularization is usually paid for.
+
+> **HotSpot note:** module boundaries do not create optimization barriers. The JIT inlines across modules exactly as it does within one, because accessibility is resolved before compilation. Modules are a correctness and packaging mechanism, not a performance one.
+
+## 57.9 Edge cases and common mistakes
+
+- Assuming `public` still means accessible. It requires `public` plus `exports` plus `requires`.
+- Using `exports` where a framework needs `opens`, then debugging `InaccessibleObjectException`.
+- Using `opens` where `exports` was meant, giving reflective access but no compile-time access.
+- Omitting `requires transitive` when an exported signature mentions another module's type, forcing every consumer to add a dependency it cannot explain.
+- Expecting `module-info.java` to express versions. It cannot; version selection belongs to the build tool.
+- Expecting a named module to `requires` the unnamed module. It cannot - migration must go bottom-up.
+- Relying on a filename-derived automatic module name, which changes when the artifact is renamed.
+- Split packages from shaded or forked JARs, now a hard startup failure.
+- Adding `--add-opens` at compile time only and omitting it from the runtime launch command.
+- Putting the same JAR on both the class path and the module path, producing two copies with different identities.
+- Treating `open module` as the finished state rather than a migration step.
+- Forgetting that `requires static` supplies compile-time visibility only; the type must be absent-safe at run time.
+- Assuming `jlink` works with automatic modules. It does not - every module in the graph must be named.
+
+## 57.10 Production engineering notes
+
+Be honest about whether modularization pays. For a Spring Boot service deployed as a fat JAR, the answer is usually no: the framework does extensive reflection, many dependencies are unmodularized, and you gain little over a well-structured build with enforced package rules. For a published library, a CLI, or anything shipping a runtime image, the answer is often yes.
+
+If you do not modularize, still add `Automatic-Module-Name` to any JAR you publish. It costs one manifest line and spares every downstream consumer a name that changes when you rename a file.
+
+Record every `--add-opens` and `--add-exports` in the build with a comment naming the library that requires it and the condition for removing it. These flags accumulate silently and become a list nobody dares touch. Re-test them on each JDK and library upgrade - most eventually become unnecessary.
+
+Put the flags where every launch sees them. `MANIFEST.MF` supports `Add-Opens` for executable JARs, and the `JDK_JAVA_OPTIONS` environment variable is honored by the `java` launcher. A flag configured only in a local IDE run configuration is a production incident waiting for a deploy.
+
+When a JDK upgrade breaks reflective access, prefer upgrading the offending library over adding a flag. `InaccessibleObjectException` is usually a library reaching into internals that have a supported alternative, and the maintainers have generally already fixed it.
+
+## 57.11 Interview questions and model answers
+
+**Why is a `public` class not always accessible in Java 9 and later?**
+
+Accessibility now has two dimensions. The type must be `public`, its package must be exported by its module, and the calling module must read that module. A `public` class in a non-exported package is visible to its own module only, which is what makes internal APIs genuinely internal.
+
+**What is the difference between `exports` and `opens`?**
+
+`exports` grants compile-time and run-time access to public members. `opens` grants run-time deep reflection into all members, including private ones, and grants nothing at compile time. Frameworks that populate private fields need `opens`; ordinary API consumers need `exports`.
+
+**When do you need `requires transitive`?**
+
+When a type from the required module appears in your own exported signatures. Consumers must be able to name those types, and `requires transitive` gives them implied readability instead of forcing each one to declare a dependency it does not obviously use.
+
+**What is an automatic module?**
+
+A plain JAR on the module path. It takes its name from `Automatic-Module-Name` or the filename, reads every other module including the unnamed one, and exports all its packages. It exists so a named module can depend on a library that has not modularized yet.
+
+**How do you fix `InaccessibleObjectException`?**
+
+Read the message - it names the module, the package, and the caller. Then either add `opens` to your own module declaration if you own the code, or pass `--add-opens module/package=ALL-UNNAMED` at launch. Preferably upgrade the library instead, since the exception usually means it is reaching into internals that now have a supported replacement.
+
+**Why does the module system reject split packages?**
+
+Each package must map to exactly one module so that accessibility and class loading are well defined. On the class path, duplicate packages silently resolved by search order, which produced defects that depended on artifact ordering. JPMS makes it a startup error.
+
+## 57.12 Exercises
+
+1. Build the two-module example, then uncomment the `IdCodec` import and read the compiler error carefully.
+2. Add a third module that requires `com.example.orders` and uses `CustomerId`. Remove `transitive` and explain the resulting error.
+3. Write a class that calls `setAccessible(true)` on a private field of a non-opened package, observe the exception, and fix it with `opens` and again with `--add-opens`.
+4. Create two JARs sharing a package name, put both on the module path, and read the `LayerInstantiationException`.
+5. Convert a small library to a named module and run `jlink`, comparing the runtime image size to a full JDK.
+6. Take a JAR with no `Automatic-Module-Name`, place it on the module path, and print its derived name with `java --list-modules`. Rename the file and print again.
+7. Declare a `uses`/`provides` service pair across two modules and confirm `ServiceLoader` finds the implementation without the consumer importing it.
+
+## 57.13 Chapter summary
+
+The module system adds a name, an explicit dependency list, and an explicit export list to a group of packages, which changes accessibility from a one-dimensional `public` check into a three-part test: public, exported, and required. `requires transitive` propagates readability for types that appear in your API; `exports` grants ordinary access while `opens` grants deep reflection, and confusing the two is the most common practical failure. Unnamed and automatic modules keep legacy code working and make bottom-up migration possible, at the cost of an asymmetry - named modules can never require the unnamed one. Strong encapsulation of JDK internals since Java 16 is where most engineers first meet JPMS, through `InaccessibleObjectException` and the `--add-opens` flag that answers it. The module system verifies structure, not versions, and modularizing is a judgment call: often unnecessary for a fat-JAR service, often worthwhile for a published library or a `jlink` runtime image.
+
+## 57.14 Revision checklist
+
+- [ ] I can state the three conditions required for a type to be accessible.
+- [ ] I can explain `exports` versus `opens` and which one an ORM needs.
+- [ ] I know when `requires transitive` is mandatory and why.
+- [ ] I can describe named, automatic, and unnamed modules and how each behaves.
+- [ ] I know why a named module cannot require the unnamed module.
+- [ ] I can read an `InaccessibleObjectException` and derive the exact `--add-opens` flag.
+- [ ] I can explain why split packages are now a startup failure.
+- [ ] I know `module-info.java` carries no version information.
+- [ ] I can declare a `uses`/`provides` service pair.
+- [ ] I can argue both sides of whether a given service should be modularized.
+
+<!-- PAGE_BREAK -->
+
+# Chapter 58 - Java 22 to 25: The Modern LTS Baseline
+
+## 58.1 Learning objectives
+
+By the end of this chapter, you should be able to:
+
+- state what changed between the Java 21 and Java 25 long-term-support baselines;
+- use stream gatherers, the Class-File API, and the Foreign Function and Memory API where they replace older approaches;
+- explain why virtual threads behave differently under `synchronized` from Java 24 onward;
+- distinguish a finalized feature from a preview feature and justify a production policy for each; and
+- answer "what version should we target" with reasoning rather than a number.
+
+## 58.2 Why this matters at SDE-2
+
+This book's baseline is Java 21, the LTS release most teams standardized on. Java 25, released 16 September 2025, is the next LTS, and the four releases between them changed several things an SDE-2 is expected to reason about - most consequentially, the pinning behavior of virtual threads under `synchronized`.
+
+Interviewers do not test JEP numbers. They test whether you can say what a feature is *for*, whether you know the difference between "previewed" and "shipped," and whether you have an opinion about upgrade cadence. An engineer who says "we're on 21 and we'll move to 25 once our agent vendors certify it, mainly for the `synchronized` pinning fix" is demonstrating exactly the judgment the level requires.
+
+## 58.3 First-principles model
+
+Since Java 9, releases ship every six months on a fixed date. Features are not held for a release; a release takes whatever is ready. Roughly every two years a release is designated **long-term support**, which is a *vendor* commitment to backported security and bug fixes, not a technical property of the JDK. Java 8, 11, 17, 21, and 25 are the LTS line.
+
+Language and API changes arrive through a staged process:
+
+- **Incubator** - an API in a separate `jdk.incubator` module, expected to change.
+- **Preview** - a fully specified feature, disabled by default, requiring `--enable-preview` at compile *and* run time. Preview class files are tied to the exact JDK version that produced them.
+- **Final** - permanent, subject to normal compatibility rules.
+
+The staging matters commercially. Preview features can be revised or withdrawn: String Templates previewed in Java 21 and 22, then were removed entirely before Java 23 because the design was not right. Anyone who had shipped code depending on them had to rewrite it. That is the argument for the policy stated later in this chapter.
+
+> **Specification boundary:** Java specifies the language and API changes in each release, and the preview mechanism that gates them. It does not specify support duration, backport policy, or which vendor's build you run. "LTS" is a distribution commitment from Oracle, Temurin, Amazon, Red Hat, and others - their support windows differ, and so do their patch levels.
+
+## 58.4 Core terminology
+
+- **LTS:** a release vendors commit to supporting for years; 8, 11, 17, 21, 25.
+- **Preview feature:** fully specified but provisional; requires `--enable-preview`.
+- **Incubator module:** provisional API under `jdk.incubator.*`.
+- **Pinning:** a virtual thread that cannot unmount, blocking its carrier platform thread.
+- **Gatherer:** a user-defined intermediate stream operation.
+- **Arena:** the lifetime scope controlling native memory in the FFM API.
+- **Compact object headers:** 8-byte object headers instead of 12 or 16.
+- **AOT cache:** ahead-of-time class loading and linking state captured from a training run.
+
+## 58.5 Detailed mechanics
+
+### Java 22 - Foreign Function and Memory API (JEP 454, final)
+
+The FFM API reached final status in Java 22, giving Java a supported way to call native code and access off-heap memory without JNI.
+
+```java
+import java.lang.foreign.*;
+import java.lang.invoke.MethodHandle;
+
+try (Arena arena = Arena.ofConfined()) {
+    MemorySegment name = arena.allocateFrom("world");
+
+    Linker linker = Linker.nativeLinker();
+    MethodHandle strlen = linker.downcallHandle(
+            linker.defaultLookup().find("strlen").orElseThrow(),
+            FunctionDescriptor.of(ValueLayout.JAVA_LONG, ValueLayout.ADDRESS));
+
+    long length = (long) strlen.invoke(name);   // 5
+}
+```
+
+Two things make this a genuine replacement for JNI rather than a variation on it. There is no C shim to compile and ship - the binding is expressed in Java. And memory lifetime is explicit: an `Arena` is a scope, closing it frees every segment allocated from it, and touching a freed segment throws `IllegalStateException` rather than corrupting the heap. `Arena.ofConfined()` further restricts access to the creating thread, so use-after-free and cross-thread races become exceptions instead of undefined behavior.
+
+This is also the intended replacement for the parts of `sun.misc.Unsafe` that deal with memory access, which were deprecated for removal in Java 23 and now warn at runtime.
+
+**Unnamed variables and patterns (JEP 456, final)** let `_` stand for a binding you must declare but will not use:
+
+```java
+try {
+    process(order);
+} catch (IOException _) {          // named but unused
+    metrics.increment("io.failure");
+}
+
+for (var _ : items) { count++; }
+
+if (obj instanceof Point(int x, _)) { ... }   // ignore the second component
+```
+
+Small, but it removes a category of misleading names and lets the compiler verify that an ignored binding really is ignored.
+
+### Java 23 - Markdown in Javadoc (JEP 467, final)
+
+Documentation comments may be written in Markdown using `///`:
+
+```java
+/// Returns the customer's outstanding balance.
+///
+/// - Never negative.
+/// - Excludes pending authorizations.
+///
+/// @param id the customer identifier
+public Money balance(CustomerId id) { ... }
+```
+
+The practical effect is that documentation gets written, because the friction of HTML tags in comments was real.
+
+**ZGC became generational by default**, and the non-generational mode was removed in Java 24. If you tuned ZGC flags on 21, revisit them.
+
+### Java 24 - the release that matters most operationally
+
+**Synchronize virtual threads without pinning (JEP 491)** is the single most important change between the two LTS releases.
+
+In Java 21, a virtual thread that blocked inside a `synchronized` block or method could not unmount from its carrier platform thread. The carrier stayed pinned for the duration. With a default scheduler parallelism equal to the core count, a handful of virtual threads blocking inside `synchronized` on a database call could stall every other virtual thread in the JVM. The recommended workaround was to replace `synchronized` with `ReentrantLock` in any code path a virtual thread might block on - a real, invasive migration cost.
+
+From Java 24, virtual threads unmount correctly while holding a monitor. The workaround becomes unnecessary, and the most common reason for virtual-thread adoption to disappoint goes away.
+
+```java
+// On Java 21 this pins the carrier for the duration of the call.
+// From Java 24 the virtual thread unmounts and the carrier is reused.
+synchronized (lock) {
+    result = jdbcTemplate.query(...);
+}
+```
+
+Pinning still occurs inside native frames and class initializers. But if your team evaluated virtual threads on 21, hit carrier starvation, and shelved them, the evaluation is worth repeating on 25.
+
+**Stream gatherers (JEP 485, final)** finally make intermediate stream operations extensible. Before this, you could write any terminal operation you liked via `Collector`, but the intermediate stage was a closed set.
+
+```java
+// Sliding window of 3 - impossible to express before gatherers
+List<List<Integer>> windows = Stream.of(1, 2, 3, 4, 5)
+        .gather(Gatherers.windowSliding(3))
+        .toList();
+// [[1, 2, 3], [2, 3, 4], [3, 4, 5]]
+
+// Fixed batches, useful for chunked writes
+List<List<String>> batches = ids.stream()
+        .gather(Gatherers.windowFixed(500))
+        .toList();
+```
+
+Built-in gatherers cover `fold`, `scan`, `mapConcurrent`, `windowFixed`, and `windowSliding`. `Gatherer.of` builds custom ones with an initializer, an integrator, an optional combiner for parallel streams, and a finisher. `mapConcurrent` deserves particular attention: it runs a mapping function on virtual threads with a concurrency limit, which is a clean way to fan out I/O without hand-managing an executor.
+
+**The Class-File API (JEP 484, final)** gives the JDK a supported library for parsing and generating class files, replacing the widespread dependency on ASM. If you work on agents, instrumentation, or build tooling, this removes a dependency that had to be upgraded in lockstep with every JDK.
+
+**Ahead-of-time class loading and linking (JEP 483)** records the loaded and linked state of classes from a training run and replays it at startup, cutting JVM startup time substantially for large applications. Java 25 adds command-line ergonomics (JEP 514) and method profiling (JEP 515) on top.
+
+**The Security Manager was permanently disabled** (JEP 486). It had been deprecated since Java 17; code still calling `System.setSecurityManager` now fails.
+
+### Java 25 - the new LTS
+
+**Scoped values (JEP 506, final)** provide immutable, inheritable, bounded data sharing - the replacement for `ThreadLocal` in a virtual-thread world.
+
+```java
+private static final ScopedValue<RequestContext> CONTEXT = ScopedValue.newInstance();
+
+ScopedValue.where(CONTEXT, new RequestContext(traceId, tenantId))
+           .run(() -> handleRequest());   // CONTEXT.get() visible to everything called here
+
+// Outside the run block, CONTEXT.get() throws NoSuchElementException
+```
+
+`ThreadLocal` was designed for a few hundred pooled platform threads. It is mutable, unbounded in lifetime, inherited by copying, and a well-known leak source. With millions of virtual threads, copying an inheritable `ThreadLocal` map per thread is untenable. A `ScopedValue` is immutable, its lifetime is exactly the dynamic extent of the `run` call, and child threads in a structured scope share the binding rather than copying it.
+
+**Compact object headers (JEP 519)** move from experimental to production-ready, reducing object headers from 12 or 16 bytes to 8. For allocation-heavy applications with many small objects this is a real heap reduction - commonly reported in the 10-20% range - and it is enabled with `-XX:+UseCompactObjectHeaders`.
+
+**Module import declarations (JEP 511, final)** import every package a module exports:
+
+```java
+import module java.base;   // java.util, java.io, java.nio.file, ... all visible
+
+List<String> names = new ArrayList<>();
+Path path = Path.of("orders.csv");
+```
+
+Useful in scripts and teaching material. In a production codebase, explicit imports still document dependencies better.
+
+**Compact source files and instance main methods (JEP 512, final)** finish the four-release effort to shorten the first program a learner writes:
+
+```java
+void main() {
+    IO.println("Hello");
+}
+```
+
+No class declaration, no `static`, no `String[] args`, no `System.out`. Combined with `java Program.java` and multi-file source launching from Java 22, Java is now genuinely scriptable.
+
+**Flexible constructor bodies (JEP 513, final)** allow statements before `super(...)` or `this(...)`, provided they do not reference the instance under construction:
+
+```java
+public Order(List<Item> items) {
+    if (items.isEmpty()) {                    // validate BEFORE the super call
+        throw new IllegalArgumentException("order requires at least one item");
+    }
+    super(computeTotal(items));
+    this.items = List.copyOf(items);
+}
+```
+
+Previously this validation had to be smuggled into a static helper inside the `super` argument list. The change also lets you avoid the classic bug where a superclass constructor calls an overridable method before the subclass has initialized its fields.
+
+**Still preview in Java 25:** structured concurrency (fifth preview), stable values, primitive types in patterns, PEM encodings. Structured concurrency in particular has been through five previews with API changes each time - a reminder that "preview" is a real warning, not a formality.
+
+### Java 26 and beyond
+
+Java 26 reached general availability on 17 March 2026 with a frozen feature set including HTTP/3 support in the HTTP client (JEP 517), removal of the Applet API (JEP 504), ahead-of-time object caching with any GC (JEP 516), and "prepare to make final mean final" (JEP 500) - which begins closing the loophole allowing reflective mutation of `final` fields. It is not an LTS release. The next LTS is expected to be Java 29 in September 2027.
+
+## 58.6 Worked Java example
+
+A batching pipeline that would have needed hand-written iterator code before Java 24, combining gatherers with `mapConcurrent`.
+
+```java
+import java.util.List;
+import java.util.stream.Gatherers;
+import java.util.stream.Stream;
+
+public final class BulkEnricher {
+
+    record Customer(String id, String name) {}
+
+    /**
+     * Fetches customers in batches of 100, enriching up to 8 batches
+     * concurrently on virtual threads, and flattens the result.
+     */
+    public List<Customer> enrichAll(List<String> ids) {
+        return ids.stream()
+                .gather(Gatherers.windowFixed(100))          // List<String> batches
+                .gather(Gatherers.mapConcurrent(8, this::fetchBatch))
+                .flatMap(List::stream)
+                .toList();
+    }
+
+    private List<Customer> fetchBatch(List<String> batch) {
+        // One network round trip per batch; blocking is fine on a virtual thread.
+        return batch.stream().map(id -> new Customer(id, "name-" + id)).toList();
+    }
+
+    public static void main(String[] args) {
+        List<String> ids = Stream.iterate(1, i -> i + 1).limit(250)
+                .map(i -> "c-" + i).toList();
+        List<Customer> all = new BulkEnricher().enrichAll(ids);
+        System.out.println(all.size());        // 250
+        System.out.println(all.getFirst());    // Customer[id=c-1, name=name-c-1]
+    }
+}
+```
+
+Three batches of 100, 100, and 50 are produced by `windowFixed`; `mapConcurrent` runs up to eight of them at a time on virtual threads while preserving encounter order in the output. Before gatherers, expressing "batch then fan out with a concurrency limit" as a stream was not possible - you dropped to a loop with an `ExecutorService` and reassembled the ordering yourself.
+
+## 58.7 Execution or memory walkthrough
+
+`windowFixed(100)` is a stateful gatherer. Its integrator accumulates elements into a private buffer, and when the buffer reaches 100 it pushes the list downstream and starts a new one. The finisher pushes the trailing partial window - the 50-element remainder. Because it holds mutable state, it declares itself unsuitable for parallel splitting; the stream stays sequential regardless of `parallel()`.
+
+`mapConcurrent(8, fn)` maintains a bounded set of in-flight tasks, each on its own virtual thread, and a queue that preserves encounter order. When the ninth batch arrives, the gatherer blocks the calling thread until a slot frees. Blocking here is cheap precisely because the workers are virtual threads: each unmounts from its carrier while waiting on I/O, so eight concurrent network calls consume eight heap-allocated stacks rather than eight OS threads.
+
+On Java 21 the same code would work but any `synchronized` block inside `fetchBatch` - including one inside a JDBC driver - could pin a carrier thread. On Java 25 the virtual thread unmounts and the carrier is returned to the pool.
+
+`flatMap(List::stream).toList()` allocates the final list once, sized from the spliterator estimate where available.
+
+## 58.8 Complexity and performance
+
+Gatherers add no asymptotic cost: `windowFixed` is O(n) time and O(w) space for window size w; `windowSliding` is O(n-w) in output volume, which is inherent to producing overlapping windows. `mapConcurrent` bounds memory by its concurrency limit rather than the input size - the reason to prefer it over submitting every element to an executor.
+
+FFM downcalls cost roughly what a JNI call costs for simple signatures and less for many, because there is no JNI shim and the linker can specialize the handle. Hoist `MethodHandle` construction to a `static final` field; building it per call dominates everything else.
+
+Compact object headers reduce heap by 4 or 8 bytes per object. For a workload dominated by small objects - nodes, boxed values, short strings - this is a double-digit percentage of live heap, and it improves cache density as well as footprint.
+
+AOT class loading and linking mainly moves work out of startup. It does not change steady-state throughput; it changes time-to-first-request, which is what matters for scale-to-zero and serverless deployments.
+
+> **HotSpot note:** the virtual-thread pinning fix in JEP 491 is a JVM change, not a library change. Recompilation is not required - running existing Java 21 bytecode on a Java 25 JVM gets the improved behavior. This is the general shape of runtime improvements: upgrading the JVM often delivers more than adopting new syntax.
+
+## 58.9 Edge cases and common mistakes
+
+- Treating a preview feature as stable. String Templates previewed twice and were withdrawn; anyone who shipped on them rewrote that code.
+- Forgetting that `--enable-preview` is required at both compile time and run time, and that preview class files are pinned to the exact JDK version.
+- Assuming "LTS" is a JDK property. It is a vendor support commitment, and windows differ by vendor.
+- Concluding virtual threads are unusable after testing on Java 21 and hitting `synchronized` pinning that Java 24 fixed.
+- Believing Java 24 removed pinning entirely. Native frames and class initializers still pin.
+- Using `ThreadLocal` for request context with virtual threads. Prefer `ScopedValue` in Java 25.
+- Using a stateful gatherer and expecting `parallel()` to help. Stateful gatherers suppress splitting.
+- Building an FFM `MethodHandle` inside the hot path instead of hoisting it.
+- Letting an `Arena` escape its try-with-resources scope, then touching a freed `MemorySegment`.
+- Using `Arena.ofShared()` when `ofConfined()` suffices, giving up the thread-confinement checks.
+- Still calling `System.setSecurityManager`, which fails from Java 24.
+- Tuning non-generational ZGC flags that no longer exist after Java 24.
+- Enabling `-XX:+UseCompactObjectHeaders` without measuring; benefits depend heavily on object size distribution.
+- Assuming an agent, profiler, or bytecode-manipulation library works across a major upgrade. These break most often, and they are usually what actually blocks an upgrade.
+
+## 58.10 Production engineering notes
+
+Adopt finalized features freely and preview features never - in production code. Preview is genuinely useful for evaluation and for giving feedback to the JDK team, and that work belongs in a spike branch, not in a service you are on call for.
+
+Separate the JVM upgrade from the language-level upgrade. Running Java 21 bytecode on a Java 25 JVM delivers the pinning fix, generational ZGC, compact object headers, and the AOT startup work with no source changes. Bumping `--release` to 25 is a second, independent decision. Doing them together makes a regression twice as hard to attribute.
+
+Inventory your agents first. Profilers, APM agents, mocking frameworks, and anything using ASM or reaching into `sun.misc.Unsafe` are the usual blockers. The Class-File API existing does not mean your dependencies have migrated to it.
+
+Expect `sun.misc.Unsafe` memory-access warnings on 23 and later. They are deprecation notices pointing at FFM and `VarHandle` replacements. Find which dependency triggers them before removal becomes mandatory rather than after.
+
+Re-evaluate virtual threads on 25 if you shelved them on 21. Also re-run any performance baseline: generational ZGC, compact object headers, and improved G1 synchronization all shift the numbers your capacity model was built on.
+
+## 58.11 Interview questions and model answers
+
+**What changed between Java 21 and Java 25 that would affect an existing service?**
+
+Operationally, the largest change is JEP 491 in Java 24: virtual threads no longer pin their carrier thread when blocking inside `synchronized`. Beyond that, ZGC became generational by default, compact object headers became production-ready, the Security Manager was permanently disabled, and ahead-of-time class loading cut startup time. Most of these arrive by upgrading the JVM alone, without recompiling.
+
+**What is a preview feature and how should a team treat it?**
+
+A fully specified but provisional feature, disabled unless `--enable-preview` is passed at both compile and run time, with class files tied to the exact JDK version. Treat it as unusable in production: String Templates previewed in Java 21 and 22 and were then withdrawn entirely.
+
+**What problem do stream gatherers solve?**
+
+They make intermediate stream operations extensible. `Collector` always allowed custom terminal operations, but intermediate stages were a fixed set, so operations like sliding windows or fixed batching required dropping out of the stream. `Gatherers.windowFixed`, `windowSliding`, `fold`, `scan`, and `mapConcurrent` cover the common cases, and `Gatherer.of` handles the rest.
+
+**When would you use `ScopedValue` instead of `ThreadLocal`?**
+
+For request-scoped context, especially with virtual threads. `ScopedValue` is immutable, bounded to the dynamic extent of a `run` call, and shared rather than copied into child threads in a structured scope. `ThreadLocal` is mutable, unbounded in lifetime, a common leak source, and its inheritable form copies per thread, which does not scale to millions of virtual threads.
+
+**Why is the Foreign Function and Memory API better than JNI?**
+
+There is no C shim to write, compile, and ship per platform. Memory lifetime is explicit through `Arena`, so freeing is deterministic and use-after-free throws `IllegalStateException` instead of corrupting memory. Confined arenas add thread-confinement checks, converting a class of undefined behavior into exceptions.
+
+**Should a team upgrade from Java 21 to Java 25?**
+
+Usually yes, but as two decisions. Upgrade the JVM first for the pinning fix, GC improvements, and startup work with no code change; then decide separately about `--release 25`. The blocker is almost always agents and bytecode-manipulation libraries, so inventory those first.
+
+## 58.12 Exercises
+
+1. Write a program using `synchronized` around a blocking call inside a virtual thread. Run it on Java 21 and Java 25 with `-Djdk.tracePinnedThreads` and compare.
+2. Implement a sliding-window moving average with `Gatherers.windowSliding`, then reimplement it without gatherers and compare readability.
+3. Build a custom `Gatherer` that emits an element only when it differs from the previous one, and explain why it cannot split for parallel streams.
+4. Call a native function through the FFM API using a confined `Arena`. Then let a `MemorySegment` escape the scope and observe the exception.
+5. Replace a `ThreadLocal`-based request context with `ScopedValue` and describe what changes for child threads.
+6. Measure heap usage of a workload with many small objects before and after `-XX:+UseCompactObjectHeaders`.
+7. Compile a class using a preview feature, then run it on a different JDK 25 build and explain the failure.
+8. Rewrite a constructor that validates arguments through a static helper inside `super(...)` using flexible constructor bodies.
+
+## 58.13 Chapter summary
+
+Java ships every six months and designates an LTS roughly every two years; Java 25 is the successor to the Java 21 baseline this book targets. Between them, Java 22 finalized the Foreign Function and Memory API and unnamed variables, Java 23 added Markdown Javadoc and made ZGC generational by default, Java 24 delivered the operationally decisive change - virtual threads no longer pin their carrier under `synchronized` - plus stream gatherers, the Class-File API, and AOT class loading, and Java 25 finalized scoped values, flexible constructor bodies, module imports, and compact source files while promoting compact object headers to production. Most of this value arrives from upgrading the JVM rather than the language level, which argues for separating those two decisions. Finalized features are safe; preview features are not, and String Templates' withdrawal after two previews is the evidence. The practical upgrade blocker is rarely the language - it is agents, profilers, and bytecode libraries.
+
+## 58.14 Revision checklist
+
+- [ ] I can name the LTS releases and explain that LTS is a vendor commitment.
+- [ ] I can explain the difference between incubator, preview, and final, and cite a withdrawn preview.
+- [ ] I know that `--enable-preview` is required at compile and run time and pins the class file version.
+- [ ] I can explain the Java 24 virtual-thread pinning fix and what still pins.
+- [ ] I can use `windowFixed`, `windowSliding`, and `mapConcurrent`.
+- [ ] I can justify `ScopedValue` over `ThreadLocal` for request context.
+- [ ] I can describe FFM arenas and why they beat JNI.
+- [ ] I know compact object headers, generational ZGC, and AOT class loading are JVM-level wins.
+- [ ] I can argue for separating a JVM upgrade from a language-level upgrade.
+- [ ] I know agents and bytecode libraries are the usual upgrade blocker.
 
 <!-- PAGE_BREAK -->
 
