@@ -1759,7 +1759,7 @@
         "Challenge: interval, tree, or bitmask state"
       ],
       "min_pages": 16,
-      "max_pages": 110,
+      "max_pages": 140,
       "code_companion": {
         "path": "content/volumes/dsa/DSA-17-dynamic-programming/code/DynamicProgrammingInterviewChecks.java",
         "title": "Executable Dynamic-Programming State Checks",
@@ -1785,6 +1785,12 @@
         {
           "path": "content/volumes/dsa/DSA-17-dynamic-programming/chapters/03-state-transitions-and-reconstruction.md",
           "series_native": true
+        },
+        {
+          "path": "content/volumes/dsa/DSA-17-dynamic-programming/chapters/04-subsequence-and-palindrome-dp.md"
+        },
+        {
+          "path": "content/volumes/dsa/DSA-17-dynamic-programming/chapters/05-bitmask-digit-and-bounded-state-dp.md"
         },
         {
           "path": "content/volumes/dsa/DSA-17-dynamic-programming/exercises/01-dp-practice-lab.md",

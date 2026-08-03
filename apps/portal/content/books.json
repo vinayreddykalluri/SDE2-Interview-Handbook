@@ -7,11 +7,11 @@
     "editionDate": "2026-08-02",
     "url": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/tag/books-v2026.07.0",
     "focusedBookCount": 41,
-    "focusedPageCount": 3467,
+    "focusedPageCount": 3485,
     "indexPageCount": 17,
     "masterPageCount": 657,
     "totalPdfCount": 43,
-    "totalPageCount": 4141,
+    "totalPageCount": 4159,
     "index": {
       "title": "Java SDE-2 Interview Preparation Series Index",
       "filename": "Java-SDE2-Interview-Preparation-Series-Index.pdf",
@@ -2933,16 +2933,16 @@
       "authorNote": "Dynamic programming starts when repeated decisions share the same future. Define the state in words, derive the transition from the last choice, and optimize memory only after the table is correct.",
       "filename": "Java-SDE2-DSA-17-Dynamic-Programming.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-17-Dynamic-Programming.pdf",
-      "pageCount": 60,
+      "pageCount": 78,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-17-Dynamic-Programming.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-17-Dynamic-Programming.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-17-dynamic-programming/chapters",
       "fullBookHref": "books/dsa-17-dynamic-programming/",
       "codeHref": "books/dsa-17-dynamic-programming/code/",
-      "webDocumentCount": 7,
-      "wordCount": 8993,
-      "codeExampleCount": 9,
-      "sourceChapterCount": 5,
+      "webDocumentCount": 9,
+      "wordCount": 14492,
+      "codeExampleCount": 17,
+      "sourceChapterCount": 7,
       "supportingSourceCount": 2,
       "chapterPreview": [
         {
@@ -2993,14 +2993,24 @@
           "webHref": "books/dsa-17-dynamic-programming/05-03-state-transitions-and-reconstruction/"
         },
         {
+          "title": "4. Subsequence and Palindrome DP",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-17-dynamic-programming/chapters/04-subsequence-and-palindrome-dp.md",
+          "webHref": "books/dsa-17-dynamic-programming/06-04-subsequence-and-palindrome-dp/"
+        },
+        {
+          "title": "5. Bitmask, Digit, and Bounded-State DP",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-17-dynamic-programming/chapters/05-bitmask-digit-and-bounded-state-dp.md",
+          "webHref": "books/dsa-17-dynamic-programming/07-05-bitmask-digit-and-bounded-state-dp/"
+        },
+        {
           "title": "Dynamic Programming Practice Lab",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-17-dynamic-programming/exercises/01-dp-practice-lab.md",
-          "webHref": "books/dsa-17-dynamic-programming/06-01-dp-practice-lab/"
+          "webHref": "books/dsa-17-dynamic-programming/08-01-dp-practice-lab/"
         },
         {
           "title": "Dynamic Programming Practice Lab Solutions",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-17-dynamic-programming/solutions/01-dp-practice-solutions.md",
-          "webHref": "books/dsa-17-dynamic-programming/07-01-dp-practice-solutions/"
+          "webHref": "books/dsa-17-dynamic-programming/09-01-dp-practice-solutions/"
         }
       ],
       "outcomes": [
