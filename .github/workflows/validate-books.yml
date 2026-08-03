@@ -55,6 +55,15 @@ jobs:
         working-directory: .
         run: python tooling/automation/build_all.py --check-only
 
+      # Checks the PDFs committed to the branch against dist/manifest.json:
+      # page counts, byte sizes, and SHA-256 digests must agree, every file in
+      # the manifest must exist, and every PDF in dist/ must be manifested.
+      # --quick skips per-page text extraction, which belongs in the build job
+      # where the PDFs were just rendered. This catches the common mistake of
+      # regenerating some volumes and committing a stale manifest.
+      - name: Validate committed PDFs against the manifest
+        run: python scripts/validate_pdfs.py --quick
+
       - name: Compile master Java examples
         run: |
           mkdir -p examples/java/build/classes

@@ -28,7 +28,16 @@ REQUIRED_PACKAGES = {
     "pygments",
     "pyyaml",
 }
-ACTIVE_WORKFLOW_ALLOWLIST = {"validate-books.yml"}
+# Release automation is now live. This was previously an allowlist of one that
+# asserted build and deploy workflows stayed disabled, which made sense while
+# publication was hand-driven -- but hand-driven publication is exactly what
+# put 163 MB of PDFs into git history. The check is inverted: these three must
+# be PRESENT, and anything else appearing here should be a deliberate decision.
+REQUIRED_WORKFLOWS = {
+    "validate-books.yml",
+    "build-books.yml",
+    "deploy-pages.yml",
+}
 REQUIRED_IGNORES = {
     ".github/",
     ".venv/",
@@ -94,11 +103,12 @@ def main() -> int:
         if workflows_dir.exists()
         else set()
     )
-    unexpected_workflows = sorted(active_workflows - ACTIVE_WORKFLOW_ALLOWLIST)
-    if unexpected_workflows:
+    missing_workflows = sorted(REQUIRED_WORKFLOWS - active_workflows)
+    if missing_workflows:
         errors.append(
-            "Website and deployment GitHub Actions must remain disabled; "
-            f"unexpected active workflows: {unexpected_workflows}"
+            "Release automation must stay enabled; missing active workflows: "
+            f"{missing_workflows}. PDFs and the published site are only "
+            "reproducible when CI produces them."
         )
 
     for relative in [

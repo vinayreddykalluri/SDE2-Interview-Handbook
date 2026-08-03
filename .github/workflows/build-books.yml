@@ -1,0 +1,116 @@
+name: Build Interview Handbook
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: handbook-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # build_book.py reads pandoc's native JSON AST and unpacks Table nodes as a
+  # 6-tuple, a shape introduced in pandoc-types 1.21 / pandoc 2.10. Distro
+  # packages vary by runner image -- Ubuntu 22.04 ships 2.9.2.1, which fails on
+  # the first table with "not enough values to unpack (expected 6, got 5)".
+  # Pin the version explicitly rather than inheriting whatever apt provides.
+  PANDOC_VERSION: '3.1.11'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Set up Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Install pinned pandoc
+        run: |
+          curl -fsSL -o pandoc.deb \
+            "https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-1-amd64.deb"
+          sudo dpkg -i pandoc.deb
+          rm pandoc.deb
+          pandoc --version | head -1
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-xetex texlive-fonts-recommended
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r tooling/requirements/authoring.txt
+          python -m pip install -r books/java-sde2-interview-preparation-series/requirements.txt
+
+      - name: Validate and build all publications
+        run: make build-all
+
+      - name: Rebuild the published book series
+        working-directory: books/java-sde2-interview-preparation-series
+        run: |
+          python scripts/build_all_volumes.py --jobs 2 --fresh
+          python scripts/build_series.py --index-only
+          python scripts/build_book.py --only all
+
+      # Runs after the rebuild so it checks the artifacts this job produced,
+      # not the ones committed to the branch. Page counts, byte sizes, and
+      # SHA-256 digests must agree with dist/manifest.json, and every page
+      # must yield extractable text -- a font that fails to embed still
+      # renders visibly but is invisible to search and screen readers.
+      - name: Validate rendered PDFs
+        working-directory: books/java-sde2-interview-preparation-series
+        run: python scripts/validate_pdfs.py
+
+      - name: Upload book series PDFs
+        uses: actions/upload-artifact@v4
+        with:
+          name: book-series-pdfs
+          path: books/java-sde2-interview-preparation-series/dist/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload PDFs
+        uses: actions/upload-artifact@v4
+        with:
+          name: handbook-pdfs
+          path: output/pdf/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload combined artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: handbook-combined
+          path: output/combined/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload DOCX
+        uses: actions/upload-artifact@v4
+        with:
+          name: handbook-docx
+          path: output/docx/
+          if-no-files-found: error
+          retention-days: 30
