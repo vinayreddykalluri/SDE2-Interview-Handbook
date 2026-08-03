@@ -1495,6 +1495,9 @@
           "series_native": true
         },
         {
+          "path": "content/volumes/dsa/DSA-13-trees-bsts-and-tries/chapters/04-constant-space-traversal-and-ancestor-queries.md"
+        },
+        {
           "path": "content/volumes/dsa/DSA-13-trees-bsts-and-tries/exercises/01-trees-practice-lab.md",
           "series_native": true
         },
@@ -1613,7 +1616,7 @@
         "Challenge: adapt algorithms to grids or evolving connectivity"
       ],
       "min_pages": 16,
-      "max_pages": 100,
+      "max_pages": 130,
       "code_companion": {
         "path": "content/volumes/dsa/DSA-15-graphs/code/GraphInterviewChecks.java",
         "title": "Executable Graph Algorithm Checks",
@@ -1639,6 +1642,12 @@
         {
           "path": "content/volumes/dsa/DSA-15-graphs/chapters/03-advanced-graph-algorithms-implemented.md",
           "series_native": true
+        },
+        {
+          "path": "content/volumes/dsa/DSA-15-graphs/chapters/04-union-find-and-connectivity.md"
+        },
+        {
+          "path": "content/volumes/dsa/DSA-15-graphs/chapters/05-implicit-and-state-space-graphs.md"
         },
         {
           "path": "content/volumes/dsa/DSA-15-graphs/exercises/01-graphs-practice-lab.md",

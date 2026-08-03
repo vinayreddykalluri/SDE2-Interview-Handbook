@@ -343,9 +343,9 @@
       "output_name": "Java-SDE2-DSA-12-Binary-Search.pdf"
     },
     {
-      "page_count": 59,
-      "sha256": "45a248b5ebeabf17e5b34e7cf68262d9e7a32eb6b009014c0493325a0cf8f860",
-      "bytes": 3773493,
+      "page_count": 69,
+      "sha256": "f3bedd2956ad74f1f79e2f5169d65b3ceba51c8afe4eb0e52164a5148c4e7030",
+      "bytes": 3809607,
       "id": "13",
       "stage": "13",
       "path_label": "DSA-13",
@@ -375,9 +375,9 @@
       "output_name": "Java-SDE2-DSA-14-Heaps-Priority-Queues-and-Top-K.pdf"
     },
     {
-      "page_count": 72,
-      "sha256": "6b8886e7fbb70391e2b3bb1c5e6cc20e8a3ec6ae821cf15708ccf539fb4e0344",
-      "bytes": 3802058,
+      "page_count": 90,
+      "sha256": "e82a28729d85c1c3bbdf4a0955807335c38eb275f83de026b812fe9df07ba22d",
+      "bytes": 3863801,
       "id": "15",
       "stage": "15",
       "path_label": "DSA-15",

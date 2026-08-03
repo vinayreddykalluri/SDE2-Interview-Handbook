@@ -7,11 +7,11 @@
     "editionDate": "2026-08-02",
     "url": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/tag/books-v2026.07.0",
     "focusedBookCount": 41,
-    "focusedPageCount": 3485,
+    "focusedPageCount": 3513,
     "indexPageCount": 17,
     "masterPageCount": 657,
     "totalPdfCount": 43,
-    "totalPageCount": 4159,
+    "totalPageCount": 4187,
     "index": {
       "title": "Java SDE-2 Interview Preparation Series Index",
       "filename": "Java-SDE2-Interview-Preparation-Series-Index.pdf",
@@ -2531,16 +2531,16 @@
       "authorNote": "Tree code becomes clearer when every method states what its subtree returns. For balanced and range structures, trace the metadata update with the same care as the pointer update.",
       "filename": "Java-SDE2-DSA-13-Trees-BSTs-and-Tries.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-13-Trees-BSTs-and-Tries.pdf",
-      "pageCount": 59,
+      "pageCount": 69,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-13-Trees-BSTs-and-Tries.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-13-Trees-BSTs-and-Tries.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-13-trees-bsts-and-tries/chapters",
       "fullBookHref": "books/dsa-13-trees-bsts-and-tries/",
       "codeHref": "books/dsa-13-trees-bsts-and-tries/code/",
-      "webDocumentCount": 7,
-      "wordCount": 8995,
-      "codeExampleCount": 11,
-      "sourceChapterCount": 5,
+      "webDocumentCount": 8,
+      "wordCount": 11577,
+      "codeExampleCount": 14,
+      "sourceChapterCount": 6,
       "supportingSourceCount": 2,
       "chapterPreview": [
         {
@@ -2591,14 +2591,19 @@
           "webHref": "books/dsa-13-trees-bsts-and-tries/05-03-range-query-trees-and-avl-rotations/"
         },
         {
+          "title": "4. Constant-Space Traversal and Repeated Ancestor Queries",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-13-trees-bsts-and-tries/chapters/04-constant-space-traversal-and-ancestor-queries.md",
+          "webHref": "books/dsa-13-trees-bsts-and-tries/06-04-constant-space-traversal-and-ancestor-queries/"
+        },
+        {
           "title": "Trees, BSTs, and Tries Practice Lab",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-13-trees-bsts-and-tries/exercises/01-trees-practice-lab.md",
-          "webHref": "books/dsa-13-trees-bsts-and-tries/06-01-trees-practice-lab/"
+          "webHref": "books/dsa-13-trees-bsts-and-tries/07-01-trees-practice-lab/"
         },
         {
           "title": "Trees, BSTs, and Tries Practice Lab Solutions",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-13-trees-bsts-and-tries/solutions/01-trees-practice-solutions.md",
-          "webHref": "books/dsa-13-trees-bsts-and-tries/07-01-trees-practice-solutions/"
+          "webHref": "books/dsa-13-trees-bsts-and-tries/08-01-trees-practice-solutions/"
         }
       ],
       "outcomes": [
@@ -2732,16 +2737,16 @@
       "authorNote": "Before choosing a graph algorithm, write down direction, weight rules, connectivity, and the requested output. Many advanced-looking failures begin with solving the wrong graph model perfectly.",
       "filename": "Java-SDE2-DSA-15-Graphs.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-15-Graphs.pdf",
-      "pageCount": 72,
+      "pageCount": 90,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-15-Graphs.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-15-Graphs.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-15-graphs/chapters",
       "fullBookHref": "books/dsa-15-graphs/",
       "codeHref": "books/dsa-15-graphs/code/",
-      "webDocumentCount": 7,
-      "wordCount": 10279,
-      "codeExampleCount": 11,
-      "sourceChapterCount": 5,
+      "webDocumentCount": 9,
+      "wordCount": 15362,
+      "codeExampleCount": 16,
+      "sourceChapterCount": 7,
       "supportingSourceCount": 2,
       "chapterPreview": [
         {
@@ -2792,14 +2797,24 @@
           "webHref": "books/dsa-15-graphs/05-03-advanced-graph-algorithms-implemented/"
         },
         {
+          "title": "4. Union-Find and Incremental Connectivity",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-15-graphs/chapters/04-union-find-and-connectivity.md",
+          "webHref": "books/dsa-15-graphs/06-04-union-find-and-connectivity/"
+        },
+        {
+          "title": "5. Implicit Graphs and State-Space Search",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-15-graphs/chapters/05-implicit-and-state-space-graphs.md",
+          "webHref": "books/dsa-15-graphs/07-05-implicit-and-state-space-graphs/"
+        },
+        {
           "title": "Graph Practice Lab",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-15-graphs/exercises/01-graphs-practice-lab.md",
-          "webHref": "books/dsa-15-graphs/06-01-graphs-practice-lab/"
+          "webHref": "books/dsa-15-graphs/08-01-graphs-practice-lab/"
         },
         {
           "title": "Graph Practice Lab Solutions",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-15-graphs/solutions/01-graphs-practice-solutions.md",
-          "webHref": "books/dsa-15-graphs/07-01-graphs-practice-solutions/"
+          "webHref": "books/dsa-15-graphs/09-01-graphs-practice-solutions/"
         }
       ],
       "outcomes": [
