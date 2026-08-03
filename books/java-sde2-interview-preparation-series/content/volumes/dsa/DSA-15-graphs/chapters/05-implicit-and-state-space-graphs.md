@@ -19,6 +19,8 @@ implicit graph:   neighbours(u) computed    -> generate the neighbours
 
 Everything else about traversal is unchanged. The universal BFS invariant from chapter 1 still holds: **when a state is dequeued, its recorded distance is final**, provided every edge has the same cost.
 
+![An implicit graph generates neighbours instead of storing an edge list](content/volumes/dsa/DSA-15-graphs/assets/02-implicit-state-space-graph.png)
+
 Four questions replace the usual "build the adjacency list" step:
 
 1. **What is a state?** The minimal information that determines the future. Not the path taken - only what constrains what happens next.

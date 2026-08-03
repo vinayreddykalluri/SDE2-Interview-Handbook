@@ -1178,7 +1178,7 @@
         "Challenge: design sound pruning rules"
       ],
       "min_pages": 20,
-      "max_pages": 110,
+      "max_pages": 130,
       "code_companion": {
         "path": "content/volumes/dsa/DSA-09-recursion-and-backtracking/code/RecursionInterviewChecks.java",
         "title": "Executable Recursion and Backtracking Checks",
@@ -1204,6 +1204,9 @@
         {
           "path": "content/volumes/dsa/DSA-09-recursion-and-backtracking/chapters/03-recursion-engine-and-backtracking-state.md",
           "series_native": true
+        },
+        {
+          "path": "content/volumes/dsa/DSA-09-recursion-and-backtracking/chapters/04-converting-recursion-to-iteration.md"
         },
         {
           "path": "content/volumes/dsa/DSA-09-recursion-and-backtracking/exercises/01-recursion-practice-lab.md",
@@ -1251,7 +1254,7 @@
         "Challenge: reorder, intersect, or merge multiple lists"
       ],
       "min_pages": 18,
-      "max_pages": 100,
+      "max_pages": 130,
       "code_companion": {
         "path": "content/volumes/dsa/DSA-10-linked-lists/code/LinkedListInterviewChecks.java",
         "title": "Executable Linked-List Identity and Mutation Checks",
@@ -1277,6 +1280,9 @@
         {
           "path": "content/volumes/dsa/DSA-10-linked-lists/chapters/03-pointer-surgery-and-node-identity.md",
           "series_native": true
+        },
+        {
+          "path": "content/volumes/dsa/DSA-10-linked-lists/chapters/04-skip-lists-and-probabilistic-balance.md"
         },
         {
           "path": "content/volumes/dsa/DSA-10-linked-lists/exercises/01-linked-list-practice-lab.md",
@@ -1324,7 +1330,7 @@
         "Challenge: histogram and monotonic-deque variants"
       ],
       "min_pages": 18,
-      "max_pages": 110,
+      "max_pages": 130,
       "code_companion": {
         "path": "content/volumes/dsa/DSA-11-stacks-queues-deques-and-monotonic-patterns/code/OrderingStructuresInterviewChecks.java",
         "title": "Executable Deque and Monotonic-Structure Checks",
@@ -1350,6 +1356,9 @@
         {
           "path": "content/volumes/dsa/DSA-11-stacks-queues-deques-and-monotonic-patterns/chapters/03-circular-deque-and-monotonic-invariants.md",
           "series_native": true
+        },
+        {
+          "path": "content/volumes/dsa/DSA-11-stacks-queues-deques-and-monotonic-patterns/chapters/04-amortized-analysis.md"
         },
         {
           "path": "content/volumes/dsa/DSA-11-stacks-queues-deques-and-monotonic-patterns/exercises/01-ordering-structures-practice-lab.md",
@@ -1397,7 +1406,7 @@
         "Challenge: design and prove a monotone feasibility predicate"
       ],
       "min_pages": 16,
-      "max_pages": 100,
+      "max_pages": 130,
       "code_companion": {
         "path": "content/volumes/dsa/DSA-12-binary-search/code/BinarySearchInterviewChecks.java",
         "title": "Executable Binary-Search Boundary Checks",
@@ -1423,6 +1432,9 @@
         {
           "path": "content/volumes/dsa/DSA-12-binary-search/chapters/03-boundary-engineering-and-answer-search.md",
           "series_native": true
+        },
+        {
+          "path": "content/volumes/dsa/DSA-12-binary-search/chapters/04-continuous-and-unimodal-search.md"
         },
         {
           "path": "content/volumes/dsa/DSA-12-binary-search/exercises/01-binary-search-practice-lab.md",
@@ -1701,7 +1713,7 @@
         "Challenge: compare greedy, DP, and graph formulations"
       ],
       "min_pages": 15,
-      "max_pages": 100,
+      "max_pages": 130,
       "code_companion": {
         "path": "content/volumes/dsa/DSA-16-greedy-algorithms/code/GreedyInterviewChecks.java",
         "title": "Executable Greedy Proof and Oracle Checks",
@@ -1727,6 +1739,9 @@
         {
           "path": "content/volumes/dsa/DSA-16-greedy-algorithms/chapters/03-greedy-proof-and-counterexample-workshop.md",
           "series_native": true
+        },
+        {
+          "path": "content/volumes/dsa/DSA-16-greedy-algorithms/chapters/04-proving-greedy-correctness.md"
         },
         {
           "path": "content/volumes/dsa/DSA-16-greedy-algorithms/exercises/01-greedy-practice-lab.md",

@@ -36,6 +36,8 @@ evict:  remove tail.prev
 
 Sentinel `head` and `tail` nodes that are never removed eliminate every null check in the link and unlink paths. That is worth doing on a whiteboard, because null-handling in pointer surgery is where candidates lose time.
 
+![The hash map supplies lookup and the doubly-linked list supplies recency ordering](content/volumes/dsa/DSA-08-hashing-maps-sets-and-prefix-state/assets/01-lru-map-and-list.png)
+
 ### Implementation
 
 ```java

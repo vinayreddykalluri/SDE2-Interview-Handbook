@@ -36,9 +36,9 @@ Stable release filenames remain intact. Reader-facing segment codes—JAVA 01-09
 
 ## What is published
 
-- 41 published focused books (3,531 pages) and one 17-page series index
+- 41 published focused books (3,575 pages) and one 17-page series index
 - one complete 657-page master book
-- 43 individual PDFs and 4,205 pages across the complete library
+- 43 individual PDFs and 4,249 pages across the complete library
 - 414 declared source entries resolving to 407 unique mapped Markdown documents
 - canonical Markdown and diagram sources
 - Java 21 companion programs and boundary tests

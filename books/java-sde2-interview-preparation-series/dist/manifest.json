@@ -264,8 +264,8 @@
     },
     {
       "page_count": 87,
-      "sha256": "65c00fe4ce0ffe8b13a90530a9ce1cccbac4b8d52af80416059398d8288ea987",
-      "bytes": 3886500,
+      "sha256": "8d4410a08dc5567bf664351bae6ed61c72341e1b9d8d8bb532a7e28ab5ff7b12",
+      "bytes": 4052659,
       "id": "08",
       "stage": "8",
       "path_label": "DSA-08",
@@ -279,9 +279,9 @@
       "output_name": "Java-SDE2-DSA-08-Hashing-Maps-Sets-and-Prefix-State.pdf"
     },
     {
-      "page_count": 55,
-      "sha256": "6189dccaf92884622ecd2fdfebdc68e82b1f38d20f300c1e492f47aef6364fe8",
-      "bytes": 3770210,
+      "page_count": 65,
+      "sha256": "142be5a141abfc468a94d865bb8d0e00add309d6d5bbf10a71d8b515712ebbb8",
+      "bytes": 3959140,
       "id": "09",
       "stage": "9",
       "path_label": "DSA-09",
@@ -295,9 +295,9 @@
       "output_name": "Java-SDE2-DSA-09-Recursion-and-Backtracking.pdf"
     },
     {
-      "page_count": 53,
-      "sha256": "66a69cf3a06dca86acf766b850e0791261cca081fad90b666d6d8834c587d81d",
-      "bytes": 3759845,
+      "page_count": 62,
+      "sha256": "250d0329937dd7a77d3bd0d7dab4264539ca493ac25121a24314ffcf392b3971",
+      "bytes": 3793369,
       "id": "10",
       "stage": "10",
       "path_label": "DSA-10",
@@ -311,9 +311,9 @@
       "output_name": "Java-SDE2-DSA-10-Linked-Lists.pdf"
     },
     {
-      "page_count": 54,
-      "sha256": "635a9642fd3f402810e3161a976129a2e8a4e7ba1f8a897ebb17889fb3dc636a",
-      "bytes": 3761977,
+      "page_count": 61,
+      "sha256": "0a81e8644c8329bc91e6c86c3c106e22fdd201897c31be15288aa16f9a2d953b",
+      "bytes": 3792612,
       "id": "11",
       "stage": "11",
       "path_label": "DSA-11",
@@ -327,9 +327,9 @@
       "output_name": "Java-SDE2-DSA-11-Stacks-Queues-Deques-and-Monotonic-Patterns.pdf"
     },
     {
-      "page_count": 51,
-      "sha256": "143ce23ed6344e7ca89c3b82beccac4efb3bec18d243b825f3aef94975190b4f",
-      "bytes": 3758418,
+      "page_count": 58,
+      "sha256": "816f6e3225f5ab00187ff661c9e3bdc1f3d44d9e6ea6b3b2e7835b64317ca58e",
+      "bytes": 3790506,
       "id": "12",
       "stage": "12",
       "path_label": "DSA-12",
@@ -343,9 +343,9 @@
       "output_name": "Java-SDE2-DSA-12-Binary-Search.pdf"
     },
     {
-      "page_count": 69,
-      "sha256": "f3bedd2956ad74f1f79e2f5169d65b3ceba51c8afe4eb0e52164a5148c4e7030",
-      "bytes": 3809607,
+      "page_count": 71,
+      "sha256": "bf6d763cf0a481c2a577cd4b63430a4c3a5b8309af0a9accc56a03b21af230ba",
+      "bytes": 4031004,
       "id": "13",
       "stage": "13",
       "path_label": "DSA-13",
@@ -375,9 +375,9 @@
       "output_name": "Java-SDE2-DSA-14-Heaps-Priority-Queues-and-Top-K.pdf"
     },
     {
-      "page_count": 90,
-      "sha256": "e82a28729d85c1c3bbdf4a0955807335c38eb275f83de026b812fe9df07ba22d",
-      "bytes": 3863801,
+      "page_count": 91,
+      "sha256": "e0526c5fc9314d400c8db205d2931c8a8e9550eebca3d8385e9fe99cb063d51b",
+      "bytes": 4084257,
       "id": "15",
       "stage": "15",
       "path_label": "DSA-15",
@@ -391,9 +391,9 @@
       "output_name": "Java-SDE2-DSA-15-Graphs.pdf"
     },
     {
-      "page_count": 53,
-      "sha256": "48eceffb06c2dfab603e7858475f5073b1690ae3eb43ce98ebad70692e97711e",
-      "bytes": 3765276,
+      "page_count": 61,
+      "sha256": "b60003354cbf8920ef250dad6e83ba4f6145f2582a253ee3d688514ccb5862ca",
+      "bytes": 3960728,
       "id": "16",
       "stage": "16",
       "path_label": "DSA-16",

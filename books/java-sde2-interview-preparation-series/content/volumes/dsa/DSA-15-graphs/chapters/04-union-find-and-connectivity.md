@@ -51,6 +51,8 @@ Naively this degenerates. Attaching roots arbitrarily can build a chain of lengt
 
 **Path compression.** During `find`, repoint every node on the path directly at the root. Subsequent finds on those nodes are O(1).
 
+![Path compression repoints every node on the find path directly at the root](content/volumes/dsa/DSA-15-graphs/assets/01-union-find-path-compression.png)
+
 Applied together, the amortized cost per operation is **O(alpha(n))**, where alpha is the inverse Ackermann function. For every `n` that fits in the observable universe, alpha(n) < 5. It is constant in practice and it is worth saying "effectively constant, formally inverse Ackermann" rather than claiming O(1) outright - interviewers notice the difference.
 
 Either optimization alone gives O(log n). Both give O(alpha(n)). Knowing that they are independent, and that the bound requires both, is a standard follow-up.

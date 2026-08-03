@@ -37,6 +37,8 @@ Descend left. After 1, 2, 3 are visited, following 3.right returns to 4.
 The thread is then removed and the tree is restored.
 ```
 
+![The Morris thread reuses a leaf's null right pointer to return to the successor](content/volumes/dsa/DSA-13-trees-bsts-and-tries/assets/01-morris-traversal-thread.png)
+
 ### Implementation
 
 ```java
@@ -122,6 +124,8 @@ up[k][v] = up[k-1][ up[k-1][v] ]     jump halfway, then halfway again
 ```
 
 That recurrence is the whole technique. Building the table is a DFS to record parents and depths, then a doubling loop.
+
+![Binary lifting decomposes an upward jump into powers of two](content/volumes/dsa/DSA-13-trees-bsts-and-tries/assets/02-binary-lifting-jumps.png)
 
 ```java
 public final class LcaBinaryLifting {

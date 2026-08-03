@@ -7,11 +7,11 @@
     "editionDate": "2026-08-02",
     "url": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/tag/books-v2026.07.0",
     "focusedBookCount": 41,
-    "focusedPageCount": 3531,
+    "focusedPageCount": 3575,
     "indexPageCount": 17,
     "masterPageCount": 657,
     "totalPdfCount": 43,
-    "totalPageCount": 4205,
+    "totalPageCount": 4249,
     "index": {
       "title": "Java SDE-2 Interview Preparation Series Index",
       "filename": "Java-SDE2-Interview-Preparation-Series-Index.pdf",
@@ -2004,7 +2004,7 @@
       "fullBookHref": "books/dsa-08-hashing-maps-sets-and-prefix-state/",
       "codeHref": "books/dsa-08-hashing-maps-sets-and-prefix-state/code/",
       "webDocumentCount": 11,
-      "wordCount": 19705,
+      "wordCount": 19724,
       "codeExampleCount": 29,
       "sourceChapterCount": 6,
       "supportingSourceCount": 5,
@@ -2120,16 +2120,16 @@
       "authorNote": "Recursion is easiest to trust when one call has a precise promise. Write that promise, prove the base case, and show how the recursive step reduces the remaining work.",
       "filename": "Java-SDE2-DSA-09-Recursion-and-Backtracking.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-09-Recursion-and-Backtracking.pdf",
-      "pageCount": 55,
+      "pageCount": 65,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-09-Recursion-and-Backtracking.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-09-Recursion-and-Backtracking.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-09-recursion-and-backtracking/chapters",
       "fullBookHref": "books/dsa-09-recursion-and-backtracking/",
       "codeHref": "books/dsa-09-recursion-and-backtracking/code/",
-      "webDocumentCount": 7,
-      "wordCount": 8875,
-      "codeExampleCount": 10,
-      "sourceChapterCount": 5,
+      "webDocumentCount": 8,
+      "wordCount": 11479,
+      "codeExampleCount": 18,
+      "sourceChapterCount": 6,
       "supportingSourceCount": 2,
       "chapterPreview": [
         {
@@ -2180,14 +2180,19 @@
           "webHref": "books/dsa-09-recursion-and-backtracking/05-03-recursion-engine-and-backtracking-state/"
         },
         {
+          "title": "4. Converting Recursion to Iteration",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-09-recursion-and-backtracking/chapters/04-converting-recursion-to-iteration.md",
+          "webHref": "books/dsa-09-recursion-and-backtracking/06-04-converting-recursion-to-iteration/"
+        },
+        {
           "title": "Recursion and Backtracking Practice Lab",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-09-recursion-and-backtracking/exercises/01-recursion-practice-lab.md",
-          "webHref": "books/dsa-09-recursion-and-backtracking/06-01-recursion-practice-lab/"
+          "webHref": "books/dsa-09-recursion-and-backtracking/07-01-recursion-practice-lab/"
         },
         {
           "title": "Recursion and Backtracking Practice Lab Solutions",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-09-recursion-and-backtracking/solutions/01-recursion-practice-solutions.md",
-          "webHref": "books/dsa-09-recursion-and-backtracking/07-01-recursion-practice-solutions/"
+          "webHref": "books/dsa-09-recursion-and-backtracking/08-01-recursion-practice-solutions/"
         }
       ],
       "outcomes": [
@@ -2223,16 +2228,16 @@
       "authorNote": "With linked lists, draw node identity before changing pointers. Preserve the next reference you still need, mutate one edge at a time, and check which node the caller still owns.",
       "filename": "Java-SDE2-DSA-10-Linked-Lists.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-10-Linked-Lists.pdf",
-      "pageCount": 53,
+      "pageCount": 62,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-10-Linked-Lists.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-10-Linked-Lists.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-10-linked-lists/chapters",
       "fullBookHref": "books/dsa-10-linked-lists/",
       "codeHref": "books/dsa-10-linked-lists/code/",
-      "webDocumentCount": 7,
-      "wordCount": 8060,
-      "codeExampleCount": 13,
-      "sourceChapterCount": 5,
+      "webDocumentCount": 8,
+      "wordCount": 10367,
+      "codeExampleCount": 15,
+      "sourceChapterCount": 6,
       "supportingSourceCount": 2,
       "chapterPreview": [
         {
@@ -2283,14 +2288,19 @@
           "webHref": "books/dsa-10-linked-lists/05-03-pointer-surgery-and-node-identity/"
         },
         {
+          "title": "4. Skip Lists and Probabilistic Balance",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-10-linked-lists/chapters/04-skip-lists-and-probabilistic-balance.md",
+          "webHref": "books/dsa-10-linked-lists/06-04-skip-lists-and-probabilistic-balance/"
+        },
+        {
           "title": "Linked-List Practice Lab",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-10-linked-lists/exercises/01-linked-list-practice-lab.md",
-          "webHref": "books/dsa-10-linked-lists/06-01-linked-list-practice-lab/"
+          "webHref": "books/dsa-10-linked-lists/07-01-linked-list-practice-lab/"
         },
         {
           "title": "Linked-List Practice Lab Solutions",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-10-linked-lists/solutions/01-linked-list-practice-solutions.md",
-          "webHref": "books/dsa-10-linked-lists/07-01-linked-list-practice-solutions/"
+          "webHref": "books/dsa-10-linked-lists/08-01-linked-list-practice-solutions/"
         }
       ],
       "outcomes": [
@@ -2326,16 +2336,16 @@
       "authorNote": "A stack, queue, or deque earns its place by making an ordering invariant cheap. Say which candidate is removed next and why stale candidates can never become useful again.",
       "filename": "Java-SDE2-DSA-11-Stacks-Queues-Deques-and-Monotonic-Patterns.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-11-Stacks-Queues-Deques-and-Monotonic-Patterns.pdf",
-      "pageCount": 54,
+      "pageCount": 61,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-11-Stacks-Queues-Deques-and-Monotonic-Patterns.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-11-Stacks-Queues-Deques-and-Monotonic-Patterns.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-11-stacks-queues-deques-and-monotonic-patterns/chapters",
       "fullBookHref": "books/dsa-11-stacks-queues-deques-and-monotonic-patterns/",
       "codeHref": "books/dsa-11-stacks-queues-deques-and-monotonic-patterns/code/",
-      "webDocumentCount": 7,
-      "wordCount": 7822,
-      "codeExampleCount": 8,
-      "sourceChapterCount": 5,
+      "webDocumentCount": 8,
+      "wordCount": 10077,
+      "codeExampleCount": 10,
+      "sourceChapterCount": 6,
       "supportingSourceCount": 2,
       "chapterPreview": [
         {
@@ -2386,14 +2396,19 @@
           "webHref": "books/dsa-11-stacks-queues-deques-and-monotonic-patterns/05-03-circular-deque-and-monotonic-invariants/"
         },
         {
+          "title": "4. Amortized Analysis",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-11-stacks-queues-deques-and-monotonic-patterns/chapters/04-amortized-analysis.md",
+          "webHref": "books/dsa-11-stacks-queues-deques-and-monotonic-patterns/06-04-amortized-analysis/"
+        },
+        {
           "title": "Stack, Queue, and Deque Practice Lab",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-11-stacks-queues-deques-and-monotonic-patterns/exercises/01-ordering-structures-practice-lab.md",
-          "webHref": "books/dsa-11-stacks-queues-deques-and-monotonic-patterns/06-01-ordering-structures-practice-lab/"
+          "webHref": "books/dsa-11-stacks-queues-deques-and-monotonic-patterns/07-01-ordering-structures-practice-lab/"
         },
         {
           "title": "Stack, Queue, and Deque Practice Lab Solutions",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-11-stacks-queues-deques-and-monotonic-patterns/solutions/01-ordering-structures-practice-solutions.md",
-          "webHref": "books/dsa-11-stacks-queues-deques-and-monotonic-patterns/07-01-ordering-structures-practice-solutions/"
+          "webHref": "books/dsa-11-stacks-queues-deques-and-monotonic-patterns/08-01-ordering-structures-practice-solutions/"
         }
       ],
       "outcomes": [
@@ -2433,16 +2448,16 @@
       "authorNote": "Binary search is not about finding a middle element; it is about preserving a boundary contract. Write what is known on each side before you choose the update rule.",
       "filename": "Java-SDE2-DSA-12-Binary-Search.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-12-Binary-Search.pdf",
-      "pageCount": 51,
+      "pageCount": 58,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-12-Binary-Search.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-12-Binary-Search.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-12-binary-search/chapters",
       "fullBookHref": "books/dsa-12-binary-search/",
       "codeHref": "books/dsa-12-binary-search/code/",
-      "webDocumentCount": 7,
-      "wordCount": 7902,
-      "codeExampleCount": 12,
-      "sourceChapterCount": 5,
+      "webDocumentCount": 8,
+      "wordCount": 10215,
+      "codeExampleCount": 16,
+      "sourceChapterCount": 6,
       "supportingSourceCount": 2,
       "chapterPreview": [
         {
@@ -2493,14 +2508,19 @@
           "webHref": "books/dsa-12-binary-search/05-03-boundary-engineering-and-answer-search/"
         },
         {
+          "title": "4. Searching Continuous and Unimodal Domains",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-12-binary-search/chapters/04-continuous-and-unimodal-search.md",
+          "webHref": "books/dsa-12-binary-search/06-04-continuous-and-unimodal-search/"
+        },
+        {
           "title": "Binary Search Practice Lab",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-12-binary-search/exercises/01-binary-search-practice-lab.md",
-          "webHref": "books/dsa-12-binary-search/06-01-binary-search-practice-lab/"
+          "webHref": "books/dsa-12-binary-search/07-01-binary-search-practice-lab/"
         },
         {
           "title": "Binary Search Practice Lab Solutions",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-12-binary-search/solutions/01-binary-search-practice-solutions.md",
-          "webHref": "books/dsa-12-binary-search/07-01-binary-search-practice-solutions/"
+          "webHref": "books/dsa-12-binary-search/08-01-binary-search-practice-solutions/"
         }
       ],
       "outcomes": [
@@ -2536,14 +2556,14 @@
       "authorNote": "Tree code becomes clearer when every method states what its subtree returns. For balanced and range structures, trace the metadata update with the same care as the pointer update.",
       "filename": "Java-SDE2-DSA-13-Trees-BSTs-and-Tries.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-13-Trees-BSTs-and-Tries.pdf",
-      "pageCount": 69,
+      "pageCount": 71,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-13-Trees-BSTs-and-Tries.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-13-Trees-BSTs-and-Tries.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-13-trees-bsts-and-tries/chapters",
       "fullBookHref": "books/dsa-13-trees-bsts-and-tries/",
       "codeHref": "books/dsa-13-trees-bsts-and-tries/code/",
       "webDocumentCount": 8,
-      "wordCount": 11577,
+      "wordCount": 11615,
       "codeExampleCount": 14,
       "sourceChapterCount": 6,
       "supportingSourceCount": 2,
@@ -2747,14 +2767,14 @@
       "authorNote": "Before choosing a graph algorithm, write down direction, weight rules, connectivity, and the requested output. Many advanced-looking failures begin with solving the wrong graph model perfectly.",
       "filename": "Java-SDE2-DSA-15-Graphs.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-15-Graphs.pdf",
-      "pageCount": 90,
+      "pageCount": 91,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-15-Graphs.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-15-Graphs.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-15-graphs/chapters",
       "fullBookHref": "books/dsa-15-graphs/",
       "codeHref": "books/dsa-15-graphs/code/",
       "webDocumentCount": 9,
-      "wordCount": 15362,
+      "wordCount": 15400,
       "codeExampleCount": 16,
       "sourceChapterCount": 7,
       "supportingSourceCount": 2,
@@ -2860,16 +2880,16 @@
       "authorNote": "A greedy choice needs a proof, not a confident intuition. State why one locally best decision can replace the first decision of an optimal solution without making the remainder worse.",
       "filename": "Java-SDE2-DSA-16-Greedy-Algorithms.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-16-Greedy-Algorithms.pdf",
-      "pageCount": 53,
+      "pageCount": 61,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-16-Greedy-Algorithms.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-16-Greedy-Algorithms.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-16-greedy-algorithms/chapters",
       "fullBookHref": "books/dsa-16-greedy-algorithms/",
       "codeHref": "books/dsa-16-greedy-algorithms/code/",
-      "webDocumentCount": 7,
-      "wordCount": 8514,
+      "webDocumentCount": 8,
+      "wordCount": 11071,
       "codeExampleCount": 9,
-      "sourceChapterCount": 5,
+      "sourceChapterCount": 6,
       "supportingSourceCount": 2,
       "chapterPreview": [
         {
@@ -2920,14 +2940,19 @@
           "webHref": "books/dsa-16-greedy-algorithms/05-03-greedy-proof-and-counterexample-workshop/"
         },
         {
+          "title": "4. Proving Greedy Correctness",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-16-greedy-algorithms/chapters/04-proving-greedy-correctness.md",
+          "webHref": "books/dsa-16-greedy-algorithms/06-04-proving-greedy-correctness/"
+        },
+        {
           "title": "Greedy Algorithms Practice Lab",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-16-greedy-algorithms/exercises/01-greedy-practice-lab.md",
-          "webHref": "books/dsa-16-greedy-algorithms/06-01-greedy-practice-lab/"
+          "webHref": "books/dsa-16-greedy-algorithms/07-01-greedy-practice-lab/"
         },
         {
           "title": "Greedy Algorithms Practice Lab Solutions",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-16-greedy-algorithms/solutions/01-greedy-practice-solutions.md",
-          "webHref": "books/dsa-16-greedy-algorithms/07-01-greedy-practice-solutions/"
+          "webHref": "books/dsa-16-greedy-algorithms/08-01-greedy-practice-solutions/"
         }
       ],
       "outcomes": [
