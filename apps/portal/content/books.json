@@ -7,11 +7,11 @@
     "editionDate": "2026-08-02",
     "url": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/tag/books-v2026.07.0",
     "focusedBookCount": 41,
-    "focusedPageCount": 3513,
+    "focusedPageCount": 3531,
     "indexPageCount": 17,
     "masterPageCount": 657,
     "totalPdfCount": 43,
-    "totalPageCount": 4187,
+    "totalPageCount": 4205,
     "index": {
       "title": "Java SDE-2 Interview Preparation Series Index",
       "filename": "Java-SDE2-Interview-Preparation-Series-Index.pdf",
@@ -1997,16 +1997,16 @@
       "authorNote": "A hash table is fast because of a conditional contract, not magic. Always make equality, hashing, collision behavior, and adversarial input part of your answer.",
       "filename": "Java-SDE2-DSA-08-Hashing-Maps-Sets-and-Prefix-State.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-08-Hashing-Maps-Sets-and-Prefix-State.pdf",
-      "pageCount": 78,
+      "pageCount": 87,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-08-Hashing-Maps-Sets-and-Prefix-State.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-08-Hashing-Maps-Sets-and-Prefix-State.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-08-hashing-maps-sets-and-prefix-state/chapters",
       "fullBookHref": "books/dsa-08-hashing-maps-sets-and-prefix-state/",
       "codeHref": "books/dsa-08-hashing-maps-sets-and-prefix-state/code/",
-      "webDocumentCount": 10,
-      "wordCount": 17136,
-      "codeExampleCount": 28,
-      "sourceChapterCount": 5,
+      "webDocumentCount": 11,
+      "wordCount": 19705,
+      "codeExampleCount": 29,
+      "sourceChapterCount": 6,
       "supportingSourceCount": 5,
       "chapterPreview": [
         {
@@ -2072,14 +2072,19 @@
           "webHref": "books/dsa-08-hashing-maps-sets-and-prefix-state/08-03-hash-table-internals-from-first-principles/"
         },
         {
+          "title": "4. Composite Structures and Open Addressing",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-08-hashing-maps-sets-and-prefix-state/chapters/04-composite-structures-and-open-addressing.md",
+          "webHref": "books/dsa-08-hashing-maps-sets-and-prefix-state/09-04-composite-structures-and-open-addressing/"
+        },
+        {
           "title": "Hashing Practice Lab",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-08-hashing-maps-sets-and-prefix-state/exercises/01-hashing-practice-lab.md",
-          "webHref": "books/dsa-08-hashing-maps-sets-and-prefix-state/09-01-hashing-practice-lab/"
+          "webHref": "books/dsa-08-hashing-maps-sets-and-prefix-state/10-01-hashing-practice-lab/"
         },
         {
           "title": "Hashing Practice Lab Solutions",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-08-hashing-maps-sets-and-prefix-state/solutions/01-hashing-practice-solutions.md",
-          "webHref": "books/dsa-08-hashing-maps-sets-and-prefix-state/10-01-hashing-practice-solutions/"
+          "webHref": "books/dsa-08-hashing-maps-sets-and-prefix-state/11-01-hashing-practice-solutions/"
         }
       ],
       "outcomes": [
@@ -2639,16 +2644,16 @@
       "authorNote": "A heap gives fast access to one extreme, not a sorted collection. Keep the heap invariant separate from the problem's selection invariant, especially when ties and custom comparators appear.",
       "filename": "Java-SDE2-DSA-14-Heaps-Priority-Queues-and-Top-K.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-14-Heaps-Priority-Queues-and-Top-K.pdf",
-      "pageCount": 55,
+      "pageCount": 64,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-14-Heaps-Priority-Queues-and-Top-K.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-14-Heaps-Priority-Queues-and-Top-K.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-14-heaps-priority-queues-and-top-k/chapters",
       "fullBookHref": "books/dsa-14-heaps-priority-queues-and-top-k/",
       "codeHref": "books/dsa-14-heaps-priority-queues-and-top-k/code/",
-      "webDocumentCount": 7,
-      "wordCount": 8707,
-      "codeExampleCount": 13,
-      "sourceChapterCount": 5,
+      "webDocumentCount": 8,
+      "wordCount": 11243,
+      "codeExampleCount": 15,
+      "sourceChapterCount": 6,
       "supportingSourceCount": 2,
       "chapterPreview": [
         {
@@ -2699,14 +2704,19 @@
           "webHref": "books/dsa-14-heaps-priority-queues-and-top-k/05-03-binary-heap-and-quickselect-internals/"
         },
         {
+          "title": "4. Indexed Heaps, Decrease-Key, and Lazy Deletion",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-14-heaps-priority-queues-and-top-k/chapters/04-indexed-heaps-and-lazy-deletion.md",
+          "webHref": "books/dsa-14-heaps-priority-queues-and-top-k/06-04-indexed-heaps-and-lazy-deletion/"
+        },
+        {
           "title": "Heaps and Priority Queues Practice Lab",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-14-heaps-priority-queues-and-top-k/exercises/01-heaps-practice-lab.md",
-          "webHref": "books/dsa-14-heaps-priority-queues-and-top-k/06-01-heaps-practice-lab/"
+          "webHref": "books/dsa-14-heaps-priority-queues-and-top-k/07-01-heaps-practice-lab/"
         },
         {
           "title": "Heaps and Priority Queues Practice Lab Solutions",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-14-heaps-priority-queues-and-top-k/solutions/01-heaps-practice-solutions.md",
-          "webHref": "books/dsa-14-heaps-priority-queues-and-top-k/07-01-heaps-practice-solutions/"
+          "webHref": "books/dsa-14-heaps-priority-queues-and-top-k/08-01-heaps-practice-solutions/"
         }
       ],
       "outcomes": [

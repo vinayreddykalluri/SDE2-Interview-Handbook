@@ -1130,6 +1130,9 @@
           "series_native": true
         },
         {
+          "path": "content/volumes/dsa/DSA-08-hashing-maps-sets-and-prefix-state/chapters/04-composite-structures-and-open-addressing.md"
+        },
+        {
           "path": "content/volumes/dsa/DSA-08-hashing-maps-sets-and-prefix-state/exercises/01-hashing-practice-lab.md",
           "series_native": true
         },
@@ -1543,7 +1546,7 @@
         "Challenge: streaming median or scheduler design"
       ],
       "min_pages": 22,
-      "max_pages": 120,
+      "max_pages": 130,
       "code_companion": {
         "path": "content/volumes/dsa/DSA-14-heaps-priority-queues-and-top-k/code/HeapInterviewChecks.java",
         "title": "Executable Heap and Selection Checks",
@@ -1569,6 +1572,9 @@
         {
           "path": "content/volumes/dsa/DSA-14-heaps-priority-queues-and-top-k/chapters/03-binary-heap-and-quickselect-internals.md",
           "series_native": true
+        },
+        {
+          "path": "content/volumes/dsa/DSA-14-heaps-priority-queues-and-top-k/chapters/04-indexed-heaps-and-lazy-deletion.md"
         },
         {
           "path": "content/volumes/dsa/DSA-14-heaps-priority-queues-and-top-k/exercises/01-heaps-practice-lab.md",

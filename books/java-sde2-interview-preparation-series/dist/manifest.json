@@ -263,9 +263,9 @@
       "output_name": "Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf"
     },
     {
-      "page_count": 78,
-      "sha256": "b8a3f7addc92c978979f1d059ebd9ec4c7d3a718cba5667adfad297421e4cd0d",
-      "bytes": 3850533,
+      "page_count": 87,
+      "sha256": "65c00fe4ce0ffe8b13a90530a9ce1cccbac4b8d52af80416059398d8288ea987",
+      "bytes": 3886500,
       "id": "08",
       "stage": "8",
       "path_label": "DSA-08",
@@ -359,9 +359,9 @@
       "output_name": "Java-SDE2-DSA-13-Trees-BSTs-and-Tries.pdf"
     },
     {
-      "page_count": 55,
-      "sha256": "94f7aa0992a236e9fdd5f87a0fb843b39e28af787596846218e4f3ecafa9883a",
-      "bytes": 3765939,
+      "page_count": 64,
+      "sha256": "bac1679a8ac8a4da74924d90b89e2cc2dc5999ae01ea23a4584584dff6e82923",
+      "bytes": 3801026,
       "id": "14",
       "stage": "14",
       "path_label": "DSA-14",

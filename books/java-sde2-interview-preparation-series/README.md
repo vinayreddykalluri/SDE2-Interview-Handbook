@@ -13,7 +13,7 @@ This is the canonical book workspace inside the consolidated [SDE2 Interview Han
 
 ## Read or download
 
-The library contains 41 published focused books (3,513 pages), one 17-page series index, and one 657-page master reference: 43 PDFs and 4,187 pages in total. Its publishing manifest declares 414 source entries that resolve to 407 unique mapped Markdown documents. Every focused volume is a publication edition with prerequisite-aware chapters, worked examples, answered interview rounds, exercises, and executable validation evidence.
+The library contains 41 published focused books (3,531 pages), one 17-page series index, and one 657-page master reference: 43 PDFs and 4,205 pages in total. Its publishing manifest declares 414 source entries that resolve to 407 unique mapped Markdown documents. Every focused volume is a publication edition with prerequisite-aware chapters, worked examples, answered interview rounds, exercises, and executable validation evidence.
 
 - [Download the complete release](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest)
 - [Open the series index](dist/00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf)
