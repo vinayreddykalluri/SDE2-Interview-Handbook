@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import functools
 import hashlib
 import json
 import re
@@ -126,6 +127,55 @@ def reader_pagination(previous_href: str, previous_label: str, next_href: str, n
 </nav>'''
 
 
+@functools.lru_cache(maxsize=1)
+def manifest_pdf_paths() -> dict[str, str]:
+    """Map every published PDF filename to its path under dist/.
+
+    Read from dist/manifest.json rather than the filesystem so that PDF links
+    resolve even when the PDFs themselves are absent. Hosted deployments strip
+    them: .vercelignore excludes `dist/*` (163 MB of binaries has no business
+    in a Vercel upload) while explicitly keeping manifest.json. Without this,
+    resolve_local_target() finds nothing, the relative link survives into the
+    generated Markdown, and `mkdocs build --strict` aborts the deployment on a
+    dead internal link. PDFs are always served from GitHub, never from the
+    site, so the file only ever needs to be *named* here, not present.
+    """
+    manifest_path = BOOK_ROOT / "dist" / "manifest.json"
+    if not manifest_path.is_file():
+        return {}
+
+    found: dict[str, str] = {}
+
+    def walk(node: Any) -> None:
+        if isinstance(node, dict):
+            relative = node.get("file")
+            if isinstance(relative, str) and relative.lower().endswith(".pdf"):
+                found[Path(relative).name] = relative
+            name = node.get("output_name")
+            segment = node.get("artifact_path") or node.get("path_prefix")
+            if isinstance(name, str) and name.lower().endswith(".pdf"):
+                found.setdefault(name, segment if isinstance(segment, str) else name)
+            for value in node.values():
+                walk(value)
+        elif isinstance(node, list):
+            for value in node:
+                walk(value)
+
+    walk(json.loads(manifest_path.read_text(encoding="utf-8")))
+    return found
+
+
+def pdf_target_from_manifest(target: str) -> str | None:
+    """Resolve a PDF link to its canonical dist/ path using the manifest."""
+    clean = target.strip("<>").split("#", 1)[0]
+    if not clean.lower().endswith(".pdf"):
+        return None
+    relative = manifest_pdf_paths().get(Path(clean).name)
+    if relative is None:
+        return None
+    return relative if relative.startswith("dist/") else f"dist/{relative}"
+
+
 def resolve_local_target(source_path: Path, target: str) -> Path | None:
     clean = target.strip("<>").split("#", 1)[0]
     if not clean or clean.startswith(("#", "http://", "https://", "mailto:", "data:")):
@@ -163,6 +213,17 @@ def rewrite_links(
         if "#" in target:
             target, fragment_value = target.split("#", 1)
             fragment = "#" + fragment_value
+        # PDFs first, and by name from the manifest rather than by existence on
+        # disk. They are always served from GitHub, and hosted builds do not
+        # ship them -- see manifest_pdf_paths().
+        manifest_pdf = pdf_target_from_manifest(target)
+        if manifest_pdf is not None:
+            replacement = (
+                f"{REPOSITORY}/raw/refs/heads/master/{BOOK_REPOSITORY_PATH}/{manifest_pdf}"
+                + fragment
+            )
+            return match.group("prefix") + replacement + match.group("rest")
+
         resolved = resolve_local_target(source_path, target)
         if resolved is None:
             return match.group(0)
@@ -384,6 +445,12 @@ def build_library(
             )
 
         source_word_count = sum(len(re.findall(r"\b[\w'-]+\b", entry["text"])) for entry in source_entries)
+        # Computed outside the f-string on purpose. A backslash inside an
+        # f-string expression is a SyntaxError before Python 3.12 (PEP 701
+        # relaxed it), and pinning the tooling to 3.12+ for one join would
+        # break contributors and CI, which runs 3.11.
+        reading_body = "\n\n".join(reading_sections)
+        canonical_source_dir = Path(volume["sources"][0]["path"]).parent.as_posix()
         index_page = f"""# {volume['title']}
 
 {context_bar(label=f"{volume['segment_code']} · {volume['short_title']}", overview_href=None, code_href='code/', pdf_href=pdf_url(volume['artifact_path']))}
@@ -425,12 +492,12 @@ def build_library(
 
 {markdown_list(list(volume.get('outcomes', [])))}
 
-{"\n\n".join(reading_sections)}
+{reading_body}
 
 ## Code
 
 - [{code_title}](code.md)
-- [Canonical source directory]({REPOSITORY}/tree/master/{BOOK_REPOSITORY_PATH}/{Path(volume['sources'][0]['path']).parent.as_posix()})
+- [Canonical source directory]({REPOSITORY}/tree/master/{BOOK_REPOSITORY_PATH}/{canonical_source_dir})
 """
         (volume_dir / "index.md").write_text(index_page, encoding="utf-8")
 

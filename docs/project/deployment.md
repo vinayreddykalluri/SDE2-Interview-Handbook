@@ -1,6 +1,37 @@
 # Vercel Deployment
 
-The repository is configured as a static Vercel project. Vercel builds the same portal, concise handbook, and complete web-book library used locally, then serves the contents of `site/`. No GitHub Actions workflow is required.
+The repository is configured as a static Vercel project. Vercel builds the same portal, concise handbook, and complete web-book library used locally, then serves the contents of `site/`.
+
+## Why the PDFs are not deployed
+
+`.vercelignore` excludes `books/java-sde2-interview-preparation-series/dist/*` and keeps only `manifest.json`. The 42 PDFs are 163 MB, which is above the 100 MB Hobby upload limit and would be pointless to serve twice — every download link in the site points at GitHub instead.
+
+This has one non-obvious consequence, and it broke the build until it was fixed. The generated book pages are compiled by `mkdocs build --strict`, which fails on any internal link it cannot resolve. Link rewriting used to resolve PDF targets by looking for the file on disk, so with `dist/` stripped a relative link such as `../00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf` resolved to nothing, survived into the generated Markdown as a relative path, and aborted the deployment.
+
+`build_book_web_library.py` now resolves PDF links by **name, from `dist/manifest.json`**, and always emits an absolute GitHub URL. The manifest is deliberately the one file kept out of the ignore rule. If you add a PDF, it must appear in the manifest or its links will not rewrite.
+
+To reproduce a hosted build locally, delete the PDFs from a scratch copy and build:
+
+```bash
+cp -r . /tmp/vercel-sim && cd /tmp/vercel-sim
+find books/java-sde2-interview-preparation-series/dist -name '*.pdf' -delete
+python3 tooling/automation/build_site.py     # must succeed with dist/ empty
+grep -roh 'href="[^"]*\.pdf"' site/ | grep -v '^href="https://'   # must print nothing
+```
+
+## Free-tier (Hobby) constraints that apply here
+
+| Limit | Value | Status |
+|---|---|---|
+| Source upload | 100 MB | 23 MB after `.vercelignore` — fine |
+| Source file count | 15,000 | ~1,000 — fine |
+| Build time | 45 min | ~1 min — fine |
+| Output files | no hard cap | 933 — fine |
+| Fast Data Transfer | 100 GB/month | See the note below |
+| Commercial use | not permitted on Hobby | Move to Pro if the books are ever monetized |
+| Git organization repos | not supported on Hobby | Repo is under a personal account — fine |
+
+The one number worth watching is transfer. Generated pages average about 219 KB because MkDocs Material inlines the full navigation tree for 407 documents into every page, so the library is roughly 147 MB of HTML. At 100 GB/month that supports a few hundred thousand page views, which is ample — but if it ever becomes a constraint, the fix is `navigation.prune` in `mkdocs.yml`, which emits only the visible portion of the nav per page. The `Cache-Control` headers in `vercel.json` already keep hashed theme assets out of repeat transfers.
 
 ## Build Contract
 
@@ -48,4 +79,6 @@ The check is read-only. A real Vercel build runs the URL normalizer without `--c
 
 ## Production Policy
 
-The production branch is `master`. Connecting Vercel to GitHub creates Vercel deployments on pushes; it does not enable repository GitHub Actions. Production promotion should wait for explicit approval of the preview UX and content.
+The production branch is `master`. Connecting Vercel to GitHub creates Vercel deployments on pushes, independently of the repository's GitHub Actions. Production promotion should wait for explicit approval of the preview UX and content.
+
+Vercel and GitHub Pages now both publish from `master`, so the same commit is served from two origins. `configure_deployment_urls.py` rewrites canonical URLs to whichever origin is building, which keeps the two from competing for search ranking. Set `PUBLIC_SITE_URL` on the Vercel project to the origin you want treated as canonical.
