@@ -56,7 +56,7 @@ Choose only one segment initially. Inside it, use the book numbers as the prereq
 
 [![Java SDE-2 Interview Preparation Series cover](books/java-sde2-interview-preparation-series/assets/covers/series-index-cover.png)](books/java-sde2-interview-preparation-series/dist/00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf)
 
-The consolidated repository includes 41 published focused books, a 17-page series index, and a 659-page master reference. The focused books contain 3,575 pages; the complete 43-PDF library contains 4,251 pages. The publishing manifest declares 414 source entries that resolve to 407 unique mapped Markdown documents — the gap is the small number of chapters and appendices deliberately shared by more than one focused book.
+The consolidated repository includes 41 published focused books, a 17-page series index, and a 658-page master reference. The focused books contain 3,565 pages; the complete 43-PDF library contains 4,240 pages. The publishing manifest declares 414 source entries that resolve to 407 unique mapped Markdown documents — the gap is the small number of chapters and appendices deliberately shared by more than one focused book.
 
 Every page count above is generated, not hand-maintained: `dist/manifest.json` records the page count, byte size, and SHA-256 of each PDF at build time, and `scripts/validate_pdfs.py` asserts that the files on disk still match.
 

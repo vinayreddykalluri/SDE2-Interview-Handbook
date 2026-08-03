@@ -1,139 +1,166 @@
 # 25. Collections Framework Architecture
 
-## Learning objectives
+## Start with a bug
 
-By the end of this chapter, you should be able to:
+A service returns the list of backends a router is allowed to use:
 
-- distinguish collection interfaces, implementations, algorithms, and views;
-- choose between `List`, `Set`, `Queue`, `Deque`, and `Map` from behavioral requirements;
-- explain optional operations, iteration order, mutability, and fail-fast iteration;
-- reason about structural modification, backed views, equality, and bulk operations;
-- state complexity as an implementation property, not an interface promise; and
-- design collection-facing APIs that preserve invariants and ownership boundaries.
+```java
+final class RoutingTable {
+    private final List<String> backends = new ArrayList<>();
 
-## Why this matters at SDE-2
-
-Collections sit in nearly every backend path: request aggregation, caches, indexes, batching, deduplication, scheduling, and persistence mapping. At SDE-2, naming a familiar class is not enough. You are expected to identify the required semantics first, defend complexity claims, understand aliasing, and notice when an innocent view or mutable key creates a correctness defect.
-
-An interview question such as "Which collection would you use?" is usually testing a decision process. Does order matter? Are duplicates allowed? Is lookup by key required? Are nulls valid? Is mutation concurrent? Is a sorted range query needed? The framework gives a vocabulary for those constraints.
-
-## First-principles model
-
-A collection is an object that owns or exposes a group of references. The Java Collections Framework separates four ideas:
-
-1. Interfaces define behavioral contracts, such as uniqueness or positional access.
-2. Implementations choose a data structure, memory layout, and performance profile.
-3. Algorithms operate through interfaces, such as sorting or binary search.
-4. Views expose a live projection of another object, such as a map's key set.
-
-The principal hierarchy is:
-
-```text
-Iterable
-  Collection
-    List
-    Set
-      SortedSet
-        NavigableSet
-    Queue
-      Deque
-
-Map                         (not a Collection)
-  SortedMap
-    NavigableMap
+    List<String> backends() {
+        return backends;          // looks harmless
+    }
+}
 ```
 
-`Map` is separate because it models key-value associations rather than individual elements. Its `keySet()`, `values()`, and `entrySet()` methods bridge into the `Collection` hierarchy through views.
+Six months later, a caller three layers away writes `table.backends().remove(0)` to skip a backend for one request. It compiles. It runs. It permanently removes a backend from the router for the lifetime of the process, and nothing in the type system objected.
 
-> **Specification boundary:** Interface contracts specify observable behavior. They generally do not promise array storage, linked nodes, hashing strategy, tree shape, amortized cost, or fail-fast detection. Complexity claims belong to the documentation of a concrete implementation.
+That is the shape of most real collection defects. Not "I picked a slow data structure" - almost nobody loses a day to that. It is "I handed out a reference and lost control of who can change what," or "I asked for a snapshot and got a live view," or "I put an object in a map and later it could not be found." This chapter is about the boundaries that prevent those, and the vocabulary interviewers use to probe them.
 
-## Core terminology
+## Choosing by guarantee, not by habit
 
-- **Element:** A reference stored by a collection. Collections do not contain primitive values directly; boxing creates wrapper objects when needed.
-- **Structural modification:** A change that can alter iteration structure, usually adding or removing elements. Replacing a value may or may not be structural for a particular implementation.
-- **Encounter order:** The order in which an iteration mechanism presents elements. Some collections define it; others do not.
-- **Natural ordering:** Ordering defined by `Comparable`.
-- **Optional operation:** An interface method that an implementation may reject with `UnsupportedOperationException`.
-- **View:** A projection backed by another object. Changes may be visible in both directions.
-- **Snapshot:** An independent representation of state at a point in time.
-- **Unmodifiable:** Mutation through that reference is rejected. It does not necessarily mean the underlying data or elements are immutable.
-- **Immutable:** State cannot change after construction, including through aliases permitted by the abstraction.
-- **Fail-fast iterator:** An iterator that attempts to detect unsupported concurrent structural modification and throw `ConcurrentModificationException`.
+Every collection interface is a promise about behaviour. Pick the one whose promise matches the requirement, then pick an implementation.
 
-## Detailed mechanics
+![Figure 25.1 - What each collection contract promises](assets/diagrams/13-collection-contracts.png)
 
-### Selecting the abstraction
+- **`List`** - position is meaningful and duplicates are allowed. "The first three results, in rank order."
+- **`Set`** - membership is meaningful and duplicates are not. "The set of user IDs that opted in."
+- **`Queue` / `Deque`** - the *removal order* is the point. "Process the oldest pending job." A `Deque` also serves as the correct stack.
+- **`Map`** - a unique key identifies a value. It is not a `Collection`, because "add one element" has no meaning for a key-value pair.
 
-Use a `List` when position, encounter order, or duplicates are meaningful. Use a `Set` for membership and uniqueness. Use a `Queue` when processing order matters and elements enter and leave through queue operations. Use a `Deque` for both ends or stack behavior. Use a `Map` when a unique key identifies a value.
+There is a trap in this that interviewers use deliberately. The interface tells you the semantics; it tells you nothing about cost:
 
-Program parameters and return types to the narrowest useful interface. A method that only iterates can accept `Iterable<T>` or `Collection<T>` rather than `ArrayList<T>`. Do not hide an important semantic property, however: accepting `Set<T>` communicates uniqueness, while accepting `Collection<T>` does not.
+| Call | What the interface promises | What it actually costs |
+|---|---|---|
+| `List.get(i)` | element at position `i` | `ArrayList` `O(1)`; `LinkedList` `O(n)` |
+| `Set.contains(x)` | membership | `HashSet` expected `O(1)`; `TreeSet` `O(log n)` |
+| `Map.get(k)` | value for the key | `HashMap` expected `O(1)`; `TreeMap` `O(log n)` |
 
-### Optional operations and capability
+So "`List.get` is constant time" is wrong as stated. "`ArrayList.get` is constant time" is right. Naming the concrete class before quoting a complexity is a small habit that separates a precise answer from a memorised one.
 
-`Collection` includes methods such as `add`, `remove`, and `clear`, but implementations can reject them. `List.of(...)` produces an unmodifiable list. `Arrays.asList(array)` is fixed-size: `set` works, but size-changing methods do not. This design lets algorithms use a common interface, but it means the static type alone does not prove mutability.
+> **Specification boundary:** interface contracts specify observable behaviour. They do not promise array storage, linked nodes, a hashing strategy, tree shape, amortized cost, or fail-fast detection. Complexity belongs to the documentation of a concrete implementation.
 
-Java has no standard type-level distinction between mutable and read-only collections. Document ownership and capability explicitly. Prefer immutable copies at public boundaries when callers should not mutate state:
+## Three ways to hand out data, and they behave differently
+
+Return to the routing table. There are three plausible fixes, and they are not interchangeable. Suppose the source list holds `A, B, C`, we wrap it three ways, and *then* someone appends `D` to the source.
+
+![Figure 25.2 - View, copy, and unmodifiable are three different things](assets/diagrams/14-view-copy-unmodifiable.png)
+
+```java
+List<String> source = new ArrayList<>(List.of("A", "B", "C"));
+
+List<String> view    = Collections.unmodifiableList(source);
+List<String> frozen  = List.copyOf(source);
+List<String> mutable = new ArrayList<>(source);
+
+source.add("D");
+```
+
+- `view` now contains four elements. It is a **live view**: it rejects mutation *through that reference*, but it reflects every change made through `source`.
+- `frozen` still contains three. `List.copyOf` took an **independent snapshot**. It also rejects null elements, which is useful only if that matches your domain.
+- `mutable` still contains three, and callers may modify it freely without touching `source`.
+
+None of the three makes the *elements* immutable. If `A`, `B`, and `C` were mutable objects, every one of these can still observe them change. Unmodifiable is a statement about the reference, not about the data reachable through it.
+
+For the routing table, the fix is to copy on the way in and stop exposing the collection at all:
 
 ```java
 final class RoutingTable {
     private final List<String> backends;
 
     RoutingTable(Collection<String> backends) {
-        this.backends = List.copyOf(backends);
+        this.backends = List.copyOf(backends);   // independent, unmodifiable
     }
 
-    List<String> backends() {
-        return backends;
+    String chooseBackend(int requestHash) {      // a domain operation
+        return backends.get(Math.floorMod(requestHash, backends.size()));
     }
 }
 ```
 
-`List.copyOf` also rejects null elements. That is useful only if null rejection matches the domain contract.
+`chooseBackend` protects an invariant that `backends().remove(0)` cannot. Prefer exposing behaviour to exposing storage.
 
-### Iterators and structural modification
+## Views are everywhere, and that is mostly good
 
-An `Iterator` is a cursor with `hasNext`, `next`, and optional `remove`. Enhanced `for` normally uses it. Removing directly from a typical collection during iteration can invalidate cursor state:
+`map.keySet()`, `map.values()`, and `map.entrySet()` are views onto the same map. So is `list.subList(from, to)`. They exist because copying would be wasteful, and they are genuinely useful - but they are aliases, and aliases surprise people:
+
+```java
+Map<String, Integer> counts = new HashMap<>(Map.of("a", 1, "b", 2));
+counts.keySet().remove("a");
+// counts is now {b=2} - removing from the key set removed the mapping
+```
+
+That is the documented contract, not an accident. The rule to carry: **if a method returns something derived from a collection, find out whether it is a view or a copy before you store it, return it, or hand it across a layer.**
+
+## Modifying while iterating
+
+This is the single most common collection mistake, and the enhanced `for` loop hides why:
 
 ```java
 for (String id : ids) {
     if (id.isBlank()) {
-        ids.remove(id); // usually wrong
+        ids.remove(id);        // usually throws ConcurrentModificationException
     }
 }
 ```
 
-Use `Iterator.remove`, `removeIf`, or a separate result collection. The iterator's own removal operation updates both the structure and its bookkeeping.
-
-> **HotSpot note:** Common OpenJDK collections maintain a modification counter and compare it with an iterator's expected value. This is implementation detail and detection is best-effort. `ConcurrentModificationException` is a bug signal, not a synchronization mechanism. Exact fields and detection points are version-sensitive.
-
-### Views and aliasing
-
-`map.keySet()`, `map.values()`, and `map.entrySet()` are normally backed views. Removing a key from the key set removes the mapping. An entry's `setValue` can update the map when supported. `list.subList(from, to)` is also a backed view. A structural change to the parent outside the sublist can make later sublist operations fail.
-
-Wrappers from `Collections.unmodifiableList(source)` are read-only views, not copies. If another alias mutates `source`, the wrapper reflects it. By contrast, `List.copyOf(source)` returns an unmodifiable list whose membership is not backed by later source changes. Neither operation freezes mutable element objects.
-
-### Equality and bulk operations
-
-`List.equals` is order-sensitive. `Set.equals` compares membership independent of order. `Map.equals` compares mappings. These contracts enable equality across implementations: an `ArrayList` can equal a `LinkedList` with the same sequence.
-
-Bulk methods include `addAll`, `removeAll`, `retainAll`, `containsAll`, `removeIf`, and `replaceAll`. Their apparent single-call form does not imply constant time. Cost depends on both receiver and argument. For example, removing every element found in an `ArrayList` argument can be quadratic when membership checks are linear. Converting the lookup side to a `HashSet` can improve the expected bound.
-
-### Null policy and element validity
-
-Null support varies. Some general-purpose collections allow null; many queues, concurrent collections, sorted structures with natural ordering, and factory-created immutable collections reject it. A robust API validates domain values before selecting an implementation rather than relying on an incidental null policy.
-
-## Worked Java example
-
-The following method groups unique order IDs by customer while preserving first-seen customer order and first-seen order ID order:
+The loop is really an `Iterator`, and the iterator keeps its own bookkeeping about the structure. Removing behind its back leaves that bookkeeping stale. The three correct forms:
 
 ```java
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+ids.removeIf(String::isBlank);                       // clearest
+
+Iterator<String> it = ids.iterator();                // when you need more control
+while (it.hasNext()) {
+    if (it.next().isBlank()) {
+        it.remove();                                 // the iterator updates itself
+    }
+}
+
+List<String> kept = ids.stream()                     // when the source is shared
+        .filter(id -> !id.isBlank()).toList();
+```
+
+> **HotSpot note:** common OpenJDK collections keep a modification counter and compare it against the iterator's expected value. Detection is best-effort. `ConcurrentModificationException` is a *bug signal*, not a synchronisation mechanism - a program that relies on catching it is relying on an implementation detail, and a genuinely concurrent modification may go undetected entirely.
+
+## Optional operations: the type does not prove mutability
+
+`Collection` declares `add`, `remove`, and `clear`, but an implementation is permitted to reject them:
+
+| Expression | Mutable? | Resizable? | Nulls? |
+|---|---|---|---|
+| `new ArrayList<>()` | yes | yes | yes |
+| `Arrays.asList(array)` | `set` only | **no** | yes |
+| `List.of(...)` | no | no | **rejected** |
+| `List.copyOf(source)` | no | no | **rejected** |
+| `Collections.unmodifiableList(source)` | no (through this ref) | no | inherits source |
+| `stream.toList()` | no | no | allowed |
+
+Java has no type-level distinction between a mutable and a read-only collection. `List<String>` tells a caller nothing about whether they may modify it. That is why capability belongs in the documentation and, better, in the API shape.
+
+## Bulk operations hide their cost
+
+`addAll`, `removeAll`, `retainAll`, and `containsAll` look like single operations. Their cost depends on *both* sides:
+
+```java
+List<String> all = ...;        // 100,000 entries
+List<String> banned = ...;     //   1,000 entries
+all.removeAll(banned);         // ~100,000 x 1,000 comparisons
+```
+
+`removeAll` asks the argument `contains` for each element of the receiver. With a `List` argument that is a linear scan every time, so the whole call is quadratic. Converting the lookup side costs one pass and changes the class of the operation:
+
+```java
+Set<String> bannedSet = new HashSet<>(banned);
+all.removeIf(bannedSet::contains);          // ~100,000 expected-constant lookups
+```
+
+## Worked example
+
+Group unique order IDs by customer, preserving first-seen order on both levels:
+
+```java
+import java.util.*;
 
 record Order(String id, String customerId) {}
 
@@ -142,132 +169,104 @@ final class OrderIndex {
         Map<String, Set<String>> working = new LinkedHashMap<>();
 
         for (Order order : orders) {
-            if (order == null || order.id() == null || order.customerId() == null) {
-                throw new IllegalArgumentException("order fields must be non-null");
-            }
-            working.computeIfAbsent(
-                    order.customerId(), ignored -> new LinkedHashSet<>())
-                    .add(order.id());
+            Objects.requireNonNull(order, "order");
+            working.computeIfAbsent(order.customerId(),
+                            ignored -> new LinkedHashSet<>())
+                   .add(order.id());
         }
 
         Map<String, List<String>> result = new LinkedHashMap<>();
-        working.forEach((customer, ids) ->
-                result.put(customer, List.copyOf(ids)));
-        return Map.copyOf(result);
-    }
-
-    public static void main(String[] args) {
-        List<Order> input = new ArrayList<>();
-        input.add(new Order("o-1", "c-7"));
-        input.add(new Order("o-2", "c-8"));
-        input.add(new Order("o-1", "c-7"));
-        input.add(new Order("o-3", "c-7"));
-
-        System.out.println(build(input));
+        working.forEach((customer, ids) -> result.put(customer, List.copyOf(ids)));
+        return Collections.unmodifiableMap(result);
     }
 }
 ```
 
-One subtlety: `Map.copyOf` guarantees an unmodifiable map, but its iteration order is not specified to preserve the insertion order of the supplied `LinkedHashMap`. If public iteration order is part of the result contract, return an unmodifiable copy with an order-preserving implementation, for example `Collections.unmodifiableMap(new LinkedHashMap<>(result))`, and document the guarantee.
+Three decisions carry the contract:
 
-## Execution or memory walkthrough
+1. `LinkedHashMap` and `LinkedHashSet`, not `HashMap` and `HashSet`, because the result promises encounter order. A plain `HashMap` would give an order that looks stable in testing and is not guaranteed.
+2. `computeIfAbsent` creates the inner set exactly once, replacing the `get`-check-`put` sequence.
+3. The return is wrapped in `Collections.unmodifiableMap(new LinkedHashMap<>(...))` rather than `Map.copyOf`. `Map.copyOf` returns an unmodifiable map but **does not promise to preserve iteration order**, so it would silently break the order guarantee the method advertises.
 
-For the four inputs above:
+Point 3 is the kind of detail that only shows up in production, when a report starts rendering customers in a different order after an unrelated upgrade.
 
-1. `o-1/c-7` creates the first map entry and a set containing `o-1`.
-2. `o-2/c-8` creates a second entry. The map's encounter order is now `c-7`, `c-8`.
-3. The duplicate `o-1/c-7` reaches the existing set. `Set.add` returns `false`; membership remains unchanged.
-4. `o-3/c-7` appends a second unique ID to the first customer's insertion-ordered set.
-5. The conversion creates new lists, so clients cannot add or remove IDs through the result.
+For inputs `o-1/c-7`, `o-2/c-8`, `o-1/c-7`, `o-3/c-7`: the duplicate `o-1` reaches the existing `LinkedHashSet`, `add` returns `false`, and membership is unchanged - deduplication happens without a single explicit check.
 
-The working representation uses a map object, map entries, set objects, set entries, and references to existing strings. The result adds list storage and map entries. Peak memory includes both representations until the method returns and the working map becomes unreachable. The code copies collection structure, not `String` content; strings are immutable, so sharing them is safe.
+## Complexity and memory
 
-## Complexity and performance
+Building the index is expected `O(n)` time and `O(u)` space for `u` unique pairs. But memory is often the constraint that bites first:
 
-Let `n` be the number of orders and `u` the number of unique customer-order pairs. With typical `LinkedHashMap` and `LinkedHashSet` behavior, building has expected `O(n)` time and `O(u)` space; producing the result costs `O(u)`. Hash collisions, resizing, and key methods affect constants and worst cases.
-
-Interface-only complexity should be stated cautiously:
-
-| Operation | Interface guarantee | Common implementation example |
-|---|---|---|
-| `List.get(i)` | No bound | `ArrayList`: `O(1)`; `LinkedList`: `O(n)` |
-| `Set.contains(x)` | No bound | `HashSet`: expected `O(1)`; `TreeSet`: `O(log n)` |
-| `Map.get(k)` | No bound | `HashMap`: expected `O(1)`; `TreeMap`: `O(log n)` |
-| iteration | Semantic order may vary | Usually `O(n)`, but hash-table capacity can affect traversal |
-| `containsAll` | No bound | Depends on sizes and membership cost |
-
-Memory is often as important as asymptotic time. Node-based structures add per-element objects and pointers. Array-based structures may reserve unused capacity but provide locality. Measure representative workloads rather than extrapolating from Big-O alone.
+- Node-based structures (`LinkedList`, `TreeMap`, `HashMap` bins) allocate one object per element, with headers and pointers on top of your data.
+- Array-based structures (`ArrayList`, `ArrayDeque`) reserve spare capacity, but store references contiguously and traverse far faster than the asymptotics suggest.
+- A view keeps its whole parent reachable. A three-element `subList` of a million-element list retains all million.
 
 ## Edge cases and common mistakes
 
-- Choosing a concrete type before defining uniqueness, ordering, and access semantics.
-- Returning a mutable internal list and unintentionally granting write access.
-- Assuming an unmodifiable wrapper is a snapshot or that immutable membership makes elements immutable.
-- Depending on `HashMap` or `HashSet` iteration order.
-- Modifying a collection directly while iterating over it.
-- Treating `ConcurrentModificationException` as guaranteed detection of a race.
-- Forgetting that `subList` and map collection views are backed by their owner.
-- Passing a collection to itself in a bulk operation whose behavior is undefined or surprising.
-- Using mutable objects whose `equals`, `hashCode`, or ordering fields change while stored.
-- Assuming every implementation permits null or mutation.
-- Calling `size()` repeatedly on a nonstandard collection without checking whether it is cheap.
-- Confusing `Collection` with `Collections`; the latter is an algorithm and wrapper utility class.
+- Choosing a concrete class before deciding uniqueness, ordering, and mutation semantics.
+- Returning a mutable internal collection and losing control of an invariant.
+- Assuming an unmodifiable wrapper is a snapshot, or that unmodifiable membership makes elements immutable.
+- Depending on `HashMap` or `HashSet` iteration order because it looked stable in a test.
+- Removing from a collection directly while iterating it.
+- Treating `ConcurrentModificationException` as reliable race detection.
+- Forgetting that `subList` and the map views are backed by their owner - including for memory retention.
+- Letting a bulk operation stay quadratic when converting one side to a `HashSet` would fix it.
+- Storing an object as a key and then mutating a field its `equals` or `hashCode` reads.
+- Confusing `Collection` (the interface) with `Collections` (the static utility class).
 
 ## Production engineering notes
 
-Define collection contracts in API documentation: order, duplicates, null policy, mutability, snapshot versus live view, thread safety, and expected scale. A return type of `List<T>` communicates sequence but not ownership.
+Document six things for every collection an API exposes: **order, duplicates, null policy, mutability, live-view-versus-snapshot, and thread safety.** A declared type of `List<T>` communicates exactly one of those.
 
-Defensively copy inputs when the component must own stable membership. For very large inputs, copying can be costly; an explicit ownership-transfer convention or immutable persistent data structure may be more appropriate. Never expose a lazily changing view across layers unless that behavior is deliberate.
+Copy at boundaries you own. Where copying is genuinely too expensive, make ownership transfer explicit in the method name and documentation rather than hoping.
 
-Avoid sharing ordinary mutable collections across threads without a synchronization policy. A synchronized wrapper makes individual calls mutually exclusive, but compound actions such as "check then add" still need one lock scope. Concurrent collections have different iteration and atomicity contracts and should be selected explicitly.
-
-Prefer domain operations over raw collection exposure. `routingTable.chooseBackend()` protects invariants better than `routingTable.backends().remove(0)`. Validate capacity and input size where untrusted requests can cause large allocations. Instrument unusually large collection sizes and expensive conversions in latency-sensitive paths.
+Do not share an ordinary mutable collection across threads without a policy. `Collections.synchronizedList` makes each individual call atomic, which is not the same as making *your* operation atomic - a check-then-add still needs one lock scope covering both. Concurrent collections have different iteration and atomicity contracts and should be chosen deliberately, not as a reflex.
 
 ## Interview questions and model answers
 
-**Why is `Map` not a subtype of `Collection`?**
+**Why is `Map` not a `Collection`?**
 
-A collection models individual elements, while a map models key-value mappings with key uniqueness. Map exposes collection views for keys, values, and entries, but operations such as adding one arbitrary element do not fit its contract.
-
-**What does fail-fast mean?**
-
-It means an iterator may detect an unsupported structural modification and throw `ConcurrentModificationException` promptly. It is best-effort behavior in common implementations, not a thread-safety guarantee or a correctness mechanism.
+A `Collection` models individual elements; a `Map` models key-to-value associations with unique keys. `Collection.add(E)` has no sensible meaning for a mapping. `Map` bridges into the hierarchy through its `keySet`, `values`, and `entrySet` views.
 
 **What is the difference between an unmodifiable view and an immutable copy?**
 
-An unmodifiable view rejects mutation through that reference but can reflect mutations through another alias. An immutable copy has independent, unchangeable membership. In both cases, referenced element objects can still be mutable unless separately constrained.
+A view rejects mutation through that reference but reflects changes made through another alias to the same data. A copy has independent membership that later source changes cannot affect. Neither makes the referenced element objects immutable.
 
-**Why accept an interface rather than `ArrayList`?**
+**What does fail-fast mean, and what does it not mean?**
 
-It minimizes coupling and admits any implementation satisfying the required behavior. The chosen interface should still express semantics: `Set` is preferable to `Collection` when uniqueness is required.
+An iterator may detect an unsupported structural modification and throw `ConcurrentModificationException` promptly. It is best-effort in common implementations. It is not thread safety, not guaranteed detection, and not a control-flow mechanism.
 
-**Can interface type tell you complexity?**
+**Can the interface type tell you the complexity?**
 
-Usually no. `List.get` can be constant or linear depending on implementation. State the concrete type and assumptions whenever making a complexity claim.
+No. `List.get` is constant on `ArrayList` and linear on `LinkedList`, and both satisfy `List`. State the concrete type and your assumptions whenever you quote a bound.
 
-**How do backed views affect correctness?**
+**A method returns `List<String>`. What do you still not know?**
 
-They create aliases. Mutating the owner can change the view, and supported mutations through the view can change the owner. They are useful for efficient projections but dangerous if callers assume snapshots.
+Whether you may modify it; whether it is a snapshot or a live view; whether it permits nulls; whether it is safe to hold across threads; and whether holding it retains a much larger structure. All five need documentation.
+
+**How would you make a quadratic `removeAll` linear?**
+
+Put the membership side in a `HashSet` and use `removeIf`. The receiver is still scanned once, but each membership test drops from a linear scan to an expected-constant lookup.
 
 ## Exercises
 
-1. Design a method signature for returning active feature flags in deterministic order without allowing callers to mutate membership. State every contract not captured by the type.
-2. Predict the result of removing an entry through `map.entrySet().iterator().remove()` and explain why it differs from mutating the map directly during iteration.
-3. Compare `Collections.unmodifiableList(source)`, `List.copyOf(source)`, and `new ArrayList<>(source)` for mutability, null handling, and aliasing.
-4. Rewrite a quadratic `removeAll` workflow so membership tests use a set. Give time and space bounds.
-5. Create a small program that demonstrates a `subList` backed view. Then structurally modify the parent outside the view and record the observed behavior without treating it as a portable synchronization technique.
+1. Write a class that exposes "the currently enabled feature flags" in deterministic order, such that no caller can change the set. State every contract your type does not express.
+2. Run the three-way wrap experiment from this chapter and record which of `view`, `frozen`, and `mutable` observe the appended element. Predict first, then run.
+3. Remove an entry through `map.entrySet().iterator().remove()` and explain why it succeeds where `map.remove(k)` inside a for-each fails.
+4. Measure `removeAll` with a `List` argument and with a `HashSet` argument at n = 100,000. Report both times and the ratio.
+5. Build a `subList` view, structurally modify the parent, then call a method on the view. Record what happens - and explain why you must not build behaviour on that observation.
+6. Take the `OrderIndex` example, replace both linked implementations with `HashMap` and `HashSet`, and describe precisely which part of the method's contract you just broke.
 
 ## Chapter summary
 
-The Collections Framework separates behavioral interfaces from data-structure implementations, reusable algorithms, and backed views. A sound choice begins with semantics: order, uniqueness, lookup, mutation, concurrency, and ownership. Complexity belongs to concrete implementations. Iterators, views, and optional operations make the framework flexible, but they also create important capability and aliasing boundaries. Production APIs should state those boundaries explicitly and copy or wrap data according to an intentional ownership model.
+The framework separates behavioural interfaces from implementations, and most real defects live at that seam rather than in complexity. Choose the interface by the guarantee you need - order, uniqueness, removal policy, key lookup - then choose an implementation, and only then quote a cost. Views, unmodifiable wrappers, and copies are three distinct things with three distinct aliasing behaviours, and none of them freezes the elements. Iterators keep bookkeeping that direct mutation invalidates, and the exception you get is a bug signal rather than a guarantee. Bulk operations hide costs that depend on both operands. Above all, a collection crossing an API boundary carries six contracts that its declared type expresses none of: order, duplicates, nulls, mutability, liveness, and thread safety - write them down.
 
 ## Revision checklist
 
-- [ ] I can sketch the `Collection` hierarchy and explain why `Map` is separate.
-- [ ] I can choose among `List`, `Set`, `Queue`, `Deque`, and `Map` from requirements.
-- [ ] I distinguish interface contracts from implementation complexity.
-- [ ] I understand optional operations and common fixed-size or unmodifiable collections.
-- [ ] I can explain structural modification and correct iterator removal.
-- [ ] I can distinguish a view, an unmodifiable wrapper, a shallow copy, and deep immutability.
-- [ ] I know the equality semantics of lists, sets, and maps.
-- [ ] I document order, nulls, ownership, thread safety, and expected scale in APIs.
+- [ ] I choose the interface from the required guarantee, not from the class I know best.
+- [ ] I name the concrete implementation before quoting any complexity.
+- [ ] I can state the difference between a view, an unmodifiable wrapper, and a copy - and what none of them do.
+- [ ] I know that `keySet`, `values`, `entrySet`, and `subList` are views onto their owner.
+- [ ] I can remove elements during iteration three different correct ways.
+- [ ] I treat `ConcurrentModificationException` as a bug signal, not a mechanism.
+- [ ] I can spot a quadratic bulk operation and fix it with a `HashSet`.
+- [ ] I document order, duplicates, nulls, mutability, liveness, and thread safety at every API boundary.

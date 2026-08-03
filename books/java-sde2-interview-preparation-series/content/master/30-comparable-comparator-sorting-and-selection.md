@@ -1,284 +1,263 @@
 # 30. Comparable, Comparator, Sorting, and Selection
 
-## Learning objectives
+## A sort that does nothing, quietly
 
-By the end of this chapter, you should be able to:
-
-- define natural and external orderings with valid comparison contracts;
-- compose null-safe, deterministic comparators without overflow;
-- explain stable sorting, in-place sorting, and comparison lower bounds;
-- choose among object sort, primitive sort, parallel sort, heap selection, and quickselect;
-- use binary search only under its ordering precondition; and
-- discuss current OpenJDK algorithms without confusing them with API guarantees.
-
-## Why this matters at SDE-2
-
-Sorting is often the boundary between raw data and useful output: ranked results, merge pipelines, pagination, reconciliation, and deduplication all depend on ordering. Comparison defects can be intermittent and severe. A non-transitive comparator may make sorting fail at runtime, corrupt a tree collection's model, or create unstable pagination.
-
-At SDE-2, you should translate a product rule into a total order, handle ties explicitly, and select an algorithm based on whether all values or only the top `k` are needed. You should distinguish specification promises, such as stability for an object sort, from OpenJDK's current TimSort or primitive-array algorithms.
-
-## First-principles model
-
-An ordering comparator maps two values to a negative number, zero, or a positive number:
-
-```text
-compare(a, b) < 0  means a precedes b
-compare(a, b) = 0  means a and b are ordering-equivalent
-compare(a, b) > 0  means a follows b
-```
-
-The magnitude is irrelevant. A comparator must behave like a total order over the accepted domain. Important laws are:
-
-- sign symmetry: `sign(compare(a,b)) == -sign(compare(b,a))`;
-- transitivity: if `a > b` and `b > c`, then `a > c`;
-- zero consistency: if `a` compares equal to `b`, comparisons of each against `c` have the same sign; and
-- repeatability while participating fields remain unchanged.
-
-Comparison sorting uses pairwise questions to distinguish possible permutations. There are `n!` permutations, so a decision tree requires height `Omega(log(n!))`, which is `Omega(n log n)`. General comparison sorting cannot asymptotically beat that bound. Algorithms using restricted keys, such as counting sort, operate under different assumptions.
-
-> **Specification boundary:** `Comparable` and `Comparator` define ordering contracts. Sorting APIs document properties such as stability and permitted mutation. Their exact algorithm, run detection, pivot selection, temporary storage, and thresholds can vary by JDK implementation and version.
-
-## Core terminology
-
-- **Natural order:** A type's canonical order implemented by `Comparable`.
-- **External order:** A purpose-specific `Comparator` supplied by a client.
-- **Stable sort:** Equal-order elements retain input relative order.
-- **In-place:** Uses only bounded or logarithmic auxiliary storage under a stated model; common library documentation may use looser wording.
-- **Adaptive sort:** Exploits existing order or runs in the input.
-- **Total order:** Consistent ordering for every accepted pair.
-- **Partial selection:** Find a rank or top subset without fully sorting.
-- **Quickselect:** Partition-based expected linear-time selection.
-- **Partition:** Rearrange elements around a pivot by comparison.
-- **Tie-breaker:** Additional field distinguishing otherwise equal rankings.
-- **Schwartzian transform/decorate-sort-undecorate:** Precompute expensive sort keys, sort decorated values, then extract originals.
-
-## Detailed mechanics
-
-### Comparable versus Comparator
-
-Implement `Comparable<T>` when a type has one unsurprising natural order used broadly:
+Someone writes a rule that sounds reasonable: *scores within 10 points of each other count as tied.*
 
 ```java
-record Version(int major, int minor, int patch)
-        implements Comparable<Version> {
-    @Override
-    public int compareTo(Version other) {
-        int result = Integer.compare(major, other.major);
-        if (result != 0) return result;
-        result = Integer.compare(minor, other.minor);
-        if (result != 0) return result;
-        return Integer.compare(patch, other.patch);
-    }
-}
+Comparator<Integer> fuzzy = (a, b) ->
+        Math.abs(a - b) <= 10 ? 0 : Integer.compare(a, b);
+
+List<Integer> scores = new ArrayList<>(List.of(15, 5, 0));
+scores.sort(fuzzy);
+System.out.println(scores);      // [15, 5, 0]
 ```
 
-Use comparators for alternative views: orders by creation time, priority, customer, or amount. A natural order becomes part of a public type's long-lived meaning, so do not add one merely for a single screen.
+Nothing moved. The list came out in exactly the order it went in - which happens to be exactly backwards.
 
-Natural ordering should usually be consistent with `equals`, especially when values enter sorted sets or maps. `BigDecimal` is a notable counterexample: values such as `1.0` and `1.00` compare as zero but are not equal because scale affects `equals`. A `TreeSet<BigDecimal>` can therefore have different uniqueness behavior from a `HashSet<BigDecimal>`.
+![Figure 30.1 - An inconsistent comparator does not throw. It just lies.](assets/diagrams/27-intransitive-comparator.png)
 
-### Comparator composition
+`compare(15, 5)` returns 0 and `compare(5, 0)` returns 0, so the sort sees two ties and no reason to move anything. But `compare(15, 0)` returns `+1` - 15 is supposed to come *after* 0. The comparator contradicts itself, and nothing threw.
 
-Comparator factories make intent explicit:
+There is a lesson inside the lesson. When I first checked this, I compared adjacent pairs of the output and found zero violations, which would have cleared the comparator entirely. The defect only shows up across *non-adjacent* pairs: over 20,000 random 12-element lists, 10,454 outputs contained at least one pair in the wrong order. **The right test for a comparator is all pairs, not neighbours.**
+
+## What a comparator has to promise
+
+Three properties, and the rule people break is almost always the third:
+
+1. **Antisymmetry** - `sgn(compare(a, b)) == -sgn(compare(b, a))`.
+2. **Transitivity of order** - if `a < b` and `b < c`, then `a < c`.
+3. **Transitivity of equivalence** - if `compare(a, b) == 0`, then for any `c`, `sgn(compare(a, c)) == sgn(compare(b, c))`.
+
+"Within 10" satisfies the first two and fails the third. Whenever you find yourself writing a comparator that treats *approximately* similar things as equal, you are breaking rule 3.
+
+Java also *recommends*, without requiring, that `compare(a, b) == 0` agree with `a.equals(b)`. Chapter 28 shows what a sorted collection does when it does not: it discards elements.
+
+> **Specification boundary:** `List.sort` and `Arrays.sort(Object[])` are specified as **stable**. Primitive overloads are not required to be, because equal primitives have no separately observable identity. `Arrays.sort` may throw `IllegalArgumentException` with "Comparison method violates its general contract!" for an inconsistent comparator - but detection is opportunistic. A sort that completes proves nothing.
+
+## Never write `a - b`
 
 ```java
-Comparator<Order> order = Comparator
-        .comparingInt(Order::priority).reversed()
-        .thenComparing(Order::createdAt)
-        .thenComparing(Order::id);
+(a, b) -> a.score() - b.score()          // wrong
+Comparator.comparingInt(Player::score)   // right
 ```
 
-Apply reversal carefully. Calling `reversed()` at the end reverses the entire chain. Calling it after the primary comparator reverses only that comparator before adding subsequent ascending tie-breakers.
+The subtraction overflows:
 
-Use primitive factories to avoid boxing in comparison: `comparingInt`, `comparingLong`, and `comparingDouble`. Use `Comparator.nullsFirst` or `nullsLast` only if null is valid domain data. Do not compare integers with `a - b`; overflow can violate the sign rule. Floats and doubles also require library comparison because NaN and signed zero need a consistent total order.
+| a | b | `a - b` as `int` | says | truth |
+|---:|---:|---:|---|---|
+| 2,000,000,000 | -2,000,000,000 | -294,967,296 | a < b | **a > b** |
+| 2,147,483,647 | -1 | -2,147,483,648 | a < b | **a > b** |
 
-### Stability and tie-breaking
+This is not a corner case. Over 200,000 random `int` pairs, subtraction produced the wrong sign **25.0% of the time**. It only looks safe because most codebases compare small non-negative numbers, right up until one of them is a timestamp delta or a hash.
 
-Stable sort preserves input order when comparator returns zero. This permits multi-pass sorting: stable-sort by a secondary key, then by primary key. A single comparator chain is usually clearer and performs fewer sorts.
+The same applies to `long` subtraction cast to `int`, and to `(int) (a - b)` in any form. Use `Integer.compare`, `Long.compare`, `Double.compare`, or the `comparingInt` / `comparingLong` / `comparingDouble` factories.
 
-Stability is not a substitute for a deterministic total presentation order. If input arrives from a hash map or concurrent source with unspecified encounter order, stable sorting equal ranks preserves an unspecified order. Add a unique immutable ID as a tie-breaker for reproducible pagination and tests.
+## Chains are cascades
 
-### Library sorting APIs
-
-`List.sort(comparator)` mutates the list and is specified as stable. `Collections.sort` delegates to the list's sorting facility in modern APIs. The list must support the required replacement operation; an unmodifiable list rejects sorting.
-
-`Arrays.sort(Object[])` is stable. Primitive overloads are not required to be stable because primitive values have no separately observable identity when equal. Primitive sorts avoid boxing and are normally much more memory-efficient.
-
-`Arrays.parallelSort` may use the common fork-join pool and temporary storage. Parallel overhead can outweigh gains for small arrays or contended services. Measure on the deployment shape, and remember that comparator work must be thread-safe and side-effect-free.
-
-> **HotSpot note:** Current OpenJDK releases commonly use TimSort-derived logic for object arrays and lists, dual-pivot quicksort and specialized paths for several primitive types, and parallel merge/sort strategies above thresholds. Algorithms and thresholds are version-sensitive.
-
-### TimSort intuition and comparator failures
-
-TimSort is adaptive: it discovers ascending or descending runs, extends short runs, and merges runs while maintaining stack invariants. Nearly sorted input can therefore be efficient. It needs temporary storage for merging.
-
-Inconsistent comparators can trigger exceptions such as "comparison method violates its general contract" in some sort paths, but detection is not guaranteed. A sort that appears to complete does not prove comparator correctness.
-
-### Selection instead of full sorting
-
-If only the smallest or largest `k` items are needed:
-
-- sort all: `O(n log n)` time, straightforward, produces complete order;
-- maintain a heap of size `k`: `O(n log k)` time and `O(k)` extra space;
-- quickselect: expected `O(n)` to place the kth rank, then optionally sort the selected `k`; worst case `O(n^2)` without robust pivot strategy;
-- counting/bucket techniques: potentially `O(n + range)` when integer key range is small and bounded.
-
-Quickselect partitions around a pivot. After partition, if the pivot lands at rank `k`, selection is complete; otherwise recurse or iterate only on the side containing rank `k`. It mutates the array unless implemented on a copy.
-
-### Binary search
-
-`Collections.binarySearch` and `Arrays.binarySearch` require data sorted according to the same ordering. A nonnegative result is a matching index. A negative result encodes insertion point `-(result) - 1`. When duplicates exist, no promise should be inferred about which equal occurrence is returned unless the API states one. Use explicit lower-bound and upper-bound searches for ranges of duplicates.
-
-## Worked Java example
-
-This method returns the top `k` candidates while bounding intermediate storage:
+![Figure 30.2 - A comparator chain is a cascade, not a formula](assets/diagrams/26-comparator-chain.png)
 
 ```java
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
-import java.util.PriorityQueue;
+static final Comparator<Order> ORDER =
+        Comparator.comparingInt(Order::priority)
+                  .thenComparing(Order::dueDate)
+                  .thenComparing(Order::id);           // unique - ends the chain
+```
 
-record Candidate(String id, int score, long completedAtEpochMillis) {}
+Each link runs **only if everything before it returned zero**. That makes the last link the one that decides your ties, and it is the one people leave off.
 
-final class Ranking {
-    // Best first: higher score, earlier completion, lexicographically smaller ID.
-    private static final Comparator<Candidate> BEST_FIRST = Comparator
-            .comparingInt(Candidate::score).reversed()
-            .thenComparingLong(Candidate::completedAtEpochMillis)
-            .thenComparing(Candidate::id);
+If the chain can still return zero for two different objects:
 
-    static List<Candidate> topK(Collection<Candidate> input, int k) {
-        if (k < 0) throw new IllegalArgumentException("k must be non-negative");
-        if (k == 0) return List.of();
+- their relative order in a sort is arbitrary;
+- a `TreeSet` treats them as one element and drops one (Chapter 28);
+- a `PriorityQueue` orders them unpredictably (Chapter 29);
+- paginated output can repeat or skip rows between pages.
 
-        // Worst retained candidate is at the head.
-        PriorityQueue<Candidate> retained =
-                new PriorityQueue<>(k, BEST_FIRST.reversed());
+That last one is the expensive one, because it looks like a database bug.
 
-        for (Candidate candidate : input) {
-            if (candidate == null) throw new IllegalArgumentException("null candidate");
-            if (retained.size() < k) {
-                retained.offer(candidate);
-            } else if (BEST_FIRST.compare(candidate, retained.peek()) < 0) {
-                retained.poll();
-                retained.offer(candidate);
+For descending order and nulls, use the combinators rather than hand-rolling:
+
+```java
+Comparator.comparing(Order::dueDate).reversed()
+Comparator.comparing(Order::assignee, Comparator.nullsLast(String::compareTo))
+```
+
+Note that `reversed()` applies to *everything before it* in the chain. `a.thenComparing(b).reversed()` is not `a.thenComparing(b.reversed())`.
+
+## `Comparable` or `Comparator`?
+
+Implement `Comparable` when a type has one obvious, permanent, domain-wide ordering - `String`, `Integer`, `Instant`, an enum. Use a `Comparator` for everything else, which in business code is most things: an `Order` has no single natural ordering, it has a dozen contextual ones.
+
+Two practical rules: define each comparator once as a named constant rather than scattering equivalent lambdas, and keep comparators side-effect-free - parallel sorts will call them from multiple threads.
+
+## Stability, and what it does not give you
+
+A stable sort preserves the input order of elements that compare equal. That lets you sort in passes: sort by secondary key, then stably by primary. A single chain is usually clearer and does less work.
+
+The trap: **stability preserves an order; it does not create one.** If your input came from a `HashMap` or a parallel stream, the encounter order was unspecified to begin with, and stable sorting faithfully preserves an unspecified order. For reproducible pagination and reproducible tests, you need a unique tie-break, not stability.
+
+> **HotSpot note:** current OpenJDK uses TimSort-derived logic for object arrays and lists, dual-pivot quicksort with specialised paths for primitives, and parallel merge strategies above a threshold. TimSort is adaptive - it finds existing ascending and descending runs and merges them, so nearly-sorted input is much faster than the `O(n log n)` bound suggests. Algorithms and thresholds are version-sensitive.
+
+## Do not sort when you only need part of the answer
+
+"Find the 100 largest of ten million" does not require ordering ten million things.
+
+![Figure 30.3 - Three ways to get the top k, and when each one wins](assets/diagrams/28-top-k-strategies.png)
+
+| Approach | Time | Extra space | Use when |
+|---|---|---|---|
+| sort, then take `k` | `O(n log n)` | `O(n)` | you need the full order anyway |
+| bounded heap of size `k` | `O(n log k)` | `O(k)` | `k` is small, or the input streams |
+| quickselect | `O(n)` expected, `O(n^2)` worst | `O(1)` extra | you need the `k`-th element, order irrelevant |
+| counting / bucket | `O(n + range)` | `O(range)` | keys are integers over a small bounded range |
+
+At n = 10,000,000 and k = 100 that is roughly 24 comparisons per element versus about 7 - and 100 elements resident instead of ten million.
+
+Two traps in the heap version. First, **the comparator is inverted**: to keep the largest `k` you maintain a *min*-heap and evict the smallest of the current best. Second, quickselect *reorders its input*; if the caller still needs the original order, that is a copy you did not budget for.
+
+## Binary search has a precondition and an encoding
+
+`Collections.binarySearch` and `Arrays.binarySearch` require data already sorted **by the same ordering** you pass in. Violate that and the result is meaningless rather than merely wrong - no exception.
+
+```java
+int found = Collections.binarySearch(events, probe, ORDER);
+int insertionPoint = found >= 0 ? found : -found - 1;
+```
+
+The negative encoding exists so a caller can tell "found at index 0" from "not found, belongs at index 0". And with duplicates, nothing promises *which* equal element you get - for ranges of duplicates, write explicit lower-bound and upper-bound searches.
+
+## Worked example: top-k with bounded memory
+
+```java
+import java.util.*;
+
+record Candidate(String id, int score, long submittedAt) { }
+
+final class Leaderboard {
+    private static final Comparator<Candidate> BEST_FIRST =
+            Comparator.comparingInt(Candidate::score).reversed()
+                      .thenComparingLong(Candidate::submittedAt)
+                      .thenComparing(Candidate::id);        // unique tie-break
+
+    static List<Candidate> top(Collection<Candidate> all, int k) {
+        if (k <= 0) {
+            return List.of();
+        }
+        // min-heap under BEST_FIRST: its head is the WORST of the current best k
+        PriorityQueue<Candidate> best = new PriorityQueue<>(BEST_FIRST.reversed());
+        for (Candidate candidate : all) {
+            best.offer(candidate);
+            if (best.size() > k) {
+                best.poll();                 // evict the current worst
             }
         }
-
-        ArrayList<Candidate> result = new ArrayList<>(retained);
-        result.sort(BEST_FIRST);
+        List<Candidate> result = new ArrayList<>(best);
+        result.sort(BEST_FIRST);             // the heap is not sorted (Chapter 29)
         return List.copyOf(result);
     }
 }
 ```
 
-The ID tie-breaker gives a deterministic total ranking. If IDs are unique, no two distinct candidates compare as zero. The heap uses reverse order so its head is the worst candidate currently retained; a better incoming candidate replaces it.
+Every line of the comparator earns its place: `score` descending is the business rule, `submittedAt` breaks score ties in favour of the earlier submission, and `id` guarantees a total order so that two identical scores at the identical millisecond still paginate reproducibly.
 
-## Execution or memory walkthrough
+The final `result.sort(...)` is not redundant. Draining a heap yields sorted output, but *copying* one into a list yields array order - the exact confusion Chapter 29 opens with.
 
-For `k = 3` and candidates with scores `70/A`, `90/B`, `80/C`, `85/D`, and `80/E`, assume times and IDs do not change the score comparisons:
+## Complexity
 
-1. Retain A, B, C. The heap head is A, the worst of those three.
-2. D outranks A, so poll A and add D. Retained set is B, C, D; C is now worst.
-3. E ties C on score. Completion time and then ID decide whether E is better. Replace only if the full comparator ranks E before C.
-4. Copy the heap. Its iteration order is not ranked.
-5. Sort the copy best-first and publish an unmodifiable result.
+| Operation | Cost | Notes |
+|---|---|---|
+| `List.sort` / `Arrays.sort(Object[])` | `O(n log n)`, stable | needs temporary storage for merging |
+| `Arrays.sort(int[])` | `O(n log n)` typical, not stable | no boxing, far less memory |
+| `Arrays.parallelSort` | `O(n log n)` work | uses the common pool; overhead can dominate small arrays |
+| binary search | `O(log n)` | **requires** matching sorted order |
+| bounded heap top-k | `O(n log k)` | `O(k)` space |
+| quickselect | `O(n)` expected | `O(n^2)` worst without a good pivot; mutates input |
 
-At most `k` candidate references reside in the heap, plus the final list of at most `k` references. Candidate records are shared rather than copied. Comparator calls extract primitive fields without boxing for score and time.
-
-Quickselect would store the entire mutable input or a copy but could reduce asymptotic selection time. The heap supports one-pass input and is appropriate when the collection is streamed or `k` is small.
-
-## Complexity and performance
-
-For `topK`, each of `n` inputs performs constant comparison plus at most one heap replacement costing `O(log k)`. Time is `O(n log k + k log k)` and auxiliary reference storage is `O(k)`. When `k >= n`, the behavior approaches `O(n log n)` and sorting all may be simpler and faster.
-
-Common sorting bounds:
-
-| Technique | Time | Extra space | Stable | Best use |
-|---|---:|---:|---|---|
-| comparison sort | `O(n log n)` typical/guaranteed by chosen algorithm | varies | API-dependent | full order |
-| insertion sort | `O(n^2)`, near `O(n)` when nearly sorted | `O(1)` | yes when implemented conventionally | tiny/nearly sorted ranges |
-| merge sort | `O(n log n)` | `O(n)` | yes | stable predictable sorting |
-| heap sort | `O(n log n)` | `O(1)` array model | no | worst-case bound, low extra space |
-| quicksort | average `O(n log n)`, worst `O(n^2)` | recursion/stack varies | usually no | fast primitive/in-place-style sorting |
-| heap top-k | `O(n log k)` | `O(k)` | only with explicit tie order | small top subset |
-| quickselect | expected `O(n)`, worst `O(n^2)` | often `O(1)` iterative | no | one rank or unsorted partition |
-
-Comparator cost can dominate `n log n`. Avoid network calls, database access, mutable clocks, locale creation, or repeated expensive parsing inside comparison. Precompute keys when profiling justifies it.
+Comparison cost multiplies through all of it. A chain of four comparators on long strings sharing a prefix is a real cost that no complexity column shows.
 
 ## Edge cases and common mistakes
 
-- Implementing compare with subtraction and overflowing.
-- Omitting a stable tie-breaker for pagination or distributed merge results.
-- Assuming stable sort makes unspecified input order deterministic.
-- Using a comparator that changes based on mutable state, current time, or side effects.
-- Mixing natural and external ordering between sort and binary search.
-- Expecting binary search to return the first duplicate.
-- Sorting an unmodifiable or fixed-capability list without understanding supported operations.
-- Mutating comparator fields while objects reside in a sorted collection.
-- Assuming primitive and object sort stability are identical.
-- Parallelizing a small sort or using a non-thread-safe comparator with parallel sort.
-- Fully sorting millions of items to return a tiny top-k result.
-- Forgetting that `reversed()` placement can reverse an entire comparator chain.
-- Treating current OpenJDK algorithm names or thresholds as portable guarantees.
+- A comparator that treats "close enough" as equal, breaking transitivity of equivalence.
+- Testing comparator correctness on adjacent pairs only.
+- `a - b` in any form, including `(int) (longA - longB)`.
+- Leaving off the final unique tie-break.
+- `a.thenComparing(b).reversed()` when you meant to reverse only `b`.
+- Relying on stability to produce determinism from an unordered source.
+- Assuming a sort that completed proves the comparator is consistent.
+- Binary searching with an ordering different from the one used to sort.
+- Reading a negative `binarySearch` result as an index.
+- Assuming which duplicate `binarySearch` returns.
+- Sorting everything when only `k` items are needed.
+- Forgetting to invert the comparator in a bounded-heap top-k.
+- Forgetting that quickselect mutates the input.
+- Sorting an unmodifiable list.
+- Comparators with side effects, then reaching for `parallelSort`.
 
 ## Production engineering notes
 
-Define ordering once and reuse it across database queries, in-memory merge, API pagination, and tests. Any mismatch can cause duplicates or gaps between pages. Cursor pagination needs a unique final tie-breaker included in both ordering and cursor encoding.
+Define comparators once, name them, and document the tie-break. `ORDER` as a `static final` constant beside the type it orders is reviewable; six inline lambdas are not.
 
-Comparator functions should be pure, cheap, null-explicit, and tested with property-style checks for symmetry and transitivity. Normalize text before sorting if case, Unicode, or locale rules matter. Human-language collation is not equivalent to `String` code-unit order and may depend on locale/version; isolate it from identity ordering.
+Translate a product rule into a *total order* deliberately. "Most relevant first" is not an ordering until you have said what happens on a tie, and the answer must be something unique and stable.
 
-Avoid sorting shared mutable lists in place. Copy, sort, and publish when readers need snapshots. For large results, push sorting and limiting toward an indexed data source when possible. Enforce input caps for user-controlled sorts to prevent CPU and memory abuse.
+Any endpoint with pagination needs a deterministic total order, or pages will overlap and drop rows. This is one of the most common production sorting bugs and it is invisible in a single-page test.
 
-Measure sequential versus parallel sorting in realistic service contention. A common pool is shared process capacity, not free compute. Primitive arrays avoid wrapper allocation and should be preferred for numerical kernels when the surrounding design permits them.
+Sort primitives as primitives. `Arrays.sort(int[])` avoids `n` boxed objects, which usually matters more than the algorithm.
+
+Measure before reaching for `parallelSort`: it uses the common fork-join pool, which you may be sharing with everything else in the process.
 
 ## Interview questions and model answers
 
-**When should a class implement `Comparable`?**
+**What contract does a comparator have to satisfy?**
 
-When it has one canonical, unsurprising natural order that is meaningful across uses. Purpose-specific orders belong in named comparators.
+Antisymmetry, transitivity of the ordering, and transitivity of equivalence - if two things compare equal, they must compare identically against everything else. The third is the one that "treat values within a tolerance as equal" rules break.
 
-**What properties must a comparator satisfy?**
+**What happens if a comparator is inconsistent?**
 
-It must provide consistent sign symmetry, transitivity, and zero behavior over its accepted domain. It should be repeatable while compared state is unchanged and preferably consistent with equals for collection use.
+Undefined ordering. A sort may throw `IllegalArgumentException`, or may quietly return a wrong order - sorting `[15, 5, 0]` with a within-10 comparator returns it unchanged. Detection is opportunistic, so completing successfully proves nothing.
 
-**What does stable sort mean?**
+**Why not `a - b`?**
 
-Elements that compare as equal retain their original relative order. It does not create determinism if original encounter order is unspecified.
+It overflows. `2147483647 - (-1)` is `-2147483648`, so the comparator claims the larger value is smaller. Measured across random `int` pairs, the sign is wrong 25% of the time. Use `Integer.compare`.
 
-**How would you find the top 100 of ten million values?**
+**What does a stable sort guarantee, and what does it not?**
 
-Use a size-100 min-heap while scanning: `O(n log 100)` time and `O(100)` memory, then sort the retained items for final output. Discuss database pushdown or distributed merge if data is external.
+It preserves the relative order of elements that compare equal. It does not manufacture determinism: if the input order was unspecified - from a `HashMap`, say - stability preserves an unspecified order. Determinism needs a unique tie-break.
 
-**Why can quickselect be faster than sorting?**
+**How would you find the top 100 of ten million?**
 
-It explores only the partition containing the target rank, giving expected linear work. It does not fully order the data and has quadratic worst cases without pivot safeguards.
+A min-heap of size 100 under the inverted comparator: offer each element, poll when size exceeds 100. `O(n log k)` and `O(k)` space instead of `O(n log n)` and `O(n)`. If I needed only the 100th value and not the order, quickselect in expected linear time - noting it reorders the input.
 
-**Can I rely on TimSort for every Java object sort?**
+**`binarySearch` returned -4. What does that mean?**
 
-Rely on the documented stability and behavior of the API, not an algorithm name. TimSort is a common current OpenJDK implementation and can change.
+Not found; the insertion point is `-(-4) - 1 = 3`. The encoding exists so "found at index 0" is distinguishable from "belongs at index 0".
+
+**Why does pagination break without a unique tie-break?**
+
+Equal-comparing rows may be ordered differently between two queries, so a row can appear on page one and page two, or on neither. Stability does not help - it preserves an order that was never determined.
 
 ## Exercises
 
-1. Write a comparator for nullable invoices ordered by status, descending amount, due date, and unique ID. State null policy.
-2. Produce a three-value counterexample showing how a bad cyclic comparator violates transitivity.
-3. Implement lower-bound binary search that returns the first index whose element is not less than a target.
-4. Compare full sort, heap top-k, and quickselect for `n = 1,000,000` and `k = 10`, then for `k = 900,000`.
-5. Repair a comparator written as `(a, b) -> a.timestamp() > b.timestamp() ? 1 : -1`.
-6. Explain why stable sorting entries from a `HashMap` by value alone can still produce changing output.
+1. Run the within-10 comparator on `[15, 5, 0]`. Confirm the output, then find the three values that prove the equivalence is not transitive.
+2. Write a checker that verifies a sorted output over *all* pairs, not adjacent ones. Run it on the fuzzy comparator over random lists and report the violation rate.
+3. Find two `int` values where `a - b` gives the wrong sign, then estimate the failure rate over random pairs by simulation.
+4. Build a four-link comparator chain, then remove the final unique link. Sort the same data twice from two different input orders and diff the results.
+5. Predict, then check, the difference between `a.thenComparing(b).reversed()` and `a.thenComparing(b.reversed())`.
+6. Implement top-k with a bounded heap and with a full sort. Count comparisons at n = 1,000,000 for k = 10, 100, and 10,000, and find where the two cross over.
+7. Implement quickselect and verify it against a full sort over a few thousand random arrays. Then show that it reordered its input.
+8. Binary search a list sorted by a *different* comparator. Record the result and explain why no exception is thrown.
 
 ## Chapter summary
 
-Ordering is a correctness contract before it is an algorithm. `Comparable` defines a canonical natural order; `Comparator` defines external orders that can be composed with safe tie-breakers. Stable full sorting solves complete ordering in `O(n log n)`, while heaps and selection algorithms avoid unnecessary work for small subsets. Java APIs specify observable properties, whereas TimSort, primitive quicksort variants, and thresholds are current implementation choices. Production ordering must align across layers and remain deterministic, pure, and bounded.
+A comparator is a claim about a total order, and Java trusts it. Break transitivity of equivalence - which every "close enough counts as equal" rule does - and a sort will quietly return the wrong answer without throwing; `[15, 5, 0]` sorted by a within-10 comparator comes back unchanged. Test comparators over all pairs, because adjacent pairs will not reveal it. Never subtract: overflow gives the wrong sign for a quarter of random `int` pairs. Build orderings as named, reusable chains where each link runs only on a tie, and always end the chain on something unique - the missing final tie-break is what silently drops elements from a `TreeSet`, scrambles a `PriorityQueue`, and makes paginated endpoints repeat and skip rows. Stability preserves an order rather than creating one, so it cannot rescue determinism from an unordered source. And when you need only part of the answer, do not compute all of it: a bounded heap of size `k` is `O(n log k)` in `O(k)` space, and quickselect is expected linear if you only need the `k`-th element and can afford to reorder the input.
 
 ## Revision checklist
 
-- [ ] I can state comparator laws and consistency-with-equals concerns.
-- [ ] I use safe primitive comparisons rather than subtraction.
-- [ ] I understand reversal placement and comparator chaining.
-- [ ] I distinguish stability from deterministic total ordering.
-- [ ] I know object, primitive, and parallel sort trade-offs.
-- [ ] I can choose full sort, heap top-k, or quickselect from requirements.
-- [ ] I use binary search only with the same ordering used for sorting.
-- [ ] I label OpenJDK sorting algorithms and thresholds as version-sensitive.
+- [ ] I can state all three comparator properties and name which one tolerance rules break.
+- [ ] I test comparators over all pairs, not adjacent ones.
+- [ ] I never write `a - b`, in any width or cast.
+- [ ] Every comparator I write ends on a unique, stable tie-break.
+- [ ] I know `reversed()` applies to the whole chain before it.
+- [ ] I know stability preserves an order and cannot create one.
+- [ ] I can choose between full sort, bounded heap, quickselect, and counting - and justify it with `n` and `k`.
+- [ ] I remember the bounded heap uses the inverted comparator.
+- [ ] I can decode a negative `binarySearch` result and state its precondition.

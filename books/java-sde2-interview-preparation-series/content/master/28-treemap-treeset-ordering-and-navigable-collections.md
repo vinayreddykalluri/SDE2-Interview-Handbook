@@ -1,72 +1,41 @@
 # 28. TreeMap, TreeSet, Ordering, and Navigable Collections
 
-## Learning objectives
-
-By the end of this chapter, you should be able to:
-
-- distinguish sorted, encounter-ordered, and unordered collections;
-- explain binary-search-tree and red-black-tree invariants;
-- use `TreeMap`, `TreeSet`, `NavigableMap`, and `NavigableSet` operations correctly;
-- reason about comparator consistency, mutable keys, ranges, and backed views;
-- analyze logarithmic operations and ordered traversal; and
-- choose a tree-based collection when navigation is required, not merely for deterministic output.
-
-## Why this matters at SDE-2
-
-Ordered maps and sets support time-window indexes, floor and ceiling lookup, leaderboards, routing ranges, and nearest-neighbor decisions. Interviews often ask for "the next event," "all keys in a range," or "the largest value no greater than x." A hash table cannot answer those efficiently without an additional scan or sort.
-
-The difficult part is not recalling `TreeMap`. It is preserving an ordering that is total, stable, and consistent with the application's notion of identity. A comparator that treats two distinct keys as equal silently changes map membership. A range view that escapes its intended lifetime introduces aliasing. An SDE-2 engineer recognizes these as correctness contracts.
-
-## First-principles model
-
-A binary search tree stores one entry per node and maintains:
-
-```text
-all keys in left subtree  < node key
-all keys in right subtree > node key
-```
-
-Here `<` is defined by a comparator or natural ordering. An ordinary binary search tree can become a chain under sorted insertion, producing linear operations. A balanced tree adds structural invariants that keep height logarithmic.
-
-A red-black tree conceptually enforces:
-
-1. Every node has a color, red or black.
-2. The root is black.
-3. Missing leaf sentinels are black.
-4. A red node has no red child.
-5. Every path from a node to a missing leaf contains the same number of black nodes.
-
-These rules limit the longest root-to-leaf path to at most about twice the shortest, so height is `O(log n)`. Insertions and removals restore invariants using recoloring and rotations.
-
-> **Specification boundary:** `TreeMap` and `TreeSet` promise sorted and navigable behavior with documented logarithmic basic operations. The API does not require a red-black tree specifically. OpenJDK's representation, node fields, and balancing code are implementation details.
-
-## Core terminology
-
-- **Natural ordering:** Ordering provided by a type's `Comparable.compareTo`.
-- **Comparator:** Object defining an external ordering through `compare(a, b)`.
-- **Total order:** Every pair can be compared consistently, with transitivity and antisymmetry-like sign rules.
-- **Ordering-equivalent:** `compare(a, b) == 0`.
-- **Consistent with equals:** Ordering-equivalent exactly when `a.equals(b)` for relevant values.
-- **Floor:** Greatest element less than or equal to a target.
-- **Lower:** Greatest element strictly less than a target.
-- **Ceiling:** Least element greater than or equal to a target.
-- **Higher:** Least element strictly greater than a target.
-- **Range view:** Backed portion bounded by keys or elements.
-- **Rotation:** Local tree transformation preserving in-order sequence while changing shape.
-
-## Detailed mechanics
-
-### Ordering is identity inside a tree collection
-
-For `TreeMap`, two keys are treated as the same map key when comparison returns zero. `equals` need not be consulted. For `TreeSet`, comparison zero means duplicate membership. Therefore a comparator inconsistent with equals can make the collection violate the general expectations of `Map` or `Set` equality, even while operating according to its own ordering.
-
-This comparator collapses all people with the same age:
+## Two elements go in. One comes out.
 
 ```java
-Comparator<Person> byAgeOnly = Comparator.comparingInt(Person::age);
+Set<BigDecimal> hashed = new HashSet<>();
+hashed.add(new BigDecimal("1.0"));
+hashed.add(new BigDecimal("1.00"));
+hashed.size();                      // 2
+
+Set<BigDecimal> sorted = new TreeSet<>();
+sorted.add(new BigDecimal("1.0"));
+sorted.add(new BigDecimal("1.00"));
+sorted.size();                      // 1
 ```
 
-If distinct people of one age must coexist, add a stable tie-breaker:
+Neither set is broken. They are answering different questions.
+
+![Figure 28.1 - A sorted set does not use equals](assets/diagrams/22-compareto-vs-equals.png)
+
+`HashSet` asks `equals`, and `BigDecimal.equals` compares unscaled value *and* scale, so `1.0` and `1.00` are different objects. `TreeSet` asks `compareTo`, which compares numeric value only, so the second `add` is a duplicate and is silently dropped.
+
+**Inside a tree collection, "the same" means "compares to zero."** `equals` is never consulted. The Javadoc says so explicitly, describing `SortedSet` and `SortedMap` as behaving inconsistently with `Set` and `Map` when the ordering is not consistent with equals. It is a documented consequence of having two notions of sameness, not a defect.
+
+The production version of this is worse than `BigDecimal`, because it is silent:
+
+```java
+Comparator<Person> byAge = Comparator.comparingInt(Person::age);
+TreeSet<Person> people = new TreeSet<>(byAge);
+// every 34-year-old after the first is discarded
+```
+
+> **Specification boundary:** that a sorted collection uses comparison rather than `equals` is a
+> documented contract, not an implementation detail - `SortedSet` and `SortedMap` explicitly describe
+> themselves as behaving inconsistently with `Set` and `Map` when the ordering disagrees with equals.
+> The red-black tree underneath is implementation; the `O(log n)` bounds are documented by `TreeMap`.
+
+The fix is a rule, not a special case: **end every comparator used by a sorted collection on something unique.**
 
 ```java
 Comparator<Person> byAgeThenId = Comparator
@@ -74,11 +43,53 @@ Comparator<Person> byAgeThenId = Comparator
         .thenComparing(Person::id);
 ```
 
-The tie-breaker must reflect the intended identity and remain stable while stored.
+The tie-break must reflect the identity you mean, and must stay stable while the element is stored - the same constraint a `HashMap` key has, for the same reason.
 
-### Search and insertion
+## What you buy for the log factor
 
-Lookup starts at the root. A negative comparison descends left, positive descends right, and zero finds the key. Insertion follows the same path, attaches a new node, and restores balance. A rotation changes parent-child links without changing in-order traversal:
+A `HashMap` answers exactly one question: is this key present? It has no cheap way to tell you the *nearest* key, the smallest key, or every key in a range. A `TreeMap` answers all of those on the same structure.
+
+![Figure 28.2 - One tree, six navigation questions](assets/diagrams/21-navigable-map.png)
+
+```java
+NavigableMap<Integer, String> m = new TreeMap<>(Map.of(
+        10, "a", 20, "b", 30, "c", 40, "d", 50, "e", 60, "f", 70, "g"));
+
+m.floorKey(35)      // 30 - greatest key <= 35
+m.ceilingKey(35)    // 40 - least key >= 35
+m.lowerKey(30)      // 20 - strictly less
+m.higherKey(30)     // 40 - strictly greater
+m.headMap(40)       // {10, 20, 30}
+m.subMap(20, 50)    // {20, 30, 40} - half-open, like everything else
+m.firstEntry()      // 10=a
+m.pollLastEntry()   // 70=g, and removes it
+```
+
+The naming is worth internalising because it is uniform: **`floor`/`ceiling` include the key; `lower`/`higher` are strict.** These methods exist to delete the off-by-one code people otherwise write by hand, and that is most of their value.
+
+If you need any of these, the `O(log n)` is not a cost you are paying - it is the feature you are buying.
+
+## Range views are live, and bounded
+
+`subMap`, `headMap`, and `tailMap` return views backed by the map, not copies:
+
+```java
+map.subMap(from, true, to, false);   // [from, to) - explicit endpoints
+map.subMap(from, to);                // same thing, implicit
+```
+
+Two behaviours follow:
+
+- Mutating the view mutates the map. `map.subMap(a, b).clear()` deletes that whole range.
+- Inserting a key *outside* the view's range throws `IllegalArgumentException`. The view knows its bounds.
+
+`descendingMap` and `descendingSet` are also views - reverse-order windows, not reversed copies. Reversing twice gives you a view equivalent to the original.
+
+For a stable snapshot you must copy: into another `TreeMap` if you need to keep the comparator and the navigation, or into a `List` if you only need the current ordered sequence.
+
+## Inside: a balanced tree, and why balance matters
+
+Lookup starts at the root and descends: negative goes left, positive goes right, zero is a hit. Insertion follows the same path and attaches a node - and then rebalances, because an unbalanced tree is a linked list with extra steps.
 
 ```text
       C                 B
@@ -88,217 +99,157 @@ Lookup starts at the root. A negative comparison descends left, positive descend
   A
 ```
 
-Removal has extra cases. A leaf can be detached. A node with one child can be replaced by that child. A node with two children is logically replaced with its successor or predecessor, after which a simpler node is removed. Balanced implementations then repair color or height invariants.
+A rotation relinks parent and child without changing in-order traversal, which is exactly why it is safe. Removal has three cases: a leaf is detached; a node with one child is replaced by that child; a node with two children is logically replaced by its successor, reducing the problem to one of the simpler cases. Balance is repaired afterwards.
 
-> **HotSpot note:** Current OpenJDK `TreeMap` uses a red-black tree and parent-linked entry nodes. Exact deletion strategy, color representation, and helper methods are version-sensitive.
+> **HotSpot note:** current OpenJDK `TreeMap` uses a red-black tree with parent-linked entry nodes. The deletion strategy, colour representation, and helper methods are version-sensitive. `TreeSet` is backed by a `NavigableMap` holding a marker value - a familiar design, not a requirement of the specification.
 
-### Navigational operations
+## Natural order, nulls, and mixed types
 
-`NavigableMap` offers `lowerEntry`, `floorEntry`, `ceilingEntry`, and `higherEntry`, along with key-returning forms. Entry-returning navigation methods produce snapshots of mappings rather than entries supporting `setValue`. `firstEntry` and `lastEntry` inspect endpoints; `pollFirstEntry` and `pollLastEntry` remove endpoints.
+Natural ordering needs keys that implement mutually compatible `Comparable`. Two consequences catch people:
 
-`NavigableSet` supplies equivalent element operations. These methods avoid the off-by-one logic that often appears in hand-written range code.
+- A natural-order `TreeMap` **rejects null keys** - null cannot be compared. (`HashMap` allows one.) A custom comparator may define null placement via `Comparator.nullsFirst` or `nullsLast`, though a null key usually signals a modelling problem.
+- Mixing unrelated key types throws `ClassCastException` at insert time, not at compile time.
 
-For key `20` in `{10, 20, 30}`:
-
-```text
-lower(20)   = 10
-floor(20)   = 20
-ceiling(20) = 20
-higher(20)  = 30
-```
-
-### Range and descending views
-
-`subMap`, `headMap`, and `tailMap` expose backed views. Navigable overloads make endpoints explicit:
+And never write a subtraction comparator:
 
 ```java
-map.subMap(from, true, to, false) // [from, to)
+(a, b) -> a.score() - b.score()      // wrong: overflow reverses the sign
+Comparator.comparingInt(Player::score)   // correct
 ```
 
-Mutating a range view mutates the backing map. Inserting a key outside the range throws `IllegalArgumentException`. `descendingMap` and `descendingSet` are reverse-order views, not full copied reversals. Reversing again produces an equivalent view of the original order.
+Chapter 30 measures how often that overflow actually bites. The short version: at 25% of random `int` pairs, it is not a corner case.
 
-Iterators over ordinary tree maps, sets, and their views commonly detect unsupported structural mutation and fail fast. Detection is best-effort, not a concurrency guarantee; synchronize access or use a collection designed for concurrent navigation.
+## Worked example: which configuration was in effect?
 
-A stable snapshot requires copying. Copy into another `TreeMap` if the comparator and sorted navigation must be retained, or into a list if only the current ordered sequence is needed.
-
-### Natural order, null, and heterogeneous keys
-
-Natural ordering requires keys implementing mutually compatible `Comparable`. Mixing unrelated types can cause `ClassCastException`. Natural-order `TreeMap` rejects null keys because they cannot be compared. A custom comparator could define null placement, although null keys usually make domain modeling weaker.
-
-Construct comparator chains carefully. `Comparator.comparing` can accept a key comparator, including `nullsFirst` or `nullsLast`. Do not implement numeric comparison with subtraction:
-
-```java
-// Wrong: overflow can reverse the sign.
-(a, b) -> a.score() - b.score()
-
-// Correct:
-Comparator.comparingInt(Player::score)
-```
-
-### TreeSet relationship
-
-A typical `TreeSet` is backed by a `NavigableMap` and stores elements as keys with a marker value. Its comparator, range behavior, navigation, and logarithmic costs follow the ordered map. The set API exposes only elements, preserving uniqueness under comparison.
-
-> **HotSpot note:** Backing `TreeSet` with a `TreeMap` is the familiar OpenJDK design, not a requirement that every Java implementation use the same fields.
-
-## Worked Java example
-
-The following index finds the configuration effective at a given time:
+"What was the effective config at time *t*" is a `floorEntry` query, and it is the canonical reason to reach for a `TreeMap`.
 
 ```java
 import java.time.Instant;
-import java.util.NavigableMap;
-import java.util.TreeMap;
+import java.util.*;
 
-record Config(String revision, int timeoutMillis) {
-    public Config {
-        if (timeoutMillis <= 0) {
-            throw new IllegalArgumentException("timeout must be positive");
-        }
-    }
-}
+final class ConfigHistory {
+    private final NavigableMap<Instant, Config> byEffectiveFrom = new TreeMap<>();
 
-final class ConfigTimeline {
-    private final NavigableMap<Instant, Config> byStart = new TreeMap<>();
-
-    void publish(Instant startsAt, Config config) {
-        if (startsAt == null || config == null) {
-            throw new IllegalArgumentException("arguments must be non-null");
-        }
-        Config previous = byStart.putIfAbsent(startsAt, config);
-        if (previous != null) {
-            throw new IllegalStateException("a revision already starts at " + startsAt);
-        }
+    void publish(Instant effectiveFrom, Config config) {
+        byEffectiveFrom.put(Objects.requireNonNull(effectiveFrom),
+                            Objects.requireNonNull(config));
     }
 
-    Config effectiveAt(Instant instant) {
-        var entry = byStart.floorEntry(instant);
-        if (entry == null) {
-            throw new IllegalStateException("no configuration yet");
-        }
-        return entry.getValue();
+    Optional<Config> effectiveAt(Instant when) {
+        Map.Entry<Instant, Config> entry = byEffectiveFrom.floorEntry(when);
+        return Optional.ofNullable(entry).map(Map.Entry::getValue);
     }
 
-    NavigableMap<Instant, Config> changes(
-            Instant fromInclusive, Instant toExclusive) {
-        return java.util.Collections.unmodifiableNavigableMap(
-                new TreeMap<>(byStart.subMap(
-                        fromInclusive, true, toExclusive, false)));
+    List<Config> publishedBetween(Instant fromInclusive, Instant toExclusive) {
+        return List.copyOf(
+                byEffectiveFrom.subMap(fromInclusive, true, toExclusive, false)
+                               .values());
     }
 }
 ```
 
-The copy inside `changes` is deliberate. Returning only an unmodifiable wrapper around `subMap` would still expose later updates from the backing timeline. Here callers receive a membership snapshot that retains sorted navigation.
+The alternative with a `HashMap` is to keep a separate sorted list of timestamps and binary-search it, then look up the map - two structures to keep consistent, and a class of bug that does not exist here.
 
-## Execution or memory walkthrough
+Note `List.copyOf` on the range: `values()` of a `subMap` is a view of a view. Returning it would hand callers something that changes under them and retains the entire history.
 
-Suppose revisions start at 09:00, 12:00, and 18:00. Searching at 15:30 asks for `floorEntry(15:30)`. The tree follows comparisons until it either finds the key or reaches a missing child. During descent it remembers the best key seen that is below the target. The result is the 12:00 revision.
+Also note that `floorEntry` returns a **snapshot** entry. Unlike an entry obtained from `entrySet()` iteration, calling `setValue` on it is not a route into the map.
 
-For a possible balanced shape:
+## Trace
 
-```text
-           12:00(B)
-          /        \
-     09:00(R)    18:00(R)
-```
-
-Adding 20:00 may initially attach under 18:00. If red-black rules are violated, recoloring or rotations restore them while preserving this in-order sequence:
+`byEffectiveFrom` holds `09:00`, `12:00`, `18:00`. Query `effectiveAt(14:30)`:
 
 ```text
-09:00, 12:00, 18:00, 20:00
+root 12:00     14:30 > 12:00  -> go right
+node 18:00     14:30 < 18:00  -> go left, remember 12:00 as best-so-far
+null           stop; answer = 12:00
 ```
 
-The exact resulting shape and colors are not API-visible. Code should observe only ordering and mappings.
+Three comparisons, no scan. The "remember the last left-turn ancestor" step is the whole of `floor` - it is worth being able to describe, because interviewers ask how `floorKey` is implemented rather than what it returns.
 
-Each map entry typically carries key, value, left, right, parent, and balancing metadata. That is more per-entry memory than many hash-table entries and much more than flat arrays. A copied range allocates new tree entries but shares immutable `Instant` and `Config` references.
+## Complexity
 
-## Complexity and performance
+| Operation | `TreeMap` / `TreeSet` | `HashMap` / `HashSet` |
+|---|---|---|
+| `get`, `put`, `remove`, `contains` | `O(log n)` | expected `O(1)` |
+| `first`, `last`, `floor`, `ceiling`, `higher`, `lower` | `O(log n)` | not supported |
+| range view construction | `O(1)` - it is a view | not supported |
+| iterating a range of size `k` | `O(log n + k)` | not supported |
+| full iteration | `O(n)`, **in order** | `O(capacity + size)`, unordered |
 
-For `n` entries in a balanced ordered tree:
-
-| Operation | Time | Additional space |
-|---|---:|---:|
-| `get`, `put`, `remove` | `O(log n)` | `O(1)` excluding inserted node |
-| floor/ceiling/lower/higher | `O(log n)` | `O(1)` |
-| first/last | `O(log n)` typical/documented basic bound | `O(1)` |
-| ordered traversal | `O(n)` | iterator state usually `O(1)` with parent links |
-| range traversal returning `k` entries | `O(log n + k)` conceptual | view `O(1)`, copy `O(k)` nodes |
-
-Comparator cost multiplies tree depth. Comparing long strings or extracting expensive sort keys can dominate. Precompute immutable comparison fields when justified.
-
-`HashMap` usually provides lower expected point-lookup cost and lower comparison overhead. `TreeMap` earns its cost when sorted traversal, bounded ranges, or neighbor queries are first-class. If data changes rarely and is read often, a sorted array or list plus binary search may offer better locality and memory use.
+Memory is a node per entry with key, value, colour, and three links. Comparison cost is part of every operation, so an expensive comparator multiplies the whole structure's cost - comparing long strings that share a prefix is the usual culprit.
 
 ## Edge cases and common mistakes
 
-- Supplying a comparator that is not transitive, leading to unpredictable placement and lookup.
-- Returning zero for distinct keys that must coexist.
-- Mutating a field used by comparison while an element is stored.
-- Using subtraction in integer comparators and overflowing.
-- Confusing `lower` with `floor` or `higher` with `ceiling`.
-- Forgetting that range bounds can be inclusive or exclusive.
-- Returning a mutable backed range to an untrusted caller.
-- Assuming a descending view is an independent reversed copy.
-- Expecting null keys to work with natural ordering.
-- Comparing heterogeneous keys without a comparator capable of handling both.
-- Using `TreeMap` solely to print deterministic test output when sorting once would be simpler.
-- Assuming the precise red-black tree shape or choosing behavior based on it.
+- Assuming `TreeSet` and `TreeMap` use `equals`. They use comparison.
+- A comparator without a unique final tie-break, silently discarding elements.
+- `BigDecimal` in a `TreeSet` when scale differences are meaningful.
+- Putting a null key into a natural-order tree collection.
+- Mixing key types and discovering it as a runtime `ClassCastException`.
+- Subtraction comparators.
+- Inserting outside a range view's bounds and being surprised by `IllegalArgumentException`.
+- Returning a range view or `descendingMap` as if it were an independent result - it is live and retains the parent.
+- Mutating a field the comparator reads while the element is stored.
+- Expecting `firstEntry` to remove; that is `pollFirstEntry`.
+- Calling `setValue` on a navigation-returned entry and expecting the map to change.
+- Reaching for a tree when a `HashMap` plus one sort at the end would do.
 
 ## Production engineering notes
 
-Centralize comparators as named, tested constants. Test sign symmetry, transitivity, zero behavior, and tie-breakers with generated data. Use stable immutable identifiers as final tie-breakers. When comparator equality intentionally differs from object equality, document that the tree collection defines uniqueness by ordering.
+Choose `TreeMap` when the *queries* are ordered: nearest-match, ranges, "latest before", top-of-range, or in-order iteration. Choose `HashMap` when they are exact-match. Do not pay `O(log n)` on every operation for an ordering you only need once at the end - sort then.
 
-Range views are excellent within a short operation because they avoid copies. At service boundaries, prefer snapshots unless live coupling is a deliberate API feature. Treat `pollFirstEntry` and `pollLastEntry` as mutations and protect shared structures with an appropriate concurrency design; `TreeMap` is not thread-safe.
+Define the comparator once, as a named constant, and give it a documented final tie-break. A comparator scattered as an inline lambda across a codebase will diverge.
 
-If a time index receives duplicate timestamps, decide whether one mapping, a list per timestamp, or a composite key is correct. Do not let an accidental comparator-zero replacement make that business decision. For very high read concurrency, consider publishing immutable sorted snapshots. For write-heavy concurrent navigation, evaluate purpose-built concurrent structures such as `ConcurrentSkipListMap` and its weaker snapshot semantics.
+Range views are excellent for bounded deletion - expiring everything before a cutoff is `map.headMap(cutoff).clear()`, which is one call and no iteration by hand.
 
-Measure retained memory and comparator CPU. Ordered indexes can duplicate data already held elsewhere. Decide which structure owns values, and remove stale entries consistently to avoid unbounded retention.
+Tree collections are not thread-safe and their iterators are fail-fast on a best-effort basis. For concurrent ordered access use `ConcurrentSkipListMap`, which provides the same navigation contract with concurrent semantics - and which exists precisely because a concurrent balanced tree is much harder to build than a concurrent skip list.
 
 ## Interview questions and model answers
 
-**How does `TreeMap` differ from `HashMap`?**
+**How does `TreeSet` decide two elements are duplicates?**
 
-`TreeMap` maintains keys in comparator or natural order and supports range and neighbor queries in `O(log n)`. `HashMap` provides expected `O(1)` point operations but no ordering contract. The right choice follows required semantics.
+By comparison returning zero, not by `equals`. That is why `new TreeSet<BigDecimal>()` treats `1.0` and `1.00` as one element while `HashSet` keeps both, and why a comparator that only compares one field silently deduplicates.
 
-**What happens when a comparator returns zero?**
+**When would you choose `TreeMap` over `HashMap`?**
 
-The tree treats the keys as the same key or set element. A map insertion replaces the value for that ordering-equivalent key. Therefore tie-breakers are necessary when distinct objects must coexist.
+When the questions are ordered: nearest key, range, first or last, or in-order traversal. `HashMap` cannot answer any of those cheaply. If I only need order once at the end, I use `HashMap` and sort.
 
-**Why are tree operations logarithmic?**
+**What is the difference between `floor` and `lower`?**
 
-A balancing invariant keeps height `O(log n)`. Each search follows one root-to-leaf path, and rebalancing uses a bounded amount of local work per level.
-
-**What is the difference between `floorKey` and `lowerKey`?**
-
-`floorKey(x)` may return `x` itself and finds the greatest key `<= x`. `lowerKey(x)` requires a strictly smaller key.
+`floor` is inclusive - the greatest key less than *or equal to* the argument. `lower` is strict. Same relationship between `ceiling` and `higher`.
 
 **Is `subMap` a copy?**
 
-No. It is a backed, bounded view. Changes are reflected in the owner, and out-of-range insertions are rejected. Copy it when independent lifetime is needed.
+No, it is a live view with bounds. Mutating it mutates the map, and inserting outside its range throws `IllegalArgumentException`. It also retains the whole parent map.
 
-**Must `TreeMap` be a red-black tree?**
+**How is `floorKey` implemented?**
 
-No. The public contract promises behavior and complexity, not a specific balancing algorithm. Red-black structure describes current common OpenJDK implementation.
+Descend from the root; on each right turn, record the current node as the best candidate so far, because everything on a right turn is a smaller key that is still a candidate. When you fall off the tree, the recorded candidate is the answer. `O(log n)`.
+
+**Why does a natural-order `TreeMap` reject null keys when `HashMap` accepts one?**
+
+Because it must compare every key it stores, and null cannot be compared. A `HashMap` only has to hash, and it special-cases null.
 
 ## Exercises
 
-1. Design a comparator for orders sorted by descending priority, then creation time, then immutable ID. Explain why every tie-breaker is needed.
-2. For keys `{10, 20, 30}`, compute lower, floor, ceiling, and higher results for targets 5, 20, 25, and 35.
-3. Implement an interval lookup where each key is a range start. State what invariant is needed to avoid overlapping ranges.
-4. Demonstrate how a comparator by string length causes `TreeSet` to collapse distinct same-length strings. Repair it.
-5. Compare a sorted `ArrayList` plus binary search with `TreeMap` for one bulk build followed by one million reads.
-6. Return an immutable snapshot of a descending range while preserving its comparator.
+1. Reproduce the `BigDecimal` result in both `HashSet` and `TreeSet`. Then explain which of the two matches the intent of a money-deduplication task, and defend it.
+2. Build a `TreeSet<Person>` with an age-only comparator and insert three people aged 34. Report the size, then fix it with a tie-break and report it again.
+3. For `{10, 20, 30}`, state `lower(20)`, `floor(20)`, `ceiling(20)`, and `higher(20)` from memory. Then check.
+4. Implement `floorKey` yourself against a plain BST and verify it against `TreeMap` over a few hundred random trees and queries.
+5. Delete every entry before a cutoff using a `headMap` view, then do it with an explicit iterator. Compare the code and say which you would review more carefully.
+6. Attempt to insert a key outside a `subMap`'s bounds. Record the exception and explain why it is preferable to silently widening the view.
+7. Replace a `TreeMap` in a piece of code with a `HashMap` plus a final sort. Say which workloads that improves and which it makes worse.
 
 ## Chapter summary
 
-Navigable tree collections maintain elements under a total ordering and support point, range, endpoint, and neighbor operations. Balanced-tree invariants keep height logarithmic; OpenJDK commonly uses red-black trees, but this is not the API contract. Comparison defines key identity inside the tree, so consistency, tie-breakers, and key stability are correctness requirements. Range and descending collections are backed views, making ownership choices as important as algorithmic complexity.
+Inside a sorted collection, identity is comparison: two keys are the same when `compareTo` or the comparator returns zero, and `equals` is never asked. That is why a `TreeSet` keeps one `BigDecimal` where a `HashSet` keeps two, and why an age-only comparator quietly discards people - so every comparator handed to a sorted collection needs a unique, stable final tie-break. What you buy in exchange for `O(log n)` is the family of questions a hash table cannot answer at all: `floor` and `ceiling` (inclusive), `lower` and `higher` (strict), first and last, and half-open ranges. `subMap`, `headMap`, `tailMap`, and `descendingMap` are live bounded views, so they write through, reject out-of-range inserts, and retain their parent. Natural ordering rejects nulls and throws on mixed types at runtime, comparison cost multiplies through every operation, and for concurrent ordered access the answer is `ConcurrentSkipListMap` rather than a lock around a `TreeMap`.
 
 ## Revision checklist
 
-- [ ] I can state binary-search-tree and red-black-tree invariants.
-- [ ] I understand that comparison zero defines uniqueness in tree collections.
-- [ ] I can build safe comparator chains without subtraction overflow.
-- [ ] I know lower, floor, ceiling, and higher semantics.
-- [ ] I can use inclusive and exclusive range views correctly.
-- [ ] I distinguish backed views from sorted snapshots.
-- [ ] I can compare tree maps with hash maps and sorted arrays.
-- [ ] I label red-black representation details as version-sensitive.
+- [ ] I know tree collections decide duplicates by comparison, never by `equals`.
+- [ ] Every comparator I hand a sorted collection ends on something unique and stable.
+- [ ] I can state `floor`, `ceiling`, `lower`, and `higher` without hesitating over inclusivity.
+- [ ] I can describe how `floorKey` is implemented, not just what it returns.
+- [ ] I know range and descending views are live, bounded, and retain the parent.
+- [ ] I know a natural-order tree rejects null keys and why `HashMap` does not.
+- [ ] I never write a subtraction comparator.
+- [ ] I can say when a `HashMap` plus one sort beats a `TreeMap`, and when it does not.

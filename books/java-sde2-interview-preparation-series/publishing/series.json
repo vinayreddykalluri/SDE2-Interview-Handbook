@@ -16,7 +16,7 @@
     "file": "java-sde2-interview-book.pdf",
     "artifact_path": "00-start-here/java-sde2-interview-book.pdf",
     "title": "Java Foundations to Advanced Engineering",
-    "page_count": 659
+    "page_count": 658
   },
   "learning_order": [
     "03",
@@ -2062,11 +2062,7 @@
       },
       "sources": [
         {
-          "path": "content/master/25-collections-framework.md",
-          "figure": {
-            "path": "assets/diagrams/08-collections-map.png",
-            "caption": "Java 21 collection, sequenced collection, queue, and map contracts"
-          }
+          "path": "content/master/25-collections-framework.md"
         },
         {
           "path": "content/volumes/java/JAVA-05-collections-streams-and-io/chapters/00-low-level-collections-implementation-lab.md",
@@ -2083,11 +2079,7 @@
           "path": "content/master/26-arraylist-linkedlist-and-list-trade-offs.md"
         },
         {
-          "path": "content/master/27-hashmap-hashset-and-hashing-internals.md",
-          "figure": {
-            "path": "assets/diagrams/09-hashmap-put.png",
-            "caption": "Representative HashMap insertion branches and correctness prerequisites"
-          }
+          "path": "content/master/27-hashmap-hashset-and-hashing-internals.md"
         },
         {
           "path": "content/master/28-treemap-treeset-ordering-and-navigable-collections.md"

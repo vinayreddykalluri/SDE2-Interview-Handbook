@@ -1,274 +1,255 @@
 # 29. Queues, Deques, PriorityQueue, and Heaps
 
-## Learning objectives
+## Print the queue and see what happens
 
-By the end of this chapter, you should be able to:
-
-- select FIFO queues, double-ended queues, and priority queues by removal policy;
-- use exception-throwing and special-value queue methods correctly;
-- derive circular-buffer and binary-heap invariants;
-- analyze enqueue, dequeue, heap maintenance, and iteration costs;
-- avoid assumptions about priority-queue traversal, stability, and thread safety; and
-- apply queues safely to scheduling, buffering, breadth-first search, and top-k problems.
-
-## Why this matters at SDE-2
-
-Queues define work order. They appear in request buffering, retries, graph traversal, schedulers, rate-limited pipelines, and event loops. Choosing the wrong removal policy can violate fairness or priority rules even when all operations compile.
-
-Interviewers expect more than "a heap gives O(log n)." You should know which operation is logarithmic, why peeking is constant, why heap iteration is not sorted, and why finding an arbitrary element is linear. In production, you must also address capacity, overload, thread ownership, and tie-breaking. An unbounded in-memory queue can convert downstream slowness into an out-of-memory incident.
-
-## First-principles model
-
-A queue separates insertion policy from removal policy:
-
-- A FIFO queue removes the oldest eligible element.
-- A deque permits insertion and removal at both ends.
-- A priority queue removes the least or greatest element under an ordering, not necessarily the oldest.
-
-An array deque can use a circular logical sequence over a physical array:
-
-```text
-physical slots: [D, E, empty, empty, A, B, C]
-logical order:   A, B, C, D, E
-head index:      4
-tail index:      2   (next insertion position)
+```java
+PriorityQueue<Integer> pq = new PriorityQueue<>();
+for (int v : new int[]{5, 1, 8, 3, 9, 2, 7}) {
+    pq.offer(v);
+}
+System.out.println(pq);          // [1, 3, 2, 5, 9, 8, 7]
 ```
 
-Indices wrap around. The invariant is that logical elements occupy the circular range from head to tail according to the representation's empty/full convention.
+Not `[1, 2, 3, 5, 7, 8, 9]`. Not the insertion order either. And `forEach`, the enhanced `for` loop, and `stream()` all give you the same thing, because they all use the same iterator.
 
-A binary min-heap uses a complete binary tree whose parent is no greater than either child:
+Only `poll()` returns priority order - one element at a time, `O(log n)` each. This is the most common `PriorityQueue` bug in production code, and it survives testing easily because with two or three elements the array *is* usually sorted.
+
+Everything else in this chapter follows from understanding why.
+
+> **Specification boundary:** `PriorityQueue` documents that its iterator makes no ordering guarantee,
+> and that it is unbounded and not thread-safe. Those are contracts you may rely on. The binary heap,
+> the array layout, and the sift procedures are the implementation that explains them - a conforming
+> implementation could use a different structure and still satisfy every documented promise.
+
+## A heap is an array pretending to be a tree
+
+![Figure 29.1 - A heap is an array pretending to be a tree](assets/diagrams/24-heap-array-layout.png)
+
+There are no node objects. There is one array, and the tree structure is arithmetic:
 
 ```text
-array: [2, 5, 4, 9, 7, 8]
-
-          2
-        /   \
-       5     4
-      / \   /
-     9   7 8
+parent(i) = (i - 1) / 2      left(i) = 2i + 1      right(i) = 2i + 2
 ```
 
-For zero-based index `i`, children are commonly `2i + 1` and `2i + 2`; parent is `(i - 1) / 2`. Completeness enables array storage without node links.
+The invariant is deliberately weak: **a parent is no greater than its children.** That is enough to guarantee the minimum is at index 0, and it says nothing whatsoever about siblings. `3` and `2` are siblings in the array above, in that order, and the heap is perfectly valid.
 
-> **Specification boundary:** `Queue`, `Deque`, and `PriorityQueue` define behavior. `PriorityQueue` documents heap-like complexity but does not promise a particular arity, array layout, growth policy, or stable ordering among equal-priority elements.
+That single sentence answers a whole family of questions:
 
-## Core terminology
+- `peek` is `O(1)` - read index 0.
+- `poll` and `offer` are `O(log n)` - one root-to-leaf path.
+- `contains` and `remove(Object)` are `O(n)` - there is no index by value, only by priority.
+- Iteration is not sorted, and `toString` shows array order.
+- There is **no decrease-key**. Nothing maps an element to its array position.
 
-- **Head:** Element selected for the next removal or inspection.
-- **Tail:** End normally used for FIFO insertion.
-- **FIFO:** First in, first out.
-- **LIFO:** Last in, first out, or stack order.
-- **Bounded queue:** Queue with a maximum capacity.
-- **Backpressure:** Mechanism that slows, rejects, or redirects producers when consumers cannot keep up.
-- **Heap:** Complete tree satisfying a local parent-child ordering invariant.
-- **Sift up:** Move an inserted heap element toward the root until the invariant holds.
-- **Sift down:** Move a displaced root toward leaves until the invariant holds.
-- **Stable ordering:** Equal-priority elements retain their original relative order.
-- **Tie-breaker:** Secondary comparison field that makes priority deterministic.
+## Sift up, sift down
 
-## Detailed mechanics
+![Figure 29.2 - Sift up on offer, sift down on poll](assets/diagrams/25-heap-sift.png)
 
-### Queue method pairs
+**`offer`** appends at the end, then swaps upward while the new element is smaller than its parent. It stops as soon as the parent is smaller, because everything above the parent is already smaller than the parent.
 
-The queue API offers two styles:
+**`poll`** takes index 0, moves the *last* element to the root, then swaps downward - always with the **smaller** of the two children. Swapping with the smaller child is what restores the invariant; swapping with either child does not, and that is the detail interviewers ask you to justify.
 
-| Intent | Throws on failure | Returns special value |
+Both walk one root-to-leaf path, so both are `O(log n)`.
+
+One consequence worth knowing: building a heap from `n` elements by calling `offer` `n` times costs `O(n log n)`, but heapifying an existing array bottom-up costs `O(n)` - most nodes are near the leaves and barely move. `new PriorityQueue<>(collection)` can take the linear path; a loop of `offer` cannot.
+
+## The other queue: a ring, not a chain
+
+`ArrayDeque` is the default for FIFO and LIFO work, and it is also an array.
+
+![Figure 29.3 - ArrayDeque is a ring, which is why both ends are cheap](assets/diagrams/23-arraydeque-ring.png)
+
+Elements do not move; `head` and `tail` do. Adding at the front decrements `head`, wrapping around the end of the array. Because capacity is always a power of two, wrapping is a mask rather than a modulo:
+
+```text
+(head - 1) & (capacity - 1)
+```
+
+That is why both ends are constant time on an array, which surprises people who assume you need links for that.
+
+Use `ArrayDeque` in preference to both alternatives. `Stack` is legacy, synchronised for no benefit, and - genuinely confusingly - iterates from the *bottom*. `LinkedList` allocates a node per element. `ArrayDeque` rejects null, which is a feature rather than a limitation: null is the "empty" signal for `poll` and `peek`, so permitting null elements would make the API ambiguous.
+
+> **HotSpot note:** current OpenJDK `ArrayDeque` uses a resizable circular array with head and tail indexes. Array-length conventions, growth, and wrap logic have changed across releases and are not public contracts.
+
+## Two method families, and when to use which
+
+Every queue operation comes in a throwing form and a returning form:
+
+| Intent | Throws on failure | Returns a special value |
 |---|---|---|
-| insert | `add(e)` | `offer(e)` returns `false` |
-| remove head | `remove()` | `poll()` returns `null` |
-| inspect head | `element()` | `peek()` returns `null` |
+| insert | `add(e)` | `offer(e)`->`false` |
+| remove head | `remove()`->`NoSuchElementException` | `poll()`->`null` |
+| inspect head | `element()`->`NoSuchElementException` | `peek()`->`null` |
 
-For capacity-restricted queues, `offer` is usually the clearer insertion method because full capacity is an expected condition. `poll` and `peek` use null to mean empty, which is one reason queue implementations commonly reject null elements.
+Use the returning form when the failure is an expected condition - a bounded queue being full, or a queue being empty in a polling loop. Use the throwing form when it would be a bug. Choosing `add` on a bounded queue and then not handling the exception is a common way to turn back-pressure into an outage.
 
-### Deque method families
+`Deque` doubles everything: `addFirst`/`offerFirst`, `removeLast`/`pollLast`, and so on. For stack use, prefer `push`, `pop`, and `peek` on a `Deque`.
 
-`Deque` generalizes both ends. It provides `addFirst/offerFirst`, `addLast/offerLast`, `removeFirst/pollFirst`, and corresponding last methods. The queue aliases generally target the last for insertion and first for removal. Stack usage should prefer `push`, `pop`, and `peek` on a deque rather than the legacy `Stack` class.
+## Equal priorities are not FIFO
 
-`ArrayDeque` is usually the default general-purpose deque. It avoids a node allocation per element and offers good locality. It rejects null. `LinkedList` also implements `Deque`, but its per-node overhead and locality are usually worse.
+```java
+PriorityQueue<Task> q = new PriorityQueue<>(Comparator.comparing(Task::dueAt));
+```
 
-> **HotSpot note:** Current OpenJDK `ArrayDeque` uses a resizable circular array and head/tail indexes. Exact array-length conventions, growth increments, and wrap logic have changed across releases and are not public contracts.
+Two tasks with the same `dueAt` come out in an arbitrary order - and the order can differ between runs and between JDK versions, because it depends on where sift operations happened to leave them. If fairness matters, make it explicit with a monotonic sequence number as the final comparator field:
 
-### PriorityQueue heap mechanics
+```java
+record Retry(long sequence, Instant dueAt, String jobId, int attempt) { }
 
-In a min-priority queue, the root is the minimum under natural ordering or a supplied comparator. Insertion appends at the next array position, then sifts upward while smaller than its parent. Removal saves the root, moves the last element to the root, decreases size, and sifts down by exchanging with the smaller child.
+static final Comparator<Retry> ORDER =
+        Comparator.comparing(Retry::dueAt).thenComparingLong(Retry::sequence);
+```
 
-The heap invariant is local. It guarantees every parent is no greater than its children, which implies the root is globally minimal. It does not imply siblings or array positions are globally sorted. Thus iteration order is unspecified rather than priority order.
+This is the same "end the chain on something unique" rule as Chapter 28, applied for a different reason: there, an ambiguous comparator *loses* elements; here, it merely reorders them unpredictably. A `long` sequence is ample for realistic process lifetimes, but the overflow policy still deserves one sentence somewhere.
 
-Ordinary deque and priority-queue iterators commonly fail fast after detected structural modification. This is diagnostic, best-effort behavior, not thread coordination. Iterator traversal is not a snapshot and still does not expose priority order.
+And never mutate the priority field of an enqueued element. The queue will not notice and will not reposition it, so the heap silently becomes invalid - `poll` starts returning the wrong element. Remove and reinsert, or enqueue immutable descriptors and keep mutable state elsewhere.
 
-For max-priority behavior, reverse the comparator. Be careful with arithmetic comparators; use `comparingInt`, `comparingLong`, or safe comparison methods instead of subtraction.
-
-### Equal priorities and mutation
-
-`PriorityQueue` does not guarantee FIFO order for equal elements. Add a monotonically increasing sequence as a final comparator field when stable tie-breaking is required. Consider sequence overflow and lifecycle; a `long` is ample for many process lifetimes but still deserves an explicit policy.
-
-Never mutate an enqueued element's priority fields. The queue does not automatically locate and reposition it, so the heap can become logically invalid. Remove and reinsert the element, or enqueue immutable task descriptors and keep changing state elsewhere.
-
-### Arbitrary operations and bulk heap construction
-
-`contains` and `remove(Object)` generally scan the backing representation, costing `O(n)`, because the heap orders only by priority and has no key index. After an arbitrary removal is found, restoring the heap costs `O(log n)`.
-
-Building a heap by repeated insertion costs `O(n log n)`. Bottom-up heap construction can heapify an array in `O(n)` because most nodes are near leaves and move only a short distance. A `PriorityQueue` constructor from a suitable collection may take advantage of bulk heapification; exact constructor paths remain implementation-specific.
-
-### Bounded and concurrent queues
-
-General-purpose `ArrayDeque` and `PriorityQueue` are unbounded in the API sense and not thread-safe. Capacity-aware and blocking behavior lives in concurrent queue types. A bounded blocking queue can wait, time out, or reject when full. A concurrent priority queue provides thread-safe priority access but still does not make a multi-step workflow atomic.
-
-Queue selection must include who produces, who consumes, whether operations can block, and what happens under overload. Those are system semantics, not merely collection details.
-
-## Worked Java example
-
-This retry scheduler orders tasks by due time and preserves insertion order among equal due times:
+## Worked example: a retry scheduler
 
 ```java
 import java.time.Instant;
-import java.util.Comparator;
-import java.util.PriorityQueue;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 
-record Retry(long sequence, Instant dueAt, String jobId, int attempt) {}
+record Retry(long sequence, Instant dueAt, String jobId, int attempt) { }
 
-final class RetrySchedule {
-    private static final Comparator<Retry> ORDER = Comparator
-            .comparing(Retry::dueAt)
-            .thenComparingLong(Retry::sequence);
+final class RetryScheduler {
+    private static final Comparator<Retry> ORDER =
+            Comparator.comparing(Retry::dueAt).thenComparingLong(Retry::sequence);
 
-    private final PriorityQueue<Retry> queue = new PriorityQueue<>(ORDER);
-    private long nextSequence;
+    private final PriorityQueue<Retry> pending = new PriorityQueue<>(ORDER);
+    private final AtomicLong sequence = new AtomicLong();
+    private final int maxPending;
 
-    void schedule(Instant dueAt, String jobId, int attempt) {
-        if (dueAt == null || jobId == null || attempt < 1) {
-            throw new IllegalArgumentException("invalid retry");
-        }
-        queue.offer(new Retry(nextSequence++, dueAt, jobId, attempt));
+    RetryScheduler(int maxPending) {
+        this.maxPending = maxPending;
     }
 
-    Retry pollReady(Instant now) {
-        Retry next = queue.peek();
-        if (next == null || next.dueAt().isAfter(now)) {
-            return null;
+    boolean schedule(String jobId, Instant dueAt, int attempt) {
+        if (pending.size() >= maxPending) {
+            return false;                    // shed load explicitly
         }
-        return queue.poll();
+        return pending.offer(
+                new Retry(sequence.getAndIncrement(), dueAt, jobId, attempt));
     }
 
-    int pending() {
-        return queue.size();
+    List<Retry> dueBy(Instant now) {
+        List<Retry> due = new ArrayList<>();
+        while (!pending.isEmpty() && !pending.peek().dueAt().isAfter(now)) {
+            due.add(pending.poll());         // peek is O(1), so the guard is cheap
+        }
+        return due;
     }
 }
 ```
 
-This class assumes single-threaded ownership. A lock would be needed if multiple threads share it; using a thread-safe queue alone would not make the `peek` followed by conditional `poll` atomic. A production retry service also persists tasks, caps capacity, supports cancellation through an index, and handles sequence lifecycle.
+Three decisions:
 
-## Execution or memory walkthrough
+1. **`peek` before `poll`.** Checking the head is `O(1)`, so the loop stops without removing anything it should not.
+2. **An explicit `maxPending`.** `PriorityQueue` is unbounded. An unbounded in-memory queue turns a slow downstream dependency into an out-of-memory incident - the queue absorbs the backlog until the heap does not.
+3. **`Retry` is a record.** Nothing can mutate `dueAt` while the element is in the heap.
 
-Suppose the comparator sees tasks `(12:00, seq 0)`, `(12:10, seq 1)`, and `(12:05, seq 2)`.
-
-```text
-insert 12:00/0: [12:00/0]
-insert 12:10/1: [12:00/0, 12:10/1]
-insert 12:05/2: append then compare with root
-                 [12:00/0, 12:10/1, 12:05/2]
-```
-
-The array is a valid heap even though positions 1 and 2 are not sorted with each other. Polling removes `12:00/0`, moves `12:05/2` to the root, and sifts down:
+Trace `offer` of a task due at 10:02 into a heap holding 10:00, 10:05, 10:10, 10:07:
 
 ```text
-before removal: [12:00/0, 12:10/1, 12:05/2]
-move last:      [12:05/2, 12:10/1]
-result:         12:00/0
+append at index 4:   [10:00, 10:05, 10:10, 10:07, 10:02]
+parent of 4 is 1:    10:02 < 10:05  -> swap
+                     [10:00, 10:02, 10:10, 10:07, 10:05]
+parent of 1 is 0:    10:02 > 10:00  -> stop
 ```
 
-If another task due at 12:05 has sequence 3, sequence 2 sorts first. The tie-breaker turns an unspecified equal-priority outcome into a domain guarantee.
+Two comparisons, one for each level, for a five-element heap.
 
-The priority queue stores references in an array and `Retry` record objects separately. Removed slots are cleared by normal implementations so they do not retain tasks. Exact capacity may exceed size. A deque similarly keeps spare slots to make end operations cheap.
-
-## Complexity and performance
+## Complexity
 
 | Operation | `ArrayDeque` | `PriorityQueue` |
-|---|---:|---:|
-| add/remove at supported end | amortized `O(1)` | add `O(log n)`, poll `O(log n)` |
-| peek head | `O(1)` | `O(1)` |
-| remove arbitrary object | `O(n)` | `O(n)` search plus repair |
-| contains | `O(n)` | `O(n)` |
-| iterate all | `O(n)` | `O(n)`, not sorted |
-| copy then ordered drain | `O(n)` copy | `O(n log n)` drain |
-| bottom-up heap construction | not applicable | `O(n)` algorithmically |
-
-Deque resize is occasionally `O(n)`, giving amortized constant end operations under geometric growth. Heap operations follow height `O(log n)` because a complete binary tree with `n` nodes has logarithmic height.
-
-For top-k selection from `n` values, maintain a heap of size `k`: `O(n log k)` time and `O(k)` space. Sorting everything costs `O(n log n)` and `O(n)` input storage or sorting space depending on representation. If `k` is close to `n`, constants and required output order can make sorting preferable.
+|---|---|---|
+| `offer` / `add` | amortized `O(1)` | `O(log n)` |
+| `poll` / `remove()` | `O(1)` | `O(log n)` |
+| `peek` | `O(1)` | `O(1)` |
+| `contains` | `O(n)` | `O(n)` |
+| `remove(Object)` | `O(n)` | `O(n)` find + `O(log n)` repair |
+| build from `n` elements | `O(n)` | `O(n)` bulk, `O(n log n)` by repeated `offer` |
+| iteration order | front to back | **array order, not priority order** |
 
 ## Edge cases and common mistakes
 
-- Assuming iteration over `PriorityQueue` returns sorted order.
-- Assuming equal-priority tasks are stable without a tie-breaker.
-- Mutating an element's comparator fields while it is enqueued.
-- Calling `remove(Object)` or `contains` frequently and expecting logarithmic behavior.
-- Using null as a legitimate queue element when `poll` uses null for emptiness.
-- Choosing exception-throwing `add` when full capacity is expected control flow.
-- Using a queue that grows without bound under slower consumers.
-- Sharing `ArrayDeque` or `PriorityQueue` across threads without protection.
-- Separating `peek` and `poll` in concurrent code without one atomic policy.
-- Using `PriorityQueue` for scheduling but ignoring wall-clock changes, durability, or wakeup coordination.
-- Implementing a max heap by negating an integer and overflowing at `Integer.MIN_VALUE`.
-- Assuming a heap is a binary search tree or that arbitrary search follows one branch.
-- Forgetting stale duplicate entries in algorithms that reinsert improved priorities.
+- Reading iteration, `toString`, `forEach`, or `stream()` output as priority order.
+- Expecting FIFO among equal priorities without a sequence tie-break.
+- Mutating a priority field while the element is enqueued.
+- Using `contains` or `remove(Object)` on a hot path - both are `O(n)`.
+- Expecting a decrease-key operation to exist.
+- Using an unbounded queue as a buffer in front of a slower consumer.
+- Using `add` where `offer` was the right choice on a bounded queue, then not handling the exception.
+- Inserting null into `ArrayDeque` or `PriorityQueue`.
+- Using `Stack` - legacy, synchronised, and iterates from the bottom.
+- Building a heap with `n` calls to `offer` when the collection constructor would heapify in `O(n)`.
+- Assuming `PriorityQueue` or `ArrayDeque` is thread-safe.
+- Writing a subtraction comparator for priorities.
 
 ## Production engineering notes
 
-Capacity is a reliability contract. Establish maximum depth, enqueue timeout or rejection behavior, retry/drop policy, and metrics for depth, age, throughput, and rejection. FIFO does not guarantee fairness if tasks have dramatically different service times. Priority scheduling can starve low-priority work; aging or quotas may be necessary.
+Queue choice is a systems decision, not a collection decision. Name the producer, the consumer, whether either may block, and what happens under overload *before* choosing a type.
 
-Use immutable queue elements. When cancellation or priority updates are frequent, pair a heap with a map from ID to state, accept lazy deletion, or use a specialized indexed heap. Lazy deletion leaves stale entries until they reach the head, so bound and observe the overhead.
+**Always bound an in-memory queue.** Then decide what a full queue means: reject and signal back-pressure, drop the oldest, drop the lowest priority, or block the producer. Each is defensible; silently growing is not.
 
-For breadth-first search, mark a node visited when enqueuing, not when dequeuing, to prevent duplicate queue growth. For stacks, prefer `ArrayDeque.push/pop` and never use null sentinels. For thread handoff, choose a concurrent or blocking queue whose ordering, capacity, and memory-consistency contract match the workflow.
+For cross-thread hand-off, use `java.util.concurrent`: `ArrayBlockingQueue` for a fixed bound, `LinkedBlockingQueue` for an optional one, `PriorityBlockingQueue` for priority with blocking, `DelayQueue` when elements become available at a time. Note that even a concurrent queue makes individual operations atomic, not your multi-step workflow.
 
-Do not persist only an in-memory retry heap if process restart must not lose jobs. Keep durable source-of-truth state and rebuild the heap, or use an external scheduler. Collection choice solves in-process ordering, not distributed delivery guarantees.
+Instrument queue depth and the age of the head element. Depth alone tells you the backlog; head age tells you whether you are draining it.
 
 ## Interview questions and model answers
 
-**Why is priority-queue iteration not sorted?**
+**What does iterating a `PriorityQueue` give you?**
 
-The heap invariant only orders each parent relative to its children. The backing array is a level-order heap representation, not a sorted sequence. Repeated polling, preferably from a copy, produces priority order.
+Array order - the internal heap layout - not priority order. The heap invariant only relates parents to children, so siblings are unordered. Only `poll` yields priority order, one element per `O(log n)` call.
 
-**What are offer/poll/peek for?**
+**Why is `poll` `O(log n)` but `peek` `O(1)`?**
 
-They use special return values for expected failure: `offer` can report full capacity, while `poll` and `peek` return null for an empty queue. The paired methods `add/remove/element` throw exceptions.
+`peek` reads index 0. `poll` must remove that element and restore the invariant, which means moving the last element to the root and sifting it down one root-to-leaf path.
 
-**How does heap insertion work?**
+**Why swap with the smaller child when sifting down?**
 
-Append at the next complete-tree position, then sift upward while the new element precedes its parent. At most one root-to-leaf height is traversed, so cost is `O(log n)`.
+Because the new parent must be no greater than *both* children. Promoting the larger child would leave it above the smaller one and violate the invariant immediately.
 
-**Why is removing an arbitrary heap element O(n)?**
+**How do you get FIFO among equal priorities?**
 
-The heap has no global search ordering for arbitrary values. It may scan all entries to locate the value, then needs only logarithmic repair.
+Add a monotonically increasing sequence number as the final field in the comparator. `PriorityQueue` gives no ordering guarantee among elements that compare equal.
 
-**How do you make equal-priority scheduling deterministic?**
+**How would you find the 100 largest of ten million elements?**
 
-Add a stable secondary comparator field, typically a monotonic sequence number or immutable ID, matching the desired business rule.
+A bounded min-heap of size 100: push each element, and poll whenever the size exceeds 100. `O(n log k)` time and `O(k)` space, against `O(n log n)` and `O(n)` for sorting everything. Note the inversion - you keep a *min*-heap to find the largest, because you evict the smallest of the current best.
 
-**Why prefer `ArrayDeque` over `Stack` or often `LinkedList`?**
+**Why does `ArrayDeque` reject null?**
 
-It directly implements deque and stack operations, avoids legacy synchronized `Vector` behavior, uses fewer objects than a linked list, and usually has better locality.
+`poll` and `peek` return null to mean "empty". Permitting null elements would make that return value ambiguous.
+
+**`ArrayDeque` is an array - how is `addFirst` constant time?**
+
+It is circular. `head` moves backwards with a mask, `(head - 1) & (capacity - 1)`, rather than shifting elements. Capacity is a power of two so the mask works.
 
 ## Exercises
 
-1. Dry-run heap insertion of `7, 3, 9, 1, 4` and then two polls. Draw the array after each step.
-2. Use an `ArrayDeque` to implement breadth-first traversal and explain when each node is marked visited.
-3. Find the largest five values in a stream using a min-heap of size five. State time and space bounds.
-4. Design overload behavior for a bounded email-work queue. Include observability and retry policy.
-5. Modify the retry scheduler to support lazy cancellation through a set of canceled IDs. Analyze stale-entry memory.
-6. Demonstrate that printing or iterating a priority queue is not a sorted-output algorithm.
+1. Offer `5, 1, 8, 3, 9, 2, 7` to a `PriorityQueue` and print it. Confirm you get `[1, 3, 2, 5, 9, 8, 7]`, then draw the tree and check every parent-child pair.
+2. Drain that queue with `poll` and confirm the output is sorted. Explain in one sentence why iteration and draining disagree.
+3. Implement sift-up and sift-down over a raw array and test them against `PriorityQueue` on a few thousand random sequences.
+4. Enqueue three tasks with identical priorities, drain, and record the order. Then add a sequence tie-break and repeat.
+5. Mutate the priority field of an enqueued element, then poll the whole queue. Show that the output is not in priority order.
+6. Implement top-k with a bounded heap. Count comparisons against a full sort at n = 1,000,000 and k = 100.
+7. Take an unbounded producer-consumer queue and add a bound. Implement two different full-queue policies and say which you would choose for a payment retry pipeline, and why.
+8. Draw an `ArrayDeque` of capacity 8 after `addLast` x 6, `pollFirst` x 3, `addLast` x 4. Mark head, tail, and where the wrap occurs.
 
 ## Chapter summary
 
-Queues are defined by removal policy. Deques efficiently support both ends, while priority queues expose the minimum or maximum under an ordering. Circular arrays provide amortized constant deque operations; complete binary heaps provide constant-time peek and logarithmic insertion and head removal. Their local invariant does not sort iteration or accelerate arbitrary search. Production use adds bounded capacity, overload behavior, immutability, concurrency ownership, fairness, and durability.
+A queue is defined by its removal policy, and a `PriorityQueue` is a binary heap stored in a plain array with the tree structure supplied by index arithmetic. Its invariant - a parent is no greater than its children - is deliberately weak, which is why the minimum is always at index 0 and why iteration, `toString`, and `stream()` expose array order rather than priority order; only `poll` gives priority order, one `O(log n)` step at a time. The same invariant explains the rest of the API: `peek` is constant, `contains` and `remove(Object)` are linear because nothing indexes elements by value, and no decrease-key exists. Sift-down must take the *smaller* child, and bulk heapification is `O(n)` where `n` calls to `offer` are `O(n log n)`. `ArrayDeque` is the other array in disguise - a power-of-two ring where `head` and `tail` move and the elements do not, which is what makes both ends constant time and why it should displace both `Stack` and `LinkedList`. Equal priorities are unordered unless you add a sequence tie-break, an enqueued element's priority must never change, and every in-memory queue needs an explicit bound and an explicit policy for what happens when it is reached.
 
 ## Revision checklist
 
-- [ ] I know the exception and special-value queue method pairs.
-- [ ] I can map every `Deque` operation to an end and use it as a stack.
-- [ ] I can state circular-buffer and min-heap invariants.
-- [ ] I can dry-run sift-up and sift-down.
-- [ ] I do not assume priority-queue iteration or equal-priority stability.
-- [ ] I know why arbitrary heap search and removal are linear.
-- [ ] I can derive `O(n log k)` top-k selection.
-- [ ] I include capacity, backpressure, concurrency, fairness, and durability in production designs.
+- [ ] I know iteration, `toString`, and `stream()` show array order, and only `poll` gives priority order.
+- [ ] I can state the heap invariant and derive `peek`, `poll`, `contains`, and "no decrease-key" from it.
+- [ ] I can explain why sift-down must use the smaller child.
+- [ ] I know bulk heapify is `O(n)` and repeated `offer` is `O(n log n)`.
+- [ ] I add a sequence tie-break whenever FIFO among equal priorities matters.
+- [ ] I never mutate the priority of an enqueued element.
+- [ ] I can explain the ring buffer and why `addFirst` is constant time on an array.
+- [ ] I choose `ArrayDeque` over `Stack` and `LinkedList`, and know why it rejects null.
+- [ ] Every queue I put in production has a bound and a documented overload policy.

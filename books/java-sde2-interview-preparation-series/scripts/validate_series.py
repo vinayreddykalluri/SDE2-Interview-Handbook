@@ -891,8 +891,23 @@ def main() -> None:
     spec = read_json(SERIES_SPEC)
     decorate_segments(spec)
     check_numbering_contract(spec)
-    if len(spec.get("volumes", [])) != 40:
-        fail("Series manifest must define the complete 40-book segmented catalog")
+    # A `len(volumes) != 40` assertion used to live here. Adding SD-03 made it
+    # fail in a place unrelated to the change, and the tempting repair is to bump
+    # the literal - which is how a checked invariant becomes a number someone
+    # edits to make the build pass (see R9 in CLAUDE.md for the same defect in
+    # validate_web.py).
+    #
+    # It is simply deleted rather than rewritten, because check_numbering_contract
+    # above already enforces the property the count was standing in for. Verified
+    # by fault injection against this manifest:
+    #
+    #   remove a book from a segment  -> "learning_order must equal the segment
+    #                                     book lists in order"
+    #   assign a book to two segments -> same
+    #   add a volume in no segment    -> "Segments must contain every physical
+    #                                     volume exactly once"
+    #
+    # Any replacement check here would be dead code.
     if args.artifacts_only:
         check_artifacts(spec)
         print("Focused series artifact validation passed.")

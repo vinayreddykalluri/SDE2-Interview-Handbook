@@ -39,6 +39,65 @@ REQUIRED_SECTIONS = [
     "Revision checklist",
 ]
 
+# Chapters that teach through a narrative opening instead of the fixed template.
+#
+# REQUIRED_SECTIONS is a genuinely useful floor for reference chapters, but as a
+# literal sequence it also mandates the shape "Learning objectives -> Why this
+# matters -> Core terminology -> Detailed mechanics", which front-loads
+# vocabulary before the reader has seen anything concrete. For the collections
+# chapters that was the substance of a reader complaint: accurate material that
+# read as definitions rather than explanation.
+#
+# So these chapters open with a specific situation and name the concept
+# afterwards. The contract is not removed - it is restated as the part that
+# carries the pedagogical guarantee: a worked example, a complexity treatment,
+# and the full assessment tail. The narrative opening is free; everything a
+# reader needs to practise and self-check is still mandatory.
+#
+# Membership is deliberately explicit so a chapter cannot drift out of the
+# template by accident. Adding an id here should be an editorial decision.
+NARRATIVE_CHAPTERS = frozenset({25, 26, 27, 28, 29, 30})
+
+# The closing sequence every narrative chapter must still end on, in order.
+NARRATIVE_TAIL = [
+    "Edge cases and common mistakes",
+    "Production engineering notes",
+    "Interview questions and model answers",
+    "Exercises",
+    "Chapter summary",
+    "Revision checklist",
+]
+
+# Prefixes that must each appear at least once before the tail.
+NARRATIVE_REQUIRED_PREFIXES = ("Worked example", "Complexity")
+
+MIN_NARRATIVE_TEACHING_SECTIONS = 4
+
+
+def narrative_section_problems(h2: list[str]) -> list[str]:
+    """Check a narrative chapter's structure, returning every problem found."""
+    problems: list[str] = []
+    if h2[-len(NARRATIVE_TAIL):] != NARRATIVE_TAIL:
+        problems.append(
+            "narrative chapter must end with, in order: "
+            + " / ".join(NARRATIVE_TAIL)
+        )
+    body = h2[: -len(NARRATIVE_TAIL)] if len(h2) > len(NARRATIVE_TAIL) else []
+    for prefix in NARRATIVE_REQUIRED_PREFIXES:
+        if not any(section.startswith(prefix) for section in body):
+            problems.append(f"narrative chapter has no {prefix!r} section")
+    teaching = [
+        section for section in body
+        if not section.startswith(NARRATIVE_REQUIRED_PREFIXES)
+    ]
+    if len(teaching) < MIN_NARRATIVE_TEACHING_SECTIONS:
+        problems.append(
+            f"narrative chapter has {len(teaching)} teaching sections before the "
+            f"worked example, expected at least {MIN_NARRATIVE_TEACHING_SECTIONS}"
+        )
+    return problems
+
+
 FORBIDDEN = re.compile(
     r"\b(?:TODO|TBD|FIXME|placeholder)\b|This (?:chapter|appendix) is pending",
     re.IGNORECASE,
@@ -115,7 +174,10 @@ def validate_chapters(checks: Checks) -> int:
             checks.error(f"{path.name}: H1 title {source_title!r}, expected {title!r}")
 
         h2 = headings(text, 2)
-        if h2 != REQUIRED_SECTIONS:
+        if number in NARRATIVE_CHAPTERS:
+            for problem in narrative_section_problems(h2):
+                checks.error(f"{path.name}: {problem}")
+        elif h2 != REQUIRED_SECTIONS:
             checks.error(f"{path.name}: required H2 sequence differs ({len(h2)} headings)")
 
         if text.count("```") % 2:

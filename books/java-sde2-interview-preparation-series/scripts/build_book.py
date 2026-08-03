@@ -199,8 +199,10 @@ FIGURES: dict[int, tuple[str, str]] = {
     7: ("05-object-layout.png", "Object creation semantics and representative HotSpot layout"),
     9: ("06-gc-reachability.png", "Reachability and the generational collection heuristic"),
     11: ("07-happens-before.png", "A happens-before chain through volatile synchronization"),
-    25: ("08-collections-map.png", "Collections framework semantic map"),
-    27: ("09-hashmap-put.png", "Representative HashMap insertion path"),
+    # 25 and 27 previously injected 08-collections-map and 09-hashmap-put here.
+    # Both chapters now embed their own figures inline (see
+    # generate_collections_diagrams.py), so injecting one more would duplicate
+    # material the chapter already places deliberately.
     36: ("10-executor-model.png", "Executor submission, queueing, work, and completion"),
     37: ("11-virtual-threads.png", "Virtual threads mounted on carrier threads"),
     48: ("12-interview-loop.png", "Repeatable coding interview control loop"),

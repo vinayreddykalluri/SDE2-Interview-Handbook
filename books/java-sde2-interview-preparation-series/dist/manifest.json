@@ -71,9 +71,9 @@
       "output_name": "Java-SDE2-JAVA-04-Language-OOP-and-Modern-Java.pdf"
     },
     {
-      "page_count": 148,
-      "sha256": "de554c30cf0eed02db7559396c326eeb760d3afe8208c59199d62011380fe558",
-      "bytes": 4285624,
+      "page_count": 147,
+      "sha256": "0f0922da1a259b7ba16b7e93b463c3e91ef8a9b3f14d4af4f01ebecf1a13e937",
+      "bytes": 6935607,
       "id": "18C",
       "stage": "18",
       "path_label": "JAVA-05",
@@ -231,9 +231,9 @@
       "output_name": "Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf"
     },
     {
-      "page_count": 107,
-      "sha256": "40b81372c1c22f9aa3c466a3c90dfc51b001a0ff7efea8272dfe9dbe9db3caed",
-      "bytes": 4815508,
+      "page_count": 101,
+      "sha256": "bb4f3a6c62c7cd2f170653d181101906df7e83ca99dfe270342d22a0ceafa453",
+      "bytes": 4797526,
       "id": "06",
       "stage": "6",
       "path_label": "DSA-06",
@@ -263,9 +263,9 @@
       "output_name": "Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf"
     },
     {
-      "page_count": 87,
-      "sha256": "8d4410a08dc5567bf664351bae6ed61c72341e1b9d8d8bb532a7e28ab5ff7b12",
-      "bytes": 4052659,
+      "page_count": 84,
+      "sha256": "163faea6522be5faa459554720d0ee43aed6f1199edee12db3f6913a1f683174",
+      "bytes": 4645851,
       "id": "08",
       "stage": "8",
       "path_label": "DSA-08",
