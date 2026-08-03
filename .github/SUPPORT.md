@@ -2,7 +2,7 @@
 
 ## Learning and usage questions
 
-Search the [published handbook](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/) first. If the answer is missing or unclear, open a content-improvement issue with the chapter, question, and expected clarification.
+Search the [published handbook](https://sde-2-interview-handbook.vercel.app/) first. If the answer is missing or unclear, open a content-improvement issue with the chapter, question, and expected clarification.
 
 ## Build and tooling problems
 

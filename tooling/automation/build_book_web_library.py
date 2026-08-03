@@ -580,6 +580,10 @@ def write_legacy_redirects(
         destination = site_dir / legacy_slug / "index.html"
         destination.parent.mkdir(parents=True, exist_ok=True)
         canonical_url = f"{PRODUCTION_ROOT}/books/{canonical_slug}/"
+        # Deliberately no Vercel analytics snippet here. Every other page in
+        # site/ carries one, but a meta-refresh stub would fire a pageview and
+        # then immediately fire a second one for the destination, inflating the
+        # count for exactly the routes nobody actually reads.
         destination.write_text(
             f'''<!doctype html>
 <html lang="en">

@@ -18,6 +18,7 @@ from urllib.parse import unquote, urlsplit
 ROOT = Path(__file__).resolve().parents[2]
 WEB = ROOT / "apps" / "portal"
 DOCS = ROOT / "docs"
+MKDOCS_OVERRIDE = ROOT / "tooling" / "mkdocs-overrides" / "main.html"
 JAVA = (
     ROOT
     / "examples"
@@ -42,6 +43,19 @@ DOCS_THEME_MANAGER = DOCS / "assets" / "javascripts" / "theme-manager.js"
 NUMBERED_CHAPTER = re.compile(r"^\d{2}-.+\.md$")
 ROOT_RELATIVE_REFERENCE = re.compile(r"(?:href|src|fetch)\s*\(?(?:=\s*)?[\"']/")
 SAFE_CODE_PACKAGE = re.compile(r"^codingfoundations/[a-z][a-z0-9]*$")
+
+# The one root-absolute reference the portal is allowed to make.
+#
+# Everything else must be relative, because GitHub Pages serves this project
+# under /SDE2-Interview-Handbook/ and a leading slash would escape it. Vercel
+# Web Analytics is the exception on purpose: the script is served by the Vercel
+# edge at this fixed route, not from site/, so it cannot be made relative and it
+# cannot be resolved by the asset existence check.
+#
+# On a non-Vercel host it 404s and analytics is simply inactive, which is the
+# correct outcome - it is a Vercel product. This is a narrow allowance for one
+# exact path rather than a relaxation of the rule.
+VERCEL_INSIGHTS_SCRIPT = "/_vercel/insights/script.js"
 
 
 class AssetCollector(HTMLParser):
@@ -79,6 +93,8 @@ def validate_local_assets(errors: list[str]) -> None:
         parsed = urlsplit(reference)
         if parsed.scheme or parsed.netloc or reference.startswith("//"):
             continue
+        if reference == VERCEL_INSIGHTS_SCRIPT:
+            continue
         relative_path = unquote(parsed.path)
         if not relative_path:
             continue
@@ -90,8 +106,18 @@ def validate_local_assets(errors: list[str]) -> None:
 
     for source in [WEB / "index.html", WEB / "404.html", WEB / "assets" / "app.js"]:
         text = source.read_text(encoding="utf-8")
-        if ROOT_RELATIVE_REFERENCE.search(text):
+        # Blank the one allowed exception before scanning, so any *other*
+        # root-absolute reference is still an error.
+        scanned = text.replace(VERCEL_INSIGHTS_SCRIPT, "vercel-insights-script")
+        if ROOT_RELATIVE_REFERENCE.search(scanned):
             fail(errors, f"Root-relative URL breaks project Pages: {source.relative_to(ROOT)}")
+
+    # The analytics snippet must be on every entry surface or the numbers are
+    # silently partial - the failure mode is under-counting, which looks like
+    # low traffic rather than a bug.
+    for source in [WEB / "index.html", WEB / "404.html", MKDOCS_OVERRIDE]:
+        if VERCEL_INSIGHTS_SCRIPT not in source.read_text(encoding="utf-8"):
+            fail(errors, f"Missing Vercel analytics snippet: {source.relative_to(ROOT)}")
 
     for page in [WEB / "index.html", WEB / "404.html"]:
         text = page.read_text(encoding="utf-8")

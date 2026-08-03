@@ -1,5 +1,23 @@
 #!/usr/bin/env python3
-"""Normalize canonical URLs in the generated site for hosted deployments."""
+"""Normalize canonical URLs in the generated site for hosted deployments.
+
+The production site is https://sde-2-interview-handbook.vercel.app, but the
+source keeps `SOURCE_ORIGIN` below as a placeholder and this script rewrites it
+to whatever origin the deployment actually has. That indirection is the reason a
+domain change is a Vercel setting rather than a repo-wide find-and-replace.
+
+So there are two classes of file, and the rule is worth stating because the
+instinct is to "fix" the first class:
+
+* **Pages built into `site/`** - anything under `docs/`, the portal shell, the
+  generated book library. These keep the placeholder origin. This script
+  rewrites them at build time. Hardcoding the live domain here would silently
+  opt those pages out of the rewrite.
+
+* **Files GitHub renders directly and this script never sees** - `README.md`,
+  `.github/SUPPORT.md`, and the other community-health files. These point at the
+  live domain, because a reader on github.com gets the literal URL.
+"""
 
 from __future__ import annotations
 

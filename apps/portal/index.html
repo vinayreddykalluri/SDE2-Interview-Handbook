@@ -18,6 +18,13 @@
   <link rel="icon" href="assets/s2-mark.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
   <script src="assets/app.js" defer></script>
+  <!-- Vercel Web Analytics. This is a static site with no bundler, so it uses
+       the documented plain-HTML path rather than the @vercel/analytics package,
+       which would require adding npm and a build step to a repo that has
+       neither. The route is served by Vercel itself and 404s elsewhere, which
+       is harmless. -->
+  <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>

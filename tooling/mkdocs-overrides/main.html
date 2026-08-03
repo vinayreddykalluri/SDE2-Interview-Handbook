@@ -10,6 +10,13 @@
   {% else %}
     <script src="{{ 'assets/javascripts/theme-manager.js' | url }}"></script>
   {% endif %}
+  {# Vercel Web Analytics. This one override serves both MkDocs surfaces -
+     site/docs and site/books - so adding it here covers every generated page.
+     The portal shell carries the same two lines in apps/portal/index.html and
+     404.html. Root-absolute on purpose: the script is served by Vercel at a
+     fixed route, not from the site output, so it must not be url-filtered. #}
+  <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+  <script defer src="/_vercel/insights/script.js"></script>
 {% endblock %}
 
 {% block announce %}
