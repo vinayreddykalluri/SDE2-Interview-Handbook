@@ -13,8 +13,8 @@ The requested entry filename is preserved for Part A. Part A links directly to t
 
 | Artifact | Pages | SHA-256 |
 |---|---:|---|
-| `dist/Java-SDE2-DSA-01-Number-Systems-and-Math-Foundations.pdf` | 125 | `8a23bb3c8f1cf34b3fedad591750ad5e0550f543fa95e433ede0c2fbe7917815` |
-| `dist/Java-SDE2-DSA-01B-Number-Systems-Interview-Workbook.pdf` | 137 | `143080589afcefd67682c9d64b4c9c91c6688110184bdbe63779baef75ad2906` |
+| `dist/Java-SDE2-DSA-02-Number-Systems-and-Math-Foundations.pdf` | 125 | `8a23bb3c8f1cf34b3fedad591750ad5e0550f543fa95e433ede0c2fbe7917815` |
+| `dist/Java-SDE2-DSA-03-Number-Systems-Interview-Workbook.pdf` | 137 | `143080589afcefd67682c9d64b4c9c91c6688110184bdbe63779baef75ad2906` |
 | `dist/Java-SDE2-Interview-Preparation-Series-Index.pdf` | 13 | `3c6232f7570623717dd4b3f2be61d8788664fcd5d2c7fe89b83f594864be5883` |
 
 ## Files created
@@ -162,7 +162,7 @@ No content, build, Java, PDF, or navigation blocker remains.
 
 ## Recommended next book
 
-Continue with `Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf`, which is already generated and linked from the Stage 1 workbook. The next optional editorial enhancement would be a separate timed-problem workbook for the shorter DSA stages, while keeping the current concept volumes unchanged.
+Continue with `Java-SDE2-DSA-01-Time-and-Space-Complexity.pdf`, which is already generated and linked from the Stage 1 workbook. The next optional editorial enhancement would be a separate timed-problem workbook for the shorter DSA stages, while keeping the current concept volumes unchanged.
 
 ## Git boundary
 

@@ -2,7 +2,7 @@
 
 ## 1. Current book structure
 
-The canonical source is `content/volumes/01-number-systems-and-math-foundations/`. Markdown is the source of truth. No competing AsciiDoc, LaTeX, HTML, DOCX, or second Number Systems source exists.
+The canonical source is `content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/`. Markdown is the source of truth. No competing AsciiDoc, LaTeX, HTML, DOCX, or second Number Systems source exists.
 
 Stage 1 is intentionally delivered as two linked US Letter PDFs:
 
@@ -135,3 +135,7 @@ The final findings and exact artifact measurements are recorded in `NUMBER_SYSTE
 ## Audit conclusion
 
 The original book was not weak; it was a polished 30-pattern foundation whose requirement expanded. The correct repair was to preserve the two-volume architecture, add the missing prerequisite explanations and 22 implementation obligations, expand assessment depth, and rebuild only the two dependent PDFs. Renaming the Stage 1 file or stage title would have forced navigation changes across the series, so the established output convention is intentionally preserved.
+
+## 2026-08-02 dual-implementation correction
+
+The earlier repair still left important operations library-primary. A new paired chapter and companion now derive checked add/subtract/multiply/narrowing, modulo normalization, bit length, negative-domain primitive GCD, bounded primitive extended Euclid, and exact factorial digit construction before comparing JDK or `BigInteger` behavior. The tests cover primitive extremes, deterministic random arithmetic, modular inverses, and factorials through 500.

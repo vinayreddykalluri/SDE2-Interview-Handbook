@@ -5,8 +5,8 @@ Strings appear simple, but interview failures often come from Java behavior rath
 This module begins with SDE-1 mechanics and only then moves to SDE-2 pattern selection. Use the web lessons for focused reading and revision. Use the 106-page book when you want the complete diagrams, dry runs, practice lab, separated solutions, and readiness assessment.
 
 [Start the web lessons](01-string-internals-and-patterns.md){ .md-button .md-button--primary }
-[Download the current 106-page Strings PDF](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf){ .md-button }
-[Inspect the canonical Markdown](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/07-strings-and-string-patterns){ .md-button }
+[Download the current Strings PDF](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf){ .md-button }
+[Inspect the canonical Markdown](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-07-strings-and-string-patterns){ .md-button }
 
 ## Prerequisite check
 
@@ -40,7 +40,7 @@ The PDF and its canonical Markdown contain seven ordered chapters plus separate 
 6. **Pattern Matching and Search** — naive matching, KMP derivation, prefix tables, rolling-hash boundaries, Z-function context, and API selection.
 7. **SDE-2 String Interview Playbook** — recognition signals, contracts, proofs, production text boundaries, testing, and follow-up chains.
 
-The [canonical source directory](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/07-strings-and-string-patterns) is the editable source of truth. The portal reads its Markdown headings when generating book cards, so chapter previews stay aligned with the book.
+The [canonical source directory](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-07-strings-and-string-patterns) is the editable source of truth. The portal reads its Markdown headings when generating book cards, so chapter previews stay aligned with the book.
 
 ## Readiness gate
 

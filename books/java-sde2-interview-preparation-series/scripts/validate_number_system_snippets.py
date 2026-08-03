@@ -10,7 +10,14 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-CHAPTERS = ROOT / "content" / "volumes" / "01-number-systems-and-math-foundations" / "chapters"
+CHAPTERS = (
+    ROOT
+    / "content"
+    / "volumes"
+    / "dsa"
+    / "DSA-02-03-number-systems-and-math-foundations"
+    / "chapters"
+)
 EXPECTED_STANDALONE_BLOCKS = 24
 
 

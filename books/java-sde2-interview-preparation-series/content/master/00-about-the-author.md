@@ -2,13 +2,13 @@
 
 ## Vinay Reddy Kalluri
 
-Vinay Reddy Kalluri is a senior Java backend engineer, the creator and founding author of *Java Foundations to Advanced Engineering* and the Java SDE-2 Interview Preparation Series, and its Editor-in-Chief and Chief Auditor. His work spans high-throughput microservices, event-driven architecture, resilient APIs, large-scale data processing, cloud delivery, and production performance across healthcare and enterprise systems.
+Vinay Reddy Kalluri is a senior Java backend engineer and the author and editor of *Java Foundations to Advanced Engineering* and the Java SDE-2 Interview Preparation Series. His work spans high-throughput microservices, event-driven architecture, resilient APIs, large-scale data processing, cloud delivery, and production performance across healthcare and enterprise systems.
 
 What distinguishes his approach is the combination of hands-on system design and operational ownership. He treats timeouts, retries, idempotency, dead-letter recovery, data consistency, SQL behavior, caching, and observability as part of the design rather than afterthoughts. He has also mentored engineers and led modernization, migration, and reliability work across distributed services.
 
-## Editorial leadership
+## Editorial approach
 
-As Editor-in-Chief, Vinay owns the learning sequence, scope, voice, and publication decisions. As Chief Auditor, he owns the Java accuracy standard, validation evidence, attribution review, and release-readiness gate. Individual contributors retain visible credit for accepted original work through `AUTHORS.md` and the public Git history.
+Vinay sets the learning sequence and publication standard and performs the final review for Java accuracy, evidence, attribution, and release readiness. Individual contributors retain visible credit for accepted original work through `AUTHORS.md` and the public Git history.
 
 ## Selected engineering and academic highlights
 

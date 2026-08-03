@@ -91,3 +91,7 @@ Before enhancement, Volume 05 contained one 572-line native chapter and a 26-pag
 ## Audit conclusion
 
 The original module was technically sound but too compressed for a reader starting with Java basics. The enhanced canonical volume now moves from visible loop execution to range reasoning and only then to SDE-2 patterns. It preserves the strongest previous invariants and engineering guidance, adds the missing Java mechanics and pattern families, and provides publication-range practice, solutions, diagrams, and executable validation.
+
+## 2026-08-02 depth pass
+
+The new state-trace chapter adds explicit initialization/preservation/progress/exit proofs, compaction and sliding-window tables, manual cyclic normalization beside `Math.floorMod`, widened grid-index arithmetic, a ten-case failure matrix, six live interviews, and twelve rapid model answers. The new companion verifies compaction order, negative cyclic indexes, large flattened indexes, window constraints, empty input, and invalid contracts.

@@ -307,9 +307,9 @@ def validate_pdf(checks: Checks) -> None:
 
 def validate_outputs(checks: Checks) -> None:
     for relative in (
-        Path("dist/java-sde2-interview-book.md"),
-        Path("dist/java-sde2-interview-book.pdf"),
-        Path("dist/java-sde2-interview-book.docx"),
+        Path("dist/00-start-here/java-sde2-interview-book.md"),
+        Path("dist/00-start-here/java-sde2-interview-book.pdf"),
+        Path("dist/00-start-here/java-sde2-interview-book.docx"),
     ):
         path = ROOT / relative
         if not path.exists() or path.stat().st_size == 0:

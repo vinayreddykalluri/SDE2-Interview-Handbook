@@ -98,3 +98,7 @@ The published PDF was 28 pages. The native chapter was technically strong but co
 ## Audit conclusion
 
 The previous module was accurate but too compressed for a reader rebuilding fundamentals. The enhanced canonical volume now teaches from first bits to SDE-2 patterns in prerequisite order, retains the best previous invariants and engineering notes, adds missing interview techniques, and supplies enough practice and validation for independent study.
+
+## 2026-08-02 depth pass
+
+The new live-interview and JDK-contract chapter makes the manual-versus-library rule explicit. It adds signed-value and shift-distance mechanics, a rotation dry run, an eight-case failure matrix, six full interviewer dialogues, twelve rapid answered questions, and differential tests for manual population count, rotation, and bit length against `Integer` APIs over boundary and deterministic randomized inputs.

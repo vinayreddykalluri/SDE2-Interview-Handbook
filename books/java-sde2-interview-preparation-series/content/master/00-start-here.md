@@ -8,13 +8,13 @@ This book is deliberately broad. Start where your explanation, implementation, o
 
 | Your situation | Start here | Exit evidence |
 |---|---|---|
-| New to Java syntax | Study Step 01, then 02, 03A, and 03B | Write a method, loop, array, validation, and tests |
-| Rebuilding foundations | Focused 01, 01B, and 02, then 03-17 | Solve representative problems with invariants and complexity |
+| New to Java syntax | JAVA-01, then DSA-01 through DSA-03 | Write a method, loop, array, validation, and tests |
+| Rebuilding foundations | JAVA-01, then DSA-01 through DSA-17 | Solve representative problems with invariants and complexity |
 | Experienced; eight weeks | Diagnostic baseline, then Chapter 54 | Pass coding, Java-depth, debugging, design, and behavioral mocks |
 | Interview in two to three weeks | Chapters 24, 27, 31, 33-38, and 42-53; timed mocks select gaps | Implement under time and defend production trade-offs |
-| Java backend specialist | Core Java and concurrency, then focused 18F and 18H-18J | Defend a Spring service, persistence strategy, and distributed workflow |
+| Java backend specialist | JAVA-01 through JAVA-08, then the relevant FW and SD books | Defend a Spring service, persistence strategy, and distributed workflow |
 
-[Open the focused PDF Series Index](dist/Java-SDE2-Interview-Preparation-Series-Index.pdf) for individual modules, clickable navigation, and entry/exit gates.
+[Open the focused PDF Series Index](Java-SDE2-Interview-Preparation-Series-Index.pdf) for individual modules, clickable navigation, and entry/exit gates.
 
 ## Pair the schedule with the learning loop
 

@@ -1,9 +1,9 @@
 # Java SDE-2 Topic Reference
 
-This concise reference supports the Java, DSA, and System Design segments in the Java SDE-2 learning library. Use it to look up a focused explanation or practice artifact, then return to the current web book. It is not a second curriculum.
+This concise reference supports the Java, DSA, Frameworks, and System Design segments in the Java SDE-2 learning library. Use it to look up a focused explanation or practice artifact, then return to the current web book. It is not a second curriculum.
 
 <a class="md-button md-button--primary" href="../books/">Choose a learning segment</a>
-<a class="md-button" href="../books/01-java-foundations-for-problem-solving/">Start Java Foundations</a>
+<a class="md-button" href="../books/java-01-java-foundations-for-problem-solving/">Start Java Foundations</a>
 [Open practice](backend-interview/10-practice/index.md){ .md-button }
 
 ## Use this reference without leaving the path

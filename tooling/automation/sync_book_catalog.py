@@ -14,6 +14,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[2]
 BOOK_ROOT = ROOT / "books" / "java-sde2-interview-preparation-series"
 SERIES_SPEC = BOOK_ROOT / "publishing" / "series.json"
+AUTHOR_NOTES = BOOK_ROOT / "publishing" / "author-notes.json"
 ARTIFACT_MANIFEST = BOOK_ROOT / "dist" / "manifest.json"
 OUTPUT = ROOT / "apps" / "portal" / "content" / "books.json"
 REPOSITORY = "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook"
@@ -88,7 +89,9 @@ def markdown_title(path: Path) -> str:
     return path.stem.replace("-", " ").title()
 
 
-def chapter_preview(volume: dict[str, Any]) -> tuple[int, int, list[dict[str, str]]]:
+def chapter_preview(
+    volume: dict[str, Any],
+) -> tuple[int, int, list[dict[str, str]], list[dict[str, str]]]:
     markdown_sources = [
         Path(source["path"])
         for source in volume.get("sources", [])
@@ -99,16 +102,22 @@ def chapter_preview(volume: dict[str, Any]) -> tuple[int, int, list[dict[str, st
         for source_path in markdown_sources
         if "chapters" in source_path.parts
     ] or markdown_sources
-    preview = []
-    for source_path in chapter_sources[:3]:
-        preview.append(
-            {
-                "title": markdown_title(BOOK_ROOT / source_path),
-                "sourceHref": source_file_href(source_path),
-            }
-        )
+    contents = []
+    chapter_contents = []
+    book_href = full_book_href(volume)
+    markdown_positions = {path: position for position, path in enumerate(markdown_sources, start=1)}
+    for source_path in markdown_sources:
+        position = markdown_positions[source_path]
+        entry = {
+            "title": markdown_title(BOOK_ROOT / source_path),
+            "sourceHref": source_file_href(source_path),
+            "webHref": f"{book_href}{position:02d}-{source_path.stem}/",
+        }
+        contents.append(entry)
+        if source_path in chapter_sources:
+            chapter_contents.append(entry)
     supporting_source_count = len(markdown_sources) - len(chapter_sources)
-    return len(chapter_sources), supporting_source_count, preview
+    return len(chapter_sources), supporting_source_count, chapter_contents[:4], contents
 
 
 def source_metrics(volume: dict[str, Any]) -> tuple[int, int, int]:
@@ -125,6 +134,7 @@ def source_metrics(volume: dict[str, Any]) -> tuple[int, int, int]:
         code_entries += len(JAVA_FENCE.findall(text))
     if volume.get("code_companion"):
         code_entries += 1
+    code_entries += len(volume.get("code_companions", []))
     return len(markdown_sources), word_count, code_entries
 
 
@@ -137,6 +147,7 @@ def web_reads(volume_id: str) -> list[dict[str, str]]:
 
 def build_catalog() -> dict[str, Any]:
     spec = read_json(SERIES_SPEC)
+    author_notes = read_json(AUTHOR_NOTES)
     artifact_manifest = read_json(ARTIFACT_MANIFEST)
     volumes_by_id = {str(volume["id"]): volume for volume in spec["volumes"]}
     artifacts_by_id = {
@@ -158,6 +169,7 @@ def build_catalog() -> dict[str, Any]:
             "description": segment["description"],
             "bookCount": len(segment_books),
             "startBookId": segment_books[0],
+            "artifactDir": segment["artifact_dir"],
         }
         first_volume = volumes_by_id[segment_books[0]]
         first_volume = {**first_volume, "path_label": spec["path_labels"][segment_books[0]]}
@@ -175,7 +187,15 @@ def build_catalog() -> dict[str, Any]:
         volume["path_label"] = str(spec["path_labels"][str(volume_id)])
         artifact = artifacts_by_id[str(volume_id)]
         segment = segment_by_book[str(volume_id)]
-        source_chapter_count, supporting_source_count, source_chapter_preview = chapter_preview(volume)
+        artifact_path = str(
+            Path(segment["artifactDir"]) / volume["output_name"]
+        )
+        (
+            source_chapter_count,
+            supporting_source_count,
+            source_chapter_preview,
+            source_chapter_contents,
+        ) = chapter_preview(volume)
         web_document_count, word_count, code_example_count = source_metrics(volume)
         book_href = full_book_href(volume)
         books.append(
@@ -197,9 +217,11 @@ def build_catalog() -> dict[str, Any]:
                 "shortTitle": volume["short_title"],
                 "subtitle": volume["subtitle"],
                 "purpose": volume["purpose"],
+                "authorNote": str(author_notes[str(volume["id"])]),
                 "filename": volume["output_name"],
+                "artifactPath": artifact_path,
                 "pageCount": int(artifact["page_count"]),
-                "pdfHref": f"{current_download_root}/{volume['output_name']}",
+                "pdfHref": f"{current_download_root}/{artifact_path}",
                 "releasePdfHref": f"{download_root}/{volume['output_name']}",
                 "sourceHref": source_href(volume),
                 "fullBookHref": book_href,
@@ -210,6 +232,7 @@ def build_catalog() -> dict[str, Any]:
                 "sourceChapterCount": source_chapter_count,
                 "supportingSourceCount": supporting_source_count,
                 "chapterPreview": source_chapter_preview,
+                "chapterContents": source_chapter_contents,
                 "outcomes": list(volume.get("outcomes", []))[:3],
                 "webReads": web_reads(str(volume["id"])),
             }
@@ -220,11 +243,12 @@ def build_catalog() -> dict[str, Any]:
     focused_pages = sum(book["pageCount"] for book in books)
     total_pages = focused_pages + int(index["page_count"]) + int(master["page_count"])
     return {
-        "schemaVersion": 4,
+        "schemaVersion": 5,
         "generatedFrom": f"{BOOK_REPOSITORY_PATH}/publishing/series.json",
         "release": {
             "tag": release_tag,
             "date": spec["release_date"],
+            "editionDate": spec.get("edition_date", spec["release_date"]),
             "url": release_url,
             "focusedBookCount": len(books),
             "focusedPageCount": focused_pages,
@@ -234,14 +258,16 @@ def build_catalog() -> dict[str, Any]:
             "totalPageCount": total_pages,
             "index": {
                 "title": "Java SDE-2 Interview Preparation Series Index",
-                "filename": index["file"],
+                "filename": Path(index["file"]).name,
+                "artifactPath": index["file"],
                 "pdfHref": f"{current_download_root}/{index['file']}",
-                "releasePdfHref": f"{download_root}/{index['file']}",
+                "releasePdfHref": f"{download_root}/{Path(index['file']).name}",
             },
             "master": {
                 "title": master["title"],
                 "filename": master["file"],
-                "pdfHref": f"{current_download_root}/{master['file']}",
+                "artifactPath": master.get("artifact_path", master["file"]),
+                "pdfHref": f"{current_download_root}/{master.get('artifact_path', master['file'])}",
                 "releasePdfHref": f"{download_root}/{master['file']}",
             },
         },

@@ -44,7 +44,7 @@ function bookSearchText(book) {
     book.purpose
   ].concat(
     book.outcomes || [],
-    (book.chapterPreview || []).map(function (chapter) { return chapter.title; })
+    (book.chapterContents || book.chapterPreview || []).map(function (chapter) { return chapter.title; })
   ).join(" ").toLowerCase();
 }
 
@@ -90,17 +90,26 @@ function buildBookCard(book) {
   const webStats = createElement(
     "p",
     "book-web-stats",
-    formatCount(book.webDocumentCount) + " web chapters · " +
+    formatCount(book.webDocumentCount) + " web documents · " +
       formatCount(book.wordCount) + " words · " +
       formatCount(book.codeExampleCount) + " code entries"
   );
 
   const contents = createElement("details", "book-contents");
-  const contentsSummary = createElement("summary", "", "Preview this book");
+  const chapterContents = book.chapterContents || book.chapterPreview || [];
+  const contentsSummary = createElement(
+    "summary",
+    "",
+    "View complete contents · " + chapterContents.length + " documents"
+  );
   const contentsBody = createElement("div", "book-contents-body");
   const chapterList = createElement("ol", "book-chapter-preview");
-  (book.chapterPreview || []).forEach(function (chapter) {
-    chapterList.append(createElement("li", "", chapter.title));
+  chapterContents.forEach(function (chapter) {
+    const item = createElement("li");
+    const link = createElement("a", "", chapter.title);
+    link.href = chapter.webHref || book.fullBookHref;
+    item.append(link);
+    chapterList.append(item);
   });
   contentsBody.append(chapterList);
 
@@ -156,7 +165,7 @@ function renderBooks() {
   const filtered = query || activeBookFilter !== "all";
   bookSummary.textContent = filtered
     ? matches.length + " of " + books.length + " books match the current segment or search."
-    : books.length + " books across three segments. Choose Java, DSA, or System Design, then follow its book order.";
+    : books.length + " books across four segments. Choose Java, DSA, Frameworks, or System Design, then follow its book order.";
 }
 
 function selectBookFilter(filter) {
@@ -171,15 +180,21 @@ function selectBookFilter(filter) {
 
 function buildSearchIndex() {
   const fixedDestinations = [
-    { type: "Library", label: "Complete Java SDE-2 learning library", note: "Choose Java, DSA, or System Design", href: "books/" },
-    { type: "Java", label: "Java Engineering", note: "Begin JAVA 01 with language foundations", href: "books/01-java-foundations-for-problem-solving/" },
-    { type: "DSA", label: "Data Structures and Algorithms", note: "Begin DSA 01 with complexity", href: "books/02-time-and-space-complexity/" },
-    { type: "System Design", label: "System Design and Backend", note: "Begin SD 01 with backend and design foundations", href: "books/18f-design-backend-testing-and-security/" },
+    { type: "Library", label: "Complete Java SDE-2 learning library", note: "Choose Java, DSA, Frameworks, or System Design", href: "books/" },
     { type: "Practice", label: "Interview practice", note: "Use question banks, mocks, rubrics, and review logs", href: "docs/backend-interview/10-practice/" },
     { type: "Reference", label: "Topic reference", note: "Look up a concise explanation without changing the study order", href: "docs/" },
     { type: "About", label: "About the curriculum", note: "Understand the web, PDF, and open-source publishing model", href: "#about" },
     { type: "Code", label: "Java implementation indexes", note: "Open code from the relevant web book", href: "books/" }
   ];
+
+  const segmentEntries = segments.map(function (segment) {
+    return {
+      type: segment.code,
+      label: segment.title,
+      note: "Begin " + segment.code + " 01 and follow " + segment.bookCount + " books in order",
+      href: segment.startHref
+    };
+  });
 
   const bookEntries = books.map(function (book) {
     return {
@@ -191,7 +206,7 @@ function buildSearchIndex() {
     };
   });
 
-  searchIndex = fixedDestinations.concat(bookEntries);
+  searchIndex = fixedDestinations.concat(segmentEntries, bookEntries);
 }
 
 function matchedSearchResults(query) {

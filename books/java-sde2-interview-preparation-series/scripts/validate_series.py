@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import subprocess
 import tempfile
@@ -33,6 +34,11 @@ def normalized(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
+def heading_key(text: str) -> str:
+    """Normalize source/PDF punctuation while preserving title words and numbers."""
+    return normalized(re.sub(r"[^\w\s]", " ", text, flags=re.UNICODE)).casefold()
+
+
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -41,6 +47,29 @@ def read_json(path: Path) -> dict[str, Any]:
     if not path.exists():
         fail(f"Missing JSON file: {path}")
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def code_companions(volume: dict[str, Any]) -> list[dict[str, Any]]:
+    """Return legacy and additional companion specifications in publication order."""
+    companions: list[dict[str, Any]] = []
+    legacy = volume.get("code_companion")
+    if legacy:
+        companions.append(legacy)
+    companions.extend(volume.get("code_companions", []))
+    paths = [str(item["path"]) for item in companions]
+    if len(paths) != len(set(paths)):
+        fail(f"Volume {volume['id']} declares a duplicate Java companion")
+    return companions
+
+
+def artifact_relative(volume: dict[str, Any]) -> Path:
+    return Path(str(volume.get("artifact_path", volume["output_name"])))
+
+
+def relative_artifact_href(source: dict[str, Any], target: dict[str, Any]) -> str:
+    return Path(
+        os.path.relpath(artifact_relative(target), start=artifact_relative(source).parent)
+    ).as_posix()
 
 
 def check_markdown(path: Path, require_ascii: bool = False) -> None:
@@ -100,6 +129,10 @@ def decorate_segments(spec: dict[str, Any]) -> None:
                     "segment_code": segment["code"],
                     "segment_position": position,
                     "segment_count": len(book_ids),
+                    "artifact_path": str(
+                        Path(segment["artifact_dir"]) / volume["output_name"]
+                    ),
+                    "index_artifact": str(spec.get("index_artifact", INDEX_NAME)),
                 }
             )
     if flattened != [str(item) for item in spec.get("learning_order", [])]:
@@ -128,8 +161,12 @@ def check_numbering_contract(spec: dict[str, Any]) -> None:
     if len(set(actual_labels)) != len(actual_labels):
         fail("Public study codes must be unique")
     segments = spec.get("segments", [])
-    if len(segments) != 3:
-        fail("Series manifest must define exactly three selectable segments")
+    expected_segment_count = int(spec.get("public_segments", len(segments)))
+    if len(segments) != expected_segment_count:
+        fail(
+            "Series manifest segment count does not match public_segments: "
+            f"expected {expected_segment_count}, found {len(segments)}"
+        )
     codes = [segment.get("code") for segment in segments]
     if len(set(codes)) != len(codes):
         fail("Segment codes must be unique")
@@ -150,11 +187,10 @@ def check_sources(spec: dict[str, Any]) -> None:
             check_markdown(
                 path,
                 require_ascii=source["path"].startswith(
-                    "content/volumes/01-number-systems-and-math-foundations/"
+                    "content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/"
                 ),
             )
-        companion = volume.get("code_companion")
-        if companion:
+        for companion in code_companions(volume):
             path = (ROOT / companion["path"]).resolve()
             if not path.exists():
                 fail(f"Missing Java companion for volume {volume['id']}: {path}")
@@ -165,7 +201,10 @@ def check_sources(spec: dict[str, Any]) -> None:
             if DRAFT_MARKER.search(code):
                 fail(f"Draft marker found in Java companion: {path}")
 
-    chapter_dir = VOLUMES / "01-number-systems-and-math-foundations" / "chapters"
+    number_systems_dir = (
+        VOLUMES / "dsa" / "DSA-02-03-number-systems-and-math-foundations"
+    )
+    chapter_dir = number_systems_dir / "chapters"
     chapters = sorted(chapter_dir.glob("*.md"))
     expected_chapters = {
         "01-why-number-systems-matter.md",
@@ -186,6 +225,7 @@ def check_sources(spec: dict[str, Any]) -> None:
         "15-java-number-traps.md",
         "15a-expanded-practice-bank.md",
         "16-interview-questions-and-revision.md",
+        "17-first-principles-and-library-pairs.md",
     }
     actual_chapters = {path.name for path in chapters}
     if actual_chapters != expected_chapters:
@@ -221,7 +261,7 @@ def check_sources(spec: dict[str, Any]) -> None:
         if count != expected:
             fail(f"Expected {expected} {label}; found {count}")
 
-    assets = VOLUMES / "01-number-systems-and-math-foundations" / "assets"
+    assets = number_systems_dir / "assets"
     diagrams = sorted(
         path for path in assets.glob("*.png") if "contact-sheet" not in path.name
     )
@@ -232,7 +272,7 @@ def check_sources(spec: dict[str, Any]) -> None:
             if image.width < 1400 or image.height < 800:
                 fail(f"Diagram is below the print-resolution target: {path} ({image.size})")
 
-    print(f"Sources: {len(paths)} unique mapped Markdown files; 18 Number Systems chapters")
+    print(f"Sources: {len(paths)} unique mapped Markdown files; 19 Number Systems chapters")
     print(f"Diagrams: {len(diagrams)} high-resolution Number Systems PNG files")
 
 
@@ -274,10 +314,45 @@ def source_display_title(source: dict[str, Any]) -> str:
     title = match.group(1).strip() if match else Path(source["path"]).stem
     title = re.sub(r"^(?:Chapter\s+)?\d+\s*(?::|\.|-)\s*", "", title, flags=re.IGNORECASE)
     title = re.sub(r"^Appendix\s+[A-Z]\s*-\s*", "", title, flags=re.IGNORECASE)
+    # The PDF renderer correctly turns inline Markdown into styled plain text.
+    # Compare against that visible title instead of requiring source delimiters.
+    title = re.sub(r"[`*_]", "", title)
     return title.strip()
 
 
-def check_pdf(path: Path, volume: dict[str, Any], known_outputs: set[str]) -> dict[str, Any]:
+def extract_pdf_page_texts(path: Path, reader: PdfReader) -> list[str]:
+    """Extract a whole PDF with Poppler, falling back to pypdf when unavailable.
+
+    Calling ``PageObject.extract_text`` once per page is prohibitively slow for the
+    multi-thousand-page release library.  Poppler preserves form-feed page
+    boundaries and performs the same text-presence checks in seconds.
+    """
+    try:
+        result = subprocess.run(
+            ["pdftotext", "-layout", str(path), "-"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+            timeout=120,
+        )
+    except (FileNotFoundError, subprocess.TimeoutExpired):
+        result = None
+    if result is not None and result.returncode == 0:
+        pages = result.stdout.split("\f")
+        if pages and not pages[-1].strip():
+            pages.pop()
+        if len(pages) == len(reader.pages):
+            return pages
+    return [page.extract_text() or "" for page in reader.pages]
+
+
+def check_pdf(
+    path: Path,
+    volume: dict[str, Any],
+    all_volumes: list[dict[str, Any]],
+    index_artifact: str,
+) -> dict[str, Any]:
     reader = PdfReader(path)
     count = len(reader.pages)
     if not volume.get("min_pages", 8) <= count <= volume.get("max_pages", 180):
@@ -289,18 +364,18 @@ def check_pdf(path: Path, volume: dict[str, Any], known_outputs: set[str]) -> di
     if volume["title"] not in str(metadata.get("/Title", "")):
         fail(f"{volume['id']} has incorrect title metadata")
 
-    pages: list[str] = []
+    pages = extract_pdf_page_texts(path, reader)
     for page_number, page in enumerate(reader.pages, start=1):
         width = float(page.mediabox.width)
         height = float(page.mediabox.height)
         if abs(width - 612) > 0.5 or abs(height - 792) > 0.5:
             fail(f"{volume['id']} page {page_number} is not US Letter: {width}x{height}")
-        text = page.extract_text() or ""
-        pages.append(text)
+        text = pages[page_number - 1]
         if page_number > 1 and len(re.sub(r"\s+", "", text)) < 8:
             fail(f"{volume['id']} page {page_number} appears blank")
 
     full_text = normalized("\n".join(pages))
+    full_heading_text = heading_key(full_text)
     cover_text = normalized(pages[0])
     if normalized(volume["volume_label"].upper()) not in cover_text:
         fail(f"{volume['id']} cover is missing its canonical study code: {volume['volume_label']}")
@@ -325,27 +400,31 @@ def check_pdf(path: Path, volume: dict[str, Any], known_outputs: set[str]) -> di
 
     for number, source in enumerate(volume["sources"], start=1):
         expected = normalized(f"Chapter {number} - {source_display_title(source)}")
-        if expected not in full_text:
+        if heading_key(expected) not in full_heading_text:
             fail(f"{volume['id']} is missing local chapter heading: {expected}")
-    companion = volume.get("code_companion")
-    if companion:
+    companions = code_companions(volume)
+    for companion_offset, companion in enumerate(companions, start=1):
         expected = normalized(
-            f"Chapter {len(volume['sources']) + 1} - "
+            f"Chapter {len(volume['sources']) + companion_offset} - "
             f"{companion.get('title', 'Dependency-Free Java 21 Companion')}"
         )
-        if expected not in full_text:
+        if heading_key(expected) not in full_heading_text:
             fail(f"{volume['id']} is missing Java companion chapter: {expected}")
 
     outlines = outline_count(reader)
-    expected_local_chapters = len(volume["sources"]) + int(bool(companion))
+    expected_local_chapters = len(volume["sources"]) + len(companions)
     if outlines < expected_local_chapters + 2:
         fail(f"{volume['id']} has too few bookmarks: {outlines}")
 
     uris = annotation_uris(reader)
-    sibling_outputs = {name for name in known_outputs if name != INDEX_NAME}
+    sibling_outputs = {
+        relative_artifact_href(volume, target) for target in all_volumes
+    }
     if not sibling_outputs.issubset(uris):
         missing = sorted(sibling_outputs - uris)
         fail(f"{volume['id']} roadmap is missing sibling links: {missing}")
+    index_spec = {"output_name": INDEX_NAME, "artifact_path": index_artifact}
+    known_outputs = sibling_outputs | {relative_artifact_href(volume, index_spec)}
     for uri in uris:
         if (
             uri.casefold().endswith(".pdf")
@@ -357,7 +436,7 @@ def check_pdf(path: Path, volume: dict[str, Any], known_outputs: set[str]) -> di
     return {"page_count": count, "sha256": sha256(path), "bytes": path.stat().st_size}
 
 
-def check_index(path: Path, spec: dict[str, Any], known_outputs: set[str]) -> dict[str, Any]:
+def check_index(path: Path, spec: dict[str, Any]) -> dict[str, Any]:
     reader = PdfReader(path)
     count = len(reader.pages)
     if not 8 <= count <= 50:
@@ -365,7 +444,7 @@ def check_index(path: Path, spec: dict[str, Any], known_outputs: set[str]) -> di
     metadata = reader.metadata or {}
     if metadata.get("/Author") != AUTHOR:
         fail("Series index has incorrect author metadata")
-    page_texts = [page.extract_text() or "" for page in reader.pages]
+    page_texts = extract_pdf_page_texts(path, reader)
     text = normalized("\n".join(page_texts))
     cover_text = normalized(page_texts[0])
     if "BY" not in cover_text or AUTHOR not in cover_text:
@@ -399,7 +478,13 @@ def check_index(path: Path, spec: dict[str, Any], known_outputs: set[str]) -> di
         if required not in text:
             fail(f"Series index is missing required text: {required}")
     uris = annotation_uris(reader)
-    expected = {volume["output_name"] for volume in spec["volumes"]}
+    index_spec = {
+        "output_name": INDEX_NAME,
+        "artifact_path": spec.get("index_artifact", INDEX_NAME),
+    }
+    expected = {
+        relative_artifact_href(index_spec, volume) for volume in spec["volumes"]
+    }
     if not expected.issubset(uris):
         fail(f"Series index is missing volume links: {sorted(expected - uris)}")
     unknown_local_pdfs = {
@@ -407,7 +492,7 @@ def check_index(path: Path, spec: dict[str, Any], known_outputs: set[str]) -> di
         for uri in uris
         if uri.casefold().endswith(".pdf")
         and not urlparse(uri).scheme
-        and uri not in known_outputs
+        and uri not in expected
     }
     if unknown_local_pdfs:
         fail(f"Series index contains unknown PDF links: {sorted(unknown_local_pdfs)}")
@@ -424,16 +509,20 @@ def check_artifacts(spec: dict[str, Any]) -> None:
     if [str(item["id"]) for item in report["volumes"]] != expected_order:
         fail("Artifact manifest books are not in canonical learning order")
 
-    known_outputs = {volume["output_name"] for volume in spec["volumes"]} | {INDEX_NAME}
     recorded = {item["id"]: item for item in report["volumes"]}
     total_pages = 0
     by_id = {str(volume["id"]): volume for volume in spec["volumes"]}
     for position, volume_id in enumerate(expected_order, start=1):
         volume = by_id[volume_id]
-        path = DIST / volume["output_name"]
+        path = DIST / artifact_relative(volume)
         if not path.exists():
             fail(f"Missing focused PDF: {path}")
-        actual = check_pdf(path, volume, known_outputs)
+        actual = check_pdf(
+            path,
+            volume,
+            spec["volumes"],
+            str(spec.get("index_artifact", INDEX_NAME)),
+        )
         expected = recorded.get(volume["id"])
         if not expected:
             fail(f"Artifact manifest is missing volume {volume['id']}")
@@ -449,10 +538,10 @@ def check_artifacts(spec: dict[str, Any]) -> None:
         total_pages += actual["page_count"]
         print(f"PDF {volume['id']}: {actual['page_count']} pages; {actual['sha256'][:12]}...")
 
-    index_path = DIST / INDEX_NAME
+    index_path = DIST / str(spec.get("index_artifact", INDEX_NAME))
     if not index_path.exists():
         fail(f"Missing series index PDF: {index_path}")
-    actual_index = check_index(index_path, spec, known_outputs)
+    actual_index = check_index(index_path, spec)
     recorded_index = report.get("index")
     if not recorded_index:
         fail("Artifact manifest is missing the index PDF")
@@ -486,7 +575,15 @@ def run_git_book_validation(spec: dict[str, Any]) -> None:
     git_volume = next((item for item in spec["volumes"] if item["id"] == "GIT"), None)
     if not git_volume or git_volume.get("publication_status") == "planned":
         return
-    script = ROOT / "content" / "volumes" / "J02-git-and-github" / "labs" / "validate_git_labs.sh"
+    script = (
+        ROOT
+        / "content"
+        / "volumes"
+        / "java"
+        / "JAVA-02-git-and-github"
+        / "labs"
+        / "validate_git_labs.sh"
+    )
     if not script.exists():
         fail(f"Missing Git/GitHub scenario validator: {script}")
     result = subprocess.run(
@@ -512,7 +609,8 @@ def run_build_book_validation(spec: dict[str, Any]) -> None:
         ROOT
         / "content"
         / "volumes"
-        / "J03-maven-and-gradle"
+        / "java"
+        / "JAVA-03-maven-and-gradle"
         / "labs"
         / "validate_build_labs.sh"
     )
@@ -533,11 +631,143 @@ def run_build_book_validation(spec: dict[str, Any]) -> None:
     print(normalized(result.stdout) or "Maven/Gradle scenarios: validation passed")
 
 
+def run_mysql_book_validation(spec: dict[str, Any]) -> None:
+    volume = next((item for item in spec["volumes"] if item["id"] == "MYSQL"), None)
+    if not volume or volume.get("publication_status") == "planned":
+        return
+    script = ROOT / "content" / "volumes" / "frameworks" / "FW-01-mysql" / "labs" / "validate_mysql_labs.sh"
+    if not script.exists():
+        fail(f"Missing MySQL book validator: {script}")
+    result = subprocess.run(
+        ["bash", str(script)], cwd=ROOT, text=True, capture_output=True,
+        check=False, timeout=300,
+    )
+    if result.returncode:
+        print(result.stdout)
+        print(result.stderr)
+        fail("MySQL book validation failed")
+    print(normalized(result.stdout) or "MySQL book: validation passed")
+
+
+def run_hibernate_book_validation(spec: dict[str, Any]) -> None:
+    volume = next((item for item in spec["volumes"] if item["id"] == "HIBERNATE"), None)
+    if not volume or volume.get("publication_status") == "planned":
+        return
+    script = ROOT / "content" / "volumes" / "frameworks" / "FW-02-hibernate-and-jpa" / "labs" / "validate_hibernate_jpa_labs.sh"
+    if not script.exists():
+        fail(f"Missing Hibernate/JPA book validator: {script}")
+    result = subprocess.run(
+        ["bash", str(script)], cwd=ROOT, text=True, capture_output=True,
+        check=False, timeout=300,
+    )
+    if result.returncode:
+        print(result.stdout)
+        print(result.stderr)
+        fail("Hibernate/JPA book validation failed")
+    print(normalized(result.stdout) or "Hibernate/JPA book: validation passed")
+
+
+def run_spring_framework_book_validation(spec: dict[str, Any]) -> None:
+    spring_volume = next(
+        (item for item in spec["volumes"] if item["id"] == "SPRING"), None
+    )
+    if not spring_volume or spring_volume.get("publication_status") == "planned":
+        return
+    script = (
+        ROOT
+        / "content"
+        / "volumes"
+        / "frameworks"
+        / "FW-03-spring-framework"
+        / "labs"
+        / "validate_spring_framework_labs.sh"
+    )
+    if not script.exists():
+        fail(f"Missing Spring Framework scenario validator: {script}")
+    result = subprocess.run(
+        ["bash", str(script)],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        check=False,
+        timeout=300,
+    )
+    if result.returncode:
+        print(result.stdout)
+        print(result.stderr)
+        fail("Spring Framework scenario validation failed")
+    print(normalized(result.stdout) or "Spring Framework scenarios: validation passed")
+
+
+def run_spring_boot_book_validation(spec: dict[str, Any]) -> None:
+    boot_volume = next(
+        (item for item in spec["volumes"] if item["id"] == "BOOT"), None
+    )
+    if not boot_volume or boot_volume.get("publication_status") == "planned":
+        return
+    script = (
+        ROOT
+        / "content"
+        / "volumes"
+        / "frameworks"
+        / "FW-04-spring-boot"
+        / "labs"
+        / "validate_spring_boot_labs.sh"
+    )
+    if not script.exists():
+        fail(f"Missing Spring Boot scenario validator: {script}")
+    result = subprocess.run(
+        ["bash", str(script)],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        check=False,
+        timeout=300,
+    )
+    if result.returncode:
+        print(result.stdout)
+        print(result.stderr)
+        fail("Spring Boot scenario validation failed")
+    print(normalized(result.stdout) or "Spring Boot scenarios: validation passed")
+
+
+def run_spring_data_book_validation(spec: dict[str, Any]) -> None:
+    data_volume = next(
+        (item for item in spec["volumes"] if item["id"] == "DATA"), None
+    )
+    if not data_volume or data_volume.get("publication_status") == "planned":
+        return
+    script = (
+        ROOT
+        / "content"
+        / "volumes"
+        / "frameworks"
+        / "FW-06-spring-data"
+        / "labs"
+        / "validate_spring_data_labs.sh"
+    )
+    if not script.exists():
+        fail(f"Missing Spring Data scenario validator: {script}")
+    result = subprocess.run(
+        ["bash", str(script)],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        check=False,
+        timeout=300,
+    )
+    if result.returncode:
+        print(result.stdout)
+        print(result.stderr)
+        fail("Spring Data scenario validation failed")
+    print(normalized(result.stdout) or "Spring Data scenarios: validation passed")
+
+
 def run_series_native_java_validation(spec: dict[str, Any]) -> None:
     """Compile and execute complete public Java classes in focused native chapters."""
     classes: dict[str, tuple[Path, str]] = {}
     volume_classes: dict[str, list[str]] = {}
-    companion_classes: dict[str, str] = {}
+    companion_classes: dict[str, set[str]] = {}
     native_volumes: set[str] = set()
     fence = re.compile(r"```java\s*\n(.*?)\n```", re.DOTALL)
     declaration = re.compile(r"\bpublic\s+final\s+class\s+([A-Za-z_$][\w$]*)\b")
@@ -563,13 +793,13 @@ def run_series_native_java_validation(spec: dict[str, Any]) -> None:
             source
             for source in volume["sources"]
             if source.get("series_native")
-            and "01-number-systems-and-math-foundations" not in source["path"]
+            and "DSA-02-03-number-systems-and-math-foundations" not in source["path"]
         ]
-        if not native_sources:
+        companions = code_companions(volume)
+        if not native_sources and not companions:
             continue
         native_volumes.add(volume_id)
-        companion = volume.get("code_companion")
-        if companion:
+        for companion in companions:
             path = (ROOT / companion["path"]).resolve()
             try:
                 code = path.read_text(encoding="ascii")
@@ -583,7 +813,7 @@ def run_series_native_java_validation(spec: dict[str, Any]) -> None:
                     f"Focused volume {volume_id} companion must expose exactly one "
                     f"complete public class: {path}"
                 )
-            companion_classes[volume_id] = added.pop()
+            companion_classes.setdefault(volume_id, set()).add(added.pop())
         for source in native_sources:
             path = (ROOT / source["path"]).resolve()
             text = path.read_text(encoding="utf-8")
@@ -594,7 +824,7 @@ def run_series_native_java_validation(spec: dict[str, Any]) -> None:
         fail("No focused series-native public Java classes were found")
     for volume_id in sorted(native_volumes):
         companions = volume_classes.get(volume_id, [])
-        if volume_id in companion_classes:
+        if companion_classes.get(volume_id):
             continue
         if len(companions) != 1:
             fail(
@@ -648,17 +878,34 @@ def run_series_native_java_validation(spec: dict[str, Any]) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--source-only", action="store_true")
+    parser.add_argument(
+        "--artifacts-only",
+        action="store_true",
+        help="Validate built PDFs and their manifest without rerunning executable source labs.",
+    )
     args = parser.parse_args()
+
+    if args.source_only and args.artifacts_only:
+        parser.error("--source-only and --artifacts-only are mutually exclusive")
 
     spec = read_json(SERIES_SPEC)
     decorate_segments(spec)
     check_numbering_contract(spec)
     if len(spec.get("volumes", [])) != 40:
         fail("Series manifest must define the complete 40-book segmented catalog")
+    if args.artifacts_only:
+        check_artifacts(spec)
+        print("Focused series artifact validation passed.")
+        return
     check_sources(spec)
     run_java_validation()
     run_git_book_validation(spec)
     run_build_book_validation(spec)
+    run_mysql_book_validation(spec)
+    run_hibernate_book_validation(spec)
+    run_spring_framework_book_validation(spec)
+    run_spring_boot_book_validation(spec)
+    run_spring_data_book_validation(spec)
     run_series_native_java_validation(spec)
     if not args.source_only:
         check_artifacts(spec)

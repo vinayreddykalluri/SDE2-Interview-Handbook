@@ -36,7 +36,7 @@ except ImportError as exc:  # pragma: no cover - dependency boundary
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_DIST = Path("dist")
 DEFAULT_SPEC = Path("publishing/series.json")
-DEFAULT_MASTER = Path("dist/java-sde2-interview-book.pdf")
+DEFAULT_MASTER = Path("dist/00-start-here/java-sde2-interview-book.pdf")
 DEFAULT_OUTPUT = Path("tmp/pdfs/semantic-layout-qa")
 INDEX_NAME = "Java-SDE2-Interview-Preparation-Series-Index.pdf"
 
@@ -921,13 +921,21 @@ def load_documents(
     """Discover the master and every PDF physically present in dist."""
     expected: dict[str, tuple[str, str]] = {}
     expected_order: list[str] = []
+    index_relative = INDEX_NAME
     warnings: list[str] = []
     if spec_path.exists():
         data = json.loads(spec_path.read_text(encoding="utf-8"))
+        segment_by_volume = {
+            str(volume_id): segment
+            for segment in data.get("segments", [])
+            for volume_id in segment.get("books", [])
+        }
         for volume in data.get("volumes", []):
-            filename = str(volume["output_name"])
-            expected[filename] = (str(volume["id"]), str(volume["title"]))
-            expected_order.append(filename)
+            segment = segment_by_volume[str(volume["id"])]
+            relative = str(Path(segment["artifact_dir"]) / volume["output_name"])
+            expected[relative] = (str(volume["id"]), str(volume["title"]))
+            expected_order.append(relative)
+        index_relative = str(data.get("index_artifact", INDEX_NAME))
     else:
         warnings.append(f"Series specification not found: {spec_path}")
 
@@ -937,20 +945,25 @@ def load_documents(
     else:
         warnings.append(f"Master PDF not found: {master}")
 
-    discovered = {path.name: path for path in dist.glob("*.pdf")} if dist.exists() else {}
+    discovered = {
+        path.relative_to(dist).as_posix(): path for path in dist.rglob("*.pdf")
+    } if dist.exists() else {}
     # The master is intentionally stored beside release PDFs; it was already added above.
-    discovered.pop(master.name, None)
+    try:
+        discovered.pop(master.resolve().relative_to(dist.resolve()).as_posix(), None)
+    except ValueError:
+        pass
     for filename in sorted(set(expected) - set(discovered)):
         warnings.append(f"Expected focused PDF not found: {dist / filename}")
-    if INDEX_NAME not in discovered:
-        warnings.append(f"Series index PDF not found: {dist / INDEX_NAME}")
+    if index_relative not in discovered:
+        warnings.append(f"Series index PDF not found: {dist / index_relative}")
     ordered_names = [name for name in expected_order if name in discovered]
-    if INDEX_NAME in discovered:
-        ordered_names.append(INDEX_NAME)
+    if index_relative in discovered:
+        ordered_names.append(index_relative)
     ordered_names.extend(sorted(set(discovered) - set(ordered_names)))
     for filename in ordered_names:
         path = discovered[filename]
-        if filename == INDEX_NAME:
+        if filename == index_relative:
             documents.append(Document("INDEX", "index", path.resolve(), "Series Index"))
         elif filename in expected:
             document_id, title = expected[filename]
@@ -1093,7 +1106,7 @@ def build_parser() -> argparse.ArgumentParser:
         help="Latest acceptable Chapter 1 page in focused volumes",
     )
     parser.add_argument(
-        "--index-max-pages", type=int, default=13, help="Maximum series-index pages"
+        "--index-max-pages", type=int, default=20, help="Maximum four-segment series-index pages"
     )
     parser.add_argument(
         "--heading-bottom-zone",

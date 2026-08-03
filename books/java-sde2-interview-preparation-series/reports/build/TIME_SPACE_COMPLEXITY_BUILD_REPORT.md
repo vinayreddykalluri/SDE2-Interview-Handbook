@@ -106,7 +106,7 @@ python3 \
 
 ## Final PDF
 
-- Path: `./dist/Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf`
+- Path: `./dist/Java-SDE2-DSA-01-Time-and-Space-Complexity.pdf`
 - Page count: **79**
 - File size: **3,837,739 bytes**
 - SHA-256: `b371cc5e3cd29a4eb09b6ecca2a655e7513cebc662cd5c9b770e4b2682048aed`

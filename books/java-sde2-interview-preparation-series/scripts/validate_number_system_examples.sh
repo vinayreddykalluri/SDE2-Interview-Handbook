@@ -3,7 +3,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
-CODE_DIR="${PROJECT_ROOT}/content/volumes/01-number-systems-and-math-foundations/code"
+CODE_DIR="${PROJECT_ROOT}/content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/code"
 REPORT="${PROJECT_ROOT}/reports/validation/NUMBER_SYSTEMS_CODE_VALIDATION.md"
 CLASS_DIR="$(mktemp -d "${TMPDIR:-/tmp}/number-systems-classes.XXXXXX")"
 

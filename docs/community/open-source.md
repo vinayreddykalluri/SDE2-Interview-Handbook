@@ -19,7 +19,7 @@ Suggested attribution:
 
 > Adapted from the SDE2 Interview Handbook by Vinay Reddy Kalluri and contributors, licensed under CC BY 4.0.
 
-Vinay Reddy Kalluri is the project creator, founding author, Editor-in-Chief, and Chief Auditor. Accepted contributors receive individual credit in the root author registry, Git history, and pull requests.
+Vinay Reddy Kalluri writes and edits the series and performs its final technical review. Accepted contributors receive individual credit in the root author registry, Git history, and pull requests.
 
 ## Contribution rights
 

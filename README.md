@@ -5,25 +5,26 @@
 [![Java 17+](https://img.shields.io/badge/Java-17%2B-1f4e79.svg)](examples/java/README.md)
 [![Book release](https://img.shields.io/github/v/release/vinayreddykalluri/SDE2-Interview-Handbook?label=books)](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest)
 
-A local-first, open-source preparation system for Java SDE-2 interviews. Its 40-book learning library is divided into Java Engineering, Data Structures and Algorithms, and System Design and Backend. The same canonical sources power 255 web documents and 42 downloadable PDFs, alongside runnable Java examples and searchable reference material.
+A local-first, open-source preparation system for Java SDE-2 interviews. Its 40-book learning library is divided into Java Engineering, Data Structures and Algorithms, Frameworks/Data/Messaging, and System Design. The same canonical sources power the web books and 42 downloadable PDFs, alongside runnable Java examples and searchable reference material.
 
 > **Canonical source:** the public `master` branch owns the book sources, web catalog, validation tooling, and reviewed PDFs. The web library and downloadable editions are generated from the same publishing manifest so their titles, status, counts, and ordering remain synchronized.
 
-[Open the learning library](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/) · [Browse all web books](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/) · [Open the PDF index](books/java-sde2-interview-preparation-series/dist/Java-SDE2-Interview-Preparation-Series-Index.pdf) · [Contribute](.github/CONTRIBUTING.md)
+[Open the learning library](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/) · [Browse all web books](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/) · [Open the PDF index](books/java-sde2-interview-preparation-series/dist/00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf) · [Contribute](.github/CONTRIBUTING.md)
 
 ## Choose Your Learning Segment
 
 | Goal | Start here | Outcome |
 |---|---|---|
-| Learn or rebuild Java | [JAVA 01 - Java Foundations](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/01-java-foundations-for-problem-solving/) | Language basics, Git, Maven/Gradle, core libraries, JVM, concurrency, performance, and revision |
-| Prepare for coding rounds | [DSA 01 - Time and Space Complexity](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/02-time-and-space-complexity/) | Complexity, math, implementation patterns, data structures, algorithms, and problem solving |
-| Prepare for backend and architecture rounds | [SD 01 - Backend and Design Foundations](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/18f-design-backend-testing-and-security/) | Databases, Hibernate, Spring, Kafka, Redis, distributed systems, and system design |
-| Browse every book and PDF | [Published Java SDE-2 book library](docs/books.md) | The complete segmented catalog, roadmap editions, code indexes, and individual PDFs |
+| Learn or rebuild Java | [JAVA 01 - Java Foundations](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/java-01-java-foundations-for-problem-solving/) | Language basics, Git, Maven/Gradle, core libraries, JVM, concurrency, performance, and revision |
+| Prepare for coding rounds | [DSA 01 - Time and Space Complexity](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/dsa-01-time-and-space-complexity/) | Complexity, math, implementation patterns, data structures, algorithms, and problem solving |
+| Prepare for Java backend rounds | [FW 01 - MySQL](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/fw-01-mysql/) | SQL, Hibernate/JPA, Spring, data stores, Redis, Kafka, and production framework reasoning |
+| Prepare for architecture rounds | [SD 01 - Backend and Design Foundations](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/sd-01-design-backend-testing-and-security/) | Service boundaries, reliability, security, and distributed-system design |
+| Browse every book and PDF | [Published Java SDE-2 book library](docs/books.md) | The complete four-segment catalog, source and code indexes, and individual PDFs |
 | Run and extend the code | [Java examples](examples/README.md) | Independently compilable examples organized by interview topic |
 | Understand the repository before contributing | [Repository structure](docs/community/repository-structure.md) | Clear source ownership and naming rules |
 | Review the latest organization audit | [July 2026 repository audit](docs/community/repository-audit-2026-07.md) | Migration map, synchronization contracts, and open book backlog |
 | Pick a useful contribution | [Project roadmap](docs/project/roadmap.md) | Prioritized work without duplicating completed modules |
-| Expand a focused DSA book | [Book contribution backlog](docs/community/book-contribution-backlog.md) | Claim a chapter, diagram, Java example, exercise set, or complete module |
+| Improve a focused DSA book | [Book contribution backlog](docs/community/book-contribution-backlog.md) | Claim an accuracy fix, diagram, Java example, adversarial test, exercise set, or accessibility repair |
 | Create a hosted preview | [Vercel deployment guide](docs/project/deployment.md) | Reproducible static build without GitHub Actions |
 
 ## Learning Architecture
@@ -32,9 +33,11 @@ A local-first, open-source preparation system for Java SDE-2 interviews. Its 40-
 flowchart LR
     Start["Choose a learning segment"] --> Java["JAVA 01-09<br/>Java Engineering"]
     Start --> DSA["DSA 01-17<br/>Data Structures and Algorithms"]
-    Start --> Design["SD 01-14<br/>System Design and Backend"]
+    Start --> Frameworks["FW 01-12<br/>Frameworks, Data, and Messaging"]
+    Start --> Design["SD 01-02<br/>System Design"]
     Java --> Practice["Learn, trace, implement, explain"]
     DSA --> Practice
+    Frameworks --> Practice
     Design --> Practice
     Practice --> Code["Runnable Java examples"]
     Practice --> PDF["Matching offline PDF"]
@@ -43,6 +46,7 @@ flowchart LR
     Mock --> Review["Gap log and next book"]
     Review --> Java
     Review --> DSA
+    Review --> Frameworks
     Review --> Design
 ```
 
@@ -50,40 +54,45 @@ Choose only one segment initially. Inside it, use the book numbers as the prereq
 
 ## Published Java SDE-2 Book Series
 
-[![Java SDE-2 Interview Preparation Series cover](books/java-sde2-interview-preparation-series/assets/covers/series-index-cover.png)](books/java-sde2-interview-preparation-series/dist/Java-SDE2-Interview-Preparation-Series-Index.pdf)
+[![Java SDE-2 Interview Preparation Series cover](books/java-sde2-interview-preparation-series/assets/covers/series-index-cover.png)](books/java-sde2-interview-preparation-series/dist/00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf)
 
-The consolidated repository includes 40 focused books, a 17-page series index, and a 616-page master book. The focused books contain 2,469 pages; the complete 42-PDF library contains 3,102 pages.
+The consolidated repository includes 40 published focused books, an 18-page series index, and a 616-page master reference. The focused books contain 3,372 pages; the complete 42-PDF library contains 4,006 pages. The publishing manifest declares 403 source entries that resolve to 396 unique mapped Markdown documents.
 
 | Publication status | Books | Meaning |
 |---|---:|---|
-| Full edition | 30 | Developed instructional content with examples, practice, navigation, and technical validation |
-| Roadmap edition | 10 | Published scope, prerequisites, chapter plan, interview outcomes, and completion gate; expanded one book at a time |
+| Publication edition | 40 | Prerequisite-aware instruction with examples, practice, answered interview rounds, navigation, and executable validation |
 
-Roadmap editions are intentionally labeled on the website, PDF cover, reader index, and catalog. They are not presented as finished publication-depth instruction.
+Every focused volume now has publication content. Future contributions improve accuracy, explanations, examples, exercises, tests, accessibility, and visual quality inside the existing books.
 
-[Browse all web books and roadmaps](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/), [download the latest tagged release](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest), or [open the individual-PDF reading order](books/java-sde2-interview-preparation-series/dist/00-START-HERE.md).
+[Browse all web books](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/), [download the latest tagged release](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest), or [open the individual-PDF reading order](books/java-sde2-interview-preparation-series/dist/00-start-here/README.md).
 
 ### Java Engineering — JAVA 01 to JAVA 09
 
-Start with [JAVA 01: Java Foundations](books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf), then continue through:
+Start with [JAVA 01: Java Foundations](books/java-sde2-interview-preparation-series/dist/01-java/Java-SDE2-JAVA-01-Java-Foundations-for-Problem-Solving.pdf), then continue through:
 
 `Git and GitHub → Maven and Gradle → Language/OOP/Modern Java → Collections/Streams/I/O → JVM → Concurrency → Performance → Interview Revision`
 
-Publication-depth tooling books: [Git and GitHub](books/java-sde2-interview-preparation-series/dist/Java-SDE2-JAVA-02-Git-and-GitHub.pdf) · [Maven and Gradle](books/java-sde2-interview-preparation-series/dist/Java-SDE2-JAVA-03-Maven-and-Gradle.pdf)
+Publication-depth tooling books: [Git and GitHub](books/java-sde2-interview-preparation-series/dist/01-java/Java-SDE2-JAVA-02-Git-and-GitHub.pdf) · [Maven and Gradle](books/java-sde2-interview-preparation-series/dist/01-java/Java-SDE2-JAVA-03-Maven-and-Gradle.pdf)
 
 ### Data Structures and Algorithms — DSA 01 to DSA 17
 
-Start with [DSA 01: Time and Space Complexity](books/java-sde2-interview-preparation-series/dist/Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf), then continue through:
+Start with [DSA 01: Time and Space Complexity](books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-01-Time-and-Space-Complexity.pdf), then continue through:
 
 `Number Systems → Interview Workbook → Bit Manipulation → Loops → Arrays → Strings → Hashing → Recursion → Linked Lists → Stacks/Queues → Binary Search → Trees → Heaps → Graphs → Greedy → Dynamic Programming`
 
-### System Design and Backend — SD 01 to SD 14
+### Frameworks, Data, and Messaging — FW 01 to FW 12
 
-Start with [SD 01: Backend and Design Foundations](books/java-sde2-interview-preparation-series/dist/Java-SDE2-ADV-18F-Design-Backend-Testing-and-Security.pdf), then continue through databases, persistence, Spring, messaging, caching, and distributed-system design.
+Start with [FW 01: MySQL](books/java-sde2-interview-preparation-series/dist/03-frameworks/Java-SDE2-FW-01-MySQL.pdf), then continue through Hibernate/JPA, Spring, MongoDB, Redis, persistence/caching, Kafka, Spring extensions, and Spring AI.
 
-New roadmap PDFs: [MySQL](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-02-MySQL.pdf) · [Hibernate and JPA](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-03-Hibernate-and-JPA.pdf) · [Spring Framework](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-04-Spring-Framework.pdf) · [Spring Boot](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-05-Spring-Boot.pdf) · [Spring Data](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-06-Spring-Data.pdf) · [MongoDB](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-07-MongoDB.pdf) · [Redis](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-08-Redis.pdf) · [Apache Kafka and Spring Kafka](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-09-Apache-Kafka-and-Spring-Kafka.pdf) · [Spring Ecosystem Extensions](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-10-Spring-Ecosystem-Extensions.pdf) · [Spring AI](books/java-sde2-interview-preparation-series/dist/Java-SDE2-SD-11-Spring-AI.pdf)
+Publication-depth framework books include [Spring Framework](books/java-sde2-interview-preparation-series/dist/03-frameworks/Java-SDE2-FW-03-Spring-Framework.pdf), [Spring Boot](books/java-sde2-interview-preparation-series/dist/03-frameworks/Java-SDE2-FW-04-Spring-Boot.pdf), and [Spring Data](books/java-sde2-interview-preparation-series/dist/03-frameworks/Java-SDE2-FW-06-Spring-Data.pdf), with executable behavior labs and production failure playbooks.
 
-Stable legacy identifiers remain in existing filenames and URLs. Reader-facing segment codes appear on the website, covers, index, and generated folders.
+All twelve books are publication editions; see the [Frameworks PDF folder](books/java-sde2-interview-preparation-series/dist/03-frameworks/) for the complete set.
+
+### System Design — SD 01 to SD 02
+
+Start with [SD 01: Backend and Design Foundations](books/java-sde2-interview-preparation-series/dist/04-system-design/Java-SDE2-SD-01-Design-Backend-Testing-and-Security.pdf), then continue to [SD 02: Distributed Systems and System Design](books/java-sde2-interview-preparation-series/dist/04-system-design/Java-SDE2-SD-02-Distributed-Systems-and-System-Design.pdf).
+
+Canonical repository PDFs now live in `00-start-here`, `01-java`, `02-dsa`, `03-frameworks`, and `04-system-design`. Their filenames, covers, website routes, and segment positions use the same `JAVA`, `DSA`, `FW`, and `SD` codes.
 
 ## Run Locally
 
@@ -167,13 +176,13 @@ Start with the [contribution guide](.github/CONTRIBUTING.md), then use the issue
 
 High-value book contributions include accuracy corrections, clearer beginner explanations, compiling edge-case examples, diagrams, exercises, solution improvements, accessibility fixes, and PDF layout reports. Accepted original work is credited to the individual contributor in the [authorship record](docs/community/authors.md), Git history, and pull requests.
 
-The current public book backlog is coordinated in [issue #27](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/27). Contributors can improve existing full editions or help turn one roadmap edition into a complete, validated learning volume. Large expansions should begin with an issue so prerequisites, examples, exercises, diagrams, and acceptance criteria remain coherent.
+The current public book backlog is coordinated in [issue #27](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/27). All 40 focused books are publication editions, so contributions now deepen an existing volume through accuracy fixes, clearer explanations, adversarial examples, exercises, diagrams, validation, accessibility, or layout repair. Large expansions should begin with an issue so prerequisites, examples, exercises, diagrams, and acceptance criteria remain coherent.
 
 Project conduct and stewardship are documented in the [Code of Conduct](.github/CODE_OF_CONDUCT.md), [governance model](docs/community/governance.md), [security policy](.github/SECURITY.md), and [support guide](.github/SUPPORT.md).
 
-## Editorial Leadership and Authorship
+## Author
 
-**Vinay Reddy Kalluri** is the project creator, founding author, **Editor-in-Chief**, and **Chief Auditor**. The Editor-in-Chief owns curriculum sequence, scope, voice, and publication decisions. The Chief Auditor owns Java accuracy, evidence, validation, PDF quality, attribution, and release readiness.
+**Vinay Reddy Kalluri** writes and edits the series, sets its learning sequence, and performs the final technical and publication review.
 
 Individual contributors retain credit for their accepted original work. See the [authorship record](docs/community/authors.md) and [governance model](docs/community/governance.md) for the complete model.
 

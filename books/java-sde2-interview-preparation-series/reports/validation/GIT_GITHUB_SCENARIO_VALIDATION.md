@@ -17,7 +17,7 @@ Python 3.12.6
 Command:
 
 ```bash
-bash content/volumes/J02-git-and-github/labs/validate_git_labs.sh
+bash content/volumes/java/JAVA-02-git-and-github/labs/validate_git_labs.sh
 ```
 
 | Scenario | Assertion | Result |

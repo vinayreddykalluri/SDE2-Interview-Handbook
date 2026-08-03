@@ -93,44 +93,61 @@ def main() -> None:
     output.mkdir(parents=True, exist_ok=True)
 
     spec = json.loads(SPEC.read_text(encoding="utf-8"))
+    segment_by_volume = {
+        str(volume_id): segment
+        for segment in spec["segments"]
+        for volume_id in segment["books"]
+    }
     documents = [
-        (volume["id"], volume["title"], volume["output_name"])
+        (
+            volume["id"],
+            volume["title"],
+            str(Path(segment_by_volume[str(volume["id"])]["artifact_dir"]) / volume["output_name"]),
+        )
         for volume in spec["volumes"]
     ]
-    documents.append(("INDEX", "Series Index", INDEX_NAME))
+    documents.append(("INDEX", "Series Index", spec.get("index_artifact", INDEX_NAME)))
 
     reports: list[dict[str, object]] = []
     rendered: list[tuple[str, str, list[Path]]] = []
     for volume_id, title, filename in documents:
         destination = output / volume_id
-        result = subprocess.run(
-            [
-                sys.executable,
-                str(ROOT / "scripts" / "qa_render.py"),
-                str(DIST / filename),
-                "--output",
-                str(destination),
-                "--dpi",
-                str(args.dpi),
-                "--columns",
-                "4",
-                "--rows",
-                "5",
-            ],
-            cwd=ROOT,
-            text=True,
-            capture_output=True,
-            check=False,
-        )
-        if result.returncode:
-            raise RuntimeError(
-                f"Render QA failed for {volume_id}:\n{result.stdout}{result.stderr}"
+        report_path = destination / "qa-report.json"
+        images = page_images(destination)
+        report: dict[str, object] | None = None
+        if report_path.is_file():
+            candidate = json.loads(report_path.read_text(encoding="utf-8"))
+            if len(images) == int(candidate.get("pages", -1)):
+                report = candidate
+        if report is None:
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "scripts" / "qa_render.py"),
+                    str(DIST / filename),
+                    "--output",
+                    str(destination),
+                    "--dpi",
+                    str(args.dpi),
+                    "--columns",
+                    "4",
+                    "--rows",
+                    "5",
+                ],
+                cwd=ROOT,
+                text=True,
+                capture_output=True,
+                check=False,
             )
-        report = json.loads((destination / "qa-report.json").read_text(encoding="utf-8"))
+            if result.returncode or not report_path.is_file():
+                raise RuntimeError(
+                    f"Render QA failed for {volume_id}:\n{result.stdout}{result.stderr}"
+                )
+            report = json.loads(report_path.read_text(encoding="utf-8"))
+            images = page_images(destination)
         report["id"] = volume_id
         report["title"] = title
         reports.append(report)
-        images = page_images(destination)
         rendered.append((volume_id, title, images))
         print(f"Rendered {volume_id}: {len(images)} pages")
 

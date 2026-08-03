@@ -16,7 +16,7 @@ Control flow is where requirements become executable decisions. At SDE-2 level, 
 
 Interview code often compresses these questions into a loop or conditional. Production code spreads them across authorization, retries, state transitions, and pricing rules. A precise expression model makes both settings easier.
 
-> **Focused series path:** Finish this Java foundation first, then study Time and Space Complexity Study Step 02. Continue to Number Systems Study Step 03A for mathematical modulo and overflow-safe numeric patterns, Study Step 04 for full bit manipulation, and Study Step 05 for loop, pattern, and index-calculation drills. The stable filenames and recommended order are listed in `Java-SDE2-Interview-Preparation-Series-Index.pdf`.
+> **Focused series path:** Finish Java Foundations (`JAVA-01`) first, then study Time and Space Complexity (`DSA-01`). Continue to Number Systems (`DSA-02`) for modulo and overflow-safe numeric patterns, Bit Manipulation (`DSA-04`), and Loop Mastery (`DSA-05`). The stable filenames and recommended order are listed in `Java-SDE2-Interview-Preparation-Series-Index.pdf`.
 
 ## First-principles model
 

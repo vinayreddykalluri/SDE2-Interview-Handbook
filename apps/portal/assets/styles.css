@@ -377,7 +377,7 @@ button, a, input, select, summary { -webkit-tap-highlight-color: transparent; }
 
 .book-start-path {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   margin: 0;
   padding: 0;
   border-top: 1px solid rgba(255, 250, 240, 0.34);
@@ -480,6 +480,7 @@ button, a, input, select, summary { -webkit-tap-highlight-color: transparent; }
 .book-contents[open] summary { border-bottom: 1px solid var(--line); }
 .book-contents-body { padding: 13px 0 15px; }
 .book-chapter-preview, .book-outcomes { margin: 0; padding-left: 21px; }
+.book-chapter-preview { max-height: 22rem; padding-right: 10px; overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable; }
 .book-chapter-preview li, .book-outcomes li { margin: 7px 0; color: var(--ink-soft); font-size: 0.82rem; line-height: 1.42; }
 .book-chapter-preview a { color: var(--blue); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .book-source-notes { margin: 9px 0 0 4px; }
@@ -770,7 +771,7 @@ noscript { display: block; padding: 18px; border-top: 1px solid var(--line-stron
   .round-card:nth-child(-n + 2) { border-bottom: 1px solid var(--line); }
   .practice-board a { grid-template-columns: 90px 0.8fr 1fr; }
   .practice-board strong { grid-column: 2 / -1; }
-  .book-start-path { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .book-start-path { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 900px) {

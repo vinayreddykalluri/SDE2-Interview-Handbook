@@ -1,6 +1,6 @@
 # Choose a Learning Segment
 
-The project has three focused curriculum segments—Java Engineering, Data Structures and Algorithms, and System Design and Backend—presented in two formats: complete web books for active learning and matching PDFs for offline study. The topic reference and practice pages support those segments; they do not create competing routes.
+The project has four focused curriculum segments—Java Engineering, Data Structures and Algorithms, Frameworks/Data/Messaging, and System Design—presented in two formats: complete web books for active learning and matching PDFs for offline study. The topic reference and practice pages support those segments; they do not create competing routes.
 
 | What you need | Use | What to do |
 |---|---|---|
@@ -11,7 +11,7 @@ The project has three focused curriculum segments—Java Engineering, Data Struc
 
 ## Fastest route for readers
 
-1. Choose Java, DSA, or System Design and Backend from the <a href="../../books/">learning library</a>.
+1. Choose Java, DSA, Frameworks, or System Design from the <a href="../../books/">learning library</a>.
 2. Start with Book 01 in that segment unless its readiness checks are already dependable.
 3. Read the numbered chapter and redraw its main diagram from memory.
 4. Open the linked Java source and identify its invariant, boundary conditions, and complexity.

@@ -16,7 +16,7 @@ Many production failures are not algorithm failures. They are representation fai
 
 Interviewers also use short numeric expressions to test whether a candidate reasons from Java rules instead of intuition borrowed from another language. The goal is not memorizing puzzles. It is building a reliable model for conversions and evaluation.
 
-> **Learning-path note:** Build the Java language model in this chapter first. After Java Foundations and Time and Space Complexity, continue to Number Systems Study Step 03A for digit algorithms, base conversion, overflow-safe arithmetic, large-number strings, GCD/LCM, modular arithmetic, powers, roots, and number-oriented practice.
+> **Learning-path note:** Build the Java language model in this chapter first. After Java Foundations (`JAVA-01`) and Time and Space Complexity (`DSA-01`), continue to Number Systems (`DSA-02`) for digit algorithms, base conversion, overflow-safe arithmetic, large-number strings, GCD/LCM, modular arithmetic, powers, roots, and number-oriented practice.
 
 ## First-principles model
 

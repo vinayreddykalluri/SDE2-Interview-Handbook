@@ -36,7 +36,7 @@ Result: successful. The existing source, cover, typography, PDF, bookmark, and c
 ## Java, Maven, and Gradle validation
 
 ```bash
-bash content/volumes/J03-maven-and-gradle/labs/validate_build_labs.sh
+bash content/volumes/java/JAVA-03-maven-and-gradle/labs/validate_build_labs.sh
 python3 scripts/validate_series.py
 ```
 

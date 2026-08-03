@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-07-30 - Spring Boot publication edition
+
+- Replaced the 10-page SD 05 roadmap with 23 prerequisite-ordered chapters progressing from the first application and startup through auto-configuration, typed configuration, HTTP/data boundaries, Actuator, observability, probes, testing, delivery, upgrades, security, and incident diagnosis.
+- Added 28 realistic interview rounds with direct model answers, five cumulative assessments, 15 debugging exercises, 20 coding/design tasks, 20 interview follow-ups, and a final readiness assessment.
+- Added a dependency-free Java 21 runtime-reasoning companion and a six-test Spring Boot 4.1.0 Maven fixture covering precedence, availability, conditions, back-off, property validation, and condition reports.
+- Rebuilt the stable PDF as a 113-page publication edition and synchronized 23 canonical chapters, 37 code entries, source navigation, and the downloadable PDF with the web library.
+- Added content audit, topic coverage, content changelog, scenario-validation, and build evidence reports.
+
+## 2026-07-29 - Spring Framework publication edition
+
+- Replaced the 10-page SD 04 roadmap with 21 prerequisite-ordered chapters progressing from plain Java object graphs and the first context through dependency resolution, lifecycle, scopes, configuration mechanics, events, validation, AOP, proxies, transactions, MVC, async work, testing, and production diagnosis.
+- Added 24 realistic interview rounds with direct model answers, 95 distributed chapter tasks, 60 final practice prompts, 15 debugging reviews, five cumulative assessments, and a final readiness assessment.
+- Added a dependency-free Java 21 runtime-reasoning companion and a six-test Spring Framework 7.0.8 Maven fixture covering injection, scopes, lifecycle, events, self-invocation, and transaction rollback behavior.
+- Rebuilt the stable PDF as a 122-page publication edition and synchronized 21 canonical chapters, 76 code entries, source navigation, and the downloadable PDF with the web library.
+- Added content audit, topic coverage, content changelog, scenario-validation, and build evidence reports.
+
 ## 2026-07-29 - Maven and Gradle publication edition
 
 - Replaced the 10-page JAVA 03 roadmap with 17 prerequisite-ordered concept and interview chapters.

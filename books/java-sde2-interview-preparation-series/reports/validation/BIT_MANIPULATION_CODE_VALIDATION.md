@@ -24,13 +24,13 @@ Volume 04 contains one dependency-free complete Java 21 companion and 124 contex
 
 Source:
 
-`content/volumes/04-bit-manipulation-in-java/code/BitManipulationExamples.java`
+`content/volumes/dsa/DSA-04-bit-manipulation-in-java/code/BitManipulationExamples.java`
 
 Compilation command:
 
 ```bash
 javac --release 21 -Xlint:all -Werror \
-  content/volumes/04-bit-manipulation-in-java/code/BitManipulationExamples.java
+  content/volumes/dsa/DSA-04-bit-manipulation-in-java/code/BitManipulationExamples.java
 ```
 
 Execution command:
@@ -107,3 +107,7 @@ The full `scripts/validate_series.py --source-only` command now recognizes the c
 ## Final result
 
 Volume 04 valid code compiles with warnings treated as errors, all forty behavioral checks pass, documented companion output matches execution, and the rebuilt PDF passes content and navigation checks.
+
+## 2026-08-02 additional companion
+
+`BitContractChecks.java` compiled under Java 21 with lint warnings treated as errors and passed 10,110 boundary/randomized manual-versus-JDK checks. Observed output: `PASS 10110 manual/JDK bit contract checks`.
