@@ -14,3 +14,4 @@ __pycache__/
 *.class
 *.docx
 *.pdf
+.vercel-venv/

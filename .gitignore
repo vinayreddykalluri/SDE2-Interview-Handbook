@@ -30,3 +30,6 @@ books/java-sde2-interview-preparation-series/content/volumes/*/labs/*/target/
 
 # Resumable series-build state written by scripts/build_all_volumes.py
 books/java-sde2-interview-preparation-series/build/
+
+# Vercel build virtualenv (created by installCommand)
+.vercel-venv/

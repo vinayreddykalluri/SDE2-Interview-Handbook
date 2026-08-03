@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "python3 -m pip install --disable-pip-version-check -r tooling/requirements/portal.txt",
-  "buildCommand": "python3 tooling/automation/build_site.py && python3 tooling/automation/configure_deployment_urls.py",
+  "installCommand": "python3 -m venv .vercel-venv && .vercel-venv/bin/python -m pip install --disable-pip-version-check -r tooling/requirements/portal.txt",
+  "buildCommand": ".vercel-venv/bin/python tooling/automation/build_site.py && .vercel-venv/bin/python tooling/automation/configure_deployment_urls.py",
   "outputDirectory": "site",
   "trailingSlash": true,
   "headers": [

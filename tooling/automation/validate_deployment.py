@@ -13,10 +13,25 @@ CONFIG = ROOT / "vercel.json"
 IGNORE = ROOT / ".vercelignore"
 WEB_REQUIREMENTS = ROOT / "tooling" / "requirements" / "portal.txt"
 
+# The install step builds a virtualenv rather than installing into the build
+# image's interpreter. Vercel's image now ships a uv-managed Python, which is
+# marked externally-managed under PEP 668, so a plain `pip install` fails:
+#
+#   error: externally-managed-environment
+#   This Python installation is managed by uv and should not be modified.
+#
+# --break-system-packages would silence it, but a venv is immune to whatever
+# base image Vercel ships next, so the build commands reference it explicitly.
 EXPECTED = {
     "$schema": "https://openapi.vercel.sh/vercel.json",
-    "installCommand": "python3 -m pip install --disable-pip-version-check -r tooling/requirements/portal.txt",
-    "buildCommand": "python3 tooling/automation/build_site.py && python3 tooling/automation/configure_deployment_urls.py",
+    "installCommand": (
+        "python3 -m venv .vercel-venv && .vercel-venv/bin/python -m pip install "
+        "--disable-pip-version-check -r tooling/requirements/portal.txt"
+    ),
+    "buildCommand": (
+        ".vercel-venv/bin/python tooling/automation/build_site.py && "
+        ".vercel-venv/bin/python tooling/automation/configure_deployment_urls.py"
+    ),
     "outputDirectory": "site",
 }
 REQUIRED_PACKAGES = {
