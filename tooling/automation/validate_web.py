@@ -207,9 +207,19 @@ def validate_books(errors: list[str], *, verify_artifact_files: bool) -> None:
         return
     if catalog.get("schemaVersion") != 5:
         fail(errors, "Book catalog schemaVersion must be 5 for canonical artifact paths")
-    if len(books) != 40:
-        fail(errors, f"Expected 40 focused books; found {len(books)}")
+    # The expected count is derived from publishing/series.json rather than
+    # hardcoded. A literal here meant that adding a volume failed validation in
+    # a place that had nothing to do with the change, and the fix was to edit
+    # the validator -- which is how a checked invariant quietly becomes a
+    # number someone updates to make the build pass.
     series_spec = json.loads(SERIES_SPEC.read_text(encoding="utf-8"))
+    expected_books = len(series_spec["volumes"])
+    if len(books) != expected_books:
+        fail(
+            errors,
+            f"Expected {expected_books} focused books from publishing/series.json; "
+            f"found {len(books)} in the portal catalog. Run: make sync-book-catalog",
+        )
     try:
         artifact_manifest = json.loads(ARTIFACT_MANIFEST.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as error:
@@ -260,8 +270,22 @@ def validate_books(errors: list[str], *, verify_artifact_files: bool) -> None:
         fail(errors, "Book catalog must begin with the ordered Java Engineering segment")
     focused_pages = sum(int(book.get("pageCount", 0)) for book in books)
     expected_total_pages = focused_pages + int(release.get("indexPageCount", 0)) + int(release.get("masterPageCount", 0))
-    if release.get("totalPdfCount") != 42 or int(release.get("totalPageCount", 0)) != expected_total_pages:
-        fail(errors, "Book catalog PDF and page totals do not reconcile with canonical artifacts")
+    # Derived, not literal: every focused volume plus the series index and the
+    # master book. A hardcoded 42 here made adding a volume fail in a validator
+    # unrelated to the change.
+    expected_pdf_count = expected_books + 2
+    if release.get("totalPdfCount") != expected_pdf_count:
+        fail(
+            errors,
+            f"Book catalog declares {release.get('totalPdfCount')} PDFs; "
+            f"expected {expected_pdf_count} ({expected_books} focused + index + master)",
+        )
+    if int(release.get("totalPageCount", 0)) != expected_total_pages:
+        fail(
+            errors,
+            f"Book catalog totalPageCount {release.get('totalPageCount')} does not equal "
+            f"{expected_total_pages} (focused {focused_pages} + index + master)",
+        )
 
     required_fields = {
         "order", "bookPosition", "step", "pathLabel", "id", "track", "title", "shortTitle", "subtitle",
@@ -522,13 +546,17 @@ def main() -> int:
             print(f"ERROR: {error}", file=sys.stderr)
         return 1
 
+    # Report the counts that were actually checked rather than literals that
+    # drift out of date the first time a volume is added.
+    focused = len(json.loads(SERIES_SPEC.read_text(encoding="utf-8"))["volumes"])
+    total_pdfs = focused + 2  # every focused volume, plus the series index and the master book
     artifact_scope = (
-        "40 focused artifact records with reconciled 42-PDF release totals"
+        f"{focused} focused artifact records with reconciled {total_pdfs}-PDF release totals"
         if args.metadata_only
-        else "40 focused PDFs with matching records and reconciled 42-PDF release totals"
+        else f"{focused} focused PDFs with matching records and reconciled {total_pdfs}-PDF release totals"
     )
     print(
-        "Web validation passed: 40 books in 4 segments, at least 173 canonical documents, "
+        f"Web validation passed: {focused} books in 4 segments, at least 173 canonical documents, "
         "at least 800 book code entries, 19 learning modules, 69 foundation Java files, "
         f"and {artifact_scope}"
     )
