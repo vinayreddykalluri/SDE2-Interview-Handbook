@@ -8,9 +8,11 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
+import diagram_kit
+
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "content" / "volumes" / "06-arrays-and-array-patterns" / "assets"
+OUT = ROOT / "content" / "volumes" / "dsa" / "DSA-06-arrays-and-array-patterns" / "assets"
 W, H = 2400, 1450
 NAVY, BLUE, TEAL, GOLD = "#0B2545", "#1F5A94", "#17758A", "#C58A22"
 GREEN, RED, INK, MUTED = "#2D7D66", "#A4423E", "#17212B", "#52606D"
@@ -20,23 +22,10 @@ PALE_GREEN, PALE_RED, PALE_GRAY = "#EAF5F0", "#FBEDEC", "#F3F6F8"
 
 
 def font(size: int, *, bold: bool = False, mono: bool = False) -> ImageFont.FreeTypeFont:
-    names = (
-        ["/System/Library/Fonts/Supplemental/Courier New Bold.ttf",
-         "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf"]
-        if mono and bold else
-        ["/System/Library/Fonts/Supplemental/Courier New.ttf",
-         "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"]
-        if mono else
-        ["/System/Library/Fonts/Supplemental/Arial Bold.ttf",
-         "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"]
-        if bold else
-        ["/System/Library/Fonts/Supplemental/Arial.ttf",
-         "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"]
-    )
-    for name in names:
-        if Path(name).exists():
-            return ImageFont.truetype(name, size)
-    return ImageFont.load_default(size=size)
+    # Delegates to diagram_kit, which reads only the vendored assets/fonts.
+    # Searching system fonts first made the same generator produce different
+    # diagrams per host, and diagrams are committed artifacts.
+    return diagram_kit.font(size, bold=bold, mono=mono)
 
 
 TITLE = font(67, bold=True)

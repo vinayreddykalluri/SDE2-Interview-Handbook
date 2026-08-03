@@ -8,9 +8,11 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
+import diagram_kit
+
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "content" / "volumes" / "05-loop-mastery-and-index-calculations" / "assets"
+OUT = ROOT / "content" / "volumes" / "dsa" / "DSA-05-loop-mastery-and-index-calculations" / "assets"
 
 W, H = 2400, 1450
 NAVY = "#0B2545"
@@ -32,24 +34,10 @@ WHITE = "#FFFFFF"
 
 
 def font(size: int, *, bold: bool = False, mono: bool = False) -> ImageFont.FreeTypeFont:
-    if mono:
-        candidates = [
-            "/System/Library/Fonts/Supplemental/Courier New Bold.ttf"
-            if bold else "/System/Library/Fonts/Supplemental/Courier New.ttf",
-            "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf"
-            if bold else "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
-        ]
-    else:
-        candidates = [
-            "/System/Library/Fonts/Supplemental/Arial Bold.ttf"
-            if bold else "/System/Library/Fonts/Supplemental/Arial.ttf",
-            "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
-            if bold else "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
-        ]
-    for candidate in candidates:
-        if Path(candidate).exists():
-            return ImageFont.truetype(candidate, size=size)
-    return ImageFont.load_default(size=size)
+    # Delegates to diagram_kit, which reads only the vendored assets/fonts.
+    # Searching system fonts first made the same generator produce different
+    # diagrams per host, and diagrams are committed artifacts.
+    return diagram_kit.font(size, bold=bold, mono=mono)
 
 
 F_TITLE = font(68, bold=True)

@@ -15,6 +15,8 @@ from typing import Callable, Iterable
 
 from PIL import Image, ImageDraw, ImageFont
 
+import diagram_kit
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUT = (
@@ -46,29 +48,10 @@ WHITE = "#FFFFFF"
 
 
 def font(size: int, *, bold: bool = False, mono: bool = False) -> ImageFont.FreeTypeFont:
-    if mono:
-        candidates = [
-            "/System/Library/Fonts/Supplemental/Courier New Bold.ttf"
-            if bold
-            else "/System/Library/Fonts/Supplemental/Courier New.ttf",
-            "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf"
-            if bold
-            else "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
-        ]
-    else:
-        candidates = [
-            "/System/Library/Fonts/Supplemental/Arial Bold.ttf"
-            if bold
-            else "/System/Library/Fonts/Supplemental/Arial.ttf",
-            "/System/Library/Fonts/Supplemental/Helvetica.ttc",
-            "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
-            if bold
-            else "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
-        ]
-    for candidate in candidates:
-        if Path(candidate).exists():
-            return ImageFont.truetype(candidate, size=size)
-    return ImageFont.load_default(size=size)
+    # Delegates to diagram_kit, which reads only the vendored assets/fonts.
+    # Searching system fonts first made the same generator produce different
+    # diagrams per host, and diagrams are committed artifacts.
+    return diagram_kit.font(size, bold=bold, mono=mono)
 
 
 F_TITLE = font(72, bold=True)
