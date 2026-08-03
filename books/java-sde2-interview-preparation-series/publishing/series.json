@@ -16,7 +16,7 @@
     "file": "java-sde2-interview-book.pdf",
     "artifact_path": "00-start-here/java-sde2-interview-book.pdf",
     "title": "Java Foundations to Advanced Engineering",
-    "page_count": 656
+    "page_count": 657
   },
   "learning_order": [
     "03",
@@ -58,7 +58,8 @@
     "SPRINGX",
     "SPRINGAI",
     "18F",
-    "18J"
+    "18J",
+    "GENAI"
   ],
   "path_labels": {
     "03": "JAVA-01",
@@ -100,7 +101,8 @@
     "SPRINGX": "FW-11",
     "SPRINGAI": "FW-12",
     "18F": "SD-01",
-    "18J": "SD-02"
+    "18J": "SD-02",
+    "GENAI": "SD-03"
   },
   "legacy_path_labels": {
     "03": [
@@ -230,7 +232,8 @@
       "artifact_dir": "04-system-design",
       "books": [
         "18F",
-        "18J"
+        "18J",
+        "GENAI"
       ]
     }
   ],
@@ -3747,6 +3750,74 @@
         "title": "Java 21 Spring AI Deterministic-Boundary Companion",
         "description": "Executable models for context budgeting, tenant-filtered retrieval, business validation, authorized idempotent tools, conversation ownership, evaluation, and bounded retries."
       }
+    },
+    {
+      "id": "GENAI",
+      "stage": "18",
+      "slug": "generative-ai-system-design",
+      "title": "Generative AI System Design",
+      "short_title": "Generative AI System Design",
+      "subtitle": "Inference Cost, Retrieval, Agents, Guardrails, and Evaluating a Probabilistic System",
+      "output_name": "Java-SDE2-SD-03-Generative-AI-System-Design.pdf",
+      "volume_label": "System Design - Book 03 of 03 - Study Step SD-03",
+      "release_date": "2026-08-03",
+      "cover_deck": "Design systems with a model in the request path: budget tokens and latency, build retrieval that can be trusted, bound agents that take actions, and measure quality when correctness is a distribution.",
+      "topic_line": "TOKENS | RAG | AGENTS | GUARDRAILS | EVALS | DEGRADED MODE",
+      "purpose": "This book covers the generative-AI design round that entered standard interview loops after 2024. It treats inference latency, token cost, and non-determinism as capacity constraints, and applies the same constraint-first method used for traditional distributed-system design.",
+      "prerequisites": [
+        "SD-01 and SD-02, or equivalent distributed-systems experience",
+        "Comfort with capacity estimation, caching, and failure-domain reasoning",
+        "No machine-learning background is assumed"
+      ],
+      "recognition_signals": [
+        "A design places a language model in the request path",
+        "The prompt asks for RAG, an assistant, or an agentic workflow",
+        "Answer quality must be measured rather than asserted",
+        "Model-initiated actions have side effects or security consequences"
+      ],
+      "outcomes": [
+        "Estimate tokens, cost, and latency before designing anything",
+        "Build a retrieval pipeline with authorization pushed into the query",
+        "Bound an agent and make its side effects idempotent and compensable",
+        "Define eval sets, guardrails, SLIs, and a regression gate for a probabilistic system",
+        "Specify the degraded mode that runs when the model is unavailable"
+      ],
+      "practice_ladder": [
+        "Foundation: token budgets, cost arithmetic, and latency envelopes",
+        "Interview Core: RAG architecture, hybrid retrieval, and grounding",
+        "SDE-2 Follow-up: agent bounds, idempotency, and prompt injection",
+        "Challenge: run a complete generative-AI design round end to end"
+      ],
+      "min_pages": 30,
+      "max_pages": 120,
+      "code_companion": {
+        "path": "content/volumes/system-design/SD-03-generative-ai-system-design/code/GenerativeAiDesignModel.java",
+        "title": "Executable Generative-AI Design Model",
+        "description": "This dependency-free Java 21 model makes token and cost estimation, latency budgeting, reciprocal rank fusion, authorization-aware retrieval, citation validation, agent bounds, idempotency keys, and the eval regression gate executable."
+      },
+      "sources": [
+        {
+          "path": "content/volumes/system-design/SD-03-generative-ai-system-design/chapters/01-designing-with-a-model-in-the-request-path.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-03-generative-ai-system-design/chapters/02-retrieval-augmented-generation-architecture.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-03-generative-ai-system-design/chapters/03-agentic-workflows-tools-and-orchestration.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-03-generative-ai-system-design/chapters/04-evaluation-guardrails-and-operating-a-probabilistic-system.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-03-generative-ai-system-design/chapters/05-the-genai-design-interview-method-and-worked-cases.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-03-generative-ai-system-design/exercises/generative-ai-design-drills.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-03-generative-ai-system-design/solutions/generative-ai-design-solutions.md"
+        }
+      ]
     }
   ]
 }

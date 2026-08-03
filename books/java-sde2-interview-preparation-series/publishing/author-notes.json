@@ -38,5 +38,6 @@
   "SPRINGX": "The Spring ecosystem is broad, so this book teaches selection judgment rather than annotation collecting. Add an extension only when its lifecycle and failure semantics fit the problem you actually have.",
   "SPRINGAI": "AI integration is still backend engineering: bounded inputs, explicit data exposure, deterministic fallbacks, evaluation, and observability matter more than a polished demo prompt.",
   "18F": "Good backend design begins with domain rules and failure boundaries before patterns or diagrams. Make the contract testable, then choose the smallest design that protects it.",
-  "18J": "In system design, the boxes are the easy part. Spend your explanation on load, state, consistency, failure, recovery, and the evidence that tells operators which assumption broke."
+  "18J": "In system design, the boxes are the easy part. Spend your explanation on load, state, consistency, failure, recovery, and the evidence that tells operators which assumption broke.",
+  "GENAI": "A model in the request path is still a dependency with a latency budget, a bill, and a failure mode. Estimate the tokens before you draw the boxes, push authorization into the query rather than trusting a prompt, and decide what your system does on the day the provider is down. The judgement being tested is the same one you already use on any distributed system; only the component is unfamiliar."
 }
