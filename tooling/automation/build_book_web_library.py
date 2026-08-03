@@ -21,6 +21,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[2]
 BOOK_ROOT = ROOT / "books" / "java-sde2-interview-preparation-series"
 SERIES_SPEC = BOOK_ROOT / "publishing" / "series.json"
+AUTHOR_NOTES_PATH = BOOK_ROOT / "publishing" / "author-notes.json"
 ARTIFACT_MANIFEST = BOOK_ROOT / "dist" / "manifest.json"
 REPOSITORY = "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook"
 BOOK_REPOSITORY_PATH = "books/java-sde2-interview-preparation-series"
@@ -65,8 +66,8 @@ def source_url(path: Path) -> str:
     return f"{REPOSITORY}/blob/master/{BOOK_REPOSITORY_PATH}/{path.as_posix()}"
 
 
-def pdf_url(filename: str) -> str:
-    return f"{REPOSITORY}/raw/refs/heads/master/{BOOK_REPOSITORY_PATH}/dist/{filename}"
+def pdf_url(artifact_path: str) -> str:
+    return f"{REPOSITORY}/raw/refs/heads/master/{BOOK_REPOSITORY_PATH}/dist/{artifact_path}"
 
 
 def safe_html(value: str) -> str:
@@ -130,6 +131,16 @@ def resolve_local_target(source_path: Path, target: str) -> Path | None:
     if not clean or clean.startswith(("#", "http://", "https://", "mailto:", "data:")):
         return None
     candidates = [BOOK_ROOT / clean, BOOK_ROOT / source_path.parent / clean]
+    if Path(clean).suffix.lower() == ".pdf":
+        candidates.extend(
+            [
+                BOOK_ROOT / "dist" / clean,
+                BOOK_ROOT / "dist" / "00-start-here" / clean,
+            ]
+        )
+        matches = list((BOOK_ROOT / "dist").rglob(Path(clean).name))
+        if len(matches) == 1:
+            candidates.append(matches[0])
     for candidate in candidates:
         resolved = candidate.resolve()
         if resolved.is_file() and (resolved == BOOK_ROOT.resolve() or BOOK_ROOT.resolve() in resolved.parents):
@@ -192,14 +203,17 @@ def generate_code_page(
         if count:
             rows.append(f"| [{entry['title']}]({entry['output']}) | {count} | {entry['group']} |")
 
-    companion = volume.get("code_companion")
-    companion_section = ""
-    if companion:
+    companions = []
+    if volume.get("code_companion"):
+        companions.append(volume["code_companion"])
+    companions.extend(volume.get("code_companions", []))
+    companion_sections = []
+    for companion in companions:
         companion_path = BOOK_ROOT / companion["path"]
         companion_text = companion_path.read_text(encoding="utf-8")
         companion_source = source_url(Path(companion["path"]))
-        companion_section = f"""
-## Standalone companion
+        companion_sections.append(f"""
+## Standalone companion: {companion['title']}
 
 **{companion['title']}** — {companion['description']}
 
@@ -208,7 +222,8 @@ def generate_code_page(
 ```java linenums="1"
 {companion_text.rstrip()}
 ```
-"""
+""")
+    companion_section = "\n".join(companion_sections)
 
     table = "\n".join(rows) if rows else "| No fenced Java snippets | 0 | Use the linked implementation references |"
     page = f"""# Code and Implementation Index
@@ -235,11 +250,14 @@ This page indexes the Java examples embedded throughout **{volume['title']}**. T
 The book may contain intentionally incorrect snippets for debugging or output prediction. Their surrounding text identifies the intended learning purpose.
 """
     (volume_dir / "code.md").write_text(page, encoding="utf-8")
-    return "Code and implementation index", total_fences + (1 if companion else 0)
+    return "Code and implementation index", total_fences + len(companions)
 
 
-def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], int, int]:
+def build_library(
+    staging_docs: Path,
+) -> tuple[list[dict[str, Any]], list[Any], int, int, dict[str, tuple[str, str]]]:
     spec = read_json(SERIES_SPEC)
+    author_notes = read_json(AUTHOR_NOTES_PATH)
     manifest = read_json(ARTIFACT_MANIFEST)
     artifacts = {str(item["id"]): item for item in manifest["volumes"]}
     volumes = {str(item["id"]): item for item in spec["volumes"]}
@@ -256,6 +274,11 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
         volume["segment_code"] = f"{segment['code']} {segment_position:02d}"
         volume["segment_position"] = segment_position
         volume["segment_count"] = len(segment["books"])
+        volume["artifact_path"] = str(Path(segment["artifact_dir"]) / volume["output_name"])
+        volume["legacy_path_labels"] = list(
+            spec.get("legacy_path_labels", {}).get(str(volume_id), [])
+        )
+        volume["author_note"] = str(author_notes[str(volume_id)])
         ordered.append(volume)
 
     (staging_docs / "assets").mkdir(parents=True, exist_ok=True)
@@ -266,6 +289,7 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
 
     nav_groups: dict[str, list[Any]] = defaultdict(list)
     built_books: list[dict[str, Any]] = []
+    legacy_redirects: dict[str, tuple[str, str]] = {}
     total_documents = 0
     total_code_examples = 0
 
@@ -302,7 +326,7 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
             else:
                 next_href = "../code/"
                 next_label = "Code and implementation index"
-            page = f"""{context_bar(label=f"{volume['segment_code']} · {volume['short_title']}", overview_href='../', code_href='../code/', pdf_href=pdf_url(volume['output_name']))}
+            page = f"""{context_bar(label=f"{volume['segment_code']} · {volume['short_title']}", overview_href='../', code_href='../code/', pdf_href=pdf_url(volume['artifact_path']))}
 
 {study_status(segment_code=volume['segment_code'], book_position=volume['segment_position'], book_count=volume['segment_count'], chapter_position=position, chapter_count=len(markdown_sources))}
 
@@ -325,7 +349,7 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
             )
 
         code_title, code_examples = generate_code_page(
-            volume, source_entries, volume_dir, pdf_url(volume["output_name"])
+            volume, source_entries, volume_dir, pdf_url(volume["artifact_path"])
         )
         total_code_examples += code_examples
         total_documents += len(source_entries)
@@ -362,7 +386,7 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
         source_word_count = sum(len(re.findall(r"\b[\w'-]+\b", entry["text"])) for entry in source_entries)
         index_page = f"""# {volume['title']}
 
-{context_bar(label=f"{volume['segment_code']} · {volume['short_title']}", overview_href=None, code_href='code/', pdf_href=pdf_url(volume['output_name']))}
+{context_bar(label=f"{volume['segment_code']} · {volume['short_title']}", overview_href=None, code_href='code/', pdf_href=pdf_url(volume['artifact_path']))}
 
 {study_status(segment_code=volume['segment_code'], book_position=volume['segment_position'], book_count=volume['segment_count'])}
 
@@ -381,10 +405,15 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
 
 {volume['purpose']}
 
+<aside class="reader-author-note">
+  <strong>A note from Vinay</strong>
+  <p>{safe_html(volume['author_note'])}</p>
+</aside>
+
 <div class="book-primary-actions">
   <a href="{Path(source_entries[0]['output']).stem}/" class="md-button md-button--primary">Start reading</a>
   <a href="code/" class="md-button">Browse code</a>
-  <a href="{pdf_url(volume['output_name'])}" class="md-button">Download PDF</a>
+  <a href="{pdf_url(volume['artifact_path'])}" class="md-button">Download PDF</a>
   {quick_href}
 </div>
 
@@ -428,22 +457,22 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
                 "documents": len(source_entries),
                 "code_examples": code_examples,
                 "word_count": source_word_count,
-                "pdf": pdf_url(volume["output_name"]),
+                "pdf": pdf_url(volume["artifact_path"]),
             }
         )
 
-        legacy_slug = f"{volume_id.lower()}-{volume['slug']}"
-        if legacy_slug != slug:
-            legacy_dir = staging_docs / legacy_slug
-            legacy_dir.mkdir(parents=True, exist_ok=True)
-            (legacy_dir / "index.md").write_text(
-                f'''<meta http-equiv="refresh" content="0; url=../{slug}/">
-
-# This book moved
-
-[Continue to {volume['segment_code']}: {volume['title']}](../{slug}/index.md)
-''',
-                encoding="utf-8",
+        legacy_slugs = {
+            f"{volume_id.lower()}-{volume['slug']}",
+            *{
+                f"{str(label).lower()}-{volume['slug']}"
+                for label in volume.get("legacy_path_labels", [])
+            },
+        }
+        legacy_slugs.discard(slug)
+        for legacy_slug in sorted(legacy_slugs):
+            legacy_redirects[legacy_slug] = (
+                slug,
+                f"{volume['segment_code']}: {volume['title']}",
             )
 
     library_rows = "\n".join(
@@ -452,15 +481,16 @@ def build_library(staging_docs: Path) -> tuple[list[dict[str, Any]], list[Any], 
     )
     library_page = f"""# Java SDE-2 Learning Library
 
-Choose **Java Engineering**, **Data Structures and Algorithms**, or **System Design and Backend**. Follow the books inside your selected segment in order. Every book is available on the web and as a matching PDF; these are two formats of the same curriculum. The library contains **{len(built_books)} focused books**, **{total_documents} web documents**, and **{total_code_examples} indexed code entries** generated from canonical sources.
+Choose **Java Engineering**, **Data Structures and Algorithms**, **Frameworks, Data, and Messaging**, or **System Design**. Follow the books inside your selected segment in order. Every book is available on the web and as a matching PDF; these are two formats of the same curriculum. The library contains **{len(built_books)} focused books**, **{total_documents} web documents**, and **{total_code_examples} indexed code entries** generated from canonical sources.
 
 !!! tip "Choose before you begin"
-    New to Java? Start with JAVA 01. Preparing for coding rounds? Start with DSA 01. Preparing for backend and architecture rounds? Start with SD 01. A roadmap edition shows committed scope and ordering while its complete chapter set is developed.
+    New to Java? Start with JAVA 01. Preparing for coding rounds? Start with DSA 01. Preparing for Java backend rounds? Start with FW 01. Start SD 01 after the framework and data contracts are comfortable. All 40 books are publication editions; use each entry check and completion check to skip only what you can already explain and implement.
 
 <div class="library-route-grid">
-  <a href="01-java-foundations-for-problem-solving/"><strong>JAVA 01</strong><span>Language, tooling, runtime, and Java engineering</span></a>
-  <a href="02-time-and-space-complexity/"><strong>DSA 01</strong><span>Complexity, patterns, structures, and algorithms</span></a>
-  <a href="18f-design-backend-testing-and-security/"><strong>SD 01</strong><span>Backend foundations, data, Spring, and distributed systems</span></a>
+  <a href="java-01-java-foundations-for-problem-solving/"><strong>JAVA 01</strong><span>Language, tooling, runtime, and Java engineering</span></a>
+  <a href="dsa-01-time-and-space-complexity/"><strong>DSA 01</strong><span>Complexity, patterns, structures, and algorithms</span></a>
+  <a href="fw-01-mysql/"><strong>FW 01</strong><span>SQL, persistence, Spring, data stores, and messaging</span></a>
+  <a href="sd-01-design-backend-testing-and-security/"><strong>SD 01</strong><span>Service boundaries and distributed-system decisions</span></a>
 </div>
 
 | Segment | Code | Continue on the web | Book | Edition | Chapters | Code | PDF pages | Offline |
@@ -470,9 +500,36 @@ Choose **Java Engineering**, **Data Structures and Algorithms**, or **System Des
     (staging_docs / "index.md").write_text(library_page, encoding="utf-8")
 
     nav = [{"Choose a Segment": "index.md"}]
-    for name in ("Java Engineering", "Data Structures and Algorithms", "System Design and Backend"):
-        nav.append({name: nav_groups[name]})
-    return built_books, nav, total_documents, total_code_examples
+    for segment in spec["segments"]:
+        nav.append({segment["title"]: nav_groups[segment["title"]]})
+    return built_books, nav, total_documents, total_code_examples, legacy_redirects
+
+
+def write_legacy_redirects(
+    site_dir: Path, redirects: dict[str, tuple[str, str]]
+) -> None:
+    """Preserve old routes without advertising duplicate pages in the sitemap."""
+    for legacy_slug, (canonical_slug, label) in redirects.items():
+        destination = site_dir / legacy_slug / "index.html"
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        canonical_url = f"{PRODUCTION_ROOT}/books/{canonical_slug}/"
+        destination.write_text(
+            f'''<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex,follow">
+  <meta http-equiv="refresh" content="0; url=../{canonical_slug}/">
+  <link rel="canonical" href="{canonical_url}">
+  <title>This book moved</title>
+</head>
+<body>
+  <p>This route moved to <a href="../{canonical_slug}/">{safe_html(label)}</a>.</p>
+</body>
+</html>
+''',
+            encoding="utf-8",
+        )
 
 
 def write_config(path: Path, docs_dir: Path, nav: list[Any]) -> None:
@@ -536,7 +593,7 @@ def main() -> int:
         work = Path(temporary)
         docs_dir = work / "docs"
         docs_dir.mkdir()
-        books, nav, documents, code_examples = build_library(docs_dir)
+        books, nav, documents, code_examples, legacy_redirects = build_library(docs_dir)
         config_path = work / "mkdocs.yml"
         write_config(config_path, docs_dir, nav)
         subprocess.run(
@@ -555,6 +612,8 @@ def main() -> int:
             cwd=ROOT,
             check=True,
         )
+
+    write_legacy_redirects(site_dir, legacy_redirects)
 
     missing = []
     for book in books:

@@ -21,7 +21,8 @@ DEFAULT_OUT = (
     ROOT
     / "content"
     / "volumes"
-    / "01-number-systems-and-math-foundations"
+    / "dsa"
+    / "DSA-02-03-number-systems-and-math-foundations"
     / "assets"
 )
 

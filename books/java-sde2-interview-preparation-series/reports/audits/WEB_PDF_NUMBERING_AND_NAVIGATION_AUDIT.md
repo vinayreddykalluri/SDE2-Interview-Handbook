@@ -33,10 +33,10 @@ Stable PDF filenames retain their historical technical IDs so repository links, 
 
 | Book | Study Step | Title | Canonical web route | Stable PDF filename |
 |---:|---:|---|---|---|
-| 1 | 01 | Java Foundations for Problem Solving | `books/01-java-foundations-for-problem-solving/` | `Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf` |
-| 2 | 02 | Time and Space Complexity | `books/02-time-and-space-complexity/` | `Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf` |
-| 3 | 03A | Number Systems and Math Foundations | `books/03a-number-systems-and-math-foundations/` | `Java-SDE2-DSA-01-Number-Systems-and-Math-Foundations.pdf` |
-| 4 | 03B | Number Systems Interview Workbook | `books/03b-number-systems-interview-workbook/` | `Java-SDE2-DSA-01B-Number-Systems-Interview-Workbook.pdf` |
+| 1 | 01 | Java Foundations for Problem Solving | `books/01-java-foundations-for-problem-solving/` | `Java-SDE2-JAVA-01-Java-Foundations-for-Problem-Solving.pdf` |
+| 2 | 02 | Time and Space Complexity | `books/02-time-and-space-complexity/` | `Java-SDE2-DSA-01-Time-and-Space-Complexity.pdf` |
+| 3 | 03A | Number Systems and Math Foundations | `books/03a-number-systems-and-math-foundations/` | `Java-SDE2-DSA-02-Number-Systems-and-Math-Foundations.pdf` |
+| 4 | 03B | Number Systems Interview Workbook | `books/03b-number-systems-interview-workbook/` | `Java-SDE2-DSA-03-Number-Systems-Interview-Workbook.pdf` |
 | 5 | 04 | Bit Manipulation | `books/04-bit-manipulation-in-java/` | `Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf` |
 | 6 | 05 | Loop Mastery and Index Calculations | `books/05-loop-mastery-and-index-calculations/` | `Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf` |
 | 7 | 06 | Arrays and Array Patterns | `books/06-arrays-and-array-patterns/` | `Java-SDE2-DSA-06-Arrays-and-Array-Patterns.pdf` |
@@ -51,16 +51,16 @@ Stable PDF filenames retain their historical technical IDs so repository links, 
 | 16 | 15 | Graphs | `books/15-graphs/` | `Java-SDE2-DSA-15-Graphs.pdf` |
 | 17 | 16 | Greedy Algorithms | `books/16-greedy-algorithms/` | `Java-SDE2-DSA-16-Greedy-Algorithms.pdf` |
 | 18 | 17 | Dynamic Programming | `books/17-dynamic-programming/` | `Java-SDE2-DSA-17-Dynamic-Programming.pdf` |
-| 19 | 18A | JVM and Execution | `books/18a-jvm-and-execution/` | `Java-SDE2-ADV-18A-JVM-and-Execution.pdf` |
-| 20 | 18B | Language, OOP, and Modern Java | `books/18b-language-oop-and-modern-java/` | `Java-SDE2-ADV-18B-Language-OOP-and-Modern-Java.pdf` |
-| 21 | 18C | Collections, Streams, and I/O | `books/18c-collections-streams-and-io/` | `Java-SDE2-ADV-18C-Collections-Streams-and-IO.pdf` |
-| 22 | 18D | Concurrency and Memory Model | `books/18d-concurrency-and-memory-model/` | `Java-SDE2-ADV-18D-Concurrency-and-Memory-Model.pdf` |
-| 23 | 18E | Performance, Diagnostics, and GC | `books/18e-performance-diagnostics-and-gc-incidents/` | `Java-SDE2-ADV-18E-Performance-Diagnostics-and-GC.pdf` |
-| 24 | 18F | Design, Backend, Testing, and Security | `books/18f-design-backend-testing-and-security/` | `Java-SDE2-ADV-18F-Design-Backend-Testing-and-Security.pdf` |
-| 25 | 18G | Question Bank and Study Plan | `books/18g-question-bank-study-plan-and-reference/` | `Java-SDE2-ADV-18G-Question-Bank-Study-Plan-and-Reference.pdf` |
-| 26 | 18H | Spring Boot and REST | `books/18h-spring-boot-and-rest/` | `Java-SDE2-ADV-18H-Spring-Boot-and-REST.pdf` |
-| 27 | 18I | Persistence, SQL, JPA, and Caching | `books/18i-persistence-sql-and-caching/` | `Java-SDE2-ADV-18I-Persistence-SQL-and-Caching.pdf` |
-| 28 | 18J | Distributed Systems and System Design | `books/18j-distributed-systems-and-system-design/` | `Java-SDE2-ADV-18J-Distributed-Systems-and-System-Design.pdf` |
+| 19 | 18A | JVM and Execution | `books/18a-jvm-and-execution/` | `Java-SDE2-JAVA-06-JVM-and-Execution.pdf` |
+| 20 | 18B | Language, OOP, and Modern Java | `books/18b-language-oop-and-modern-java/` | `Java-SDE2-JAVA-04-Language-OOP-and-Modern-Java.pdf` |
+| 21 | 18C | Collections, Streams, and I/O | `books/18c-collections-streams-and-io/` | `Java-SDE2-JAVA-05-Collections-Streams-and-IO.pdf` |
+| 22 | 18D | Concurrency and Memory Model | `books/18d-concurrency-and-memory-model/` | `Java-SDE2-JAVA-07-Concurrency-and-Memory-Model.pdf` |
+| 23 | 18E | Performance, Diagnostics, and GC | `books/18e-performance-diagnostics-and-gc-incidents/` | `Java-SDE2-JAVA-08-Performance-Diagnostics-and-GC-Incidents.pdf` |
+| 24 | 18F | Design, Backend, Testing, and Security | `books/18f-design-backend-testing-and-security/` | `Java-SDE2-SD-01-Design-Backend-Testing-and-Security.pdf` |
+| 25 | 18G | Question Bank and Study Plan | `books/18g-question-bank-study-plan-and-reference/` | `Java-SDE2-JAVA-09-Question-Bank-Study-Plan-and-Reference.pdf` |
+| 26 | 18H | Spring Boot and REST | `books/18h-spring-boot-and-rest/` | `Java-SDE2-FW-05-Spring-Boot-and-REST.pdf` |
+| 27 | 18I | Persistence, SQL, JPA, and Caching | `books/18i-persistence-sql-and-caching/` | `Java-SDE2-FW-09-Persistence-SQL-and-Caching.pdf` |
+| 28 | 18J | Distributed Systems and System Design | `books/18j-distributed-systems-and-system-design/` | `Java-SDE2-SD-02-Distributed-Systems-and-System-Design.pdf` |
 
 ## Web study experience
 

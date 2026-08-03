@@ -17,7 +17,7 @@ Arrays and strings dominate coding screens because they expose reasoning without
 
 At SDE-2, naming "sliding window" is not sufficient. You must explain why shrinking restores validity, why no candidate is skipped, whether negative values break monotonicity, and whether a map stores the earliest index, latest index, frequency, or count of prefix states. Those details are the algorithm.
 
-> **Focused prerequisites:** Study Step 03A establishes numeric boundaries, prefix sums under modulo, and safe index arithmetic. The topic then continues through Study Steps 05-08 for loops and indices, arrays, strings, and hashing. Use the series index PDF for the ordered filenames.
+> **Focused prerequisites:** Number Systems (`DSA-02`) establishes numeric boundaries, prefix sums under modulo, and safe index arithmetic. Continue through `DSA-05` to `DSA-08` for loops and indices, arrays, strings, and hashing. Use the series index PDF for the ordered filenames.
 
 ## First-principles model
 

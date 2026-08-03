@@ -219,10 +219,6 @@ theme:
 
 plugins:
   - search
-  - git-revision-date-localized:
-      enable_creation_date: true
-      enable_git_follow: true
-      type: date
 
 extra_css:
   - assets/css/extra.css

@@ -48,6 +48,13 @@ jobs:
       - name: Validate focused series and Java companions
         run: python scripts/validate_series.py --source-only
 
+      # The deterministic release preflight checks all four segment assignments
+      # across series.json, the portal catalog, and dist/manifest.json. It does
+      # not build or require the large PDF files in a source-validation job.
+      - name: Validate synchronized web catalog and artifact metadata
+        working-directory: .
+        run: python tooling/automation/build_all.py --check-only
+
       - name: Compile master Java examples
         run: |
           mkdir -p examples/java/build/classes

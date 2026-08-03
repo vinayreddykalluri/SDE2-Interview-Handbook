@@ -92,3 +92,7 @@ Before enhancement, Volume 07 produced a 32-page PDF from selected portions of b
 ## Audit conclusion
 
 The previous volume was a useful SDE-2 outline but not a publishable beginner-to-SDE-2 learning path. The enhanced canonical volume now contains 15,657 words across seven focused teaching chapters, a separated 78-item lab and solution guide, ten reproducible diagrams, and one strict Java 21 companion. It preserves the existing publishing system and stable PDF identity while closing the foundational, algorithmic, practice, and validation gaps.
+
+## 2026-08-02 depth pass
+
+The new contract/interview chapter distinguishes UTF-16 units, code points, and grapheme clusters before choosing an algorithm. It adds negative-accumulation integer parsing, a full KMP prefix-state dry run, normalization/locale boundaries, a ten-case failure matrix, six live interviews, and twelve rapid model answers. The added companion differential-tests parsing and KMP behavior and verifies that code-point reversal preserves a supplementary character.

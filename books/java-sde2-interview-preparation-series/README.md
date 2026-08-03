@@ -7,32 +7,24 @@
 
 This is the canonical book workspace inside the consolidated [SDE2 Interview Handbook](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook). It contains the editable Markdown, Java 21 companions, diagrams, publishing configuration, validation evidence, and reviewed release PDFs.
 
-[![Cover of the Java SDE-2 Interview Preparation Series Index](assets/covers/series-index-cover.png)](dist/Java-SDE2-Interview-Preparation-Series-Index.pdf)
+[![Cover of the Java SDE-2 Interview Preparation Series Index](assets/covers/series-index-cover.png)](dist/00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf)
 
-> Choose Java Engineering, Data Structures and Algorithms, or System Design and Backend. Start at Book 01 inside that segment and continue in order.
+> Choose Java Engineering, Data Structures and Algorithms, Frameworks/Data/Messaging, or System Design. Start at Book 01 inside that segment and continue in order.
 
 ## Read or download
 
-The library contains 40 focused books (2,684 pages), one 17-page series index, and one 616-page master book: 42 PDFs and 3,317 pages in total. Eight clearly marked roadmap editions establish the sequence and intended depth for topics that will be expanded one by one. JAVA 02 - Git and GitHub, JAVA 03 - Maven and Gradle, SD 04 - Spring Framework, and SD 05 - Spring Boot are publication editions with executable labs and interview simulations.
+The library contains 40 published focused books (3,371 pages), one 18-page series index, and one 616-page master reference: 42 PDFs and 4,005 pages in total. Its publishing manifest declares 403 source entries that resolve to 396 unique mapped Markdown documents. Every focused volume is a publication edition with prerequisite-aware chapters, worked examples, answered interview rounds, exercises, and executable validation evidence.
 
 - [Download the complete release](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest)
-- [Open the series index](dist/Java-SDE2-Interview-Preparation-Series-Index.pdf)
-- [Open the complete individual-PDF reading order](dist/00-START-HERE.md)
-- [Start with Java Foundations](dist/Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf)
-- [Study Git and GitHub](dist/Java-SDE2-JAVA-02-Git-and-GitHub.pdf)
-- [Study Maven and Gradle](dist/Java-SDE2-JAVA-03-Maven-and-Gradle.pdf)
-- [Study Spring Framework](dist/Java-SDE2-SD-04-Spring-Framework.pdf)
-- [Study Spring Boot](dist/Java-SDE2-SD-05-Spring-Boot.pdf)
-- [Continue to Time and Space Complexity](dist/Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf)
-- [Study Number Systems](dist/Java-SDE2-DSA-01-Number-Systems-and-Math-Foundations.pdf)
-- [Open the Number Systems workbook](dist/Java-SDE2-DSA-01B-Number-Systems-Interview-Workbook.pdf)
-- [Study Bit Manipulation](dist/Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf)
-- [Study Loop Mastery](dist/Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf)
-- [Study Arrays](dist/Java-SDE2-DSA-06-Arrays-and-Array-Patterns.pdf)
-- [Study Strings](dist/Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf)
-- [Open the complete master book](dist/java-sde2-interview-book.pdf)
+- [Open the series index](dist/00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf)
+- [Open the complete individual-PDF reading order](dist/00-start-here/README.md)
+- [Start with Java Foundations](dist/01-java/Java-SDE2-JAVA-01-Java-Foundations-for-Problem-Solving.pdf)
+- [Continue to Time and Space Complexity](dist/02-dsa/Java-SDE2-DSA-01-Time-and-Space-Complexity.pdf)
+- [Start the backend framework path with MySQL](dist/03-frameworks/Java-SDE2-FW-01-MySQL.pdf)
+- [Start System Design](dist/04-system-design/Java-SDE2-SD-01-Design-Backend-Testing-and-Security.pdf)
+- [Open the complete master book](dist/00-start-here/java-sde2-interview-book.pdf)
 
-The three segment sequences, prerequisites, and completion gates are in [the series roadmap](docs/roadmap.md). To create actual segment-prefixed folders containing all 42 PDFs, see [PDF library organization](docs/pdf-library-organization.md) or run `python3 scripts/organize_pdf_library.py`.
+The four segment sequences, prerequisites, and completion gates are in [the series roadmap](docs/roadmap.md). The canonical `dist/` directory already uses segment folders; run `python3 scripts/organize_pdf_library.py --check` to validate the organization or omit `--check` to copy it elsewhere.
 
 ## Directory map
 
@@ -40,7 +32,7 @@ The three segment sequences, prerequisites, and completion gates are in [the ser
 .
 |-- content/
 |   |-- master/             Master-book chapters and appendices
-|   +-- volumes/            Focused books with chapters, exercises, solutions, code, and assets
+|   +-- volumes/            Focused books grouped under java, dsa, frameworks, and system-design
 |-- examples/java/          Maven-based Java 21 examples used by the master book
 |-- assets/
 |   |-- covers/             Reader-facing cover previews
@@ -48,7 +40,7 @@ The three segment sequences, prerequisites, and completion gates are in [the ser
 |-- publishing/
 |   |-- series.json         Canonical learning order and physical-PDF manifest
 |   +-- assets/             Shared publishing artwork
-|-- dist/                   Reviewed PDFs, master DOCX/Markdown, and integrity manifest
+|-- dist/                   Reviewed PDFs grouped into start-here, Java, DSA, frameworks, and system design
 |-- reports/                Audits, coverage, validation, build evidence, and change logs
 |-- docs/                   Editorial standard and series roadmap
 |-- scripts/                Existing build, diagram, validation, and visual-QA tools
@@ -110,8 +102,8 @@ Repository-wide policies are canonical; the book workspace does not maintain com
 
 Useful contributions include accuracy corrections, prerequisite-first rewrites, runnable edge cases, diagrams, exercises, solution explanations, accessibility improvements, and PDF layout reports. Start from a `help wanted`, `good first issue`, or `book` issue so parallel work stays coordinated.
 
-The current expansion campaign is tracked in [issue #27](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/27). Individual issues [#16](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/16) through [#26](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/26) cover Strings, Hashing, Recursion, Linked Lists, Stacks and Queues, Binary Search, Trees, Heaps, Graphs, Greedy, and Dynamic Programming.
+The completed four-series expansion campaign is documented in [issue #27](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/27). Open a focused issue for an accuracy correction, new adversarial test, clearer diagram, stronger solution, accessibility repair, or PDF/web layout defect.
 
 ## Editorial responsibility
 
-Vinay Reddy Kalluri is the series creator, founding author, Editor-in-Chief, and Chief Auditor. Individual contributors retain credit for accepted original work through the [repository authorship record](../../docs/community/authors.md), Git history, and pull requests.
+Vinay Reddy Kalluri is the author and editor of the series. He also owns the final technical audit and publication decision. Individual contributors retain credit for accepted original work through the [repository authorship record](../../docs/community/authors.md), Git history, and pull requests.

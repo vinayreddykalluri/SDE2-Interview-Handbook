@@ -1,7 +1,7 @@
 # Time and Space Complexity Content Audit
 
 Audit date: 2026-07-26  
-Canonical PDF: `dist/Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf`
+Canonical PDF: `dist/02-dsa/Java-SDE2-DSA-01-Time-and-Space-Complexity.pdf`
 
 ## Condition before improvement
 
@@ -86,3 +86,7 @@ This sequence deliberately begins with executable work, adds notation only after
 ## Scope decision
 
 The final volume teaches complexity analysis rather than every algorithm. It uses arrays, strings, recursion, and collections as analysis examples, then cross-references Number Systems and later DSA books for full problem-pattern coverage. Number Systems teaching content was not modified.
+
+## 2026-08-02 depth pass
+
+The stricter series-wide audit found that topic coverage alone did not provide enough visible derivation. The new amortized/recurrence/live-interview chapter adds a level-by-level recurrence tree, a bounded geometric-copy proof, aggregate pointer analysis, live-memory space reasoning, an eight-case failure matrix, six answered interview rounds, twelve rapid model answers, and executable evidence. `ComplexityDeepDiveExamples.java` validates geometric copy count, total pointer movement, and repeated-versus-memoized recursion state.

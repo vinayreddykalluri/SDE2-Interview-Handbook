@@ -16,9 +16,9 @@ SD 04 is now a publication edition. The existing publisher rebuilt the canonical
 
 ## Canonical sources
 
-- 21 Markdown chapters under `content/volumes/SD04-spring-framework/chapters/`.
-- One dependency-free Java 21 companion under `content/volumes/SD04-spring-framework/code/`.
-- One Maven Spring Framework behavior fixture under `content/volumes/SD04-spring-framework/labs/`.
+- 21 Markdown chapters under `content/volumes/frameworks/FW-03-spring-framework/chapters/`.
+- One dependency-free Java 21 companion under `content/volumes/frameworks/FW-03-spring-framework/code/`.
+- One Maven Spring Framework behavior fixture under `content/volumes/frameworks/FW-03-spring-framework/labs/`.
 
 ## Content result
 
@@ -40,7 +40,7 @@ python3 scripts/build_series.py --volume SPRING
 ## Validation commands
 
 ```bash
-bash content/volumes/SD04-spring-framework/labs/validate_spring_framework_labs.sh
+bash content/volumes/frameworks/FW-03-spring-framework/labs/validate_spring_framework_labs.sh
 python3 scripts/validate_series.py --source-only
 python3 scripts/validate_series.py
 make PYTHON=python3 sync-book-catalog
@@ -57,7 +57,7 @@ make PYTHON=python3 check-book-catalog validate
 
 ## Final artifact and QA
 
-- Final PDF: `dist/Java-SDE2-SD-04-Spring-Framework.pdf`.
+- Final PDF: `dist/Java-SDE2-FW-03-Spring-Framework.pdf`.
 - Final page count: 122.
 - Final file size: 3,963,607 bytes.
 - Final SHA-256: `f2368011b48bec566bcdfaf3b2aa3e44de55628304f152acbb7780b68c21d991`.

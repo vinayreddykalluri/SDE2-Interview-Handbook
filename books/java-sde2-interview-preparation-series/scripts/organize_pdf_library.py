@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create a reader-facing PDF library without moving stable release artifacts."""
+"""Validate or copy the canonical four-segment PDF library."""
 
 from __future__ import annotations
 
@@ -53,15 +53,14 @@ def validate(spec: dict) -> list[dict]:
     for ordinal, volume_id in enumerate(order, start=1):
         volume = volumes[volume_id]
         path_label = str(path_labels[volume_id])
-        source = DIST / volume["output_name"]
+        segment, segment_position = segment_by_book[volume_id]
+        source = DIST / segment["artifact_dir"] / volume["output_name"]
         if not source.is_file():
             raise FileNotFoundError(f"missing focused PDF: {source}")
         if volume["output_name"] in seen_outputs:
             raise ValueError(f"duplicate output name: {volume['output_name']}")
         seen_outputs.add(volume["output_name"])
-        segment, segment_position = segment_by_book[volume_id]
-        segment_number = spec["segments"].index(segment) + 1
-        directory = f"{segment_number:02d}-{segment['id']}"
+        directory = segment["artifact_dir"]
         group_title = f"{segment['title']} - {len(segment['books'])} Books"
         assignments.append({
             "ordinal": ordinal,
@@ -72,15 +71,18 @@ def validate(spec: dict) -> list[dict]:
             "group_title": group_title,
             "segment": segment,
             "segment_position": segment_position,
-            "reader_name": f"{segment['code']}-{segment_position:02d}-{volume['output_name']}",
+            "reader_name": volume["output_name"],
         })
 
     expected = len(spec["volumes"])
     if len(assignments) != expected:
         raise ValueError(f"expected {expected} focused PDFs, found {len(assignments)}")
-    for filename in (INDEX_NAME, spec["master_artifact"]["file"]):
-        if not (DIST / filename).is_file():
-            raise FileNotFoundError(f"missing reference PDF: {DIST / filename}")
+    for relative in (
+        spec.get("index_artifact", f"00-start-here/{INDEX_NAME}"),
+        spec["master_artifact"].get("artifact_path", spec["master_artifact"]["file"]),
+    ):
+        if not (DIST / relative).is_file():
+            raise FileNotFoundError(f"missing reference PDF: {DIST / relative}")
     return assignments
 
 
@@ -93,11 +95,11 @@ def build_readme(spec: dict, assignments: list[dict]) -> str:
     lines = [
         "# Organized Java SDE-2 PDF Library",
         "",
-        "Choose Java, DSA, or System Design and Backend, then read the books inside",
+        "Choose Java, DSA, Frameworks, or System Design, then read the books inside",
         "that segment in order. Segment codes are shared by the website, PDF cover, and this folder.",
         "",
-        "This directory is generated from `publishing/series.json`. Canonical reviewed",
-        "artifacts remain in `dist/`, so repository links and release filenames do not break.",
+        "This directory is generated from `publishing/series.json` and mirrors the canonical",
+        "four-segment layout under `dist/`. GitHub release assets retain their flat filenames.",
         "",
         "## Start here",
         "",
@@ -134,12 +136,17 @@ def copy_library(spec: dict, assignments: list[dict], output: Path) -> None:
     for directory in sorted(directories):
         (output / directory).mkdir(parents=True, exist_ok=True)
 
-    reference_files = (INDEX_NAME, spec["master_artifact"]["file"])
-    for filename in reference_files:
-        source = DIST / filename
+    reference_files = (
+        spec.get("index_artifact", f"00-start-here/{INDEX_NAME}"),
+        spec["master_artifact"].get("artifact_path", spec["master_artifact"]["file"]),
+    )
+    for relative in reference_files:
+        source = DIST / relative
         if not source.is_file():
             raise FileNotFoundError(f"missing reference PDF: {source}")
-        shutil.copy2(source, output / "00-start-here" / filename)
+        destination = output / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, destination)
 
     for item in assignments:
         shutil.copy2(item["source"], output / item["directory"] / item["reader_name"])
@@ -157,7 +164,7 @@ def main() -> None:
         return
     copy_library(spec, assignments, args.output)
     print(f"organized {len(assignments) + 2} PDFs under {args.output.resolve()}")
-    print("stable canonical artifacts remain unchanged in dist/")
+    print("canonical four-segment artifacts remain unchanged in dist/")
 
 
 if __name__ == "__main__":

@@ -1,8 +1,8 @@
 # Learning Portal
 
-The portal is the responsive entry point to the canonical Java SDE-2 curriculum. It explains the single learning order, renders the 28-book catalog, and keeps web reading and PDF download choices together at every step.
+The portal is the responsive entry point to the canonical Java SDE-2 curriculum. It presents 40 books across four focused segments and keeps web reading and PDF download choices together at every step.
 
-The shared navigation contract is **Home · Choose a segment · Practice · About · GitHub**. Java, DSA, and System Design/Backend are the three curriculum segments. Books are ordered within each segment, and every book exposes its matching PDF as an offline format. Keep those labels and destinations consistent in the portal, the MkDocs theme override, the generated book reader, and the 404 recovery page. Page-level controls must remain contextual; do not add a competing global roadmap.
+The shared navigation contract is **Home · Choose a segment · Practice · About · GitHub**. Java Engineering, DSA, Frameworks/Data/Messaging, and System Design are the four curriculum segments. Books are ordered within each segment, and every book exposes its matching PDF as an offline format. Keep those labels and destinations consistent in the portal, the MkDocs theme override, the generated book reader, and the 404 recovery page. Page-level controls must remain contextual; do not add a competing global roadmap.
 
 The shared theme contract is **System · Light · Dark**. `assets/theme-manager.js` stores one origin-wide preference so the portal, 404 page, handbook, complete books, and code indexes stay visually synchronized. Keep its mirrored MkDocs asset identical; `make validate-web` enforces this.
 
@@ -10,7 +10,7 @@ The shared theme contract is **System · Light · Dark**. `assets/theme-manager.
 
 - `index.html` and `assets/` own portal presentation and behavior.
 - `content/coding-foundations.json` owns compact discovery metadata for the 19 foundation modules.
-- `content/books.json` is a generated catalog for the 28 focused books, complete web-reader and code routes, current PDFs, quick lessons, and canonical Markdown chapter previews.
+- `content/books.json` is a generated catalog for the 40 focused books, complete web-reader and code routes, current PDFs, quick lessons, and every canonical Markdown chapter.
 - Canonical lesson prose remains under `docs/` and is not duplicated here.
 - `tooling/automation/build_book_web_library.py` renders every Markdown source declared by every volume into `site/books/`, with a searchable contents tree and code index.
 - `tooling/automation/build_site.py` copies this shell to `site/`, mounts the concise handbook at `site/docs/`, and builds the complete books at `site/books/`.

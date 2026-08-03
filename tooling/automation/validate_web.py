@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+import argparse
+import hashlib
 import json
 import re
 import shutil
@@ -31,6 +33,8 @@ JAVA = (
 MODULES_FILE = WEB / "content" / "coding-foundations.json"
 BOOKS_FILE = WEB / "content" / "books.json"
 BOOK_DIST = ROOT / "books" / "java-sde2-interview-preparation-series" / "dist"
+ARTIFACT_MANIFEST = BOOK_DIST / "manifest.json"
+SERIES_SPEC = ROOT / "books" / "java-sde2-interview-preparation-series" / "publishing" / "series.json"
 BOOK_WEB_BUILDER = ROOT / "tooling" / "automation" / "build_book_web_library.py"
 BOOK_WEB_CSS = ROOT / "tooling" / "book-web" / "book-reader.css"
 PORTAL_THEME_MANAGER = WEB / "assets" / "theme-manager.js"
@@ -57,6 +61,14 @@ class AssetCollector(HTMLParser):
 
 def fail(errors: list[str], message: str) -> None:
     errors.append(message)
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def validate_local_assets(errors: list[str]) -> None:
@@ -170,7 +182,7 @@ def validate_modules(errors: list[str]) -> None:
         fail(errors, f"Expected 69 Java examples; metadata={metadata_examples}, source={actual_examples}")
 
 
-def validate_books(errors: list[str]) -> None:
+def validate_books(errors: list[str], *, verify_artifact_files: bool) -> None:
     sync = subprocess.run(
         [sys.executable, str(ROOT / "tooling" / "automation" / "sync_book_catalog.py"), "--check"],
         cwd=ROOT,
@@ -193,14 +205,53 @@ def validate_books(errors: list[str]) -> None:
     if not isinstance(books, list) or not isinstance(segments, list) or not isinstance(release, dict):
         fail(errors, "apps/portal/content/books.json must contain segments, release metadata, and a books array")
         return
-    if catalog.get("schemaVersion") != 4:
-        fail(errors, "Book catalog schemaVersion must be 4 for segmented navigation")
+    if catalog.get("schemaVersion") != 5:
+        fail(errors, "Book catalog schemaVersion must be 5 for canonical artifact paths")
     if len(books) != 40:
         fail(errors, f"Expected 40 focused books; found {len(books)}")
+    series_spec = json.loads(SERIES_SPEC.read_text(encoding="utf-8"))
+    try:
+        artifact_manifest = json.loads(ARTIFACT_MANIFEST.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        fail(errors, f"Cannot read {ARTIFACT_MANIFEST.relative_to(ROOT)}: {error}")
+        return
+    artifact_volumes = artifact_manifest.get("volumes")
+    if not isinstance(artifact_volumes, list):
+        fail(errors, "Book artifact manifest must contain a volumes array")
+        return
+    artifact_ids = [str(item.get("id", "")) for item in artifact_volumes]
+    if not all(artifact_ids) or len(artifact_ids) != len(set(artifact_ids)):
+        fail(errors, "Book artifact manifest contains a missing or duplicate volume ID")
+        return
+    expected_ids = [str(item) for item in series_spec["learning_order"]]
+    catalog_ids = [str(item.get("id", "")) for item in books]
+    if catalog_ids != expected_ids:
+        fail(errors, "Book catalog volumes are not in canonical learning order")
+    if artifact_ids != expected_ids:
+        fail(errors, "Book artifact manifest volumes are not in canonical learning order")
+    if artifact_manifest.get("physical_volumes") != len(expected_ids):
+        fail(errors, "Book artifact manifest has an incorrect physical-volume count")
+    artifacts_by_id = {
+        str(item["id"]): item for item in artifact_volumes
+    }
+    if set(artifacts_by_id) != set(expected_ids):
+        fail(errors, "Book artifact manifest does not contain every canonical volume exactly once")
+
+    series_volumes = {
+        str(volume["id"]): volume for volume in series_spec["volumes"]
+    }
+    expected_assignment: dict[str, tuple[dict[str, object], int]] = {}
+    expected_global_position = {
+        volume_id: position for position, volume_id in enumerate(expected_ids, start=1)
+    }
+    for segment in series_spec["segments"]:
+        for segment_position, volume_id in enumerate(segment["books"], start=1):
+            expected_assignment[str(volume_id)] = (segment, segment_position)
+    if release.get("editionDate") != series_spec.get("edition_date", series_spec["release_date"]):
+        fail(errors, "Book catalog edition date is not synchronized with the publishing manifest")
     expected_segments = [
-        ("java", "JAVA", 9),
-        ("dsa", "DSA", 17),
-        ("system-design", "SD", 14),
+        (segment["id"], segment["code"], len(segment["books"]))
+        for segment in series_spec["segments"]
     ]
     actual_segments = [(item.get("id"), item.get("code"), item.get("bookCount")) for item in segments]
     if actual_segments != expected_segments:
@@ -214,9 +265,9 @@ def validate_books(errors: list[str]) -> None:
 
     required_fields = {
         "order", "bookPosition", "step", "pathLabel", "id", "track", "title", "shortTitle", "subtitle",
-        "purpose", "filename", "pageCount", "pdfHref", "releasePdfHref", "sourceHref",
+        "purpose", "authorNote", "filename", "artifactPath", "pageCount", "pdfHref", "releasePdfHref", "sourceHref",
         "fullBookHref", "codeHref", "webDocumentCount", "wordCount", "codeExampleCount",
-        "sourceChapterCount", "supportingSourceCount", "chapterPreview", "outcomes", "webReads",
+        "sourceChapterCount", "supportingSourceCount", "chapterPreview", "chapterContents", "outcomes", "webReads",
         "segmentId", "segmentTitle", "segmentShortTitle", "segmentCode", "segmentPosition",
         "segmentBookCount", "publicationStatus",
     }
@@ -243,19 +294,119 @@ def validate_books(errors: list[str]) -> None:
         expected_segment_code = next((segment["code"] for segment in segments if segment["id"] == book["segmentId"]), None)
         if not expected_segment_code or book["segmentCode"] != f"{expected_segment_code} {int(book['segmentPosition']):02d}":
             fail(errors, f"Book {book['id']} has inconsistent segment numbering")
-        if book["publicationStatus"] not in {"published", "planned"}:
+        if book["publicationStatus"] not in {"published", "enhanced", "planned"}:
             fail(errors, f"Book {book['id']} has an invalid publication status")
         if int(book["webDocumentCount"]) != int(book["sourceChapterCount"]) + int(book["supportingSourceCount"]):
             fail(errors, f"Book {book['id']} web document count does not cover every Markdown source")
         if int(book["wordCount"]) <= 0 or int(book["codeExampleCount"]) < 0:
             fail(errors, f"Book {book['id']} has invalid web content metrics")
-        if not (BOOK_DIST / filename).is_file():
-            fail(errors, f"Published book is missing from dist/: {filename}")
+        if len(str(book["authorNote"]).strip()) < 40:
+            fail(errors, f"Book {book['id']} is missing its topic-specific author note")
+        artifact_path = str(book["artifactPath"])
+        if Path(artifact_path).is_absolute() or ".." in Path(artifact_path).parts:
+            fail(errors, f"Book {book['id']} has an invalid canonical artifact path")
+        artifact_file = BOOK_DIST / artifact_path
+        if verify_artifact_files and not artifact_file.is_file():
+            fail(errors, f"Published book is missing from dist/: {artifact_path}")
+        artifact = artifacts_by_id.get(str(book["id"]))
+        volume = series_volumes.get(str(book["id"]))
+        assignment = expected_assignment.get(str(book["id"]))
+        if artifact is None or volume is None or assignment is None:
+            fail(errors, f"Book {book['id']} has no complete publishing/artifact contract")
+        else:
+            segment, expected_segment_position = assignment
+            expected_artifact_path = str(
+                Path(str(segment["artifact_dir"])) / str(volume["output_name"])
+            )
+            required_artifact_fields = {
+                "file", "page_count", "bytes", "sha256", "book_position",
+                "segment_id", "segment_code", "segment_position",
+                "path_label", "publication_status",
+            }
+            missing_artifact_fields = required_artifact_fields - set(artifact)
+            if missing_artifact_fields:
+                fail(
+                    errors,
+                    f"Book {book['id']} artifact record is missing fields: "
+                    f"{sorted(missing_artifact_fields)}",
+                )
+            else:
+                recorded_path = str(artifact["file"])
+                recorded_filename = Path(recorded_path).name
+                if artifact_path != expected_artifact_path or recorded_path != expected_artifact_path:
+                    fail(
+                        errors,
+                        f"Book {book['id']} artifact path disagrees across catalog, "
+                        "publishing manifest, and artifact manifest",
+                    )
+                if (
+                    filename != str(volume["output_name"])
+                    or recorded_filename != str(volume["output_name"])
+                    or (
+                        artifact.get("output_name") is not None
+                        and str(artifact["output_name"]) != str(volume["output_name"])
+                    )
+                ):
+                    fail(errors, f"Book {book['id']} filename disagrees with its artifact record")
+                if (
+                    str(book["segmentId"]) != str(segment["id"])
+                    or str(artifact["segment_id"]) != str(segment["id"])
+                ):
+                    fail(errors, f"Book {book['id']} segment disagrees with its artifact record")
+                expected_catalog_code = f"{segment['code']} {expected_segment_position:02d}"
+                if (
+                    str(book["segmentCode"]) != expected_catalog_code
+                    or str(artifact["segment_code"]) != str(segment["code"])
+                ):
+                    fail(errors, f"Book {book['id']} segment code disagrees with its artifact record")
+                try:
+                    positions_match = (
+                        int(book["bookPosition"])
+                        == expected_global_position[str(book["id"])]
+                        == int(artifact["book_position"])
+                        and int(book["segmentPosition"]) == expected_segment_position
+                        and int(artifact["segment_position"]) == expected_segment_position
+                    )
+                    pages_match = int(book["pageCount"]) == int(artifact["page_count"])
+                except (TypeError, ValueError):
+                    positions_match = False
+                    pages_match = False
+                if not positions_match:
+                    fail(errors, f"Book {book['id']} position disagrees with its artifact record")
+                if not pages_match:
+                    fail(errors, f"Book {book['id']} page count disagrees with its artifact record")
+                if (
+                    str(book["pathLabel"]) != str(series_spec["path_labels"][str(book["id"])])
+                    or str(artifact["path_label"])
+                    != str(series_spec["path_labels"][str(book["id"])])
+                ):
+                    fail(errors, f"Book {book['id']} study code disagrees with its artifact record")
+                expected_status = str(volume.get("publication_status", "published"))
+                if (
+                    str(book["publicationStatus"]) != expected_status
+                    or str(artifact["publication_status"]) != expected_status
+                ):
+                    fail(errors, f"Book {book['id']} publication status disagrees with its artifact record")
+                try:
+                    recorded_bytes = int(artifact["bytes"])
+                except (TypeError, ValueError):
+                    recorded_bytes = -1
+                if recorded_bytes <= 0:
+                    fail(errors, f"Book {book['id']} artifact byte count is invalid")
+                recorded_hash = str(artifact["sha256"]).casefold()
+                if not re.fullmatch(r"[0-9a-f]{64}", recorded_hash):
+                    fail(errors, f"Book {book['id']} artifact hash is not a SHA-256 digest")
+                if verify_artifact_files and artifact_file.is_file():
+                    if recorded_bytes != artifact_file.stat().st_size:
+                        fail(errors, f"Book {book['id']} byte count disagrees with its artifact record")
+                    if re.fullmatch(r"[0-9a-f]{64}", recorded_hash) and sha256(artifact_file) != recorded_hash:
+                        fail(errors, f"Book {book['id']} PDF hash disagrees with its artifact record")
         if "/raw/refs/heads/master/" not in str(book["pdfHref"]):
             fail(errors, f"Book {book['id']} does not use the current master PDF URL")
         if "/releases/download/" not in str(book["releasePdfHref"]):
             fail(errors, f"Book {book['id']} does not retain a versioned release PDF URL")
         chapter_preview = book["chapterPreview"]
+        chapter_contents = book["chapterContents"]
         if not isinstance(chapter_preview, list) or not chapter_preview:
             fail(errors, f"Book {book['id']} has no Markdown-derived chapter preview")
         elif int(book["sourceChapterCount"]) < len(chapter_preview):
@@ -264,6 +415,12 @@ def validate_books(errors: list[str]) -> None:
             for chapter in chapter_preview:
                 if not chapter.get("title") or "/blob/master/" not in str(chapter.get("sourceHref", "")):
                     fail(errors, f"Book {book['id']} has an invalid source chapter entry")
+        if not isinstance(chapter_contents, list) or len(chapter_contents) != int(book["webDocumentCount"]):
+            fail(errors, f"Book {book['id']} does not expose every canonical web document")
+        else:
+            for chapter in chapter_contents:
+                if not chapter.get("title") or not str(chapter.get("webHref", "")).startswith(full_book_href):
+                    fail(errors, f"Book {book['id']} has an invalid web chapter contents entry")
 
         web_reads = book["webReads"]
         if not isinstance(web_reads, list):
@@ -317,6 +474,16 @@ def validate_javascript(errors: list[str]) -> None:
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--metadata-only",
+        action="store_true",
+        help=(
+            "Validate the source, portal catalog, and artifact-manifest contract "
+            "without requiring focused PDF files."
+        ),
+    )
+    args = parser.parse_args()
     errors: list[str] = []
     required_files = [
         WEB / "index.html",
@@ -334,6 +501,7 @@ def main() -> int:
         BOOK_WEB_CSS,
         MODULES_FILE,
         BOOKS_FILE,
+        ARTIFACT_MANIFEST,
     ]
     for path in required_files:
         if not path.is_file():
@@ -346,7 +514,7 @@ def main() -> int:
 
     validate_local_assets(errors)
     validate_modules(errors)
-    validate_books(errors)
+    validate_books(errors, verify_artifact_files=not args.metadata_only)
     validate_javascript(errors)
 
     if errors:
@@ -354,9 +522,15 @@ def main() -> int:
             print(f"ERROR: {error}", file=sys.stderr)
         return 1
 
+    artifact_scope = (
+        "40 focused artifact records with reconciled 42-PDF release totals"
+        if args.metadata_only
+        else "40 focused PDFs with matching records and reconciled 42-PDF release totals"
+    )
     print(
-        "Web validation passed: 40 books in 3 segments, at least 173 canonical documents, "
-        "at least 800 book code entries, 19 learning modules, 69 foundation Java files, and 42 PDFs"
+        "Web validation passed: 40 books in 4 segments, at least 173 canonical documents, "
+        "at least 800 book code entries, 19 learning modules, 69 foundation Java files, "
+        f"and {artifact_scope}"
     )
     return 0
 

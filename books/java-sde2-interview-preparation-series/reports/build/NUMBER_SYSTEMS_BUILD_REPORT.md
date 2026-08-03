@@ -92,8 +92,8 @@ No unscoped `scripts/build_series.py` command was run.
 
 | Artifact | Pages | Bytes | SHA-256 |
 |---|---:|---:|---|
-| `dist/Java-SDE2-DSA-01-Number-Systems-and-Math-Foundations.pdf` | 125 | 6,248,979 | `8a23bb3c8f1cf34b3fedad591750ad5e0550f543fa95e433ede0c2fbe7917815` |
-| `dist/Java-SDE2-DSA-01B-Number-Systems-Interview-Workbook.pdf` | 137 | 3,973,634 | `143080589afcefd67682c9d64b4c9c91c6688110184bdbe63779baef75ad2906` |
+| `dist/Java-SDE2-DSA-02-Number-Systems-and-Math-Foundations.pdf` | 125 | 6,248,979 | `8a23bb3c8f1cf34b3fedad591750ad5e0550f543fa95e433ede0c2fbe7917815` |
+| `dist/Java-SDE2-DSA-03-Number-Systems-Interview-Workbook.pdf` | 137 | 3,973,634 | `143080589afcefd67682c9d64b4c9c91c6688110184bdbe63779baef75ad2906` |
 
 Combined Stage 1 length is 262 pages, split into two individually navigable PDFs that each remain at or below the series 140-page usability limit.
 
@@ -150,7 +150,7 @@ No content, code, build, PDF, or navigation blocker remains.
 
 ## Recommended next mini-book
 
-Continue with `Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf`. Number Systems now supplies its range, logarithm, overflow, and numeric-reasoning prerequisites.
+Continue with `Java-SDE2-DSA-01-Time-and-Space-Complexity.pdf`. Number Systems now supplies its range, logarithm, overflow, and numeric-reasoning prerequisites.
 
 ## Git boundary
 

@@ -39,34 +39,34 @@ Retained master sources:
 
 New canonical Volume 03 teaching sources:
 
-1. `content/volumes/03-java-foundations-for-problem-solving/chapters/01-platform-program-foundations.md`
-2. `content/volumes/03-java-foundations-for-problem-solving/chapters/02-object-oriented-foundations.md`
-3. `content/volumes/03-java-foundations-for-problem-solving/chapters/03-wrappers-generics-enums-io-utilities.md`
-4. `content/volumes/03-java-foundations-for-problem-solving/chapters/04-java-interview-traps.md`
-5. `content/volumes/03-java-foundations-for-problem-solving/chapters/05-java-collections-basics.md`
+1. `content/volumes/java/JAVA-01-java-foundations-for-problem-solving/chapters/01-platform-program-foundations.md`
+2. `content/volumes/java/JAVA-01-java-foundations-for-problem-solving/chapters/02-object-oriented-foundations.md`
+3. `content/volumes/java/JAVA-01-java-foundations-for-problem-solving/chapters/03-wrappers-generics-enums-io-utilities.md`
+4. `content/volumes/java/JAVA-01-java-foundations-for-problem-solving/chapters/04-java-interview-traps.md`
+5. `content/volumes/java/JAVA-01-java-foundations-for-problem-solving/chapters/05-java-collections-basics.md`
 
 Practice sources:
 
-1. `content/volumes/03-java-foundations-for-problem-solving/exercises/01-language-practice.md`
-2. `content/volumes/03-java-foundations-for-problem-solving/exercises/02-object-practice.md`
-3. `content/volumes/03-java-foundations-for-problem-solving/exercises/03-library-practice.md`
-4. `content/volumes/03-java-foundations-for-problem-solving/exercises/04-traps-and-readiness-practice.md`
+1. `content/volumes/java/JAVA-01-java-foundations-for-problem-solving/exercises/01-language-practice.md`
+2. `content/volumes/java/JAVA-01-java-foundations-for-problem-solving/exercises/02-object-practice.md`
+3. `content/volumes/java/JAVA-01-java-foundations-for-problem-solving/exercises/03-library-practice.md`
+4. `content/volumes/java/JAVA-01-java-foundations-for-problem-solving/exercises/04-traps-and-readiness-practice.md`
 
 Separated solution sources:
 
-1. `content/volumes/03-java-foundations-for-problem-solving/solutions/01-language-solutions.md`
-2. `content/volumes/03-java-foundations-for-problem-solving/solutions/02-object-solutions.md`
-3. `content/volumes/03-java-foundations-for-problem-solving/solutions/03-library-solutions.md`
-4. `content/volumes/03-java-foundations-for-problem-solving/solutions/04-traps-and-readiness-solutions.md`
+1. `content/volumes/java/JAVA-01-java-foundations-for-problem-solving/solutions/01-language-solutions.md`
+2. `content/volumes/java/JAVA-01-java-foundations-for-problem-solving/solutions/02-object-solutions.md`
+3. `content/volumes/java/JAVA-01-java-foundations-for-problem-solving/solutions/03-library-solutions.md`
+4. `content/volumes/java/JAVA-01-java-foundations-for-problem-solving/solutions/04-traps-and-readiness-solutions.md`
 
 Executable companion:
 
-- `content/volumes/03-java-foundations-for-problem-solving/code/JavaFundamentalsExamples.java`
+- `content/volumes/java/JAVA-01-java-foundations-for-problem-solving/code/JavaFundamentalsExamples.java`
 
 Generated files are not canonical when an editable source exists:
 
-- `build/series/03-java-foundations-for-problem-solving/volume.md`
-- `dist/Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf`
+- the generated Volume 03 source under `build/series/`
+- `dist/Java-SDE2-JAVA-01-Java-Foundations-for-Problem-Solving.pdf`
 
 ## Content work completed
 
@@ -166,12 +166,12 @@ python3 \
 Observed result:
 
 ```text
-03: ./dist/Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf (198 pages)
+03: ./dist/Java-SDE2-JAVA-01-Java-Foundations-for-Problem-Solving.pdf (198 pages)
 ```
 
 ## Final PDF
 
-- Absolute path: `./dist/Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf`
+- Absolute path: `./dist/Java-SDE2-JAVA-01-Java-Foundations-for-Problem-Solving.pdf`
 - Page count: **198**
 - File size: **4,145,324 bytes**
 - SHA-256: `d036948d8f076451eaa8aa507f8f5bf44e53c32c4c4336a5f40cc8898c1f869a`

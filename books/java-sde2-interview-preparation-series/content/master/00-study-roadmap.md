@@ -1,12 +1,12 @@
 # Study Roadmap
 
-## Focused 18-stage PDF path
+## Focused 40-book path
 
-The complete master book remains the umbrella reference. For a more finishable basics-to-advanced route, use the companion **Java SDE-2 Interview Preparation Series** in `dist/`. It contains 18 public stages: Number Systems, complexity, Java problem-solving foundations, bit manipulation, loops and indexing, arrays, strings, hashing, recursion and backtracking, linked lists, stacks and queues, binary search, trees, heaps, graphs, greedy algorithms, dynamic programming, and advanced Java engineering.
+The complete master book remains the umbrella reference. For a finishable basics-to-SDE-2 route, use the **Java SDE-2 Interview Preparation Series** in `dist/`. Its 40 focused books are grouped into four clearly ordered shelves: Java (9), DSA (17), frameworks and data systems (12), and system design (2). Each PDF is independently printable and includes previous/next navigation within its shelf.
 
-Start with `Java-SDE2-Interview-Preparation-Series-Index.pdf`. Study Step 18 is deliberately packaged as 18A through 18J so JVM execution, modern Java, libraries, concurrency, diagnostics, design and testing, final interview revision, Spring REST services, persistence, and distributed systems/system design remain individually printable. Study Steps 18H through 18J form the backend specialist track. Every focused PDF includes the complete roadmap plus previous/next navigation.
+Start with the sibling [series index](Java-SDE2-Interview-Preparation-Series-Index.pdf). A reader rebuilding from basics should study Java Foundations first, followed by Time and Space Complexity, Number Systems, and the remaining DSA sequence. Continue with the rest of the Java shelf, then choose the frameworks and system-design books required by the target role. Git/GitHub and Maven/Gradle can be studied before the first portfolio project or before entering the framework shelf.
 
-When rebuilding from basics, complete Study Steps 01 through 17 in order and then select the Study Step 18 books required by the role. When revising, enter at the first study step whose recognition signals or completion check expose a gap.
+Use the displayed shelf code and sequence number as the source of truth: `JAVA-01` through `JAVA-09`, `DSA-01` through `DSA-17`, `FW-01` through `FW-12`, and `SD-01` through `SD-02`. When revising, begin at the first completion check that exposes a gap instead of rereading material you can already explain and implement.
 
 ## Diagnostic baseline
 

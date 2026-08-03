@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import html
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -65,6 +66,28 @@ MUTED = master.MUTED
 PALE = master.PALE
 LIGHT = master.LIGHT
 LINE = master.LINE
+
+AUTHOR_NOTES = json.loads((PUBLISHING / "author-notes.json").read_text(encoding="utf-8"))
+
+
+def artifact_relative(spec: dict[str, Any]) -> Path:
+    """Return the canonical path below dist/ for a book or the series index."""
+    return Path(str(spec.get("artifact_path", spec["output_name"])))
+
+
+def relative_artifact_href(source: dict[str, Any], target: dict[str, Any]) -> str:
+    """Return a portable relative PDF link between canonical artifact folders."""
+    return Path(
+        os.path.relpath(artifact_relative(target), start=artifact_relative(source).parent)
+    ).as_posix()
+
+
+def relative_index_href(spec: dict[str, Any]) -> str:
+    target = {
+        "output_name": INDEX_NAME,
+        "artifact_path": spec.get("index_artifact", INDEX_NAME),
+    }
+    return relative_artifact_href(spec, target)
 
 
 class CoverBand(Flowable):
@@ -316,6 +339,8 @@ def load_manifest() -> dict[str, Any]:
     ids = [item["id"] for item in volumes]
     if len(ids) != len(set(ids)):
         raise RuntimeError("series.json contains duplicate physical volume IDs")
+    if set(AUTHOR_NOTES) != set(ids):
+        raise RuntimeError("author-notes.json must define exactly one note per physical volume")
     outputs = [item["output_name"] for item in volumes]
     if len(outputs) != len(set(outputs)):
         raise RuntimeError("series.json contains duplicate output names")
@@ -347,13 +372,23 @@ def load_manifest() -> dict[str, Any]:
             item["segment_code"] = segment["code"]
             item["segment_position"] = segment_position
             item["segment_count"] = len(book_ids)
+            item["artifact_path"] = str(
+                Path(segment["artifact_dir"]) / item["output_name"]
+            )
+            item["index_artifact"] = str(
+                data.get("index_artifact", INDEX_NAME)
+            )
     if flattened != data.get("learning_order"):
-        raise RuntimeError("learning_order must equal the three segment book lists in order")
+        raise RuntimeError("learning_order must equal the segment book lists in order")
     if set(flattened) != set(ids) or len(flattened) != len(ids):
         raise RuntimeError("segments must contain every physical volume exactly once")
+    artifacts = [item["artifact_path"] for item in ordered]
+    if len(artifacts) != len(set(artifacts)):
+        raise RuntimeError("segments produce duplicate canonical artifact paths")
     for position, item in enumerate(ordered, start=1):
         item["path_label"] = str(path_labels[item["id"]])
         item["book_position"] = position
+        item["edition_date"] = str(data.get("edition_date", item["release_date"]))
         item["volume_label"] = (
             f"{item['segment_title']} - Book {item['segment_position']:02d} "
             f"of {item['segment_count']:02d} - Study Step {item['path_label']}"
@@ -392,6 +427,19 @@ def safe_source_path(relative: str) -> Path:
     if not path.exists():
         raise RuntimeError(f"Missing series source: {relative}")
     return path
+
+
+def code_companions(spec: dict[str, Any]) -> list[dict[str, Any]]:
+    """Return legacy and additional companion specifications in publication order."""
+    companions: list[dict[str, Any]] = []
+    legacy = spec.get("code_companion")
+    if legacy:
+        companions.append(legacy)
+    companions.extend(spec.get("code_companions", []))
+    paths = [str(item["path"]) for item in companions]
+    if len(paths) != len(set(paths)):
+        raise RuntimeError(f"Volume {spec['id']} declares a duplicate Java companion")
+    return companions
 
 
 def source_title(text: str, fallback: str) -> str:
@@ -519,14 +567,14 @@ def orientation_markdown(spec: dict[str, Any], previous: dict[str, Any] | None, 
 def handoff_markdown(spec: dict[str, Any], previous: dict[str, Any] | None, next_spec: dict[str, Any] | None) -> str:
     practice = "\n".join(f"- {item}" for item in spec["practice_ladder"])
     previous_line = (
-        f"[Previous book: {previous['segment_code']} {previous['segment_position']:02d} - {previous['title']}]({previous['output_name']})"
+        f"[Previous book: {previous['segment_code']} {previous['segment_position']:02d} - {previous['title']}]({relative_artifact_href(spec, previous)})"
         if previous
         else f"This is the first volume in the {spec['segment_title']} segment."
     )
     next_line = (
-        f"[Next book: {next_spec['segment_code']} {next_spec['segment_position']:02d} - {next_spec['title']}]({next_spec['output_name']})"
+        f"[Next book: {next_spec['segment_code']} {next_spec['segment_position']:02d} - {next_spec['title']}]({relative_artifact_href(spec, next_spec)})"
         if next_spec
-        else f"[Return to the complete series index]({INDEX_NAME})"
+        else f"[Return to the complete series index]({relative_index_href(spec)})"
     )
     return master.ascii_safe(
         f"""# Part II - Practice and Handoff
@@ -543,7 +591,7 @@ For every coding problem, state the input contract, select the numeric and colle
 
 {previous_line}
 
-[Series index]({INDEX_NAME})
+[Series index]({relative_index_href(spec)})
 
 {next_line}
 
@@ -579,11 +627,10 @@ def assemble_volume(
             relative = figure_path.relative_to(ROOT).as_posix()
             figure_text = f"\n\n![{figure['caption']}]({relative})\n"
         pieces.append(f"# Chapter {local_number} - {title}{figure_text}\n\n{body}".strip())
-    companion = spec.get("code_companion")
-    if companion:
+    for companion_offset, companion in enumerate(code_companions(spec), start=1):
         path = safe_source_path(companion["path"])
         code = master.ascii_safe(path.read_text(encoding="utf-8")).strip()
-        number = len(spec["sources"]) + 1
+        number = len(spec["sources"]) + companion_offset
         title = companion.get("title", "Dependency-Free Java 21 Companion")
         description = companion.get(
             "description",
@@ -634,7 +681,7 @@ def cover_story(spec: dict[str, Any], styles: dict[str, ParagraphStyle], fonts: 
         HRFlowable(width=COVER_W, thickness=0.55, color=LINE, spaceBefore=7, spaceAfter=13),
         Paragraph("JAVA 21 | INTERVIEW CORE | SDE-2 FOLLOW-UPS | PRINTABLE EDITION", styles["cover_stat_line"]),
         Spacer(1, 24),
-        Paragraph(f"Series edition - Release {spec['release_date']}", styles["cover_meta"]),
+        Paragraph(f"Series edition - Updated {spec.get('edition_date', spec['release_date'])}", styles["cover_meta"]),
         Paragraph("Open educational interview-preparation edition", styles["cover_meta"]),
         PageBreak(),
     ]
@@ -686,12 +733,12 @@ def about_author_story(
         title,
         Paragraph("Vinay Reddy Kalluri", styles["h2"]),
         Paragraph(
-            "Vinay Reddy Kalluri is a senior Java backend engineer, the creator and founding author of the Java SDE-2 Interview Preparation Series, and its Editor-in-Chief and Chief Auditor. His work spans high-throughput microservices, event-driven architecture, resilient APIs, large-scale data processing, cloud delivery, and production performance across healthcare and enterprise systems.",
+            "Vinay Reddy Kalluri is a senior Java backend engineer and the author and editor of the Java SDE-2 Interview Preparation Series. His work spans high-throughput microservices, event-driven architecture, resilient APIs, large-scale data processing, cloud delivery, and production performance across healthcare and enterprise systems.",
             styles["body"],
         ),
-        Paragraph("Editorial leadership", styles["h2"]),
+        Paragraph("Editorial approach", styles["h2"]),
         Paragraph(
-            "As Editor-in-Chief, Vinay owns the learning sequence, scope, voice, and publication decisions. As Chief Auditor, he owns the Java accuracy standard, validation evidence, attribution review, and release-readiness gate. Individual contributors retain visible credit for accepted original work through AUTHORS.md and the public Git history.",
+            "Vinay sets the learning sequence and publication standard and performs the final review for Java accuracy, evidence, attribution, and release readiness. Individual contributors retain visible credit for accepted original work through AUTHORS.md and the public Git history.",
             styles["body"],
         ),
         Paragraph(
@@ -721,7 +768,7 @@ def about_author_story(
 
 
 def stage_rows(manifest: dict[str, Any]) -> list[dict[str, str]]:
-    """Return the three selectable learning segments for compact summaries."""
+    """Return the selectable learning segments for compact summaries."""
     return [dict(item) for item in manifest["segments"]]
 
 
@@ -759,7 +806,7 @@ def roadmap_story(
     ]
     ordered_books = learning_volumes(manifest)
     for book in ordered_books:
-        link = html.escape(book["output_name"], quote=True)
+        link = html.escape(relative_artifact_href(spec, book), quote=True)
         segment = Paragraph(html.escape(book["segment_short_title"]), cell_style)
         number = Paragraph(f'<link href="{link}" color="#0B2545"><b>{book["segment_code"]} {book["segment_position"]:02d}</b></link>', number_style)
         title = Paragraph(
@@ -788,14 +835,14 @@ def roadmap_story(
     return [
         title,
         Paragraph(
-            "Choose Java, DSA, or System Design and Backend first, then follow the books inside that segment in order. Stable study-step codes remain on filenames and links; the clearer segment book codes appear on the website and every PDF cover.",
+            "Choose Java, DSA, Frameworks, or System Design first, then follow the books inside that segment in order. The same series codes and positions appear on the website, PDF covers, and canonical download folders.",
             styles["small"],
         ),
         Spacer(1, 7),
         table,
         Spacer(1, 7),
         Paragraph(
-            "Roadmap editions identify planned books whose chapter sets will be expanded one at a time. Existing deep-dive books remain available later in each segment, so no published material is displaced.",
+            "All 40 publication editions are available now. Choose Java, DSA, Frameworks, or System Design first, then follow the books inside that shelf in order. Each deep-dive book remains independently printable and available on the web.",
             styles["small"],
         ),
         PageBreak(),
@@ -862,7 +909,7 @@ def local_navigation_story(
             return Paragraph(fallback, nav_style)
         label = f"{item['segment_code']} {item['segment_position']:02d} - {item['short_title']}"
         return Paragraph(
-            f'<link href="{html.escape(item["output_name"], quote=True)}" color="#164E63">{html.escape(label)}</link>',
+            f'<link href="{html.escape(relative_artifact_href(spec, item), quote=True)}" color="#164E63">{html.escape(label)}</link>',
             nav_style,
         )
 
@@ -893,6 +940,52 @@ def local_navigation_story(
     heading._heading_level = 2
     heading._bookmark_text = "Contents and Navigation"
     return [heading, table, Spacer(1, 13)]
+
+
+def author_note_story(
+    spec: dict[str, Any],
+    styles: dict[str, ParagraphStyle],
+    fonts: dict[str, str],
+) -> list[Flowable]:
+    """Add one concise, topic-specific author note without title-heavy branding."""
+    note = AUTHOR_NOTES.get(spec["id"])
+    if not note:
+        return []
+    label_style = ParagraphStyle(
+        "AuthorNoteLabel",
+        parent=styles["small"],
+        fontName=fonts["bold"],
+        fontSize=8,
+        leading=10,
+        textColor=NAVY,
+        spaceAfter=4,
+    )
+    body_style = ParagraphStyle(
+        "AuthorNoteBody",
+        parent=styles["body"],
+        fontSize=9.1,
+        leading=12.4,
+        textColor=INK,
+        spaceAfter=0,
+    )
+    content = [
+        Paragraph("A note from Vinay", label_style),
+        Paragraph(html.escape(note), body_style),
+    ]
+    table = Table([[content]], colWidths=[CONTENT_W])
+    table.setStyle(
+        TableStyle(
+            [
+                ("BACKGROUND", (0, 0), (-1, -1), PALE),
+                ("BOX", (0, 0), (-1, -1), 0.65, GOLD),
+                ("LEFTPADDING", (0, 0), (-1, -1), 11),
+                ("RIGHTPADDING", (0, 0), (-1, -1), 11),
+                ("TOPPADDING", (0, 0), (-1, -1), 8),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 9),
+            ]
+        )
+    )
+    return [table, Spacer(1, 13)]
 
 
 def split_front_orientation(blocks: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
@@ -931,6 +1024,8 @@ def validate_pdf(path: Path, spec: dict[str, Any]) -> dict[str, Any]:
     if spec["title"] not in normalized_cover or AUTHOR not in normalized_cover:
         raise RuntimeError(f"{spec['id']} cover text is incomplete")
     required_front_matter = ("About the Author", "Series Roadmap", "Contents")
+    if spec["id"] != "00":
+        required_front_matter += ("A note from Vinay",)
     missing_front_matter = [item for item in required_front_matter if item not in full_text]
     if missing_front_matter:
         raise RuntimeError(
@@ -938,6 +1033,24 @@ def validate_pdf(path: Path, spec: dict[str, Any]) -> dict[str, Any]:
         )
     digest = hashlib.sha256(path.read_bytes()).hexdigest()
     return {"page_count": page_count, "sha256": digest, "bytes": path.stat().st_size}
+
+
+def artifact_record(spec: dict[str, Any], result: dict[str, Any]) -> dict[str, Any]:
+    """Attach current manifest identity to a validated PDF artifact."""
+    return {
+        **result,
+        "id": spec["id"],
+        "stage": spec["stage"],
+        "path_label": spec["path_label"],
+        "book_position": spec["book_position"],
+        "segment_id": spec["segment_id"],
+        "segment_code": spec["segment_code"],
+        "segment_position": spec["segment_position"],
+        "publication_status": spec.get("publication_status", "published"),
+        "title": spec["title"],
+        "file": str(artifact_relative(spec)),
+        "output_name": spec["output_name"],
+    }
 
 
 def build_pdf(
@@ -994,6 +1107,7 @@ def build_pdf(
     story.extend(renderer.blocks(orientation_blocks))
     story.append(PageBreak())
     story.extend(local_navigation_story(spec, manifest, styles, fonts))
+    story.extend(author_note_story(spec, styles, fonts))
     story.extend(toc_story(styles, fonts))
     story.extend(renderer.blocks(learning_blocks))
     story.append(PageBreak())
@@ -1013,12 +1127,16 @@ def build_pdf(
 
 
 def index_markdown(manifest: dict[str, Any]) -> str:
+    index_spec = {
+        "output_name": INDEX_NAME,
+        "artifact_path": manifest.get("index_artifact", INDEX_NAME),
+    }
     lines = [
         "# Choose Your Learning Segment",
         "",
-        "This library has three independent starting points: Java Engineering, Data Structures and Algorithms, and System Design and Backend. Choose the segment that matches your immediate goal, then follow its numbered books in order. You can study a second segment in parallel after its prerequisites are comfortable.",
+        "This library has four clear paths: Java Engineering, Data Structures and Algorithms, Frameworks/Data/Messaging, and System Design. Choose the path that matches your immediate goal, then follow its numbered books in order. Frameworks and System Design intentionally build on the Java foundation.",
         "",
-        "Keep the PDFs together in the same directory so relative links can work in viewers that permit local-file navigation. The printed filenames remain the fallback when a viewer blocks those links.",
+        "Keep the canonical `00-start-here` through `04-system-design` folders together so relative links can work in viewers that permit local-file navigation. The printed series codes remain the fallback when a viewer blocks those links.",
         "",
         "## Choose your starting point in 60 seconds",
         "",
@@ -1028,7 +1146,8 @@ def index_markdown(manifest: dict[str, Any]) -> str:
         "|---|---|---|",
         "| Learn or rebuild Java | JAVA 01 - Java Foundations | Continue through the Java segment in order |",
         "| Build interview problem-solving skill | DSA 01 - Time and Space Complexity | Continue through the DSA segment in order |",
-        "| Prepare for Java backend and design rounds | SD 01 - Backend and Design Foundations | Continue through databases, Spring, messaging, and distributed systems |",
+        "| Prepare for Java backend interviews | FW 01 - MySQL | Continue through persistence, Spring, data stores, and messaging |",
+        "| Prepare for architecture rounds | SD 01 - Backend and Design Foundations | Continue with distributed systems after the framework path |",
         "",
         "## The learning loop for every volume",
         "",
@@ -1056,13 +1175,13 @@ def index_markdown(manifest: dict[str, Any]) -> str:
                     "",
                     item["purpose"],
                     "",
-                    f"Open [{item['output_name']}]({item['output_name']}).",
+                    f"Open [{item['output_name']}]({relative_artifact_href(index_spec, item)}).",
                     "",
                 ]
             )
     lines.extend(
         [
-            "# Part IV - Recommended Study Rhythm",
+            f"# Part {len(manifest['segments']) + 1} - Recommended Study Rhythm",
             "",
             "# Build, Practice, Explain, Revisit",
             "",
@@ -1073,6 +1192,7 @@ def index_markdown(manifest: dict[str, Any]) -> str:
 
 
 def build_index(manifest: dict[str, Any], fonts: dict[str, str]) -> dict[str, Any]:
+    index_artifact = str(manifest.get("index_artifact", INDEX_NAME))
     spec = {
         "id": "00",
         "stage": "00",
@@ -1080,10 +1200,13 @@ def build_index(manifest: dict[str, Any], fonts: dict[str, str]) -> dict[str, An
         "short_title": "Series Index",
         "subtitle": "A Basics-to-Advanced Navigation Guide",
         "output_name": INDEX_NAME,
-        "volume_label": "Series Index - 3 Segments / 40 Books",
+        "artifact_path": index_artifact,
+        "index_artifact": index_artifact,
+        "volume_label": "Series Index - 4 Segments / 40 Books",
         "release_date": manifest["release_date"],
-        "cover_deck": "Choose Java, DSA, or System Design and Backend, then follow a clear prerequisite-aware path within the segment.",
-        "topic_line": "JAVA ENGINEERING | DSA | SYSTEM DESIGN AND BACKEND",
+        "edition_date": manifest.get("edition_date", manifest["release_date"]),
+        "cover_deck": "Choose Java, DSA, Frameworks, or System Design, then follow a clear prerequisite-aware path within the segment.",
+        "topic_line": "JAVA | DSA | FRAMEWORKS AND DATA | SYSTEM DESIGN",
         "min_pages": 8,
         "max_pages": 50,
     }
@@ -1091,7 +1214,56 @@ def build_index(manifest: dict[str, Any], fonts: dict[str, str]) -> dict[str, An
     build_dir.mkdir(parents=True, exist_ok=True)
     markdown = build_dir / "index.md"
     markdown.write_text(index_markdown(manifest), encoding="utf-8")
-    return build_pdf(spec, manifest, markdown, DIST / INDEX_NAME, fonts)
+    return build_pdf(spec, manifest, markdown, DIST / artifact_relative(spec), fonts)
+
+
+def write_dist_navigation(manifest: dict[str, Any]) -> None:
+    """Generate small GitHub-friendly indexes beside the canonical PDFs."""
+    start_dir = DIST / "00-start-here"
+    start_dir.mkdir(parents=True, exist_ok=True)
+    start_lines = [
+        "# Start Here: Java SDE-2 PDF Library",
+        "",
+        "Choose one segment, begin with its Book 01, and continue in order. "
+        "The web library, PDF covers, and folders use the same codes.",
+        "",
+        "| Segment | Start | Folder |",
+        "|---|---|---|",
+    ]
+    for segment in manifest["segments"]:
+        first = segment_volumes(manifest, segment["id"])[0]
+        start_lines.append(
+            f"| {segment['title']} | {segment['code']} 01 - {first['title']} | "
+            f"[`{segment['artifact_dir']}`](../{segment['artifact_dir']}/) |"
+        )
+        segment_dir = DIST / segment["artifact_dir"]
+        segment_dir.mkdir(parents=True, exist_ok=True)
+        lines = [
+            f"# {segment['title']} PDFs",
+            "",
+            segment["description"],
+            "",
+        ]
+        for book in segment_volumes(manifest, segment["id"]):
+            lines.append(
+                f"{book['segment_position']}. **{book['segment_code']} "
+                f"{book['segment_position']:02d}** - "
+                f"[{book['title']}]({book['output_name']})"
+            )
+        lines.extend(["", "[Return to Start Here](../00-start-here/README.md)", ""])
+        (segment_dir / "README.md").write_text("\n".join(lines), encoding="utf-8")
+    start_lines.extend(
+        [
+            "",
+            f"- [Series navigation index]({Path(str(manifest.get('index_artifact', INDEX_NAME))).name})",
+            f"- [Complete master reference]({manifest['master_artifact']['file']})",
+            "- [Web learning library](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/)",
+            "",
+            "Read, trace, implement, test edge cases, and explain the trade-off aloud before moving on.",
+            "",
+        ]
+    )
+    (start_dir / "README.md").write_text("\n".join(start_lines), encoding="utf-8")
 
 
 def select_volumes(manifest: dict[str, Any], requested: str | None) -> list[dict[str, Any]]:
@@ -1131,22 +1303,32 @@ def main() -> None:
         markdown = assemble_volume(spec, previous, next_spec, build_dir)
         temporary = TMP / f"{spec['output_name']}.tmp.pdf"
         result = build_pdf(spec, manifest, markdown, temporary, fonts)
-        final_path = DIST / spec["output_name"]
+        final_path = DIST / artifact_relative(spec)
+        final_path.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(temporary, final_path)
-        result.update({"id": spec["id"], "stage": spec["stage"], "path_label": spec["path_label"], "book_position": spec["book_position"], "segment_id": spec["segment_id"], "segment_code": spec["segment_code"], "segment_position": spec["segment_position"], "publication_status": spec.get("publication_status", "published"), "title": spec["title"], "file": spec["output_name"]})
-        results.append(result)
+        results.append(artifact_record(spec, result))
         print(f"{spec['id']}: {final_path} ({result['page_count']} pages)")
 
     if args.index_only:
         for spec in all_volumes:
-            result = validate_pdf(DIST / spec["output_name"], spec)
-            result.update({"id": spec["id"], "stage": spec["stage"], "path_label": spec["path_label"], "book_position": spec["book_position"], "segment_id": spec["segment_id"], "segment_code": spec["segment_code"], "segment_position": spec["segment_position"], "publication_status": spec.get("publication_status", "published"), "title": spec["title"], "file": spec["output_name"]})
-            results.append(result)
+            result = validate_pdf(DIST / artifact_relative(spec), spec)
+            results.append(artifact_record(spec, result))
+
+    if args.volume is not None:
+        rebuilt = {item["id"] for item in results}
+        for spec in all_volumes:
+            if spec["id"] in rebuilt:
+                continue
+            path = DIST / artifact_relative(spec)
+            if path.is_file():
+                results.append(artifact_record(spec, validate_pdf(path, spec)))
 
     index_result: dict[str, Any] | None = None
     if not args.skip_index and args.volume is None:
         index_result = build_index(manifest, fonts)
-        print(f"INDEX: {DIST / INDEX_NAME} ({index_result['page_count']} pages)")
+        print(f"INDEX: {DIST / manifest.get('index_artifact', INDEX_NAME)} ({index_result['page_count']} pages)")
+
+    write_dist_navigation(manifest)
 
     report_path = DIST / "manifest.json"
     existing: dict[str, Any] = {}
@@ -1158,12 +1340,13 @@ def main() -> None:
         "series": SERIES_TITLE,
         "author": AUTHOR,
         "release_date": manifest["release_date"],
+        "edition_date": manifest.get("edition_date", manifest["release_date"]),
         "public_segments": len(manifest["segments"]),
         "physical_volumes": len(all_volumes),
         "volumes": [by_id[item["id"]] for item in all_volumes if item["id"] in by_id],
     }
     if index_result:
-        report["index"] = {"file": INDEX_NAME, **index_result}
+        report["index"] = {"file": str(manifest.get("index_artifact", INDEX_NAME)), **index_result}
     elif "index" in existing:
         report["index"] = existing["index"]
     report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")

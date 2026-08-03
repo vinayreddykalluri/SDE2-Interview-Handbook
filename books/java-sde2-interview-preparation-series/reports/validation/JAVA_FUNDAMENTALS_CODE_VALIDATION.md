@@ -2,7 +2,7 @@
 
 Validation date: 2026-07-26  
 Selected Java version: Java 21  
-Canonical companion: `content/volumes/03-java-foundations-for-problem-solving/code/JavaFundamentalsExamples.java`
+Canonical companion: `content/volumes/java/JAVA-01-java-foundations-for-problem-solving/code/JavaFundamentalsExamples.java`
 
 ## Validation strategy
 
@@ -57,7 +57,7 @@ Focused compile and run:
 install -d /private/tmp/javafund-validation-classes
 javac -Xlint:all -Werror \
   -d /private/tmp/javafund-validation-classes \
-  content/volumes/03-java-foundations-for-problem-solving/code/JavaFundamentalsExamples.java
+  content/volumes/java/JAVA-01-java-foundations-for-problem-solving/code/JavaFundamentalsExamples.java
 java -cp /private/tmp/javafund-validation-classes JavaFundamentalsExamples
 ```
 

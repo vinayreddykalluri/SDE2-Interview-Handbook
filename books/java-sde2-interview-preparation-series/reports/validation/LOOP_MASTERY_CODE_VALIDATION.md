@@ -24,13 +24,13 @@ Volume 05 contains one dependency-free complete Java 21 companion and 88 context
 
 Source:
 
-`content/volumes/05-loop-mastery-and-index-calculations/code/LoopMasteryExamples.java`
+`content/volumes/dsa/DSA-05-loop-mastery-and-index-calculations/code/LoopMasteryExamples.java`
 
 Compilation command:
 
 ```bash
 javac --release 21 -Xlint:all -Werror \
-  content/volumes/05-loop-mastery-and-index-calculations/code/LoopMasteryExamples.java
+  content/volumes/dsa/DSA-05-loop-mastery-and-index-calculations/code/LoopMasteryExamples.java
 ```
 
 Execution command from the companion directory:
@@ -99,3 +99,7 @@ The unfiltered series source validator now recognizes the canonical 18-chapter N
 ## Final result
 
 All valid standalone Loop Mastery code compiles with warnings treated as errors. All forty deterministic checks pass, documented output matches execution, intentionally invalid scenarios are isolated, and the rebuilt PDF passes content, navigation, link, and integrity checks.
+
+## 2026-08-02 additional companion
+
+`LoopInvariantChecks.java` compiled under Java 21 with `-Xlint:all -Werror` and passed compaction, cyclic-index, widened-coordinate, window, empty-input, and invalid-contract assertions. Observed output: `PASS loop invariant and boundary checks`.

@@ -23,7 +23,7 @@
 ## Commands
 
 ```bash
-bash content/volumes/SD04-spring-framework/labs/validate_spring_framework_labs.sh
+bash content/volumes/frameworks/FW-03-spring-framework/labs/validate_spring_framework_labs.sh
 python3 scripts/validate_series.py --source-only
 ```
 

@@ -11,7 +11,7 @@
 ## Command
 
 ```bash
-bash content/volumes/J03-maven-and-gradle/labs/validate_build_labs.sh
+bash content/volumes/java/JAVA-03-maven-and-gradle/labs/validate_build_labs.sh
 ```
 
 ## Result

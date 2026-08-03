@@ -185,7 +185,7 @@ The focused series is linked from:
 - `content/master/48-the-java-coding-interview-playbook.md`;
 - `content/master/appendices/a-java-quick-reference.md`.
 
-The durable entry point is `dist/Java-SDE2-Interview-Preparation-Series-Index.pdf`.
+The durable entry point is `dist/00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf`.
 
 ## Migration decision log
 

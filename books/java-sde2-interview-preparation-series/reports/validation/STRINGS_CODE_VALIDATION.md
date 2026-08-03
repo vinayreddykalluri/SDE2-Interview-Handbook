@@ -25,13 +25,13 @@ Volume 07 contains one dependency-free complete Java 21 companion and contextual
 
 Source:
 
-`content/volumes/07-strings-and-string-patterns/code/StringPatternsExamples.java`
+`content/volumes/dsa/DSA-07-strings-and-string-patterns/code/StringPatternsExamples.java`
 
 Compilation command:
 
 ```bash
 javac --release 21 -Xlint:all -Werror \
-  content/volumes/07-strings-and-string-patterns/code/StringPatternsExamples.java
+  content/volumes/dsa/DSA-07-strings-and-string-patterns/code/StringPatternsExamples.java
 ```
 
 Execution command from the compiled output directory:
@@ -62,7 +62,7 @@ The companion validates core indexing, immutable transformations, code-point rev
 ```bash
 tmp_classes=$(mktemp -d)
 javac --release 21 -Xlint:all -Werror -d "$tmp_classes" \
-  content/volumes/07-strings-and-string-patterns/code/StringPatternsExamples.java
+  content/volumes/dsa/DSA-07-strings-and-string-patterns/code/StringPatternsExamples.java
 java -cp "$tmp_classes" StringPatternsExamples
 ```
 
@@ -92,3 +92,7 @@ All valid standalone Strings code compiles with warnings treated as errors. All 
 | Semantic pagination | 0 errors, 0 warnings |
 | Latest rendered pages inspected | all 106 through contact sheets; 16 full-page samples |
 | Clipping, overlap, broken tables/figures | none observed |
+
+## 2026-08-02 additional companion
+
+`StringContractChecks.java` compiled under Java 21 with `-Xlint:all -Werror`. Manual signed parsing matched `Integer.parseInt` over accepted and rejected boundaries, KMP matched `String.indexOf` over the deterministic matrix, and code-point reversal preserved a surrogate pair. Observed output: `PASS string parsing, KMP, and code-point checks`.

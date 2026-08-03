@@ -1,24 +1,25 @@
 # PDF Library Organization
 
-The publishing workspace separates stable artifact identity from reader navigation.
+The publishing workspace keeps stable release filenames while organizing repository artifacts by learning segment.
 
 ## Canonical artifacts
 
-`dist/` contains one copy of every PDF under its stable filename. Repository links, the web catalog, checksums, and external bookmarks use those names. Existing files are not renamed merely to improve the curriculum order.
+`dist/` contains one copy of every PDF under its stable filename, grouped into canonical folders. Repository links and the web catalog use the folder plus filename; tagged GitHub release assets remain flat because release uploads do not preserve directories.
 
-Open `dist/00-START-HERE.md` or the series-index PDF first. Choose one segment:
+Open `dist/00-start-here/README.md` or the series-index PDF first. Choose one segment:
 
 ```text
 Java Engineering (JAVA 01-09)
 Data Structures and Algorithms (DSA 01-17)
-System Design and Backend (SD 01-14)
+Frameworks, Data, and Messaging (FW 01-12)
+System Design (SD 01-02)
 ```
 
-Every focused PDF displays its segment code and local book position. Previous/next navigation stays inside the current segment. The full roadmap lists all three segments so a reader can switch intentionally.
+Every focused PDF displays its segment code and local book position. Previous/next navigation stays inside the current segment. The full roadmap lists all four segments so a reader can switch intentionally.
 
 ## Generated folder library
 
-Create a locally organized library without moving or renaming committed artifacts:
+Validate the committed organization, or copy it to a reader-owned location:
 
 ```bash
 python3 scripts/organize_pdf_library.py
@@ -31,11 +32,12 @@ output/reader-library/
 |-- 00-start-here/
 |-- 01-java/
 |-- 02-dsa/
-|-- 03-system-design/
+|-- 03-frameworks/
+|-- 04-system-design/
 +-- README.md
 ```
 
-Focused copies use prefixes such as `JAVA-01`, `DSA-01`, and `SD-01`; the stable canonical filename remains visible after that prefix. The generated `output/` tree is ignored by Git because it contains byte-for-byte copies of reviewed files from `dist/`.
+The generated `output/` tree is ignored by Git because it contains byte-for-byte copies of reviewed files from the canonical `dist/` folders.
 
 Validate all assignments without copying:
 
@@ -56,4 +58,4 @@ When a book is added or renamed:
 5. run the organization check; and
 6. synchronize and rebuild the web catalog.
 
-Do not commit generated copies from `output/reader-library/` and do not move stable PDFs without a migration plan for published links.
+Do not commit generated copies from `output/reader-library/`. When moving a repository PDF, preserve the filename, update the manifest-owned artifact folder, and retain web-route redirects.

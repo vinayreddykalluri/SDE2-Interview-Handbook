@@ -1,6 +1,6 @@
 # Java Fundamentals Topic Coverage
 
-Final PDF: `dist/Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf`
+Final PDF: `dist/01-java/Java-SDE2-JAVA-01-Java-Foundations-for-Problem-Solving.pdf`
 Target language: Java 21 unless a section labels another version  
 Validation key: **Companion** means the topic is exercised by `JavaFundamentalsExamples.java`; **Source** means the canonical master source and repository validator cover it; **Practice** means tagged questions/tasks and reasoning solutions are present.
 

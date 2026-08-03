@@ -16,9 +16,9 @@ SD 05 is now a publication edition. The existing publisher rebuilt the canonical
 
 ## Canonical sources
 
-- 23 Markdown chapters under `content/volumes/SD05-spring-boot/chapters/`.
-- One dependency-free Java 21 companion under `content/volumes/SD05-spring-boot/code/`.
-- One Maven Spring Boot 4.1 behavior fixture under `content/volumes/SD05-spring-boot/labs/`.
+- 23 Markdown chapters under `content/volumes/frameworks/FW-04-spring-boot/chapters/`.
+- One dependency-free Java 21 companion under `content/volumes/frameworks/FW-04-spring-boot/code/`.
+- One Maven Spring Boot 4.1 behavior fixture under `content/volumes/frameworks/FW-04-spring-boot/labs/`.
 
 ## Content result
 
@@ -40,7 +40,7 @@ python3 scripts/build_series.py --volume BOOT
 ## Validation commands
 
 ```bash
-bash content/volumes/SD05-spring-boot/labs/validate_spring_boot_labs.sh
+bash content/volumes/frameworks/FW-04-spring-boot/labs/validate_spring_boot_labs.sh
 python3 scripts/validate_series.py --source-only
 python3 scripts/validate_series.py
 make PYTHON=python3 sync-book-catalog
@@ -57,7 +57,7 @@ make PYTHON=python3 check-book-catalog validate
 
 ## Final artifact and QA
 
-- Final PDF: `dist/Java-SDE2-SD-05-Spring-Boot.pdf`.
+- Final PDF: `dist/Java-SDE2-FW-04-Spring-Boot.pdf`.
 - Final page count: 113.
 - Final file size: 3,922,488 bytes.
 - Final SHA-256: `e5eb2a607739e388ec5484571b162535406144de942ce35b0763c5b697d8f735`.

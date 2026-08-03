@@ -2,49 +2,59 @@
 
 ## Mapping policy
 
-The focused series preserves the master guide rather than cloning or deleting its material. `publishing/series.json` is the canonical, machine-readable mapping. A source entry may include a named section selection when one master chapter covers several DSA patterns; this avoids repeating unrelated sections in multiple PDFs.
+The focused series preserves the master guide rather than cloning or deleting its material. [`publishing/series.json`](../publishing/series.json) is the canonical, machine-readable mapping from each book to its Markdown, Java companions, diagrams, PDF name, public shelf, and reader order. A source entry may select a named section when one master chapter supports several focused books; this avoids copying unrelated material.
 
-## Series-native material
+Reader-facing navigation always uses the four shelf codes:
 
-Study Step 03 uses 16 new chapters under `content/volumes/01-number-systems-and-math-foundations/chapters/`. Part A contains Chapters 1-13; Part B contains Chapters 14-16. Together they supply numeric foundations beyond the Java and complexity prerequisites: digit traversal, base conversion, large-number strings, interview divisibility, factors and primes, GCD/LCM, modular arithmetic, powers and roots, numeric traps, a 30-problem catalog, and rapid revision.
+- Java Engineering: `JAVA-01` through `JAVA-09`
+- Data Structures and Algorithms: `DSA-01` through `DSA-17`
+- Frameworks, Data, and Messaging: `FW-01` through `FW-12`
+- System Design: `SD-01` through `SD-02`
 
-Focused series-native chapters exist for Study Steps 04-17. Steps 04-06 are the most developed of these early DSA volumes. Steps 07-17 currently provide concise topic-specific baselines; most still need richer diagrams, companion programs, dry runs, exercises, and separated solutions. The open-source issue backlog tracks those expansions so contributors improve canonical volumes instead of creating parallel books.
+The manifest also retains older internal IDs because build commands, artifact history, and catalog automation depend on stable keys. An internal ID such as `01B` or `18A` is an implementation identifier, not a public study step. `path_labels` translates those keys to current shelf codes, and `segments[].books` defines order inside each shelf.
 
-Parts 18H-18J are also series-native. They form the backend specialist track: Spring Boot and REST; SQL, transactions, JPA/Hibernate, and caching; then capacity, consistency, Kafka, resilience, sagas, observability, and system design. Dependency-requiring framework sketches are labeled explicitly, while each volume includes a separate dependency-free Java 21 model that is compiled and executed by validation.
+## Public-to-internal identity map
 
-## Master-source grouping
+| Public books | Stable internal IDs |
+|---|---|
+| `JAVA-01`, `JAVA-02`, `JAVA-03` | `03`, `GIT`, `BUILD` |
+| `JAVA-04` through `JAVA-09` | `18B`, `18C`, `18A`, `18D`, `18E`, `18G` |
+| `DSA-01`, `DSA-02`, `DSA-03` | `02`, `01`, `01B` |
+| `DSA-04` through `DSA-17` | `04` through `17` |
+| `FW-01` through `FW-04` | `MYSQL`, `HIBERNATE`, `SPRING`, `BOOT` |
+| `FW-05` through `FW-08` | `18H`, `DATA`, `MONGO`, `REDIS` |
+| `FW-09` through `FW-12` | `18I`, `KAFKA`, `SPRINGX`, `SPRINGAI` |
+| `SD-01`, `SD-02` | `18F`, `18J` |
 
-| Focused step | Principal master sources |
-|---:|---|
-| 2 | Chapter 42, Appendix B, and measurement context from Chapter 39 |
-| 3 | Chapters 13-15, 20, 25, 30, 48, and Appendix A |
-| 4 | Fixed-width numeric semantics, the Study Step 03 bridge, and a focused bit-pattern chapter |
-| 5 | Focused series-native loop and index patterns |
-| 6 | Master array/list/sort semantics plus focused array interview patterns |
-| 7 | Master string and text semantics plus focused string interview patterns |
-| 8 | Master equality/collection/hash semantics plus focused hashing and prefix-state patterns |
-| 9 | Focused recursion and backtracking chapter |
-| 10 | Focused linked-list pointer chapter |
-| 11 | Focused stack, queue, deque, and monotonic-pattern chapter |
-| 12 | Focused binary-search chapter |
-| 13 | Focused tree, BST, and trie chapter |
-| 14 | Focused heap, priority-queue, selection, and Top-K chapter |
-| 15 | Focused graph-modeling and graph-algorithm chapter |
-| 16 | Focused greedy recognition and proof chapter |
-| 17 | Focused dynamic-programming derivation chapter |
-| 18A | Master Chapters 1-10 |
-| 18B | Master Chapters 16-24 and Appendix D |
-| 18C | Master Chapters 25-32 and Appendix B |
-| 18D | Master Chapters 11 and 33-38 |
-| 18E | Master Chapters 39-41 and Appendix C |
-| 18F | Master Chapters 49-52 |
-| 18G | Master Chapters 48, 53-54 and Appendices E-G |
-| 18H | Four series-native Spring Boot and REST chapters |
-| 18I | Four series-native persistence, SQL, JPA, and caching chapters |
-| 18J | Four series-native distributed-systems and system-design chapters |
+Use public codes in prose, issue titles, website navigation, covers, and PDF filenames. Use an internal ID only where a tool explicitly requires `--volume <id>` or code reads a manifest key.
+
+## Source ownership by shelf
+
+All 40 focused books are publication editions. Their principal source ownership is:
+
+| Public book or range | Principal source ownership |
+|---|---|
+| `JAVA-01` | Beginner-first Java chapters under `content/volumes/java/JAVA-01-*`, with selected master quick-reference material |
+| `JAVA-02` and `JAVA-03` | Series-native Git/GitHub and Maven/Gradle chapters, labs, and solutions under their Java workspaces |
+| `JAVA-04` | Master Chapters 16-24 and feature reference material, plus a focused language-contract workshop |
+| `JAVA-05` | Master Chapters 25-32 and collection reference material, plus a focused low-level collections lab |
+| `JAVA-06` | Master Chapters 1-10, plus a focused JVM evidence workshop |
+| `JAVA-07` | Master Chapter 11 and Chapters 33-38, plus a focused concurrency workshop |
+| `JAVA-08` | Master Chapters 39-41 and production reference material, plus a focused diagnostics workshop |
+| `JAVA-09` | Master Chapters 48, 53, and 54 and revision appendices, plus a focused mock-interview studio |
+| `DSA-01` | Series-native complexity chapters, exercises, and solutions with selected master measurement and collection-cost reference material |
+| `DSA-02` and `DSA-03` | One shared number-systems workspace: foundations in `DSA-02`, then interview patterns and rapid revision in `DSA-03` |
+| `DSA-04` through `DSA-17` | Series-native beginner-first chapters, practice, solutions, and executable companions; selected master sections are reused only where they remain the canonical Java contract explanation |
+| `FW-01` through `FW-12` | Series-native framework, database, caching, messaging, Spring ecosystem, and Spring AI workspaces with focused labs and validation evidence |
+| `SD-01` | Master backend-design chapters plus series-native boundary exercises, solutions, and executable checks |
+| `SD-02` | Series-native distributed-systems chapters, design drills, solutions, and executable checks |
+
+The shared DSA number-systems workspace contains both `DSA-02` and `DSA-03` source because foundational representation and interview arithmetic are developed together. They remain separate public books and separate PDFs.
+
+Dependency-requiring framework examples are labeled explicitly. Focused Java companions that model a contract without external dependencies are compiled and executed where the manifest declares them; real framework labs are validated through their owning build tool.
 
 ## Cross-reference policy
 
-Master chapter numbers retained in extracted prose are labeled as `Master Chapter` or `Master Chapters`. Focused chapter numbers are local to each PDF. The master book remains the stable, comprehensive reference, while focused PDFs provide shorter learning and revision paths.
+Master chapter numbers retained in extracted prose are labeled as `Master Chapter` or `Master Chapters`. Focused chapter numbers are local to each web book and PDF. The master book remains the stable comprehensive reference, while focused books provide prerequisite-aware learning and revision paths.
 
-No valuable master source is deleted. Consolidation happens through selection at build time, and future edits should continue to land in the canonical master source unless a topic is explicitly series-native.
+No valuable master source is deleted. Consolidation happens through selection at build time. Put a change in the shared master source when that is its canonical owner; put book-specific explanations, exercises, solutions, and labs in the matching public shelf workspace.

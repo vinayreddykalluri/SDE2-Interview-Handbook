@@ -1,6 +1,6 @@
 # Time and Space Complexity Topic Coverage
 
-Final PDF: `dist/Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf`
+Final PDF: `dist/02-dsa/Java-SDE2-DSA-01-Time-and-Space-Complexity.pdf`
 
 | Topic | Required depth | Previous state | Final state | Chapter | Examples/practice | Validation |
 |---|---|---|---|---:|---|---|

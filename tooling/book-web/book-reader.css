@@ -186,7 +186,7 @@ body::before {
 .reader-pagination span { color: var(--reader-soft); font: 600 0.55rem var(--reader-mono); letter-spacing: 0.08em; }
 .reader-pagination strong { color: var(--reader-ink); font: 400 1.35rem/1.05 var(--reader-display); letter-spacing: 0.025em; text-transform: uppercase; }
 
-.library-route-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 2rem 0; border-top: 1px solid var(--reader-line); border-left: 1px solid var(--reader-line); }
+.library-route-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 2rem 0; border-top: 1px solid var(--reader-line); border-left: 1px solid var(--reader-line); }
 .library-route-grid a { min-height: 8rem; display: grid; align-content: end; padding: 1rem; border-right: 1px solid var(--reader-line); border-bottom: 1px solid var(--reader-line); background: var(--reader-raised); }
 .library-route-grid strong, .library-route-grid span { display: block; }
 .library-route-grid strong { color: var(--reader-blue); font: 400 1.45rem var(--reader-display); letter-spacing: 0.03em; text-transform: uppercase; }
@@ -202,6 +202,9 @@ body::before {
 }
 
 .book-identity span { min-height: 5.3rem; display: grid; place-items: center; padding: 0.7rem; border-right: 1px solid var(--reader-line); border-bottom: 1px solid var(--reader-line); color: var(--reader-soft); font: 600 0.56rem/1.45 var(--reader-mono); letter-spacing: 0.05em; text-align: center; text-transform: uppercase; }
+.reader-author-note { max-width: 78ch; margin: 1.5rem 0 0; padding: 1rem 1.1rem; border: 1px solid var(--reader-signal); border-left: 0.34rem solid var(--reader-signal); background: color-mix(in srgb, var(--reader-blue) 7%, var(--reader-raised)); box-shadow: 5px 5px 0 var(--reader-line); }
+.reader-author-note strong { display: block; margin-bottom: 0.35rem; color: var(--reader-blue); font: 600 0.62rem var(--reader-mono); letter-spacing: 0.06em; text-transform: uppercase; }
+.reader-author-note p { margin: 0; color: var(--reader-ink); font-style: italic; }
 .book-primary-actions { display: flex; flex-wrap: wrap; gap: 0.65rem; margin: 1.7rem 0 2.5rem; }
 .book-primary-actions > a:not(.md-button) { display: inline-flex; align-items: center; padding: 0.65rem 0.75rem; border-bottom: 1px solid currentColor; font: 600 0.62rem var(--reader-mono); text-transform: uppercase; }
 .book-reader-endnote { padding: 0.75rem 0; color: var(--reader-soft); font: 500 0.65rem var(--reader-mono); }

@@ -2,7 +2,7 @@
 
 Validation date: 2026-07-26  
 Java target: Java 21  
-Canonical companion: `content/volumes/02-time-and-space-complexity/code/ComplexityExamples.java`
+Canonical companion: `content/volumes/dsa/DSA-01-time-and-space-complexity/code/ComplexityExamples.java`
 
 ## Strategy
 
@@ -41,7 +41,7 @@ Run from `.`:
 mkdir -p /private/tmp/complexity-validate-final
 javac -Xlint:all -Werror \
   -d /private/tmp/complexity-validate-final \
-  content/volumes/02-time-and-space-complexity/code/ComplexityExamples.java
+  content/volumes/dsa/DSA-01-time-and-space-complexity/code/ComplexityExamples.java
 java -cp /private/tmp/complexity-validate-final ComplexityExamples
 ```
 
@@ -56,3 +56,7 @@ PASS 24 complexity examples
 - The checks validate behavior and illustrative operation counts, not nanosecond timing.
 - Complexity claims about library implementations remain qualified in prose by concrete type, case, Java version, and contract.
 - Intentionally incomplete teaching snippets are not compiled as standalone programs; their behavior is represented by the companion where appropriate.
+
+## 2026-08-02 additional companion
+
+`ComplexityDeepDiveExamples.java` compiled with Java 21 and `-Xlint:all -Werror`, then passed its geometric-copy, aggregate-pointer, and recursion-state assertions. Observed final line: `PASS complexity deep-dive checks`.

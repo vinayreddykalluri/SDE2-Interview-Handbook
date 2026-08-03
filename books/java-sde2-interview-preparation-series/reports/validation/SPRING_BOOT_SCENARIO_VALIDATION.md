@@ -19,7 +19,7 @@
 ## Command
 
 ```bash
-bash content/volumes/SD05-spring-boot/labs/validate_spring_boot_labs.sh
+bash content/volumes/frameworks/FW-04-spring-boot/labs/validate_spring_boot_labs.sh
 ```
 
 ## Dependency-free companion

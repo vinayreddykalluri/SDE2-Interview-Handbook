@@ -19,7 +19,7 @@ The interviewer is evaluating several channels at once: correctness, problem dec
 
 This chapter is not a script to recite. It is a feedback loop. Each artifact - contract, example, baseline, invariant, dry run, and complexity statement - makes the next decision safer and gives the interviewer a chance to correct a misunderstanding early.
 
-> **Focused practice path:** The 18-step companion series turns this playbook into shorter topic loops. Begin with the first book whose completion check is not yet automatic, and use Study Step 18G for question-bank, mock-loop, and final revision work.
+> **Focused practice path:** The 40-book companion series turns this playbook into shorter topic loops. Begin with the first book whose completion check is not yet automatic, and use `JAVA-09` for the question bank, mock loops, and final revision.
 
 ## First-principles model
 

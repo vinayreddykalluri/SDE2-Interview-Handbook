@@ -2,7 +2,7 @@
 
 Audit date: 2026-07-26  
 Canonical volume: 03 - Java Foundations for Problem Solving  
-Pre-improvement PDF: `dist/Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf` (89 pages)
+Pre-improvement PDF: `dist/01-java/Java-SDE2-JAVA-01-Java-Foundations-for-Problem-Solving.pdf` (89 pages at audit time)
 Final PDF: same stable path and filename (198 pages)
 
 ## Executive finding
@@ -13,7 +13,7 @@ The right action was expansion and resequencing inside the canonical Volume 03 m
 
 ## Canonical source determination
 
-The canonical PDF is assembled by `scripts/build_series.py` from the Volume 03 entry in `publishing/series.json`. Editable Markdown and Java sources are canonical; `build/series/03-java-foundations-for-problem-solving/volume.md` and the PDF in `dist` are generated artifacts.
+The canonical PDF is assembled by `scripts/build_series.py` from the Volume 03 entry in `publishing/series.json`. Editable Markdown and Java sources are canonical; the volume-specific file under `build/series/` and the PDF in `dist` are generated artifacts.
 
 The pre-improvement Volume 03 manifest referenced these nine sources:
 

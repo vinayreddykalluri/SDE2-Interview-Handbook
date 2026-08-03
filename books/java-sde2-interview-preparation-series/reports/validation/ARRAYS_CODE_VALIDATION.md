@@ -25,13 +25,13 @@ Volume 06 contains one dependency-free complete Java 21 companion and 65 context
 
 Source:
 
-`content/volumes/06-arrays-and-array-patterns/code/ArrayPatternsExamples.java`
+`content/volumes/dsa/DSA-06-arrays-and-array-patterns/code/ArrayPatternsExamples.java`
 
 Compilation command:
 
 ```bash
 javac --release 21 -Xlint:all -Werror \
-  content/volumes/06-arrays-and-array-patterns/code/ArrayPatternsExamples.java
+  content/volumes/dsa/DSA-06-arrays-and-array-patterns/code/ArrayPatternsExamples.java
 ```
 
 Execution command from the companion directory:

@@ -9,9 +9,12 @@
   "contributors_file": "../../docs/community/authors.md",
   "release_tag": "books-v2026.07.0",
   "release_date": "2026-07-25",
-  "public_segments": 3,
+  "edition_date": "2026-08-02",
+  "public_segments": 4,
+  "index_artifact": "00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf",
   "master_artifact": {
     "file": "java-sde2-interview-book.pdf",
+    "artifact_path": "00-start-here/java-sde2-interview-book.pdf",
     "title": "Java Foundations to Advanced Engineering",
     "page_count": 616
   },
@@ -42,62 +45,80 @@
     "15",
     "16",
     "17",
-    "18F",
     "MYSQL",
     "HIBERNATE",
     "SPRING",
     "BOOT",
+    "18H",
     "DATA",
     "MONGO",
     "REDIS",
+    "18I",
     "KAFKA",
     "SPRINGX",
     "SPRINGAI",
-    "18H",
-    "18I",
+    "18F",
     "18J"
   ],
   "path_labels": {
-    "03": "01",
-    "02": "02",
-    "01": "03A",
-    "01B": "03B",
-    "04": "04",
-    "05": "05",
-    "06": "06",
-    "07": "07",
-    "08": "08",
-    "09": "09",
-    "10": "10",
-    "11": "11",
-    "12": "12",
-    "13": "13",
-    "14": "14",
-    "15": "15",
-    "16": "16",
-    "17": "17",
-    "18A": "18A",
-    "18B": "18B",
-    "18C": "18C",
-    "18D": "18D",
-    "18E": "18E",
-    "18F": "18F",
-    "18G": "18G",
-    "18H": "18H",
-    "18I": "18I",
-    "18J": "18J",
-    "GIT": "19A",
-    "BUILD": "19B",
-    "MYSQL": "19C",
-    "HIBERNATE": "19D",
-    "SPRING": "19E",
-    "BOOT": "19F",
-    "DATA": "19G",
-    "MONGO": "19H",
-    "REDIS": "19I",
-    "KAFKA": "19J",
-    "SPRINGX": "19K",
-    "SPRINGAI": "19L"
+    "03": "JAVA-01",
+    "GIT": "JAVA-02",
+    "BUILD": "JAVA-03",
+    "18B": "JAVA-04",
+    "18C": "JAVA-05",
+    "18A": "JAVA-06",
+    "18D": "JAVA-07",
+    "18E": "JAVA-08",
+    "18G": "JAVA-09",
+    "02": "DSA-01",
+    "01": "DSA-02",
+    "01B": "DSA-03",
+    "04": "DSA-04",
+    "05": "DSA-05",
+    "06": "DSA-06",
+    "07": "DSA-07",
+    "08": "DSA-08",
+    "09": "DSA-09",
+    "10": "DSA-10",
+    "11": "DSA-11",
+    "12": "DSA-12",
+    "13": "DSA-13",
+    "14": "DSA-14",
+    "15": "DSA-15",
+    "16": "DSA-16",
+    "17": "DSA-17",
+    "MYSQL": "FW-01",
+    "HIBERNATE": "FW-02",
+    "SPRING": "FW-03",
+    "BOOT": "FW-04",
+    "18H": "FW-05",
+    "DATA": "FW-06",
+    "MONGO": "FW-07",
+    "REDIS": "FW-08",
+    "18I": "FW-09",
+    "KAFKA": "FW-10",
+    "SPRINGX": "FW-11",
+    "SPRINGAI": "FW-12",
+    "18F": "SD-01",
+    "18J": "SD-02"
+  },
+  "legacy_path_labels": {
+    "03": ["01"],
+    "GIT": ["19A"],
+    "BUILD": ["19B"],
+    "02": ["02"],
+    "01": ["03A"],
+    "01B": ["03B"],
+    "MYSQL": ["19C"],
+    "HIBERNATE": ["19D"],
+    "SPRING": ["19E"],
+    "BOOT": ["19F"],
+    "DATA": ["19G"],
+    "MONGO": ["19H"],
+    "REDIS": ["19I"],
+    "KAFKA": ["19J"],
+    "SPRINGX": ["19K"],
+    "SPRINGAI": ["19L"]
   },
   "segments": [
     {
@@ -106,6 +127,7 @@
       "title": "Java Engineering",
       "short_title": "Java",
       "description": "Start with the language, developer workflow, build tools, core libraries, JVM, concurrency, performance, and Java interview revision.",
+      "artifact_dir": "01-java",
       "books": [
         "03",
         "GIT",
@@ -124,6 +146,7 @@
       "title": "Data Structures and Algorithms",
       "short_title": "DSA",
       "description": "Build complexity intuition, mathematical foundations, implementation patterns, data structures, algorithms, and problem-solving confidence.",
+      "artifact_dir": "02-dsa",
       "books": [
         "02",
         "01",
@@ -145,25 +168,36 @@
       ]
     },
     {
-      "id": "system-design",
-      "code": "SD",
-      "title": "System Design and Backend",
-      "short_title": "System Design",
-      "description": "Learn backend boundaries, databases, persistence, Spring, Kafka, caching, distributed systems, and production design in prerequisite order.",
+      "id": "frameworks",
+      "code": "FW",
+      "title": "Frameworks, Data, and Messaging",
+      "short_title": "Frameworks",
+      "description": "Learn SQL, persistence, Spring, data stores, caching, and messaging in a prerequisite-correct Java backend path.",
+      "artifact_dir": "03-frameworks",
       "books": [
-        "18F",
         "MYSQL",
         "HIBERNATE",
         "SPRING",
         "BOOT",
+        "18H",
         "DATA",
         "MONGO",
         "REDIS",
+        "18I",
         "KAFKA",
         "SPRINGX",
-        "SPRINGAI",
-        "18H",
-        "18I",
+        "SPRINGAI"
+      ]
+    },
+    {
+      "id": "system-design",
+      "code": "SD",
+      "title": "System Design",
+      "short_title": "System Design",
+      "description": "Move from component boundaries to distributed-system reasoning after the Java backend foundations are secure.",
+      "artifact_dir": "04-system-design",
+      "books": [
+        "18F",
         "18J"
       ]
     }
@@ -176,8 +210,8 @@
       "title": "Number Systems and Math Foundations for DSA Interviews",
       "short_title": "Number Systems and Math Foundations",
       "subtitle": "Part A: The Practical Numeric Foundation for Java Coding Interviews",
-      "output_name": "Java-SDE2-DSA-01-Number-Systems-and-Math-Foundations.pdf",
-      "volume_label": "Study Step 03A of 18 - Core Book",
+      "output_name": "Java-SDE2-DSA-02-Number-Systems-and-Math-Foundations.pdf",
+      "volume_label": "Data Structures and Algorithms - Book 02 of 17 - Study Step DSA-02",
       "release_date": "2026-07-25",
       "cover_deck": "Build the numeric reasoning needed for digits, bases, overflow, divisibility, modular arithmetic, powers, roots, and bit-level interview prerequisites.",
       "topic_line": "DIGITS | BASES | OVERFLOW | MODULO | GCD | POWERS | JAVA",
@@ -209,56 +243,67 @@
       "max_pages": 140,
       "sources": [
         {
-          "path": "content/volumes/01-number-systems-and-math-foundations/chapters/01-why-number-systems-matter.md",
+          "path": "content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/chapters/01-why-number-systems-matter.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/01-number-systems-and-math-foundations/chapters/02-decimal-number-system.md",
+          "path": "content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/chapters/02-decimal-number-system.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/01-number-systems-and-math-foundations/chapters/03-binary-number-system.md",
+          "path": "content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/chapters/03-binary-number-system.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/01-number-systems-and-math-foundations/chapters/04-octal-and-hexadecimal.md",
+          "path": "content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/chapters/04-octal-and-hexadecimal.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/01-number-systems-and-math-foundations/chapters/05-base-conversion-patterns.md",
+          "path": "content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/chapters/05-base-conversion-patterns.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/01-number-systems-and-math-foundations/chapters/06-java-integer-types-and-limits.md",
+          "path": "content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/chapters/06-java-integer-types-and-limits.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/01-number-systems-and-math-foundations/chapters/07-overflow-and-underflow.md",
+          "path": "content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/chapters/07-overflow-and-underflow.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/01-number-systems-and-math-foundations/chapters/08-very-large-numbers.md",
+          "path": "content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/chapters/08-very-large-numbers.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/01-number-systems-and-math-foundations/chapters/09-divisibility-rules.md",
+          "path": "content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/chapters/09-divisibility-rules.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/01-number-systems-and-math-foundations/chapters/10-factors-primes-gcd-lcm.md",
+          "path": "content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/chapters/10-factors-primes-gcd-lcm.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/01-number-systems-and-math-foundations/chapters/11-modular-arithmetic.md",
+          "path": "content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/chapters/11-modular-arithmetic.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/01-number-systems-and-math-foundations/chapters/12-powers-roots-logarithms.md",
+          "path": "content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/chapters/12-powers-roots-logarithms.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/01-number-systems-and-math-foundations/chapters/13-bit-level-prerequisites.md",
+          "path": "content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/chapters/13-bit-level-prerequisites.md",
           "series_native": true
+        },
+        {
+          "path": "content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/chapters/17-first-principles-and-library-pairs.md",
+          "series_native": true
+        }
+      ],
+      "code_companions": [
+        {
+          "path": "content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/code/NumberSystemsManualLibraryChecks.java",
+          "title": "Manual and JDK Number-System Contract Checks",
+          "description": "Executable Java 21 comparisons between first-principles arithmetic and JDK oracle methods, including overflow, floor-modulo, bit-length, GCD, modular inverse, and exact decimal factorial behavior."
         }
       ]
     },
@@ -269,14 +314,14 @@
       "title": "Number Systems Interview Patterns and Rapid Revision",
       "short_title": "Number Systems Interview Workbook",
       "subtitle": "Part B: Fifty-Two Implementations, Java Traps, Exercises, Solutions, and Readiness",
-      "output_name": "Java-SDE2-DSA-01B-Number-Systems-Interview-Workbook.pdf",
-      "volume_label": "Study Step 03B of 18 - Interview Workbook",
+      "output_name": "Java-SDE2-DSA-03-Number-Systems-Interview-Workbook.pdf",
+      "volume_label": "Data Structures and Algorithms - Book 03 of 17 - Study Step DSA-03",
       "release_date": "2026-07-25",
       "cover_deck": "Convert the numeric foundation into reusable interview patterns, boundary-safe Java, debugging skill, timed practice, and rapid revision.",
       "topic_line": "52 IMPLEMENTATIONS | JAVA TRAPS | DEBUGGING | SOLUTIONS | REVISION",
-      "purpose": "This linked workbook completes Study Step 03 with the 52-implementation catalog, Java number traps, conceptual and code-output questions, debugging tasks, coding exercises, solutions, follow-up chains, cheat sheet, and readiness assessment.",
+      "purpose": "This linked workbook completes the DSA-02 numeric foundation with a 52-implementation catalog, Java number traps, conceptual and code-output questions, debugging tasks, coding exercises, solutions, follow-up chains, cheat sheet, and readiness assessment.",
       "prerequisites": [
-        "Study Step 03A numeric foundations",
+        "DSA-02 Number Systems and Math Foundations",
         "Ability to write and run small Java 21 methods",
         "An error log for boundary, overflow, and contract mistakes"
       ],
@@ -302,23 +347,23 @@
       "max_pages": 140,
       "sources": [
         {
-          "path": "content/volumes/01-number-systems-and-math-foundations/chapters/14-essential-interview-patterns.md",
+          "path": "content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/chapters/14-essential-interview-patterns.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/01-number-systems-and-math-foundations/chapters/14a-fifty-two-implementation-reference.md",
+          "path": "content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/chapters/14a-fifty-two-implementation-reference.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/01-number-systems-and-math-foundations/chapters/15-java-number-traps.md",
+          "path": "content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/chapters/15-java-number-traps.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/01-number-systems-and-math-foundations/chapters/15a-expanded-practice-bank.md",
+          "path": "content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/chapters/15a-expanded-practice-bank.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/01-number-systems-and-math-foundations/chapters/16-interview-questions-and-revision.md",
+          "path": "content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/chapters/16-interview-questions-and-revision.md",
           "series_native": true
         }
       ]
@@ -330,14 +375,14 @@
       "title": "Time and Space Complexity for Java Interviews",
       "short_title": "Time and Space Complexity",
       "subtitle": "From First Operation Counts to SDE-2 Trade-off Reasoning",
-      "output_name": "Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf",
-      "volume_label": "Study Step 02 of 18",
+      "output_name": "Java-SDE2-DSA-01-Time-and-Space-Complexity.pdf",
+      "volume_label": "Data Structures and Algorithms - Book 01 of 17 - Study Step DSA-01",
       "release_date": "2026-07-25",
       "cover_deck": "Build complexity intuition from zero, derive bounds from Java code, reason about memory and collections, then defend optimizations at SDE-2 depth.",
       "topic_line": "GROWTH | BIG-O | LOOPS | SPACE | COLLECTIONS | TRADE-OFFS",
       "purpose": "This volume is the bridge from Java syntax to algorithmic problem solving. It begins with concrete operation counts, introduces growth and space gently, then develops the qualified cost models, constraints, invariants, amortization, and optimization explanations expected in SDE-2 interviews.",
       "prerequisites": [
-        "Java Foundations Study Step 01 through loops, methods, arrays, strings, and basic collections",
+        "JAVA-01 Java Foundations through loops, methods, arrays, strings, and basic collections",
         "Ability to dry-run short Java methods",
         "No prior complexity notation is required"
       ],
@@ -362,40 +407,51 @@
       "min_pages": 65,
       "max_pages": 150,
       "code_companion": {
-        "path": "content/volumes/02-time-and-space-complexity/code/ComplexityExamples.java",
+        "path": "content/volumes/dsa/DSA-01-time-and-space-complexity/code/ComplexityExamples.java",
         "title": "Twenty-Four Executable Complexity Examples",
         "description": "This dependency-free Java 21 companion validates behavior and operation counts for the volume's core growth shapes, space models, and collection choices. Compile with javac -Xlint:all -Werror ComplexityExamples.java and run with java ComplexityExamples. A successful run prints exactly PASS 24 complexity examples. Wall-clock timing is deliberately not used as proof of Big-O."
       },
+      "code_companions": [
+        {
+          "path": "content/volumes/dsa/DSA-01-time-and-space-complexity/code/ComplexityDeepDiveExamples.java",
+          "title": "Amortized, Recurrence, and Live-Memory Checks",
+          "description": "Executable Java 21 traces for dynamic-array amortization, aggregate pointer movement, recursive-versus-memoized state, and live auxiliary-space reasoning."
+        }
+      ],
       "sources": [
         {
-          "path": "content/volumes/02-time-and-space-complexity/chapters/01-complexity-from-zero.md",
+          "path": "content/volumes/dsa/DSA-01-time-and-space-complexity/chapters/01-complexity-from-zero.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/02-time-and-space-complexity/chapters/02-reading-complexity-from-java-code.md",
+          "path": "content/volumes/dsa/DSA-01-time-and-space-complexity/chapters/02-reading-complexity-from-java-code.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/02-time-and-space-complexity/chapters/03-space-complexity-from-zero.md",
+          "path": "content/volumes/dsa/DSA-01-time-and-space-complexity/chapters/03-space-complexity-from-zero.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/02-time-and-space-complexity/chapters/04-java-collections-cost-models.md",
+          "path": "content/volumes/dsa/DSA-01-time-and-space-complexity/chapters/04-java-collections-cost-models.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/02-time-and-space-complexity/chapters/05-sde2-complexity-reasoning.md",
+          "path": "content/volumes/dsa/DSA-01-time-and-space-complexity/chapters/05-sde2-complexity-reasoning.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/dsa/DSA-01-time-and-space-complexity/chapters/06-amortized-recurrence-and-live-interview-lab.md",
           "series_native": true
         },
         {
           "path": "content/master/appendices/b-collection-complexity.md"
         },
         {
-          "path": "content/volumes/02-time-and-space-complexity/exercises/01-complexity-practice-lab.md",
+          "path": "content/volumes/dsa/DSA-01-time-and-space-complexity/exercises/01-complexity-practice-lab.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/02-time-and-space-complexity/solutions/01-complexity-practice-solutions.md",
+          "path": "content/volumes/dsa/DSA-01-time-and-space-complexity/solutions/01-complexity-practice-solutions.md",
           "series_native": true
         }
       ]
@@ -407,8 +463,8 @@
       "title": "Java Foundations for Problem Solving",
       "short_title": "Java Problem-Solving Foundations",
       "subtitle": "Java Fundamentals for DSA and SDE-2 Interviews",
-      "output_name": "Java-SDE2-DSA-03-Java-Foundations-for-Problem-Solving.pdf",
-      "volume_label": "Study Step 01 of 18",
+      "output_name": "Java-SDE2-JAVA-01-Java-Foundations-for-Problem-Solving.pdf",
+      "volume_label": "Java Engineering - Book 01 of 09 - Study Step JAVA-01",
       "release_date": "2026-07-25",
       "cover_deck": "Restart from the first Java program, master language and collection behavior, then prove interview readiness through executable examples, traps, debugging, and focused practice.",
       "topic_line": "JAVA BASICS | TYPES | OBJECTS | COLLECTIONS | TRAPS | INTERVIEWS",
@@ -439,85 +495,101 @@
       "min_pages": 55,
       "max_pages": 230,
       "code_companion": {
-        "path": "content/volumes/03-java-foundations-for-problem-solving/code/JavaFundamentalsExamples.java",
+        "path": "content/volumes/java/JAVA-01-java-foundations-for-problem-solving/code/JavaFundamentalsExamples.java",
         "title": "Seventy Compiling Java Fundamentals Examples",
         "description": "This dependency-free Java 21 companion contains seventy executable checks spanning the mandatory fundamentals and core collection usage. Compile with javac -Xlint:all -Werror JavaFundamentalsExamples.java and run with java JavaFundamentalsExamples. A successful run prints exactly PASS 70 Java Fundamentals examples."
       },
       "sources": [
         {
-          "path": "content/volumes/03-java-foundations-for-problem-solving/chapters/01-platform-program-foundations.md",
+          "path": "content/volumes/java/JAVA-01-java-foundations-for-problem-solving/chapters/01-platform-program-foundations.md",
           "series_native": true
         },
         {
-          "path": "content/master/12-variables-types-literals.md"
-        },
-        {
-          "path": "content/master/13-operators-expressions-control-flow.md"
-        },
-        {
-          "path": "content/master/14-methods-overloading-varargs-pass-by-value.md"
-        },
-        {
-          "path": "content/master/15-arrays-strings-text-blocks-unicode.md"
-        },
-        {
-          "path": "content/volumes/03-java-foundations-for-problem-solving/exercises/01-language-practice.md",
+          "path": "content/volumes/java/JAVA-01-java-foundations-for-problem-solving/chapters/02-values-types-and-literals.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/03-java-foundations-for-problem-solving/chapters/02-object-oriented-foundations.md",
+          "path": "content/volumes/java/JAVA-01-java-foundations-for-problem-solving/chapters/03-operators-conversions-and-expressions.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/03-java-foundations-for-problem-solving/exercises/02-object-practice.md",
+          "path": "content/volumes/java/JAVA-01-java-foundations-for-problem-solving/chapters/04-conditions-loops-and-indexes.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/03-java-foundations-for-problem-solving/chapters/03-wrappers-generics-enums-io-utilities.md",
+          "path": "content/volumes/java/JAVA-01-java-foundations-for-problem-solving/chapters/05-methods-and-pass-by-value.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/03-java-foundations-for-problem-solving/chapters/05-java-collections-basics.md",
+          "path": "content/volumes/java/JAVA-01-java-foundations-for-problem-solving/chapters/06-arrays-from-first-principles.md",
           "series_native": true
         },
         {
-          "path": "content/master/20-exceptions-resource-management.md"
-        },
-        {
-          "path": "content/master/25-collections-framework.md"
-        },
-        {
-          "path": "content/master/30-comparable-comparator-sorting-and-selection.md"
-        },
-        {
-          "path": "content/volumes/03-java-foundations-for-problem-solving/exercises/03-library-practice.md",
+          "path": "content/volumes/java/JAVA-01-java-foundations-for-problem-solving/chapters/07-strings-characters-and-builders.md",
           "series_native": true
         },
         {
-          "path": "content/master/48-the-java-coding-interview-playbook.md"
-        },
-        {
-          "path": "content/volumes/03-java-foundations-for-problem-solving/chapters/04-java-interview-traps.md",
+          "path": "content/volumes/java/JAVA-01-java-foundations-for-problem-solving/exercises/01-language-practice.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/03-java-foundations-for-problem-solving/exercises/04-traps-and-readiness-practice.md",
+          "path": "content/volumes/java/JAVA-01-java-foundations-for-problem-solving/chapters/08-classes-objects-and-constructors.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/03-java-foundations-for-problem-solving/solutions/01-language-solutions.md",
+          "path": "content/volumes/java/JAVA-01-java-foundations-for-problem-solving/chapters/09-object-oriented-foundations-prerequisite-first.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/03-java-foundations-for-problem-solving/solutions/02-object-solutions.md",
+          "path": "content/volumes/java/JAVA-01-java-foundations-for-problem-solving/exercises/02-object-practice.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/03-java-foundations-for-problem-solving/solutions/03-library-solutions.md",
+          "path": "content/volumes/java/JAVA-01-java-foundations-for-problem-solving/chapters/10-wrappers-generics-and-enums.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/03-java-foundations-for-problem-solving/solutions/04-traps-and-readiness-solutions.md",
+          "path": "content/volumes/java/JAVA-01-java-foundations-for-problem-solving/chapters/05-java-collections-basics.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/java/JAVA-01-java-foundations-for-problem-solving/chapters/11-exceptions-input-output-and-utilities.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/java/JAVA-01-java-foundations-for-problem-solving/exercises/03-library-practice.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/java/JAVA-01-java-foundations-for-problem-solving/chapters/12-writing-interview-quality-java.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/java/JAVA-01-java-foundations-for-problem-solving/chapters/04-java-interview-traps.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/java/JAVA-01-java-foundations-for-problem-solving/exercises/04-traps-and-readiness-practice.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/java/JAVA-01-java-foundations-for-problem-solving/solutions/01-language-solutions.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/java/JAVA-01-java-foundations-for-problem-solving/solutions/02-object-solutions.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/java/JAVA-01-java-foundations-for-problem-solving/solutions/03-library-solutions.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/java/JAVA-01-java-foundations-for-problem-solving/solutions/04-traps-and-readiness-solutions.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/java/JAVA-01-java-foundations-for-problem-solving/solutions/05-wave1-complete-solutions.md",
           "series_native": true
         },
         {
@@ -533,15 +605,15 @@
       "short_title": "Bit Manipulation",
       "subtitle": "From First Bits to SDE-2 Interview Techniques",
       "output_name": "Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf",
-      "volume_label": "Study Step 04 of 18",
+      "volume_label": "Data Structures and Algorithms - Book 04 of 17 - Study Step DSA-04",
       "release_date": "2026-07-25",
       "cover_deck": "Build bit intuition from zero, master Java masks and shifts, derive high-value interview shortcuts, and apply XOR, subset, trie, and packed-state patterns safely.",
       "topic_line": "BITS | MASKS | SHIFTS | XOR | SUBSETS | INTERVIEW SHORTCUTS",
-      "purpose": "This dedicated volume turns the binary foundation from Study Step 03A into a progressive Java interview toolkit. It begins with visible bit patterns and safe operators, derives each shortcut instead of asking readers to memorize it, then develops XOR families, subset state, SDE-2 problem patterns, Java APIs, and production-quality bit fields.",
+      "purpose": "This dedicated volume turns the binary foundation from DSA-02 into a progressive Java interview toolkit. It begins with visible bit patterns and safe operators, derives each shortcut instead of asking readers to memorize it, then develops XOR families, subset state, SDE-2 problem patterns, Java APIs, and production-quality bit fields.",
       "prerequisites": [
-        "Java Foundations Study Step 01 through operators, loops, arrays, and methods",
-        "Time and Space Complexity Study Step 02 through logarithmic growth and output-sensitive analysis",
-        "Number Systems Study Step 03A binary representation and two's-complement basics"
+        "JAVA-01 Java Foundations through operators, loops, arrays, and methods",
+        "DSA-01 Time and Space Complexity through logarithmic growth and output-sensitive analysis",
+        "DSA-02 Number Systems binary representation and two's-complement basics"
       ],
       "recognition_signals": [
         "The state is a small bounded set of yes/no facts",
@@ -566,41 +638,52 @@
       "min_pages": 65,
       "max_pages": 150,
       "code_companion": {
-        "path": "content/volumes/04-bit-manipulation-in-java/code/BitManipulationExamples.java",
+        "path": "content/volumes/dsa/DSA-04-bit-manipulation-in-java/code/BitManipulationExamples.java",
         "title": "Forty Executable Bit-Manipulation Checks",
         "description": "This dependency-free Java 21 companion turns the volume's core identities, XOR patterns, subset methods, range techniques, and packed-field contracts into forty executable checks. Compile with javac -Xlint:all -Werror BitManipulationExamples.java and run with java BitManipulationExamples. A successful run prints exactly PASS 40 Bit Manipulation checks."
       },
+      "code_companions": [
+        {
+          "path": "content/volumes/dsa/DSA-04-bit-manipulation-in-java/code/BitContractChecks.java",
+          "title": "Manual and JDK Bit Contract Checks",
+          "description": "Executable Java 21 comparisons for population count, rotation, bit length, signed shifts, masked shift distances, and boundary-safe bit contracts."
+        }
+      ],
       "sources": [
         {
-          "path": "content/volumes/04-bit-manipulation-in-java/chapters/01-bits-and-java-operators-from-zero.md",
+          "path": "content/volumes/dsa/DSA-04-bit-manipulation-in-java/chapters/01-bits-and-java-operators-from-zero.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/04-bit-manipulation-in-java/chapters/02-masks-core-techniques-and-shortcuts.md",
+          "path": "content/volumes/dsa/DSA-04-bit-manipulation-in-java/chapters/02-masks-core-techniques-and-shortcuts.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/04-bit-manipulation-in-java/chapters/03-xor-patterns-and-prefix-state.md",
+          "path": "content/volumes/dsa/DSA-04-bit-manipulation-in-java/chapters/03-xor-patterns-and-prefix-state.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/04-bit-manipulation-in-java/chapters/04-subsets-submasks-and-compact-state.md",
+          "path": "content/volumes/dsa/DSA-04-bit-manipulation-in-java/chapters/04-subsets-submasks-and-compact-state.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/04-bit-manipulation-in-java/chapters/05-sde2-bit-interview-patterns.md",
+          "path": "content/volumes/dsa/DSA-04-bit-manipulation-in-java/chapters/05-sde2-bit-interview-patterns.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/04-bit-manipulation-in-java/chapters/06-java-apis-production-and-revision.md",
+          "path": "content/volumes/dsa/DSA-04-bit-manipulation-in-java/chapters/06-java-apis-production-and-revision.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/04-bit-manipulation-in-java/exercises/01-bit-manipulation-practice-lab.md",
+          "path": "content/volumes/dsa/DSA-04-bit-manipulation-in-java/chapters/07-live-bit-interviews-and-jdk-contracts.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/04-bit-manipulation-in-java/solutions/01-bit-manipulation-practice-solutions.md",
+          "path": "content/volumes/dsa/DSA-04-bit-manipulation-in-java/exercises/01-bit-manipulation-practice-lab.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/dsa/DSA-04-bit-manipulation-in-java/solutions/01-bit-manipulation-practice-solutions.md",
           "series_native": true
         }
       ]
@@ -613,15 +696,15 @@
       "short_title": "Loops and Index Calculations",
       "subtitle": "From Your First Loop to SDE-2 Index Reasoning",
       "output_name": "Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf",
-      "volume_label": "Study Step 05 of 18",
+      "volume_label": "Data Structures and Algorithms - Book 05 of 17 - Study Step DSA-05",
       "release_date": "2026-07-25",
       "cover_deck": "See exactly how Java executes loops, eliminate off-by-one errors, and derive the pointer, window, search, and grid patterns expected in SDE-2 interviews.",
       "topic_line": "LOOP EXECUTION | RANGES | POINTERS | WINDOWS | SEARCH | GRIDS",
       "purpose": "This volume is the bridge from basic Java control flow to reliable array and string problem solving. It begins with the execution model of for, while, do-while, and enhanced-for loops; builds a visual language for ranges and invariants; then derives pointer, compaction, window, search, and matrix patterns without asking the reader to memorize templates blindly.",
       "prerequisites": [
-        "Java Foundations Study Step 01 through conditions, methods, arrays, and basic collections",
-        "Time and Space Complexity Study Step 02 through linear, quadratic, and aggregate work",
-        "Number Systems Study Step 03A for integer range and overflow intuition"
+        "JAVA-01 Java Foundations through conditions, methods, arrays, and basic collections",
+        "DSA-01 Time and Space Complexity through linear, quadratic, and aggregate work",
+        "DSA-02 Number Systems for integer range and overflow intuition"
       ],
       "recognition_signals": [
         "An endpoint or empty input creates an off-by-one failure",
@@ -646,41 +729,52 @@
       "min_pages": 70,
       "max_pages": 160,
       "code_companion": {
-        "path": "content/volumes/05-loop-mastery-and-index-calculations/code/LoopMasteryExamples.java",
+        "path": "content/volumes/dsa/DSA-05-loop-mastery-and-index-calculations/code/LoopMasteryExamples.java",
         "title": "40 Executable Loop Checks",
         "description": "This dependency-free Java 21 companion validates loop execution, bounds, two-pointer movement, compaction, sliding windows, lower bounds, flattened indexes, and matrix traversals. Compile with javac --release 21 -Xlint:all -Werror LoopMasteryExamples.java and run with java LoopMasteryExamples. A successful run prints exactly PASS 40 Loop Mastery checks."
       },
+      "code_companions": [
+        {
+          "path": "content/volumes/dsa/DSA-05-loop-mastery-and-index-calculations/code/LoopInvariantChecks.java",
+          "title": "Loop Invariant and Boundary Checks",
+          "description": "Executable Java 21 traces for compaction, sliding windows, cyclic normalization, flattened indexes, progress measures, and boundary contracts."
+        }
+      ],
       "sources": [
         {
-          "path": "content/volumes/05-loop-mastery-and-index-calculations/chapters/01-loop-execution-from-zero.md",
+          "path": "content/volumes/dsa/DSA-05-loop-mastery-and-index-calculations/chapters/01-loop-execution-from-zero.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/05-loop-mastery-and-index-calculations/chapters/02-index-ranges-invariants-and-search.md",
+          "path": "content/volumes/dsa/DSA-05-loop-mastery-and-index-calculations/chapters/02-index-ranges-invariants-and-search.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/05-loop-mastery-and-index-calculations/chapters/03-two-pointers-compaction-and-merge.md",
+          "path": "content/volumes/dsa/DSA-05-loop-mastery-and-index-calculations/chapters/03-two-pointers-compaction-and-merge.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/05-loop-mastery-and-index-calculations/chapters/04-sliding-windows-and-aggregate-work.md",
+          "path": "content/volumes/dsa/DSA-05-loop-mastery-and-index-calculations/chapters/04-sliding-windows-and-aggregate-work.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/05-loop-mastery-and-index-calculations/chapters/05-grid-indexes-and-matrix-traversals.md",
+          "path": "content/volumes/dsa/DSA-05-loop-mastery-and-index-calculations/chapters/05-grid-indexes-and-matrix-traversals.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/05-loop-mastery-and-index-calculations/chapters/06-sde2-loop-reasoning-and-java-internals.md",
+          "path": "content/volumes/dsa/DSA-05-loop-mastery-and-index-calculations/chapters/06-sde2-loop-reasoning-and-java-internals.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/05-loop-mastery-and-index-calculations/exercises/01-loop-mastery-practice-lab.md",
+          "path": "content/volumes/dsa/DSA-05-loop-mastery-and-index-calculations/chapters/07-state-traces-and-live-loop-interviews.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/05-loop-mastery-and-index-calculations/solutions/01-loop-mastery-practice-solutions.md",
+          "path": "content/volumes/dsa/DSA-05-loop-mastery-and-index-calculations/exercises/01-loop-mastery-practice-lab.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/dsa/DSA-05-loop-mastery-and-index-calculations/solutions/01-loop-mastery-practice-solutions.md",
           "series_native": true
         }
       ]
@@ -693,7 +787,7 @@
       "short_title": "Arrays and Array Patterns",
       "subtitle": "From First Indexes to SDE-2 Array Pattern Reasoning",
       "output_name": "Java-SDE2-DSA-06-Arrays-and-Array-Patterns.pdf",
-      "volume_label": "Study Step 06 of 18",
+      "volume_label": "Data Structures and Algorithms - Book 06 of 17 - Study Step DSA-06",
       "release_date": "2026-07-26",
       "cover_deck": "Master Java array mechanics first, then derive the two-pointer, window, prefix, partition, interval, and matrix patterns expected in SDE-2 interviews.",
       "topic_line": "ARRAY FOUNDATIONS | INVARIANTS | RANGE STATE | SDE-2 PATTERNS",
@@ -725,29 +819,29 @@
       "min_pages": 70,
       "max_pages": 170,
       "code_companion": {
-        "path": "content/volumes/06-arrays-and-array-patterns/code/ArrayPatternsExamples.java",
-        "title": "50 Executable Array Checks",
-        "description": "This dependency-free Java 21 companion validates array copying, traversal, two pointers, compaction, partitioning, windows, maximum ranges, prefix and difference state, intervals, cyclic placement, and matrix rotation. Compile with javac --release 21 -Xlint:all -Werror ArrayPatternsExamples.java and run with java ArrayPatternsExamples. A successful run prints exactly PASS 50 Arrays checks."
+        "path": "content/volumes/dsa/DSA-06-arrays-and-array-patterns/code/ArrayPatternsExamples.java",
+        "title": "60 Executable Array Checks",
+        "description": "This dependency-free Java 21 companion validates array mechanics, patterns, manual insertion/merge/three-way quicksort, guarded counting sort, randomized quickselect, and differential oracles. Compile with javac --release 21 -Xlint:all -Werror ArrayPatternsExamples.java and run with java ArrayPatternsExamples. A successful run prints exactly PASS 60 Arrays checks."
       },
       "sources": [
         {
-          "path": "content/volumes/06-arrays-and-array-patterns/chapters/01-array-foundations-from-zero.md",
+          "path": "content/volumes/dsa/DSA-06-arrays-and-array-patterns/chapters/01-array-foundations-from-zero.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/06-arrays-and-array-patterns/chapters/02-traversal-copying-and-transformations.md",
+          "path": "content/volumes/dsa/DSA-06-arrays-and-array-patterns/chapters/02-traversal-copying-and-transformations.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/06-arrays-and-array-patterns/chapters/03-two-pointers-compaction-and-partition.md",
+          "path": "content/volumes/dsa/DSA-06-arrays-and-array-patterns/chapters/03-two-pointers-compaction-and-partition.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/06-arrays-and-array-patterns/chapters/04-subarrays-windows-and-maximum-ranges.md",
+          "path": "content/volumes/dsa/DSA-06-arrays-and-array-patterns/chapters/04-subarrays-windows-and-maximum-ranges.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/06-arrays-and-array-patterns/chapters/05-prefix-suffix-and-range-state.md",
+          "path": "content/volumes/dsa/DSA-06-arrays-and-array-patterns/chapters/05-prefix-suffix-and-range-state.md",
           "series_native": true
         },
         {
@@ -785,19 +879,23 @@
           }
         },
         {
-          "path": "content/volumes/06-arrays-and-array-patterns/chapters/06-advanced-array-patterns.md",
+          "path": "content/volumes/dsa/DSA-06-arrays-and-array-patterns/chapters/06-advanced-array-patterns.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/06-arrays-and-array-patterns/chapters/07-sde2-array-interview-playbook.md",
+          "path": "content/volumes/dsa/DSA-06-arrays-and-array-patterns/chapters/07-sde2-array-interview-playbook.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/06-arrays-and-array-patterns/exercises/01-arrays-practice-lab.md",
+          "path": "content/volumes/dsa/DSA-06-arrays-and-array-patterns/chapters/08-sorting-and-selection-from-first-principles.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/06-arrays-and-array-patterns/solutions/01-arrays-practice-solutions.md",
+          "path": "content/volumes/dsa/DSA-06-arrays-and-array-patterns/exercises/01-arrays-practice-lab.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/dsa/DSA-06-arrays-and-array-patterns/solutions/01-arrays-practice-solutions.md",
           "series_native": true
         }
       ]
@@ -810,7 +908,7 @@
       "short_title": "Strings and String Patterns",
       "subtitle": "From SDE-1 String Basics to SDE-2 Text Algorithms",
       "output_name": "Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf",
-      "volume_label": "Study Step 07 of 18",
+      "volume_label": "Data Structures and Algorithms - Book 07 of 17 - Study Step DSA-07",
       "release_date": "2026-07-28",
       "cover_deck": "Master Java String mechanics first, then derive Unicode-safe boundaries, builders, parsing, windows, frequency patterns, KMP, and interview-ready text contracts.",
       "topic_line": "STRING BASICS | UNICODE | BUILDERS | WINDOWS | SEARCH | SDE-2",
@@ -843,45 +941,56 @@
       "min_pages": 70,
       "max_pages": 170,
       "code_companion": {
-        "path": "content/volumes/07-strings-and-string-patterns/code/StringPatternsExamples.java",
+        "path": "content/volumes/dsa/DSA-07-strings-and-string-patterns/code/StringPatternsExamples.java",
         "title": "50 Executable String Checks",
         "description": "This dependency-free Java 21 companion validates immutable String behavior, code-point traversal, parsing, two pointers, frequency state, sliding windows, minimum cover, KMP, rolling hash, and randomized search equivalence. Compile with javac --release 21 -Xlint:all -Werror StringPatternsExamples.java and run with java StringPatternsExamples. A successful run prints exactly PASS 50 Strings checks."
       },
+      "code_companions": [
+        {
+          "path": "content/volumes/dsa/DSA-07-strings-and-string-patterns/code/StringContractChecks.java",
+          "title": "String Parsing, Search, and Unicode Contract Checks",
+          "description": "Executable Java 21 checks for overflow-safe manual parsing, KMP, UTF-16/code-point boundaries, normalization, and locale-sensitive text handling."
+        }
+      ],
       "sources": [
         {
-          "path": "content/volumes/07-strings-and-string-patterns/chapters/01-string-foundations-from-zero.md",
+          "path": "content/volumes/dsa/DSA-07-strings-and-string-patterns/chapters/01-string-foundations-from-zero.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/07-strings-and-string-patterns/chapters/02-traversal-unicode-and-text-boundaries.md",
+          "path": "content/volumes/dsa/DSA-07-strings-and-string-patterns/chapters/02-traversal-unicode-and-text-boundaries.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/07-strings-and-string-patterns/chapters/03-building-parsing-and-conversion.md",
+          "path": "content/volumes/dsa/DSA-07-strings-and-string-patterns/chapters/03-building-parsing-and-conversion.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/07-strings-and-string-patterns/chapters/04-two-pointers-frequency-and-core-patterns.md",
+          "path": "content/volumes/dsa/DSA-07-strings-and-string-patterns/chapters/04-two-pointers-frequency-and-core-patterns.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/07-strings-and-string-patterns/chapters/05-sliding-windows-and-substring-state.md",
+          "path": "content/volumes/dsa/DSA-07-strings-and-string-patterns/chapters/05-sliding-windows-and-substring-state.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/07-strings-and-string-patterns/chapters/06-pattern-matching-and-search.md",
+          "path": "content/volumes/dsa/DSA-07-strings-and-string-patterns/chapters/06-pattern-matching-and-search.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/07-strings-and-string-patterns/chapters/07-sde2-string-interview-playbook.md",
+          "path": "content/volumes/dsa/DSA-07-strings-and-string-patterns/chapters/07-sde2-string-interview-playbook.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/07-strings-and-string-patterns/exercises/01-strings-practice-lab.md",
+          "path": "content/volumes/dsa/DSA-07-strings-and-string-patterns/chapters/08-string-contracts-live-interviews-and-edge-cases.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/07-strings-and-string-patterns/solutions/01-strings-practice-solutions.md",
+          "path": "content/volumes/dsa/DSA-07-strings-and-string-patterns/exercises/01-strings-practice-lab.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/dsa/DSA-07-strings-and-string-patterns/solutions/01-strings-practice-solutions.md",
           "series_native": true
         }
       ]
@@ -894,13 +1003,13 @@
       "short_title": "Hashing and Prefix State",
       "subtitle": "Equality Contracts, Frequency Maps, Deduplication, and Expected Complexity",
       "output_name": "Java-SDE2-DSA-08-Hashing-Maps-Sets-and-Prefix-State.pdf",
-      "volume_label": "Study Step 08 of 18",
+      "volume_label": "Data Structures and Algorithms - Book 08 of 17 - Study Step DSA-08",
       "release_date": "2026-07-25",
       "cover_deck": "Understand equality and hashing deeply enough to use maps and sets for frequency, membership, prefix-state, caching, and custom-key interview problems.",
       "topic_line": "HASHING | MAPS | SETS | FREQUENCY | PREFIX STATE | EQUALITY",
       "purpose": "Hashing is both a DSA pattern and a Java object-contract problem. This volume connects the two so expected O(1) claims remain defensible.",
       "prerequisites": [
-        "Study Steps 01-07",
+        "JAVA-01 and DSA-01 through DSA-07",
         "Equality and array/string basics"
       ],
       "recognition_signals": [
@@ -924,13 +1033,13 @@
       "min_pages": 25,
       "max_pages": 130,
       "code_companion": {
-        "path": "content/volumes/08-hashing-maps-sets-and-prefix-state/code/HashingInterviewChecks.java",
-        "title": "Executable Hashing Interview Checks",
-        "description": "This dependency-free Java companion validates two-sum state, prefix-frequency counting, balanced-prefix indexing, longest-consecutive aggregate reasoning, and integer-boundary handling. A successful run prints PASS 5 hashing checks."
+        "path": "content/volumes/dsa/DSA-08-hashing-maps-sets-and-prefix-state/code/HashingInterviewChecks.java",
+        "title": "Executable Hashing and Hash-Table Checks",
+        "description": "This dependency-free Java 21 companion validates hashing patterns plus a first-principles generic chained hash table, collision handling, resizing, equality contracts, null policy, mutable-key failure, and boundary cases. A successful run prints PASS 16 hashing checks."
       },
       "sources": [
         {
-          "path": "content/volumes/08-hashing-maps-sets-and-prefix-state/chapters/00-hashing-foundations-first.md",
+          "path": "content/volumes/dsa/DSA-08-hashing-maps-sets-and-prefix-state/chapters/00-hashing-foundations-first.md",
           "series_native": true
         },
         {
@@ -970,23 +1079,27 @@
           "path": "content/master/27-hashmap-hashset-and-hashing-internals.md"
         },
         {
-          "path": "content/volumes/08-hashing-maps-sets-and-prefix-state/chapters/01-sde2-hashing-patterns.md",
+          "path": "content/volumes/dsa/DSA-08-hashing-maps-sets-and-prefix-state/chapters/01-sde2-hashing-patterns.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/08-hashing-maps-sets-and-prefix-state/chapters/02-essential-pattern-clinics.md",
+          "path": "content/volumes/dsa/DSA-08-hashing-maps-sets-and-prefix-state/chapters/02-essential-pattern-clinics.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/08-hashing-maps-sets-and-prefix-state/chapters/02-realistic-hashing-interview-rounds.md",
+          "path": "content/volumes/dsa/DSA-08-hashing-maps-sets-and-prefix-state/chapters/02-realistic-hashing-interview-rounds.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/08-hashing-maps-sets-and-prefix-state/exercises/01-hashing-practice-lab.md",
+          "path": "content/volumes/dsa/DSA-08-hashing-maps-sets-and-prefix-state/chapters/03-hash-table-internals-from-first-principles.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/08-hashing-maps-sets-and-prefix-state/solutions/01-hashing-practice-solutions.md",
+          "path": "content/volumes/dsa/DSA-08-hashing-maps-sets-and-prefix-state/exercises/01-hashing-practice-lab.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/dsa/DSA-08-hashing-maps-sets-and-prefix-state/solutions/01-hashing-practice-solutions.md",
           "series_native": true
         }
       ]
@@ -999,13 +1112,13 @@
       "short_title": "Recursion and Backtracking",
       "subtitle": "Contracts, Call Stacks, Search Trees, Pruning, and State Restoration",
       "output_name": "Java-SDE2-DSA-09-Recursion-and-Backtracking.pdf",
-      "volume_label": "Study Step 09 of 18",
+      "volume_label": "Data Structures and Algorithms - Book 09 of 17 - Study Step DSA-09",
       "release_date": "2026-07-25",
       "cover_deck": "Reason from recursive contracts, understand stack cost, restore mutable state correctly, and prune combinatorial search without losing solutions.",
       "topic_line": "RECURSION | STACK FRAMES | BACKTRACKING | PRUNING | SEARCH TREES",
       "purpose": "This volume separates recursion as a method contract from backtracking as controlled state-space search, with Java stack and mutation behavior made explicit.",
       "prerequisites": [
-        "Study Steps 01-08",
+        "JAVA-01 and DSA-01 through DSA-08",
         "Complexity and collection fundamentals"
       ],
       "recognition_signals": [
@@ -1029,33 +1142,37 @@
       "min_pages": 20,
       "max_pages": 110,
       "code_companion": {
-        "path": "content/volumes/09-recursion-and-backtracking/code/RecursionInterviewChecks.java",
-        "title": "Executable Recursion Interview Checks",
-        "description": "This dependency-free Java companion validates recursive contracts, duplicate-aware subset generation, choose-explore-unchoose restoration, and balanced-parentheses pruning. A successful run prints PASS 4 recursion checks."
+        "path": "content/volumes/dsa/DSA-09-recursion-and-backtracking/code/RecursionInterviewChecks.java",
+        "title": "Executable Recursion and Backtracking Checks",
+        "description": "This dependency-free Java 21 companion validates frame contracts, restoration, duplicate-aware generation, combination search, N-Queens state, jagged-board word search, and differential oracles. A successful run prints PASS 17 recursion checks."
       },
       "sources": [
         {
-          "path": "content/volumes/09-recursion-and-backtracking/chapters/00-recursion-foundations-first.md",
+          "path": "content/volumes/dsa/DSA-09-recursion-and-backtracking/chapters/00-recursion-foundations-first.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/09-recursion-and-backtracking/chapters/01-sde2-recursion-and-backtracking-patterns.md",
+          "path": "content/volumes/dsa/DSA-09-recursion-and-backtracking/chapters/01-sde2-recursion-and-backtracking-patterns.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/09-recursion-and-backtracking/chapters/02-essential-pattern-clinics.md",
+          "path": "content/volumes/dsa/DSA-09-recursion-and-backtracking/chapters/02-essential-pattern-clinics.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/09-recursion-and-backtracking/chapters/02-realistic-recursion-interview-rounds.md",
+          "path": "content/volumes/dsa/DSA-09-recursion-and-backtracking/chapters/02-realistic-recursion-interview-rounds.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/09-recursion-and-backtracking/exercises/01-recursion-practice-lab.md",
+          "path": "content/volumes/dsa/DSA-09-recursion-and-backtracking/chapters/03-recursion-engine-and-backtracking-state.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/09-recursion-and-backtracking/solutions/01-recursion-practice-solutions.md",
+          "path": "content/volumes/dsa/DSA-09-recursion-and-backtracking/exercises/01-recursion-practice-lab.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/dsa/DSA-09-recursion-and-backtracking/solutions/01-recursion-practice-solutions.md",
           "series_native": true
         }
       ]
@@ -1068,13 +1185,13 @@
       "short_title": "Linked Lists",
       "subtitle": "Nodes, Sentinels, Fast-Slow Pointers, Reversal, Cycles, and Merging",
       "output_name": "Java-SDE2-DSA-10-Linked-Lists.pdf",
-      "volume_label": "Study Step 10 of 18",
+      "volume_label": "Data Structures and Algorithms - Book 10 of 17 - Study Step DSA-10",
       "release_date": "2026-07-25",
       "cover_deck": "Make pointer mutation explainable through invariants, sentinels, saved-next discipline, fast-slow reasoning, and safe merge primitives.",
       "topic_line": "NODES | POINTERS | SENTINELS | REVERSAL | CYCLES | MERGING",
       "purpose": "Linked-list problems expose whether a candidate can preserve reachability while mutating references. This volume makes those invariants visible.",
       "prerequisites": [
-        "Study Steps 01-09",
+        "JAVA-01 and DSA-01 through DSA-09",
         "Reference semantics and complexity"
       ],
       "recognition_signals": [
@@ -1098,33 +1215,37 @@
       "min_pages": 18,
       "max_pages": 100,
       "code_companion": {
-        "path": "content/volumes/10-linked-lists/code/LinkedListInterviewChecks.java",
-        "title": "Executable Linked-List Interview Checks",
-        "description": "This dependency-free Java companion validates construction, reversal, palindrome comparison, and restoration of caller-visible list structure. A successful run prints PASS 4 linked-list checks."
+        "path": "content/volumes/dsa/DSA-10-linked-lists/code/LinkedListInterviewChecks.java",
+        "title": "Executable Linked-List Identity and Mutation Checks",
+        "description": "This dependency-free Java 21 companion validates node identity and pointer mutation across reversal, stable merge, deletion, cycle entry, intersection, random-pointer copying, restoration, and edge cases. A successful run prints PASS 20 linked-list checks."
       },
       "sources": [
         {
-          "path": "content/volumes/10-linked-lists/chapters/00-linked-list-foundations-first.md",
+          "path": "content/volumes/dsa/DSA-10-linked-lists/chapters/00-linked-list-foundations-first.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/10-linked-lists/chapters/01-sde2-linked-list-patterns.md",
+          "path": "content/volumes/dsa/DSA-10-linked-lists/chapters/01-sde2-linked-list-patterns.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/10-linked-lists/chapters/02-essential-pattern-clinics.md",
+          "path": "content/volumes/dsa/DSA-10-linked-lists/chapters/02-essential-pattern-clinics.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/10-linked-lists/chapters/02-realistic-linked-list-interview-rounds.md",
+          "path": "content/volumes/dsa/DSA-10-linked-lists/chapters/02-realistic-linked-list-interview-rounds.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/10-linked-lists/exercises/01-linked-list-practice-lab.md",
+          "path": "content/volumes/dsa/DSA-10-linked-lists/chapters/03-pointer-surgery-and-node-identity.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/10-linked-lists/solutions/01-linked-list-practice-solutions.md",
+          "path": "content/volumes/dsa/DSA-10-linked-lists/exercises/01-linked-list-practice-lab.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/dsa/DSA-10-linked-lists/solutions/01-linked-list-practice-solutions.md",
           "series_native": true
         }
       ]
@@ -1137,13 +1258,13 @@
       "short_title": "Stacks, Queues, and Deques",
       "subtitle": "LIFO, FIFO, Sliding Extrema, Next-Greater State, and Java ArrayDeque",
       "output_name": "Java-SDE2-DSA-11-Stacks-Queues-Deques-and-Monotonic-Patterns.pdf",
-      "volume_label": "Study Step 11 of 18",
+      "volume_label": "Data Structures and Algorithms - Book 11 of 17 - Study Step DSA-11",
       "release_date": "2026-07-25",
       "cover_deck": "Choose LIFO, FIFO, deque, priority, or monotonic state correctly and implement the pattern with safe Java collection APIs.",
       "topic_line": "STACK | QUEUE | DEQUE | MONOTONIC | WINDOWS | ARRAYDEQUE",
       "purpose": "This volume unifies ordering data structures around the state each one preserves, then applies monotonic structures to linear-time interview patterns.",
       "prerequisites": [
-        "Study Steps 01-10",
+        "JAVA-01 and DSA-01 through DSA-10",
         "Array and linked-list fundamentals"
       ],
       "recognition_signals": [
@@ -1167,33 +1288,37 @@
       "min_pages": 18,
       "max_pages": 110,
       "code_companion": {
-        "path": "content/volumes/11-stacks-queues-deques-and-monotonic-patterns/code/OrderingStructuresInterviewChecks.java",
-        "title": "Executable Stack, Queue, and Deque Interview Checks",
-        "description": "This dependency-free Java companion validates monotonic-stack resolution, monotonic-deque expiry, duplicate dominance, and window boundaries. A successful run prints PASS 3 ordering-structure checks."
+        "path": "content/volumes/dsa/DSA-11-stacks-queues-deques-and-monotonic-patterns/code/OrderingStructuresInterviewChecks.java",
+        "title": "Executable Deque and Monotonic-Structure Checks",
+        "description": "This dependency-free Java 21 companion validates a resizable circular deque, wrap and resize boundaries, monotonic invariants, histogram spans, postfix contracts, and differential cases. A successful run prints PASS 16 ordering-structure checks."
       },
       "sources": [
         {
-          "path": "content/volumes/11-stacks-queues-deques-and-monotonic-patterns/chapters/00-ordering-structures-foundations-first.md",
+          "path": "content/volumes/dsa/DSA-11-stacks-queues-deques-and-monotonic-patterns/chapters/00-ordering-structures-foundations-first.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/11-stacks-queues-deques-and-monotonic-patterns/chapters/01-sde2-stack-queue-deque-patterns.md",
+          "path": "content/volumes/dsa/DSA-11-stacks-queues-deques-and-monotonic-patterns/chapters/01-sde2-stack-queue-deque-patterns.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/11-stacks-queues-deques-and-monotonic-patterns/chapters/02-essential-pattern-clinics.md",
+          "path": "content/volumes/dsa/DSA-11-stacks-queues-deques-and-monotonic-patterns/chapters/02-essential-pattern-clinics.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/11-stacks-queues-deques-and-monotonic-patterns/chapters/02-realistic-stack-queue-interview-rounds.md",
+          "path": "content/volumes/dsa/DSA-11-stacks-queues-deques-and-monotonic-patterns/chapters/02-realistic-stack-queue-interview-rounds.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/11-stacks-queues-deques-and-monotonic-patterns/exercises/01-ordering-structures-practice-lab.md",
+          "path": "content/volumes/dsa/DSA-11-stacks-queues-deques-and-monotonic-patterns/chapters/03-circular-deque-and-monotonic-invariants.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/11-stacks-queues-deques-and-monotonic-patterns/solutions/01-ordering-structures-practice-solutions.md",
+          "path": "content/volumes/dsa/DSA-11-stacks-queues-deques-and-monotonic-patterns/exercises/01-ordering-structures-practice-lab.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/dsa/DSA-11-stacks-queues-deques-and-monotonic-patterns/solutions/01-ordering-structures-practice-solutions.md",
           "series_native": true
         }
       ]
@@ -1206,13 +1331,13 @@
       "short_title": "Binary Search",
       "subtitle": "Exact Matches, Lower Bounds, Monotone Predicates, and Safe Midpoints",
       "output_name": "Java-SDE2-DSA-12-Binary-Search.pdf",
-      "volume_label": "Study Step 12 of 18",
+      "volume_label": "Data Structures and Algorithms - Book 12 of 17 - Study Step DSA-12",
       "release_date": "2026-07-25",
       "cover_deck": "Stop memorizing one template: define the candidate interval, monotone predicate, progress rule, and boundary contract that make binary search correct.",
       "topic_line": "BOUNDS | INVARIANTS | LOWER BOUND | ROTATION | ANSWER SEARCH",
       "purpose": "Binary search is a proof pattern over monotone state. This volume centers interval semantics, duplicates, insertion points, overflow-safe midpoint calculation, and search on answers.",
       "prerequisites": [
-        "Study Steps 01-06",
+        "JAVA-01 and DSA-01 through DSA-06",
         "Complexity and loop invariants"
       ],
       "recognition_signals": [
@@ -1236,33 +1361,37 @@
       "min_pages": 16,
       "max_pages": 100,
       "code_companion": {
-        "path": "content/volumes/12-binary-search/code/BinarySearchInterviewChecks.java",
-        "title": "Executable Binary-Search Interview Checks",
-        "description": "This dependency-free Java companion validates lower and upper bounds, duplicate ranges, missing values, and long-safe monotone capacity search. A successful run prints PASS 5 binary-search checks."
+        "path": "content/volumes/dsa/DSA-12-binary-search/code/BinarySearchInterviewChecks.java",
+        "title": "Executable Binary-Search Boundary Checks",
+        "description": "This dependency-free Java 21 companion validates signed-safe bounds, integer square root, rotated search, answer search, long-index matrix search, termination, and differential oracles. A successful run prints PASS 18 binary-search checks."
       },
       "sources": [
         {
-          "path": "content/volumes/12-binary-search/chapters/00-binary-search-foundations-first.md",
+          "path": "content/volumes/dsa/DSA-12-binary-search/chapters/00-binary-search-foundations-first.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/12-binary-search/chapters/01-sde2-binary-search-patterns.md",
+          "path": "content/volumes/dsa/DSA-12-binary-search/chapters/01-sde2-binary-search-patterns.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/12-binary-search/chapters/02-essential-pattern-clinics.md",
+          "path": "content/volumes/dsa/DSA-12-binary-search/chapters/02-essential-pattern-clinics.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/12-binary-search/chapters/02-realistic-binary-search-interview-rounds.md",
+          "path": "content/volumes/dsa/DSA-12-binary-search/chapters/02-realistic-binary-search-interview-rounds.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/12-binary-search/exercises/01-binary-search-practice-lab.md",
+          "path": "content/volumes/dsa/DSA-12-binary-search/chapters/03-boundary-engineering-and-answer-search.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/12-binary-search/solutions/01-binary-search-practice-solutions.md",
+          "path": "content/volumes/dsa/DSA-12-binary-search/exercises/01-binary-search-practice-lab.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/dsa/DSA-12-binary-search/solutions/01-binary-search-practice-solutions.md",
           "series_native": true
         }
       ]
@@ -1275,13 +1404,13 @@
       "short_title": "Trees, BSTs, and Tries",
       "subtitle": "Traversal Contracts, Path State, Ordering, Balance, and Prefix Search",
       "output_name": "Java-SDE2-DSA-13-Trees-BSTs-and-Tries.pdf",
-      "volume_label": "Study Step 13 of 18",
+      "volume_label": "Data Structures and Algorithms - Book 13 of 17 - Study Step DSA-13",
       "release_date": "2026-07-25",
       "cover_deck": "Model recursive tree contracts, own traversal state correctly, exploit BST ordering, and use tries for prefix-shaped search.",
       "topic_line": "DFS | BFS | BST | LCA | BALANCE | TRIES | SERIALIZATION",
       "purpose": "Tree interviews test recursion, state ownership, structural invariants, and the ability to translate ordering into pruning.",
       "prerequisites": [
-        "Study Steps 01-12",
+        "JAVA-01 and DSA-01 through DSA-12",
         "Recursion, queues, and binary search"
       ],
       "recognition_signals": [
@@ -1305,33 +1434,37 @@
       "min_pages": 25,
       "max_pages": 130,
       "code_companion": {
-        "path": "content/volumes/13-trees-bsts-and-tries/code/TreeInterviewChecks.java",
-        "title": "Executable Tree Interview Checks",
-        "description": "This dependency-free Java companion validates iterative inorder traversal and global ancestor-bound BST validation, including a deep violation. A successful run prints PASS 3 tree checks."
+        "path": "content/volumes/dsa/DSA-13-trees-bsts-and-tries/code/TreeInterviewChecks.java",
+        "title": "Executable Tree and Range-Tree Checks",
+        "description": "This dependency-free Java 21 companion validates traversal and BST contracts, Fenwick and iterative segment trees, all AVL rotation families, height/balance invariants, and differential cases. A successful run prints PASS 18 tree checks."
       },
       "sources": [
         {
-          "path": "content/volumes/13-trees-bsts-and-tries/chapters/00-tree-foundations-first.md",
+          "path": "content/volumes/dsa/DSA-13-trees-bsts-and-tries/chapters/00-tree-foundations-first.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/13-trees-bsts-and-tries/chapters/01-sde2-tree-bst-trie-patterns.md",
+          "path": "content/volumes/dsa/DSA-13-trees-bsts-and-tries/chapters/01-sde2-tree-bst-trie-patterns.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/13-trees-bsts-and-tries/chapters/02-essential-pattern-clinics.md",
+          "path": "content/volumes/dsa/DSA-13-trees-bsts-and-tries/chapters/02-essential-pattern-clinics.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/13-trees-bsts-and-tries/chapters/02-realistic-tree-interview-rounds.md",
+          "path": "content/volumes/dsa/DSA-13-trees-bsts-and-tries/chapters/02-realistic-tree-interview-rounds.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/13-trees-bsts-and-tries/exercises/01-trees-practice-lab.md",
+          "path": "content/volumes/dsa/DSA-13-trees-bsts-and-tries/chapters/03-range-query-trees-and-avl-rotations.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/13-trees-bsts-and-tries/solutions/01-trees-practice-solutions.md",
+          "path": "content/volumes/dsa/DSA-13-trees-bsts-and-tries/exercises/01-trees-practice-lab.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/dsa/DSA-13-trees-bsts-and-tries/solutions/01-trees-practice-solutions.md",
           "series_native": true
         }
       ]
@@ -1344,13 +1477,13 @@
       "short_title": "Heaps and Priority Queues",
       "subtitle": "Heap Invariants, Comparator Safety, K-Way Processing, and Partial Ordering",
       "output_name": "Java-SDE2-DSA-14-Heaps-Priority-Queues-and-Top-K.pdf",
-      "volume_label": "Study Step 14 of 18",
+      "volume_label": "Data Structures and Algorithms - Book 14 of 17 - Study Step DSA-14",
       "release_date": "2026-07-25",
       "cover_deck": "Use heap order when only the next extremum matters, compare full sorting with selection, and write stable, overflow-safe Java priority logic.",
       "topic_line": "HEAPS | PRIORITYQUEUE | TOP-K | SELECTION | COMPARATORS | MERGING",
       "purpose": "This volume distinguishes heap order from global sorting and develops priority-based interview patterns without hiding comparator or mutation risks.",
       "prerequisites": [
-        "Study Steps 01-13",
+        "JAVA-01 and DSA-01 through DSA-13",
         "Arrays, trees, sorting, and comparators"
       ],
       "recognition_signals": [
@@ -1374,33 +1507,37 @@
       "min_pages": 22,
       "max_pages": 120,
       "code_companion": {
-        "path": "content/volumes/14-heaps-priority-queues-and-top-k/code/HeapInterviewChecks.java",
-        "title": "Executable Heap Interview Checks",
-        "description": "This dependency-free Java companion validates bounded top-k retention and overflow-safe running medians with two heaps. A successful run prints PASS 5 heap checks."
+        "path": "content/volumes/dsa/DSA-14-heaps-priority-queues-and-top-k/code/HeapInterviewChecks.java",
+        "title": "Executable Heap and Selection Checks",
+        "description": "This dependency-free Java 21 companion validates a resizable primitive binary heap, bottom-up heapify, sift invariants, bounded top-k, running median, randomized three-way quickselect, and differential cases. A successful run prints PASS 17 heap checks."
       },
       "sources": [
         {
-          "path": "content/volumes/14-heaps-priority-queues-and-top-k/chapters/00-heap-foundations-first.md",
+          "path": "content/volumes/dsa/DSA-14-heaps-priority-queues-and-top-k/chapters/00-heap-foundations-first.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/14-heaps-priority-queues-and-top-k/chapters/01-sde2-heap-and-selection-patterns.md",
+          "path": "content/volumes/dsa/DSA-14-heaps-priority-queues-and-top-k/chapters/01-sde2-heap-and-selection-patterns.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/14-heaps-priority-queues-and-top-k/chapters/02-essential-pattern-clinics.md",
+          "path": "content/volumes/dsa/DSA-14-heaps-priority-queues-and-top-k/chapters/02-essential-pattern-clinics.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/14-heaps-priority-queues-and-top-k/chapters/02-realistic-heap-interview-rounds.md",
+          "path": "content/volumes/dsa/DSA-14-heaps-priority-queues-and-top-k/chapters/02-realistic-heap-interview-rounds.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/14-heaps-priority-queues-and-top-k/exercises/01-heaps-practice-lab.md",
+          "path": "content/volumes/dsa/DSA-14-heaps-priority-queues-and-top-k/chapters/03-binary-heap-and-quickselect-internals.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/14-heaps-priority-queues-and-top-k/solutions/01-heaps-practice-solutions.md",
+          "path": "content/volumes/dsa/DSA-14-heaps-priority-queues-and-top-k/exercises/01-heaps-practice-lab.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/dsa/DSA-14-heaps-priority-queues-and-top-k/solutions/01-heaps-practice-solutions.md",
           "series_native": true
         }
       ]
@@ -1413,13 +1550,13 @@
       "short_title": "Graphs",
       "subtitle": "Modeling, BFS, DFS, Topological Sort, Shortest Paths, and Connectivity",
       "output_name": "Java-SDE2-DSA-15-Graphs.pdf",
-      "volume_label": "Study Step 15 of 18",
+      "volume_label": "Data Structures and Algorithms - Book 15 of 17 - Study Step DSA-15",
       "release_date": "2026-07-25",
       "cover_deck": "Translate domains into vertices and edges, then choose traversal, ordering, path, or connectivity algorithms from graph constraints.",
       "topic_line": "MODELING | BFS | DFS | TOPOLOGICAL SORT | DIJKSTRA | UNION-FIND",
       "purpose": "Graph problems become manageable once the model and edge semantics are explicit. This volume emphasizes algorithm selection, state, overflow, and correctness.",
       "prerequisites": [
-        "Study Steps 01-14",
+        "JAVA-01 and DSA-01 through DSA-14",
         "Queues, recursion, heaps, and hashing"
       ],
       "recognition_signals": [
@@ -1443,33 +1580,37 @@
       "min_pages": 16,
       "max_pages": 100,
       "code_companion": {
-        "path": "content/volumes/15-graphs/code/GraphInterviewChecks.java",
-        "title": "Executable Graph Interview Checks",
-        "description": "This dependency-free Java companion validates Kahn topological ordering, directed-cycle failure, grid BFS, and enqueue-time visited marking. A successful run prints PASS 4 graph checks."
+        "path": "content/volumes/dsa/DSA-15-graphs/code/GraphInterviewChecks.java",
+        "title": "Executable Graph Algorithm Checks",
+        "description": "This dependency-free Java 21 companion validates traversal and ordering plus DAG shortest paths, Bellman-Ford affected states, guarded Floyd-Warshall, edge-returning Prim, SCCs, and edge-ID-correct bridges and articulation points. A successful run prints PASS 16 graph checks."
       },
       "sources": [
         {
-          "path": "content/volumes/15-graphs/chapters/00-graph-foundations-first.md",
+          "path": "content/volumes/dsa/DSA-15-graphs/chapters/00-graph-foundations-first.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/15-graphs/chapters/01-sde2-graph-patterns.md",
+          "path": "content/volumes/dsa/DSA-15-graphs/chapters/01-sde2-graph-patterns.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/15-graphs/chapters/02-essential-pattern-clinics.md",
+          "path": "content/volumes/dsa/DSA-15-graphs/chapters/02-essential-pattern-clinics.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/15-graphs/chapters/02-realistic-graph-interview-rounds.md",
+          "path": "content/volumes/dsa/DSA-15-graphs/chapters/02-realistic-graph-interview-rounds.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/15-graphs/exercises/01-graphs-practice-lab.md",
+          "path": "content/volumes/dsa/DSA-15-graphs/chapters/03-advanced-graph-algorithms-implemented.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/15-graphs/solutions/01-graphs-practice-solutions.md",
+          "path": "content/volumes/dsa/DSA-15-graphs/exercises/01-graphs-practice-lab.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/dsa/DSA-15-graphs/solutions/01-graphs-practice-solutions.md",
           "series_native": true
         }
       ]
@@ -1482,13 +1623,13 @@
       "short_title": "Greedy Algorithms",
       "subtitle": "Local Choices, Exchange Arguments, Counterexamples, and Interval Decisions",
       "output_name": "Java-SDE2-DSA-16-Greedy-Algorithms.pdf",
-      "volume_label": "Study Step 16 of 18",
+      "volume_label": "Data Structures and Algorithms - Book 16 of 17 - Study Step DSA-16",
       "release_date": "2026-07-25",
       "cover_deck": "Recognize when a local choice can be proved safe, construct counterexamples when it cannot, and implement sorting-driven greedy schedules.",
       "topic_line": "GREEDY CHOICE | EXCHANGE PROOF | INTERVALS | SORTING | SCHEDULING",
       "purpose": "Greedy solutions are short to code and hard to justify. This volume centers the proof obligation, not the superficial loop.",
       "prerequisites": [
-        "Study Steps 01-15",
+        "JAVA-01 and DSA-01 through DSA-15",
         "Sorting, comparators, graphs, and complexity"
       ],
       "recognition_signals": [
@@ -1512,33 +1653,37 @@
       "min_pages": 15,
       "max_pages": 100,
       "code_companion": {
-        "path": "content/volumes/16-greedy-algorithms/code/GreedyInterviewChecks.java",
-        "title": "Executable Greedy Interview Checks",
-        "description": "This dependency-free Java companion validates earliest-finish interval selection and long-safe gas-station elimination reasoning. A successful run prints PASS 3 greedy checks."
+        "path": "content/volumes/dsa/DSA-16-greedy-algorithms/code/GreedyInterviewChecks.java",
+        "title": "Executable Greedy Proof and Oracle Checks",
+        "description": "This dependency-free Java 21 companion validates returned interval choices, minimum-jump frontiers, deferred-refueling heaps, counterexamples, exhaustive interval oracles, and DP jump oracles. A successful run prints PASS 15 greedy checks."
       },
       "sources": [
         {
-          "path": "content/volumes/16-greedy-algorithms/chapters/00-greedy-foundations-first.md",
+          "path": "content/volumes/dsa/DSA-16-greedy-algorithms/chapters/00-greedy-foundations-first.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/16-greedy-algorithms/chapters/01-sde2-greedy-patterns.md",
+          "path": "content/volumes/dsa/DSA-16-greedy-algorithms/chapters/01-sde2-greedy-patterns.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/16-greedy-algorithms/chapters/02-essential-pattern-clinics.md",
+          "path": "content/volumes/dsa/DSA-16-greedy-algorithms/chapters/02-essential-pattern-clinics.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/16-greedy-algorithms/chapters/02-realistic-greedy-interview-rounds.md",
+          "path": "content/volumes/dsa/DSA-16-greedy-algorithms/chapters/02-realistic-greedy-interview-rounds.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/16-greedy-algorithms/exercises/01-greedy-practice-lab.md",
+          "path": "content/volumes/dsa/DSA-16-greedy-algorithms/chapters/03-greedy-proof-and-counterexample-workshop.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/16-greedy-algorithms/solutions/01-greedy-practice-solutions.md",
+          "path": "content/volumes/dsa/DSA-16-greedy-algorithms/exercises/01-greedy-practice-lab.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/dsa/DSA-16-greedy-algorithms/solutions/01-greedy-practice-solutions.md",
           "series_native": true
         }
       ]
@@ -1551,13 +1696,13 @@
       "short_title": "Dynamic Programming",
       "subtitle": "Memoization, Tabulation, Reconstruction, Dimensions, and Space Compression",
       "output_name": "Java-SDE2-DSA-17-Dynamic-Programming.pdf",
-      "volume_label": "Study Step 17 of 18",
+      "volume_label": "Data Structures and Algorithms - Book 17 of 17 - Study Step DSA-17",
       "release_date": "2026-07-25",
       "cover_deck": "Derive dynamic programs from state meaning, transitions, base cases, evaluation order, and reconstruction instead of memorizing tables.",
       "topic_line": "STATE | TRANSITION | MEMOIZATION | TABULATION | RECONSTRUCTION | DP",
       "purpose": "This volume makes dynamic programming a specification process: define exactly what a state means, how it depends on smaller states, and what information can be compressed.",
       "prerequisites": [
-        "Study Steps 01-16",
+        "JAVA-01 and DSA-01 through DSA-16",
         "Recursion, arrays, strings, and complexity"
       ],
       "recognition_signals": [
@@ -1581,33 +1726,37 @@
       "min_pages": 16,
       "max_pages": 110,
       "code_companion": {
-        "path": "content/volumes/17-dynamic-programming/code/DynamicProgrammingInterviewChecks.java",
-        "title": "Executable Dynamic-Programming Interview Checks",
-        "description": "This dependency-free Java companion validates minimum-coin optimization, LCS state transitions, and downward 0/1 subset-sum compression. A successful run prints PASS 5 dynamic-programming checks."
+        "path": "content/volumes/dsa/DSA-17-dynamic-programming/code/DynamicProgrammingInterviewChecks.java",
+        "title": "Executable Dynamic-Programming State Checks",
+        "description": "This dependency-free Java 21 companion validates memo/tabulation contracts, bounded Fibonacci, reconstructing knapsack, edit distance, grid paths, transaction-state machines, compression, and independent oracles. A successful run prints PASS 20 dynamic-programming checks."
       },
       "sources": [
         {
-          "path": "content/volumes/17-dynamic-programming/chapters/00-dynamic-programming-foundations-first.md",
+          "path": "content/volumes/dsa/DSA-17-dynamic-programming/chapters/00-dynamic-programming-foundations-first.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/17-dynamic-programming/chapters/01-sde2-dynamic-programming-patterns.md",
+          "path": "content/volumes/dsa/DSA-17-dynamic-programming/chapters/01-sde2-dynamic-programming-patterns.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/17-dynamic-programming/chapters/02-essential-pattern-clinics.md",
+          "path": "content/volumes/dsa/DSA-17-dynamic-programming/chapters/02-essential-pattern-clinics.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/17-dynamic-programming/chapters/02-realistic-dp-interview-rounds.md",
+          "path": "content/volumes/dsa/DSA-17-dynamic-programming/chapters/02-realistic-dp-interview-rounds.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/17-dynamic-programming/exercises/01-dp-practice-lab.md",
+          "path": "content/volumes/dsa/DSA-17-dynamic-programming/chapters/03-state-transitions-and-reconstruction.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/17-dynamic-programming/solutions/01-dp-practice-solutions.md",
+          "path": "content/volumes/dsa/DSA-17-dynamic-programming/exercises/01-dp-practice-lab.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/dsa/DSA-17-dynamic-programming/solutions/01-dp-practice-solutions.md",
           "series_native": true
         }
       ]
@@ -1616,17 +1765,17 @@
       "id": "18A",
       "stage": "18",
       "slug": "jvm-and-execution",
-      "title": "Advanced Java A: JVM and Execution",
-      "short_title": "Advanced Java A - JVM",
+      "title": "JVM and Java Execution",
+      "short_title": "JVM and Execution",
       "subtitle": "Platform Model, Bytecode, Loading, Memory, GC, JIT, and Runtime Semantics",
-      "output_name": "Java-SDE2-ADV-18A-JVM-and-Execution.pdf",
-      "volume_label": "Study Step 18A of 18 - Part A of J",
+      "output_name": "Java-SDE2-JAVA-06-JVM-and-Execution.pdf",
+      "volume_label": "Java Engineering - Book 06 of 09 - Study Step JAVA-06",
       "release_date": "2026-07-25",
       "cover_deck": "Connect Java source to class files, loading, runtime data areas, object layout, call stacks, garbage collection, and JIT execution.",
       "topic_line": "JDK | BYTECODE | CLASS LOADING | MEMORY | GC | JIT",
-      "purpose": "Part A builds the execution model needed to reason about Java behavior beneath syntax without presenting implementation details as language guarantees.",
+      "purpose": "This book builds the execution model needed to reason about Java behavior beneath syntax without presenting implementation details as language guarantees.",
       "prerequisites": [
-        "Study Steps 01-17 or equivalent Java coding maturity",
+        "JAVA-01 through JAVA-05, or equivalent Java coding maturity",
         "Comfort reading Java and basic command-line output"
       ],
       "recognition_signals": [
@@ -1648,6 +1797,11 @@
       ],
       "min_pages": 70,
       "max_pages": 150,
+      "code_companion": {
+        "path": "content/volumes/java/JAVA-06-jvm-and-execution/code/JvmExecutionEvidenceLab.java",
+        "title": "JVM Execution Evidence Lab",
+        "description": "Deterministic Java 21 checks for initialization triggers, loader boundaries, logical stack frames, erroneous class initialization, and reference aliasing. A successful run prints exactly PASS 5 JVM execution evidence checks."
+      },
       "sources": [
         {
           "path": "content/master/01-why-java-exists.md"
@@ -1702,6 +1856,10 @@
         },
         {
           "path": "content/master/10-execution-engine-jit-compilation-and-safepoints.md"
+        },
+        {
+          "path": "content/volumes/java/JAVA-06-jvm-and-execution/chapters/01-execution-evidence-workshop.md",
+          "series_native": true
         }
       ]
     },
@@ -1709,18 +1867,17 @@
       "id": "18B",
       "stage": "18",
       "slug": "language-oop-and-modern-java",
-      "title": "Advanced Java B: Language, OOP, and Modern Java",
-      "short_title": "Advanced Java B - Language",
+      "title": "Language, OOP, and Modern Java",
+      "short_title": "Language, OOP, and Modern Java",
       "subtitle": "Objects, Inheritance, Interfaces, Equality, Exceptions, Generics, Lambdas, and Java 21",
-      "output_name": "Java-SDE2-ADV-18B-Language-OOP-and-Modern-Java.pdf",
-      "volume_label": "Study Step 18B of 18 - Part B of J",
+      "output_name": "Java-SDE2-JAVA-04-Language-OOP-and-Modern-Java.pdf",
+      "volume_label": "Java Engineering - Book 04 of 09 - Study Step JAVA-04",
       "release_date": "2026-07-25",
       "cover_deck": "Develop precise Java language judgment across object design, type systems, equality, exceptions, generics, functional APIs, and modern platform features.",
       "topic_line": "OOP | EQUALITY | EXCEPTIONS | GENERICS | LAMBDAS | JAVA 21",
-      "purpose": "Part B covers the language-engineering depth expected when SDE-2 interviews move beyond coding patterns into API design and type safety.",
+      "purpose": "This book covers the language-engineering depth expected when SDE-2 interviews move beyond coding patterns into API design and type safety.",
       "prerequisites": [
-        "Study Step 01 Java foundations",
-        "Study Step 18A execution model recommended"
+        "JAVA-01 Java Foundations"
       ],
       "recognition_signals": [
         "The question tests substitutability or composition",
@@ -1742,6 +1899,11 @@
       ],
       "min_pages": 70,
       "max_pages": 160,
+      "code_companion": {
+        "path": "content/volumes/java/JAVA-04-language-oop-and-modern-java/code/LanguageContractChecks.java",
+        "title": "Advanced Language Contract Checks",
+        "description": "Executable Java 21 checks for overload/override selection, record semantics, generic variance and heap pollution, sealed pattern dispatch, and suppressed resource failures. A successful run prints exactly PASS 6 advanced language contract suites."
+      },
       "sources": [
         {
           "path": "content/master/16-classes-objects-access-control-packages.md"
@@ -1771,6 +1933,10 @@
           "path": "content/master/24-java-17-21-features.md"
         },
         {
+          "path": "content/volumes/java/JAVA-04-language-oop-and-modern-java/chapters/01-language-contracts-and-evolution-lab.md",
+          "series_native": true
+        },
+        {
           "path": "content/master/appendices/d-java-feature-matrix.md"
         }
       ]
@@ -1779,18 +1945,18 @@
       "id": "18C",
       "stage": "18",
       "slug": "collections-streams-and-io",
-      "title": "Advanced Java C: Collections, Streams, and I/O",
-      "short_title": "Advanced Java C - Libraries",
+      "title": "Collections, Streams, and I/O",
+      "short_title": "Collections, Streams, and I/O",
       "subtitle": "Collection Semantics, Ordering, Streams, NIO.2, Files, Buffers, and Boundaries",
-      "output_name": "Java-SDE2-ADV-18C-Collections-Streams-and-IO.pdf",
-      "volume_label": "Study Step 18C of 18 - Part C of J",
+      "output_name": "Java-SDE2-JAVA-05-Collections-Streams-and-IO.pdf",
+      "volume_label": "Java Engineering - Book 05 of 09 - Study Step JAVA-05",
       "release_date": "2026-07-25",
       "cover_deck": "Choose collections by semantics and cost, reason about ordering and equality, build correct stream reductions, and use I/O boundaries safely.",
       "topic_line": "COLLECTIONS | ORDERING | STREAMS | OPTIONAL | NIO.2 | FILES",
-      "purpose": "Part C is the advanced Java-library companion to the DSA volumes, emphasizing API contracts, representation costs, resource ownership, and production boundaries.",
+      "purpose": "This Java-library book complements the DSA shelf by emphasizing API contracts, representation costs, resource ownership, and production boundaries.",
       "prerequisites": [
-        "Study Steps 01, 06-08, 11, and 14",
-        "Study Step 18B language engineering"
+        "JAVA-01 and JAVA-04 language foundations",
+        "Basic array, string, hashing, and heap vocabulary"
       ],
       "recognition_signals": [
         "Collection semantics matter more than interface names",
@@ -1812,6 +1978,11 @@
       ],
       "min_pages": 70,
       "max_pages": 170,
+      "code_companion": {
+        "path": "content/volumes/java/JAVA-05-collections-streams-and-io/code/CollectionsImplementationChecks.java",
+        "title": "Low-Level Collections Implementation Checks",
+        "description": "Dependency-free Java 21 implementations and adversarial checks for a dynamic array, doubly linked list, separate-chaining hash map, binary min-heap, and comparator edge cases. A successful run prints exactly PASS 5 low-level collection implementation suites."
+      },
       "sources": [
         {
           "path": "content/master/25-collections-framework.md",
@@ -1819,6 +1990,10 @@
             "path": "assets/diagrams/08-collections-map.png",
             "caption": "Java 21 collection, sequenced collection, queue, and map contracts"
           }
+        },
+        {
+          "path": "content/volumes/java/JAVA-05-collections-streams-and-io/chapters/00-low-level-collections-implementation-lab.md",
+          "series_native": true
         },
         {
           "path": "content/master/appendices/d-java-feature-matrix.md",
@@ -1861,17 +2036,17 @@
       "id": "18D",
       "stage": "18",
       "slug": "concurrency-and-memory-model",
-      "title": "Advanced Java D: Concurrency and the Memory Model",
-      "short_title": "Advanced Java D - Concurrency",
+      "title": "Java Concurrency and the Memory Model",
+      "short_title": "Concurrency and Memory Model",
       "subtitle": "Threads, Happens-Before, Locks, Atomics, Executors, Virtual Threads, and Failure Modes",
-      "output_name": "Java-SDE2-ADV-18D-Concurrency-and-Memory-Model.pdf",
-      "volume_label": "Study Step 18D of 18 - Part D of J",
+      "output_name": "Java-SDE2-JAVA-07-Concurrency-and-Memory-Model.pdf",
+      "volume_label": "Java Engineering - Book 07 of 09 - Study Step JAVA-07",
       "release_date": "2026-07-25",
       "cover_deck": "Reason from happens-before and ownership through locks, atomics, task execution, concurrent collections, virtual threads, testing, and cancellation.",
       "topic_line": "JMM | THREADS | LOCKS | ATOMICS | EXECUTORS | VIRTUAL THREADS",
-      "purpose": "Part D develops concurrency correctness from first principles and then connects it to production scheduling, cancellation, backpressure, and testing.",
+      "purpose": "This book develops concurrency correctness from first principles and then connects it to production scheduling, cancellation, backpressure, and testing.",
       "prerequisites": [
-        "Study Step 18A runtime model",
+        "JAVA-06 runtime model",
         "Collections and exception fundamentals"
       ],
       "recognition_signals": [
@@ -1894,6 +2069,11 @@
       ],
       "min_pages": 55,
       "max_pages": 150,
+      "code_companion": {
+        "path": "content/volumes/java/JAVA-07-concurrency-and-memory-model/code/ConcurrencyInvariantChecks.java",
+        "title": "Concurrency Invariant Checks",
+        "description": "Deterministic Java 21 checks for synchronized and atomic transitions, volatile publication, interruption, bounded executor rejection, and virtual-thread execution. A successful run prints exactly PASS 6 concurrency invariant suites."
+      },
       "sources": [
         {
           "path": "content/master/11-java-memory-model.md",
@@ -1927,6 +2107,10 @@
         },
         {
           "path": "content/master/38-concurrency-failure-modes-testing-and-design-patterns.md"
+        },
+        {
+          "path": "content/volumes/java/JAVA-07-concurrency-and-memory-model/chapters/01-concurrency-invariants-and-capacity-lab.md",
+          "series_native": true
         }
       ]
     },
@@ -1934,18 +2118,18 @@
       "id": "18E",
       "stage": "18",
       "slug": "performance-diagnostics-and-gc-incidents",
-      "title": "Advanced Java E: Performance, Diagnostics, and GC Incidents",
-      "short_title": "Advanced Java E - Diagnostics",
+      "title": "Performance, Diagnostics, and GC Incidents",
+      "short_title": "Performance and Diagnostics",
       "subtitle": "Measurement, JMH, jcmd, JFR, Thread Dumps, Heap Evidence, and Tuning Playbooks",
-      "output_name": "Java-SDE2-ADV-18E-Performance-Diagnostics-and-GC.pdf",
-      "volume_label": "Study Step 18E of 18 - Part E of J",
+      "output_name": "Java-SDE2-JAVA-08-Performance-Diagnostics-and-GC-Incidents.pdf",
+      "volume_label": "Java Engineering - Book 08 of 09 - Study Step JAVA-08",
       "release_date": "2026-07-25",
       "cover_deck": "Move from symptoms to evidence using measurement design, JMH, runtime tools, recordings, dumps, leak analysis, GC reasoning, and safe mitigation.",
       "topic_line": "JMH | JCMD | JSTACK | JFR | HEAP | GC | INCIDENTS",
-      "purpose": "Part E teaches an evidence-first diagnostic method so performance claims and tuning actions remain falsifiable and operationally safe.",
+      "purpose": "This book teaches an evidence-first diagnostic method so performance claims and tuning actions remain falsifiable and operationally safe.",
       "prerequisites": [
-        "Study Step 18A runtime model",
-        "Study Step 18D concurrency recommended"
+        "JAVA-06 runtime model",
+        "JAVA-07 concurrency recommended"
       ],
       "recognition_signals": [
         "Latency, throughput, CPU, allocation, or pause behavior changed",
@@ -1967,6 +2151,11 @@
       ],
       "min_pages": 28,
       "max_pages": 110,
+      "code_companion": {
+        "path": "content/volumes/java/JAVA-08-performance-diagnostics-and-gc-incidents/code/PerformanceEvidenceChecks.java",
+        "title": "Performance Evidence Checks",
+        "description": "Safe Java 21 checks for percentile math, JVM memory and thread snapshots, JFR custom-event round trips, and bounded retention policy. A successful run prints exactly PASS 5 performance evidence suites."
+      },
       "sources": [
         {
           "path": "content/master/39-performance-methodology-and-jmh-benchmarking.md"
@@ -1978,6 +2167,10 @@
           "path": "content/master/41-memory-leaks-gc-incidents-and-tuning-playbooks.md"
         },
         {
+          "path": "content/volumes/java/JAVA-08-performance-diagnostics-and-gc-incidents/chapters/01-evidence-first-incident-workshop.md",
+          "series_native": true
+        },
+        {
           "path": "content/master/appendices/c-jvm-tools-flags.md"
         }
       ]
@@ -1986,19 +2179,19 @@
       "id": "18F",
       "stage": "18",
       "slug": "design-backend-testing-and-security",
-      "title": "Advanced Java F: Design, Backend, Testing, and Security",
-      "short_title": "Advanced Java F - Backend",
+      "title": "Design, Backend, Testing, and Security",
+      "short_title": "Backend Design and Security",
       "subtitle": "SOLID APIs, Patterns, Transactions, Services, Build Quality, Reliability, and Secure Boundaries",
-      "output_name": "Java-SDE2-ADV-18F-Design-Backend-Testing-and-Security.pdf",
-      "volume_label": "Study Step 18F of 18 - Part F of J",
+      "output_name": "Java-SDE2-SD-01-Design-Backend-Testing-and-Security.pdf",
+      "volume_label": "System Design - Book 01 of 02 - Study Step SD-01",
       "release_date": "2026-07-25",
       "cover_deck": "Connect clean Java design to transactions, service boundaries, testing, build discipline, dependency risk, security, reliability, and operational behavior.",
       "topic_line": "SOLID | LLD | JDBC | TRANSACTIONS | TESTING | SECURITY | RELIABILITY",
-      "purpose": "Part F covers the engineering judgment that distinguishes SDE-2 candidates from syntax-only candidates: boundaries, invariants, failure policy, observability, and maintainability.",
+      "purpose": "This book covers the engineering judgment that distinguishes SDE-2 candidates from syntax-only candidates: boundaries, invariants, failure policy, observability, and maintainability.",
       "prerequisites": [
-        "Study Step 18B language design",
-        "Study Step 18C libraries",
-        "Study Step 18D concurrency"
+        "JAVA-04 language design",
+        "JAVA-05 libraries",
+        "JAVA-07 concurrency"
       ],
       "recognition_signals": [
         "A design question has changing policies and integration boundaries",
@@ -2020,6 +2213,11 @@
       ],
       "min_pages": 35,
       "max_pages": 130,
+      "code_companion": {
+        "path": "content/volumes/system-design/SD-01-design-backend-testing-and-security/code/BackendBoundaryPatterns.java",
+        "title": "Executable Backend Boundary Model",
+        "description": "This dependency-free Java 21 model exercises idempotency states, transactional order/outbox behavior, tenant authorization, optimistic concurrency, and constant-time token comparison across failure paths."
+      },
       "sources": [
         {
           "path": "content/master/49-clean-java-apis-solid-design-and-low-level-design-patterns.md"
@@ -2032,6 +2230,22 @@
         },
         {
           "path": "content/master/52-secure-and-reliable-java.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-01-design-backend-testing-and-security/chapters/01-request-lifecycle-transactions-and-idempotency.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/system-design/SD-01-design-backend-testing-and-security/chapters/02-testing-security-and-operational-boundaries.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/system-design/SD-01-design-backend-testing-and-security/exercises/backend-boundary-practice.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/system-design/SD-01-design-backend-testing-and-security/solutions/backend-boundary-solutions.md",
+          "series_native": true
         }
       ]
     },
@@ -2039,17 +2253,17 @@
       "id": "18G",
       "stage": "18",
       "slug": "question-bank-study-plan-and-reference",
-      "title": "Advanced Java G: Question Bank, Study Plan, and Reference",
-      "short_title": "Advanced Java G - Interview Revision",
+      "title": "Java Question Bank, Study Plan, and Reference",
+      "short_title": "Question Bank and Revision",
       "subtitle": "Interview Questions, Mock Loops, Solutions, Glossary, References, and Final Readiness",
-      "output_name": "Java-SDE2-ADV-18G-Question-Bank-Study-Plan-and-Reference.pdf",
-      "volume_label": "Study Step 18G of 18 - Part G of J",
+      "output_name": "Java-SDE2-JAVA-09-Question-Bank-Study-Plan-and-Reference.pdf",
+      "volume_label": "Java Engineering - Book 09 of 09 - Study Step JAVA-09",
       "release_date": "2026-07-25",
       "cover_deck": "Convert the core Java path into active recall, coding drills, mock interviews, evidence-based revision, and an SDE-2 readiness decision.",
       "topic_line": "QUESTION BANK | MOCK LOOPS | SOLUTIONS | GLOSSARY | REFERENCES",
-      "purpose": "Part G is the core Java revision system. It consolidates interview questions, selected solutions, study loops, terminology, and primary references without replacing deliberate practice.",
+      "purpose": "This book is the core Java revision system. It consolidates interview questions, selected solutions, study loops, terminology, and primary references without replacing deliberate practice.",
       "prerequisites": [
-        "Complete or selectively review Study Steps 01-17 and 18A-18F",
+        "Complete or selectively review JAVA-01 through JAVA-08; add the relevant DSA books before mixed coding-round mocks",
         "Maintain an error log and evidence notebook"
       ],
       "recognition_signals": [
@@ -2072,6 +2286,11 @@
       ],
       "min_pages": 60,
       "max_pages": 180,
+      "code_companion": {
+        "path": "content/volumes/java/JAVA-09-question-bank-study-plan-and-reference/code/AdvancedJavaReadinessAssessment.java",
+        "title": "Advanced Java Readiness Assessment",
+        "description": "Mixed Java 21 checks for lazy initialization, runtime annotations, sealed domains, atomic state, asynchronous failure handling, and virtual threads. A successful run prints exactly PASS 6 advanced Java readiness scenarios."
+      },
       "sources": [
         {
           "path": "content/master/48-the-java-coding-interview-playbook.md",
@@ -2082,6 +2301,10 @@
         },
         {
           "path": "content/master/53-sde-2-java-interview-question-bank.md"
+        },
+        {
+          "path": "content/volumes/java/JAVA-09-question-bank-study-plan-and-reference/chapters/01-advanced-java-mock-interview-studio.md",
+          "series_native": true
         },
         {
           "path": "content/master/54-eight-week-study-plan-and-mock-interview-loops.md"
@@ -2101,17 +2324,17 @@
       "id": "18H",
       "stage": "18",
       "slug": "spring-boot-and-rest",
-      "title": "Advanced Java H: Spring Boot and REST APIs",
-      "short_title": "Advanced Java H - Spring",
+      "title": "Spring Boot and REST APIs",
+      "short_title": "Spring Boot and REST",
       "subtitle": "Dependency Injection, MVC Contracts, Transactions, Idempotency, Operations, and Testing",
-      "output_name": "Java-SDE2-ADV-18H-Spring-Boot-and-REST.pdf",
-      "volume_label": "Study Step 18H of 18 - Part H of J",
+      "output_name": "Java-SDE2-FW-05-Spring-Boot-and-REST.pdf",
+      "volume_label": "Frameworks and Data Systems - Book 05 of 12 - Study Step FW-05",
       "release_date": "2026-07-25",
       "cover_deck": "Build Spring services from explicit object graphs and durable HTTP contracts, then harden transaction, idempotency, security, observability, and testing boundaries.",
       "topic_line": "SPRING BOOT | DI | MVC | REST | TRANSACTIONS | TESTING",
-      "purpose": "Part H opens the backend specialist track with the Spring and HTTP reasoning expected in Java SDE-2 interviews, while keeping framework behavior tied to explicit contracts and failure modes.",
+      "purpose": "This book develops the Spring and HTTP reasoning expected in Java SDE-2 interviews while keeping framework behavior tied to explicit contracts and failure modes.",
       "prerequisites": [
-        "Study Step 18B language design and 18F backend boundaries",
+        "JAVA-04 language design, FW-03 Spring Framework, and FW-04 Spring Boot",
         "HTTP, SQL, and testing fundamentals"
       ],
       "recognition_signals": [
@@ -2135,25 +2358,29 @@
       "min_pages": 35,
       "max_pages": 130,
       "code_companion": {
-        "path": "content/volumes/18H-spring-boot-and-rest/code/SpringBoundaryModel.java",
+        "path": "content/volumes/frameworks/FW-05-spring-boot-and-rest/code/SpringBoundaryModel.java",
         "title": "Executable Spring Boundary Model",
-        "description": "This dependency-free Java 21 model makes idempotency, optimistic concurrency, error contracts, and bounded retry policy executable without pretending to reimplement Spring."
+        "description": "This dependency-free Java 21 model makes idempotency, optimistic concurrency, error contracts, lost-response recovery, and deadline-aware retry admission executable without pretending to reimplement Spring."
       },
       "sources": [
         {
-          "path": "content/volumes/18H-spring-boot-and-rest/chapters/01-container-configuration-proxies-and-transactions.md",
+          "path": "content/volumes/frameworks/FW-05-spring-boot-and-rest/chapters/01-container-configuration-proxies-and-transactions.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/18H-spring-boot-and-rest/chapters/02-spring-mvc-rest-contracts-and-errors.md",
+          "path": "content/volumes/frameworks/FW-05-spring-boot-and-rest/chapters/02-spring-mvc-rest-contracts-and-errors.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/18H-spring-boot-and-rest/chapters/03-idempotency-operations-and-testing.md",
+          "path": "content/volumes/frameworks/FW-05-spring-boot-and-rest/chapters/03-idempotency-operations-and-testing.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/18H-spring-boot-and-rest/chapters/04-worked-order-api-and-interview-drills.md",
+          "path": "content/volumes/frameworks/FW-05-spring-boot-and-rest/chapters/04-worked-order-api-and-interview-drills.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-05-spring-boot-and-rest/chapters/05-request-runtime-failure-and-interview-capstone.md",
           "series_native": true
         }
       ]
@@ -2162,18 +2389,18 @@
       "id": "18I",
       "stage": "18",
       "slug": "persistence-sql-and-caching",
-      "title": "Advanced Java I: Persistence, SQL, JPA, and Caching",
-      "short_title": "Advanced Java I - Persistence",
+      "title": "Persistence, SQL, JPA, and Caching",
+      "short_title": "Persistence, SQL, and Caching",
       "subtitle": "Relational Models, Indexes, Query Plans, Transactions, Hibernate, Redis, and Consistency",
-      "output_name": "Java-SDE2-ADV-18I-Persistence-SQL-and-Caching.pdf",
-      "volume_label": "Study Step 18I of 18 - Part I of J",
+      "output_name": "Java-SDE2-FW-09-Persistence-SQL-and-Caching.pdf",
+      "volume_label": "Frameworks and Data Systems - Book 09 of 12 - Study Step FW-09",
       "release_date": "2026-07-25",
       "cover_deck": "Reason from relational invariants through indexes, query plans, isolation, locking, connection pools, JPA lifecycle, and cache consistency.",
       "topic_line": "SQL | INDEXES | TRANSACTIONS | JPA | HIBERNATE | REDIS",
-      "purpose": "Part I develops the persistence judgment needed to design correct, measurable Java data paths instead of treating databases, ORMs, and caches as interchangeable storage APIs.",
+      "purpose": "This book develops the persistence judgment needed to design correct, measurable Java data paths instead of treating databases, ORMs, and caches as interchangeable storage APIs.",
       "prerequisites": [
-        "Study Step 18F JDBC and transaction boundaries",
-        "Study Step 18H service and REST contracts"
+        "FW-01 MySQL and FW-02 Hibernate/JPA foundations",
+        "FW-05 service and REST contracts"
       ],
       "recognition_signals": [
         "A query, index, lock, or isolation choice controls correctness or latency",
@@ -2196,25 +2423,29 @@
       "min_pages": 35,
       "max_pages": 130,
       "code_companion": {
-        "path": "content/volumes/18I-persistence-sql-and-caching/code/PersistencePatterns.java",
+        "path": "content/volumes/frameworks/FW-09-persistence-sql-and-caching/code/PersistencePatterns.java",
         "title": "Executable Persistence and Cache Model",
-        "description": "This dependency-free Java 21 model makes optimistic locking, outbox state, cache-aside invalidation, and stampede control testable as explicit contracts."
+        "description": "This dependency-free Java 21 model makes optimistic locking, fenced outbox claims, version-aware cache invalidation, and stale-fill protection testable as explicit contracts."
       },
       "sources": [
         {
-          "path": "content/volumes/18I-persistence-sql-and-caching/chapters/01-relational-modeling-indexes-and-query-plans.md",
+          "path": "content/volumes/frameworks/FW-09-persistence-sql-and-caching/chapters/01-relational-modeling-indexes-and-query-plans.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/18I-persistence-sql-and-caching/chapters/02-transactions-locks-pools-migrations-and-outbox.md",
+          "path": "content/volumes/frameworks/FW-09-persistence-sql-and-caching/chapters/02-transactions-locks-pools-migrations-and-outbox.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/18I-persistence-sql-and-caching/chapters/03-jpa-hibernate-lifecycle-fetching-and-locking.md",
+          "path": "content/volumes/frameworks/FW-09-persistence-sql-and-caching/chapters/03-jpa-hibernate-lifecycle-fetching-and-locking.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/18I-persistence-sql-and-caching/chapters/04-cache-consistency-and-worked-persistence-case.md",
+          "path": "content/volumes/frameworks/FW-09-persistence-sql-and-caching/chapters/04-cache-consistency-and-worked-persistence-case.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-09-persistence-sql-and-caching/chapters/05-cross-layer-data-path-failure-and-interview-capstone.md",
           "series_native": true
         }
       ]
@@ -2223,17 +2454,17 @@
       "id": "18J",
       "stage": "18",
       "slug": "distributed-systems-and-system-design",
-      "title": "Advanced Java J: Distributed Systems and System Design",
-      "short_title": "Advanced Java J - System Design",
+      "title": "Distributed Systems and System Design",
+      "short_title": "Distributed Systems and System Design",
       "subtitle": "Capacity, Partitioning, Consistency, Kafka, Resilience, Sagas, Observability, and SLOs",
-      "output_name": "Java-SDE2-ADV-18J-Distributed-Systems-and-System-Design.pdf",
-      "volume_label": "Study Step 18J of 18 - Part J of J",
+      "output_name": "Java-SDE2-SD-02-Distributed-Systems-and-System-Design.pdf",
+      "volume_label": "System Design - Book 02 of 02 - Study Step SD-02",
       "release_date": "2026-07-25",
       "cover_deck": "Turn requirements into capacity estimates, data distribution, delivery semantics, resilience policies, observability, and defensible system-design trade-offs.",
       "topic_line": "CAPACITY | SHARDING | CONSISTENCY | KAFKA | RESILIENCE | SLOS",
-      "purpose": "Part J completes the backend specialist track with a constraint-first system-design method spanning distributed data, messaging, failure control, and operations.",
+      "purpose": "This book applies a constraint-first system-design method spanning distributed data, messaging, failure control, and operations.",
       "prerequisites": [
-        "Parts 18H and 18I or equivalent backend experience",
+        "FW-05 and FW-09, or equivalent backend experience",
         "Concurrency, networking, and persistence fundamentals"
       ],
       "recognition_signals": [
@@ -2257,29 +2488,41 @@
       "min_pages": 35,
       "max_pages": 130,
       "code_companion": {
-        "path": "content/volumes/18J-distributed-systems-and-system-design/code/DistributedSystemsPatterns.java",
+        "path": "content/volumes/system-design/SD-02-distributed-systems-and-system-design/code/DistributedSystemsPatterns.java",
         "title": "Executable Distributed-Systems Model",
-        "description": "This dependency-free Java 21 model makes partitioning, offset processing, deadlines, retry budgets, circuit state, and SLO calculations executable."
+        "description": "This dependency-free Java 21 model makes capacity, admission, retries, offset processing, saga state, idempotent effects, cache freshness, partition movement, and SLO calculations executable."
       },
       "sources": [
         {
-          "path": "content/volumes/18J-distributed-systems-and-system-design/chapters/01-capacity-partitioning-replication-and-consistency.md",
+          "path": "content/volumes/system-design/SD-02-distributed-systems-and-system-design/chapters/01-capacity-partitioning-replication-and-consistency.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/18J-distributed-systems-and-system-design/chapters/02-kafka-streaming-and-delivery-semantics.md",
+          "path": "content/volumes/system-design/SD-02-distributed-systems-and-system-design/chapters/02-kafka-streaming-and-delivery-semantics.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/18J-distributed-systems-and-system-design/chapters/03-deadlines-retries-resilience-and-sagas.md",
+          "path": "content/volumes/system-design/SD-02-distributed-systems-and-system-design/chapters/03-deadlines-retries-resilience-and-sagas.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/18J-distributed-systems-and-system-design/chapters/04-observability-sli-slo-and-operational-method.md",
+          "path": "content/volumes/system-design/SD-02-distributed-systems-and-system-design/chapters/04-observability-sli-slo-and-operational-method.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/18J-distributed-systems-and-system-design/chapters/05-hld-method-worked-cases-and-question-bank.md",
+          "path": "content/volumes/system-design/SD-02-distributed-systems-and-system-design/chapters/05-hld-method-worked-cases-and-question-bank.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/system-design/SD-02-distributed-systems-and-system-design/chapters/06-request-data-flow-failures-and-design-defense.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/system-design/SD-02-distributed-systems-and-system-design/exercises/distributed-systems-design-drills.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/system-design/SD-02-distributed-systems-and-system-design/solutions/distributed-systems-design-solutions.md",
           "series_native": true
         }
       ]
@@ -2299,7 +2542,7 @@
       "topic_line": "GIT | GITHUB | JAVA CI | RECOVERY | SECURE DELIVERY",
       "purpose": "Build dependable Git and GitHub judgment from local snapshots through pull requests, protected branches, secure Java automation, releases, and production recovery.",
       "prerequisites": [
-        "Java Book 01 - Java Foundations",
+        "JAVA-01 Java Foundations",
         "A local Git installation",
         "A terminal and Java 21 for the executable companion"
       ],
@@ -2322,76 +2565,76 @@
       "max_pages": 240,
       "sources": [
         {
-          "path": "content/volumes/J02-git-and-github/chapters/00-learning-path-and-foundations.md",
+          "path": "content/volumes/java/JAVA-02-git-and-github/chapters/00-learning-path-and-foundations.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J02-git-and-github/chapters/01-everyday-local-workflow.md",
+          "path": "content/volumes/java/JAVA-02-git-and-github/chapters/01-everyday-local-workflow.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J02-git-and-github/chapters/02-commit-graph-branches-and-merges.md",
+          "path": "content/volumes/java/JAVA-02-git-and-github/chapters/02-commit-graph-branches-and-merges.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J02-git-and-github/chapters/03-remotes-pull-requests-and-reviews.md",
+          "path": "content/volumes/java/JAVA-02-git-and-github/chapters/03-remotes-pull-requests-and-reviews.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J02-git-and-github/chapters/04-conflict-resolution.md",
+          "path": "content/volumes/java/JAVA-02-git-and-github/chapters/04-conflict-resolution.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J02-git-and-github/chapters/05-rebase-cherry-pick-and-history-design.md",
+          "path": "content/volumes/java/JAVA-02-git-and-github/chapters/05-rebase-cherry-pick-and-history-design.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J02-git-and-github/chapters/06-undo-recovery-and-forensics.md",
+          "path": "content/volumes/java/JAVA-02-git-and-github/chapters/06-undo-recovery-and-forensics.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J02-git-and-github/chapters/07-java-repository-hygiene.md",
+          "path": "content/volumes/java/JAVA-02-git-and-github/chapters/07-java-repository-hygiene.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J02-git-and-github/chapters/08-github-governance.md",
+          "path": "content/volumes/java/JAVA-02-git-and-github/chapters/08-github-governance.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J02-git-and-github/chapters/09-github-actions-java-ci.md",
+          "path": "content/volumes/java/JAVA-02-git-and-github/chapters/09-github-actions-java-ci.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J02-git-and-github/chapters/10-actions-security-and-supply-chain.md",
+          "path": "content/volumes/java/JAVA-02-git-and-github/chapters/10-actions-security-and-supply-chain.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J02-git-and-github/chapters/11-tags-releases-and-hotfixes.md",
+          "path": "content/volumes/java/JAVA-02-git-and-github/chapters/11-tags-releases-and-hotfixes.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J02-git-and-github/chapters/12-advanced-git-at-scale.md",
+          "path": "content/volumes/java/JAVA-02-git-and-github/chapters/12-advanced-git-at-scale.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J02-git-and-github/chapters/13-complex-production-scenarios.md",
+          "path": "content/volumes/java/JAVA-02-git-and-github/chapters/13-complex-production-scenarios.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J02-git-and-github/chapters/14-realistic-interview-rounds.md",
+          "path": "content/volumes/java/JAVA-02-git-and-github/chapters/14-realistic-interview-rounds.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J02-git-and-github/chapters/15-practice-workbook.md",
+          "path": "content/volumes/java/JAVA-02-git-and-github/chapters/15-practice-workbook.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J02-git-and-github/chapters/16-solutions-command-reference-and-sources.md",
+          "path": "content/volumes/java/JAVA-02-git-and-github/chapters/16-solutions-command-reference-and-sources.md",
           "series_native": true
         }
       ],
       "code_companion": {
-        "path": "content/volumes/J02-git-and-github/code/GitBookJavaFixture.java",
+        "path": "content/volumes/java/JAVA-02-git-and-github/code/GitBookJavaFixture.java",
         "title": "Dependency-Free Java 21 Repository Review Companion",
         "description": "This executable companion validates two recurring review contracts: overflow-safe comparator ordering and dependency-aware Java module selection."
       }
@@ -2411,8 +2654,8 @@
       "topic_line": "MAVEN | GRADLE | DEPENDENCIES | CI | SECURE BUILDS | SDE-2",
       "purpose": "Teach one durable Java build model first, map Maven and Gradle to it precisely, and develop the diagnostic and delivery judgment expected in SDE-2 interviews and production ownership.",
       "prerequisites": [
-        "Java Foundations Book 01",
-        "Git and GitHub Book 02 recommended",
+        "JAVA-01 Java Foundations",
+        "JAVA-02 Git and GitHub recommended",
         "Java 21 and a terminal for the executable labs"
       ],
       "recognition_signals": [
@@ -2437,76 +2680,76 @@
       "max_pages": 220,
       "sources": [
         {
-          "path": "content/volumes/J03-maven-and-gradle/chapters/00-build-foundations-and-learning-path.md",
+          "path": "content/volumes/java/JAVA-03-maven-and-gradle/chapters/00-build-foundations-and-learning-path.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J03-maven-and-gradle/chapters/01-first-java-build-side-by-side.md",
+          "path": "content/volumes/java/JAVA-03-maven-and-gradle/chapters/01-first-java-build-side-by-side.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J03-maven-and-gradle/chapters/02-maven-model-lifecycle-and-effective-build.md",
+          "path": "content/volumes/java/JAVA-03-maven-and-gradle/chapters/02-maven-model-lifecycle-and-effective-build.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J03-maven-and-gradle/chapters/03-gradle-model-lifecycle-tasks-and-lazy-configuration.md",
+          "path": "content/volumes/java/JAVA-03-maven-and-gradle/chapters/03-gradle-model-lifecycle-tasks-and-lazy-configuration.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J03-maven-and-gradle/chapters/04-dependencies-classpaths-scopes-and-configurations.md",
+          "path": "content/volumes/java/JAVA-03-maven-and-gradle/chapters/04-dependencies-classpaths-scopes-and-configurations.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J03-maven-and-gradle/chapters/05-resolution-conflicts-boms-platforms-locks.md",
+          "path": "content/volumes/java/JAVA-03-maven-and-gradle/chapters/05-resolution-conflicts-boms-platforms-locks.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J03-maven-and-gradle/chapters/06-testing-unit-integration-and-quality-gates.md",
+          "path": "content/volumes/java/JAVA-03-maven-and-gradle/chapters/06-testing-unit-integration-and-quality-gates.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J03-maven-and-gradle/chapters/07-artifacts-packaging-metadata-and-runtime.md",
+          "path": "content/volumes/java/JAVA-03-maven-and-gradle/chapters/07-artifacts-packaging-metadata-and-runtime.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J03-maven-and-gradle/chapters/08-multi-module-reactor-and-multi-project-design.md",
+          "path": "content/volumes/java/JAVA-03-maven-and-gradle/chapters/08-multi-module-reactor-and-multi-project-design.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J03-maven-and-gradle/chapters/09-wrappers-toolchains-and-environment-control.md",
+          "path": "content/volumes/java/JAVA-03-maven-and-gradle/chapters/09-wrappers-toolchains-and-environment-control.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J03-maven-and-gradle/chapters/10-ci-performance-caching-and-observability.md",
+          "path": "content/volumes/java/JAVA-03-maven-and-gradle/chapters/10-ci-performance-caching-and-observability.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J03-maven-and-gradle/chapters/11-publishing-versioning-and-private-repositories.md",
+          "path": "content/volumes/java/JAVA-03-maven-and-gradle/chapters/11-publishing-versioning-and-private-repositories.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J03-maven-and-gradle/chapters/12-security-reproducibility-and-supply-chain.md",
+          "path": "content/volumes/java/JAVA-03-maven-and-gradle/chapters/12-security-reproducibility-and-supply-chain.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J03-maven-and-gradle/chapters/13-complex-build-failure-playbooks.md",
+          "path": "content/volumes/java/JAVA-03-maven-and-gradle/chapters/13-complex-build-failure-playbooks.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J03-maven-and-gradle/chapters/14-tool-selection-and-migration-strategy.md",
+          "path": "content/volumes/java/JAVA-03-maven-and-gradle/chapters/14-tool-selection-and-migration-strategy.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J03-maven-and-gradle/chapters/15-realistic-maven-gradle-interview-rounds.md",
+          "path": "content/volumes/java/JAVA-03-maven-and-gradle/chapters/15-realistic-maven-gradle-interview-rounds.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/J03-maven-and-gradle/chapters/16-practice-solutions-command-reference-and-sources.md",
+          "path": "content/volumes/java/JAVA-03-maven-and-gradle/chapters/16-practice-solutions-command-reference-and-sources.md",
           "series_native": true
         }
       ],
       "code_companion": {
-        "path": "content/volumes/J03-maven-and-gradle/code/BuildToolModel.java",
+        "path": "content/volumes/java/JAVA-03-maven-and-gradle/code/BuildToolModel.java",
         "title": "Dependency-Free Java 21 Build Graph Companion",
         "description": "This executable model validates dependency-first module ordering, affected-module selection, cycle detection, and deterministic cache-key inputs."
       }
@@ -2518,15 +2761,15 @@
       "title": "MySQL for Java Backend Interviews",
       "short_title": "MySQL",
       "subtitle": "Relational Modeling, SQL, Indexes, Transactions, and Production Reasoning",
-      "output_name": "Java-SDE2-SD-02-MySQL.pdf",
-      "volume_label": "Roadmap Edition",
+      "output_name": "Java-SDE2-FW-01-MySQL.pdf",
+      "volume_label": "Publication Edition",
       "release_date": "2026-07-29",
-      "publication_status": "planned",
-      "cover_deck": "A prerequisite-first roadmap from relational tables and SQL to indexes, transactions, query plans, and Java service boundaries.",
+      "publication_status": "published",
+      "cover_deck": "A prerequisite-first, SQL-first guide from relational contracts to InnoDB internals, indexes, transactions, JDBC, operations, and live SDE-2 interviews.",
       "topic_line": "MYSQL | SQL | INDEXES | TRANSACTIONS | QUERY PLANS",
-      "purpose": "Establish database fundamentals before ORM and Spring Data abstractions.",
+      "purpose": "Establish relational and SQL fundamentals before ORM abstractions, then build the InnoDB, indexing, concurrency, JDBC, migration, and diagnostic judgment expected from a Java SDE-2 engineer.",
       "prerequisites": [
-        "System Design and Backend Book 01",
+        "JAVA 01 - Java Foundations or equivalent syntax fluency",
         "Basic Java classes and collections"
       ],
       "recognition_signals": [
@@ -2535,20 +2778,61 @@
         "Correctness depends on transaction isolation"
       ],
       "outcomes": [
-        "Understand the planned MySQL learning sequence",
-        "Connect SQL mechanics to Java backend decisions",
-        "Know the SDE-2 evidence and practice expected"
+        "Model relational invariants and write correct joins, grouping, CTE, and window queries",
+        "Explain InnoDB B+ trees, clustered and secondary indexes, MVCC, redo/undo, locks, and deadlocks",
+        "Use EXPLAIN evidence, safe JDBC contracts, keyset pagination, migrations, recovery, and production diagnostics"
       ],
       "practice_ladder": [
         "Foundation: schemas and queries",
         "Interview Core: indexes and transactions",
         "SDE-2 Follow-up: plans, locks, migrations, and pools"
       ],
-      "min_pages": 7,
-      "max_pages": 30,
+      "min_pages": 24,
+      "max_pages": 90,
+      "code_companion": {
+        "path": "content/volumes/frameworks/FW-01-mysql/code/MySqlInterviewCompanion.java",
+        "title": "Java 21 MySQL Interview Reasoning Companion",
+        "description": "Executable models for SQL truth, composite-index prefixes, MVCC visibility, optimistic updates, keyset boundaries, and transaction retry classification."
+      },
       "sources": [
         {
-          "path": "content/volumes/SD02-mysql/chapters/01-planned-learning-roadmap.md",
+          "path": "content/volumes/frameworks/FW-01-mysql/chapters/00-learning-path-and-relational-first-principles.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-01-mysql/chapters/01-relational-modeling-keys-constraints-and-normalization.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-01-mysql/chapters/02-types-null-collation-temporal-and-schema-safety.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-01-mysql/chapters/03-sql-joins-grouping-cte-and-window-reasoning.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-01-mysql/chapters/04-innodb-bplus-tree-buffer-pool-redo-undo-and-mvcc.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-01-mysql/chapters/05-index-design-explain-and-query-performance.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-01-mysql/chapters/06-transactions-isolation-locks-deadlocks-and-retries.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-01-mysql/chapters/07-jdbc-pooling-batching-timeouts-and-pagination.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-01-mysql/chapters/08-migrations-replication-backup-observability-and-security.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-01-mysql/chapters/09-live-interviews-rapid-qa-practice-and-sources.md",
           "series_native": true
         }
       ]
@@ -2560,15 +2844,15 @@
       "title": "Hibernate and JPA for Java Backend Interviews",
       "short_title": "Hibernate and JPA",
       "subtitle": "Entity Lifecycles, Mapping, Fetching, Transactions, and Query Discipline",
-      "output_name": "Java-SDE2-SD-03-Hibernate-and-JPA.pdf",
-      "volume_label": "Roadmap Edition",
+      "output_name": "Java-SDE2-FW-02-Hibernate-and-JPA.pdf",
+      "volume_label": "Publication Edition",
       "release_date": "2026-07-29",
-      "publication_status": "planned",
-      "cover_deck": "A roadmap from relational knowledge to correct entity modeling, persistence contexts, fetching, locking, and measurable ORM behavior.",
+      "publication_status": "published",
+      "cover_deck": "A SQL-first, executable guide to JPA contracts, Hibernate lifecycle, associations, fetching, batching, locks, caches, diagnostics, and live SDE-2 interviews.",
       "topic_line": "JPA | HIBERNATE | ENTITIES | FETCHING | LOCKING",
-      "purpose": "Teach ORM behavior only after relational and transaction fundamentals are established.",
+      "purpose": "Teach ORM behavior only after relational and transaction fundamentals, then make persistence-context identity, flush, fetching, query shape, batching, locking, caching, equality, and diagnosis observable and testable.",
       "prerequisites": [
-        "MySQL Book 02",
+        "FW-01 MySQL",
         "Java object and exception fundamentals"
       ],
       "recognition_signals": [
@@ -2577,20 +2861,61 @@
         "Transactions and entity lifecycle interact"
       ],
       "outcomes": [
-        "Understand the planned JPA and Hibernate progression",
-        "Separate specification contracts from provider behavior",
-        "Know the interview and production cases the full book will cover"
+        "Separate JPA specification contracts from Hibernate provider behavior",
+        "Reason about entity lifecycle, identity, dirty checking, flush, ownership, cascades, and fetching",
+        "Prevent N+1, stale bulk state, equality, batching, locking, cache, and transaction-boundary failures"
       ],
       "practice_ladder": [
         "Foundation: entity mapping and lifecycle",
         "Interview Core: fetching, queries, and transactions",
         "SDE-2 Follow-up: locks, batching, and diagnosis"
       ],
-      "min_pages": 7,
-      "max_pages": 30,
+      "min_pages": 22,
+      "max_pages": 90,
+      "code_companion": {
+        "path": "content/volumes/frameworks/FW-02-hibernate-and-jpa/code/HibernateJpaInterviewCompanion.java",
+        "title": "Java 21 Hibernate and JPA Interview Companion",
+        "description": "Executable models for entity lifecycle, persistence-context identity, dirty checking, association ownership, optimistic versions, and bounded batch work."
+      },
       "sources": [
         {
-          "path": "content/volumes/SD03-hibernate-and-jpa/chapters/01-planned-learning-roadmap.md",
+          "path": "content/volumes/frameworks/FW-02-hibernate-and-jpa/chapters/00-learning-path-sql-before-orm.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-02-hibernate-and-jpa/chapters/01-jpa-contract-hibernate-provider-and-bootstrap.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-02-hibernate-and-jpa/chapters/02-mapping-identity-values-and-schema-boundaries.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-02-hibernate-and-jpa/chapters/03-lifecycle-persistence-context-dirty-checking-and-flush.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-02-hibernate-and-jpa/chapters/04-associations-ownership-cascade-orphans-and-aggregate-boundaries.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-02-hibernate-and-jpa/chapters/05-proxies-fetch-plans-n-plus-one-and-graph-control.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-02-hibernate-and-jpa/chapters/06-jpql-criteria-native-projections-and-pagination.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-02-hibernate-and-jpa/chapters/07-batching-locking-caches-equality-and-bulk-work.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-02-hibernate-and-jpa/chapters/08-testing-sql-traces-and-production-diagnostics.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-02-hibernate-and-jpa/chapters/09-live-interviews-rapid-qa-practice-and-sources.md",
           "series_native": true
         }
       ]
@@ -2602,7 +2927,7 @@
       "title": "Spring Framework for Java Engineers",
       "short_title": "Spring Framework",
       "subtitle": "From IoC First Principles to Proxies, Transactions, Web Boundaries, and SDE-2 Incidents",
-      "output_name": "Java-SDE2-SD-04-Spring-Framework.pdf",
+      "output_name": "Java-SDE2-FW-03-Spring-Framework.pdf",
       "volume_label": "Publication Edition",
       "release_date": "2026-07-29",
       "publication_status": "published",
@@ -2610,9 +2935,9 @@
       "topic_line": "SPRING | IOC | PROXIES | TRANSACTIONS | MVC | PRODUCTION",
       "purpose": "Build a precise Java object-graph and proxy mental model before Spring Boot automation, then develop the transaction, web, testing, concurrency, and incident judgment expected from SDE-2 backend engineers.",
       "prerequisites": [
-        "Java Foundations Book 01",
-        "Maven and Gradle Book 03",
-        "Hibernate and JPA Book 03 recommended",
+        "JAVA-01 Java Foundations",
+        "JAVA-03 Maven and Gradle",
+        "FW-02 Hibernate and JPA recommended",
         "Java 21 and a terminal for the executable labs"
       ],
       "recognition_signals": [
@@ -2638,92 +2963,92 @@
       "max_pages": 240,
       "sources": [
         {
-          "path": "content/volumes/SD04-spring-framework/chapters/00-learning-path-and-container-first-principles.md",
+          "path": "content/volumes/frameworks/FW-03-spring-framework/chapters/00-learning-path-and-container-first-principles.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD04-spring-framework/chapters/01-plain-java-to-first-application-context.md",
+          "path": "content/volumes/frameworks/FW-03-spring-framework/chapters/01-plain-java-to-first-application-context.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD04-spring-framework/chapters/02-bean-definitions-java-configuration-and-component-scanning.md",
+          "path": "content/volumes/frameworks/FW-03-spring-framework/chapters/02-bean-definitions-java-configuration-and-component-scanning.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD04-spring-framework/chapters/03-constructor-injection-and-dependency-resolution.md",
+          "path": "content/volumes/frameworks/FW-03-spring-framework/chapters/03-constructor-injection-and-dependency-resolution.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD04-spring-framework/chapters/04-environment-properties-profiles-and-resources.md",
+          "path": "content/volumes/frameworks/FW-03-spring-framework/chapters/04-environment-properties-profiles-and-resources.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD04-spring-framework/chapters/05-bean-lifecycle-and-container-extension-points.md",
+          "path": "content/volumes/frameworks/FW-03-spring-framework/chapters/05-bean-lifecycle-and-container-extension-points.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD04-spring-framework/chapters/06-bean-scopes-state-and-thread-safety.md",
+          "path": "content/volumes/frameworks/FW-03-spring-framework/chapters/06-bean-scopes-state-and-thread-safety.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD04-spring-framework/chapters/07-configuration-classes-factory-methods-and-modularity.md",
+          "path": "content/volumes/frameworks/FW-03-spring-framework/chapters/07-configuration-classes-factory-methods-and-modularity.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD04-spring-framework/chapters/08-application-events-and-decoupled-workflows.md",
+          "path": "content/volumes/frameworks/FW-03-spring-framework/chapters/08-application-events-and-decoupled-workflows.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD04-spring-framework/chapters/09-conversion-formatting-validation-and-data-binding.md",
+          "path": "content/volumes/frameworks/FW-03-spring-framework/chapters/09-conversion-formatting-validation-and-data-binding.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD04-spring-framework/chapters/10-aop-join-points-pointcuts-and-advice.md",
+          "path": "content/volumes/frameworks/FW-03-spring-framework/chapters/10-aop-join-points-pointcuts-and-advice.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD04-spring-framework/chapters/11-proxy-mechanics-self-invocation-and-runtime-types.md",
+          "path": "content/volumes/frameworks/FW-03-spring-framework/chapters/11-proxy-mechanics-self-invocation-and-runtime-types.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD04-spring-framework/chapters/12-transaction-abstraction-and-declarative-boundaries.md",
+          "path": "content/volumes/frameworks/FW-03-spring-framework/chapters/12-transaction-abstraction-and-declarative-boundaries.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD04-spring-framework/chapters/13-propagation-isolation-rollback-and-timeouts.md",
+          "path": "content/volumes/frameworks/FW-03-spring-framework/chapters/13-propagation-isolation-rollback-and-timeouts.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD04-spring-framework/chapters/14-transaction-failure-retries-and-production-patterns.md",
+          "path": "content/volumes/frameworks/FW-03-spring-framework/chapters/14-transaction-failure-retries-and-production-patterns.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD04-spring-framework/chapters/15-spring-mvc-request-flow-and-http-boundaries.md",
+          "path": "content/volumes/frameworks/FW-03-spring-framework/chapters/15-spring-mvc-request-flow-and-http-boundaries.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD04-spring-framework/chapters/16-async-execution-scheduling-and-context-boundaries.md",
+          "path": "content/volumes/frameworks/FW-03-spring-framework/chapters/16-async-execution-scheduling-and-context-boundaries.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD04-spring-framework/chapters/17-testing-from-pure-units-to-spring-contexts.md",
+          "path": "content/volumes/frameworks/FW-03-spring-framework/chapters/17-testing-from-pure-units-to-spring-contexts.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD04-spring-framework/chapters/18-architecture-extension-points-and-production-diagnostics.md",
+          "path": "content/volumes/frameworks/FW-03-spring-framework/chapters/18-architecture-extension-points-and-production-diagnostics.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD04-spring-framework/chapters/19-realistic-spring-framework-interview-rounds.md",
+          "path": "content/volumes/frameworks/FW-03-spring-framework/chapters/19-realistic-spring-framework-interview-rounds.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD04-spring-framework/chapters/20-practice-solutions-readiness-and-sources.md",
+          "path": "content/volumes/frameworks/FW-03-spring-framework/chapters/20-practice-solutions-readiness-and-sources.md",
           "series_native": true
         }
       ],
       "code_companion": {
-        "path": "content/volumes/SD04-spring-framework/code/SpringFrameworkInterviewCompanion.java",
+        "path": "content/volumes/frameworks/FW-03-spring-framework/code/SpringFrameworkInterviewCompanion.java",
         "title": "Java 21 Spring Runtime Companion",
         "description": "This dependency-free executable model validates bean-graph creation order and cycles, qualifier/primary candidate resolution, external proxy versus self-invocation rules, and default/custom transaction rollback policy; the Maven fixture separately executes real Spring behavior."
       }
@@ -2735,7 +3060,7 @@
       "title": "Spring Boot for Java Backend Engineers",
       "short_title": "Spring Boot",
       "subtitle": "From First Application to Auto-Configuration, Production Operations, and SDE-2 Incidents",
-      "output_name": "Java-SDE2-SD-05-Spring-Boot.pdf",
+      "output_name": "Java-SDE2-FW-04-Spring-Boot.pdf",
       "volume_label": "Publication Edition",
       "release_date": "2026-07-30",
       "publication_status": "published",
@@ -2743,9 +3068,9 @@
       "topic_line": "SPRING BOOT | AUTO-CONFIGURATION | HTTP | ACTUATOR | OPERATIONS",
       "purpose": "Build on Spring Framework mechanics to teach how Boot assembles, configures, tests, packages, observes, secures, and operates production Java services from beginner foundations through SDE-2 incident reasoning.",
       "prerequisites": [
-        "Spring Framework Book 04",
-        "Maven and Gradle Book 03",
-        "Java Foundations Book 01",
+        "FW-03 Spring Framework",
+        "JAVA-03 Maven and Gradle",
+        "JAVA-01 Java Foundations",
         "Java 21 and a terminal for executable labs"
       ],
       "recognition_signals": [
@@ -2771,100 +3096,100 @@
       "max_pages": 240,
       "sources": [
         {
-          "path": "content/volumes/SD05-spring-boot/chapters/00-learning-path-and-boot-first-principles.md",
+          "path": "content/volumes/frameworks/FW-04-spring-boot/chapters/00-learning-path-and-boot-first-principles.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD05-spring-boot/chapters/01-first-application-and-project-anatomy.md",
+          "path": "content/volumes/frameworks/FW-04-spring-boot/chapters/01-first-application-and-project-anatomy.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD05-spring-boot/chapters/02-spring-application-startup-and-lifecycle.md",
+          "path": "content/volumes/frameworks/FW-04-spring-boot/chapters/02-spring-application-startup-and-lifecycle.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD05-spring-boot/chapters/03-application-structure-and-scan-boundaries.md",
+          "path": "content/volumes/frameworks/FW-04-spring-boot/chapters/03-application-structure-and-scan-boundaries.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD05-spring-boot/chapters/04-starters-dependency-management-and-build-plugins.md",
+          "path": "content/volumes/frameworks/FW-04-spring-boot/chapters/04-starters-dependency-management-and-build-plugins.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD05-spring-boot/chapters/05-auto-configuration-conditions-and-back-off.md",
+          "path": "content/volumes/frameworks/FW-04-spring-boot/chapters/05-auto-configuration-conditions-and-back-off.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD05-spring-boot/chapters/06-custom-auto-configuration-and-starters.md",
+          "path": "content/volumes/frameworks/FW-04-spring-boot/chapters/06-custom-auto-configuration-and-starters.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD05-spring-boot/chapters/07-external-configuration-precedence-profiles-and-imports.md",
+          "path": "content/volumes/frameworks/FW-04-spring-boot/chapters/07-external-configuration-precedence-profiles-and-imports.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD05-spring-boot/chapters/08-configuration-properties-binding-validation-and-secrets.md",
+          "path": "content/volumes/frameworks/FW-04-spring-boot/chapters/08-configuration-properties-binding-validation-and-secrets.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD05-spring-boot/chapters/09-rest-api-boundaries-validation-and-errors.md",
+          "path": "content/volumes/frameworks/FW-04-spring-boot/chapters/09-rest-api-boundaries-validation-and-errors.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD05-spring-boot/chapters/10-http-json-pagination-versioning-and-idempotency.md",
+          "path": "content/volumes/frameworks/FW-04-spring-boot/chapters/10-http-json-pagination-versioning-and-idempotency.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD05-spring-boot/chapters/11-outbound-http-clients-timeouts-and-resilience-boundaries.md",
+          "path": "content/volumes/frameworks/FW-04-spring-boot/chapters/11-outbound-http-clients-timeouts-and-resilience-boundaries.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD05-spring-boot/chapters/12-data-access-transactions-and-schema-migrations.md",
+          "path": "content/volumes/frameworks/FW-04-spring-boot/chapters/12-data-access-transactions-and-schema-migrations.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD05-spring-boot/chapters/13-actuator-endpoints-health-and-operational-access.md",
+          "path": "content/volumes/frameworks/FW-04-spring-boot/chapters/13-actuator-endpoints-health-and-operational-access.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD05-spring-boot/chapters/14-metrics-observations-traces-and-structured-logging.md",
+          "path": "content/volumes/frameworks/FW-04-spring-boot/chapters/14-metrics-observations-traces-and-structured-logging.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD05-spring-boot/chapters/15-availability-probes-and-graceful-shutdown.md",
+          "path": "content/volumes/frameworks/FW-04-spring-boot/chapters/15-availability-probes-and-graceful-shutdown.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD05-spring-boot/chapters/16-testing-ladder-contexts-slices-and-testcontainers.md",
+          "path": "content/volumes/frameworks/FW-04-spring-boot/chapters/16-testing-ladder-contexts-slices-and-testcontainers.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD05-spring-boot/chapters/17-packaging-layers-containers-and-runtime-resources.md",
+          "path": "content/volumes/frameworks/FW-04-spring-boot/chapters/17-packaging-layers-containers-and-runtime-resources.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD05-spring-boot/chapters/18-startup-performance-aot-native-images-and-upgrades.md",
+          "path": "content/volumes/frameworks/FW-04-spring-boot/chapters/18-startup-performance-aot-native-images-and-upgrades.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD05-spring-boot/chapters/19-security-configuration-and-production-architecture.md",
+          "path": "content/volumes/frameworks/FW-04-spring-boot/chapters/19-security-configuration-and-production-architecture.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD05-spring-boot/chapters/20-production-incidents-and-diagnostic-playbooks.md",
+          "path": "content/volumes/frameworks/FW-04-spring-boot/chapters/20-production-incidents-and-diagnostic-playbooks.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD05-spring-boot/chapters/21-realistic-spring-boot-interview-rounds.md",
+          "path": "content/volumes/frameworks/FW-04-spring-boot/chapters/21-realistic-spring-boot-interview-rounds.md",
           "series_native": true
         },
         {
-          "path": "content/volumes/SD05-spring-boot/chapters/22-practice-solutions-readiness-and-sources.md",
+          "path": "content/volumes/frameworks/FW-04-spring-boot/chapters/22-practice-solutions-readiness-and-sources.md",
           "series_native": true
         }
       ],
       "code_companion": {
-        "path": "content/volumes/SD05-spring-boot/code/SpringBootInterviewCompanion.java",
+        "path": "content/volumes/frameworks/FW-04-spring-boot/code/SpringBootInterviewCompanion.java",
         "title": "Java 21 Boot Runtime Companion",
         "description": "This dependency-free executable model validates property precedence and origin, conditional defaults and user back-off, application availability transitions, deadline allocation, and idempotency states; the Maven fixture separately executes real Spring Boot 4.1 behavior."
       }
@@ -2876,18 +3201,18 @@
       "title": "Spring Data for Java Backend Engineers",
       "short_title": "Spring Data",
       "subtitle": "Repository Contracts, Query Patterns, Transactions, and Store Boundaries",
-      "output_name": "Java-SDE2-SD-06-Spring-Data.pdf",
+      "output_name": "Java-SDE2-FW-06-Spring-Data.pdf",
       "volume_label": "Publication Edition",
       "release_date": "2026-07-30",
-      "publication_status": "enhanced",
+      "publication_status": "published",
       "cover_deck": "A pragmatic, interview-oriented guide for repository boundaries, query patterns, transactions, pagination, MongoDB, Redis, observability, and production-safe Spring Data usage.",
       "topic_line": "SPRING DATA | REPOSITORIES | TRANSACTIONS | PAGINATION | MULTI-STORES",
       "purpose": "Build strong repository-first reasoning, query-shape confidence, transaction correctness, and performance awareness before and during SDE-2 interviews.",
       "prerequisites": [
-        "MySQL Book 02",
-        "Hibernate and JPA Book 03",
-        "Spring Framework Book 04",
-        "Spring Boot Book 05",
+        "FW-01 MySQL",
+        "FW-02 Hibernate and JPA",
+        "FW-03 Spring Framework",
+        "FW-04 Spring Boot",
         "Java 21 and basic SQL or document-store literacy"
       ],
       "recognition_signals": [
@@ -2913,76 +3238,76 @@
       "max_pages": 180,
       "sources": [
         {
-          "path": "content/volumes/SD06-spring-data/chapters/00-learning-path-and-persistence-first-principles.md",
+          "path": "content/volumes/frameworks/FW-06-spring-data/chapters/00-learning-path-and-persistence-first-principles.md",
           "series_native": false
         },
         {
-          "path": "content/volumes/SD06-spring-data/chapters/01-what-spring-data-is-and-when-not-to-use-it.md",
+          "path": "content/volumes/frameworks/FW-06-spring-data/chapters/01-what-spring-data-is-and-when-not-to-use-it.md",
           "series_native": false
         },
         {
-          "path": "content/volumes/SD06-spring-data/chapters/02-domain-models-and-aggregate-boundaries.md",
+          "path": "content/volumes/frameworks/FW-06-spring-data/chapters/02-domain-models-and-aggregate-boundaries.md",
           "series_native": false
         },
         {
-          "path": "content/volumes/SD06-spring-data/chapters/03-repository-core-and-crud-contracts.md",
+          "path": "content/volumes/frameworks/FW-06-spring-data/chapters/03-repository-core-and-crud-contracts.md",
           "series_native": false
         },
         {
-          "path": "content/volumes/SD06-spring-data/chapters/04-derived-query-methods-and-caveats.md",
+          "path": "content/volumes/frameworks/FW-06-spring-data/chapters/04-derived-query-methods-and-caveats.md",
           "series_native": false
         },
         {
-          "path": "content/volumes/SD06-spring-data/chapters/05-declared-queries-native-queries-and-projections.md",
+          "path": "content/volumes/frameworks/FW-06-spring-data/chapters/05-declared-queries-native-queries-and-projections.md",
           "series_native": false
         },
         {
-          "path": "content/volumes/SD06-spring-data/chapters/06-pagination-sorting-streaming-and-window-patterns.md",
+          "path": "content/volumes/frameworks/FW-06-spring-data/chapters/06-pagination-sorting-streaming-and-window-patterns.md",
           "series_native": false
         },
         {
-          "path": "content/volumes/SD06-spring-data/chapters/07-transactions-flush-and-writing-strategy.md",
+          "path": "content/volumes/frameworks/FW-06-spring-data/chapters/07-transactions-flush-and-writing-strategy.md",
           "series_native": false
         },
         {
-          "path": "content/volumes/SD06-spring-data/chapters/08-fetch-plans-n1-problem-and-performance-badges.md",
+          "path": "content/volumes/frameworks/FW-06-spring-data/chapters/08-fetch-plans-n1-problem-and-performance-badges.md",
           "series_native": false
         },
         {
-          "path": "content/volumes/SD06-spring-data/chapters/09-locking-and-concurrency-protection.md",
+          "path": "content/volumes/frameworks/FW-06-spring-data/chapters/09-locking-and-concurrency-protection.md",
           "series_native": false
         },
         {
-          "path": "content/volumes/SD06-spring-data/chapters/10-custom-queries-specification-patterns.md",
+          "path": "content/volumes/frameworks/FW-06-spring-data/chapters/10-custom-queries-specification-patterns.md",
           "series_native": false
         },
         {
-          "path": "content/volumes/SD06-spring-data/chapters/11-auditing-soft-delete-and-entity-lifecycle.md",
+          "path": "content/volumes/frameworks/FW-06-spring-data/chapters/11-auditing-soft-delete-and-entity-lifecycle.md",
           "series_native": false
         },
         {
-          "path": "content/volumes/SD06-spring-data/chapters/12-spring-data-mongodb-foundations.md",
+          "path": "content/volumes/frameworks/FW-06-spring-data/chapters/12-spring-data-mongodb-foundations.md",
           "series_native": false
         },
         {
-          "path": "content/volumes/SD06-spring-data/chapters/13-spring-data-redis-for-cache-and-rate-states.md",
+          "path": "content/volumes/frameworks/FW-06-spring-data/chapters/13-spring-data-redis-for-cache-and-rate-states.md",
           "series_native": false
         },
         {
-          "path": "content/volumes/SD06-spring-data/chapters/14-testing-data-paths-observability-and-regression-harness.md",
+          "path": "content/volumes/frameworks/FW-06-spring-data/chapters/14-testing-data-paths-observability-and-regression-harness.md",
           "series_native": false
         },
         {
-          "path": "content/volumes/SD06-spring-data/chapters/15-common-interview-traps-for-spring-data.md",
+          "path": "content/volumes/frameworks/FW-06-spring-data/chapters/15-common-interview-traps-for-spring-data.md",
           "series_native": false
         },
         {
-          "path": "content/volumes/SD06-spring-data/chapters/16-practice-solutions-readiness-and-sources.md",
+          "path": "content/volumes/frameworks/FW-06-spring-data/chapters/16-practice-solutions-readiness-and-sources.md",
           "series_native": false
         }
       ],
       "code_companion": {
-        "path": "content/volumes/SD06-spring-data/code/SpringDataInterviewCompanion.java",
+        "path": "content/volumes/frameworks/FW-06-spring-data/code/SpringDataInterviewCompanion.java",
         "title": "Java 21 Spring Data Readiness Companion",
         "description": "This dependency-free executable model validates repository contracts, deterministic query intent, pagination boundary checks, optimistic concurrency responses, store-boundary decisions, and recovery policy for Spring Data-centric interview scenarios."
       }
@@ -2994,16 +3319,16 @@
       "title": "MongoDB for Java Backend Interviews",
       "short_title": "MongoDB",
       "subtitle": "Document Modeling, Indexes, Consistency, Aggregation, and Spring Integration",
-      "output_name": "Java-SDE2-SD-07-MongoDB.pdf",
-      "volume_label": "Roadmap Edition",
+      "output_name": "Java-SDE2-FW-07-MongoDB.pdf",
+      "volume_label": "Publication Edition",
       "release_date": "2026-07-29",
-      "publication_status": "planned",
-      "cover_deck": "A modeling-first roadmap for document databases, with Java driver and Spring Data integration placed after storage semantics.",
+      "publication_status": "published",
+      "cover_deck": "A modeling-first guide to document databases, with Java driver and Spring Data integration placed after storage semantics.",
       "topic_line": "MONGODB | DOCUMENTS | INDEXES | AGGREGATION | CONSISTENCY",
       "purpose": "Teach when document storage fits and how schema, indexing, consistency, and access patterns drive the design.",
       "prerequisites": [
-        "MySQL Book 02 for relational comparison",
-        "Spring Data Book 06 recommended"
+        "FW-01 MySQL for relational comparison",
+        "FW-06 Spring Data recommended"
       ],
       "recognition_signals": [
         "Data is accessed as aggregates or documents",
@@ -3011,23 +3336,60 @@
         "An aggregation or index must support a concrete access pattern"
       ],
       "outcomes": [
-        "Understand the planned MongoDB learning progression",
-        "Compare document and relational modeling deliberately",
-        "Know the Java integration and SDE-2 design questions to master"
+        "Model document aggregates from access patterns and atomicity boundaries",
+        "Design indexes, aggregations, consistency, and sharding from evidence",
+        "Integrate Java and Spring Data with explicit failure and retry contracts"
       ],
       "practice_ladder": [
         "Foundation: documents and CRUD",
         "Interview Core: models, indexes, and aggregation",
         "SDE-2 Follow-up: consistency, scaling, and integration"
       ],
-      "min_pages": 7,
-      "max_pages": 30,
+      "min_pages": 22,
+      "max_pages": 90,
       "sources": [
         {
-          "path": "content/volumes/SD07-mongodb/chapters/01-planned-learning-roadmap.md",
+          "path": "content/volumes/frameworks/FW-07-mongodb/chapters/00-learning-path-and-document-first-principles.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-07-mongodb/chapters/01-bson-crud-validation-null-arrays-and-update-semantics.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-07-mongodb/chapters/02-document-modeling-embedding-references-growth-and-atomicity.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-07-mongodb/chapters/03-indexes-multikey-plans-and-pagination.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-07-mongodb/chapters/04-aggregation-pipelines-memory-and-result-grain.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-07-mongodb/chapters/05-replication-read-write-concerns-transactions-and-retries.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-07-mongodb/chapters/06-sharding-change-streams-migrations-operations-and-security.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-07-mongodb/chapters/07-java-driver-spring-data-boundaries-testing-and-diagnostics.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-07-mongodb/chapters/08-live-interviews-rapid-qa-practice-solutions-and-sources.md",
           "series_native": true
         }
-      ]
+      ],
+      "code_companion": {
+        "path": "content/volumes/frameworks/FW-07-mongodb/code/MongoDbInterviewCompanion.java",
+        "title": "Java 21 MongoDB Interview Reasoning Companion",
+        "description": "Executable models for document boundaries, optimistic filters, cursor ordering, transaction retry labels, and idempotent change projections."
+      }
     },
     {
       "id": "REDIS",
@@ -3036,16 +3398,16 @@
       "title": "Redis for Java Backend Interviews",
       "short_title": "Redis",
       "subtitle": "Data Structures, Caching, Expiration, Coordination, and Failure-Aware Design",
-      "output_name": "Java-SDE2-SD-08-Redis.pdf",
-      "volume_label": "Roadmap Edition",
+      "output_name": "Java-SDE2-FW-08-Redis.pdf",
+      "volume_label": "Publication Edition",
       "release_date": "2026-07-29",
-      "publication_status": "planned",
-      "cover_deck": "A roadmap for choosing Redis structures and designing cache, expiration, rate-limit, and coordination behavior safely.",
+      "publication_status": "published",
+      "cover_deck": "A guide to choosing Redis structures and designing cache, expiration, rate-limit, and coordination behavior safely.",
       "topic_line": "REDIS | CACHING | TTL | RATE LIMITING | CONSISTENCY",
       "purpose": "Teach Redis as a distinct system with explicit consistency and failure boundaries, not merely a fast map.",
       "prerequisites": [
         "Database fundamentals",
-        "Spring Boot Book 05 recommended"
+        "FW-04 Spring Boot recommended"
       ],
       "recognition_signals": [
         "Latency motivates a cache or in-memory data structure",
@@ -3053,23 +3415,56 @@
         "A rate limit, lock, or hot key must survive concurrency"
       ],
       "outcomes": [
-        "Understand the planned Redis sequence",
-        "Recognize cache-aside and coordination trade-offs",
-        "Know the interview and operational failure cases to cover"
+        "Choose Redis structures and commands from access and atomicity requirements",
+        "Design TTL, eviction, caching, rate limits, and locks with failure safety",
+        "Operate replication, Sentinel, Cluster, and Java or Spring clients deliberately"
       ],
       "practice_ladder": [
         "Foundation: structures and commands",
         "Interview Core: caching, TTL, and rate limits",
         "SDE-2 Follow-up: consistency, stampedes, and operations"
       ],
-      "min_pages": 7,
-      "max_pages": 30,
+      "min_pages": 20,
+      "max_pages": 80,
       "sources": [
         {
-          "path": "content/volumes/SD08-redis/chapters/01-planned-learning-roadmap.md",
+          "path": "content/volumes/frameworks/FW-08-redis/chapters/00-learning-path-bytes-structures-and-first-principles.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-08-redis/chapters/01-resp-command-execution-data-types-and-key-design.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-08-redis/chapters/02-ttl-expiration-eviction-memory-persistence-and-durability.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-08-redis/chapters/03-cache-patterns-consistency-stampedes-hot-keys-and-negative-caching.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-08-redis/chapters/04-atomicity-transactions-lua-functions-rate-limits-and-locks.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-08-redis/chapters/05-replication-sentinel-cluster-failover-operations-and-security.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-08-redis/chapters/06-java-lettuce-spring-data-serialization-testing-and-diagnostics.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-08-redis/chapters/07-live-interviews-rapid-qa-practice-solutions-and-sources.md",
           "series_native": true
         }
-      ]
+      ],
+      "code_companion": {
+        "path": "content/volumes/frameworks/FW-08-redis/code/RedisInterviewCompanion.java",
+        "title": "Java 21 Redis Interview Reasoning Companion",
+        "description": "Executable models for structure selection, TTL jitter, logical freshness, Cluster hash tags, lease ownership, and binary-safe encoding."
+      }
     },
     {
       "id": "KAFKA",
@@ -3078,15 +3473,15 @@
       "title": "Apache Kafka and Spring Kafka",
       "short_title": "Apache Kafka and Spring Kafka",
       "subtitle": "Logs, Partitions, Consumer Groups, Delivery Semantics, and Java Integration",
-      "output_name": "Java-SDE2-SD-09-Apache-Kafka-and-Spring-Kafka.pdf",
-      "volume_label": "Roadmap Edition",
+      "output_name": "Java-SDE2-FW-10-Apache-Kafka-and-Spring-Kafka.pdf",
+      "volume_label": "Publication Edition",
       "release_date": "2026-07-29",
-      "publication_status": "planned",
-      "cover_deck": "One coherent roadmap from Kafka fundamentals to Spring Kafka configuration, consumers, producers, retries, tests, and operations.",
+      "publication_status": "published",
+      "cover_deck": "One coherent guide from Kafka fundamentals to Spring Kafka configuration, consumers, producers, retries, tests, and operations.",
       "topic_line": "KAFKA | SPRING KAFKA | PARTITIONS | OFFSETS | DELIVERY",
       "purpose": "Keep Apache Kafka semantics and Spring Kafka integration together while teaching the platform model before framework abstractions.",
       "prerequisites": [
-        "Spring Boot Book 05",
+        "FW-04 Spring Boot",
         "Database transaction basics"
       ],
       "recognition_signals": [
@@ -3095,23 +3490,60 @@
         "Retries and delivery semantics can duplicate effects"
       ],
       "outcomes": [
-        "Understand the planned Kafka-to-Spring-Kafka sequence",
-        "Connect partitions and offsets to application correctness",
-        "Know the production and interview depth required"
+        "Reason from partitioned logs, keys, acknowledgements, and offsets",
+        "Design idempotent delivery, schema evolution, retry, DLT, and outbox or inbox flows",
+        "Configure Spring Kafka and operate lag, rebalances, security, and incidents"
       ],
       "practice_ladder": [
         "Foundation: log, partitions, producers, and consumers",
         "Interview Core: groups, offsets, delivery, and Spring integration",
         "SDE-2 Follow-up: retries, transactions, observability, and incidents"
       ],
-      "min_pages": 7,
-      "max_pages": 30,
+      "min_pages": 22,
+      "max_pages": 90,
       "sources": [
         {
-          "path": "content/volumes/SD09-apache-kafka-and-spring-kafka/chapters/01-planned-learning-roadmap.md",
+          "path": "content/volumes/frameworks/FW-10-apache-kafka-and-spring-kafka/chapters/00-learning-path-event-log-and-delivery-first-principles.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-10-apache-kafka-and-spring-kafka/chapters/01-broker-log-partitions-replication-and-storage-flow.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-10-apache-kafka-and-spring-kafka/chapters/02-producer-keys-batching-acks-idempotence-and-transactions.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-10-apache-kafka-and-spring-kafka/chapters/03-consumers-groups-offsets-polling-rebalances-and-delivery.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-10-apache-kafka-and-spring-kafka/chapters/04-event-contracts-schema-evolution-retention-compaction-and-tombstones.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-10-apache-kafka-and-spring-kafka/chapters/05-outbox-inbox-retries-dlt-and-exactly-once-boundaries.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-10-apache-kafka-and-spring-kafka/chapters/06-spring-kafka-producers-listeners-acks-errors-transactions-and-tests.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-10-apache-kafka-and-spring-kafka/chapters/07-capacity-observability-security-and-incident-response.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-10-apache-kafka-and-spring-kafka/chapters/08-live-interviews-rapid-qa-practice-solutions-and-sources.md",
           "series_native": true
         }
-      ]
+      ],
+      "code_companion": {
+        "path": "content/volumes/frameworks/FW-10-apache-kafka-and-spring-kafka/code/KafkaInterviewCompanion.java",
+        "title": "Java 21 Kafka Delivery Reasoning Companion",
+        "description": "Executable models for record identity, contiguous offset commits, idempotent inbox effects, failure classification, consumer parallelism, and aggregate ordering."
+      }
     },
     {
       "id": "SPRINGX",
@@ -3120,13 +3552,13 @@
       "title": "Spring Ecosystem Extensions",
       "short_title": "Spring Ecosystem Extensions",
       "subtitle": "Security, Cloud, WebFlux, Batch, Integration, Actuator, and Test Strategy",
-      "output_name": "Java-SDE2-SD-10-Spring-Ecosystem-Extensions.pdf",
-      "volume_label": "Roadmap Edition",
+      "output_name": "Java-SDE2-FW-11-Spring-Ecosystem-Extensions.pdf",
+      "volume_label": "Publication Edition",
       "release_date": "2026-07-29",
-      "publication_status": "planned",
-      "cover_deck": "A curated roadmap for the major Spring capabilities that matter after core Framework, Boot, Data, and messaging foundations.",
+      "publication_status": "published",
+      "cover_deck": "A problem-first guide to Security, Cloud, observability, WebFlux, Batch, Integration, testing, and their production failure boundaries.",
       "topic_line": "SECURITY | CLOUD | WEBFLUX | BATCH | ACTUATOR | TESTING",
-      "purpose": "Capture important Spring ecosystem areas without forcing them prematurely into the core learning sequence.",
+      "purpose": "Teach the major Spring extensions from prerequisites and runtime mechanics through SDE-2 trade-offs without implying every service needs every module.",
       "prerequisites": [
         "Spring Framework, Boot, and Data books",
         "Kafka and Redis basics recommended"
@@ -3137,23 +3569,60 @@
         "A specialized Spring module may solve a well-defined boundary"
       ],
       "outcomes": [
-        "See the major Spring areas still to be developed",
-        "Choose a specialization from system requirements",
-        "Avoid treating every Spring module as a prerequisite"
+        "Trace authentication, authorization, reactive, batch, integration, and observability runtime boundaries",
+        "Design bounded deadlines, retries, idempotency, restart, and operational evidence",
+        "Choose the smallest Spring extension justified by a system requirement"
       ],
       "practice_ladder": [
         "Foundation: module purpose and selection",
         "Interview Core: Security, Actuator, testing, and Cloud",
         "SDE-2 Follow-up: reactive, batch, and integration trade-offs"
       ],
-      "min_pages": 7,
-      "max_pages": 30,
+      "min_pages": 45,
+      "max_pages": 130,
       "sources": [
         {
-          "path": "content/volumes/SD10-spring-ecosystem-extensions/chapters/01-planned-learning-roadmap.md",
+          "path": "content/volumes/frameworks/FW-11-spring-ecosystem-extensions/chapters/01-planned-learning-roadmap.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-11-spring-ecosystem-extensions/chapters/02-spring-security-request-authentication-and-authorization.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-11-spring-ecosystem-extensions/chapters/03-actuator-observability-and-test-evidence.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-11-spring-ecosystem-extensions/chapters/04-spring-cloud-clients-gateway-and-resilience.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-11-spring-ecosystem-extensions/chapters/05-webflux-reactor-and-blocking-boundaries.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-11-spring-ecosystem-extensions/chapters/06-spring-batch-and-integration-runtime-models.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-11-spring-ecosystem-extensions/chapters/07-cross-module-failures-and-selection-guide.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-11-spring-ecosystem-extensions/chapters/08-realistic-spring-ecosystem-interview-rounds.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-11-spring-ecosystem-extensions/chapters/09-practice-solutions-readiness-and-sources.md",
           "series_native": true
         }
-      ]
+      ],
+      "code_companion": {
+        "path": "content/volumes/frameworks/FW-11-spring-ecosystem-extensions/code/SpringEcosystemExtensionsCompanion.java",
+        "title": "Java 21 Spring Ecosystem Runtime Companion",
+        "description": "Executable models for Security chain selection, resource authorization, deadline-aware retries, reactive demand, batch idempotency, and bounded correlation state."
+      }
     },
     {
       "id": "SPRINGAI",
@@ -3162,16 +3631,16 @@
       "title": "Spring AI for Java Engineers",
       "short_title": "Spring AI",
       "subtitle": "Model Clients, Prompts, Structured Output, Retrieval, Tools, Evaluation, and Operations",
-      "output_name": "Java-SDE2-SD-11-Spring-AI.pdf",
-      "volume_label": "Roadmap Edition",
+      "output_name": "Java-SDE2-FW-12-Spring-AI.pdf",
+      "volume_label": "Publication Edition",
       "release_date": "2026-07-29",
-      "publication_status": "planned",
-      "cover_deck": "A roadmap for adding generative-AI capabilities to Spring applications through testable boundaries, retrieval, tools, evaluation, and operational controls.",
+      "publication_status": "published",
+      "cover_deck": "A production-minded guide to Spring AI 2.0, structured output, RAG, tools, memory, evaluation, safety, cost, and incidents.",
       "topic_line": "SPRING AI | PROMPTS | RAG | TOOLS | EVALUATION",
       "purpose": "Place Spring AI after the core backend and Spring foundations so AI integration is taught as production software engineering.",
       "prerequisites": [
-        "Spring Boot Book 05",
-        "Spring Data Book 06",
+        "FW-04 Spring Boot",
+        "FW-06 Spring Data",
         "System-design fundamentals"
       ],
       "recognition_signals": [
@@ -3180,23 +3649,60 @@
         "Quality, cost, latency, privacy, and evaluation need explicit controls"
       ],
       "outcomes": [
-        "Understand the planned Spring AI progression",
-        "Model AI integration as testable application boundaries",
-        "Know the quality and operational questions expected at SDE-2"
+        "Trace ChatClient, advisors, retrieval, tools, memory, and provider boundaries",
+        "Keep tenant isolation, authorization, validation, and side effects in deterministic application controls",
+        "Build measurable quality, safety, latency, cost, fallback, and incident contracts at SDE-2 depth"
       ],
       "practice_ladder": [
         "Foundation: model clients and prompts",
         "Interview Core: structured output, retrieval, and tools",
         "SDE-2 Follow-up: evaluation, security, cost, and operations"
       ],
-      "min_pages": 7,
-      "max_pages": 30,
+      "min_pages": 42,
+      "max_pages": 125,
       "sources": [
         {
-          "path": "content/volumes/SD11-spring-ai/chapters/01-planned-learning-roadmap.md",
+          "path": "content/volumes/frameworks/FW-12-spring-ai/chapters/01-planned-learning-roadmap.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-12-spring-ai/chapters/02-model-chatclient-advisors-and-structured-output.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-12-spring-ai/chapters/03-rag-ingestion-retrieval-and-grounding.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-12-spring-ai/chapters/04-tool-calling-and-action-safety.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-12-spring-ai/chapters/05-memory-state-privacy-and-multi-tenancy.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-12-spring-ai/chapters/06-evaluation-quality-safety-and-release-gates.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-12-spring-ai/chapters/07-resilience-observability-cost-and-incident-matrix.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-12-spring-ai/chapters/08-realistic-spring-ai-interview-rounds.md",
+          "series_native": true
+        },
+        {
+          "path": "content/volumes/frameworks/FW-12-spring-ai/chapters/09-practice-solutions-readiness-and-sources.md",
           "series_native": true
         }
-      ]
+      ],
+      "code_companion": {
+        "path": "content/volumes/frameworks/FW-12-spring-ai/code/SpringAiInterviewCompanion.java",
+        "title": "Java 21 Spring AI Deterministic-Boundary Companion",
+        "description": "Executable models for context budgeting, tenant-filtered retrieval, business validation, authorized idempotent tools, conversation ownership, evaluation, and bounded retries."
+      }
     }
   ]
 }

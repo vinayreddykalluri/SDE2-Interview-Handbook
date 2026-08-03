@@ -10,7 +10,7 @@ SD 05 contained one roadmap chapter and a 10-page roadmap PDF. It named starters
 |---|---|---|---|---|---|
 | Planned learning roadmap | eight planned topic groups | Too shallow | none | none | SD 04 and JAVA 03 named only |
 
-The canonical source was `content/volumes/SD05-spring-boot/chapters/01-planned-learning-roadmap.md`. The publisher registration in `publishing/series.json` marked BOOT as planned with a 7-30 page range.
+The canonical source was `content/volumes/frameworks/FW-04-spring-boot/chapters/01-planned-learning-roadmap.md`. The publisher registration in `publishing/series.json` marked BOOT as planned with a 7-30 page range.
 
 ## Content-quality matrix
 

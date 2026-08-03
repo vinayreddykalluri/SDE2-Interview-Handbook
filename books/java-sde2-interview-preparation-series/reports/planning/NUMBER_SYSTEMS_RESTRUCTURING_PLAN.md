@@ -36,7 +36,7 @@ The supplied fifty-chapter design is implemented as fifty ordered topic units ma
 
 ## Preservation and non-impact rules
 
-- Keep `Java-SDE2-DSA-01-Number-Systems-and-Math-Foundations.pdf` and `Java-SDE2-DSA-01B-Number-Systems-Interview-Workbook.pdf` unchanged as filenames.
+- Keep `Java-SDE2-DSA-02-Number-Systems-and-Math-Foundations.pdf` and `Java-SDE2-DSA-03-Number-Systems-Interview-Workbook.pdf` unchanged as filenames.
 - Keep the Stage 1 public title stable so roadmaps in unrelated PDFs do not become stale.
 - Do not rebuild the series index, master book, or Stages 2-18.
 - Do not delete original chapters, diagrams, solutions, or exercises.

@@ -2,7 +2,7 @@
 
 This appendix is a recall sheet, not a substitute for the language chapters. Every compact rule hides edge cases. When correctness depends on an exact compile-time rule, use the Java Language Specification linked in Appendix G.
 
-After Java Foundations, continue to `Java-SDE2-DSA-02-Time-and-Space-Complexity.pdf`, then use `Java-SDE2-DSA-01-Number-Systems-and-Math-Foundations.pdf` for a printable numeric quick-reference with worked algorithms. For the full focused sequence, open `dist/Java-SDE2-Interview-Preparation-Series-Index.pdf`.
+After Java Foundations, continue to `Java-SDE2-DSA-01-Time-and-Space-Complexity.pdf`, then use `Java-SDE2-DSA-02-Number-Systems-and-Math-Foundations.pdf` for a printable numeric quick-reference with worked algorithms. For the full focused sequence, open the [series index](../00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf).
 
 ## Source files, packages, and launch
 

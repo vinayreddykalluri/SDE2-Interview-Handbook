@@ -63,9 +63,9 @@ BUILD = ROOT / "build"
 TMP = ROOT / "tmp" / "pdfs"
 DIST = ROOT / "dist"
 
-MASTER_MD = DIST / "java-sde2-interview-book.md"
-FINAL_DOCX = DIST / "java-sde2-interview-book.docx"
-FINAL_PDF = DIST / "java-sde2-interview-book.pdf"
+MASTER_MD = DIST / "00-start-here" / "java-sde2-interview-book.md"
+FINAL_DOCX = DIST / "00-start-here" / "java-sde2-interview-book.docx"
+FINAL_PDF = DIST / "00-start-here" / "java-sde2-interview-book.pdf"
 REFERENCE_DOCX = BUILD / "reference.docx"
 
 TITLE = "Java Foundations to Advanced Engineering"
@@ -1998,6 +1998,7 @@ def main() -> None:
     BUILD.mkdir(parents=True, exist_ok=True)
     TMP.mkdir(parents=True, exist_ok=True)
     DIST.mkdir(parents=True, exist_ok=True)
+    FINAL_PDF.parent.mkdir(parents=True, exist_ok=True)
     content_path, docx_input = assemble_sources(args.allow_incomplete)
     if args.only in ("docx", "all"):
         build_docx(docx_input)
