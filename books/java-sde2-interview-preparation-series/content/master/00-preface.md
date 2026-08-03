@@ -24,7 +24,7 @@ When an interviewer asks a broad question, begin with the guaranteed model, then
 
 Java 21 is the main executable baseline because it combines a mature LTS platform with records, sealed types, pattern matching, sequenced collections, and production virtual threads. Java 17 features and migration concerns are covered directly because Java 17 remains common in backend fleets. Earlier Java 8 and Java 11 idioms appear where they still shape interviews or deployed systems.
 
-As of July 2026, Java 25 is also an LTS release. This book mentions that ecosystem fact but does not silently rewrite Java 21 behavior using later APIs. Whenever a feature was preview, incubating, or finalized in a particular release, the chapter says so. Always check the release notes and support policy for the exact distribution used by your employer.
+Java 25 is also an LTS release. This book does not silently rewrite Java 21 behavior using later APIs; instead, Chapter 58 isolates the Java 22 to 25 delta so you can state what changed without guessing. Whenever a feature was preview, incubating, or finalized in a particular release, the chapter says so. Always check the release notes and support policy for the exact distribution used by your employer.
 
 ## How the chapters are built
 
@@ -32,7 +32,7 @@ Most chapters follow the same learning loop:
 
 1. Build an intuitive model.
 2. Define the formal vocabulary.
-3. inspect the Java API or language mechanism.
+3. Inspect the Java API or language mechanism.
 4. Trace a concrete example.
 5. Map the example to memory, bytecode, or execution behavior where useful.
 6. Analyze complexity and failure modes.

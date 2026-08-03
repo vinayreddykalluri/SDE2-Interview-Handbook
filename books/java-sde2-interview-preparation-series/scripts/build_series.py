@@ -1147,7 +1147,7 @@ def index_markdown(manifest: dict[str, Any]) -> str:
         "| Learn or rebuild Java | JAVA 01 - Java Foundations | Continue through the Java segment in order |",
         "| Build interview problem-solving skill | DSA 01 - Time and Space Complexity | Continue through the DSA segment in order |",
         "| Prepare for Java backend interviews | FW 01 - MySQL | Continue through persistence, Spring, data stores, and messaging |",
-        "| Prepare for architecture rounds | SD 01 - Backend and Design Foundations | Continue with distributed systems after the framework path |",
+        "| Prepare for architecture rounds | SD 01 - Design, Backend, Testing, and Security | Continue with distributed systems, then the generative-AI design round, after the framework path |",
         "",
         "## The learning loop for every volume",
         "",
@@ -1202,7 +1202,10 @@ def build_index(manifest: dict[str, Any], fonts: dict[str, str]) -> dict[str, An
         "output_name": INDEX_NAME,
         "artifact_path": index_artifact,
         "index_artifact": index_artifact,
-        "volume_label": "Series Index - 4 Segments / 40 Books",
+        "volume_label": (
+            f"Series Index - {len(manifest['segments'])} Segments / "
+            f"{len(manifest['volumes'])} Books"
+        ),
         "release_date": manifest["release_date"],
         "edition_date": manifest.get("edition_date", manifest["release_date"]),
         "cover_deck": "Choose Java, DSA, Frameworks, or System Design, then follow a clear prerequisite-aware path within the segment.",
@@ -1221,19 +1224,22 @@ def write_dist_navigation(manifest: dict[str, Any]) -> None:
     """Generate small GitHub-friendly indexes beside the canonical PDFs."""
     start_dir = DIST / "00-start-here"
     start_dir.mkdir(parents=True, exist_ok=True)
+    total_books = len(manifest["volumes"])
     start_lines = [
         "# Start Here: Java SDE-2 PDF Library",
         "",
-        "Choose one segment, begin with its Book 01, and continue in order. "
-        "The web library, PDF covers, and folders use the same codes.",
+        f"{total_books} books in {len(manifest['segments'])} segments. Choose one segment, "
+        "begin with its Book 01, and continue in order. The web library, PDF covers, "
+        "and folders use the same codes.",
         "",
-        "| Segment | Start | Folder |",
-        "|---|---|---|",
+        "| Segment | Books | Start | Folder |",
+        "|---|---|---|---|",
     ]
     for segment in manifest["segments"]:
-        first = segment_volumes(manifest, segment["id"])[0]
+        books = segment_volumes(manifest, segment["id"])
+        first = books[0]
         start_lines.append(
-            f"| {segment['title']} | {segment['code']} 01 - {first['title']} | "
+            f"| {segment['title']} | {len(books)} | {segment['code']} 01 - {first['title']} | "
             f"[`{segment['artifact_dir']}`](../{segment['artifact_dir']}/) |"
         )
         segment_dir = DIST / segment["artifact_dir"]

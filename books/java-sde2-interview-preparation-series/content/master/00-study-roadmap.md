@@ -1,12 +1,12 @@
 # Study Roadmap
 
-## Focused 40-book path
+## Focused 41-book path
 
-The complete master book remains the umbrella reference. For a finishable basics-to-SDE-2 route, use the **Java SDE-2 Interview Preparation Series** in `dist/`. Its 40 focused books are grouped into four clearly ordered shelves: Java (9), DSA (17), frameworks and data systems (12), and system design (2). Each PDF is independently printable and includes previous/next navigation within its shelf.
+The complete master book remains the umbrella reference. For a finishable basics-to-SDE-2 route, use the **Java SDE-2 Interview Preparation Series** in `dist/`. Its 41 focused books are grouped into four ordered shelves: Java (9), DSA (17), frameworks and data systems (12), and system design (3). Each PDF is independently printable and includes previous/next navigation within its shelf.
 
-Start with the sibling [series index](Java-SDE2-Interview-Preparation-Series-Index.pdf). A reader rebuilding from basics should study Java Foundations first, followed by Time and Space Complexity, Number Systems, and the remaining DSA sequence. Continue with the rest of the Java shelf, then choose the frameworks and system-design books required by the target role. Git/GitHub and Maven/Gradle can be studied before the first portfolio project or before entering the framework shelf.
+Start with the sibling [series index](Java-SDE2-Interview-Preparation-Series-Index.pdf). A reader rebuilding from basics should study Java Foundations first, followed by Time and Space Complexity, Number Systems, and the remaining DSA sequence. Continue with the rest of the Java shelf, then choose the frameworks and system-design books the target role requires. Git/GitHub and Maven/Gradle can be studied before the first portfolio project or before entering the framework shelf.
 
-Use the displayed shelf code and sequence number as the source of truth: `JAVA-01` through `JAVA-09`, `DSA-01` through `DSA-17`, `FW-01` through `FW-12`, and `SD-01` through `SD-02`. When revising, begin at the first completion check that exposes a gap instead of rereading material you can already explain and implement.
+Use the displayed shelf code and sequence number as the source of truth: `JAVA-01` through `JAVA-09`, `DSA-01` through `DSA-17`, `FW-01` through `FW-12`, and `SD-01` through `SD-03`. `SD-03` covers the generative-AI design round - token and latency budgeting, retrieval architecture, agent bounds, and evaluating a probabilistic system - and is worth reading whenever an LLM-backed feature is in scope for the role. When revising, begin at the first completion check that exposes a gap instead of rereading material you can already explain and implement.
 
 ## Diagnostic baseline
 
@@ -19,7 +19,8 @@ Before choosing a schedule, answer these prompts aloud and write one code sample
 5. Compare `ArrayList`, `LinkedList`, `ArrayDeque`, `HashMap`, `TreeMap`, and `ConcurrentHashMap` for a concrete workload.
 6. Design cancellation for a task submitted to an executor.
 7. Diagnose a service with rising old-generation occupancy and normal request volume.
-8. Solve a medium array or graph problem while stating an invariant before coding.
+8. Choose between `Instant`, `LocalDateTime`, and `ZonedDateTime` for a scheduled job that must survive a daylight-saving transition.
+9. Solve a medium array or graph problem while stating an invariant before coding.
 
 Score each answer from zero to three:
 
@@ -35,12 +36,12 @@ Prioritize zeros and ones. A balanced candidate is usually stronger than a candi
 | Week | Core reading | Coding and evidence | Interview output |
 |---|---|---|---|
 | 1 | Chapters 1-3 | Compile, disassemble, and package a small program | Explain source-to-CPU execution in five minutes |
-| 2 | Chapters 4-8 | Draw JVM memory and call-stack diagrams | Answer stack, heap, class-loader, and pass-by-value probes |
+| 2 | Chapters 4-8, plus 57 after Chapter 5 | Draw JVM memory and call-stack diagrams; run a modular build | Answer stack, heap, class-loader, module, and pass-by-value probes |
 | 3 | Chapters 9-11 | Capture GC logs; write safe and unsafe publication examples | Explain reachability, collectors, JIT, and happens-before |
 | 4 | Chapters 12-18 | Implement language edge-case exercises | Predict code output and defend specification claims |
-| 5 | Chapters 19-24 | Build immutable values, generic APIs, and pattern switches | Compare records, classes, sealed types, and generics |
+| 5 | Chapters 19-24, then 58 | Build immutable values, generic APIs, and pattern switches | Compare records, classes, sealed types, and generics; state the Java 21 to 25 delta |
 | 6 | Chapters 25-30 | Reimplement a small map and heap; benchmark only after reasoning | Select collections for five production workloads |
-| 7 | Chapters 31-32 | Build stream and NIO pipelines with explicit resource handling | Explain laziness, collectors, back pressure boundaries, and I/O |
+| 7 | Chapters 31-32, then 55-56 | Build stream and NIO pipelines with explicit resource handling; parse a timestamped log | Explain laziness, collectors, back-pressure boundaries, I/O, time zones, and regex cost |
 | 8 | Chapters 33-35 | Write cancellation, visibility, lock, and atomic examples | Solve race-condition and synchronization follow-ups |
 | 9 | Chapters 36-38 | Build bounded executor and virtual-thread experiments | Design a concurrent component and failure strategy |
 | 10 | Chapters 39-41 | Run JMH and JFR; analyze a synthetic memory leak | Present an evidence-first performance diagnosis |

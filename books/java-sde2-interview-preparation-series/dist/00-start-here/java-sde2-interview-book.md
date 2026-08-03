@@ -134,31 +134,36 @@ The examples are provided without warranty. Review correctness, security, perfor
 
 # Start Here - Choose Your Route
 
-This book is deliberately broad. Start where your explanation, implementation, or production judgment first becomes unreliable.
+Start where your explanation, implementation, or production judgment first becomes unreliable - not at page one.
 
-> **One-minute placement rule:** choose the earliest route below that describes a real gap. Complete its entry check, follow the named path, and move forward only when you can demonstrate the exit evidence without notes.
+> **Placement rule:** take the earliest route below that describes a real gap. Follow it until you can produce its exit evidence without notes.
 
-## Pick one primary route
+## Pick one route
 
-| Your situation | Start here | Exit evidence |
+| Your situation | Read | Exit evidence |
 |---|---|---|
 | New to Java syntax | JAVA-01, then DSA-01 through DSA-03 | Write a method, loop, array, validation, and tests |
-| Rebuilding foundations | JAVA-01, then DSA-01 through DSA-17 | Solve representative problems with invariants and complexity |
-| Experienced; eight weeks | Diagnostic baseline, then Chapter 54 | Pass coding, Java-depth, debugging, design, and behavioral mocks |
-| Interview in two to three weeks | Chapters 24, 27, 31, 33-38, and 42-53; timed mocks select gaps | Implement under time and defend production trade-offs |
-| Java backend specialist | JAVA-01 through JAVA-08, then the relevant FW and SD books | Defend a Spring service, persistence strategy, and distributed workflow |
+| Rebuilding foundations | JAVA-01, then DSA-01 through DSA-17 | Solve representative problems, stating invariants and complexity |
+| Experienced, eight weeks out | Diagnostic baseline in the Study Roadmap, then Chapter 54 | Pass coding, Java-depth, debugging, design, and behavioral mocks |
+| Two to three weeks out | Chapters 24, 27, 31, 33-38, 42-53, 55, and 56; let timed mocks pick the rest | Implement under time and defend production trade-offs |
+| Java backend specialist | JAVA-01 through JAVA-09, then the FW books your stack uses, then SD-01 through SD-03 | Defend a Spring service, a persistence strategy, and a distributed workflow |
+| Facing an AI or LLM design round | SD-03, after SD-01 and SD-02 | Budget tokens and latency, bound an agent, and defend where authorization sits in a RAG query |
 
-[Open the focused PDF Series Index](Java-SDE2-Interview-Preparation-Series-Index.pdf) for individual modules, clickable navigation, and entry/exit gates.
+The focused series is 41 books in four segments: Java (9), DSA (17), frameworks and data (12), and system design (3). [Open the Series Index](Java-SDE2-Interview-Preparation-Series-Index.pdf) for per-book entry and exit gates.
 
-## Pair the schedule with the learning loop
+## Where Part IX sits
 
-| Schedule decision | Repeat for every topic |
+Chapters 55 to 58 - `java.time`, regular expressions, JPMS, and the Java 22-25 delta - are appended as Part IX rather than interleaved, because chapter numbers are cross-referenced throughout the book. Their correct reading positions are after Chapter 5 (57, alongside class loading), after Chapter 24 (58), and after Chapter 32 (55 and 56). The focused volumes JAVA-06, JAVA-04, and JAVA-05 already place them there.
+
+## The loop, applied to every topic
+
+| Schedule | Repeat for every topic |
 |---|---|
-| **12-week foundation:** Study Roadmap; rebuild from basics | **1. Recognize:** name the contract, signal, or pattern |
-| **Eight-week accelerated:** Chapter 54; skip only through diagnostics | **2. Understand:** restate the mechanism, invariant, or guarantee |
-| **Two-to-three-week sprint:** revision driven by timed mocks | **3. Implement:** type the Java and test its boundaries |
+| **12 weeks:** Study Roadmap, rebuilding from basics | **1. Recognize:** name the contract, signal, or pattern |
+| **8 weeks:** Chapter 54, skipping only where diagnostics say you can | **2. Understand:** restate the mechanism, invariant, or guarantee |
+| **2-3 weeks:** revision driven by timed mocks | **3. Implement:** type the Java and test its boundaries |
 |  | **4. Explain:** give complexity, trade-offs, and failure modes aloud |
-|  | **5. Prove readiness:** produce working code or a defensible design without notes |
+|  | **5. Prove:** produce working code or a defensible design without notes |
 
 # Preface
 
@@ -186,7 +191,7 @@ When an interviewer asks a broad question, begin with the guaranteed model, then
 
 Java 21 is the main executable baseline because it combines a mature LTS platform with records, sealed types, pattern matching, sequenced collections, and production virtual threads. Java 17 features and migration concerns are covered directly because Java 17 remains common in backend fleets. Earlier Java 8 and Java 11 idioms appear where they still shape interviews or deployed systems.
 
-As of July 2026, Java 25 is also an LTS release. This book mentions that ecosystem fact but does not silently rewrite Java 21 behavior using later APIs. Whenever a feature was preview, incubating, or finalized in a particular release, the chapter says so. Always check the release notes and support policy for the exact distribution used by your employer.
+Java 25 is also an LTS release. This book does not silently rewrite Java 21 behavior using later APIs; instead, Chapter 58 isolates the Java 22 to 25 delta so you can state what changed without guessing. Whenever a feature was preview, incubating, or finalized in a particular release, the chapter says so. Always check the release notes and support policy for the exact distribution used by your employer.
 
 ## How the chapters are built
 
@@ -194,7 +199,7 @@ Most chapters follow the same learning loop:
 
 1. Build an intuitive model.
 2. Define the formal vocabulary.
-3. inspect the Java API or language mechanism.
+3. Inspect the Java API or language mechanism.
 4. Trace a concrete example.
 5. Map the example to memory, bytecode, or execution behavior where useful.
 6. Analyze complexity and failure modes.
@@ -256,21 +261,21 @@ The complete book is intentionally larger than a last-week revision guide. Do no
 
 Use this path if everyday framework work has made core Java feel implicit:
 
-1. Chapters 1-11: execution model, JVM, memory, GC, and the memory model.
-2. Chapters 12-24: language semantics and modern Java.
-3. Chapters 25-38: collections, streams, I/O, and concurrency.
+1. Chapters 1-11, inserting 57 after Chapter 5: execution model, JVM, memory, modules, GC, and the memory model.
+2. Chapters 12-24, then 58: language semantics and modern Java through the current LTS.
+3. Chapters 25-38, inserting 55 and 56 after Chapter 32: collections, streams, I/O, dates, text, and concurrency.
 4. Chapters 39-41: measurement and diagnosis.
 5. Chapters 42-48: DSA practice in Java.
 6. Chapters 49-54: design, production boundaries, and interview loops.
 
-Plan eight to twelve weeks and write code while reading. The eight-week schedule in Chapter 54 is an accelerated version.
+Chapters 55-58 are appended as Part IX rather than interleaved; the positions above are their reading order. Plan eight to twelve weeks and write code while reading. The eight-week schedule in Chapter 54 is an accelerated version.
 
 ### The interview sprint
 
 Use this path when an interview is two to three weeks away:
 
 - Read the summaries and revision checklists for Chapters 3-11.
-- Study Chapters 19, 22, 25-31, and 33-38 in full.
+- Study Chapters 19, 22, 25-31, 33-38, 55, and 56 in full.
 - Complete the coding templates in Chapters 42-48 without copying.
 - Answer Chapter 53 aloud under a two-minute limit.
 - Run at least two mock loops from Chapter 54.
@@ -364,13 +369,13 @@ Checkmarks in revision lists are promises to yourself, not completion badges. Re
 
 # Study Roadmap
 
-## Focused 40-book path
+## Focused 41-book path
 
-The complete master book remains the umbrella reference. For a finishable basics-to-SDE-2 route, use the **Java SDE-2 Interview Preparation Series** in `dist/`. Its 40 focused books are grouped into four clearly ordered shelves: Java (9), DSA (17), frameworks and data systems (12), and system design (2). Each PDF is independently printable and includes previous/next navigation within its shelf.
+The complete master book remains the umbrella reference. For a finishable basics-to-SDE-2 route, use the **Java SDE-2 Interview Preparation Series** in `dist/`. Its 41 focused books are grouped into four ordered shelves: Java (9), DSA (17), frameworks and data systems (12), and system design (3). Each PDF is independently printable and includes previous/next navigation within its shelf.
 
-Start with the sibling [series index](Java-SDE2-Interview-Preparation-Series-Index.pdf). A reader rebuilding from basics should study Java Foundations first, followed by Time and Space Complexity, Number Systems, and the remaining DSA sequence. Continue with the rest of the Java shelf, then choose the frameworks and system-design books required by the target role. Git/GitHub and Maven/Gradle can be studied before the first portfolio project or before entering the framework shelf.
+Start with the sibling [series index](Java-SDE2-Interview-Preparation-Series-Index.pdf). A reader rebuilding from basics should study Java Foundations first, followed by Time and Space Complexity, Number Systems, and the remaining DSA sequence. Continue with the rest of the Java shelf, then choose the frameworks and system-design books the target role requires. Git/GitHub and Maven/Gradle can be studied before the first portfolio project or before entering the framework shelf.
 
-Use the displayed shelf code and sequence number as the source of truth: `JAVA-01` through `JAVA-09`, `DSA-01` through `DSA-17`, `FW-01` through `FW-12`, and `SD-01` through `SD-02`. When revising, begin at the first completion check that exposes a gap instead of rereading material you can already explain and implement.
+Use the displayed shelf code and sequence number as the source of truth: `JAVA-01` through `JAVA-09`, `DSA-01` through `DSA-17`, `FW-01` through `FW-12`, and `SD-01` through `SD-03`. `SD-03` covers the generative-AI design round - token and latency budgeting, retrieval architecture, agent bounds, and evaluating a probabilistic system - and is worth reading whenever an LLM-backed feature is in scope for the role. When revising, begin at the first completion check that exposes a gap instead of rereading material you can already explain and implement.
 
 ## Diagnostic baseline
 
@@ -383,7 +388,8 @@ Before choosing a schedule, answer these prompts aloud and write one code sample
 5. Compare `ArrayList`, `LinkedList`, `ArrayDeque`, `HashMap`, `TreeMap`, and `ConcurrentHashMap` for a concrete workload.
 6. Design cancellation for a task submitted to an executor.
 7. Diagnose a service with rising old-generation occupancy and normal request volume.
-8. Solve a medium array or graph problem while stating an invariant before coding.
+8. Choose between `Instant`, `LocalDateTime`, and `ZonedDateTime` for a scheduled job that must survive a daylight-saving transition.
+9. Solve a medium array or graph problem while stating an invariant before coding.
 
 Score each answer from zero to three:
 
@@ -399,12 +405,12 @@ Prioritize zeros and ones. A balanced candidate is usually stronger than a candi
 | Week | Core reading | Coding and evidence | Interview output |
 |---|---|---|---|
 | 1 | Chapters 1-3 | Compile, disassemble, and package a small program | Explain source-to-CPU execution in five minutes |
-| 2 | Chapters 4-8 | Draw JVM memory and call-stack diagrams | Answer stack, heap, class-loader, and pass-by-value probes |
+| 2 | Chapters 4-8, plus 57 after Chapter 5 | Draw JVM memory and call-stack diagrams; run a modular build | Answer stack, heap, class-loader, module, and pass-by-value probes |
 | 3 | Chapters 9-11 | Capture GC logs; write safe and unsafe publication examples | Explain reachability, collectors, JIT, and happens-before |
 | 4 | Chapters 12-18 | Implement language edge-case exercises | Predict code output and defend specification claims |
-| 5 | Chapters 19-24 | Build immutable values, generic APIs, and pattern switches | Compare records, classes, sealed types, and generics |
+| 5 | Chapters 19-24, then 58 | Build immutable values, generic APIs, and pattern switches | Compare records, classes, sealed types, and generics; state the Java 21 to 25 delta |
 | 6 | Chapters 25-30 | Reimplement a small map and heap; benchmark only after reasoning | Select collections for five production workloads |
-| 7 | Chapters 31-32 | Build stream and NIO pipelines with explicit resource handling | Explain laziness, collectors, back pressure boundaries, and I/O |
+| 7 | Chapters 31-32, then 55-56 | Build stream and NIO pipelines with explicit resource handling; parse a timestamped log | Explain laziness, collectors, back-pressure boundaries, I/O, time zones, and regex cost |
 | 8 | Chapters 33-35 | Write cancellation, visibility, lock, and atomic examples | Solve race-condition and synchronization follow-ups |
 | 9 | Chapters 36-38 | Build bounded executor and virtual-thread experiments | Design a concurrent component and failure strategy |
 | 10 | Chapters 39-41 | Run JMH and JFR; analyze a synthetic memory leak | Present an evidence-first performance diagnosis |

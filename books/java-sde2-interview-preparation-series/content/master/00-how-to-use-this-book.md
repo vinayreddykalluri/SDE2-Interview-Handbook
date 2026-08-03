@@ -8,21 +8,21 @@ The complete book is intentionally larger than a last-week revision guide. Do no
 
 Use this path if everyday framework work has made core Java feel implicit:
 
-1. Chapters 1-11: execution model, JVM, memory, GC, and the memory model.
-2. Chapters 12-24: language semantics and modern Java.
-3. Chapters 25-38: collections, streams, I/O, and concurrency.
+1. Chapters 1-11, inserting 57 after Chapter 5: execution model, JVM, memory, modules, GC, and the memory model.
+2. Chapters 12-24, then 58: language semantics and modern Java through the current LTS.
+3. Chapters 25-38, inserting 55 and 56 after Chapter 32: collections, streams, I/O, dates, text, and concurrency.
 4. Chapters 39-41: measurement and diagnosis.
 5. Chapters 42-48: DSA practice in Java.
 6. Chapters 49-54: design, production boundaries, and interview loops.
 
-Plan eight to twelve weeks and write code while reading. The eight-week schedule in Chapter 54 is an accelerated version.
+Chapters 55-58 are appended as Part IX rather than interleaved; the positions above are their reading order. Plan eight to twelve weeks and write code while reading. The eight-week schedule in Chapter 54 is an accelerated version.
 
 ### The interview sprint
 
 Use this path when an interview is two to three weeks away:
 
 - Read the summaries and revision checklists for Chapters 3-11.
-- Study Chapters 19, 22, 25-31, and 33-38 in full.
+- Study Chapters 19, 22, 25-31, 33-38, 55, and 56 in full.
 - Complete the coding templates in Chapters 42-48 without copying.
 - Answer Chapter 53 aloud under a two-minute limit.
 - Run at least two mock loops from Chapter 54.

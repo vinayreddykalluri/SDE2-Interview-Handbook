@@ -18,7 +18,7 @@ A local-first, open-source preparation system for Java SDE-2 interviews. Its 41-
 | Learn or rebuild Java | [JAVA 01 - Java Foundations](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/java-01-java-foundations-for-problem-solving/) | Language basics, Git, Maven/Gradle, core libraries, JVM, concurrency, performance, and revision |
 | Prepare for coding rounds | [DSA 01 - Time and Space Complexity](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/dsa-01-time-and-space-complexity/) | Complexity, math, implementation patterns, data structures, algorithms, and problem solving |
 | Prepare for Java backend rounds | [FW 01 - MySQL](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/fw-01-mysql/) | SQL, Hibernate/JPA, Spring, data stores, Redis, Kafka, and production framework reasoning |
-| Prepare for architecture rounds | [SD 01 - Backend and Design Foundations](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/sd-01-design-backend-testing-and-security/) | Service boundaries, reliability, security, distributed-system design, and generative-AI design rounds |
+| Prepare for architecture rounds | [SD 01 - Design, Backend, Testing, and Security](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/sd-01-design-backend-testing-and-security/) | Service boundaries, reliability, security, distributed-system design, and generative-AI design rounds |
 | Browse every book and PDF | [Published Java SDE-2 book library](docs/books.md) | The complete four-segment catalog, source and code indexes, and individual PDFs |
 | Run and extend the code | [Java examples](examples/README.md) | Independently compilable examples organized by interview topic |
 | Understand the repository before contributing | [Repository structure](docs/community/repository-structure.md) | Clear source ownership and naming rules |
@@ -56,7 +56,7 @@ Choose only one segment initially. Inside it, use the book numbers as the prereq
 
 [![Java SDE-2 Interview Preparation Series cover](books/java-sde2-interview-preparation-series/assets/covers/series-index-cover.png)](books/java-sde2-interview-preparation-series/dist/00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf)
 
-The consolidated repository includes 41 published focused books, a 17-page series index, and a 657-page master reference. The focused books contain 3,575 pages; the complete 43-PDF library contains 4,249 pages. The publishing manifest declares 414 source entries that resolve to 407 unique mapped Markdown documents — the gap is the small number of chapters and appendices deliberately shared by more than one focused book.
+The consolidated repository includes 41 published focused books, a 17-page series index, and a 659-page master reference. The focused books contain 3,575 pages; the complete 43-PDF library contains 4,251 pages. The publishing manifest declares 414 source entries that resolve to 407 unique mapped Markdown documents — the gap is the small number of chapters and appendices deliberately shared by more than one focused book.
 
 Every page count above is generated, not hand-maintained: `dist/manifest.json` records the page count, byte size, and SHA-256 of each PDF at build time, and `scripts/validate_pdfs.py` asserts that the files on disk still match.
 
@@ -178,7 +178,7 @@ Start with the [contribution guide](.github/CONTRIBUTING.md), then use the issue
 
 High-value book contributions include accuracy corrections, clearer beginner explanations, compiling edge-case examples, diagrams, exercises, solution improvements, accessibility fixes, and PDF layout reports. Accepted original work is credited to the individual contributor in the [authorship record](docs/community/authors.md), Git history, and pull requests.
 
-The current public book backlog is coordinated in [issue #27](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/27). All 40 focused books are publication editions, so contributions now deepen an existing volume through accuracy fixes, clearer explanations, adversarial examples, exercises, diagrams, validation, accessibility, or layout repair. Large expansions should begin with an issue so prerequisites, examples, exercises, diagrams, and acceptance criteria remain coherent.
+The current public book backlog is coordinated in [issue #27](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/issues/27). All 41 focused books are publication editions, so contributions now deepen an existing volume through accuracy fixes, clearer explanations, adversarial examples, exercises, diagrams, validation, accessibility, or layout repair. Large expansions should begin with an issue so prerequisites, examples, exercises, diagrams, and acceptance criteria remain coherent.
 
 Project conduct and stewardship are documented in the [Code of Conduct](.github/CODE_OF_CONDUCT.md), [governance model](docs/community/governance.md), [security policy](.github/SECURITY.md), and [support guide](.github/SUPPORT.md).
 

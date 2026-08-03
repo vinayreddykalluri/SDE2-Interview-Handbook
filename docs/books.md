@@ -28,17 +28,17 @@ Do not combine every subject into one overwhelming route. Select the interview s
 | Java Engineering | [JAVA 01 - Java Foundations](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/java-01-java-foundations-for-problem-solving/) | 9 | Java language, Git, Maven/Gradle, core libraries, JVM, concurrency, performance, and revision |
 | Data Structures and Algorithms | [DSA 01 - Time and Space Complexity](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/dsa-01-time-and-space-complexity/) | 17 | Complexity, number systems, bit operations, implementation patterns, data structures, algorithms, and problem solving |
 | Frameworks, Data, and Messaging | [FW 01 - MySQL](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/fw-01-mysql/) | 12 | MySQL, Hibernate/JPA, Spring, MongoDB, Redis, Kafka, and AI integration |
-| System Design | [SD 01 - Backend and Design Foundations](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/sd-01-design-backend-testing-and-security/) | 2 | Backend boundaries and distributed-system design |
+| System Design | [SD 01 - Design, Backend, Testing, and Security](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/sd-01-design-backend-testing-and-security/) | 3 | Backend boundaries, distributed-system design, and the generative-AI design round |
 
-All 40 focused books are **Publication editions**. The four segment sequences are the prerequisite order; future contributions improve an existing canonical volume instead of creating a parallel roadmap or duplicate book.
+All 41 focused books are **Publication editions**. The four segment sequences are the prerequisite order; future contributions improve an existing canonical volume instead of creating a parallel roadmap or duplicate book.
 
-Stable release filenames remain intact. Reader-facing segment codes—JAVA 01-09, DSA 01-17, FW 01-12, and SD 01-02—appear on the web, PDF covers, index, and canonical download folders. Contributors can validate or copy the organized local library with `scripts/organize_pdf_library.py`.
+Stable release filenames remain intact. Reader-facing segment codes—JAVA 01-09, DSA 01-17, FW 01-12, and SD 01-03—appear on the web, PDF covers, index, and canonical download folders. Contributors can validate or copy the organized local library with `scripts/organize_pdf_library.py`.
 
 ## What is published
 
 - 41 published focused books (3,575 pages) and one 17-page series index
-- one complete 657-page master book
-- 43 individual PDFs and 4,249 pages across the complete library
+- one complete 659-page master book
+- 43 individual PDFs and 4,251 pages across the complete library
 - 414 declared source entries resolving to 407 unique mapped Markdown documents
 - canonical Markdown and diagram sources
 - Java 21 companion programs and boundary tests

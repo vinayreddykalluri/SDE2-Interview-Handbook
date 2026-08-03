@@ -30,15 +30,15 @@ Use public codes in prose, issue titles, website navigation, covers, and PDF fil
 
 ## Source ownership by shelf
 
-All 40 focused books are publication editions. Their principal source ownership is:
+All 41 focused books are publication editions. Their principal source ownership is:
 
 | Public book or range | Principal source ownership |
 |---|---|
 | `JAVA-01` | Beginner-first Java chapters under `content/volumes/java/JAVA-01-*`, with selected master quick-reference material |
 | `JAVA-02` and `JAVA-03` | Series-native Git/GitHub and Maven/Gradle chapters, labs, and solutions under their Java workspaces |
-| `JAVA-04` | Master Chapters 16-24 and feature reference material, plus a focused language-contract workshop |
-| `JAVA-05` | Master Chapters 25-32 and collection reference material, plus a focused low-level collections lab |
-| `JAVA-06` | Master Chapters 1-10, plus a focused JVM evidence workshop |
+| `JAVA-04` | Master Chapters 16-24 and 58, plus feature reference material and a focused language-contract workshop |
+| `JAVA-05` | Master Chapters 25-32, 55, and 56, plus collection reference material and a focused low-level collections lab |
+| `JAVA-06` | Master Chapters 1-10 with 57 placed after Chapter 5, plus a focused JVM evidence workshop |
 | `JAVA-07` | Master Chapter 11 and Chapters 33-38, plus a focused concurrency workshop |
 | `JAVA-08` | Master Chapters 39-41 and production reference material, plus a focused diagnostics workshop |
 | `JAVA-09` | Master Chapters 48, 53, and 54 and revision appendices, plus a focused mock-interview studio |

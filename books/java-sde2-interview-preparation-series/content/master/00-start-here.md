@@ -1,27 +1,32 @@
 # Start Here - Choose Your Route
 
-This book is deliberately broad. Start where your explanation, implementation, or production judgment first becomes unreliable.
+Start where your explanation, implementation, or production judgment first becomes unreliable - not at page one.
 
-> **One-minute placement rule:** choose the earliest route below that describes a real gap. Complete its entry check, follow the named path, and move forward only when you can demonstrate the exit evidence without notes.
+> **Placement rule:** take the earliest route below that describes a real gap. Follow it until you can produce its exit evidence without notes.
 
-## Pick one primary route
+## Pick one route
 
-| Your situation | Start here | Exit evidence |
+| Your situation | Read | Exit evidence |
 |---|---|---|
 | New to Java syntax | JAVA-01, then DSA-01 through DSA-03 | Write a method, loop, array, validation, and tests |
-| Rebuilding foundations | JAVA-01, then DSA-01 through DSA-17 | Solve representative problems with invariants and complexity |
-| Experienced; eight weeks | Diagnostic baseline, then Chapter 54 | Pass coding, Java-depth, debugging, design, and behavioral mocks |
-| Interview in two to three weeks | Chapters 24, 27, 31, 33-38, and 42-53; timed mocks select gaps | Implement under time and defend production trade-offs |
-| Java backend specialist | JAVA-01 through JAVA-08, then the relevant FW and SD books | Defend a Spring service, persistence strategy, and distributed workflow |
+| Rebuilding foundations | JAVA-01, then DSA-01 through DSA-17 | Solve representative problems, stating invariants and complexity |
+| Experienced, eight weeks out | Diagnostic baseline in the Study Roadmap, then Chapter 54 | Pass coding, Java-depth, debugging, design, and behavioral mocks |
+| Two to three weeks out | Chapters 24, 27, 31, 33-38, 42-53, 55, and 56; let timed mocks pick the rest | Implement under time and defend production trade-offs |
+| Java backend specialist | JAVA-01 through JAVA-09, then the FW books your stack uses, then SD-01 through SD-03 | Defend a Spring service, a persistence strategy, and a distributed workflow |
+| Facing an AI or LLM design round | SD-03, after SD-01 and SD-02 | Budget tokens and latency, bound an agent, and defend where authorization sits in a RAG query |
 
-[Open the focused PDF Series Index](Java-SDE2-Interview-Preparation-Series-Index.pdf) for individual modules, clickable navigation, and entry/exit gates.
+The focused series is 41 books in four segments: Java (9), DSA (17), frameworks and data (12), and system design (3). [Open the Series Index](Java-SDE2-Interview-Preparation-Series-Index.pdf) for per-book entry and exit gates.
 
-## Pair the schedule with the learning loop
+## Where Part IX sits
 
-| Schedule decision | Repeat for every topic |
+Chapters 55 to 58 - `java.time`, regular expressions, JPMS, and the Java 22-25 delta - are appended as Part IX rather than interleaved, because chapter numbers are cross-referenced throughout the book. Their correct reading positions are after Chapter 5 (57, alongside class loading), after Chapter 24 (58), and after Chapter 32 (55 and 56). The focused volumes JAVA-06, JAVA-04, and JAVA-05 already place them there.
+
+## The loop, applied to every topic
+
+| Schedule | Repeat for every topic |
 |---|---|
-| **12-week foundation:** Study Roadmap; rebuild from basics | **1. Recognize:** name the contract, signal, or pattern |
-| **Eight-week accelerated:** Chapter 54; skip only through diagnostics | **2. Understand:** restate the mechanism, invariant, or guarantee |
-| **Two-to-three-week sprint:** revision driven by timed mocks | **3. Implement:** type the Java and test its boundaries |
+| **12 weeks:** Study Roadmap, rebuilding from basics | **1. Recognize:** name the contract, signal, or pattern |
+| **8 weeks:** Chapter 54, skipping only where diagnostics say you can | **2. Understand:** restate the mechanism, invariant, or guarantee |
+| **2-3 weeks:** revision driven by timed mocks | **3. Implement:** type the Java and test its boundaries |
 |  | **4. Explain:** give complexity, trade-offs, and failure modes aloud |
-|  | **5. Prove readiness:** produce working code or a defensible design without notes |
+|  | **5. Prove:** produce working code or a defensible design without notes |
