@@ -155,6 +155,10 @@ CHAPTERS: list[tuple[int, str]] = [
     (52, "Secure and Reliable Java"),
     (53, "SDE-2 Java Interview Question Bank"),
     (54, "Eight-Week Study Plan and Mock Interview Loops"),
+    (55, "Dates, Times, Zones, and the java.time API"),
+    (56, "Regular Expressions and Text Processing"),
+    (57, "The Module System, JPMS, and Strong Encapsulation"),
+    (58, "Java 22 to 25: The Modern LTS Baseline"),
 ]
 
 PARTS: list[tuple[str, str, int, int]] = [
@@ -166,6 +170,15 @@ PARTS: list[tuple[str, str, int, int]] = [
     ("Part VI", "Performance, Diagnostics, and Reliability", 39, 41),
     ("Part VII", "Data Structures and Algorithms in Java", 42, 48),
     ("Part VIII", "Engineering Practice and Interview Readiness", 49, 54),
+    # Part IX is appended rather than interleaved on purpose. Placing java.time
+    # after Chapter 32 would have been the better reading order, but chapter
+    # numbers are referenced 309 times across the master text, the volume
+    # chapters, and the docs site, and series.json pins 42 master paths by
+    # filename. Renumbering to gain a few positions would have risked silently
+    # repointing those references. The focused volumes carry these chapters in
+    # their correct reading positions via publishing/series.json, which is
+    # where most readers meet them.
+    ("Part IX", "Core Library Depth and the Modern Java Baseline", 55, 58),
 ]
 
 APPENDIX_MAP: list[tuple[str, str, str]] = [
@@ -382,6 +395,44 @@ def run(cmd: Sequence[str], cwd: Path = ROOT, capture: bool = False) -> subproce
         text=True,
         capture_output=capture,
     )
+
+
+# The PDF renderer consumes pandoc's native JSON AST and unpacks a Table node
+# as a fixed 6-tuple (attr, caption, colspecs, thead, tbodies, tfoot). That
+# shape arrived in pandoc-types 1.21, shipped with pandoc 2.10. Older pandoc
+# emits a 5-field Table and the build dies with an opaque
+# "not enough values to unpack (expected 6, got 5)" on the first table it
+# meets. Ubuntu 22.04 still ships pandoc 2.9.2.1, so an unguarded
+# `apt-get install pandoc` in CI reproduces this every time. Fail early with a
+# message that names the real problem.
+MINIMUM_PANDOC = (2, 10)
+
+
+def pandoc_version() -> tuple[int, ...]:
+    result = run(["pandoc", "--version"], capture=True)
+    first = result.stdout.splitlines()[0] if result.stdout else ""
+    match = re.search(r"(\d+(?:\.\d+)+)", first)
+    if not match:
+        raise RuntimeError(f"Could not parse a pandoc version from: {first!r}")
+    return tuple(int(part) for part in match.group(1).split("."))
+
+
+def require_pandoc() -> tuple[int, ...]:
+    if shutil.which("pandoc") is None:
+        raise RuntimeError(
+            "pandoc is required to build this series. Install pandoc "
+            f"{'.'.join(map(str, MINIMUM_PANDOC))} or newer."
+        )
+    version = pandoc_version()
+    if version < MINIMUM_PANDOC:
+        raise RuntimeError(
+            f"pandoc {'.'.join(map(str, version))} is too old. This build reads "
+            "the pandoc JSON AST and needs the 6-field Table node introduced in "
+            f"pandoc {'.'.join(map(str, MINIMUM_PANDOC))} (pandoc-types 1.21). "
+            "Ubuntu's default package is 2.9.2.1, which fails on the first "
+            "table in the source. Install a newer pandoc and retry."
+        )
+    return version
 
 
 def ensure_reference_doc() -> None:
@@ -757,7 +808,7 @@ def enhance_docx_cover(doc: Document) -> None:
     set_paragraph_rule(scope, "C58A22", "6")
     date._p.addprevious(scope._p)
 
-    stats = doc.add_paragraph("54 CHAPTERS  |  7 APPENDICES  |  JAVA 21 BASELINE  |  8-WEEK STUDY PLAN")
+    stats = doc.add_paragraph("58 CHAPTERS  |  7 APPENDICES  |  JAVA 25 BASELINE  |  8-WEEK STUDY PLAN")
     format_cover_paragraph(stats, size=8.3, color="52606D", bold=True, before=9, after=7, line_spacing=1.15)
     date._p.addprevious(stats._p)
 
@@ -799,9 +850,8 @@ def postprocess_docx(path: Path) -> None:
 
 
 def build_docx(input_path: str) -> None:
+    require_pandoc()
     ensure_reference_doc()
-    if shutil.which("pandoc") is None:
-        raise RuntimeError("pandoc is required to build the DOCX")
     cmd = [
         "pandoc",
         input_path,
@@ -821,72 +871,57 @@ def build_docx(input_path: str) -> None:
     shutil.copy2(FINAL_DOCX, out / FINAL_DOCX.name)
 
 
-def register_fonts() -> dict[str, str]:
-    # The release uses a book-oriented serif for sustained reading, a clean
-    # sans serif for navigation/headings, and a high-legibility mono for code.
-    # Every role has open-font fallbacks so rebuilding is not macOS-specific.
-    candidates: dict[str, list[tuple[str, int | None]]] = {
-        "BookBody": [
-            ("/System/Library/Fonts/Supplemental/Charter.ttc", 0),
-            ("/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf", None),
-        ],
-        "BookBody-Bold": [
-            ("/System/Library/Fonts/Supplemental/Charter.ttc", 3),
-            ("/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf", None),
-        ],
-        "BookBody-Italic": [
-            ("/System/Library/Fonts/Supplemental/Charter.ttc", 1),
-            ("/usr/share/fonts/truetype/dejavu/DejaVuSerif-Italic.ttf", None),
-        ],
-        "BookSans": [
-            ("/System/Library/Fonts/Avenir Next.ttc", 7),
-            ("/System/Library/Fonts/Supplemental/Arial.ttf", None),
-            ("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", None),
-        ],
-        "BookSans-Bold": [
-            ("/System/Library/Fonts/Avenir Next.ttc", 2),
-            ("/System/Library/Fonts/Supplemental/Arial Bold.ttf", None),
-            ("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", None),
-        ],
-        "BookSans-Italic": [
-            ("/System/Library/Fonts/Avenir Next.ttc", 4),
-            ("/System/Library/Fonts/Supplemental/Arial Italic.ttf", None),
-            ("/usr/share/fonts/truetype/dejavu/DejaVuSans-Oblique.ttf", None),
-        ],
-        "BookMono": [
-            ("/System/Library/Fonts/Menlo.ttc", 0),
-            ("/System/Library/Fonts/Supplemental/Courier New.ttf", None),
-            ("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf", None),
-        ],
-        "BookMono-Bold": [
-            ("/System/Library/Fonts/Menlo.ttc", 1),
-            ("/System/Library/Fonts/Supplemental/Courier New Bold.ttf", None),
-            ("/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf", None),
-        ],
-    }
-    resolved: dict[str, str] = {}
-    for logical, options in candidates.items():
-        for raw, subfont_index in options:
-            path = Path(raw)
-            if not path.exists():
-                continue
-            try:
-                kwargs = {"subfontIndex": subfont_index} if subfont_index is not None else {}
-                pdfmetrics.registerFont(TTFont(logical, str(path), **kwargs))
-            except Exception:
-                continue
-            resolved[logical] = logical
-            break
+# Fonts are vendored under assets/fonts and are the ONLY source the build
+# reads. The previous implementation searched macOS paths first and fell back
+# to whatever the host happened to provide, which meant the same unchanged
+# Markdown paginated differently per machine — JAVA-02 rendered 127 pages on
+# macOS and 133 on Linux. Page counts are recorded in dist/manifest.json and
+# bounded by min_pages/max_pages in publishing/series.json, so host-dependent
+# font resolution was a correctness bug, not a cosmetic one.
+#
+# Roles map to the families the series was designed around: Caladea for the
+# Charter-like body serif, Lato for the Avenir-like navigation sans, and
+# DejaVu Sans Mono for code (Menlo descends from Bitstream Vera Sans Mono,
+# DejaVu's ancestor, so code metrics barely move).
+FONT_DIR = ROOT / "assets" / "fonts"
 
-    body = resolved.get("BookBody", resolved.get("BookSans", "Times-Roman"))
-    body_bold = resolved.get("BookBody-Bold", resolved.get("BookSans-Bold", "Times-Bold"))
-    body_italic = resolved.get("BookBody-Italic", resolved.get("BookSans-Italic", "Times-Italic"))
-    sans = resolved.get("BookSans", "Helvetica")
-    bold = resolved.get("BookSans-Bold", "Helvetica-Bold")
-    italic = resolved.get("BookSans-Italic", "Helvetica-Oblique")
-    mono = resolved.get("BookMono", "Courier")
-    mono_bold = resolved.get("BookMono-Bold", "Courier-Bold")
-    pdfmetrics.registerFontFamily("BookBody", normal=body, bold=body_bold, italic=body_italic, boldItalic=body_bold)
+FONT_FILES: dict[str, str] = {
+    "BookBody": "Caladea-Regular.ttf",
+    "BookBody-Bold": "Caladea-Bold.ttf",
+    "BookBody-Italic": "Caladea-Italic.ttf",
+    "BookBody-BoldItalic": "Caladea-BoldItalic.ttf",
+    "BookSans": "Lato-Regular.ttf",
+    "BookSans-Bold": "Lato-Bold.ttf",
+    "BookSans-Italic": "Lato-Italic.ttf",
+    "BookMono": "DejaVuSansMono.ttf",
+    "BookMono-Bold": "DejaVuSansMono-Bold.ttf",
+}
+
+
+def register_fonts() -> dict[str, str]:
+    missing = [name for name, f in FONT_FILES.items() if not (FONT_DIR / f).is_file()]
+    if missing:
+        raise RuntimeError(
+            "Bundled fonts are missing from "
+            f"{FONT_DIR}: {', '.join(sorted(FONT_FILES[m] for m in missing))}. "
+            "The build refuses to substitute system fonts because that changes "
+            "pagination and invalidates dist/manifest.json. Restore the files "
+            "from version control and rebuild."
+        )
+
+    for logical, filename in FONT_FILES.items():
+        pdfmetrics.registerFont(TTFont(logical, str(FONT_DIR / filename)))
+
+    body = "BookBody"
+    body_bold = "BookBody-Bold"
+    body_italic = "BookBody-Italic"
+    body_bold_italic = "BookBody-BoldItalic"
+    sans = "BookSans"
+    bold = "BookSans-Bold"
+    italic = "BookSans-Italic"
+    mono = "BookMono"
+    mono_bold = "BookMono-Bold"
+    pdfmetrics.registerFontFamily("BookBody", normal=body, bold=body_bold, italic=body_italic, boldItalic=body_bold_italic)
     pdfmetrics.registerFontFamily("BookSans", normal=sans, bold=bold, italic=italic, boldItalic=bold)
     pdfmetrics.registerFontFamily("BookMono", normal=mono, bold=mono_bold, italic=mono, boldItalic=mono_bold)
     return {
@@ -1916,7 +1951,7 @@ def cover_story(styles: dict[str, ParagraphStyle], fonts: dict[str, str]) -> lis
         HRFlowable(width=COVER_W, thickness=0.8, color=GOLD, spaceBefore=0, spaceAfter=7),
         Paragraph("LANGUAGE | JVM | COLLECTIONS | CONCURRENCY | DSA | BACKEND", styles["cover_scope"]),
         HRFlowable(width=COVER_W, thickness=0.55, color=LINE, spaceBefore=7, spaceAfter=11),
-        Paragraph("54 CHAPTERS | 7 APPENDICES | JAVA 21 BASELINE | 8-WEEK STUDY PLAN", styles["cover_stat_line"]),
+        Paragraph("58 CHAPTERS | 7 APPENDICES | JAVA 25 BASELINE | 8-WEEK STUDY PLAN", styles["cover_stat_line"]),
         Spacer(1, 24),
         Paragraph(EDITION, styles["cover_meta"]),
         Paragraph("Open educational printable interview study edition", styles["cover_meta"]),
@@ -1964,6 +1999,7 @@ def toc_story(styles: dict[str, ParagraphStyle], fonts: dict[str, str]) -> list[
 
 
 def build_pdf(content_path: str) -> None:
+    require_pandoc()
     BUILD.mkdir(parents=True, exist_ok=True)
     pandoc = run(["pandoc", content_path, "--from=gfm+pipe_tables+task_lists", "--to=json"], capture=True)
     ast = json.loads(pandoc.stdout)

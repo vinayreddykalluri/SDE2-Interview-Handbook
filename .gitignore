@@ -27,3 +27,6 @@ books/java-sde2-interview-preparation-series/content/volumes/*/labs/*/target/
 .DS_Store
 *.swp
 *.swo
+
+# Resumable series-build state written by scripts/build_all_volumes.py
+books/java-sde2-interview-preparation-series/build/

@@ -1289,6 +1289,10 @@ def main() -> None:
     BUILD.mkdir(parents=True, exist_ok=True)
     DIST.mkdir(parents=True, exist_ok=True)
     TMP.mkdir(parents=True, exist_ok=True)
+    # Check the toolchain once, before any volume is written, so a bad pandoc
+    # or a missing bundled font fails the run instead of corrupting part of
+    # dist/ and leaving the manifest half-updated.
+    master.require_pandoc()
     fonts = master.register_fonts()
     all_volumes = learning_volumes(manifest)
     selected = [] if args.index_only else select_volumes(manifest, args.volume)
