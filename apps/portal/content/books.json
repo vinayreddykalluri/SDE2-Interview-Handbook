@@ -7,11 +7,11 @@
     "editionDate": "2026-08-02",
     "url": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/tag/books-v2026.07.0",
     "focusedBookCount": 40,
-    "focusedPageCount": 3372,
-    "indexPageCount": 18,
-    "masterPageCount": 616,
+    "focusedPageCount": 3389,
+    "indexPageCount": 17,
+    "masterPageCount": 656,
     "totalPdfCount": 42,
-    "totalPageCount": 4006,
+    "totalPageCount": 4062,
     "index": {
       "title": "Java SDE-2 Interview Preparation Series Index",
       "filename": "Java-SDE2-Interview-Preparation-Series-Index.pdf",
@@ -95,7 +95,7 @@
       "authorNote": "When Java feels rusty, do not rush toward clever syntax. Rebuild one behavior at a time, run it, and explain why the output is correct before you move on.",
       "filename": "Java-SDE2-JAVA-01-Java-Foundations-for-Problem-Solving.pdf",
       "artifactPath": "01-java/Java-SDE2-JAVA-01-Java-Foundations-for-Problem-Solving.pdf",
-      "pageCount": 189,
+      "pageCount": 188,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/01-java/Java-SDE2-JAVA-01-Java-Foundations-for-Problem-Solving.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-JAVA-01-Java-Foundations-for-Problem-Solving.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/java/JAVA-01-java-foundations-for-problem-solving/chapters",
@@ -283,7 +283,7 @@
       "authorNote": "Git becomes much easier when you picture commits as a graph instead of a stack of files. In an interview or an incident, name the graph change you intend before typing the command.",
       "filename": "Java-SDE2-JAVA-02-Git-and-GitHub.pdf",
       "artifactPath": "01-java/Java-SDE2-JAVA-02-Git-and-GitHub.pdf",
-      "pageCount": 127,
+      "pageCount": 126,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/01-java/Java-SDE2-JAVA-02-Git-and-GitHub.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-JAVA-02-Git-and-GitHub.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/java/JAVA-02-git-and-github/chapters",
@@ -579,22 +579,22 @@
       "authorNote": "Modern Java features are useful only when their contracts stay visible. I prefer the simplest language construct that makes invalid states harder to represent and the next engineer's reasoning easier.",
       "filename": "Java-SDE2-JAVA-04-Language-OOP-and-Modern-Java.pdf",
       "artifactPath": "01-java/Java-SDE2-JAVA-04-Language-OOP-and-Modern-Java.pdf",
-      "pageCount": 108,
+      "pageCount": 120,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/01-java/Java-SDE2-JAVA-04-Language-OOP-and-Modern-Java.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-JAVA-04-Language-OOP-and-Modern-Java.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master",
       "fullBookHref": "books/java-04-language-oop-and-modern-java/",
       "codeHref": "books/java-04-language-oop-and-modern-java/code/",
-      "webDocumentCount": 11,
-      "wordCount": 24844,
-      "codeExampleCount": 71,
+      "webDocumentCount": 12,
+      "wordCount": 28536,
+      "codeExampleCount": 81,
       "sourceChapterCount": 1,
-      "supportingSourceCount": 10,
+      "supportingSourceCount": 11,
       "chapterPreview": [
         {
           "title": "Language Contracts and API Evolution Lab",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/java/JAVA-04-language-oop-and-modern-java/chapters/01-language-contracts-and-evolution-lab.md",
-          "webHref": "books/java-04-language-oop-and-modern-java/10-01-language-contracts-and-evolution-lab/"
+          "webHref": "books/java-04-language-oop-and-modern-java/11-01-language-contracts-and-evolution-lab/"
         }
       ],
       "chapterContents": [
@@ -644,14 +644,19 @@
           "webHref": "books/java-04-language-oop-and-modern-java/09-24-java-17-21-features/"
         },
         {
+          "title": "58. Java 22 to 25: The Modern LTS Baseline",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/58-java-22-to-25-the-modern-lts-baseline.md",
+          "webHref": "books/java-04-language-oop-and-modern-java/10-58-java-22-to-25-the-modern-lts-baseline/"
+        },
+        {
           "title": "Language Contracts and API Evolution Lab",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/java/JAVA-04-language-oop-and-modern-java/chapters/01-language-contracts-and-evolution-lab.md",
-          "webHref": "books/java-04-language-oop-and-modern-java/10-01-language-contracts-and-evolution-lab/"
+          "webHref": "books/java-04-language-oop-and-modern-java/11-01-language-contracts-and-evolution-lab/"
         },
         {
           "title": "Appendix D - Java 17 and Java 21 Feature Matrix",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/appendices/d-java-feature-matrix.md",
-          "webHref": "books/java-04-language-oop-and-modern-java/11-d-java-feature-matrix/"
+          "webHref": "books/java-04-language-oop-and-modern-java/12-d-java-feature-matrix/"
         }
       ],
       "outcomes": [
@@ -687,17 +692,17 @@
       "authorNote": "Collections questions are really questions about representation, equality, ordering, mutation, and cost. Trace those five things before reaching for a familiar implementation.",
       "filename": "Java-SDE2-JAVA-05-Collections-Streams-and-IO.pdf",
       "artifactPath": "01-java/Java-SDE2-JAVA-05-Collections-Streams-and-IO.pdf",
-      "pageCount": 128,
+      "pageCount": 148,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/01-java/Java-SDE2-JAVA-05-Collections-Streams-and-IO.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-JAVA-05-Collections-Streams-and-IO.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master",
       "fullBookHref": "books/java-05-collections-streams-and-io/",
       "codeHref": "books/java-05-collections-streams-and-io/code/",
-      "webDocumentCount": 11,
-      "wordCount": 27063,
-      "codeExampleCount": 41,
+      "webDocumentCount": 13,
+      "wordCount": 33716,
+      "codeExampleCount": 60,
       "sourceChapterCount": 1,
-      "supportingSourceCount": 10,
+      "supportingSourceCount": 12,
       "chapterPreview": [
         {
           "title": "Low-Level Collections Implementation Lab",
@@ -757,9 +762,19 @@
           "webHref": "books/java-05-collections-streams-and-io/10-32-java-io-nio/"
         },
         {
+          "title": "55. Dates, Times, Zones, and the java.time API",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/55-dates-times-and-the-java-time-api.md",
+          "webHref": "books/java-05-collections-streams-and-io/11-55-dates-times-and-the-java-time-api/"
+        },
+        {
+          "title": "56. Regular Expressions and Text Processing",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/56-regular-expressions-and-text-processing.md",
+          "webHref": "books/java-05-collections-streams-and-io/12-56-regular-expressions-and-text-processing/"
+        },
+        {
           "title": "Appendix B - Collection Complexity and Selection Matrix",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/appendices/b-collection-complexity.md",
-          "webHref": "books/java-05-collections-streams-and-io/11-b-collection-complexity/"
+          "webHref": "books/java-05-collections-streams-and-io/13-b-collection-complexity/"
         }
       ],
       "outcomes": [
@@ -795,22 +810,22 @@
       "authorNote": "Treat the JVM as an observable runtime, not a box of trivia. Separate what the language guarantees, what the VM specifies, and what one measured execution happens to show.",
       "filename": "Java-SDE2-JAVA-06-JVM-and-Execution.pdf",
       "artifactPath": "01-java/Java-SDE2-JAVA-06-JVM-and-Execution.pdf",
-      "pageCount": 98,
+      "pageCount": 108,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/01-java/Java-SDE2-JAVA-06-JVM-and-Execution.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-JAVA-06-JVM-and-Execution.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master",
       "fullBookHref": "books/java-06-jvm-and-execution/",
       "codeHref": "books/java-06-jvm-and-execution/code/",
-      "webDocumentCount": 11,
-      "wordCount": 21903,
-      "codeExampleCount": 14,
+      "webDocumentCount": 12,
+      "wordCount": 25379,
+      "codeExampleCount": 20,
       "sourceChapterCount": 1,
-      "supportingSourceCount": 10,
+      "supportingSourceCount": 11,
       "chapterPreview": [
         {
           "title": "JVM Execution Evidence Workshop",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/java/JAVA-06-jvm-and-execution/chapters/01-execution-evidence-workshop.md",
-          "webHref": "books/java-06-jvm-and-execution/11-01-execution-evidence-workshop/"
+          "webHref": "books/java-06-jvm-and-execution/12-01-execution-evidence-workshop/"
         }
       ],
       "chapterContents": [
@@ -840,34 +855,39 @@
           "webHref": "books/java-06-jvm-and-execution/05-05-class-loading-linking-and-initialization/"
         },
         {
+          "title": "57. The Module System, JPMS, and Strong Encapsulation",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/57-the-module-system-jpms-and-strong-encapsulation.md",
+          "webHref": "books/java-06-jvm-and-execution/06-57-the-module-system-jpms-and-strong-encapsulation/"
+        },
+        {
           "title": "Chapter 6: Runtime Data Areas",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/06-runtime-data-areas.md",
-          "webHref": "books/java-06-jvm-and-execution/06-06-runtime-data-areas/"
+          "webHref": "books/java-06-jvm-and-execution/07-06-runtime-data-areas/"
         },
         {
           "title": "Chapter 7: Object Creation and Memory Layout",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/07-object-creation-and-memory-layout.md",
-          "webHref": "books/java-06-jvm-and-execution/07-07-object-creation-and-memory-layout/"
+          "webHref": "books/java-06-jvm-and-execution/08-07-object-creation-and-memory-layout/"
         },
         {
           "title": "Chapter 8: Java Stacks, Method Calls, and Recursion",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/08-java-stacks-method-calls-and-recursion.md",
-          "webHref": "books/java-06-jvm-and-execution/08-08-java-stacks-method-calls-and-recursion/"
+          "webHref": "books/java-06-jvm-and-execution/09-08-java-stacks-method-calls-and-recursion/"
         },
         {
           "title": "Chapter 9: Garbage Collection",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/09-garbage-collection.md",
-          "webHref": "books/java-06-jvm-and-execution/09-09-garbage-collection/"
+          "webHref": "books/java-06-jvm-and-execution/10-09-garbage-collection/"
         },
         {
           "title": "Chapter 10: Execution Engine, JIT Compilation, and Safepoints",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/master/10-execution-engine-jit-compilation-and-safepoints.md",
-          "webHref": "books/java-06-jvm-and-execution/10-10-execution-engine-jit-compilation-and-safepoints/"
+          "webHref": "books/java-06-jvm-and-execution/11-10-execution-engine-jit-compilation-and-safepoints/"
         },
         {
           "title": "JVM Execution Evidence Workshop",
           "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/java/JAVA-06-jvm-and-execution/chapters/01-execution-evidence-workshop.md",
-          "webHref": "books/java-06-jvm-and-execution/11-01-execution-evidence-workshop/"
+          "webHref": "books/java-06-jvm-and-execution/12-01-execution-evidence-workshop/"
         }
       ],
       "outcomes": [
@@ -991,7 +1011,7 @@
       "authorNote": "Performance work starts with a symptom and evidence, not a favorite optimization. Measure the path, form one falsifiable hypothesis, and change the smallest thing that can prove or reject it.",
       "filename": "Java-SDE2-JAVA-08-Performance-Diagnostics-and-GC-Incidents.pdf",
       "artifactPath": "01-java/Java-SDE2-JAVA-08-Performance-Diagnostics-and-GC-Incidents.pdf",
-      "pageCount": 63,
+      "pageCount": 61,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/01-java/Java-SDE2-JAVA-08-Performance-Diagnostics-and-GC-Incidents.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-JAVA-08-Performance-Diagnostics-and-GC-Incidents.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master",
@@ -1069,7 +1089,7 @@
       "authorNote": "Use this question bank to practice explanation, not recognition. Close the answer, speak your model aloud, and score the missing reasoning more seriously than a forgotten keyword.",
       "filename": "Java-SDE2-JAVA-09-Question-Bank-Study-Plan-and-Reference.pdf",
       "artifactPath": "01-java/Java-SDE2-JAVA-09-Question-Bank-Study-Plan-and-Reference.pdf",
-      "pageCount": 110,
+      "pageCount": 109,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/01-java/Java-SDE2-JAVA-09-Question-Bank-Study-Plan-and-Reference.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-JAVA-09-Question-Bank-Study-Plan-and-Reference.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master",
@@ -1157,7 +1177,7 @@
       "authorNote": "Complexity is a prediction about how work grows, not a label attached after coding. Count the dominant operations on a concrete input first; the asymptotic expression should follow from that count.",
       "filename": "Java-SDE2-DSA-01-Time-and-Space-Complexity.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-01-Time-and-Space-Complexity.pdf",
-      "pageCount": 90,
+      "pageCount": 86,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-01-Time-and-Space-Complexity.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-01-Time-and-Space-Complexity.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-01-time-and-space-complexity/chapters",
@@ -1270,7 +1290,7 @@
       "authorNote": "Number systems become practical when you can derive the operation without a helper and then use the library safely. Learn both; the manual version exposes the invariant and the library version improves production clarity.",
       "filename": "Java-SDE2-DSA-02-Number-Systems-and-Math-Foundations.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-02-Number-Systems-and-Math-Foundations.pdf",
-      "pageCount": 139,
+      "pageCount": 137,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-02-Number-Systems-and-Math-Foundations.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-02-Number-Systems-and-Math-Foundations.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/chapters",
@@ -1408,7 +1428,7 @@
       "authorNote": "Do these drills on paper before running the code. The small friction of carrying a bit, checking a sign, or proving a bound is exactly what makes the interview shortcut dependable.",
       "filename": "Java-SDE2-DSA-03-Number-Systems-Interview-Workbook.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-03-Number-Systems-Interview-Workbook.pdf",
-      "pageCount": 138,
+      "pageCount": 137,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-03-Number-Systems-Interview-Workbook.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-03-Number-Systems-Interview-Workbook.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/chapters",
@@ -1501,7 +1521,7 @@
       "authorNote": "Bit tricks are memorable only after the bit pattern is visible. Write the fixed-width representation, perform one operation, and translate the result back before memorizing a shortcut.",
       "filename": "Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf",
-      "pageCount": 117,
+      "pageCount": 115,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-04-bit-manipulation-in-java/chapters",
@@ -1614,7 +1634,7 @@
       "authorNote": "Most loop bugs are state bugs in disguise. Name what each index means at the start of an iteration, then test that meaning at the first, last, and empty boundary.",
       "filename": "Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf",
-      "pageCount": 103,
+      "pageCount": 101,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-05-loop-mastery-and-index-calculations/chapters",
@@ -2408,7 +2428,7 @@
       "authorNote": "Binary search is not about finding a middle element; it is about preserving a boundary contract. Write what is known on each side before you choose the update rule.",
       "filename": "Java-SDE2-DSA-12-Binary-Search.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-12-Binary-Search.pdf",
-      "pageCount": 52,
+      "pageCount": 51,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-12-Binary-Search.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-12-Binary-Search.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-12-binary-search/chapters",
@@ -2712,7 +2732,7 @@
       "authorNote": "Before choosing a graph algorithm, write down direction, weight rules, connectivity, and the requested output. Many advanced-looking failures begin with solving the wrong graph model perfectly.",
       "filename": "Java-SDE2-DSA-15-Graphs.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-15-Graphs.pdf",
-      "pageCount": 73,
+      "pageCount": 72,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-15-Graphs.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-15-Graphs.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-15-graphs/chapters",
@@ -2815,7 +2835,7 @@
       "authorNote": "A greedy choice needs a proof, not a confident intuition. State why one locally best decision can replace the first decision of an optimal solution without making the remainder worse.",
       "filename": "Java-SDE2-DSA-16-Greedy-Algorithms.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-16-Greedy-Algorithms.pdf",
-      "pageCount": 54,
+      "pageCount": 53,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-16-Greedy-Algorithms.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-16-Greedy-Algorithms.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-16-greedy-algorithms/chapters",
@@ -2913,7 +2933,7 @@
       "authorNote": "Dynamic programming starts when repeated decisions share the same future. Define the state in words, derive the transition from the last choice, and optimize memory only after the table is correct.",
       "filename": "Java-SDE2-DSA-17-Dynamic-Programming.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-17-Dynamic-Programming.pdf",
-      "pageCount": 61,
+      "pageCount": 60,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-17-Dynamic-Programming.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-17-Dynamic-Programming.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-17-dynamic-programming/chapters",
@@ -3242,7 +3262,7 @@
       "authorNote": "Spring annotations become understandable once you follow object creation and the proxy boundary. Ask which object is actually called, on which thread, and inside which context.",
       "filename": "Java-SDE2-FW-03-Spring-Framework.pdf",
       "artifactPath": "03-frameworks/Java-SDE2-FW-03-Spring-Framework.pdf",
-      "pageCount": 122,
+      "pageCount": 120,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/03-frameworks/Java-SDE2-FW-03-Spring-Framework.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-FW-03-Spring-Framework.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/frameworks/FW-03-spring-framework/chapters",
@@ -3681,7 +3701,7 @@
       "authorNote": "Repository convenience can hide query count, flush timing, pagination drift, and transaction scope. Keep one eye on the abstraction and the other on the SQL and connection underneath it.",
       "filename": "Java-SDE2-FW-06-Spring-Data.pdf",
       "artifactPath": "03-frameworks/Java-SDE2-FW-06-Spring-Data.pdf",
-      "pageCount": 79,
+      "pageCount": 78,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/03-frameworks/Java-SDE2-FW-06-Spring-Data.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-FW-06-Spring-Data.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/frameworks/FW-06-spring-data/chapters",
@@ -4349,7 +4369,7 @@
       "authorNote": "AI integration is still backend engineering: bounded inputs, explicit data exposure, deterministic fallbacks, evaluation, and observability matter more than a polished demo prompt.",
       "filename": "Java-SDE2-FW-12-Spring-AI.pdf",
       "artifactPath": "03-frameworks/Java-SDE2-FW-12-Spring-AI.pdf",
-      "pageCount": 63,
+      "pageCount": 62,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/03-frameworks/Java-SDE2-FW-12-Spring-AI.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-FW-12-Spring-AI.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/frameworks/FW-12-spring-ai/chapters",
@@ -4457,7 +4477,7 @@
       "authorNote": "Good backend design begins with domain rules and failure boundaries before patterns or diagrams. Make the contract testable, then choose the smallest design that protects it.",
       "filename": "Java-SDE2-SD-01-Design-Backend-Testing-and-Security.pdf",
       "artifactPath": "04-system-design/Java-SDE2-SD-01-Design-Backend-Testing-and-Security.pdf",
-      "pageCount": 75,
+      "pageCount": 74,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/04-system-design/Java-SDE2-SD-01-Design-Backend-Testing-and-Security.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-SD-01-Design-Backend-Testing-and-Security.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master",

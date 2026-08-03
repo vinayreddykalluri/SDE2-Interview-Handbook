@@ -16,7 +16,7 @@
     "file": "java-sde2-interview-book.pdf",
     "artifact_path": "00-start-here/java-sde2-interview-book.pdf",
     "title": "Java Foundations to Advanced Engineering",
-    "page_count": 616
+    "page_count": 656
   },
   "learning_order": [
     "03",
@@ -103,22 +103,54 @@
     "18J": "SD-02"
   },
   "legacy_path_labels": {
-    "03": ["01"],
-    "GIT": ["19A"],
-    "BUILD": ["19B"],
-    "02": ["02"],
-    "01": ["03A"],
-    "01B": ["03B"],
-    "MYSQL": ["19C"],
-    "HIBERNATE": ["19D"],
-    "SPRING": ["19E"],
-    "BOOT": ["19F"],
-    "DATA": ["19G"],
-    "MONGO": ["19H"],
-    "REDIS": ["19I"],
-    "KAFKA": ["19J"],
-    "SPRINGX": ["19K"],
-    "SPRINGAI": ["19L"]
+    "03": [
+      "01"
+    ],
+    "GIT": [
+      "19A"
+    ],
+    "BUILD": [
+      "19B"
+    ],
+    "02": [
+      "02"
+    ],
+    "01": [
+      "03A"
+    ],
+    "01B": [
+      "03B"
+    ],
+    "MYSQL": [
+      "19C"
+    ],
+    "HIBERNATE": [
+      "19D"
+    ],
+    "SPRING": [
+      "19E"
+    ],
+    "BOOT": [
+      "19F"
+    ],
+    "DATA": [
+      "19G"
+    ],
+    "MONGO": [
+      "19H"
+    ],
+    "REDIS": [
+      "19I"
+    ],
+    "KAFKA": [
+      "19J"
+    ],
+    "SPRINGX": [
+      "19K"
+    ],
+    "SPRINGAI": [
+      "19L"
+    ]
   },
   "segments": [
     {
@@ -1831,6 +1863,9 @@
           }
         },
         {
+          "path": "content/master/57-the-module-system-jpms-and-strong-encapsulation.md"
+        },
+        {
           "path": "content/master/06-runtime-data-areas.md",
           "figure": {
             "path": "assets/diagrams/04-runtime-data-areas.png",
@@ -1933,6 +1968,9 @@
           "path": "content/master/24-java-17-21-features.md"
         },
         {
+          "path": "content/master/58-java-22-to-25-the-modern-lts-baseline.md"
+        },
+        {
           "path": "content/volumes/java/JAVA-04-language-oop-and-modern-java/chapters/01-language-contracts-and-evolution-lab.md",
           "series_native": true
         },
@@ -2026,6 +2064,12 @@
         },
         {
           "path": "content/master/32-java-io-nio.md"
+        },
+        {
+          "path": "content/master/55-dates-times-and-the-java-time-api.md"
+        },
+        {
+          "path": "content/master/56-regular-expressions-and-text-processing.md"
         },
         {
           "path": "content/master/appendices/b-collection-complexity.md"
