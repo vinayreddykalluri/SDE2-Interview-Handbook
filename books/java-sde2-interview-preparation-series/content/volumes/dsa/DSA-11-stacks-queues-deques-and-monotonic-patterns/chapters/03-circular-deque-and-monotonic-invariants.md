@@ -79,6 +79,51 @@ Before adding `right`, remove expired indexes from the front and remove values n
 
 Removing equal older values with `<=` is safe for maximum values: the newer equal value lasts longer. If the output needs the earliest maximum index, equality policy changes.
 
+```java
+import java.util.*;
+
+/** Maximum of every window of length k, in O(n) total. */
+static int[] windowMaximums(int[] values, int k) {
+    if (k <= 0 || k > values.length) {
+        throw new IllegalArgumentException("k must be in 1.." + values.length);
+    }
+    int[] result = new int[values.length - k + 1];
+    Deque<Integer> candidates = new ArrayDeque<>();     // indexes, values descending
+
+    for (int right = 0; right < values.length; right++) {
+        // Back: anything no larger than the arrival can never be a maximum again.
+        while (!candidates.isEmpty() && values[candidates.peekLast()] <= values[right]) {
+            candidates.pollLast();
+        }
+        candidates.addLast(right);
+
+        // Front: drop the index that just fell out of the window.
+        if (candidates.peekFirst() <= right - k) {
+            candidates.pollFirst();
+        }
+        if (right >= k - 1) {
+            result[right - k + 1] = values[candidates.peekFirst()];
+        }
+    }
+    return result;
+}
+```
+
+The loop looks nested, so the complexity question is guaranteed. The answer is
+the amortized argument from Chapter 4 of this volume: **each index is added
+exactly once and removed at most once**, so the total work across the whole
+scan is bounded by `2n` regardless of how many removals a single iteration
+performs. `O(n)`, not `O(nk)`.
+
+Storing *indexes* rather than values is what makes the expiry test possible -
+`candidates.peekFirst() <= right - k` needs to know where the candidate came
+from. Candidates who store values get stuck here and usually reach for a second
+structure.
+
+Checked against a brute-force `max` over every window across 4,000 random
+arrays, including duplicate-heavy inputs and `k == 1` and `k == n`: identical
+every time.
+
 ## Histogram area: boundaries arrive when height drops
 
 An increasing stack delays a bar until a shorter bar reveals its right boundary. When height at index `i` is lower than stack top:

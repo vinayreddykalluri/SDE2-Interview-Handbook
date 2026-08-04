@@ -2,7 +2,7 @@
 
 # SDE-2 Interview Handbook
 
-**41 books. 4,240 pages. Free, open source, no signup.**
+**41 books. 4,254 pages. Free, open source, no signup.**
 
 [**→ Start reading**](https://sde-2-interview-handbook.vercel.app) &nbsp;·&nbsp;
 [Browse all books](https://sde-2-interview-handbook.vercel.app/books/) &nbsp;·&nbsp;
@@ -118,9 +118,9 @@ the difference explicitly.
 ## What you get
 
 <table>
-<tr><td><b>41 focused books</b></td><td>3,565 pages, each independently readable and printable</td></tr>
+<tr><td><b>41 focused books</b></td><td>3,579 pages, each independently readable and printable</td></tr>
 <tr><td><b>1 master reference</b></td><td>658 pages, 58 chapters, 7 appendices</td></tr>
-<tr><td><b>43 PDFs</b></td><td>4,240 pages total, page counts and SHA-256 verified at build time</td></tr>
+<tr><td><b>43 PDFs</b></td><td>4,254 pages total, page counts and SHA-256 verified at build time</td></tr>
 <tr><td><b>176 Java files</b></td><td>compiled and smoke-tested in CI, not just pasted into prose</td></tr>
 <tr><td><b>28 diagrams</b></td><td>generated from the same arithmetic the chapters use</td></tr>
 <tr><td><b>Zero signup</b></td><td>no account, no email, no paywall, no tracking beyond page views</td></tr>

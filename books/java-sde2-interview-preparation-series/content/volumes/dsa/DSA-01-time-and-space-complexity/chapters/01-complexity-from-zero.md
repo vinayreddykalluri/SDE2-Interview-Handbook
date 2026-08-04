@@ -74,6 +74,20 @@ A simplified count is `2n + 2`. As `n` grows, the linear part dominates, so time
 
 ## Step 3: See the common growth shapes
 
+![Growth rates on a linear axis, with the real operation counts](assets/diagrams/29-growth-rates.png)
+
+Two things in that figure are worth reading carefully before the code.
+
+The axis is **linear**, not logarithmic. A log axis is the conventional choice
+and it would flatten `O(n^2)` into a gentle curve - the opposite of the point.
+Running off the top of the chart is the honest picture.
+
+And the table beside it is where the argument actually lives. The curves show
+shape; the numbers show consequence. `O(n^2)` at a million elements is `10^12`
+operations, which at a billion simple operations per second is roughly
+seventeen minutes for a single request. That is the difference between a
+complexity class being "worse" and being unusable.
+
 ### O(1): constant growth
 
 ```java

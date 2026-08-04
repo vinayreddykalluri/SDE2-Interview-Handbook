@@ -151,9 +151,9 @@
       "output_name": "Java-SDE2-JAVA-09-Question-Bank-Study-Plan-and-Reference.pdf"
     },
     {
-      "page_count": 86,
-      "sha256": "5ff651a730f5eab28362abff677dbdbbaa45c2d6e258b523c563aed53c3ec48d",
-      "bytes": 3868889,
+      "page_count": 87,
+      "sha256": "ef1e8362159b3b842676e07223d73620fe25a99ac90c59ac4f5e22bfda8bbeaf",
+      "bytes": 4076335,
       "id": "02",
       "stage": "2",
       "path_label": "DSA-01",
@@ -311,9 +311,9 @@
       "output_name": "Java-SDE2-DSA-10-Linked-Lists.pdf"
     },
     {
-      "page_count": 61,
-      "sha256": "0a81e8644c8329bc91e6c86c3c106e22fdd201897c31be15288aa16f9a2d953b",
-      "bytes": 3792612,
+      "page_count": 62,
+      "sha256": "ec9a12775cf93ddd0e9c0f55f32637272165ce1159e1770ca0934b63bd1a982c",
+      "bytes": 3795097,
       "id": "11",
       "stage": "11",
       "path_label": "DSA-11",
@@ -343,9 +343,9 @@
       "output_name": "Java-SDE2-DSA-12-Binary-Search.pdf"
     },
     {
-      "page_count": 71,
-      "sha256": "bf6d763cf0a481c2a577cd4b63430a4c3a5b8309af0a9accc56a03b21af230ba",
-      "bytes": 4031004,
+      "page_count": 73,
+      "sha256": "d474c3554d46b0a6697e87deaf3f4ac076de82576dc2fcd22c03601940e0f363",
+      "bytes": 4034344,
       "id": "13",
       "stage": "13",
       "path_label": "DSA-13",
@@ -375,9 +375,9 @@
       "output_name": "Java-SDE2-DSA-14-Heaps-Priority-Queues-and-Top-K.pdf"
     },
     {
-      "page_count": 91,
-      "sha256": "e0526c5fc9314d400c8db205d2931c8a8e9550eebca3d8385e9fe99cb063d51b",
-      "bytes": 4084257,
+      "page_count": 96,
+      "sha256": "211ad1c6a1993e370ec07ba6c763f1bebb5a99f02ae07a54a20ceb22987813fd",
+      "bytes": 4096134,
       "id": "15",
       "stage": "15",
       "path_label": "DSA-15",
@@ -391,9 +391,9 @@
       "output_name": "Java-SDE2-DSA-15-Graphs.pdf"
     },
     {
-      "page_count": 61,
-      "sha256": "b60003354cbf8920ef250dad6e83ba4f6145f2582a253ee3d688514ccb5862ca",
-      "bytes": 3960728,
+      "page_count": 65,
+      "sha256": "758730289fdbd41a13b9928c290e5b8b7bd1dd0e20562503127f0688b4ad57ef",
+      "bytes": 4170203,
       "id": "16",
       "stage": "16",
       "path_label": "DSA-16",
@@ -407,9 +407,9 @@
       "output_name": "Java-SDE2-DSA-16-Greedy-Algorithms.pdf"
     },
     {
-      "page_count": 78,
-      "sha256": "d8066f708c5398435474ca1754be131ae8ed34ca7014f66d48bc54029b56b86d",
-      "bytes": 3843699,
+      "page_count": 79,
+      "sha256": "ff0bc9438b1a25adafe38ed0bf12aaf837a1565d5965912bced355c198e581a3",
+      "bytes": 3846742,
       "id": "17",
       "stage": "17",
       "path_label": "DSA-17",

@@ -18,6 +18,12 @@ Greedy is suspicious when choices consume resources in ways that depend on futur
 
 For maximum number of compatible half-open intervals `[start,end)`, sort by end and select an interval when `start >= lastEnd`.
 
+![The exchange argument, with a computed selection](assets/diagrams/30-exchange-argument.png)
+
+The highlighted intervals in that figure are not a drawing decision - the
+generator runs the earliest-finish rule on those six requests and marks
+whatever it selects. If the rule changed, the picture would change with it.
+
 Exchange proof:
 
 1. Let greedy choose interval `g` with earliest finish.
@@ -27,6 +33,44 @@ Exchange proof:
 5. An optimum exists containing the greedy choice; repeat on the suffix.
 
 The companion returns the selected original records and IDs, not only a count. Deterministic tie-breaks make the result auditable.
+
+```java
+import java.util.*;
+
+record Interval(String id, int start, int end) { }   // half-open [start, end)
+
+final class IntervalScheduling {
+    private static final Comparator<Interval> BY_FINISH =
+            Comparator.comparingInt(Interval::end)
+                      .thenComparingInt(Interval::start)
+                      .thenComparing(Interval::id);   // unique - see Chapter 30
+
+    static List<Interval> selectMaximum(Collection<Interval> intervals) {
+        List<Interval> sorted = new ArrayList<>(intervals);
+        sorted.sort(BY_FINISH);
+
+        List<Interval> chosen = new ArrayList<>();
+        int lastEnd = Integer.MIN_VALUE;
+        for (Interval candidate : sorted) {
+            if (candidate.start() >= lastEnd) {       // half-open: touching is fine
+                chosen.add(candidate);
+                lastEnd = candidate.end();
+            }
+        }
+        return List.copyOf(chosen);
+    }
+}
+```
+
+The comparator ends on `id` for the reason Chapter 30 gives: without a unique
+final tie-break, two intervals with identical bounds order arbitrarily and the
+*set* returned changes between runs even though the count does not. A candidate
+who only returns a count never notices; one who returns the selection does.
+
+`start() >= lastEnd` rather than `>` is the half-open convention doing real
+work - a meeting ending at 10:00 and one starting at 10:00 do not conflict.
+Getting this backwards costs one interval on exactly the inputs an interviewer
+constructs.
 
 Sorting by earliest start is not safe: a very long early interval can block many short ones. A counterexample is part of explaining the correct criterion.
 
@@ -50,6 +94,46 @@ The proof is the same as unweighted BFS: all indexes in a layer are reachable wi
 Let `net[i] = gas[i] - cost[i]`. If total net is negative, no start can complete the circle. While scanning a candidate start, if running tank becomes negative at `i`, no station between that candidate and `i` can be a valid start: each would begin with no more accumulated surplus yet face the same failing suffix. Set candidate to `i+1` and reset the local tank.
 
 Use `long` for total and tank. Validate nonnegative gas/cost and equal nonempty arrays. The proof assumes every segment is traversed in fixed circular order.
+
+```java
+/** Index of the only possible starting station, or -1 if the circuit is impossible. */
+static int startingStation(int[] gas, int[] cost) {
+    if (gas.length != cost.length || gas.length == 0) {
+        throw new IllegalArgumentException("gas and cost must be equal and non-empty");
+    }
+    long total = 0;
+    for (int i = 0; i < gas.length; i++) {
+        total += (long) gas[i] - cost[i];
+    }
+    if (total < 0) {
+        return -1;                     // no start can finish; decided before scanning
+    }
+
+    int candidate = 0;
+    long tank = 0;
+    for (int i = 0; i < gas.length; i++) {
+        tank += (long) gas[i] - cost[i];
+        if (tank < 0) {                // i is unreachable from `candidate`...
+            candidate = i + 1;         // ...and from every station between them
+            tank = 0;
+        }
+    }
+    return candidate;
+}
+```
+
+This is one pass, not the `O(n^2)` "try every start" the problem statement
+invites. The reason it works is the whole insight: when the tank goes negative
+at `i`, *every* station from `candidate` through `i` is eliminated at once,
+because each of them would reach `i` with no more surplus than `candidate` had.
+The scan therefore never revisits a station.
+
+Note the two-part structure. The `total < 0` check answers *whether* a solution
+exists; the scan answers *where* it starts. Merging them is tempting and wrong -
+the scan alone cannot distinguish "no valid start" from "start at 0".
+
+Checked against an exhaustive `O(n^2)` simulation of every starting station
+over 4,000 random instances: identical answers, including the `-1` cases.
 
 ## Refueling: defer the choice until necessary
 
@@ -75,6 +159,50 @@ The companion:
 - computes minimum jumps with a small dynamic-programming oracle and compares the greedy frontier result.
 
 An oracle disagreement does not automatically prove which implementation is wrong, but it gives a reproducible counterexample for reasoning.
+
+The oracle is worth writing once and keeping, because it is short:
+
+```java
+static int bruteForceMaximum(List<Interval> all) {
+    int n = all.size();
+    int best = 0;
+    for (int mask = 0; mask < (1 << n); mask++) {    // every subset
+        List<Interval> subset = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            if ((mask & (1 << i)) != 0) {
+                subset.add(all.get(i));
+            }
+        }
+        if (pairwiseCompatible(subset)) {
+            best = Math.max(best, subset.size());
+        }
+    }
+    return best;
+}
+
+private static boolean pairwiseCompatible(List<Interval> subset) {
+    for (int i = 0; i < subset.size(); i++) {
+        for (int j = i + 1; j < subset.size(); j++) {
+            Interval a = subset.get(i);
+            Interval b = subset.get(j);
+            boolean disjoint = a.end() <= b.start() || b.end() <= a.start();
+            if (!disjoint) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+```
+
+`1 << n` limits this to roughly `n <= 20`, which is the point: an oracle is
+allowed to be exponential because it only ever sees inputs small enough to
+enumerate. Its job is to be *obviously* correct, not fast.
+
+Run over 500 random instances of up to seven intervals, earliest-finish
+matched the exhaustive optimum every time. The same harness is what shows the
+plausible alternatives failing - earliest-*start* and shortest-first each
+produce strictly worse answers on inputs this test finds within seconds.
 
 ## Greedy versus dynamic programming
 

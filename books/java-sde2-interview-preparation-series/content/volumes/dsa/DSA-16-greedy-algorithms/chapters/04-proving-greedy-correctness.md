@@ -90,6 +90,72 @@ The coin-change example is worth memorizing because it is the shortest complete 
 
 **A failed proof attempt is diagnostic.** If you cannot complete the exchange step - if swapping greedy's choice into optimal breaks validity - the place it breaks usually *is* the counterexample. Proof and refutation are the same search from opposite ends.
 
+### Search for the counterexample mechanically
+
+Thirty seconds of thinking is the first pass. If the instance space is small,
+the second pass is a loop, and it is worth having this shape in your fingers:
+
+```java
+import java.util.*;
+
+final class GreedyRefuter {
+
+    /** Fewest coins for `target`, or Integer.MAX_VALUE if unreachable. */
+    static int optimalCoins(int[] coins, int target) {
+        int[] best = new int[target + 1];
+        Arrays.fill(best, Integer.MAX_VALUE);
+        best[0] = 0;
+        for (int amount = 1; amount <= target; amount++) {
+            for (int coin : coins) {
+                if (coin <= amount && best[amount - coin] != Integer.MAX_VALUE) {
+                    best[amount] = Math.min(best[amount], best[amount - coin] + 1);
+                }
+            }
+        }
+        return best[target];
+    }
+
+    /** Take the largest coin that fits, repeatedly. */
+    static int greedyCoins(int[] coins, int target) {
+        int[] descending = coins.clone();
+        Arrays.sort(descending);
+        int used = 0;
+        int remaining = target;
+        for (int i = descending.length - 1; i >= 0 && remaining > 0; i--) {
+            used += remaining / descending[i];
+            remaining %= descending[i];
+        }
+        return remaining == 0 ? used : Integer.MAX_VALUE;
+    }
+
+    /** The smallest target where the two disagree, or -1 if none up to `limit`. */
+    static int firstDisagreement(int[] coins, int limit) {
+        for (int target = 1; target <= limit; target++) {
+            if (greedyCoins(coins, target) != optimalCoins(coins, target)) {
+                return target;
+            }
+        }
+        return -1;
+    }
+}
+```
+
+`firstDisagreement(new int[]{1, 3, 4}, 20)` returns **6**: greedy spends
+`4 + 1 + 1` for three coins where `3 + 3` needs two. That is the entire
+refutation of "greedy works for coin change", produced without any insight -
+which is the point. When you cannot see the counterexample, enumerate for it.
+
+The same three-method shape - an obviously-correct oracle, the greedy under
+test, and a smallest-disagreement search - transfers to every greedy claim you
+are unsure about. Reach for it *before* the proof, because it is faster and a
+counterexample ends the question outright.
+
+> **What a clean run does and does not tell you.** `firstDisagreement` returning
+> `-1` is evidence, not proof: it says the two agree on the range you searched.
+> Interval scheduling by earliest finish survived 500 exhaustive instances
+> here, and that is still weaker than the exchange argument above it. Use the
+> search to *refute*; use the proof to *accept*.
+
 ## When greedy is guaranteed: the matroid connection
 
 A structural answer exists for why greedy works on some problems and not others, and naming it is a strong senior signal even without the full theory.

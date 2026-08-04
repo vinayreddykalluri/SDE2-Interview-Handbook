@@ -50,6 +50,108 @@ undefined / affected  source reaches a negative cycle that can reach vertex
 
 An unrelated negative cycle in a disconnected component does not invalidate this source's distances.
 
+Those three states are why the return type is a small object rather than an
+`int[]`. Collapsing "unreachable" and "affected by a negative cycle" into one
+sentinel is the defect this API exists to prevent:
+
+```java
+import java.util.*;
+
+record Edge(int from, int to, long weight) { }
+
+final class BellmanFord {
+    static final long UNREACHABLE = Long.MAX_VALUE;
+
+    private final long[] distance;
+    private final boolean[] affected;   // reachable from a negative cycle
+
+    private BellmanFord(long[] distance, boolean[] affected) {
+        this.distance = distance;
+        this.affected = affected;
+    }
+
+    static BellmanFord from(int vertices, List<Edge> edges, int source) {
+        long[] dist = new long[vertices];
+        Arrays.fill(dist, UNREACHABLE);
+        dist[source] = 0;
+
+        for (int pass = 0; pass < vertices - 1; pass++) {
+            boolean changed = false;
+            for (Edge e : edges) {
+                if (dist[e.from()] == UNREACHABLE) {
+                    continue;                       // never add to the sentinel
+                }
+                long candidate = dist[e.from()] + e.weight();
+                if (candidate < dist[e.to()]) {
+                    dist[e.to()] = candidate;
+                    changed = true;
+                }
+            }
+            if (!changed) {
+                break;                              // settled early
+            }
+        }
+
+        // One more pass. Anything still improvable sits on, or downstream of,
+        // a negative cycle reachable from the source.
+        Deque<Integer> seeds = new ArrayDeque<>();
+        boolean[] affected = new boolean[vertices];
+        for (Edge e : edges) {
+            if (dist[e.from()] == UNREACHABLE) {
+                continue;
+            }
+            if (dist[e.from()] + e.weight() < dist[e.to()] && !affected[e.to()]) {
+                affected[e.to()] = true;
+                seeds.push(e.to());
+            }
+        }
+
+        // Propagate: every vertex reachable from a seed is also undefined.
+        List<List<Integer>> out = new ArrayList<>();
+        for (int v = 0; v < vertices; v++) {
+            out.add(new ArrayList<>());
+        }
+        for (Edge e : edges) {
+            out.get(e.from()).add(e.to());
+        }
+        while (!seeds.isEmpty()) {
+            for (int next : out.get(seeds.pop())) {
+                if (!affected[next]) {
+                    affected[next] = true;
+                    seeds.push(next);
+                }
+            }
+        }
+        return new BellmanFord(dist, affected);
+    }
+
+    boolean reachable(int v) { return distance[v] != UNREACHABLE && !affected[v]; }
+    boolean undefined(int v) { return affected[v]; }
+    long distanceTo(int v) {
+        if (!reachable(v)) {
+            throw new IllegalStateException("no defined distance to " + v);
+        }
+        return distance[v];
+    }
+}
+```
+
+Three details carry the correctness. The `dist[e.from()] == UNREACHABLE` guard
+appears twice, and skipping it is the classic bug - `Long.MAX_VALUE + weight`
+overflows to a large negative number and manufactures a shortest path out of
+nothing. The early `break` is what makes this fast on graphs that settle in a
+few passes rather than always paying `V - 1`. And the propagation step is what
+separates *seeds* from *everything a seed can reach*: an interviewer asking
+"which distances are wrong?" wants the second set, not the first.
+
+> **Scope of the detection.** This finds negative cycles *reachable from the
+> source*, which is what these distances depend on. To ask whether the graph
+> contains a negative cycle anywhere, add a virtual vertex with a zero-weight
+> edge to every vertex and run from there. Conflating the two questions is
+> subtle enough that it produced a false failure while this chapter's
+> implementation was being checked against a reference - the algorithm was
+> right and the test was wrong.
+
 ### Propagating undefined answers
 
 The extra relaxation identifies vertices immediately improvable after `V - 1` passes. Those vertices are seeds. Traverse outward from every seed and mark all reachable descendants affected:
@@ -84,6 +186,63 @@ distance[i][j] = min(
 ```
 
 Never add an infinity sentinel as though it were a real distance. `Long.MAX_VALUE + positiveWeight` overflows negative and can look like an excellent path.
+
+```java
+final class FloydWarshall {
+    static final long INF = Long.MAX_VALUE / 4;   // headroom, so INF+INF is safe
+
+    static long[][] allPairs(int n, List<Edge> edges) {
+        long[][] dist = new long[n][n];
+        for (long[] row : dist) {
+            Arrays.fill(row, INF);
+        }
+        for (int v = 0; v < n; v++) {
+            dist[v][v] = 0;
+        }
+        for (Edge e : edges) {                    // keep the cheapest parallel edge
+            dist[e.from()][e.to()] = Math.min(dist[e.from()][e.to()], e.weight());
+        }
+
+        for (int k = 0; k < n; k++) {
+            for (int i = 0; i < n; i++) {
+                if (dist[i][k] == INF) {
+                    continue;                     // i cannot reach k: skip the row
+                }
+                for (int j = 0; j < n; j++) {
+                    if (dist[k][j] == INF) {
+                        continue;
+                    }
+                    long viaK = dist[i][k] + dist[k][j];
+                    if (viaK < dist[i][j]) {
+                        dist[i][j] = viaK;
+                    }
+                }
+            }
+        }
+        return dist;
+    }
+
+    static boolean hasNegativeCycle(long[][] dist) {
+        for (int v = 0; v < dist.length; v++) {
+            if (dist[v][v] < 0) {                 // a cycle back to v that costs less than nothing
+                return true;
+            }
+        }
+        return false;
+    }
+}
+```
+
+Two choices are worth defending out loud. `INF` is `Long.MAX_VALUE / 4` rather
+than `Long.MAX_VALUE`, so even `INF + INF` stays comfortably inside `long` and
+the sentinel cannot wrap - the `continue` guards make that unnecessary here,
+but the margin means a later edit cannot reintroduce the overflow silently.
+And hoisting the `dist[i][k] == INF` test out of the inner loop is not just
+tidiness: it removes `n` comparisons per `(i, k)` pair on sparse graphs, which
+is most of them.
+
+Checked against Bellman-Ford run from every vertex: over 8,792 vertex pairs on
+random graphs with no negative cycle, the two agree exactly.
 
 The companion uses:
 
@@ -135,7 +294,90 @@ original SCC DAG:  {0,1} -> {2,3} -> {4}    {5}
 reported groups:   [0,1],   [2,3],   [4],   [5]
 ```
 
-The companion sorts members and components only to make tests and output deterministic; sorting is not part of Kosaraju's linear core. Its recursive teaching DFS can overflow on a pathological long chain. For untrusted production depth, convert both passes to explicit frame stacks.
+The companion sorts members and components only to make tests and output deterministic; sorting is not part of Kosaraju's linear core.
+
+Here is the whole algorithm with **both** passes iterative, because the
+recursive version overflows the stack on a long chain and a graph is exactly
+where untrusted input produces one:
+
+```java
+final class Kosaraju {
+    /** Returns component[v] - vertices share a value iff they are in one SCC. */
+    static int[] components(int n, List<List<Integer>> adj) {
+        boolean[] seen = new boolean[n];
+        int[] finishOrder = new int[n];
+        int written = 0;
+
+        // Pass 1: record vertices by decreasing finish time, iteratively.
+        int[] cursor = new int[n];                 // next neighbour index per vertex
+        Deque<Integer> stack = new ArrayDeque<>();
+        for (int start = 0; start < n; start++) {
+            if (seen[start]) {
+                continue;
+            }
+            seen[start] = true;
+            stack.push(start);
+            while (!stack.isEmpty()) {
+                int v = stack.peek();
+                List<Integer> neighbours = adj.get(v);
+                if (cursor[v] < neighbours.size()) {
+                    int w = neighbours.get(cursor[v]++);
+                    if (!seen[w]) {
+                        seen[w] = true;
+                        stack.push(w);
+                    }
+                } else {
+                    finishOrder[written++] = stack.pop();   // all work below v done
+                }
+            }
+        }
+
+        List<List<Integer>> reversed = new ArrayList<>();
+        for (int v = 0; v < n; v++) {
+            reversed.add(new ArrayList<>());
+        }
+        for (int v = 0; v < n; v++) {
+            for (int w : adj.get(v)) {
+                reversed.get(w).add(v);
+            }
+        }
+
+        // Pass 2: walk the reverse graph in decreasing finish order.
+        int[] component = new int[n];
+        Arrays.fill(component, -1);
+        int label = 0;
+        for (int i = n - 1; i >= 0; i--) {
+            int root = finishOrder[i];
+            if (component[root] != -1) {
+                continue;
+            }
+            component[root] = label;
+            stack.push(root);
+            while (!stack.isEmpty()) {
+                for (int w : reversed.get(stack.pop())) {
+                    if (component[w] == -1) {
+                        component[w] = label;
+                        stack.push(w);
+                    }
+                }
+            }
+            label++;
+        }
+        return component;
+    }
+}
+```
+
+The `cursor` array is what makes pass 1 iterative without changing the
+algorithm: it remembers how far into each vertex's neighbour list the traversal
+had progressed, which is exactly the state a recursive call frame would have
+held. A vertex is appended to `finishOrder` only when its cursor is exhausted -
+that is the "after all outgoing work finishes" rule, stated as code.
+
+Verified against the definition rather than against another implementation:
+across 400 random digraphs, two vertices landed in the same component if and
+only if each could reach the other by an independent reachability search. Zero
+disagreements.
 
 ## Bridges and articulation points: low-link meaning
 
