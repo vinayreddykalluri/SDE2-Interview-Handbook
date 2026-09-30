@@ -8,6 +8,9 @@ This shelf is the ordered System Design path. It begins with correctness inside 
 |---:|---|---|
 | SD-01 | `SD-01-design-backend-testing-and-security/` | request lifecycle, authorization, idempotency, local transactions, outbox, optimistic concurrency, testing, security, and operational boundaries |
 | SD-02 | `SD-02-distributed-systems-and-system-design/` | capacity, partitioning, replication, consistency, streaming, retries, sagas, overload, observability, multi-region design, and interview method |
+| SD-03 | `SD-03-generative-ai-system-design/` | token and latency budgets, retrieval, agents, guardrails, and evaluating a probabilistic system |
+| SD-04 | `SD-04-low-level-design-and-machine-coding/` | the machine-coding method, eight classic problems, invariants, concurrency, and extension rounds |
+| SD-05 | `SD-05-high-level-design-case-book/` | the 45-minute case method, estimation, and nine worked high-level design cases |
 
 ## How to study each book
 

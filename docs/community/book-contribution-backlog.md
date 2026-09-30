@@ -1,6 +1,6 @@
 # Book Contribution Backlog
 
-The complete library now contains four learning segments and 43 published focused books. Its 447 declared source entries resolve to 440 unique mapped Markdown documents. The focused books contain 3,773 pages; with the 17-page index and 658-page master reference, the 45-PDF library contains 4,448 pages.
+The complete library now contains five learning segments and 44 published focused books. Its 458 declared source entries resolve to 451 unique mapped Markdown documents. The focused books contain 3,840 pages; with the 18-page index and 658-page master reference, the 46-PDF library contains 4,516 pages.
 
 The prerequisite-first DSA route is published through Dynamic Programming. Volumes 08-17 include foundations-first instruction, SDE-2 patterns, realistic interview-room rounds with model answers, focused practice, separated reasoning solutions, and compiling Java companions. The issues below remain the best place to report an accuracy problem or claim a bounded follow-up such as a diagram, adversarial test, accessibility repair, or deeper exercise set.
 

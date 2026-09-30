@@ -3,8 +3,8 @@
   "author": "Vinay Reddy Kalluri",
   "release_date": "2026-09-30",
   "edition_date": "2026-08-02",
-  "public_segments": 4,
-  "physical_volumes": 43,
+  "public_segments": 5,
+  "physical_volumes": 44,
   "volumes": [
     {
       "page_count": 188,
@@ -693,12 +693,28 @@
       "title": "High-Level Design Case Book",
       "file": "04-system-design/Java-SDE2-SD-05-High-Level-Design-Case-Book.pdf",
       "output_name": "Java-SDE2-SD-05-High-Level-Design-Case-Book.pdf"
+    },
+    {
+      "page_count": 67,
+      "sha256": "2bf841d4bc04e715162307414aac57366795d3b4b00023942927a218cdf53fb1",
+      "bytes": 3823297,
+      "id": "BEHAV",
+      "stage": "19",
+      "path_label": "IR-01",
+      "book_position": 44,
+      "segment_id": "interview-rounds",
+      "segment_code": "IR",
+      "segment_position": 1,
+      "publication_status": "published",
+      "title": "Behavioral and Leadership Interviews",
+      "file": "05-interview-rounds/Java-SDE2-IR-01-Behavioral-and-Leadership-Interviews.pdf",
+      "output_name": "Java-SDE2-IR-01-Behavioral-and-Leadership-Interviews.pdf"
     }
   ],
   "index": {
     "file": "00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf",
-    "page_count": 17,
-    "sha256": "a37ba1a831bc72e3e842cec69357300fa8f0d005e734b3b011f2fb607a13625e",
-    "bytes": 3663113
+    "page_count": 18,
+    "sha256": "ab2e7f0cc2a2e4cae70fe441f514803e5ef8c77dc11b3a6ef83f10047e6a6b8f",
+    "bytes": 3666275
   }
 }

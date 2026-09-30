@@ -10,7 +10,7 @@
   "release_tag": "books-v2026.09.0",
   "release_date": "2026-09-30",
   "edition_date": "2026-08-02",
-  "public_segments": 4,
+  "public_segments": 5,
   "index_artifact": "00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf",
   "master_artifact": {
     "file": "java-sde2-interview-book.pdf",
@@ -61,7 +61,8 @@
     "18J",
     "GENAI",
     "LLD",
-    "HLD"
+    "HLD",
+    "BEHAV"
   ],
   "path_labels": {
     "03": "JAVA-01",
@@ -106,7 +107,8 @@
     "18J": "SD-02",
     "GENAI": "SD-03",
     "LLD": "SD-04",
-    "HLD": "SD-05"
+    "HLD": "SD-05",
+    "BEHAV": "IR-01"
   },
   "legacy_path_labels": {
     "03": [
@@ -240,6 +242,17 @@
         "GENAI",
         "LLD",
         "HLD"
+      ]
+    },
+    {
+      "id": "interview-rounds",
+      "code": "IR",
+      "title": "Interview Rounds",
+      "short_title": "Interview Rounds",
+      "description": "Prepare the non-technical rounds that decide the level: behavioral, leadership, and hiring-manager interviews, built on stories from your own work.",
+      "artifact_dir": "05-interview-rounds",
+      "books": [
+        "BEHAV"
       ]
     }
   ],
@@ -4007,6 +4020,86 @@
         },
         {
           "path": "content/volumes/system-design/SD-05-high-level-design-case-book/solutions/hld-case-solutions.md"
+        }
+      ]
+    },
+    {
+      "id": "BEHAV",
+      "stage": "19",
+      "slug": "behavioral-and-leadership-interviews",
+      "title": "Behavioral and Leadership Interviews",
+      "short_title": "Behavioral and Leadership Interviews",
+      "subtitle": "Story Banks, STAR Delivery, and the Signals That Decide the SDE-2 Level",
+      "output_name": "Java-SDE2-IR-01-Behavioral-and-Leadership-Interviews.pdf",
+      "volume_label": "Interview Rounds - Book 01 of 01 - Study Step IR-01",
+      "release_date": "2026-09-30",
+      "cover_deck": "Prepare the round that most often decides whether a strong engineer is offered SDE-2 or SDE-1: build a story bank that covers every signal twice, deliver answers where your decisions are unmistakable, and map your stories onto any company's values.",
+      "topic_line": "SIGNALS | STORY BANK | STAR | CONFLICT | FAILURE | MENTORING | LEADERSHIP PRINCIPLES",
+      "purpose": "This book covers the behavioral and hiring-manager rounds: what they score at SDE-2, how to build and audit a story bank, how to structure and time answers, the signal-specific stories interviewers ask for, and how to adapt one bank to company-specific values such as Amazon's Leadership Principles.",
+      "prerequisites": [
+        "At least two years of professional engineering experience to draw stories from",
+        "No technical prerequisites; the examples are drawn from backend engineering",
+        "Access to your own design documents, post-mortems, and reviews helps"
+      ],
+      "recognition_signals": [
+        "A question begins with 'tell me about a time'",
+        "The round is labelled behavioral, values, leadership, or hiring manager",
+        "The company publishes values or leadership principles",
+        "You passed the technical rounds but were offered a lower level before"
+      ],
+      "outcomes": [
+        "Name the signals an SDE-2 behavioral round scores and what separates SDE-2 from SDE-1 evidence",
+        "Build a story bank that covers every signal at least twice, and plan a loop without forced reuse",
+        "Deliver STAR answers with at least 55% on your actions, in one and a half to three minutes",
+        "Tell conflict, failure, and mentoring stories that survive five levels of probing",
+        "Map one story bank onto a company's values, including all sixteen Amazon Leadership Principles"
+      ],
+      "practice_ladder": [
+        "Foundation: signals, levels, and mining your history for stories",
+        "Interview Core: story cards, coverage, and STAR delivery",
+        "SDE-2 Follow-up: conflict, failure, mentoring, and company-specific principles",
+        "Challenge: a recorded mock round scored against the delivery targets"
+      ],
+      "min_pages": 30,
+      "max_pages": 120,
+      "code_companion": {
+        "path": "content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/code/StoryBankModel.java",
+        "title": "Executable Story Bank Model",
+        "description": "This dependency-free Java 21 model treats a story bank as data: it computes signal coverage and gaps, plans a loop without over-using a story, times a STAR answer by section, counts 'I' against 'we', and maps the bank onto Amazon's sixteen Leadership Principles."
+      },
+      "sources": [
+        {
+          "path": "content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/01-what-the-behavioral-round-scores.md"
+        },
+        {
+          "path": "content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/02-building-a-story-bank.md"
+        },
+        {
+          "path": "content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/03-structuring-and-delivering-an-answer.md"
+        },
+        {
+          "path": "content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/04-ownership-ambiguity-and-delivery.md"
+        },
+        {
+          "path": "content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/05-conflict-disagreement-and-influence.md"
+        },
+        {
+          "path": "content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/06-failure-feedback-and-growth.md"
+        },
+        {
+          "path": "content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/07-mentoring-and-leadership-without-authority.md"
+        },
+        {
+          "path": "content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/08-company-formats-and-leadership-principles.md"
+        },
+        {
+          "path": "content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/09-the-hiring-manager-round-and-closing-well.md"
+        },
+        {
+          "path": "content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/exercises/behavioral-drills.md"
+        },
+        {
+          "path": "content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/solutions/behavioral-solutions.md"
         }
       ]
     }

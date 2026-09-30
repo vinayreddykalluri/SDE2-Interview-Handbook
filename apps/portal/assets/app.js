@@ -217,7 +217,7 @@ function renderBooks() {
   const filtered = query || activeBookFilter !== "all";
   bookSummary.textContent = filtered
     ? matches.length + " of " + books.length + " books match the current segment or search."
-    : books.length + " books across four segments. Choose Java, DSA, Frameworks, or System Design, then follow its book order.";
+    : books.length + " books across five segments. Choose Java, DSA, Frameworks, System Design, or Interview Rounds, then follow its book order.";
 }
 
 function selectBookFilter(filter) {
@@ -232,7 +232,7 @@ function selectBookFilter(filter) {
 
 function buildSearchIndex() {
   const fixedDestinations = [
-    { type: "Library", label: "Complete Java SDE-2 learning library", note: "Choose Java, DSA, Frameworks, or System Design", href: "books/" },
+    { type: "Library", label: "Complete Java SDE-2 learning library", note: "Choose Java, DSA, Frameworks, System Design, or Interview Rounds", href: "books/" },
     { type: "Practice", label: "Interview practice", note: "Use question banks, mocks, rubrics, and review logs", href: "docs/backend-interview/10-practice/" },
     { type: "Reference", label: "Topic reference", note: "Look up a concise explanation without changing the study order", href: "docs/" },
     { type: "About", label: "About the curriculum", note: "Understand the web, PDF, and open-source publishing model", href: "#about" },

@@ -574,7 +574,9 @@ def main() -> int:
 
     # Report the counts that were actually checked rather than literals that
     # drift out of date the first time a volume is added.
-    focused = len(json.loads(SERIES_SPEC.read_text(encoding="utf-8"))["volumes"])
+    spec = json.loads(SERIES_SPEC.read_text(encoding="utf-8"))
+    focused = len(spec["volumes"])
+    segment_count = len(spec["segments"])
     total_pdfs = focused + 2  # every focused volume, plus the series index and the master book
     artifact_scope = (
         f"{focused} focused artifact records with reconciled {total_pdfs}-PDF release totals"
@@ -582,7 +584,7 @@ def main() -> int:
         else f"{focused} focused PDFs with matching records and reconciled {total_pdfs}-PDF release totals"
     )
     print(
-        f"Web validation passed: {focused} books in 4 segments, at least 173 canonical documents, "
+        f"Web validation passed: {focused} books in {segment_count} segments, at least 173 canonical documents, "
         "at least 800 book code entries, 19 learning modules, 69 foundation Java files, "
         f"and {artifact_scope}"
     )

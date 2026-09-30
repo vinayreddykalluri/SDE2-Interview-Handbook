@@ -1,6 +1,6 @@
 # Choose a Learning Segment
 
-The project has four focused curriculum segments—Java Engineering, Data Structures and Algorithms, Frameworks/Data/Messaging, and System Design—presented in two formats: complete web books for active learning and matching PDFs for offline study. The topic reference and practice pages support those segments; they do not create competing routes.
+The project has five focused curriculum segments—Java Engineering, Data Structures and Algorithms, Frameworks/Data/Messaging, System Design, and Interview Rounds—presented in two formats: complete web books for active learning and matching PDFs for offline study. The topic reference and practice pages support those segments; they do not create competing routes.
 
 | What you need | Use | What to do |
 |---|---|---|
@@ -11,7 +11,7 @@ The project has four focused curriculum segments—Java Engineering, Data Struct
 
 ## Fastest route for readers
 
-1. Choose Java, DSA, Frameworks, or System Design from the <a href="../../books/">learning library</a>.
+1. Choose Java, DSA, Frameworks, System Design, or Interview Rounds from the <a href="../../books/">learning library</a>.
 2. Start with Book 01 in that segment unless its readiness checks are already dependable.
 3. Read the numbered chapter and redraw its main diagram from memory.
 4. Open the linked Java source and identify its invariant, boundary conditions, and complexity.
@@ -71,7 +71,7 @@ Expected combined outputs:
 
 Individual website-derived module books are written to `output/pdf/` and `output/docx/`. Build and inspect those outputs locally when changing handbook Markdown.
 
-The publication-ready book library is separate from those website-derived builds. Download its 45 PDFs from the [latest release](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest), or browse the canonical files under `books/java-sde2-interview-preparation-series/dist/`.
+The publication-ready book library is separate from those website-derived builds. Download its 46 PDFs from the [latest release](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest), or browse the canonical files under `books/java-sde2-interview-preparation-series/dist/`.
 
 ## Recommended interview loop
 

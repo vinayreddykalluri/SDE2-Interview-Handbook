@@ -548,10 +548,10 @@ def build_library(
     )
     library_page = f"""# Java SDE-2 Learning Library
 
-Choose **Java Engineering**, **Data Structures and Algorithms**, **Frameworks, Data, and Messaging**, or **System Design**. Follow the books inside your selected segment in order. Every book is available on the web and as a matching PDF; these are two formats of the same curriculum. The library contains **{len(built_books)} focused books**, **{total_documents} web documents**, and **{total_code_examples} indexed code entries** generated from canonical sources.
+Choose **Java Engineering**, **Data Structures and Algorithms**, **Frameworks, Data, and Messaging**, **System Design**, or **Interview Rounds**. Follow the books inside your selected segment in order. Every book is available on the web and as a matching PDF; these are two formats of the same curriculum. The library contains **{len(built_books)} focused books**, **{total_documents} web documents**, and **{total_code_examples} indexed code entries** generated from canonical sources.
 
 !!! tip "Choose before you begin"
-    New to Java? Start with JAVA 01. Preparing for coding rounds? Start with DSA 01. Preparing for Java backend rounds? Start with FW 01. Start SD 01 after the framework and data contracts are comfortable, read SD 03 if an AI or LLM design round is likely, SD 04 for a machine-coding round, and SD 05 for worked high-level design cases. All {len(built_books)} books are publication editions; use each entry check and completion check to skip only what you can already explain and implement.
+    New to Java? Start with JAVA 01. Preparing for coding rounds? Start with DSA 01. Preparing for Java backend rounds? Start with FW 01. Start SD 01 after the framework and data contracts are comfortable, read SD 03 if an AI or LLM design round is likely, SD 04 for a machine-coding round, SD 05 for worked high-level design cases, and IR 01 for the behavioral and hiring-manager rounds. All {len(built_books)} books are publication editions; use each entry check and completion check to skip only what you can already explain and implement.
 
 <div class="library-route-grid">
   <a href="java-01-java-foundations-for-problem-solving/"><strong>JAVA 01</strong><span>Language, tooling, runtime, and Java engineering</span></a>

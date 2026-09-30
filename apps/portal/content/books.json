@@ -6,18 +6,18 @@
     "date": "2026-09-30",
     "editionDate": "2026-08-02",
     "url": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/tag/books-v2026.09.0",
-    "focusedBookCount": 43,
-    "focusedPageCount": 3773,
-    "indexPageCount": 17,
+    "focusedBookCount": 44,
+    "focusedPageCount": 3840,
+    "indexPageCount": 18,
     "masterPageCount": 658,
-    "totalPdfCount": 45,
-    "totalPageCount": 4448,
+    "totalPdfCount": 46,
+    "totalPageCount": 4516,
     "index": {
       "title": "Java SDE-2 Interview Preparation Series Index",
       "filename": "Java-SDE2-Interview-Preparation-Series-Index.pdf",
       "artifactPath": "00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf",
-      "pageCount": 17,
-      "pdfBytes": 3663113,
+      "pageCount": 18,
+      "pdfBytes": 3666275,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-Interview-Preparation-Series-Index.pdf"
     },
@@ -80,6 +80,18 @@
       "artifactDir": "04-system-design",
       "pdfsZip": "Java-SDE2-SD-PDFs.zip",
       "startHref": "books/sd-01-design-backend-testing-and-security/"
+    },
+    {
+      "id": "interview-rounds",
+      "code": "IR",
+      "title": "Interview Rounds",
+      "shortTitle": "Interview Rounds",
+      "description": "Prepare the non-technical rounds that decide the level: behavioral, leadership, and hiring-manager interviews, built on stories from your own work.",
+      "bookCount": 1,
+      "startBookId": "BEHAV",
+      "artifactDir": "05-interview-rounds",
+      "pdfsZip": "Java-SDE2-IR-PDFs.zip",
+      "startHref": "books/ir-01-behavioral-and-leadership-interviews/"
     }
   ],
   "books": [
@@ -5104,6 +5116,125 @@
         "Run a fixed 45-minute design method with written requirements and non-goals",
         "Produce an estimate in under five minutes and let it choose the architecture",
         "Explain key generation, consistent hashing, hybrid fan-out, per-conversation ordering, geohash search, and exactly-once payments with numbers"
+      ],
+      "webReads": []
+    },
+    {
+      "order": 44,
+      "bookPosition": 44,
+      "step": "IR-01",
+      "pathLabel": "IR-01",
+      "id": "BEHAV",
+      "track": "Interview Rounds",
+      "segmentId": "interview-rounds",
+      "segmentTitle": "Interview Rounds",
+      "segmentShortTitle": "Interview Rounds",
+      "segmentCode": "IR 01",
+      "segmentPosition": 1,
+      "segmentBookCount": 1,
+      "publicationStatus": "published",
+      "title": "Behavioral and Leadership Interviews",
+      "shortTitle": "Behavioral and Leadership Interviews",
+      "subtitle": "Story Banks, STAR Delivery, and the Signals That Decide the SDE-2 Level",
+      "purpose": "This book covers the behavioral and hiring-manager rounds: what they score at SDE-2, how to build and audit a story bank, how to structure and time answers, the signal-specific stories interviewers ask for, and how to adapt one bank to company-specific values such as Amazon's Leadership Principles.",
+      "authorNote": "You already have the experience this round is looking for; what most engineers lack is the preparation to show it. Write your stories down, check that every signal has two of them, and practise saying what you decided and what you rejected. Tell your own stories, including the failures - they are the ones that survive the follow-up questions.",
+      "filename": "Java-SDE2-IR-01-Behavioral-and-Leadership-Interviews.pdf",
+      "artifactPath": "05-interview-rounds/Java-SDE2-IR-01-Behavioral-and-Leadership-Interviews.pdf",
+      "pageCount": 67,
+      "pdfBytes": 3823297,
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/05-interview-rounds/Java-SDE2-IR-01-Behavioral-and-Leadership-Interviews.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-IR-01-Behavioral-and-Leadership-Interviews.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters",
+      "fullBookHref": "books/ir-01-behavioral-and-leadership-interviews/",
+      "codeHref": "books/ir-01-behavioral-and-leadership-interviews/code/",
+      "webDocumentCount": 11,
+      "wordCount": 12860,
+      "codeExampleCount": 1,
+      "sourceChapterCount": 9,
+      "supportingSourceCount": 2,
+      "chapterPreview": [
+        {
+          "title": "1. What the Behavioral Round Scores",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/01-what-the-behavioral-round-scores.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/01-01-what-the-behavioral-round-scores/"
+        },
+        {
+          "title": "2. Building a Story Bank",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/02-building-a-story-bank.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/02-02-building-a-story-bank/"
+        },
+        {
+          "title": "3. Structuring and Delivering an Answer",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/03-structuring-and-delivering-an-answer.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/03-03-structuring-and-delivering-an-answer/"
+        },
+        {
+          "title": "4. Ownership, Ambiguity, and Delivery",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/04-ownership-ambiguity-and-delivery.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/04-04-ownership-ambiguity-and-delivery/"
+        }
+      ],
+      "chapterContents": [
+        {
+          "title": "1. What the Behavioral Round Scores",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/01-what-the-behavioral-round-scores.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/01-01-what-the-behavioral-round-scores/"
+        },
+        {
+          "title": "2. Building a Story Bank",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/02-building-a-story-bank.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/02-02-building-a-story-bank/"
+        },
+        {
+          "title": "3. Structuring and Delivering an Answer",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/03-structuring-and-delivering-an-answer.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/03-03-structuring-and-delivering-an-answer/"
+        },
+        {
+          "title": "4. Ownership, Ambiguity, and Delivery",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/04-ownership-ambiguity-and-delivery.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/04-04-ownership-ambiguity-and-delivery/"
+        },
+        {
+          "title": "5. Conflict, Disagreement, and Influence",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/05-conflict-disagreement-and-influence.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/05-05-conflict-disagreement-and-influence/"
+        },
+        {
+          "title": "6. Failure, Feedback, and Growth",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/06-failure-feedback-and-growth.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/06-06-failure-feedback-and-growth/"
+        },
+        {
+          "title": "7. Mentoring and Leadership Without Authority",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/07-mentoring-and-leadership-without-authority.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/07-07-mentoring-and-leadership-without-authority/"
+        },
+        {
+          "title": "8. Company Formats and Leadership Principles",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/08-company-formats-and-leadership-principles.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/08-08-company-formats-and-leadership-principles/"
+        },
+        {
+          "title": "9. The Hiring-Manager Round and Closing Well",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/09-the-hiring-manager-round-and-closing-well.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/09-09-the-hiring-manager-round-and-closing-well/"
+        },
+        {
+          "title": "Behavioral Interview Drills",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/exercises/behavioral-drills.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/10-behavioral-drills/"
+        },
+        {
+          "title": "Behavioral Interview Drills: Worked Solutions",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/solutions/behavioral-solutions.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/11-behavioral-solutions/"
+        }
+      ],
+      "outcomes": [
+        "Name the signals an SDE-2 behavioral round scores and what separates SDE-2 from SDE-1 evidence",
+        "Build a story bank that covers every signal at least twice, and plan a loop without forced reuse",
+        "Deliver STAR answers with at least 55% on your actions, in one and a half to three minutes"
       ],
       "webReads": []
     }

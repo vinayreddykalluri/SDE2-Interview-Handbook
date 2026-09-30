@@ -17,7 +17,7 @@ The repository includes a free, open-source series of individually navigable Jav
 | Study a topic to publication depth | Focused PDF | Full explanations, diagrams, dry runs, exercises, solutions, and offline reading |
 | Correct or extend the material | Canonical Markdown | Review the exact editable source and submit a focused contribution |
 
-The interactive library uses the publishing manifest for segment order and release links, then reads the canonical Markdown and declared Java companions for routes, chapter previews, document counts, word counts, and code counts. The manifest currently declares 447 source entries, resolving to 440 unique mapped Markdown documents across 43 searchable web books. A newly added canonical chapter therefore reaches the catalog and full reader through `make sync-book-catalog` and `make build-site`; the website does not maintain a hand-written shadow copy of book prose.
+The interactive library uses the publishing manifest for segment order and release links, then reads the canonical Markdown and declared Java companions for routes, chapter previews, document counts, word counts, and code counts. The manifest currently declares 458 source entries, resolving to 451 unique mapped Markdown documents across 44 searchable web books. A newly added canonical chapter therefore reaches the catalog and full reader through `make sync-book-catalog` and `make build-site`; the website does not maintain a hand-written shadow copy of book prose.
 
 ## Choose a segment
 
@@ -30,16 +30,16 @@ Do not combine every subject into one overwhelming route. Select the interview s
 | Frameworks, Data, and Messaging | [FW 01 - MySQL](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/fw-01-mysql/) | 12 | MySQL, Hibernate/JPA, Spring, MongoDB, Redis, Kafka, and AI integration |
 | System Design | [SD 01 - Design, Backend, Testing, and Security](https://vinayreddykalluri.github.io/SDE2-Interview-Handbook/books/sd-01-design-backend-testing-and-security/) | 3 | Backend boundaries, distributed-system design, and the generative-AI design round |
 
-All 43 focused books are **Publication editions**. The four segment sequences are the prerequisite order; future contributions improve an existing canonical volume instead of creating a parallel roadmap or duplicate book.
+All 44 focused books are **Publication editions**. The four segment sequences are the prerequisite order; future contributions improve an existing canonical volume instead of creating a parallel roadmap or duplicate book.
 
-Stable release filenames remain intact. Reader-facing segment codes—JAVA 01-09, DSA 01-17, FW 01-12, and SD 01-05—appear on the web, PDF covers, index, and canonical download folders. Contributors can validate or copy the organized local library with `scripts/organize_pdf_library.py`.
+Stable release filenames remain intact. Reader-facing segment codes—JAVA 01-09, DSA 01-17, FW 01-12, SD 01-05, and IR 01—appear on the web, PDF covers, index, and canonical download folders. Contributors can validate or copy the organized local library with `scripts/organize_pdf_library.py`.
 
 ## What is published
 
-- 43 published focused books (3,773 pages) and one 17-page series index
+- 44 published focused books (3,840 pages) and one 18-page series index
 - one complete 658-page master book
-- 45 individual PDFs and 4,448 pages across the complete library
-- 447 declared source entries resolving to 440 unique mapped Markdown documents
+- 46 individual PDFs and 4,516 pages across the complete library
+- 458 declared source entries resolving to 451 unique mapped Markdown documents
 - canonical Markdown and diagram sources
 - Java 21 companion programs and boundary tests
 - exercises with separated solutions

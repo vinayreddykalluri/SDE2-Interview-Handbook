@@ -9,11 +9,11 @@ This is the canonical book workspace inside the consolidated [SDE2 Interview Han
 
 [![Cover of the Java SDE-2 Interview Preparation Series Index](assets/covers/series-index-cover.png)](dist/00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf)
 
-> Choose Java Engineering, Data Structures and Algorithms, Frameworks/Data/Messaging, or System Design. Start at Book 01 inside that segment and continue in order.
+> Choose Java Engineering, Data Structures and Algorithms, Frameworks/Data/Messaging, System Design, or Interview Rounds. Start at Book 01 inside that segment and continue in order.
 
 ## Read or download
 
-The library contains 43 published focused books (3,773 pages), one 17-page series index, and one 658-page master reference: 45 PDFs and 4,448 pages in total. Its publishing manifest declares 447 source entries that resolve to 440 unique mapped Markdown documents. Every focused volume is a publication edition with prerequisite-aware chapters, worked examples, answered interview rounds, exercises, and executable validation evidence.
+The library contains 44 published focused books (3,840 pages), one 18-page series index, and one 658-page master reference: 46 PDFs and 4,516 pages in total. Its publishing manifest declares 458 source entries that resolve to 451 unique mapped Markdown documents. Every focused volume is a publication edition with prerequisite-aware chapters, worked examples, answered interview rounds, exercises, and executable validation evidence.
 
 - [Download the complete release](https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest)
 - [Open the series index](dist/00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf)
@@ -24,7 +24,7 @@ The library contains 43 published focused books (3,773 pages), one 17-page serie
 - [Start System Design](dist/04-system-design/Java-SDE2-SD-01-Design-Backend-Testing-and-Security.pdf)
 - [Open the complete master book](dist/00-start-here/java-sde2-interview-book.pdf)
 
-The four segment sequences, prerequisites, and completion gates are in [the series roadmap](docs/roadmap.md). The canonical `dist/` directory already uses segment folders; run `python3 scripts/organize_pdf_library.py --check` to validate the organization or omit `--check` to copy it elsewhere.
+The five segment sequences, prerequisites, and completion gates are in [the series roadmap](docs/roadmap.md). The canonical `dist/` directory already uses segment folders; run `python3 scripts/organize_pdf_library.py --check` to validate the organization or omit `--check` to copy it elsewhere.
 
 ## Directory map
 
@@ -40,7 +40,7 @@ The four segment sequences, prerequisites, and completion gates are in [the seri
 |-- publishing/
 |   |-- series.json         Canonical learning order and physical-PDF manifest
 |   +-- assets/             Shared publishing artwork
-|-- dist/                   Reviewed PDFs grouped into start-here, Java, DSA, frameworks, and system design
+|-- dist/                   Reviewed PDFs grouped into start-here, Java, DSA, frameworks, system design, and interview rounds
 |-- reports/                Audits, coverage, validation, build evidence, and change logs
 |-- docs/                   Editorial standard and series roadmap
 |-- scripts/                Existing build, diagram, validation, and visual-QA tools

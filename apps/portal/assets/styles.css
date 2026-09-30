@@ -377,7 +377,7 @@ button, a, input, select, summary { -webkit-tap-highlight-color: transparent; }
 
 .book-start-path {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   margin: 0;
   padding: 0;
   border-top: 1px solid rgba(255, 250, 240, 0.34);
@@ -645,7 +645,7 @@ button, a, input, select, summary { -webkit-tap-highlight-color: transparent; }
 .pdf-feature strong { margin: 16px 0 4px; font: 400 1.65rem/1 var(--display); text-transform: uppercase; }
 .pdf-feature small { color: var(--ink-soft); }
 .pdf-feature:hover { background: var(--paper-deep); }
-.pdf-shelf-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; align-items: start; }
+.pdf-shelf-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: start; }
 .pdf-shelf-loading { grid-column: 1 / -1; margin: 0; color: var(--ink-soft); font: 500 0.72rem var(--mono); }
 .pdf-shelf-loading a { text-decoration: underline; }
 .pdf-segment { min-width: 0; border: 1px solid var(--line-strong); background: var(--paper-raised); }
