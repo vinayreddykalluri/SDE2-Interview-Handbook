@@ -6,18 +6,18 @@
     "date": "2026-09-30",
     "editionDate": "2026-08-02",
     "url": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/tag/books-v2026.09.0",
-    "focusedBookCount": 42,
-    "focusedPageCount": 3688,
+    "focusedBookCount": 43,
+    "focusedPageCount": 3773,
     "indexPageCount": 17,
     "masterPageCount": 658,
-    "totalPdfCount": 44,
-    "totalPageCount": 4363,
+    "totalPdfCount": 45,
+    "totalPageCount": 4448,
     "index": {
       "title": "Java SDE-2 Interview Preparation Series Index",
       "filename": "Java-SDE2-Interview-Preparation-Series-Index.pdf",
       "artifactPath": "00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf",
       "pageCount": 17,
-      "pdfBytes": 3661956,
+      "pdfBytes": 3663113,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-Interview-Preparation-Series-Index.pdf"
     },
@@ -75,7 +75,7 @@
       "title": "System Design",
       "shortTitle": "System Design",
       "description": "Move from component boundaries to distributed-system reasoning after the Java backend foundations are secure.",
-      "bookCount": 4,
+      "bookCount": 5,
       "startBookId": "18F",
       "artifactDir": "04-system-design",
       "pdfsZip": "Java-SDE2-SD-PDFs.zip",
@@ -4575,7 +4575,7 @@
       "segmentShortTitle": "System Design",
       "segmentCode": "SD 01",
       "segmentPosition": 1,
-      "segmentBookCount": 4,
+      "segmentBookCount": 5,
       "publicationStatus": "published",
       "title": "Design, Backend, Testing, and Security",
       "shortTitle": "Backend Design and Security",
@@ -4585,7 +4585,7 @@
       "filename": "Java-SDE2-SD-01-Design-Backend-Testing-and-Security.pdf",
       "artifactPath": "04-system-design/Java-SDE2-SD-01-Design-Backend-Testing-and-Security.pdf",
       "pageCount": 74,
-      "pdfBytes": 3841785,
+      "pdfBytes": 3842286,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/04-system-design/Java-SDE2-SD-01-Design-Backend-Testing-and-Security.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-SD-01-Design-Backend-Testing-and-Security.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master",
@@ -4678,7 +4678,7 @@
       "segmentShortTitle": "System Design",
       "segmentCode": "SD 02",
       "segmentPosition": 2,
-      "segmentBookCount": 4,
+      "segmentBookCount": 5,
       "publicationStatus": "published",
       "title": "Distributed Systems and System Design",
       "shortTitle": "Distributed Systems and System Design",
@@ -4688,7 +4688,7 @@
       "filename": "Java-SDE2-SD-02-Distributed-Systems-and-System-Design.pdf",
       "artifactPath": "04-system-design/Java-SDE2-SD-02-Distributed-Systems-and-System-Design.pdf",
       "pageCount": 94,
-      "pdfBytes": 3901859,
+      "pdfBytes": 3902389,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/04-system-design/Java-SDE2-SD-02-Distributed-Systems-and-System-Design.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-SD-02-Distributed-Systems-and-System-Design.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-02-distributed-systems-and-system-design/chapters",
@@ -4787,7 +4787,7 @@
       "segmentShortTitle": "System Design",
       "segmentCode": "SD 03",
       "segmentPosition": 3,
-      "segmentBookCount": 4,
+      "segmentBookCount": 5,
       "publicationStatus": "published",
       "title": "Generative AI System Design",
       "shortTitle": "Generative AI System Design",
@@ -4797,7 +4797,7 @@
       "filename": "Java-SDE2-SD-03-Generative-AI-System-Design.pdf",
       "artifactPath": "04-system-design/Java-SDE2-SD-03-Generative-AI-System-Design.pdf",
       "pageCount": 78,
-      "pdfBytes": 3859936,
+      "pdfBytes": 3860457,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/04-system-design/Java-SDE2-SD-03-Generative-AI-System-Design.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-SD-03-Generative-AI-System-Design.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-03-generative-ai-system-design/chapters",
@@ -4886,7 +4886,7 @@
       "segmentShortTitle": "System Design",
       "segmentCode": "SD 04",
       "segmentPosition": 4,
-      "segmentBookCount": 4,
+      "segmentBookCount": 5,
       "publicationStatus": "published",
       "title": "Low-Level Design and Machine Coding",
       "shortTitle": "Low-Level Design and Machine Coding",
@@ -4896,7 +4896,7 @@
       "filename": "Java-SDE2-SD-04-Low-Level-Design-and-Machine-Coding.pdf",
       "artifactPath": "04-system-design/Java-SDE2-SD-04-Low-Level-Design-and-Machine-Coding.pdf",
       "pageCount": 109,
-      "pdfBytes": 3921732,
+      "pdfBytes": 3922777,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/04-system-design/Java-SDE2-SD-04-Low-Level-Design-and-Machine-Coding.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-SD-04-Low-Level-Design-and-Machine-Coding.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters",
@@ -4980,6 +4980,130 @@
         "Run a fixed six-step method with a written scope and a back-loaded time budget",
         "Separate entities, value objects, and policies so an extension lands in one new type",
         "Name the concurrency owner for every invariant and prove it with a concurrent test"
+      ],
+      "webReads": []
+    },
+    {
+      "order": 43,
+      "bookPosition": 43,
+      "step": "SD-05",
+      "pathLabel": "SD-05",
+      "id": "HLD",
+      "track": "System Design",
+      "segmentId": "system-design",
+      "segmentTitle": "System Design",
+      "segmentShortTitle": "System Design",
+      "segmentCode": "SD 05",
+      "segmentPosition": 5,
+      "segmentBookCount": 5,
+      "publicationStatus": "published",
+      "title": "High-Level Design Case Book",
+      "shortTitle": "High-Level Design Case Book",
+      "subtitle": "Worked System Design Cases with the Arithmetic That Chooses the Architecture",
+      "purpose": "This book applies the building blocks from SD-02 to the high-level design prompts used in SDE-2 loops. Every case follows one 45-minute method, and every architectural choice is justified by arithmetic that an executable Java 21 model recomputes and checks.",
+      "authorNote": "The diagram is the easy part of a design round. Write the requirements down, do the arithmetic before you name a technology, and spend your deep dive where the hardest requirement meets the load. When a number surprises you, say so out loud - that is usually the moment the interviewer starts to trust your design.",
+      "filename": "Java-SDE2-SD-05-High-Level-Design-Case-Book.pdf",
+      "artifactPath": "04-system-design/Java-SDE2-SD-05-High-Level-Design-Case-Book.pdf",
+      "pageCount": 85,
+      "pdfBytes": 3879532,
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/04-system-design/Java-SDE2-SD-05-High-Level-Design-Case-Book.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-SD-05-High-Level-Design-Case-Book.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters",
+      "fullBookHref": "books/sd-05-high-level-design-case-book/",
+      "codeHref": "books/sd-05-high-level-design-case-book/code/",
+      "webDocumentCount": 12,
+      "wordCount": 17995,
+      "codeExampleCount": 2,
+      "sourceChapterCount": 10,
+      "supportingSourceCount": 2,
+      "chapterPreview": [
+        {
+          "title": "1. The HLD Case Method and Estimation Toolkit",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/01-the-hld-case-method-and-estimation-toolkit.md",
+          "webHref": "books/sd-05-high-level-design-case-book/01-01-the-hld-case-method-and-estimation-toolkit/"
+        },
+        {
+          "title": "2. URL Shortener: Key Generation and the Read Path",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/02-url-shortener-key-generation-and-the-read-path.md",
+          "webHref": "books/sd-05-high-level-design-case-book/02-02-url-shortener-key-generation-and-the-read-path/"
+        },
+        {
+          "title": "3. Distributed Cache and Key-Value Store",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/03-distributed-cache-and-key-value-store.md",
+          "webHref": "books/sd-05-high-level-design-case-book/03-03-distributed-cache-and-key-value-store/"
+        },
+        {
+          "title": "4. News Feed: Fan-Out and the Celebrity Problem",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/04-news-feed-fan-out-and-the-celebrity-problem.md",
+          "webHref": "books/sd-05-high-level-design-case-book/04-04-news-feed-fan-out-and-the-celebrity-problem/"
+        }
+      ],
+      "chapterContents": [
+        {
+          "title": "1. The HLD Case Method and Estimation Toolkit",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/01-the-hld-case-method-and-estimation-toolkit.md",
+          "webHref": "books/sd-05-high-level-design-case-book/01-01-the-hld-case-method-and-estimation-toolkit/"
+        },
+        {
+          "title": "2. URL Shortener: Key Generation and the Read Path",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/02-url-shortener-key-generation-and-the-read-path.md",
+          "webHref": "books/sd-05-high-level-design-case-book/02-02-url-shortener-key-generation-and-the-read-path/"
+        },
+        {
+          "title": "3. Distributed Cache and Key-Value Store",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/03-distributed-cache-and-key-value-store.md",
+          "webHref": "books/sd-05-high-level-design-case-book/03-03-distributed-cache-and-key-value-store/"
+        },
+        {
+          "title": "4. News Feed: Fan-Out and the Celebrity Problem",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/04-news-feed-fan-out-and-the-celebrity-problem.md",
+          "webHref": "books/sd-05-high-level-design-case-book/04-04-news-feed-fan-out-and-the-celebrity-problem/"
+        },
+        {
+          "title": "5. Chat and Presence: Ordering, Delivery, and Connections",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/05-chat-and-presence-ordering-delivery-and-connections.md",
+          "webHref": "books/sd-05-high-level-design-case-book/05-05-chat-and-presence-ordering-delivery-and-connections/"
+        },
+        {
+          "title": "6. Typeahead and Search: Tries, Top-K, and Bloom Filters",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/06-typeahead-and-search-tries-top-k-and-bloom-filters.md",
+          "webHref": "books/sd-05-high-level-design-case-book/06-06-typeahead-and-search-tries-top-k-and-bloom-filters/"
+        },
+        {
+          "title": "7. Proximity and Ride Matching: Geohash and Moving Points",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/07-proximity-and-ride-matching-geohash-and-moving-points.md",
+          "webHref": "books/sd-05-high-level-design-case-book/07-07-proximity-and-ride-matching-geohash-and-moving-points/"
+        },
+        {
+          "title": "8. Payments and Ticket Booking: Exactly-Once Effects",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/08-payments-and-ticket-booking-exactly-once-effects.md",
+          "webHref": "books/sd-05-high-level-design-case-book/08-08-payments-and-ticket-booking-exactly-once-effects/"
+        },
+        {
+          "title": "9. Metrics Pipeline and Object Storage: Volume and Durability",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/09-metrics-pipeline-and-object-storage-volume-and-durability.md",
+          "webHref": "books/sd-05-high-level-design-case-book/09-09-metrics-pipeline-and-object-storage-volume-and-durability/"
+        },
+        {
+          "title": "10. Case Bank, Follow-Ups, and Scoring",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/10-case-bank-follow-ups-and-scoring.md",
+          "webHref": "books/sd-05-high-level-design-case-book/10-10-case-bank-follow-ups-and-scoring/"
+        },
+        {
+          "title": "High-Level Design Case Drills",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/exercises/hld-case-drills.md",
+          "webHref": "books/sd-05-high-level-design-case-book/11-hld-case-drills/"
+        },
+        {
+          "title": "High-Level Design Case Drills: Worked Solutions",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/solutions/hld-case-solutions.md",
+          "webHref": "books/sd-05-high-level-design-case-book/12-hld-case-solutions/"
+        }
+      ],
+      "outcomes": [
+        "Run a fixed 45-minute design method with written requirements and non-goals",
+        "Produce an estimate in under five minutes and let it choose the architecture",
+        "Explain key generation, consistent hashing, hybrid fan-out, per-conversation ordering, geohash search, and exactly-once payments with numbers"
       ],
       "webReads": []
     }

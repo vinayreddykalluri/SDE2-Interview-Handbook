@@ -4,7 +4,7 @@
   "release_date": "2026-09-30",
   "edition_date": "2026-08-02",
   "public_segments": 4,
-  "physical_volumes": 42,
+  "physical_volumes": 43,
   "volumes": [
     {
       "page_count": 188,
@@ -616,8 +616,8 @@
     },
     {
       "page_count": 74,
-      "sha256": "0c295c715065928754182c1297a79aaff5a3e9a542a5fc4aec2876bcd772d74b",
-      "bytes": 3841785,
+      "sha256": "8ec72d963a2aaec6916287f6ef5153c84cd8074e8d4be8197fc2c2ae506efc27",
+      "bytes": 3842286,
       "id": "18F",
       "stage": "18",
       "path_label": "SD-01",
@@ -632,8 +632,8 @@
     },
     {
       "page_count": 94,
-      "sha256": "2974c31ecc726dd9f1a5589bde0439b86756523f6e0df20c9c4d22cdded6988e",
-      "bytes": 3901859,
+      "sha256": "7d12c3290df84bf8ef7f6a760bb32e4da257503564008ebd18049ae0e518c693",
+      "bytes": 3902389,
       "id": "18J",
       "stage": "18",
       "path_label": "SD-02",
@@ -648,8 +648,8 @@
     },
     {
       "page_count": 78,
-      "sha256": "9c65d4a0232b296ed6b7512b3c8daf001592c4d56fc873c156d6f54cd8988986",
-      "bytes": 3859936,
+      "sha256": "0d8335169c3a506b73ea314bae9b7d637aec334a902a4749c5ca3fa57de2ac7f",
+      "bytes": 3860457,
       "id": "GENAI",
       "stage": "18",
       "path_label": "SD-03",
@@ -664,8 +664,8 @@
     },
     {
       "page_count": 109,
-      "sha256": "69e1997cfc5af7d4e2ecac6694cb8549dfdcff1325a15fe9389898378d8ab7c0",
-      "bytes": 3921732,
+      "sha256": "3f55e10f4e3a333b6b9af9bddd60d08e21de395dc0019dac2716e7fc8e49cbb1",
+      "bytes": 3922777,
       "id": "LLD",
       "stage": "18",
       "path_label": "SD-04",
@@ -677,12 +677,28 @@
       "title": "Low-Level Design and Machine Coding",
       "file": "04-system-design/Java-SDE2-SD-04-Low-Level-Design-and-Machine-Coding.pdf",
       "output_name": "Java-SDE2-SD-04-Low-Level-Design-and-Machine-Coding.pdf"
+    },
+    {
+      "page_count": 85,
+      "sha256": "db37e96dc4aa8a5c24317da6e0d80a722efcd9d8e49a2879f28a2645954d5820",
+      "bytes": 3879532,
+      "id": "HLD",
+      "stage": "18",
+      "path_label": "SD-05",
+      "book_position": 43,
+      "segment_id": "system-design",
+      "segment_code": "SD",
+      "segment_position": 5,
+      "publication_status": "published",
+      "title": "High-Level Design Case Book",
+      "file": "04-system-design/Java-SDE2-SD-05-High-Level-Design-Case-Book.pdf",
+      "output_name": "Java-SDE2-SD-05-High-Level-Design-Case-Book.pdf"
     }
   ],
   "index": {
     "file": "00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf",
     "page_count": 17,
-    "sha256": "d373073ae0a04106b4d1e62f61d395d9583dfd99d24b2b30b8d7f97dedce2f04",
-    "bytes": 3661956
+    "sha256": "a37ba1a831bc72e3e842cec69357300fa8f0d005e734b3b011f2fb607a13625e",
+    "bytes": 3663113
   }
 }

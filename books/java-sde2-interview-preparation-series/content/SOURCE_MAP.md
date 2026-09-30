@@ -9,7 +9,7 @@ Reader-facing navigation always uses the four shelf codes:
 - Java Engineering: `JAVA-01` through `JAVA-09`
 - Data Structures and Algorithms: `DSA-01` through `DSA-17`
 - Frameworks, Data, and Messaging: `FW-01` through `FW-12`
-- System Design: `SD-01` through `SD-04`
+- System Design: `SD-01` through `SD-05`
 
 The manifest also retains older internal IDs because build commands, artifact history, and catalog automation depend on stable keys. An internal ID such as `01B` or `18A` is an implementation identifier, not a public study step. `path_labels` translates those keys to current shelf codes, and `segments[].books` defines order inside each shelf.
 
@@ -24,13 +24,13 @@ The manifest also retains older internal IDs because build commands, artifact hi
 | `FW-01` through `FW-04` | `MYSQL`, `HIBERNATE`, `SPRING`, `BOOT` |
 | `FW-05` through `FW-08` | `18H`, `DATA`, `MONGO`, `REDIS` |
 | `FW-09` through `FW-12` | `18I`, `KAFKA`, `SPRINGX`, `SPRINGAI` |
-| `SD-01` through `SD-04` | `18F`, `18J`, `GENAI`, `LLD` |
+| `SD-01` through `SD-05` | `18F`, `18J`, `GENAI`, `LLD`, `HLD` |
 
 Use public codes in prose, issue titles, website navigation, covers, and PDF filenames. Use an internal ID only where a tool explicitly requires `--volume <id>` or code reads a manifest key.
 
 ## Source ownership by shelf
 
-All 42 focused books are publication editions. Their principal source ownership is:
+All 43 focused books are publication editions. Their principal source ownership is:
 
 | Public book or range | Principal source ownership |
 |---|---|
@@ -50,6 +50,7 @@ All 42 focused books are publication editions. Their principal source ownership 
 | `SD-02` | Series-native distributed-systems chapters, design drills, solutions, and executable checks |
 | `SD-03` | Series-native generative-AI design chapters, design drills, solutions, and an executable design model |
 | `SD-04` | Series-native low-level design and machine-coding chapters, drills, worked solutions, and an executable model of all eight problems |
+| `SD-05` | Series-native high-level design cases, drills, worked solutions, and an executable model that recomputes every estimate |
 
 The shared DSA number-systems workspace contains both `DSA-02` and `DSA-03` source because foundational representation and interview arithmetic are developed together. They remain separate public books and separate PDFs.
 

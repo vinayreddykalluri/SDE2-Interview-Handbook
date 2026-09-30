@@ -60,7 +60,8 @@
     "18F",
     "18J",
     "GENAI",
-    "LLD"
+    "LLD",
+    "HLD"
   ],
   "path_labels": {
     "03": "JAVA-01",
@@ -104,7 +105,8 @@
     "18F": "SD-01",
     "18J": "SD-02",
     "GENAI": "SD-03",
-    "LLD": "SD-04"
+    "LLD": "SD-04",
+    "HLD": "SD-05"
   },
   "legacy_path_labels": {
     "03": [
@@ -236,7 +238,8 @@
         "18F",
         "18J",
         "GENAI",
-        "LLD"
+        "LLD",
+        "HLD"
       ]
     }
   ],
@@ -2261,7 +2264,7 @@
       "short_title": "Backend Design and Security",
       "subtitle": "SOLID APIs, Patterns, Transactions, Services, Build Quality, Reliability, and Secure Boundaries",
       "output_name": "Java-SDE2-SD-01-Design-Backend-Testing-and-Security.pdf",
-      "volume_label": "System Design - Book 01 of 04 - Study Step SD-01",
+      "volume_label": "System Design - Book 01 of 05 - Study Step SD-01",
       "release_date": "2026-07-25",
       "cover_deck": "Connect clean Java design to transactions, service boundaries, testing, build discipline, dependency risk, security, reliability, and operational behavior.",
       "topic_line": "SOLID | LLD | JDBC | TRANSACTIONS | TESTING | SECURITY | RELIABILITY",
@@ -2536,7 +2539,7 @@
       "short_title": "Distributed Systems and System Design",
       "subtitle": "Capacity, Partitioning, Consistency, Kafka, Resilience, Sagas, Observability, and SLOs",
       "output_name": "Java-SDE2-SD-02-Distributed-Systems-and-System-Design.pdf",
-      "volume_label": "System Design - Book 02 of 04 - Study Step SD-02",
+      "volume_label": "System Design - Book 02 of 05 - Study Step SD-02",
       "release_date": "2026-07-25",
       "cover_deck": "Turn requirements into capacity estimates, data distribution, delivery semantics, resilience policies, observability, and defensible system-design trade-offs.",
       "topic_line": "CAPACITY | SHARDING | CONSISTENCY | KAFKA | RESILIENCE | SLOS",
@@ -3790,7 +3793,7 @@
       "short_title": "Generative AI System Design",
       "subtitle": "Inference Cost, Retrieval, Agents, Guardrails, and Evaluating a Probabilistic System",
       "output_name": "Java-SDE2-SD-03-Generative-AI-System-Design.pdf",
-      "volume_label": "System Design - Book 03 of 04 - Study Step SD-03",
+      "volume_label": "System Design - Book 03 of 05 - Study Step SD-03",
       "release_date": "2026-08-03",
       "cover_deck": "Design systems with a model in the request path: budget tokens and latency, build retrieval that can be trusted, bound agents that take actions, and measure quality when correctness is a distribution.",
       "topic_line": "TOKENS | RAG | AGENTS | GUARDRAILS | EVALS | DEGRADED MODE",
@@ -3858,7 +3861,7 @@
       "short_title": "Low-Level Design and Machine Coding",
       "subtitle": "Modeling, State Machines, Invariants, and Extensible Java 21 for the Machine-Coding Round",
       "output_name": "Java-SDE2-SD-04-Low-Level-Design-and-Machine-Coding.pdf",
-      "volume_label": "System Design - Book 04 of 04 - Study Step SD-04",
+      "volume_label": "System Design - Book 04 of 05 - Study Step SD-04",
       "release_date": "2026-09-30",
       "cover_deck": "Design and implement eight classic machine-coding problems under time pressure: scope in writing, separate entities from values and policies, name the concurrency owner, protect every invariant, and absorb the extension round with one new class.",
       "topic_line": "METHOD | PARKING LOT | STATE MACHINES | CACHES | RATE LIMITERS | LEDGERS | SCHEDULERS",
@@ -3921,6 +3924,89 @@
         },
         {
           "path": "content/volumes/system-design/SD-04-low-level-design-and-machine-coding/solutions/lld-machine-coding-solutions.md"
+        }
+      ]
+    },
+    {
+      "id": "HLD",
+      "stage": "18",
+      "slug": "high-level-design-case-book",
+      "title": "High-Level Design Case Book",
+      "short_title": "High-Level Design Case Book",
+      "subtitle": "Worked System Design Cases with the Arithmetic That Chooses the Architecture",
+      "output_name": "Java-SDE2-SD-05-High-Level-Design-Case-Book.pdf",
+      "volume_label": "System Design - Book 05 of 05 - Study Step SD-05",
+      "release_date": "2026-09-30",
+      "cover_deck": "Work the design prompts interviewers actually use - URL shortener, distributed cache, news feed, chat, typeahead, ride matching, payments, metrics and object storage - with a fixed method and the numbers that decide each architecture.",
+      "topic_line": "ESTIMATION | KEYS | PARTITIONING | FAN-OUT | ORDERING | GEOHASH | EXACTLY-ONCE | DURABILITY",
+      "purpose": "This book applies the building blocks from SD-02 to the high-level design prompts used in SDE-2 loops. Every case follows one 45-minute method, and every architectural choice is justified by arithmetic that an executable Java 21 model recomputes and checks.",
+      "prerequisites": [
+        "SD-02 Distributed Systems and System Design, or equivalent knowledge of partitioning, replication, and queues",
+        "SD-04 is helpful for the component-level detail behind several cases",
+        "Comfort with back-of-the-envelope arithmetic"
+      ],
+      "recognition_signals": [
+        "The prompt says design a product or service at scale, not implement a class model",
+        "The interviewer expects capacity numbers before technology choices",
+        "The round has 45 to 60 minutes and ends with failure and scale follow-ups",
+        "The difficulty is allocation, skew, ordering, freshness, spatial data, or volume"
+      ],
+      "outcomes": [
+        "Run a fixed 45-minute design method with written requirements and non-goals",
+        "Produce an estimate in under five minutes and let it choose the architecture",
+        "Explain key generation, consistent hashing, hybrid fan-out, per-conversation ordering, geohash search, and exactly-once payments with numbers",
+        "Compare durability schemes and storage tiers by computed loss probability and bytes",
+        "Map an unfamiliar prompt to its dominant difficulty and answer the standard follow-ups"
+      ],
+      "practice_ladder": [
+        "Foundation: the case method and the estimation toolkit",
+        "Interview Core: shortener, cache, feed, and chat with their deep dives",
+        "SDE-2 Follow-up: typeahead, proximity, payments, and storage durability",
+        "Challenge: timed 45-minute mocks scored out of twelve"
+      ],
+      "min_pages": 30,
+      "max_pages": 160,
+      "code_companion": {
+        "path": "content/volumes/system-design/SD-05-high-level-design-case-book/code/HighLevelDesignModel.java",
+        "title": "Executable High-Level Design Model",
+        "description": "This dependency-free Java 21 model recomputes and checks every number the cases quote: shortener estimates and birthday collisions, consistent-hashing balance and remapping, power-law fan-out, chat ordering and presence load, Bloom filter sizing and measured false positives, geohash cells and the boundary problem, idempotent payments with a double-entry ledger, seat contention, and storage durability and volume."
+      },
+      "sources": [
+        {
+          "path": "content/volumes/system-design/SD-05-high-level-design-case-book/chapters/01-the-hld-case-method-and-estimation-toolkit.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-05-high-level-design-case-book/chapters/02-url-shortener-key-generation-and-the-read-path.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-05-high-level-design-case-book/chapters/03-distributed-cache-and-key-value-store.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-05-high-level-design-case-book/chapters/04-news-feed-fan-out-and-the-celebrity-problem.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-05-high-level-design-case-book/chapters/05-chat-and-presence-ordering-delivery-and-connections.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-05-high-level-design-case-book/chapters/06-typeahead-and-search-tries-top-k-and-bloom-filters.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-05-high-level-design-case-book/chapters/07-proximity-and-ride-matching-geohash-and-moving-points.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-05-high-level-design-case-book/chapters/08-payments-and-ticket-booking-exactly-once-effects.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-05-high-level-design-case-book/chapters/09-metrics-pipeline-and-object-storage-volume-and-durability.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-05-high-level-design-case-book/chapters/10-case-bank-follow-ups-and-scoring.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-05-high-level-design-case-book/exercises/hld-case-drills.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-05-high-level-design-case-book/solutions/hld-case-solutions.md"
         }
       ]
     }
