@@ -1,5 +1,3 @@
-package sd03;
-
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -23,7 +21,7 @@ import java.util.regex.Pattern;
  * dependencies and no network calls: the point is the reasoning, not a client
  * library. Run it with:
  *
- *     javac --release 21 GenerativeAiDesignModel.java && java sd03.GenerativeAiDesignModel
+ *     javac --release 21 GenerativeAiDesignModel.java && java -ea GenerativeAiDesignModel
  *
  * Sections map to chapters:
  *   1. Token and cost estimation, latency budgeting        (chapter 1)

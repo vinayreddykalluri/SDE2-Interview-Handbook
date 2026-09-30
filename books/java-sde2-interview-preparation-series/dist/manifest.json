@@ -1,10 +1,10 @@
 {
   "series": "Java SDE-2 Interview Preparation Series",
   "author": "Vinay Reddy Kalluri",
-  "release_date": "2026-07-25",
+  "release_date": "2026-09-30",
   "edition_date": "2026-08-02",
-  "public_segments": 4,
-  "physical_volumes": 41,
+  "public_segments": 5,
+  "physical_volumes": 44,
   "volumes": [
     {
       "page_count": 188,
@@ -616,8 +616,8 @@
     },
     {
       "page_count": 74,
-      "sha256": "bdf1432157d0cf5e7f78f78d2d93883ba66a768fa25972ae0bcc51f7b871c50a",
-      "bytes": 3840750,
+      "sha256": "8ec72d963a2aaec6916287f6ef5153c84cd8074e8d4be8197fc2c2ae506efc27",
+      "bytes": 3842286,
       "id": "18F",
       "stage": "18",
       "path_label": "SD-01",
@@ -632,8 +632,8 @@
     },
     {
       "page_count": 94,
-      "sha256": "210b4c7f91b4d793cbc3e7d5bfeec7420156f7e761599670f52f38c437dac2b1",
-      "bytes": 3900305,
+      "sha256": "7d12c3290df84bf8ef7f6a760bb32e4da257503564008ebd18049ae0e518c693",
+      "bytes": 3902389,
       "id": "18J",
       "stage": "18",
       "path_label": "SD-02",
@@ -648,8 +648,8 @@
     },
     {
       "page_count": 78,
-      "sha256": "ab081543304f979fa2546a0f5c4bb8bbca8aa550e31cd5ad06464890556acd1b",
-      "bytes": 3858882,
+      "sha256": "0d8335169c3a506b73ea314bae9b7d637aec334a902a4749c5ca3fa57de2ac7f",
+      "bytes": 3860457,
       "id": "GENAI",
       "stage": "18",
       "path_label": "SD-03",
@@ -661,12 +661,60 @@
       "title": "Generative AI System Design",
       "file": "04-system-design/Java-SDE2-SD-03-Generative-AI-System-Design.pdf",
       "output_name": "Java-SDE2-SD-03-Generative-AI-System-Design.pdf"
+    },
+    {
+      "page_count": 109,
+      "sha256": "3f55e10f4e3a333b6b9af9bddd60d08e21de395dc0019dac2716e7fc8e49cbb1",
+      "bytes": 3922777,
+      "id": "LLD",
+      "stage": "18",
+      "path_label": "SD-04",
+      "book_position": 42,
+      "segment_id": "system-design",
+      "segment_code": "SD",
+      "segment_position": 4,
+      "publication_status": "published",
+      "title": "Low-Level Design and Machine Coding",
+      "file": "04-system-design/Java-SDE2-SD-04-Low-Level-Design-and-Machine-Coding.pdf",
+      "output_name": "Java-SDE2-SD-04-Low-Level-Design-and-Machine-Coding.pdf"
+    },
+    {
+      "page_count": 85,
+      "sha256": "db37e96dc4aa8a5c24317da6e0d80a722efcd9d8e49a2879f28a2645954d5820",
+      "bytes": 3879532,
+      "id": "HLD",
+      "stage": "18",
+      "path_label": "SD-05",
+      "book_position": 43,
+      "segment_id": "system-design",
+      "segment_code": "SD",
+      "segment_position": 5,
+      "publication_status": "published",
+      "title": "High-Level Design Case Book",
+      "file": "04-system-design/Java-SDE2-SD-05-High-Level-Design-Case-Book.pdf",
+      "output_name": "Java-SDE2-SD-05-High-Level-Design-Case-Book.pdf"
+    },
+    {
+      "page_count": 67,
+      "sha256": "2bf841d4bc04e715162307414aac57366795d3b4b00023942927a218cdf53fb1",
+      "bytes": 3823297,
+      "id": "BEHAV",
+      "stage": "19",
+      "path_label": "IR-01",
+      "book_position": 44,
+      "segment_id": "interview-rounds",
+      "segment_code": "IR",
+      "segment_position": 1,
+      "publication_status": "published",
+      "title": "Behavioral and Leadership Interviews",
+      "file": "05-interview-rounds/Java-SDE2-IR-01-Behavioral-and-Leadership-Interviews.pdf",
+      "output_name": "Java-SDE2-IR-01-Behavioral-and-Leadership-Interviews.pdf"
     }
   ],
   "index": {
     "file": "00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf",
-    "page_count": 17,
-    "sha256": "7a0b990a03913ee7baf9a0041e4a8f3d51da1cedd19b3fc86454b400ab0d2f8a",
-    "bytes": 3660612
+    "page_count": 18,
+    "sha256": "ab2e7f0cc2a2e4cae70fe441f514803e5ef8c77dc11b3a6ef83f10047e6a6b8f",
+    "bytes": 3666275
   }
 }

@@ -7,10 +7,10 @@
   "code_license": "MIT",
   "repository": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook",
   "contributors_file": "../../docs/community/authors.md",
-  "release_tag": "books-v2026.07.0",
-  "release_date": "2026-07-25",
+  "release_tag": "books-v2026.09.0",
+  "release_date": "2026-09-30",
   "edition_date": "2026-08-02",
-  "public_segments": 4,
+  "public_segments": 5,
   "index_artifact": "00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf",
   "master_artifact": {
     "file": "java-sde2-interview-book.pdf",
@@ -59,7 +59,10 @@
     "SPRINGAI",
     "18F",
     "18J",
-    "GENAI"
+    "GENAI",
+    "LLD",
+    "HLD",
+    "BEHAV"
   ],
   "path_labels": {
     "03": "JAVA-01",
@@ -102,7 +105,10 @@
     "SPRINGAI": "FW-12",
     "18F": "SD-01",
     "18J": "SD-02",
-    "GENAI": "SD-03"
+    "GENAI": "SD-03",
+    "LLD": "SD-04",
+    "HLD": "SD-05",
+    "BEHAV": "IR-01"
   },
   "legacy_path_labels": {
     "03": [
@@ -233,7 +239,20 @@
       "books": [
         "18F",
         "18J",
-        "GENAI"
+        "GENAI",
+        "LLD",
+        "HLD"
+      ]
+    },
+    {
+      "id": "interview-rounds",
+      "code": "IR",
+      "title": "Interview Rounds",
+      "short_title": "Interview Rounds",
+      "description": "Prepare the non-technical rounds that decide the level: behavioral, leadership, and hiring-manager interviews, built on stories from your own work.",
+      "artifact_dir": "05-interview-rounds",
+      "books": [
+        "BEHAV"
       ]
     }
   ],
@@ -2258,7 +2277,7 @@
       "short_title": "Backend Design and Security",
       "subtitle": "SOLID APIs, Patterns, Transactions, Services, Build Quality, Reliability, and Secure Boundaries",
       "output_name": "Java-SDE2-SD-01-Design-Backend-Testing-and-Security.pdf",
-      "volume_label": "System Design - Book 01 of 02 - Study Step SD-01",
+      "volume_label": "System Design - Book 01 of 05 - Study Step SD-01",
       "release_date": "2026-07-25",
       "cover_deck": "Connect clean Java design to transactions, service boundaries, testing, build discipline, dependency risk, security, reliability, and operational behavior.",
       "topic_line": "SOLID | LLD | JDBC | TRANSACTIONS | TESTING | SECURITY | RELIABILITY",
@@ -2533,7 +2552,7 @@
       "short_title": "Distributed Systems and System Design",
       "subtitle": "Capacity, Partitioning, Consistency, Kafka, Resilience, Sagas, Observability, and SLOs",
       "output_name": "Java-SDE2-SD-02-Distributed-Systems-and-System-Design.pdf",
-      "volume_label": "System Design - Book 02 of 02 - Study Step SD-02",
+      "volume_label": "System Design - Book 02 of 05 - Study Step SD-02",
       "release_date": "2026-07-25",
       "cover_deck": "Turn requirements into capacity estimates, data distribution, delivery semantics, resilience policies, observability, and defensible system-design trade-offs.",
       "topic_line": "CAPACITY | SHARDING | CONSISTENCY | KAFKA | RESILIENCE | SLOS",
@@ -3787,7 +3806,7 @@
       "short_title": "Generative AI System Design",
       "subtitle": "Inference Cost, Retrieval, Agents, Guardrails, and Evaluating a Probabilistic System",
       "output_name": "Java-SDE2-SD-03-Generative-AI-System-Design.pdf",
-      "volume_label": "System Design - Book 03 of 03 - Study Step SD-03",
+      "volume_label": "System Design - Book 03 of 05 - Study Step SD-03",
       "release_date": "2026-08-03",
       "cover_deck": "Design systems with a model in the request path: budget tokens and latency, build retrieval that can be trusted, bound agents that take actions, and measure quality when correctness is a distribution.",
       "topic_line": "TOKENS | RAG | AGENTS | GUARDRAILS | EVALS | DEGRADED MODE",
@@ -3844,6 +3863,243 @@
         },
         {
           "path": "content/volumes/system-design/SD-03-generative-ai-system-design/solutions/generative-ai-design-solutions.md"
+        }
+      ]
+    },
+    {
+      "id": "LLD",
+      "stage": "18",
+      "slug": "low-level-design-and-machine-coding",
+      "title": "Low-Level Design and Machine Coding",
+      "short_title": "Low-Level Design and Machine Coding",
+      "subtitle": "Modeling, State Machines, Invariants, and Extensible Java 21 for the Machine-Coding Round",
+      "output_name": "Java-SDE2-SD-04-Low-Level-Design-and-Machine-Coding.pdf",
+      "volume_label": "System Design - Book 04 of 05 - Study Step SD-04",
+      "release_date": "2026-09-30",
+      "cover_deck": "Design and implement eight classic machine-coding problems under time pressure: scope in writing, separate entities from values and policies, name the concurrency owner, protect every invariant, and absorb the extension round with one new class.",
+      "topic_line": "METHOD | PARKING LOT | STATE MACHINES | CACHES | RATE LIMITERS | LEDGERS | SCHEDULERS",
+      "purpose": "This book covers the low-level design and machine-coding round, where experienced engineers most often produce working code and still fail. It teaches a fixed method and applies it to eight problems - parking lot, vending machine, elevator, LRU and LFU caches, rate limiter, split expenses, job scheduler, and notification service - with every claim checked by an executable Java 21 model.",
+      "prerequisites": [
+        "SD-01, or equivalent comfort with interfaces, records, enums, and basic design principles",
+        "JAVA-05 collections and JAVA-07 concurrency for the thread-safety sections",
+        "No framework knowledge is assumed; every solution is plain Java 21"
+      ],
+      "recognition_signals": [
+        "The prompt says design and implement, not only design",
+        "A runnable program or tests are expected within 60 to 120 minutes",
+        "The problem has a lifecycle, a policy that is likely to change, or a shared resource",
+        "The interviewer adds a requirement to working code near the end"
+      ],
+      "outcomes": [
+        "Run a fixed six-step method with a written scope and a back-loaded time budget",
+        "Separate entities, value objects, and policies so an extension lands in one new type",
+        "Name the concurrency owner for every invariant and prove it with a concurrent test",
+        "Implement caches, rate limiters, ledgers, and schedulers with their invariants checked",
+        "Answer the concurrency, persistence, scale, and failure follow-ups that close the round"
+      ],
+      "practice_ladder": [
+        "Foundation: method, modeling toolkit, and the parking-lot critical path",
+        "Interview Core: state machines, caches, and rate limiters with invariants checked",
+        "SDE-2 Follow-up: money, settlement, lifecycles, retries, and idempotency",
+        "Challenge: a timed 90-minute mock scored against the rubric"
+      ],
+      "min_pages": 30,
+      "max_pages": 140,
+      "code_companion": {
+        "path": "content/volumes/system-design/SD-04-low-level-design-and-machine-coding/code/LowLevelDesignModel.java",
+        "title": "Executable Low-Level Design Model",
+        "description": "This dependency-free Java 21 model implements all eight problems with injected time and fixed random seeds, and checks every claim in the chapters: allocation outcomes, pricing boundaries, concurrent entry, bounded change-making, money conservation, LOOK scheduling, LRU and LFU against reference models, limiter boundary bursts, exact splits, settlement counts, job ordering, and notification idempotency."
+      },
+      "sources": [
+        {
+          "path": "content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/01-the-machine-coding-round-method-and-rubric.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/02-parking-lot-allocation-pricing-and-concurrent-entry.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/03-state-machines-vending-machine-and-elevator.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/04-caches-and-rate-limiters-data-structure-plus-policy.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/05-split-expenses-money-invariants-and-settlement.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/06-job-scheduler-and-notification-service-lifecycle-and-retries.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/07-extension-rounds-follow-ups-and-question-bank.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-04-low-level-design-and-machine-coding/exercises/lld-machine-coding-drills.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-04-low-level-design-and-machine-coding/solutions/lld-machine-coding-solutions.md"
+        }
+      ]
+    },
+    {
+      "id": "HLD",
+      "stage": "18",
+      "slug": "high-level-design-case-book",
+      "title": "High-Level Design Case Book",
+      "short_title": "High-Level Design Case Book",
+      "subtitle": "Worked System Design Cases with the Arithmetic That Chooses the Architecture",
+      "output_name": "Java-SDE2-SD-05-High-Level-Design-Case-Book.pdf",
+      "volume_label": "System Design - Book 05 of 05 - Study Step SD-05",
+      "release_date": "2026-09-30",
+      "cover_deck": "Work the design prompts interviewers actually use - URL shortener, distributed cache, news feed, chat, typeahead, ride matching, payments, metrics and object storage - with a fixed method and the numbers that decide each architecture.",
+      "topic_line": "ESTIMATION | KEYS | PARTITIONING | FAN-OUT | ORDERING | GEOHASH | EXACTLY-ONCE | DURABILITY",
+      "purpose": "This book applies the building blocks from SD-02 to the high-level design prompts used in SDE-2 loops. Every case follows one 45-minute method, and every architectural choice is justified by arithmetic that an executable Java 21 model recomputes and checks.",
+      "prerequisites": [
+        "SD-02 Distributed Systems and System Design, or equivalent knowledge of partitioning, replication, and queues",
+        "SD-04 is helpful for the component-level detail behind several cases",
+        "Comfort with back-of-the-envelope arithmetic"
+      ],
+      "recognition_signals": [
+        "The prompt says design a product or service at scale, not implement a class model",
+        "The interviewer expects capacity numbers before technology choices",
+        "The round has 45 to 60 minutes and ends with failure and scale follow-ups",
+        "The difficulty is allocation, skew, ordering, freshness, spatial data, or volume"
+      ],
+      "outcomes": [
+        "Run a fixed 45-minute design method with written requirements and non-goals",
+        "Produce an estimate in under five minutes and let it choose the architecture",
+        "Explain key generation, consistent hashing, hybrid fan-out, per-conversation ordering, geohash search, and exactly-once payments with numbers",
+        "Compare durability schemes and storage tiers by computed loss probability and bytes",
+        "Map an unfamiliar prompt to its dominant difficulty and answer the standard follow-ups"
+      ],
+      "practice_ladder": [
+        "Foundation: the case method and the estimation toolkit",
+        "Interview Core: shortener, cache, feed, and chat with their deep dives",
+        "SDE-2 Follow-up: typeahead, proximity, payments, and storage durability",
+        "Challenge: timed 45-minute mocks scored out of twelve"
+      ],
+      "min_pages": 30,
+      "max_pages": 160,
+      "code_companion": {
+        "path": "content/volumes/system-design/SD-05-high-level-design-case-book/code/HighLevelDesignModel.java",
+        "title": "Executable High-Level Design Model",
+        "description": "This dependency-free Java 21 model recomputes and checks every number the cases quote: shortener estimates and birthday collisions, consistent-hashing balance and remapping, power-law fan-out, chat ordering and presence load, Bloom filter sizing and measured false positives, geohash cells and the boundary problem, idempotent payments with a double-entry ledger, seat contention, and storage durability and volume."
+      },
+      "sources": [
+        {
+          "path": "content/volumes/system-design/SD-05-high-level-design-case-book/chapters/01-the-hld-case-method-and-estimation-toolkit.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-05-high-level-design-case-book/chapters/02-url-shortener-key-generation-and-the-read-path.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-05-high-level-design-case-book/chapters/03-distributed-cache-and-key-value-store.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-05-high-level-design-case-book/chapters/04-news-feed-fan-out-and-the-celebrity-problem.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-05-high-level-design-case-book/chapters/05-chat-and-presence-ordering-delivery-and-connections.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-05-high-level-design-case-book/chapters/06-typeahead-and-search-tries-top-k-and-bloom-filters.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-05-high-level-design-case-book/chapters/07-proximity-and-ride-matching-geohash-and-moving-points.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-05-high-level-design-case-book/chapters/08-payments-and-ticket-booking-exactly-once-effects.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-05-high-level-design-case-book/chapters/09-metrics-pipeline-and-object-storage-volume-and-durability.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-05-high-level-design-case-book/chapters/10-case-bank-follow-ups-and-scoring.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-05-high-level-design-case-book/exercises/hld-case-drills.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-05-high-level-design-case-book/solutions/hld-case-solutions.md"
+        }
+      ]
+    },
+    {
+      "id": "BEHAV",
+      "stage": "19",
+      "slug": "behavioral-and-leadership-interviews",
+      "title": "Behavioral and Leadership Interviews",
+      "short_title": "Behavioral and Leadership Interviews",
+      "subtitle": "Story Banks, STAR Delivery, and the Signals That Decide the SDE-2 Level",
+      "output_name": "Java-SDE2-IR-01-Behavioral-and-Leadership-Interviews.pdf",
+      "volume_label": "Interview Rounds - Book 01 of 01 - Study Step IR-01",
+      "release_date": "2026-09-30",
+      "cover_deck": "Prepare the round that most often decides whether a strong engineer is offered SDE-2 or SDE-1: build a story bank that covers every signal twice, deliver answers where your decisions are unmistakable, and map your stories onto any company's values.",
+      "topic_line": "SIGNALS | STORY BANK | STAR | CONFLICT | FAILURE | MENTORING | LEADERSHIP PRINCIPLES",
+      "purpose": "This book covers the behavioral and hiring-manager rounds: what they score at SDE-2, how to build and audit a story bank, how to structure and time answers, the signal-specific stories interviewers ask for, and how to adapt one bank to company-specific values such as Amazon's Leadership Principles.",
+      "prerequisites": [
+        "At least two years of professional engineering experience to draw stories from",
+        "No technical prerequisites; the examples are drawn from backend engineering",
+        "Access to your own design documents, post-mortems, and reviews helps"
+      ],
+      "recognition_signals": [
+        "A question begins with 'tell me about a time'",
+        "The round is labelled behavioral, values, leadership, or hiring manager",
+        "The company publishes values or leadership principles",
+        "You passed the technical rounds but were offered a lower level before"
+      ],
+      "outcomes": [
+        "Name the signals an SDE-2 behavioral round scores and what separates SDE-2 from SDE-1 evidence",
+        "Build a story bank that covers every signal at least twice, and plan a loop without forced reuse",
+        "Deliver STAR answers with at least 55% on your actions, in one and a half to three minutes",
+        "Tell conflict, failure, and mentoring stories that survive five levels of probing",
+        "Map one story bank onto a company's values, including all sixteen Amazon Leadership Principles"
+      ],
+      "practice_ladder": [
+        "Foundation: signals, levels, and mining your history for stories",
+        "Interview Core: story cards, coverage, and STAR delivery",
+        "SDE-2 Follow-up: conflict, failure, mentoring, and company-specific principles",
+        "Challenge: a recorded mock round scored against the delivery targets"
+      ],
+      "min_pages": 30,
+      "max_pages": 120,
+      "code_companion": {
+        "path": "content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/code/StoryBankModel.java",
+        "title": "Executable Story Bank Model",
+        "description": "This dependency-free Java 21 model treats a story bank as data: it computes signal coverage and gaps, plans a loop without over-using a story, times a STAR answer by section, counts 'I' against 'we', and maps the bank onto Amazon's sixteen Leadership Principles."
+      },
+      "sources": [
+        {
+          "path": "content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/01-what-the-behavioral-round-scores.md"
+        },
+        {
+          "path": "content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/02-building-a-story-bank.md"
+        },
+        {
+          "path": "content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/03-structuring-and-delivering-an-answer.md"
+        },
+        {
+          "path": "content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/04-ownership-ambiguity-and-delivery.md"
+        },
+        {
+          "path": "content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/05-conflict-disagreement-and-influence.md"
+        },
+        {
+          "path": "content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/06-failure-feedback-and-growth.md"
+        },
+        {
+          "path": "content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/07-mentoring-and-leadership-without-authority.md"
+        },
+        {
+          "path": "content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/08-company-formats-and-leadership-principles.md"
+        },
+        {
+          "path": "content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/09-the-hiring-manager-round-and-closing-well.md"
+        },
+        {
+          "path": "content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/exercises/behavioral-drills.md"
+        },
+        {
+          "path": "content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/solutions/behavioral-solutions.md"
         }
       ]
     }

@@ -4,7 +4,7 @@ The repository is configured as a static Vercel project. Vercel builds the same 
 
 ## Why the PDFs are not deployed
 
-`.vercelignore` excludes `books/java-sde2-interview-preparation-series/dist/*` and keeps only `manifest.json`. The 43 PDFs are 163 MB, which is above the 100 MB Hobby upload limit and would be pointless to serve twice — every download link in the site points at GitHub instead.
+`.vercelignore` excludes `books/java-sde2-interview-preparation-series/dist/*` and keeps only `manifest.json`. The 46 PDFs are 191 MB, which is above the 100 MB Hobby upload limit and would be pointless to serve twice — every download link in the site points at GitHub instead.
 
 This has one non-obvious consequence, and it broke the build until it was fixed. The generated book pages are compiled by `mkdocs build --strict`, which fails on any internal link it cannot resolve. Link rewriting used to resolve PDF targets by looking for the file on disk, so with `dist/` stripped a relative link such as `../00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf` resolved to nothing, survived into the generated Markdown as a relative path, and aborted the deployment.
 

@@ -852,15 +852,21 @@ def postprocess_docx(path: Path) -> None:
 
 
 def build_docx(input_path: str) -> None:
-    require_pandoc()
+    version = require_pandoc()
     ensure_reference_doc()
+    # pandoc 3.8 renamed --highlight-style to --syntax-highlighting. CI pins
+    # 3.1.11, which rejects the new spelling with exit status 6, so choose the
+    # flag the running pandoc understands.
+    highlight = (
+        "--syntax-highlighting=tango" if version >= (3, 8) else "--highlight-style=tango"
+    )
     cmd = [
         "pandoc",
         input_path,
         "--from=gfm+yaml_metadata_block+pipe_tables+task_lists",
         "--to=docx",
         "--standalone",
-        "--syntax-highlighting=tango",
+        highlight,
         f"--resource-path={ROOT}",
         f"--reference-doc={REFERENCE_DOCX}",
         "-o",

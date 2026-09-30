@@ -2,7 +2,7 @@
 
 ## Choose a segment first
 
-The library has four focused learning segments. Select the skill area you need now, begin with Book 01 in that segment, and continue in order. Canonical filenames, covers, website routes, and folders use the same `JAVA`, `DSA`, `FW`, and `SD` codes.
+The library has five focused learning segments. Select the skill area you need now, begin with Book 01 in that segment, and continue in order. Canonical filenames, covers, website routes, and folders use the same `JAVA`, `DSA`, `FW`, and `SD` codes.
 
 | Segment | Start | Books | Primary outcome |
 |---|---|---:|---|
@@ -15,11 +15,11 @@ All forty focused books are publication editions. The roadmap now records readin
 
 ## Current publication snapshot
 
-- 4 learning segments and 41 published focused books
-- 414 declared source entries resolving to 407 unique mapped Markdown documents
-- 3,579 focused-book pages
-- one 17-page series index and one 658-page master reference
-- 43 PDFs and 4,254 pages across the complete library
+- 5 learning segments and 44 published focused books
+- 458 declared source entries resolving to 451 unique mapped Markdown documents
+- 3,840 focused-book pages
+- one 18-page series index and one 658-page master reference
+- 46 PDFs and 4,516 pages across the complete library
 
 ## Java Engineering
 
@@ -87,7 +87,7 @@ Spring Ecosystem Extensions covers Spring Security, Spring Cloud, Spring WebFlux
 
 - Keep the five canonical `dist/` folders together so relative links can work in compatible viewers.
 - Use `dist/00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf` as the durable entry point.
-- Every PDF lists all four segments and highlights the current book.
+- Every PDF lists every segment and highlights the current book.
 - Previous and next links stay inside the current segment.
 - Local bookmarks and the table of contents navigate chapters inside a PDF.
 - `dist/manifest.json` records segment positions, page counts, byte sizes, and SHA-256 hashes.

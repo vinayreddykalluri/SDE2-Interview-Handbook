@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate or copy the canonical four-segment PDF library."""
+"""Validate or copy the canonical segmented PDF library."""
 
 from __future__ import annotations
 
@@ -95,11 +95,11 @@ def build_readme(spec: dict, assignments: list[dict]) -> str:
     lines = [
         "# Organized Java SDE-2 PDF Library",
         "",
-        "Choose Java, DSA, Frameworks, or System Design, then read the books inside",
+        "Choose Java, DSA, Frameworks, System Design, or Interview Rounds, then read the books inside",
         "that segment in order. Segment codes are shared by the website, PDF cover, and this folder.",
         "",
         "This directory is generated from `publishing/series.json` and mirrors the canonical",
-        "four-segment layout under `dist/`. GitHub release assets retain their flat filenames.",
+        "segment layout under `dist/`. GitHub release assets retain their flat filenames.",
         "",
         "## Start here",
         "",
@@ -164,7 +164,7 @@ def main() -> None:
         return
     copy_library(spec, assignments, args.output)
     print(f"organized {len(assignments) + 2} PDFs under {args.output.resolve()}")
-    print("canonical four-segment artifacts remain unchanged in dist/")
+    print("canonical segmented artifacts remain unchanged in dist/")
 
 
 if __name__ == "__main__":
