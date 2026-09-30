@@ -46,12 +46,15 @@ REQUIRED_PACKAGES = {
 # Release automation is now live. This was previously an allowlist of one that
 # asserted build and deploy workflows stayed disabled, which made sense while
 # publication was hand-driven -- but hand-driven publication is exactly what
-# put 163 MB of PDFs into git history. The check is inverted: these three must
-# be PRESENT, and anything else appearing here should be a deliberate decision.
+# put 163 MB of PDFs into git history. The check is inverted: these must be
+# PRESENT, and anything else appearing here should be a deliberate decision.
+# release-books.yml is what turns a `release_tag` bump into downloadable assets;
+# without it the README's zip links point at a release that never appears.
 REQUIRED_WORKFLOWS = {
     "validate-books.yml",
     "build-books.yml",
     "deploy-pages.yml",
+    "release-books.yml",
 }
 REQUIRED_IGNORES = {
     ".github/",

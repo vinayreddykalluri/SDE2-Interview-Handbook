@@ -636,6 +636,32 @@ button, a, input, select, summary { -webkit-tap-highlight-color: transparent; }
 .practice-board strong { color: var(--blue); font: 600 0.63rem var(--mono); text-transform: uppercase; }
 .practice-board a:hover h3, .practice-board a:hover strong { color: var(--red); }
 
+.pdf-shelf { padding-block: 110px; border-bottom: 1px solid var(--line-strong); }
+.pdf-shelf-start { display: grid; grid-template-columns: repeat(3, 1fr); margin-bottom: 24px; border: 1px solid var(--line-strong); }
+.pdf-feature { min-height: 150px; display: grid; align-content: center; padding: 20px; border-right: 1px solid var(--line); background: var(--paper-raised); }
+.pdf-feature:last-child { border-right: 0; }
+.pdf-feature span, .pdf-feature strong, .pdf-feature small { display: block; }
+.pdf-feature span { color: var(--blue); font: 600 0.58rem var(--mono); letter-spacing: 0.08em; }
+.pdf-feature strong { margin: 16px 0 4px; font: 400 1.65rem/1 var(--display); text-transform: uppercase; }
+.pdf-feature small { color: var(--ink-soft); }
+.pdf-feature:hover { background: var(--paper-deep); }
+.pdf-shelf-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; align-items: start; }
+.pdf-shelf-loading { grid-column: 1 / -1; margin: 0; color: var(--ink-soft); font: 500 0.72rem var(--mono); }
+.pdf-shelf-loading a { text-decoration: underline; }
+.pdf-segment { min-width: 0; border: 1px solid var(--line-strong); background: var(--paper-raised); }
+.pdf-segment-head { padding: 16px; border-bottom: 1px solid var(--line-strong); }
+.pdf-segment-head span, .pdf-segment-head strong, .pdf-segment-head a { display: block; }
+.pdf-segment-head span { color: var(--blue); font: 600 0.58rem var(--mono); letter-spacing: 0.08em; }
+.pdf-segment-head strong { margin: 10px 0 8px; font: 400 1.4rem/1 var(--display); text-transform: uppercase; }
+.pdf-segment-head a { width: fit-content; font: 600 0.62rem var(--mono); text-decoration: underline; }
+.pdf-segment ol { margin: 0; padding: 0; list-style: none; }
+.pdf-segment li + li { border-top: 1px solid var(--line); }
+.pdf-segment li a { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 2px 8px; padding: 10px 16px; }
+.pdf-segment li a:hover { background: var(--paper-deep); }
+.pdf-segment li span { grid-row: span 2; padding-top: 3px; color: var(--ink-soft); font: 600 0.58rem var(--mono); white-space: nowrap; }
+.pdf-segment li strong { font-size: 0.95rem; font-weight: 600; line-height: 1.25; overflow-wrap: anywhere; }
+.pdf-segment li small { color: var(--ink-soft); font: 500 0.6rem var(--mono); }
+
 .resource-strip { display: grid; grid-template-columns: 0.65fr 1.35fr; gap: 60px; }
 .resource-links { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line-strong); }
 .resource-links a { min-height: 180px; display: grid; align-content: center; padding: 20px; border-right: 1px solid var(--line); background: var(--paper-raised); }
@@ -772,6 +798,7 @@ noscript { display: block; padding: 18px; border-top: 1px solid var(--line-stron
   .practice-board a { grid-template-columns: 90px 0.8fr 1fr; }
   .practice-board strong { grid-column: 2 / -1; }
   .book-start-path { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pdf-shelf-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 900px) {
@@ -810,6 +837,10 @@ noscript { display: block; padding: 18px; border-top: 1px solid var(--line-stron
   .practice { gap: 32px; }
   .practice-intro { position: static; }
   .resource-links { grid-template-columns: 1fr; }
+  .pdf-shelf { padding-block: 80px; }
+  .pdf-shelf-start { grid-template-columns: 1fr; }
+  .pdf-feature { min-height: 110px; border-right: 0; border-bottom: 1px solid var(--line); }
+  .pdf-feature:last-child { border-bottom: 0; }
   .resource-links a { min-height: 130px; border-right: 0; border-bottom: 1px solid var(--line); }
   .resource-links a:last-child { border-bottom: 0; }
   .book-release-actions { justify-content: flex-start; }
@@ -855,6 +886,7 @@ noscript { display: block; padding: 18px; border-top: 1px solid var(--line-stron
   .book-start-block { padding: 20px; }
   .book-start-path { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .book-path-step a { min-height: 126px; }
+  .pdf-shelf-grid { grid-template-columns: 1fr; }
   .book-filters { display: grid; grid-template-columns: 1fr; }
 }
 

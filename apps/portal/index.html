@@ -41,6 +41,7 @@
 
     <nav class="primary-nav" id="primary-nav" aria-label="Primary navigation">
       <a href="#home" class="is-active">Home</a>
+      <a href="#pdfs">Download PDFs</a>
       <a href="#study-path">Choose a segment</a>
       <a href="docs/backend-interview/10-practice/">Practice</a>
       <a href="#about">About</a>
@@ -85,6 +86,7 @@
           Choose your learning segment <span aria-hidden="true">&rarr;</span>
           </a>
           <a class="button button-secondary" href="books/">Open the complete library</a>
+          <a class="button button-secondary" href="#pdfs">Download the PDFs <span aria-hidden="true">&darr;</span></a>
         </div>
       </div>
 
@@ -137,6 +139,40 @@
       <div><span>Canonical web lessons</span><strong data-book-stat="documents">414 chapters and companions</strong><small>the complete source-backed curriculum</small></div>
       <div><span>Runnable knowledge</span><strong data-book-stat="code">1,273 code examples</strong><small>integrated with the lessons</small></div>
       <div><span>Offline format</span><strong data-book-stat="pdfs">43 PDFs</strong><small>matching downloadable editions</small></div>
+    </section>
+
+    <section class="pdf-shelf shell" id="pdfs" aria-labelledby="pdfs-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">OFFLINE / EVERY BOOK AS A PDF</p>
+          <h2 id="pdfs-title">Download the PDFs.</h2>
+        </div>
+        <p>
+          Every book is a free PDF with the same chapters, in the same order, as the web edition. Take one book, one segment, or the whole library.
+        </p>
+      </div>
+
+      <div class="pdf-shelf-start">
+        <a class="pdf-feature" id="pdf-master-link" href="https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/00-start-here/java-sde2-interview-book.pdf">
+          <span>START HERE / MASTER BOOK</span>
+          <strong>Complete master book</strong>
+          <small id="pdf-master-meta">Every chapter in one PDF</small>
+        </a>
+        <a class="pdf-feature" id="pdf-index-link" href="https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf">
+          <span>START HERE / SERIES INDEX</span>
+          <strong>Series index</strong>
+          <small id="pdf-index-meta">Every book in reading order</small>
+        </a>
+        <a class="pdf-feature" id="pdf-all-zip" href="https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest/download/Java-SDE2-All-PDFs.zip">
+          <span>EVERYTHING / ONE ZIP</span>
+          <strong data-book-stat="pdf-zip">All 43 PDFs</strong>
+          <small>From the latest release</small>
+        </a>
+      </div>
+
+      <div class="pdf-shelf-grid" id="pdf-shelf-grid" aria-live="polite">
+        <p class="pdf-shelf-loading">Loading the PDF list... You can also <a href="https://github.com/vinayreddykalluri/SDE2-Interview-Handbook#download-the-pdfs">download every PDF from GitHub</a>.</p>
+      </div>
     </section>
 
     <section class="book-library shell" id="study-path" aria-labelledby="books-title">

@@ -16,6 +16,7 @@ const bookReleaseLink = document.querySelector("#book-release-link");
 const masterBookLink = document.querySelector("#master-book-link");
 const seriesIndexLink = document.querySelector("#series-index-link");
 const footerPdfIndex = document.querySelector("#footer-pdf-index");
+const pdfShelfGrid = document.querySelector("#pdf-shelf-grid");
 const primaryNav = document.querySelector("#primary-nav");
 const menuButton = document.querySelector(".menu-toggle");
 const searchDialog = document.querySelector("#search-dialog");
@@ -65,6 +66,57 @@ function buildSegmentPath() {
     );
     item.append(link);
     bookStartPath.append(item);
+  });
+}
+
+function formatMegabytes(bytes) {
+  return (Number(bytes || 0) / 1000000).toFixed(1) + " MB";
+}
+
+function buildPdfShelf() {
+  const master = bookRelease.master;
+  const index = bookRelease.index;
+  document.querySelector("#pdf-master-link").href = master.pdfHref;
+  document.querySelector("#pdf-master-meta").textContent = master.title + " · " + formatCount(master.pageCount) + " pages";
+  document.querySelector("#pdf-index-link").href = index.pdfHref;
+  document.querySelector("#pdf-index-meta").textContent = "Every book in reading order · " + formatCount(index.pageCount) + " pages";
+  document.querySelector("#pdf-all-zip").href = bookRelease.latestDownloadRoot + "/" + bookRelease.allPdfsZip;
+  document.querySelector("[data-book-stat='pdf-zip']").textContent = "All " + bookRelease.totalPdfCount + " PDFs";
+
+  pdfShelfGrid.replaceChildren();
+  segments.forEach(function (segment) {
+    const segmentBooks = books.filter(function (book) { return book.segmentId === segment.id; });
+    const pages = segmentBooks.reduce(function (total, book) { return total + Number(book.pageCount || 0); }, 0);
+    const column = createElement("section", "pdf-segment");
+    column.setAttribute("aria-label", segment.title + " PDFs");
+
+    const head = createElement("div", "pdf-segment-head");
+    const zip = createElement("a", "", "Download all as zip ↓");
+    zip.href = bookRelease.latestDownloadRoot + "/" + segment.pdfsZip;
+    zip.setAttribute("aria-label", "Download all " + segment.title + " PDFs as one zip");
+    head.append(
+      createElement("span", "", segment.code + " / " + segmentBooks.length + " PDFS · " + formatCount(pages) + " PAGES"),
+      createElement("strong", "", segment.title),
+      zip
+    );
+
+    const list = createElement("ol");
+    segmentBooks.forEach(function (book) {
+      const item = createElement("li");
+      const link = createElement("a");
+      link.href = book.pdfHref;
+      link.setAttribute("aria-label", "Download " + book.title + " PDF, " + book.pageCount + " pages");
+      link.append(
+        createElement("span", "", book.segmentCode),
+        createElement("strong", "", book.title),
+        createElement("small", "", formatCount(book.pageCount) + " pages · " + formatMegabytes(book.pdfBytes))
+      );
+      item.append(link);
+      list.append(item);
+    });
+
+    column.append(head, list);
+    pdfShelfGrid.append(column);
   });
 }
 
@@ -292,6 +344,7 @@ async function initializeBooks() {
       formatCount(books.reduce(function (total, book) { return total + Number(book.webDocumentCount || 0); }, 0)) + " chapters";
     document.querySelector("[data-book-stat='code']").textContent =
       formatCount(books.reduce(function (total, book) { return total + Number(book.codeExampleCount || 0); }, 0)) + " code entries";
+    buildPdfShelf();
     buildSegmentPath();
     renderBooks();
     buildSearchIndex();
