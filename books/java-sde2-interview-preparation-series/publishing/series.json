@@ -59,7 +59,8 @@
     "SPRINGAI",
     "18F",
     "18J",
-    "GENAI"
+    "GENAI",
+    "LLD"
   ],
   "path_labels": {
     "03": "JAVA-01",
@@ -102,7 +103,8 @@
     "SPRINGAI": "FW-12",
     "18F": "SD-01",
     "18J": "SD-02",
-    "GENAI": "SD-03"
+    "GENAI": "SD-03",
+    "LLD": "SD-04"
   },
   "legacy_path_labels": {
     "03": [
@@ -233,7 +235,8 @@
       "books": [
         "18F",
         "18J",
-        "GENAI"
+        "GENAI",
+        "LLD"
       ]
     }
   ],
@@ -2258,7 +2261,7 @@
       "short_title": "Backend Design and Security",
       "subtitle": "SOLID APIs, Patterns, Transactions, Services, Build Quality, Reliability, and Secure Boundaries",
       "output_name": "Java-SDE2-SD-01-Design-Backend-Testing-and-Security.pdf",
-      "volume_label": "System Design - Book 01 of 02 - Study Step SD-01",
+      "volume_label": "System Design - Book 01 of 04 - Study Step SD-01",
       "release_date": "2026-07-25",
       "cover_deck": "Connect clean Java design to transactions, service boundaries, testing, build discipline, dependency risk, security, reliability, and operational behavior.",
       "topic_line": "SOLID | LLD | JDBC | TRANSACTIONS | TESTING | SECURITY | RELIABILITY",
@@ -2533,7 +2536,7 @@
       "short_title": "Distributed Systems and System Design",
       "subtitle": "Capacity, Partitioning, Consistency, Kafka, Resilience, Sagas, Observability, and SLOs",
       "output_name": "Java-SDE2-SD-02-Distributed-Systems-and-System-Design.pdf",
-      "volume_label": "System Design - Book 02 of 02 - Study Step SD-02",
+      "volume_label": "System Design - Book 02 of 04 - Study Step SD-02",
       "release_date": "2026-07-25",
       "cover_deck": "Turn requirements into capacity estimates, data distribution, delivery semantics, resilience policies, observability, and defensible system-design trade-offs.",
       "topic_line": "CAPACITY | SHARDING | CONSISTENCY | KAFKA | RESILIENCE | SLOS",
@@ -3787,7 +3790,7 @@
       "short_title": "Generative AI System Design",
       "subtitle": "Inference Cost, Retrieval, Agents, Guardrails, and Evaluating a Probabilistic System",
       "output_name": "Java-SDE2-SD-03-Generative-AI-System-Design.pdf",
-      "volume_label": "System Design - Book 03 of 03 - Study Step SD-03",
+      "volume_label": "System Design - Book 03 of 04 - Study Step SD-03",
       "release_date": "2026-08-03",
       "cover_deck": "Design systems with a model in the request path: budget tokens and latency, build retrieval that can be trusted, bound agents that take actions, and measure quality when correctness is a distribution.",
       "topic_line": "TOKENS | RAG | AGENTS | GUARDRAILS | EVALS | DEGRADED MODE",
@@ -3844,6 +3847,80 @@
         },
         {
           "path": "content/volumes/system-design/SD-03-generative-ai-system-design/solutions/generative-ai-design-solutions.md"
+        }
+      ]
+    },
+    {
+      "id": "LLD",
+      "stage": "18",
+      "slug": "low-level-design-and-machine-coding",
+      "title": "Low-Level Design and Machine Coding",
+      "short_title": "Low-Level Design and Machine Coding",
+      "subtitle": "Modeling, State Machines, Invariants, and Extensible Java 21 for the Machine-Coding Round",
+      "output_name": "Java-SDE2-SD-04-Low-Level-Design-and-Machine-Coding.pdf",
+      "volume_label": "System Design - Book 04 of 04 - Study Step SD-04",
+      "release_date": "2026-09-30",
+      "cover_deck": "Design and implement eight classic machine-coding problems under time pressure: scope in writing, separate entities from values and policies, name the concurrency owner, protect every invariant, and absorb the extension round with one new class.",
+      "topic_line": "METHOD | PARKING LOT | STATE MACHINES | CACHES | RATE LIMITERS | LEDGERS | SCHEDULERS",
+      "purpose": "This book covers the low-level design and machine-coding round, where experienced engineers most often produce working code and still fail. It teaches a fixed method and applies it to eight problems - parking lot, vending machine, elevator, LRU and LFU caches, rate limiter, split expenses, job scheduler, and notification service - with every claim checked by an executable Java 21 model.",
+      "prerequisites": [
+        "SD-01, or equivalent comfort with interfaces, records, enums, and basic design principles",
+        "JAVA-05 collections and JAVA-07 concurrency for the thread-safety sections",
+        "No framework knowledge is assumed; every solution is plain Java 21"
+      ],
+      "recognition_signals": [
+        "The prompt says design and implement, not only design",
+        "A runnable program or tests are expected within 60 to 120 minutes",
+        "The problem has a lifecycle, a policy that is likely to change, or a shared resource",
+        "The interviewer adds a requirement to working code near the end"
+      ],
+      "outcomes": [
+        "Run a fixed six-step method with a written scope and a back-loaded time budget",
+        "Separate entities, value objects, and policies so an extension lands in one new type",
+        "Name the concurrency owner for every invariant and prove it with a concurrent test",
+        "Implement caches, rate limiters, ledgers, and schedulers with their invariants checked",
+        "Answer the concurrency, persistence, scale, and failure follow-ups that close the round"
+      ],
+      "practice_ladder": [
+        "Foundation: method, modeling toolkit, and the parking-lot critical path",
+        "Interview Core: state machines, caches, and rate limiters with invariants checked",
+        "SDE-2 Follow-up: money, settlement, lifecycles, retries, and idempotency",
+        "Challenge: a timed 90-minute mock scored against the rubric"
+      ],
+      "min_pages": 30,
+      "max_pages": 140,
+      "code_companion": {
+        "path": "content/volumes/system-design/SD-04-low-level-design-and-machine-coding/code/LowLevelDesignModel.java",
+        "title": "Executable Low-Level Design Model",
+        "description": "This dependency-free Java 21 model implements all eight problems with injected time and fixed random seeds, and checks every claim in the chapters: allocation outcomes, pricing boundaries, concurrent entry, bounded change-making, money conservation, LOOK scheduling, LRU and LFU against reference models, limiter boundary bursts, exact splits, settlement counts, job ordering, and notification idempotency."
+      },
+      "sources": [
+        {
+          "path": "content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/01-the-machine-coding-round-method-and-rubric.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/02-parking-lot-allocation-pricing-and-concurrent-entry.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/03-state-machines-vending-machine-and-elevator.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/04-caches-and-rate-limiters-data-structure-plus-policy.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/05-split-expenses-money-invariants-and-settlement.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/06-job-scheduler-and-notification-service-lifecycle-and-retries.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/07-extension-rounds-follow-ups-and-question-bank.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-04-low-level-design-and-machine-coding/exercises/lld-machine-coding-drills.md"
+        },
+        {
+          "path": "content/volumes/system-design/SD-04-low-level-design-and-machine-coding/solutions/lld-machine-coding-solutions.md"
         }
       ]
     }

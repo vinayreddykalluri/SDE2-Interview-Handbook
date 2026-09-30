@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-09-30 - SD 04 Low-Level Design and Machine Coding
+
+- Added SD 04, a 109-page volume for the machine-coding round: a six-step method and rubric, then parking lot, vending machine, elevator, LRU and LFU caches, rate limiters, split expenses, job scheduler, and notification service, closing with extension rounds and a 23-prompt question bank.
+- Added 14 drills with worked solutions whose every numeric answer was computed by a program.
+- Added `LowLevelDesignModel.java`, a dependency-free Java 21 model that checks every claim the chapters quote, including a corrected elevator claim: LOOK is optimal for a known batch only when started in the better direction.
+- Removed the `package` declaration from the SD 03 companion, which made the series-native smoke test fail with `ClassNotFoundException`.
+- Rebuilt SD 01 to SD 03 so their covers read "of 04", and rebuilt the series index.
+
 ## 2026-07-30 - Spring Boot publication edition
 
 - Replaced the 10-page SD 05 roadmap with 23 prerequisite-ordered chapters progressing from the first application and startup through auto-configuration, typed configuration, HTTP/data boundaries, Actuator, observability, probes, testing, delivery, upgrades, security, and incident diagnosis.

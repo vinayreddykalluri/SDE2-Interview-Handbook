@@ -6,18 +6,18 @@
     "date": "2026-09-30",
     "editionDate": "2026-08-02",
     "url": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/tag/books-v2026.09.0",
-    "focusedBookCount": 41,
-    "focusedPageCount": 3579,
+    "focusedBookCount": 42,
+    "focusedPageCount": 3688,
     "indexPageCount": 17,
     "masterPageCount": 658,
-    "totalPdfCount": 43,
-    "totalPageCount": 4254,
+    "totalPdfCount": 44,
+    "totalPageCount": 4363,
     "index": {
       "title": "Java SDE-2 Interview Preparation Series Index",
       "filename": "Java-SDE2-Interview-Preparation-Series-Index.pdf",
       "artifactPath": "00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf",
       "pageCount": 17,
-      "pdfBytes": 3660612,
+      "pdfBytes": 3661956,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-Interview-Preparation-Series-Index.pdf"
     },
@@ -75,7 +75,7 @@
       "title": "System Design",
       "shortTitle": "System Design",
       "description": "Move from component boundaries to distributed-system reasoning after the Java backend foundations are secure.",
-      "bookCount": 3,
+      "bookCount": 4,
       "startBookId": "18F",
       "artifactDir": "04-system-design",
       "pdfsZip": "Java-SDE2-SD-PDFs.zip",
@@ -4575,7 +4575,7 @@
       "segmentShortTitle": "System Design",
       "segmentCode": "SD 01",
       "segmentPosition": 1,
-      "segmentBookCount": 3,
+      "segmentBookCount": 4,
       "publicationStatus": "published",
       "title": "Design, Backend, Testing, and Security",
       "shortTitle": "Backend Design and Security",
@@ -4585,7 +4585,7 @@
       "filename": "Java-SDE2-SD-01-Design-Backend-Testing-and-Security.pdf",
       "artifactPath": "04-system-design/Java-SDE2-SD-01-Design-Backend-Testing-and-Security.pdf",
       "pageCount": 74,
-      "pdfBytes": 3840750,
+      "pdfBytes": 3841785,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/04-system-design/Java-SDE2-SD-01-Design-Backend-Testing-and-Security.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-SD-01-Design-Backend-Testing-and-Security.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master",
@@ -4678,7 +4678,7 @@
       "segmentShortTitle": "System Design",
       "segmentCode": "SD 02",
       "segmentPosition": 2,
-      "segmentBookCount": 3,
+      "segmentBookCount": 4,
       "publicationStatus": "published",
       "title": "Distributed Systems and System Design",
       "shortTitle": "Distributed Systems and System Design",
@@ -4688,7 +4688,7 @@
       "filename": "Java-SDE2-SD-02-Distributed-Systems-and-System-Design.pdf",
       "artifactPath": "04-system-design/Java-SDE2-SD-02-Distributed-Systems-and-System-Design.pdf",
       "pageCount": 94,
-      "pdfBytes": 3900305,
+      "pdfBytes": 3901859,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/04-system-design/Java-SDE2-SD-02-Distributed-Systems-and-System-Design.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-SD-02-Distributed-Systems-and-System-Design.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-02-distributed-systems-and-system-design/chapters",
@@ -4787,7 +4787,7 @@
       "segmentShortTitle": "System Design",
       "segmentCode": "SD 03",
       "segmentPosition": 3,
-      "segmentBookCount": 3,
+      "segmentBookCount": 4,
       "publicationStatus": "published",
       "title": "Generative AI System Design",
       "shortTitle": "Generative AI System Design",
@@ -4797,7 +4797,7 @@
       "filename": "Java-SDE2-SD-03-Generative-AI-System-Design.pdf",
       "artifactPath": "04-system-design/Java-SDE2-SD-03-Generative-AI-System-Design.pdf",
       "pageCount": 78,
-      "pdfBytes": 3858882,
+      "pdfBytes": 3859936,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/04-system-design/Java-SDE2-SD-03-Generative-AI-System-Design.pdf",
       "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-SD-03-Generative-AI-System-Design.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-03-generative-ai-system-design/chapters",
@@ -4871,6 +4871,115 @@
         "Estimate tokens, cost, and latency before designing anything",
         "Build a retrieval pipeline with authorization pushed into the query",
         "Bound an agent and make its side effects idempotent and compensable"
+      ],
+      "webReads": []
+    },
+    {
+      "order": 42,
+      "bookPosition": 42,
+      "step": "SD-04",
+      "pathLabel": "SD-04",
+      "id": "LLD",
+      "track": "System Design",
+      "segmentId": "system-design",
+      "segmentTitle": "System Design",
+      "segmentShortTitle": "System Design",
+      "segmentCode": "SD 04",
+      "segmentPosition": 4,
+      "segmentBookCount": 4,
+      "publicationStatus": "published",
+      "title": "Low-Level Design and Machine Coding",
+      "shortTitle": "Low-Level Design and Machine Coding",
+      "subtitle": "Modeling, State Machines, Invariants, and Extensible Java 21 for the Machine-Coding Round",
+      "purpose": "This book covers the low-level design and machine-coding round, where experienced engineers most often produce working code and still fail. It teaches a fixed method and applies it to eight problems - parking lot, vending machine, elevator, LRU and LFU caches, rate limiter, split expenses, job scheduler, and notification service - with every claim checked by an executable Java 21 model.",
+      "authorNote": "Working code is the entry ticket in this round, not the score. Write the scope down before you write a class, keep the rule that will change behind an interface, and say out loud which object owns each invariant when two requests arrive at once. The interviewer will add a requirement in the last twenty minutes; if it costs you one new class, you designed well.",
+      "filename": "Java-SDE2-SD-04-Low-Level-Design-and-Machine-Coding.pdf",
+      "artifactPath": "04-system-design/Java-SDE2-SD-04-Low-Level-Design-and-Machine-Coding.pdf",
+      "pageCount": 109,
+      "pdfBytes": 3921732,
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/04-system-design/Java-SDE2-SD-04-Low-Level-Design-and-Machine-Coding.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-SD-04-Low-Level-Design-and-Machine-Coding.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters",
+      "fullBookHref": "books/sd-04-low-level-design-and-machine-coding/",
+      "codeHref": "books/sd-04-low-level-design-and-machine-coding/code/",
+      "webDocumentCount": 9,
+      "wordCount": 17957,
+      "codeExampleCount": 13,
+      "sourceChapterCount": 7,
+      "supportingSourceCount": 2,
+      "chapterPreview": [
+        {
+          "title": "1. The Machine-Coding Round: Method and Rubric",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/01-the-machine-coding-round-method-and-rubric.md",
+          "webHref": "books/sd-04-low-level-design-and-machine-coding/01-01-the-machine-coding-round-method-and-rubric/"
+        },
+        {
+          "title": "2. Parking Lot: Allocation, Pricing, and Concurrent Entry",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/02-parking-lot-allocation-pricing-and-concurrent-entry.md",
+          "webHref": "books/sd-04-low-level-design-and-machine-coding/02-02-parking-lot-allocation-pricing-and-concurrent-entry/"
+        },
+        {
+          "title": "3. State Machines: Vending Machine and Elevator",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/03-state-machines-vending-machine-and-elevator.md",
+          "webHref": "books/sd-04-low-level-design-and-machine-coding/03-03-state-machines-vending-machine-and-elevator/"
+        },
+        {
+          "title": "4. Caches and Rate Limiters: Data Structure Plus Policy",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/04-caches-and-rate-limiters-data-structure-plus-policy.md",
+          "webHref": "books/sd-04-low-level-design-and-machine-coding/04-04-caches-and-rate-limiters-data-structure-plus-policy/"
+        }
+      ],
+      "chapterContents": [
+        {
+          "title": "1. The Machine-Coding Round: Method and Rubric",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/01-the-machine-coding-round-method-and-rubric.md",
+          "webHref": "books/sd-04-low-level-design-and-machine-coding/01-01-the-machine-coding-round-method-and-rubric/"
+        },
+        {
+          "title": "2. Parking Lot: Allocation, Pricing, and Concurrent Entry",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/02-parking-lot-allocation-pricing-and-concurrent-entry.md",
+          "webHref": "books/sd-04-low-level-design-and-machine-coding/02-02-parking-lot-allocation-pricing-and-concurrent-entry/"
+        },
+        {
+          "title": "3. State Machines: Vending Machine and Elevator",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/03-state-machines-vending-machine-and-elevator.md",
+          "webHref": "books/sd-04-low-level-design-and-machine-coding/03-03-state-machines-vending-machine-and-elevator/"
+        },
+        {
+          "title": "4. Caches and Rate Limiters: Data Structure Plus Policy",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/04-caches-and-rate-limiters-data-structure-plus-policy.md",
+          "webHref": "books/sd-04-low-level-design-and-machine-coding/04-04-caches-and-rate-limiters-data-structure-plus-policy/"
+        },
+        {
+          "title": "5. Split Expenses: Money, Invariants, and Settlement",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/05-split-expenses-money-invariants-and-settlement.md",
+          "webHref": "books/sd-04-low-level-design-and-machine-coding/05-05-split-expenses-money-invariants-and-settlement/"
+        },
+        {
+          "title": "6. Job Scheduler and Notification Service: Lifecycle and Retries",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/06-job-scheduler-and-notification-service-lifecycle-and-retries.md",
+          "webHref": "books/sd-04-low-level-design-and-machine-coding/06-06-job-scheduler-and-notification-service-lifecycle-and-retries/"
+        },
+        {
+          "title": "7. Extension Rounds, Follow-Ups, and Question Bank",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/07-extension-rounds-follow-ups-and-question-bank.md",
+          "webHref": "books/sd-04-low-level-design-and-machine-coding/07-07-extension-rounds-follow-ups-and-question-bank/"
+        },
+        {
+          "title": "Low-Level Design and Machine-Coding Drills",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/exercises/lld-machine-coding-drills.md",
+          "webHref": "books/sd-04-low-level-design-and-machine-coding/08-lld-machine-coding-drills/"
+        },
+        {
+          "title": "Low-Level Design and Machine-Coding Drills: Worked Solutions",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/solutions/lld-machine-coding-solutions.md",
+          "webHref": "books/sd-04-low-level-design-and-machine-coding/09-lld-machine-coding-solutions/"
+        }
+      ],
+      "outcomes": [
+        "Run a fixed six-step method with a written scope and a back-loaded time budget",
+        "Separate entities, value objects, and policies so an extension lands in one new type",
+        "Name the concurrency owner for every invariant and prove it with a concurrent test"
       ],
       "webReads": []
     }

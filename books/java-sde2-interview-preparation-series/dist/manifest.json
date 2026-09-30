@@ -1,10 +1,10 @@
 {
   "series": "Java SDE-2 Interview Preparation Series",
   "author": "Vinay Reddy Kalluri",
-  "release_date": "2026-07-25",
+  "release_date": "2026-09-30",
   "edition_date": "2026-08-02",
   "public_segments": 4,
-  "physical_volumes": 41,
+  "physical_volumes": 42,
   "volumes": [
     {
       "page_count": 188,
@@ -616,8 +616,8 @@
     },
     {
       "page_count": 74,
-      "sha256": "bdf1432157d0cf5e7f78f78d2d93883ba66a768fa25972ae0bcc51f7b871c50a",
-      "bytes": 3840750,
+      "sha256": "0c295c715065928754182c1297a79aaff5a3e9a542a5fc4aec2876bcd772d74b",
+      "bytes": 3841785,
       "id": "18F",
       "stage": "18",
       "path_label": "SD-01",
@@ -632,8 +632,8 @@
     },
     {
       "page_count": 94,
-      "sha256": "210b4c7f91b4d793cbc3e7d5bfeec7420156f7e761599670f52f38c437dac2b1",
-      "bytes": 3900305,
+      "sha256": "2974c31ecc726dd9f1a5589bde0439b86756523f6e0df20c9c4d22cdded6988e",
+      "bytes": 3901859,
       "id": "18J",
       "stage": "18",
       "path_label": "SD-02",
@@ -648,8 +648,8 @@
     },
     {
       "page_count": 78,
-      "sha256": "ab081543304f979fa2546a0f5c4bb8bbca8aa550e31cd5ad06464890556acd1b",
-      "bytes": 3858882,
+      "sha256": "9c65d4a0232b296ed6b7512b3c8daf001592c4d56fc873c156d6f54cd8988986",
+      "bytes": 3859936,
       "id": "GENAI",
       "stage": "18",
       "path_label": "SD-03",
@@ -661,12 +661,28 @@
       "title": "Generative AI System Design",
       "file": "04-system-design/Java-SDE2-SD-03-Generative-AI-System-Design.pdf",
       "output_name": "Java-SDE2-SD-03-Generative-AI-System-Design.pdf"
+    },
+    {
+      "page_count": 109,
+      "sha256": "69e1997cfc5af7d4e2ecac6694cb8549dfdcff1325a15fe9389898378d8ab7c0",
+      "bytes": 3921732,
+      "id": "LLD",
+      "stage": "18",
+      "path_label": "SD-04",
+      "book_position": 42,
+      "segment_id": "system-design",
+      "segment_code": "SD",
+      "segment_position": 4,
+      "publication_status": "published",
+      "title": "Low-Level Design and Machine Coding",
+      "file": "04-system-design/Java-SDE2-SD-04-Low-Level-Design-and-Machine-Coding.pdf",
+      "output_name": "Java-SDE2-SD-04-Low-Level-Design-and-Machine-Coding.pdf"
     }
   ],
   "index": {
     "file": "00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf",
     "page_count": 17,
-    "sha256": "7a0b990a03913ee7baf9a0041e4a8f3d51da1cedd19b3fc86454b400ab0d2f8a",
-    "bytes": 3660612
+    "sha256": "d373073ae0a04106b4d1e62f61d395d9583dfd99d24b2b30b8d7f97dedce2f04",
+    "bytes": 3661956
   }
 }
