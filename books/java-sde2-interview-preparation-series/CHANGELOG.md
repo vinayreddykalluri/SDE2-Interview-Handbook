@@ -1,5 +1,28 @@
 # Changelog
 
+## 2026-09-30 - IR 01 Behavioral and Leadership Interviews, and the Interview Rounds segment
+
+- Added a fifth learning segment, Interview Rounds, published under `dist/05-interview-rounds/`.
+- Added IR 01, a 67-page book on the behavioral and hiring-manager rounds: the signals an SDE-2 round scores, building and auditing a story bank, STAR structure and timing, ownership, conflict, failure, and mentoring stories, company formats including Amazon's sixteen Leadership Principles, and closing the hiring-manager round.
+- Added 10 drills with worked solutions and `StoryBankModel.java`, which computes coverage, loop plans, answer timing, and pronoun balance for a sample bank. Its coverage check found that the sample bank's conflict signal rested on one story, which the chapter now uses as a teaching point.
+- Updated portal, web-library, series-index, and documentation wording from four segments to five, and rebuilt the series index (now 18 pages).
+
+## 2026-09-30 - SD 05 High-Level Design Case Book
+
+- Added SD 05, an 85-page case book for the high-level design round: a 45-minute method and estimation toolkit, then URL shortener, distributed cache and key-value store, news feed, chat and presence, typeahead and search, proximity and ride matching, payments and ticket booking, and metrics and object storage, closing with a case bank, the standard follow-ups, and a scoring rubric.
+- Added 12 drills with worked solutions whose every numeric answer was computed by a program.
+- Added `HighLevelDesignModel.java`, which recomputes every estimate the cases quote and checks the claims: birthday collisions against simulation, consistent-hashing balance and remapping, power-law fan-out, chat ordering, measured Bloom filter false positives, geohash boundaries, idempotent payments with a double-entry ledger, and storage durability.
+- Corrected a geohash rule while writing the drills: a 3 x 3 cell search covers a radius only if every cell side is at least that radius.
+- Rebuilt SD 01 to SD 04 so their covers read "of 05", and rebuilt the series index.
+
+## 2026-09-30 - SD 04 Low-Level Design and Machine Coding
+
+- Added SD 04, a 109-page volume for the machine-coding round: a six-step method and rubric, then parking lot, vending machine, elevator, LRU and LFU caches, rate limiters, split expenses, job scheduler, and notification service, closing with extension rounds and a 23-prompt question bank.
+- Added 14 drills with worked solutions whose every numeric answer was computed by a program.
+- Added `LowLevelDesignModel.java`, a dependency-free Java 21 model that checks every claim the chapters quote, including a corrected elevator claim: LOOK is optimal for a known batch only when started in the better direction.
+- Removed the `package` declaration from the SD 03 companion, which made the series-native smoke test fail with `ClassNotFoundException`.
+- Rebuilt SD 01 to SD 03 so their covers read "of 04", and rebuilt the series index.
+
 ## 2026-07-30 - Spring Boot publication edition
 
 - Replaced the 10-page SD 05 roadmap with 23 prerequisite-ordered chapters progressing from the first application and startup through auto-configuration, typed configuration, HTTP/data boundaries, Actuator, observability, probes, testing, delivery, upgrades, security, and incident diagnosis.

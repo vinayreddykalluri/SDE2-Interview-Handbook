@@ -75,37 +75,55 @@ def paragraph_border(style, color: str = "9FB3C8", width: str = "8") -> None:
     borders.append(bottom)
 
 
+def named_style(doc: Document, name: str):
+    """Look a style up by its displayed name.
+
+    python-docx maps built-in UI names to Word's lowercase internal names, so
+    `doc.styles["Heading 1"]` searches for `heading 1`. Pandoc 3's reference
+    document names the same style `Heading 1`, and the subscript lookup then
+    raises KeyError for a style that exists. Match on the displayed name
+    instead, and keep the subscript as the fast path.
+    """
+    try:
+        return doc.styles[name]
+    except KeyError:
+        for style in doc.styles:
+            if style.name == name:
+                return style
+        raise
+
+
 def ensure_style(doc: Document, name: str, base: str = "Normal"):
     try:
-        style = doc.styles[name]
+        style = named_style(doc, name)
     except KeyError:
         style = doc.styles.add_style(name, WD_STYLE_TYPE.PARAGRAPH)
-    style.base_style = doc.styles[base]
+    style.base_style = named_style(doc, base)
     return style
 
 
 def configure_styles(doc: Document) -> None:
-    normal = doc.styles["Normal"]
+    normal = named_style(doc, "Normal")
     set_font(normal, "Calibri", 11, RGBColor(0x17, 0x21, 0x2B))
     set_spacing(normal, 0, 6, 1.25)
     normal.paragraph_format.widow_control = True
 
-    title = doc.styles["Title"]
+    title = named_style(doc, "Title")
     set_font(title, "Arial", 30, NAVY, bold=True)
     set_spacing(title, 0, 8, 1.0, keep_next=True)
     title.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
-    subtitle = doc.styles["Subtitle"]
+    subtitle = named_style(doc, "Subtitle")
     set_font(subtitle, "Arial", 15, DARK_BLUE, italic=False)
     set_spacing(subtitle, 0, 8, 1.1, keep_next=True)
     subtitle.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
-    author = doc.styles["Author"]
+    author = named_style(doc, "Author")
     set_font(author, "Arial", 14, NAVY, bold=True)
     set_spacing(author, 0, 12, 1.0, keep_next=True)
     author.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
-    date = doc.styles["Date"]
+    date = named_style(doc, "Date")
     set_font(date, "Arial", 9, MUTED)
     set_spacing(date, 12, 2, 1.0, keep_next=True)
     date.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -116,7 +134,7 @@ def configure_styles(doc: Document) -> None:
         ("Heading 3", 12, DARK_BLUE, 10, 5),
         ("Heading 4", 11, DARK_BLUE, 8, 4),
     ):
-        style = doc.styles[name]
+        style = named_style(doc, name)
         set_font(style, "Calibri", size, color, bold=True)
         set_spacing(style, before, after, 1.1, keep_next=True, page_break_before=(name == "Heading 1"))
         style.paragraph_format.keep_together = True
@@ -170,11 +188,11 @@ def configure_styles(doc: Document) -> None:
     # Pandoc's DOCX writer uses these built-in reference styles for table-cell
     # paragraphs and table geometry.  Starting from Pandoc's own reference file
     # (see main) keeps their numbering and OOXML definitions intact.
-    compact = doc.styles["Compact"]
+    compact = named_style(doc, "Compact")
     set_font(compact, "Calibri", 9.5, RGBColor(0x17, 0x21, 0x2B))
     set_spacing(compact, 0, 2, 1.05)
 
-    table = doc.styles["Table"]
+    table = named_style(doc, "Table")
     set_font(table, "Calibri", 9.5, RGBColor(0x17, 0x21, 0x2B))
 
     table_text = ensure_style(doc, "Table Text")

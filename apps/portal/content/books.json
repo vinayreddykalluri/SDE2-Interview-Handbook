@@ -2,30 +2,35 @@
   "schemaVersion": 5,
   "generatedFrom": "books/java-sde2-interview-preparation-series/publishing/series.json",
   "release": {
-    "tag": "books-v2026.07.0",
-    "date": "2026-07-25",
+    "tag": "books-v2026.09.0",
+    "date": "2026-09-30",
     "editionDate": "2026-08-02",
-    "url": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/tag/books-v2026.07.0",
-    "focusedBookCount": 41,
-    "focusedPageCount": 3579,
-    "indexPageCount": 17,
+    "url": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/tag/books-v2026.09.0",
+    "focusedBookCount": 44,
+    "focusedPageCount": 3840,
+    "indexPageCount": 18,
     "masterPageCount": 658,
-    "totalPdfCount": 43,
-    "totalPageCount": 4254,
+    "totalPdfCount": 46,
+    "totalPageCount": 4516,
     "index": {
       "title": "Java SDE-2 Interview Preparation Series Index",
       "filename": "Java-SDE2-Interview-Preparation-Series-Index.pdf",
       "artifactPath": "00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf",
+      "pageCount": 18,
+      "pdfBytes": 3666275,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/00-start-here/Java-SDE2-Interview-Preparation-Series-Index.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-Interview-Preparation-Series-Index.pdf"
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-Interview-Preparation-Series-Index.pdf"
     },
     "master": {
       "title": "Java Foundations to Advanced Engineering",
       "filename": "java-sde2-interview-book.pdf",
       "artifactPath": "00-start-here/java-sde2-interview-book.pdf",
+      "pageCount": 658,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/00-start-here/java-sde2-interview-book.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/java-sde2-interview-book.pdf"
-    }
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/java-sde2-interview-book.pdf"
+    },
+    "latestDownloadRoot": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/latest/download",
+    "allPdfsZip": "Java-SDE2-All-PDFs.zip"
   },
   "segments": [
     {
@@ -37,6 +42,7 @@
       "bookCount": 9,
       "startBookId": "03",
       "artifactDir": "01-java",
+      "pdfsZip": "Java-SDE2-JAVA-PDFs.zip",
       "startHref": "books/java-01-java-foundations-for-problem-solving/"
     },
     {
@@ -48,6 +54,7 @@
       "bookCount": 17,
       "startBookId": "02",
       "artifactDir": "02-dsa",
+      "pdfsZip": "Java-SDE2-DSA-PDFs.zip",
       "startHref": "books/dsa-01-time-and-space-complexity/"
     },
     {
@@ -59,6 +66,7 @@
       "bookCount": 12,
       "startBookId": "MYSQL",
       "artifactDir": "03-frameworks",
+      "pdfsZip": "Java-SDE2-FW-PDFs.zip",
       "startHref": "books/fw-01-mysql/"
     },
     {
@@ -67,10 +75,23 @@
       "title": "System Design",
       "shortTitle": "System Design",
       "description": "Move from component boundaries to distributed-system reasoning after the Java backend foundations are secure.",
-      "bookCount": 3,
+      "bookCount": 5,
       "startBookId": "18F",
       "artifactDir": "04-system-design",
+      "pdfsZip": "Java-SDE2-SD-PDFs.zip",
       "startHref": "books/sd-01-design-backend-testing-and-security/"
+    },
+    {
+      "id": "interview-rounds",
+      "code": "IR",
+      "title": "Interview Rounds",
+      "shortTitle": "Interview Rounds",
+      "description": "Prepare the non-technical rounds that decide the level: behavioral, leadership, and hiring-manager interviews, built on stories from your own work.",
+      "bookCount": 1,
+      "startBookId": "BEHAV",
+      "artifactDir": "05-interview-rounds",
+      "pdfsZip": "Java-SDE2-IR-PDFs.zip",
+      "startHref": "books/ir-01-behavioral-and-leadership-interviews/"
     }
   ],
   "books": [
@@ -96,8 +117,9 @@
       "filename": "Java-SDE2-JAVA-01-Java-Foundations-for-Problem-Solving.pdf",
       "artifactPath": "01-java/Java-SDE2-JAVA-01-Java-Foundations-for-Problem-Solving.pdf",
       "pageCount": 188,
+      "pdfBytes": 4100565,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/01-java/Java-SDE2-JAVA-01-Java-Foundations-for-Problem-Solving.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-JAVA-01-Java-Foundations-for-Problem-Solving.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-JAVA-01-Java-Foundations-for-Problem-Solving.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/java/JAVA-01-java-foundations-for-problem-solving/chapters",
       "fullBookHref": "books/java-01-java-foundations-for-problem-solving/",
       "codeHref": "books/java-01-java-foundations-for-problem-solving/code/",
@@ -284,8 +306,9 @@
       "filename": "Java-SDE2-JAVA-02-Git-and-GitHub.pdf",
       "artifactPath": "01-java/Java-SDE2-JAVA-02-Git-and-GitHub.pdf",
       "pageCount": 126,
+      "pdfBytes": 3981353,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/01-java/Java-SDE2-JAVA-02-Git-and-GitHub.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-JAVA-02-Git-and-GitHub.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-JAVA-02-Git-and-GitHub.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/java/JAVA-02-git-and-github/chapters",
       "fullBookHref": "books/java-02-git-and-github/",
       "codeHref": "books/java-02-git-and-github/code/",
@@ -432,8 +455,9 @@
       "filename": "Java-SDE2-JAVA-03-Maven-and-Gradle.pdf",
       "artifactPath": "01-java/Java-SDE2-JAVA-03-Maven-and-Gradle.pdf",
       "pageCount": 94,
+      "pdfBytes": 3875379,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/01-java/Java-SDE2-JAVA-03-Maven-and-Gradle.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-JAVA-03-Maven-and-Gradle.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-JAVA-03-Maven-and-Gradle.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/java/JAVA-03-maven-and-gradle/chapters",
       "fullBookHref": "books/java-03-maven-and-gradle/",
       "codeHref": "books/java-03-maven-and-gradle/code/",
@@ -580,8 +604,9 @@
       "filename": "Java-SDE2-JAVA-04-Language-OOP-and-Modern-Java.pdf",
       "artifactPath": "01-java/Java-SDE2-JAVA-04-Language-OOP-and-Modern-Java.pdf",
       "pageCount": 120,
+      "pdfBytes": 3994870,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/01-java/Java-SDE2-JAVA-04-Language-OOP-and-Modern-Java.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-JAVA-04-Language-OOP-and-Modern-Java.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-JAVA-04-Language-OOP-and-Modern-Java.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master",
       "fullBookHref": "books/java-04-language-oop-and-modern-java/",
       "codeHref": "books/java-04-language-oop-and-modern-java/code/",
@@ -693,8 +718,9 @@
       "filename": "Java-SDE2-JAVA-05-Collections-Streams-and-IO.pdf",
       "artifactPath": "01-java/Java-SDE2-JAVA-05-Collections-Streams-and-IO.pdf",
       "pageCount": 147,
+      "pdfBytes": 6935607,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/01-java/Java-SDE2-JAVA-05-Collections-Streams-and-IO.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-JAVA-05-Collections-Streams-and-IO.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-JAVA-05-Collections-Streams-and-IO.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master",
       "fullBookHref": "books/java-05-collections-streams-and-io/",
       "codeHref": "books/java-05-collections-streams-and-io/code/",
@@ -811,8 +837,9 @@
       "filename": "Java-SDE2-JAVA-06-JVM-and-Execution.pdf",
       "artifactPath": "01-java/Java-SDE2-JAVA-06-JVM-and-Execution.pdf",
       "pageCount": 108,
+      "pdfBytes": 4555873,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/01-java/Java-SDE2-JAVA-06-JVM-and-Execution.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-JAVA-06-JVM-and-Execution.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-JAVA-06-JVM-and-Execution.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master",
       "fullBookHref": "books/java-06-jvm-and-execution/",
       "codeHref": "books/java-06-jvm-and-execution/code/",
@@ -924,8 +951,9 @@
       "filename": "Java-SDE2-JAVA-07-Concurrency-and-Memory-Model.pdf",
       "artifactPath": "01-java/Java-SDE2-JAVA-07-Concurrency-and-Memory-Model.pdf",
       "pageCount": 85,
+      "pdfBytes": 4180752,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/01-java/Java-SDE2-JAVA-07-Concurrency-and-Memory-Model.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-JAVA-07-Concurrency-and-Memory-Model.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-JAVA-07-Concurrency-and-Memory-Model.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master",
       "fullBookHref": "books/java-07-concurrency-and-memory-model/",
       "codeHref": "books/java-07-concurrency-and-memory-model/code/",
@@ -1012,8 +1040,9 @@
       "filename": "Java-SDE2-JAVA-08-Performance-Diagnostics-and-GC-Incidents.pdf",
       "artifactPath": "01-java/Java-SDE2-JAVA-08-Performance-Diagnostics-and-GC-Incidents.pdf",
       "pageCount": 61,
+      "pdfBytes": 3800572,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/01-java/Java-SDE2-JAVA-08-Performance-Diagnostics-and-GC-Incidents.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-JAVA-08-Performance-Diagnostics-and-GC-Incidents.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-JAVA-08-Performance-Diagnostics-and-GC-Incidents.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master",
       "fullBookHref": "books/java-08-performance-diagnostics-and-gc-incidents/",
       "codeHref": "books/java-08-performance-diagnostics-and-gc-incidents/code/",
@@ -1090,8 +1119,9 @@
       "filename": "Java-SDE2-JAVA-09-Question-Bank-Study-Plan-and-Reference.pdf",
       "artifactPath": "01-java/Java-SDE2-JAVA-09-Question-Bank-Study-Plan-and-Reference.pdf",
       "pageCount": 109,
+      "pdfBytes": 4049265,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/01-java/Java-SDE2-JAVA-09-Question-Bank-Study-Plan-and-Reference.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-JAVA-09-Question-Bank-Study-Plan-and-Reference.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-JAVA-09-Question-Bank-Study-Plan-and-Reference.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master",
       "fullBookHref": "books/java-09-question-bank-study-plan-and-reference/",
       "codeHref": "books/java-09-question-bank-study-plan-and-reference/code/",
@@ -1178,8 +1208,9 @@
       "filename": "Java-SDE2-DSA-01-Time-and-Space-Complexity.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-01-Time-and-Space-Complexity.pdf",
       "pageCount": 87,
+      "pdfBytes": 4076335,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-01-Time-and-Space-Complexity.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-01-Time-and-Space-Complexity.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-DSA-01-Time-and-Space-Complexity.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-01-time-and-space-complexity/chapters",
       "fullBookHref": "books/dsa-01-time-and-space-complexity/",
       "codeHref": "books/dsa-01-time-and-space-complexity/code/",
@@ -1291,8 +1322,9 @@
       "filename": "Java-SDE2-DSA-02-Number-Systems-and-Math-Foundations.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-02-Number-Systems-and-Math-Foundations.pdf",
       "pageCount": 137,
+      "pdfBytes": 6282611,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-02-Number-Systems-and-Math-Foundations.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-02-Number-Systems-and-Math-Foundations.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-DSA-02-Number-Systems-and-Math-Foundations.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/chapters",
       "fullBookHref": "books/dsa-02-number-systems-and-math-foundations/",
       "codeHref": "books/dsa-02-number-systems-and-math-foundations/code/",
@@ -1429,8 +1461,9 @@
       "filename": "Java-SDE2-DSA-03-Number-Systems-Interview-Workbook.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-03-Number-Systems-Interview-Workbook.pdf",
       "pageCount": 137,
+      "pdfBytes": 3980970,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-03-Number-Systems-Interview-Workbook.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-03-Number-Systems-Interview-Workbook.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-DSA-03-Number-Systems-Interview-Workbook.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-02-03-number-systems-and-math-foundations/chapters",
       "fullBookHref": "books/dsa-03-number-systems-interview-workbook/",
       "codeHref": "books/dsa-03-number-systems-interview-workbook/code/",
@@ -1522,8 +1555,9 @@
       "filename": "Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf",
       "pageCount": 115,
+      "pdfBytes": 3928508,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-DSA-04-Bit-Manipulation-in-Java.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-04-bit-manipulation-in-java/chapters",
       "fullBookHref": "books/dsa-04-bit-manipulation-in-java/",
       "codeHref": "books/dsa-04-bit-manipulation-in-java/code/",
@@ -1635,8 +1669,9 @@
       "filename": "Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf",
       "pageCount": 101,
+      "pdfBytes": 5009884,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-DSA-05-Loop-Mastery-and-Index-Calculations.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-05-loop-mastery-and-index-calculations/chapters",
       "fullBookHref": "books/dsa-05-loop-mastery-and-index-calculations/",
       "codeHref": "books/dsa-05-loop-mastery-and-index-calculations/code/",
@@ -1752,8 +1787,9 @@
       "filename": "Java-SDE2-DSA-06-Arrays-and-Array-Patterns.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-06-Arrays-and-Array-Patterns.pdf",
       "pageCount": 101,
+      "pdfBytes": 4797526,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-06-Arrays-and-Array-Patterns.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-06-Arrays-and-Array-Patterns.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-DSA-06-Arrays-and-Array-Patterns.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-06-arrays-and-array-patterns/chapters",
       "fullBookHref": "books/dsa-06-arrays-and-array-patterns/",
       "codeHref": "books/dsa-06-arrays-and-array-patterns/code/",
@@ -1880,8 +1916,9 @@
       "filename": "Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf",
       "pageCount": 115,
+      "pdfBytes": 4985378,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-DSA-07-Strings-and-String-Patterns.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-07-strings-and-string-patterns/chapters",
       "fullBookHref": "books/dsa-07-strings-and-string-patterns/",
       "codeHref": "books/dsa-07-strings-and-string-patterns/code/",
@@ -1998,8 +2035,9 @@
       "filename": "Java-SDE2-DSA-08-Hashing-Maps-Sets-and-Prefix-State.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-08-Hashing-Maps-Sets-and-Prefix-State.pdf",
       "pageCount": 84,
+      "pdfBytes": 4645851,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-08-Hashing-Maps-Sets-and-Prefix-State.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-08-Hashing-Maps-Sets-and-Prefix-State.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-DSA-08-Hashing-Maps-Sets-and-Prefix-State.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-08-hashing-maps-sets-and-prefix-state/chapters",
       "fullBookHref": "books/dsa-08-hashing-maps-sets-and-prefix-state/",
       "codeHref": "books/dsa-08-hashing-maps-sets-and-prefix-state/code/",
@@ -2121,8 +2159,9 @@
       "filename": "Java-SDE2-DSA-09-Recursion-and-Backtracking.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-09-Recursion-and-Backtracking.pdf",
       "pageCount": 65,
+      "pdfBytes": 3959140,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-09-Recursion-and-Backtracking.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-09-Recursion-and-Backtracking.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-DSA-09-Recursion-and-Backtracking.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-09-recursion-and-backtracking/chapters",
       "fullBookHref": "books/dsa-09-recursion-and-backtracking/",
       "codeHref": "books/dsa-09-recursion-and-backtracking/code/",
@@ -2229,8 +2268,9 @@
       "filename": "Java-SDE2-DSA-10-Linked-Lists.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-10-Linked-Lists.pdf",
       "pageCount": 62,
+      "pdfBytes": 3793369,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-10-Linked-Lists.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-10-Linked-Lists.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-DSA-10-Linked-Lists.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-10-linked-lists/chapters",
       "fullBookHref": "books/dsa-10-linked-lists/",
       "codeHref": "books/dsa-10-linked-lists/code/",
@@ -2337,8 +2377,9 @@
       "filename": "Java-SDE2-DSA-11-Stacks-Queues-Deques-and-Monotonic-Patterns.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-11-Stacks-Queues-Deques-and-Monotonic-Patterns.pdf",
       "pageCount": 62,
+      "pdfBytes": 3795097,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-11-Stacks-Queues-Deques-and-Monotonic-Patterns.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-11-Stacks-Queues-Deques-and-Monotonic-Patterns.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-DSA-11-Stacks-Queues-Deques-and-Monotonic-Patterns.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-11-stacks-queues-deques-and-monotonic-patterns/chapters",
       "fullBookHref": "books/dsa-11-stacks-queues-deques-and-monotonic-patterns/",
       "codeHref": "books/dsa-11-stacks-queues-deques-and-monotonic-patterns/code/",
@@ -2449,8 +2490,9 @@
       "filename": "Java-SDE2-DSA-12-Binary-Search.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-12-Binary-Search.pdf",
       "pageCount": 58,
+      "pdfBytes": 3790506,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-12-Binary-Search.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-12-Binary-Search.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-DSA-12-Binary-Search.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-12-binary-search/chapters",
       "fullBookHref": "books/dsa-12-binary-search/",
       "codeHref": "books/dsa-12-binary-search/code/",
@@ -2557,8 +2599,9 @@
       "filename": "Java-SDE2-DSA-13-Trees-BSTs-and-Tries.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-13-Trees-BSTs-and-Tries.pdf",
       "pageCount": 73,
+      "pdfBytes": 4034344,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-13-Trees-BSTs-and-Tries.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-13-Trees-BSTs-and-Tries.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-DSA-13-Trees-BSTs-and-Tries.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-13-trees-bsts-and-tries/chapters",
       "fullBookHref": "books/dsa-13-trees-bsts-and-tries/",
       "codeHref": "books/dsa-13-trees-bsts-and-tries/code/",
@@ -2665,8 +2708,9 @@
       "filename": "Java-SDE2-DSA-14-Heaps-Priority-Queues-and-Top-K.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-14-Heaps-Priority-Queues-and-Top-K.pdf",
       "pageCount": 64,
+      "pdfBytes": 3801026,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-14-Heaps-Priority-Queues-and-Top-K.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-14-Heaps-Priority-Queues-and-Top-K.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-DSA-14-Heaps-Priority-Queues-and-Top-K.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-14-heaps-priority-queues-and-top-k/chapters",
       "fullBookHref": "books/dsa-14-heaps-priority-queues-and-top-k/",
       "codeHref": "books/dsa-14-heaps-priority-queues-and-top-k/code/",
@@ -2768,8 +2812,9 @@
       "filename": "Java-SDE2-DSA-15-Graphs.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-15-Graphs.pdf",
       "pageCount": 96,
+      "pdfBytes": 4096134,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-15-Graphs.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-15-Graphs.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-DSA-15-Graphs.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-15-graphs/chapters",
       "fullBookHref": "books/dsa-15-graphs/",
       "codeHref": "books/dsa-15-graphs/code/",
@@ -2881,8 +2926,9 @@
       "filename": "Java-SDE2-DSA-16-Greedy-Algorithms.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-16-Greedy-Algorithms.pdf",
       "pageCount": 65,
+      "pdfBytes": 4170203,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-16-Greedy-Algorithms.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-16-Greedy-Algorithms.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-DSA-16-Greedy-Algorithms.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-16-greedy-algorithms/chapters",
       "fullBookHref": "books/dsa-16-greedy-algorithms/",
       "codeHref": "books/dsa-16-greedy-algorithms/code/",
@@ -2984,8 +3030,9 @@
       "filename": "Java-SDE2-DSA-17-Dynamic-Programming.pdf",
       "artifactPath": "02-dsa/Java-SDE2-DSA-17-Dynamic-Programming.pdf",
       "pageCount": 79,
+      "pdfBytes": 3846742,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/02-dsa/Java-SDE2-DSA-17-Dynamic-Programming.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-DSA-17-Dynamic-Programming.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-DSA-17-Dynamic-Programming.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/dsa/DSA-17-dynamic-programming/chapters",
       "fullBookHref": "books/dsa-17-dynamic-programming/",
       "codeHref": "books/dsa-17-dynamic-programming/code/",
@@ -3097,8 +3144,9 @@
       "filename": "Java-SDE2-FW-01-MySQL.pdf",
       "artifactPath": "03-frameworks/Java-SDE2-FW-01-MySQL.pdf",
       "pageCount": 48,
+      "pdfBytes": 3762123,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/03-frameworks/Java-SDE2-FW-01-MySQL.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-FW-01-MySQL.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-FW-01-MySQL.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/frameworks/FW-01-mysql/chapters",
       "fullBookHref": "books/fw-01-mysql/",
       "codeHref": "books/fw-01-mysql/code/",
@@ -3210,8 +3258,9 @@
       "filename": "Java-SDE2-FW-02-Hibernate-and-JPA.pdf",
       "artifactPath": "03-frameworks/Java-SDE2-FW-02-Hibernate-and-JPA.pdf",
       "pageCount": 42,
+      "pdfBytes": 3742222,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/03-frameworks/Java-SDE2-FW-02-Hibernate-and-JPA.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-FW-02-Hibernate-and-JPA.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-FW-02-Hibernate-and-JPA.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/frameworks/FW-02-hibernate-and-jpa/chapters",
       "fullBookHref": "books/fw-02-hibernate-and-jpa/",
       "codeHref": "books/fw-02-hibernate-and-jpa/code/",
@@ -3323,8 +3372,9 @@
       "filename": "Java-SDE2-FW-03-Spring-Framework.pdf",
       "artifactPath": "03-frameworks/Java-SDE2-FW-03-Spring-Framework.pdf",
       "pageCount": 120,
+      "pdfBytes": 3956996,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/03-frameworks/Java-SDE2-FW-03-Spring-Framework.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-FW-03-Spring-Framework.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-FW-03-Spring-Framework.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/frameworks/FW-03-spring-framework/chapters",
       "fullBookHref": "books/fw-03-spring-framework/",
       "codeHref": "books/fw-03-spring-framework/code/",
@@ -3491,8 +3541,9 @@
       "filename": "Java-SDE2-FW-04-Spring-Boot.pdf",
       "artifactPath": "03-frameworks/Java-SDE2-FW-04-Spring-Boot.pdf",
       "pageCount": 113,
+      "pdfBytes": 3917494,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/03-frameworks/Java-SDE2-FW-04-Spring-Boot.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-FW-04-Spring-Boot.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-FW-04-Spring-Boot.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/frameworks/FW-04-spring-boot/chapters",
       "fullBookHref": "books/fw-04-spring-boot/",
       "codeHref": "books/fw-04-spring-boot/code/",
@@ -3669,8 +3720,9 @@
       "filename": "Java-SDE2-FW-05-Spring-Boot-and-REST.pdf",
       "artifactPath": "03-frameworks/Java-SDE2-FW-05-Spring-Boot-and-REST.pdf",
       "pageCount": 77,
+      "pdfBytes": 3855475,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/03-frameworks/Java-SDE2-FW-05-Spring-Boot-and-REST.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-FW-05-Spring-Boot-and-REST.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-FW-05-Spring-Boot-and-REST.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/frameworks/FW-05-spring-boot-and-rest/chapters",
       "fullBookHref": "books/fw-05-spring-boot-and-rest/",
       "codeHref": "books/fw-05-spring-boot-and-rest/code/",
@@ -3762,8 +3814,9 @@
       "filename": "Java-SDE2-FW-06-Spring-Data.pdf",
       "artifactPath": "03-frameworks/Java-SDE2-FW-06-Spring-Data.pdf",
       "pageCount": 78,
+      "pdfBytes": 3833379,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/03-frameworks/Java-SDE2-FW-06-Spring-Data.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-FW-06-Spring-Data.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-FW-06-Spring-Data.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/frameworks/FW-06-spring-data/chapters",
       "fullBookHref": "books/fw-06-spring-data/",
       "codeHref": "books/fw-06-spring-data/code/",
@@ -3910,8 +3963,9 @@
       "filename": "Java-SDE2-FW-07-MongoDB.pdf",
       "artifactPath": "03-frameworks/Java-SDE2-FW-07-MongoDB.pdf",
       "pageCount": 41,
+      "pdfBytes": 3737873,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/03-frameworks/Java-SDE2-FW-07-MongoDB.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-FW-07-MongoDB.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-FW-07-MongoDB.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/frameworks/FW-07-mongodb/chapters",
       "fullBookHref": "books/fw-07-mongodb/",
       "codeHref": "books/fw-07-mongodb/code/",
@@ -4018,8 +4072,9 @@
       "filename": "Java-SDE2-FW-08-Redis.pdf",
       "artifactPath": "03-frameworks/Java-SDE2-FW-08-Redis.pdf",
       "pageCount": 36,
+      "pdfBytes": 3725540,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/03-frameworks/Java-SDE2-FW-08-Redis.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-FW-08-Redis.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-FW-08-Redis.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/frameworks/FW-08-redis/chapters",
       "fullBookHref": "books/fw-08-redis/",
       "codeHref": "books/fw-08-redis/code/",
@@ -4121,8 +4176,9 @@
       "filename": "Java-SDE2-FW-09-Persistence-SQL-and-Caching.pdf",
       "artifactPath": "03-frameworks/Java-SDE2-FW-09-Persistence-SQL-and-Caching.pdf",
       "pageCount": 75,
+      "pdfBytes": 3852817,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/03-frameworks/Java-SDE2-FW-09-Persistence-SQL-and-Caching.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-FW-09-Persistence-SQL-and-Caching.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-FW-09-Persistence-SQL-and-Caching.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/frameworks/FW-09-persistence-sql-and-caching/chapters",
       "fullBookHref": "books/fw-09-persistence-sql-and-caching/",
       "codeHref": "books/fw-09-persistence-sql-and-caching/code/",
@@ -4214,8 +4270,9 @@
       "filename": "Java-SDE2-FW-10-Apache-Kafka-and-Spring-Kafka.pdf",
       "artifactPath": "03-frameworks/Java-SDE2-FW-10-Apache-Kafka-and-Spring-Kafka.pdf",
       "pageCount": 39,
+      "pdfBytes": 3732243,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/03-frameworks/Java-SDE2-FW-10-Apache-Kafka-and-Spring-Kafka.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-FW-10-Apache-Kafka-and-Spring-Kafka.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-FW-10-Apache-Kafka-and-Spring-Kafka.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/frameworks/FW-10-apache-kafka-and-spring-kafka/chapters",
       "fullBookHref": "books/fw-10-apache-kafka-and-spring-kafka/",
       "codeHref": "books/fw-10-apache-kafka-and-spring-kafka/code/",
@@ -4322,8 +4379,9 @@
       "filename": "Java-SDE2-FW-11-Spring-Ecosystem-Extensions.pdf",
       "artifactPath": "03-frameworks/Java-SDE2-FW-11-Spring-Ecosystem-Extensions.pdf",
       "pageCount": 63,
+      "pdfBytes": 3794098,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/03-frameworks/Java-SDE2-FW-11-Spring-Ecosystem-Extensions.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-FW-11-Spring-Ecosystem-Extensions.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-FW-11-Spring-Ecosystem-Extensions.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/frameworks/FW-11-spring-ecosystem-extensions/chapters",
       "fullBookHref": "books/fw-11-spring-ecosystem-extensions/",
       "codeHref": "books/fw-11-spring-ecosystem-extensions/code/",
@@ -4430,8 +4488,9 @@
       "filename": "Java-SDE2-FW-12-Spring-AI.pdf",
       "artifactPath": "03-frameworks/Java-SDE2-FW-12-Spring-AI.pdf",
       "pageCount": 62,
+      "pdfBytes": 3787652,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/03-frameworks/Java-SDE2-FW-12-Spring-AI.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-FW-12-Spring-AI.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-FW-12-Spring-AI.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/frameworks/FW-12-spring-ai/chapters",
       "fullBookHref": "books/fw-12-spring-ai/",
       "codeHref": "books/fw-12-spring-ai/code/",
@@ -4528,7 +4587,7 @@
       "segmentShortTitle": "System Design",
       "segmentCode": "SD 01",
       "segmentPosition": 1,
-      "segmentBookCount": 3,
+      "segmentBookCount": 5,
       "publicationStatus": "published",
       "title": "Design, Backend, Testing, and Security",
       "shortTitle": "Backend Design and Security",
@@ -4538,8 +4597,9 @@
       "filename": "Java-SDE2-SD-01-Design-Backend-Testing-and-Security.pdf",
       "artifactPath": "04-system-design/Java-SDE2-SD-01-Design-Backend-Testing-and-Security.pdf",
       "pageCount": 74,
+      "pdfBytes": 3842286,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/04-system-design/Java-SDE2-SD-01-Design-Backend-Testing-and-Security.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-SD-01-Design-Backend-Testing-and-Security.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-SD-01-Design-Backend-Testing-and-Security.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/master",
       "fullBookHref": "books/sd-01-design-backend-testing-and-security/",
       "codeHref": "books/sd-01-design-backend-testing-and-security/code/",
@@ -4630,7 +4690,7 @@
       "segmentShortTitle": "System Design",
       "segmentCode": "SD 02",
       "segmentPosition": 2,
-      "segmentBookCount": 3,
+      "segmentBookCount": 5,
       "publicationStatus": "published",
       "title": "Distributed Systems and System Design",
       "shortTitle": "Distributed Systems and System Design",
@@ -4640,8 +4700,9 @@
       "filename": "Java-SDE2-SD-02-Distributed-Systems-and-System-Design.pdf",
       "artifactPath": "04-system-design/Java-SDE2-SD-02-Distributed-Systems-and-System-Design.pdf",
       "pageCount": 94,
+      "pdfBytes": 3902389,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/04-system-design/Java-SDE2-SD-02-Distributed-Systems-and-System-Design.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-SD-02-Distributed-Systems-and-System-Design.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-SD-02-Distributed-Systems-and-System-Design.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-02-distributed-systems-and-system-design/chapters",
       "fullBookHref": "books/sd-02-distributed-systems-and-system-design/",
       "codeHref": "books/sd-02-distributed-systems-and-system-design/code/",
@@ -4738,7 +4799,7 @@
       "segmentShortTitle": "System Design",
       "segmentCode": "SD 03",
       "segmentPosition": 3,
-      "segmentBookCount": 3,
+      "segmentBookCount": 5,
       "publicationStatus": "published",
       "title": "Generative AI System Design",
       "shortTitle": "Generative AI System Design",
@@ -4748,8 +4809,9 @@
       "filename": "Java-SDE2-SD-03-Generative-AI-System-Design.pdf",
       "artifactPath": "04-system-design/Java-SDE2-SD-03-Generative-AI-System-Design.pdf",
       "pageCount": 78,
+      "pdfBytes": 3860457,
       "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/04-system-design/Java-SDE2-SD-03-Generative-AI-System-Design.pdf",
-      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.07.0/Java-SDE2-SD-03-Generative-AI-System-Design.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-SD-03-Generative-AI-System-Design.pdf",
       "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-03-generative-ai-system-design/chapters",
       "fullBookHref": "books/sd-03-generative-ai-system-design/",
       "codeHref": "books/sd-03-generative-ai-system-design/code/",
@@ -4821,6 +4883,358 @@
         "Estimate tokens, cost, and latency before designing anything",
         "Build a retrieval pipeline with authorization pushed into the query",
         "Bound an agent and make its side effects idempotent and compensable"
+      ],
+      "webReads": []
+    },
+    {
+      "order": 42,
+      "bookPosition": 42,
+      "step": "SD-04",
+      "pathLabel": "SD-04",
+      "id": "LLD",
+      "track": "System Design",
+      "segmentId": "system-design",
+      "segmentTitle": "System Design",
+      "segmentShortTitle": "System Design",
+      "segmentCode": "SD 04",
+      "segmentPosition": 4,
+      "segmentBookCount": 5,
+      "publicationStatus": "published",
+      "title": "Low-Level Design and Machine Coding",
+      "shortTitle": "Low-Level Design and Machine Coding",
+      "subtitle": "Modeling, State Machines, Invariants, and Extensible Java 21 for the Machine-Coding Round",
+      "purpose": "This book covers the low-level design and machine-coding round, where experienced engineers most often produce working code and still fail. It teaches a fixed method and applies it to eight problems - parking lot, vending machine, elevator, LRU and LFU caches, rate limiter, split expenses, job scheduler, and notification service - with every claim checked by an executable Java 21 model.",
+      "authorNote": "Working code is the entry ticket in this round, not the score. Write the scope down before you write a class, keep the rule that will change behind an interface, and say out loud which object owns each invariant when two requests arrive at once. The interviewer will add a requirement in the last twenty minutes; if it costs you one new class, you designed well.",
+      "filename": "Java-SDE2-SD-04-Low-Level-Design-and-Machine-Coding.pdf",
+      "artifactPath": "04-system-design/Java-SDE2-SD-04-Low-Level-Design-and-Machine-Coding.pdf",
+      "pageCount": 109,
+      "pdfBytes": 3922777,
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/04-system-design/Java-SDE2-SD-04-Low-Level-Design-and-Machine-Coding.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-SD-04-Low-Level-Design-and-Machine-Coding.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters",
+      "fullBookHref": "books/sd-04-low-level-design-and-machine-coding/",
+      "codeHref": "books/sd-04-low-level-design-and-machine-coding/code/",
+      "webDocumentCount": 9,
+      "wordCount": 17957,
+      "codeExampleCount": 13,
+      "sourceChapterCount": 7,
+      "supportingSourceCount": 2,
+      "chapterPreview": [
+        {
+          "title": "1. The Machine-Coding Round: Method and Rubric",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/01-the-machine-coding-round-method-and-rubric.md",
+          "webHref": "books/sd-04-low-level-design-and-machine-coding/01-01-the-machine-coding-round-method-and-rubric/"
+        },
+        {
+          "title": "2. Parking Lot: Allocation, Pricing, and Concurrent Entry",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/02-parking-lot-allocation-pricing-and-concurrent-entry.md",
+          "webHref": "books/sd-04-low-level-design-and-machine-coding/02-02-parking-lot-allocation-pricing-and-concurrent-entry/"
+        },
+        {
+          "title": "3. State Machines: Vending Machine and Elevator",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/03-state-machines-vending-machine-and-elevator.md",
+          "webHref": "books/sd-04-low-level-design-and-machine-coding/03-03-state-machines-vending-machine-and-elevator/"
+        },
+        {
+          "title": "4. Caches and Rate Limiters: Data Structure Plus Policy",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/04-caches-and-rate-limiters-data-structure-plus-policy.md",
+          "webHref": "books/sd-04-low-level-design-and-machine-coding/04-04-caches-and-rate-limiters-data-structure-plus-policy/"
+        }
+      ],
+      "chapterContents": [
+        {
+          "title": "1. The Machine-Coding Round: Method and Rubric",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/01-the-machine-coding-round-method-and-rubric.md",
+          "webHref": "books/sd-04-low-level-design-and-machine-coding/01-01-the-machine-coding-round-method-and-rubric/"
+        },
+        {
+          "title": "2. Parking Lot: Allocation, Pricing, and Concurrent Entry",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/02-parking-lot-allocation-pricing-and-concurrent-entry.md",
+          "webHref": "books/sd-04-low-level-design-and-machine-coding/02-02-parking-lot-allocation-pricing-and-concurrent-entry/"
+        },
+        {
+          "title": "3. State Machines: Vending Machine and Elevator",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/03-state-machines-vending-machine-and-elevator.md",
+          "webHref": "books/sd-04-low-level-design-and-machine-coding/03-03-state-machines-vending-machine-and-elevator/"
+        },
+        {
+          "title": "4. Caches and Rate Limiters: Data Structure Plus Policy",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/04-caches-and-rate-limiters-data-structure-plus-policy.md",
+          "webHref": "books/sd-04-low-level-design-and-machine-coding/04-04-caches-and-rate-limiters-data-structure-plus-policy/"
+        },
+        {
+          "title": "5. Split Expenses: Money, Invariants, and Settlement",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/05-split-expenses-money-invariants-and-settlement.md",
+          "webHref": "books/sd-04-low-level-design-and-machine-coding/05-05-split-expenses-money-invariants-and-settlement/"
+        },
+        {
+          "title": "6. Job Scheduler and Notification Service: Lifecycle and Retries",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/06-job-scheduler-and-notification-service-lifecycle-and-retries.md",
+          "webHref": "books/sd-04-low-level-design-and-machine-coding/06-06-job-scheduler-and-notification-service-lifecycle-and-retries/"
+        },
+        {
+          "title": "7. Extension Rounds, Follow-Ups, and Question Bank",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/chapters/07-extension-rounds-follow-ups-and-question-bank.md",
+          "webHref": "books/sd-04-low-level-design-and-machine-coding/07-07-extension-rounds-follow-ups-and-question-bank/"
+        },
+        {
+          "title": "Low-Level Design and Machine-Coding Drills",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/exercises/lld-machine-coding-drills.md",
+          "webHref": "books/sd-04-low-level-design-and-machine-coding/08-lld-machine-coding-drills/"
+        },
+        {
+          "title": "Low-Level Design and Machine-Coding Drills: Worked Solutions",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-04-low-level-design-and-machine-coding/solutions/lld-machine-coding-solutions.md",
+          "webHref": "books/sd-04-low-level-design-and-machine-coding/09-lld-machine-coding-solutions/"
+        }
+      ],
+      "outcomes": [
+        "Run a fixed six-step method with a written scope and a back-loaded time budget",
+        "Separate entities, value objects, and policies so an extension lands in one new type",
+        "Name the concurrency owner for every invariant and prove it with a concurrent test"
+      ],
+      "webReads": []
+    },
+    {
+      "order": 43,
+      "bookPosition": 43,
+      "step": "SD-05",
+      "pathLabel": "SD-05",
+      "id": "HLD",
+      "track": "System Design",
+      "segmentId": "system-design",
+      "segmentTitle": "System Design",
+      "segmentShortTitle": "System Design",
+      "segmentCode": "SD 05",
+      "segmentPosition": 5,
+      "segmentBookCount": 5,
+      "publicationStatus": "published",
+      "title": "High-Level Design Case Book",
+      "shortTitle": "High-Level Design Case Book",
+      "subtitle": "Worked System Design Cases with the Arithmetic That Chooses the Architecture",
+      "purpose": "This book applies the building blocks from SD-02 to the high-level design prompts used in SDE-2 loops. Every case follows one 45-minute method, and every architectural choice is justified by arithmetic that an executable Java 21 model recomputes and checks.",
+      "authorNote": "The diagram is the easy part of a design round. Write the requirements down, do the arithmetic before you name a technology, and spend your deep dive where the hardest requirement meets the load. When a number surprises you, say so out loud - that is usually the moment the interviewer starts to trust your design.",
+      "filename": "Java-SDE2-SD-05-High-Level-Design-Case-Book.pdf",
+      "artifactPath": "04-system-design/Java-SDE2-SD-05-High-Level-Design-Case-Book.pdf",
+      "pageCount": 85,
+      "pdfBytes": 3879532,
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/04-system-design/Java-SDE2-SD-05-High-Level-Design-Case-Book.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-SD-05-High-Level-Design-Case-Book.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters",
+      "fullBookHref": "books/sd-05-high-level-design-case-book/",
+      "codeHref": "books/sd-05-high-level-design-case-book/code/",
+      "webDocumentCount": 12,
+      "wordCount": 17995,
+      "codeExampleCount": 2,
+      "sourceChapterCount": 10,
+      "supportingSourceCount": 2,
+      "chapterPreview": [
+        {
+          "title": "1. The HLD Case Method and Estimation Toolkit",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/01-the-hld-case-method-and-estimation-toolkit.md",
+          "webHref": "books/sd-05-high-level-design-case-book/01-01-the-hld-case-method-and-estimation-toolkit/"
+        },
+        {
+          "title": "2. URL Shortener: Key Generation and the Read Path",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/02-url-shortener-key-generation-and-the-read-path.md",
+          "webHref": "books/sd-05-high-level-design-case-book/02-02-url-shortener-key-generation-and-the-read-path/"
+        },
+        {
+          "title": "3. Distributed Cache and Key-Value Store",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/03-distributed-cache-and-key-value-store.md",
+          "webHref": "books/sd-05-high-level-design-case-book/03-03-distributed-cache-and-key-value-store/"
+        },
+        {
+          "title": "4. News Feed: Fan-Out and the Celebrity Problem",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/04-news-feed-fan-out-and-the-celebrity-problem.md",
+          "webHref": "books/sd-05-high-level-design-case-book/04-04-news-feed-fan-out-and-the-celebrity-problem/"
+        }
+      ],
+      "chapterContents": [
+        {
+          "title": "1. The HLD Case Method and Estimation Toolkit",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/01-the-hld-case-method-and-estimation-toolkit.md",
+          "webHref": "books/sd-05-high-level-design-case-book/01-01-the-hld-case-method-and-estimation-toolkit/"
+        },
+        {
+          "title": "2. URL Shortener: Key Generation and the Read Path",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/02-url-shortener-key-generation-and-the-read-path.md",
+          "webHref": "books/sd-05-high-level-design-case-book/02-02-url-shortener-key-generation-and-the-read-path/"
+        },
+        {
+          "title": "3. Distributed Cache and Key-Value Store",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/03-distributed-cache-and-key-value-store.md",
+          "webHref": "books/sd-05-high-level-design-case-book/03-03-distributed-cache-and-key-value-store/"
+        },
+        {
+          "title": "4. News Feed: Fan-Out and the Celebrity Problem",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/04-news-feed-fan-out-and-the-celebrity-problem.md",
+          "webHref": "books/sd-05-high-level-design-case-book/04-04-news-feed-fan-out-and-the-celebrity-problem/"
+        },
+        {
+          "title": "5. Chat and Presence: Ordering, Delivery, and Connections",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/05-chat-and-presence-ordering-delivery-and-connections.md",
+          "webHref": "books/sd-05-high-level-design-case-book/05-05-chat-and-presence-ordering-delivery-and-connections/"
+        },
+        {
+          "title": "6. Typeahead and Search: Tries, Top-K, and Bloom Filters",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/06-typeahead-and-search-tries-top-k-and-bloom-filters.md",
+          "webHref": "books/sd-05-high-level-design-case-book/06-06-typeahead-and-search-tries-top-k-and-bloom-filters/"
+        },
+        {
+          "title": "7. Proximity and Ride Matching: Geohash and Moving Points",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/07-proximity-and-ride-matching-geohash-and-moving-points.md",
+          "webHref": "books/sd-05-high-level-design-case-book/07-07-proximity-and-ride-matching-geohash-and-moving-points/"
+        },
+        {
+          "title": "8. Payments and Ticket Booking: Exactly-Once Effects",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/08-payments-and-ticket-booking-exactly-once-effects.md",
+          "webHref": "books/sd-05-high-level-design-case-book/08-08-payments-and-ticket-booking-exactly-once-effects/"
+        },
+        {
+          "title": "9. Metrics Pipeline and Object Storage: Volume and Durability",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/09-metrics-pipeline-and-object-storage-volume-and-durability.md",
+          "webHref": "books/sd-05-high-level-design-case-book/09-09-metrics-pipeline-and-object-storage-volume-and-durability/"
+        },
+        {
+          "title": "10. Case Bank, Follow-Ups, and Scoring",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/chapters/10-case-bank-follow-ups-and-scoring.md",
+          "webHref": "books/sd-05-high-level-design-case-book/10-10-case-bank-follow-ups-and-scoring/"
+        },
+        {
+          "title": "High-Level Design Case Drills",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/exercises/hld-case-drills.md",
+          "webHref": "books/sd-05-high-level-design-case-book/11-hld-case-drills/"
+        },
+        {
+          "title": "High-Level Design Case Drills: Worked Solutions",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/system-design/SD-05-high-level-design-case-book/solutions/hld-case-solutions.md",
+          "webHref": "books/sd-05-high-level-design-case-book/12-hld-case-solutions/"
+        }
+      ],
+      "outcomes": [
+        "Run a fixed 45-minute design method with written requirements and non-goals",
+        "Produce an estimate in under five minutes and let it choose the architecture",
+        "Explain key generation, consistent hashing, hybrid fan-out, per-conversation ordering, geohash search, and exactly-once payments with numbers"
+      ],
+      "webReads": []
+    },
+    {
+      "order": 44,
+      "bookPosition": 44,
+      "step": "IR-01",
+      "pathLabel": "IR-01",
+      "id": "BEHAV",
+      "track": "Interview Rounds",
+      "segmentId": "interview-rounds",
+      "segmentTitle": "Interview Rounds",
+      "segmentShortTitle": "Interview Rounds",
+      "segmentCode": "IR 01",
+      "segmentPosition": 1,
+      "segmentBookCount": 1,
+      "publicationStatus": "published",
+      "title": "Behavioral and Leadership Interviews",
+      "shortTitle": "Behavioral and Leadership Interviews",
+      "subtitle": "Story Banks, STAR Delivery, and the Signals That Decide the SDE-2 Level",
+      "purpose": "This book covers the behavioral and hiring-manager rounds: what they score at SDE-2, how to build and audit a story bank, how to structure and time answers, the signal-specific stories interviewers ask for, and how to adapt one bank to company-specific values such as Amazon's Leadership Principles.",
+      "authorNote": "You already have the experience this round is looking for; what most engineers lack is the preparation to show it. Write your stories down, check that every signal has two of them, and practise saying what you decided and what you rejected. Tell your own stories, including the failures - they are the ones that survive the follow-up questions.",
+      "filename": "Java-SDE2-IR-01-Behavioral-and-Leadership-Interviews.pdf",
+      "artifactPath": "05-interview-rounds/Java-SDE2-IR-01-Behavioral-and-Leadership-Interviews.pdf",
+      "pageCount": 67,
+      "pdfBytes": 3823297,
+      "pdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/raw/refs/heads/master/books/java-sde2-interview-preparation-series/dist/05-interview-rounds/Java-SDE2-IR-01-Behavioral-and-Leadership-Interviews.pdf",
+      "releasePdfHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/releases/download/books-v2026.09.0/Java-SDE2-IR-01-Behavioral-and-Leadership-Interviews.pdf",
+      "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/tree/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters",
+      "fullBookHref": "books/ir-01-behavioral-and-leadership-interviews/",
+      "codeHref": "books/ir-01-behavioral-and-leadership-interviews/code/",
+      "webDocumentCount": 11,
+      "wordCount": 12860,
+      "codeExampleCount": 1,
+      "sourceChapterCount": 9,
+      "supportingSourceCount": 2,
+      "chapterPreview": [
+        {
+          "title": "1. What the Behavioral Round Scores",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/01-what-the-behavioral-round-scores.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/01-01-what-the-behavioral-round-scores/"
+        },
+        {
+          "title": "2. Building a Story Bank",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/02-building-a-story-bank.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/02-02-building-a-story-bank/"
+        },
+        {
+          "title": "3. Structuring and Delivering an Answer",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/03-structuring-and-delivering-an-answer.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/03-03-structuring-and-delivering-an-answer/"
+        },
+        {
+          "title": "4. Ownership, Ambiguity, and Delivery",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/04-ownership-ambiguity-and-delivery.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/04-04-ownership-ambiguity-and-delivery/"
+        }
+      ],
+      "chapterContents": [
+        {
+          "title": "1. What the Behavioral Round Scores",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/01-what-the-behavioral-round-scores.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/01-01-what-the-behavioral-round-scores/"
+        },
+        {
+          "title": "2. Building a Story Bank",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/02-building-a-story-bank.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/02-02-building-a-story-bank/"
+        },
+        {
+          "title": "3. Structuring and Delivering an Answer",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/03-structuring-and-delivering-an-answer.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/03-03-structuring-and-delivering-an-answer/"
+        },
+        {
+          "title": "4. Ownership, Ambiguity, and Delivery",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/04-ownership-ambiguity-and-delivery.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/04-04-ownership-ambiguity-and-delivery/"
+        },
+        {
+          "title": "5. Conflict, Disagreement, and Influence",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/05-conflict-disagreement-and-influence.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/05-05-conflict-disagreement-and-influence/"
+        },
+        {
+          "title": "6. Failure, Feedback, and Growth",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/06-failure-feedback-and-growth.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/06-06-failure-feedback-and-growth/"
+        },
+        {
+          "title": "7. Mentoring and Leadership Without Authority",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/07-mentoring-and-leadership-without-authority.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/07-07-mentoring-and-leadership-without-authority/"
+        },
+        {
+          "title": "8. Company Formats and Leadership Principles",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/08-company-formats-and-leadership-principles.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/08-08-company-formats-and-leadership-principles/"
+        },
+        {
+          "title": "9. The Hiring-Manager Round and Closing Well",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/chapters/09-the-hiring-manager-round-and-closing-well.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/09-09-the-hiring-manager-round-and-closing-well/"
+        },
+        {
+          "title": "Behavioral Interview Drills",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/exercises/behavioral-drills.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/10-behavioral-drills/"
+        },
+        {
+          "title": "Behavioral Interview Drills: Worked Solutions",
+          "sourceHref": "https://github.com/vinayreddykalluri/SDE2-Interview-Handbook/blob/master/books/java-sde2-interview-preparation-series/content/volumes/interview-rounds/IR-01-behavioral-and-leadership-interviews/solutions/behavioral-solutions.md",
+          "webHref": "books/ir-01-behavioral-and-leadership-interviews/11-behavioral-solutions/"
+        }
+      ],
+      "outcomes": [
+        "Name the signals an SDE-2 behavioral round scores and what separates SDE-2 from SDE-1 evidence",
+        "Build a story bank that covers every signal at least twice, and plan a loop without forced reuse",
+        "Deliver STAR answers with at least 55% on your actions, in one and a half to three minutes"
       ],
       "webReads": []
     }

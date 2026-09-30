@@ -14,7 +14,9 @@ PYTHON ?= $(shell test -x .venv/bin/python && echo .venv/bin/python || command -
 # Targets that cd into a subdirectory need an absolute interpreter path.
 # $(abspath) leaves an already-absolute path alone and resolves a relative one
 # against the repository root, so this works for both the venv and system cases.
-PYTHON_ABS := $(abspath $(PYTHON))
+# A bare command name such as PYTHON=python (what CI sets) has no slash and must
+# be looked up on PATH first; $(abspath python) would yield $(CURDIR)/python.
+PYTHON_ABS := $(abspath $(if $(findstring /,$(PYTHON)),$(PYTHON),$(shell command -v $(PYTHON))))
 
 bootstrap:
 	bash tooling/automation/bootstrap_macos.sh

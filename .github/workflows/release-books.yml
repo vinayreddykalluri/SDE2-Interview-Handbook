@@ -1,0 +1,123 @@
+name: Release book PDFs
+
+# Publishes the committed PDF library as a GitHub Release. The release is a
+# consequence of bumping `release_tag` in publishing/series.json: when that tag
+# has no release yet, this job creates it; when it already exists, the job is a
+# no-op. The README and portal link to `releases/latest/download/<zip>`, so the
+# zip bundles only resolve once the current tag has been released.
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'books/java-sde2-interview-preparation-series/publishing/series.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-books
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      BOOK_DIR: books/java-sde2-interview-preparation-series
+      GH_TOKEN: ${{ github.token }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      - name: Read release tag
+        id: meta
+        run: |
+          tag=$(python -c "import json; print(json.load(open('$BOOK_DIR/publishing/series.json'))['release_tag'])")
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "Release $tag already exists; nothing to publish."
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install PDF validation dependencies
+        if: steps.meta.outputs.exists == 'false'
+        run: python -m pip install -r "$BOOK_DIR/requirements.txt"
+
+      # The committed PDFs must agree with dist/manifest.json on page count,
+      # bytes, and SHA-256 before anything is published from them.
+      - name: Validate committed PDFs
+        if: steps.meta.outputs.exists == 'false'
+        working-directory: ${{ env.BOOK_DIR }}
+        run: python scripts/validate_pdfs.py --quick
+
+      # Asset and zip names come from apps/portal/content/books.json, the same
+      # catalog the README tables and portal download links are generated from.
+      - name: Package release assets
+        if: steps.meta.outputs.exists == 'false'
+        run: |
+          python - <<'EOF'
+          import json
+          import shutil
+          import zipfile
+          from pathlib import Path
+
+          dist = Path("books/java-sde2-interview-preparation-series/dist")
+          catalog = json.loads(Path("apps/portal/content/books.json").read_text(encoding="utf-8"))
+          release = catalog["release"]
+          out = Path("release-assets")
+          out.mkdir()
+
+          pdfs = sorted(dist.rglob("*.pdf"))
+          if len(pdfs) != release["totalPdfCount"]:
+              raise SystemExit(f"Expected {release['totalPdfCount']} PDFs in dist/, found {len(pdfs)}")
+          for pdf in pdfs:
+              shutil.copy2(pdf, out / pdf.name)
+          shutil.copy2(dist / "manifest.json", out / "manifest.json")
+
+          with zipfile.ZipFile(out / release["allPdfsZip"], "w", zipfile.ZIP_DEFLATED) as bundle:
+              for pdf in pdfs:
+                  bundle.write(pdf, pdf.relative_to(dist).as_posix())
+          for segment in catalog["segments"]:
+              with zipfile.ZipFile(out / segment["pdfsZip"], "w", zipfile.ZIP_DEFLATED) as bundle:
+                  for pdf in sorted((dist / segment["artifactDir"]).glob("*.pdf")):
+                      bundle.write(pdf, pdf.name)
+
+          lines = [
+              f"{release['totalPdfCount']} PDFs, {release['totalPageCount']:,} pages"
+              f" (edition {release['editionDate']}).",
+              "",
+              f"- **Everything:** `{release['allPdfsZip']}`",
+          ]
+          for segment in catalog["segments"]:
+              count = sum(1 for book in catalog["books"] if book["segmentId"] == segment["id"])
+              lines.append(f"- **{segment['title']}** ({count} books): `{segment['pdfsZip']}`")
+          lines += [
+              "",
+              "Every book is also attached individually below. `manifest.json` records the page"
+              " count, byte size, and SHA-256 of each PDF.",
+              "",
+              "Browse the per-book list: https://github.com/vinayreddykalluri/SDE2-Interview-Handbook#download-the-pdfs",
+          ]
+          Path("release-notes.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+          EOF
+          ls -la release-assets
+
+      - name: Publish release
+        if: steps.meta.outputs.exists == 'false'
+        run: |
+          gh release create "${{ steps.meta.outputs.tag }}" release-assets/* \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title "Java SDE-2 book series ${{ steps.meta.outputs.tag }}" \
+            --notes-file release-notes.md \
+            --latest
